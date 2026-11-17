@@ -6,17 +6,6 @@ on:
       - "!v*.*.*-**"
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
-  NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-  PUBLISH_NPM: true
-  NPM_REGISTRY_URL: https://registry.npmjs.org
-  NUGET_PUBLISH_KEY: ${{ secrets.NUGET_PUBLISH_KEY }}
-  NUGET_FEED_URL: https://api.nuget.org/v3/index.json
-  PUBLISH_NUGET: true
-  PYPI_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
-  PYPI_USERNAME: ${{ secrets.PYPI_USERNAME }}
-  PYPI_REPOSITORY_URL: ""
-  PUBLISH_PYPI: true
 jobs:
   publish_binary:
     name: publish
@@ -54,6 +43,27 @@ jobs:
     name: Publish SDKs
     runs-on: ubuntu-latest
     needs: publish_binary
+    # ==================== V1 publish configuration (legacy accounts, non-blocking) ====================
+    # Scoped to this job only; zero sharing with V2. When deprecating V1,
+    # delete this job (including its env block) as a whole.
+    env:
+      # node
+      NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      # publish switches are read from repository variables
+      # (Settings > Secrets and variables > Actions > Variables); an unset
+      # variable evaluates to empty and disables the publish step
+      PUBLISH_NPM: ${{ vars.PUBLISH_NPM }}
+      NPM_REGISTRY_URL: https://registry.npmjs.org
+      # dotnet
+      NUGET_PUBLISH_KEY: ${{ secrets.NUGET_PUBLISH_KEY }}
+      NUGET_FEED_URL: https://api.nuget.org/v3/index.json
+      PUBLISH_NUGET: ${{ vars.PUBLISH_NUGET }}
+      # python
+      PYPI_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+      PYPI_USERNAME: ${{ secrets.PYPI_USERNAME }}
+      PYPI_REPOSITORY_URL: ""
+      PUBLISH_PYPI: ${{ vars.PUBLISH_PYPI }}
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
@@ -99,26 +109,173 @@ jobs:
               git diff
               exit 1
           fi
+      # V1 publishing (legacy accounts): best-effort compatibility publish, failures must not block the pipeline
       - if: ${{ matrix.language == 'python' && env.PUBLISH_PYPI == 'true' }}
-        name: Publish package to PyPI
+        name: Publish package to PyPI (V1, non-blocking)
+        continue-on-error: true
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           user: ${{ env.PYPI_USERNAME }}
           password: ${{ env.PYPI_PASSWORD }}
           packages_dir: ${{github.workspace}}/sdk/python/bin/dist
       - if: ${{ matrix.language == 'nodejs' && env.PUBLISH_NPM == 'true' }}
+        name: Publish to NPM (V1, non-blocking)
+        continue-on-error: true
         uses: JS-DevTools/npm-publish@v1
         with:
           access: "public"
           token: ${{ env.NPM_TOKEN }}
           package: ${{github.workspace}}/sdk/nodejs/bin/package.json
       - if: ${{ matrix.language == 'dotnet' && env.PUBLISH_NUGET == 'true' }}
-        name: publish nuget package
+        name: publish nuget package (V1, non-blocking)
+        continue-on-error: true
         run: |
           dotnet nuget push ${{github.workspace}}/sdk/dotnet/bin/Debug/*.nupkg -s ${{ env.NUGET_FEED_URL }} -k ${{ env.NUGET_PUBLISH_KEY }}
           echo "done publishing packages"
     strategy:
       fail-fast: true
+      matrix:
+        dotnetversion:
+          - 6.0.418
+        goversion:
+          - 1.25.11
+        language:
+          - nodejs
+          - python
+          - dotnet
+          - go
+        nodeversion:
+          - 22.23.2
+        pythonversion:
+          - "3.13"
+  publish_sdk_v2:
+    name: Publish SDKs (V2)
+    runs-on: ubuntu-latest
+    needs: publish_binary
+    # ==================== V2 publish configuration (new accounts, blocking) ====================
+    # Scoped to this job only; zero sharing with V1. This is the sole
+    # official release channel once V1 is removed.
+    env:
+      # node
+      NODE_AUTH_TOKEN_V2: ${{ secrets.NODE_AUTH_TOKEN_V2 }}
+      NPM_TOKEN_V2: ${{ secrets.NPM_TOKEN_V2 }}
+      # publish switches are read from repository variables; an unset
+      # variable evaluates to empty and disables the publish step.
+      # NOTE: PUBLISH_NUGET_V2 stays unset until the NuGet account is
+      # provisioned, otherwise the dotnet matrix job fails and blocks
+      # the whole release.
+      PUBLISH_NPM_V2: ${{ vars.PUBLISH_NPM_V2 }}
+      NPM_REGISTRY_URL_V2: https://registry.npmjs.org
+      # dotnet
+      NUGET_PUBLISH_KEY_V2: ${{ secrets.NUGET_PUBLISH_KEY_V2 }}
+      NUGET_FEED_URL_V2: https://api.nuget.org/v3/index.json
+      PUBLISH_NUGET_V2: ${{ vars.PUBLISH_NUGET_V2 }}
+      # python
+      PYPI_PASSWORD_V2: ${{ secrets.PYPI_PASSWORD_V2 }}
+      PYPI_USERNAME_V2: ${{ secrets.PYPI_USERNAME_V2 }}
+      PYPI_REPOSITORY_URL_V2: ""
+      PUBLISH_PYPI_V2: ${{ vars.PUBLISH_PYPI_V2 }}
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+      - name: Unshallow clone for tags
+        run: git fetch --prune --unshallow --tags
+      - name: Install Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: ${{ matrix.goversion }}
+      - name: Install pulumictl
+        uses: jaxxstorm/action-install-gh-release@v1.5.0
+        with:
+          repo: pulumi/pulumictl
+          tag: v0.0.46
+      - name: Install Pulumi CLI
+        uses: pulumi/action-install-pulumi-cli@v2.0.0
+        with:
+          # recent CLI required by tfgen's gen-sdk subprocess
+          pulumi-version: 3.259.0
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{matrix.nodeversion}}
+          registry-url: ${{env.NPM_REGISTRY_URL_V2}}
+      - name: Setup DotNet
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: ${{matrix.dotnetversion}}
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{matrix.pythonversion}}
+      - name: Build SDK
+        run: make build_${{ matrix.language }}
+      # V2 packages are functionally identical to V1, differing only in name
+      # (same content published under new accounts). Remove V2 if the V1
+      # accounts are recovered; otherwise remove V1.
+      # Packages are renamed inside the gitignored bin/ output directories,
+      # so the "worktree clean" check is unaffected.
+      - if: ${{ matrix.language == 'nodejs' }}
+        name: Rename NPM package for V2
+        run: |
+          sed -i 's|"@tencentcloud_iac/pulumi"|"@tencentcloud-infra/pulumi"|' ${{github.workspace}}/sdk/nodejs/bin/package.json
+          # hard assertion: fail fast if the rename did not take effect,
+          # otherwise the V1-named package would be published to NPM
+          grep -q '"name": "@tencentcloud-infra/pulumi"' ${{github.workspace}}/sdk/nodejs/bin/package.json
+          grep '"name"' ${{github.workspace}}/sdk/nodejs/bin/package.json
+      - if: ${{ matrix.language == 'python' }}
+        name: Rename PyPI package for V2
+        run: |
+          cd ${{github.workspace}}/sdk/python/bin
+          mv tencentcloud_iac_pulumi tencentcloud_infra_pulumi
+          sed -i "s/tencentcloud_iac_pulumi/tencentcloud_infra_pulumi/g" setup.py
+          rm -rf dist build *.egg-info
+          python3 -m pip install --quiet --upgrade setuptools wheel
+          python3 setup.py build sdist
+          # assertion: the sdist must carry the V2 package name
+          # (normalized to the "tencentcloud-infra-pulumi" project on PyPI)
+          ls dist/tencentcloud_infra_pulumi-*.tar.gz
+      - if: ${{ matrix.language == 'dotnet' }}
+        name: Rename NuGet package for V2
+        run: |
+          cd ${{github.workspace}}/sdk/dotnet
+          sed -i 's|<GeneratePackageOnBuild>|<PackageId>TencentCloudIAC.PulumiPackage.V2</PackageId><GeneratePackageOnBuild>|' TencentCloudIAC.PulumiPackage.Tencentcloud.csproj
+          rm -f bin/Debug/*.nupkg
+          dotnet build /p:Version=$(cat version.txt)
+          # assertion: only V2-named packages must remain in the output
+          ls bin/Debug/TencentCloudIAC.PulumiPackage.V2.*.nupkg
+      - name: Check worktree clean
+        run: |
+          git update-index -q --refresh
+          if ! git diff-files --quiet; then
+              >&2 echo "error: working tree is not clean, aborting!"
+              git status
+              git diff
+              exit 1
+          fi
+      - if: ${{ matrix.language == 'python' && env.PUBLISH_PYPI_V2 == 'true' }}
+        name: Publish package to PyPI (V2)
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          user: ${{ env.PYPI_USERNAME_V2 }}
+          password: ${{ env.PYPI_PASSWORD_V2 }}
+          repository_url: ${{ env.PYPI_REPOSITORY_URL_V2 }}
+          packages_dir: ${{github.workspace}}/sdk/python/bin/dist
+      - if: ${{ matrix.language == 'nodejs' && env.PUBLISH_NPM_V2 == 'true' }}
+        name: Publish to NPM (V2)
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          access: "public"
+          token: ${{ env.NPM_TOKEN_V2 }}
+          package: ${{github.workspace}}/sdk/nodejs/bin/package.json
+      - if: ${{ matrix.language == 'dotnet' && env.PUBLISH_NUGET_V2 == 'true' }}
+        name: publish nuget package (V2)
+        run: |
+          dotnet nuget push ${{github.workspace}}/sdk/dotnet/bin/Debug/*.nupkg -s ${{ env.NUGET_FEED_URL_V2 }} -k ${{ env.NUGET_PUBLISH_KEY_V2 }}
+          echo "done publishing packages"
+    # Each language publishes independently: one language's failure must not
+    # cancel the other in-flight publishes. All failures are reported at the end.
+    strategy:
+      fail-fast: false
       matrix:
         dotnetversion:
           - 6.0.418
