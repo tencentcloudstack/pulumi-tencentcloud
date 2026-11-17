@@ -119,6 +119,14 @@ class PullStreamTaskRestart(pulumi.CustomResource):
             operator="tf-test")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeLivePullStreamTaskStatus](https://www.tencentcloud.com/search/?wd=DescribeLivePullStreamTaskStatus&type=document&lang=en)
+          - [RestartLivePullStreamTask](https://www.tencentcloud.com/document/api/267/56967)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -144,6 +152,14 @@ class PullStreamTaskRestart(pulumi.CustomResource):
             task_id="3573",
             operator="tf-test")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeLivePullStreamTaskStatus](https://www.tencentcloud.com/search/?wd=DescribeLivePullStreamTaskStatus&type=document&lang=en)
+          - [RestartLivePullStreamTask](https://www.tencentcloud.com/document/api/267/56967)
 
 
         :param str resource_name: The name of the resource.

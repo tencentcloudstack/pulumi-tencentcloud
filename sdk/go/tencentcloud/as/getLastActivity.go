@@ -41,6 +41,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeAutoScalingGroupLastActivities](https://www.tencentcloud.com/document/api/377/33204)
 func GetLastActivity(ctx *pulumi.Context, args *GetLastActivityArgs, opts ...pulumi.InvokeOption) (*GetLastActivityResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetLastActivityResult

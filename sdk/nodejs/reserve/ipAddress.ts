@@ -5,7 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a vpc reserve ip addresses
+ * Provides a resource to create a VPC reserve ip address
  *
  * ## Example Usage
  *
@@ -13,24 +13,39 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const reserveIp = new tencentcloud.reserve.IpAddress("reserve_ip", {
- *     vpcId: "xxxxxx",
- *     subnetId: "xxxxxx",
- *     ipAddress: "10.0.0.13",
- *     name: "reserve-ip-tf",
- *     description: "description",
+ * const example = new tencentcloud.reserve.IpAddress("example", {
+ *     vpcId: "vpc-i5yyodl9",
+ *     subnetId: "subnet-hhi88a58",
+ *     ipAddress: "10.0.30.27",
+ *     name: "tf-example",
+ *     description: "remark.",
  *     tags: {
- *         test1: "test1",
+ *         createBy: "Terraform",
  *     },
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateReserveIpAddresses](https://www.tencentcloud.com/document/api/215/66342)
+ *   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+ * * Read:
+ *   - [DescribeReserveIpAddresses](https://www.tencentcloud.com/document/api/215/66340)
+ *   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+ * * Update:
+ *   - [ModifyReserveIpAddress](https://www.tencentcloud.com/document/api/215/66339)
+ *   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+ * * Delete: [DeleteReserveIpAddresses](https://www.tencentcloud.com/document/api/215/66341)
+ *
  * ## Import
  *
- * vpc reserveIpAddresses can be imported using the id, e.g.
+ * VPC reserve ip address can be imported using the vpcId#reserveIpId, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Reserve/ipAddress:IpAddress reserve_ip_addresses ${vpcId}#${reserveIpId}
+ * $ pulumi import tencentcloud:Reserve/ipAddress:IpAddress example vpc-i5yyodl9#rsvip-cz3ces44
  * ```
  */
 export class IpAddress extends pulumi.CustomResource {
@@ -96,7 +111,7 @@ export class IpAddress extends pulumi.CustomResource {
     /**
      * Subnet ID.
      */
-    declare public readonly subnetId: pulumi.Output<string | undefined>;
+    declare public readonly subnetId: pulumi.Output<string>;
     /**
      * Tags.
      */

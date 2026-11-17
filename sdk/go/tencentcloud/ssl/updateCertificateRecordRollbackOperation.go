@@ -39,6 +39,12 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [UpdateCertificateRecordRollback](https://www.tencentcloud.com/document/api/1007/57979)
+//
 // ## Import
 //
 // ssl updateCertificateRecordRollback can be imported using the id, e.g.

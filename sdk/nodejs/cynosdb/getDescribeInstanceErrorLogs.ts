@@ -28,6 +28,12 @@ import * as utilities from "../utilities";
  *     keyWords: ["Aborted"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeInstanceErrorLogs](https://www.tencentcloud.com/document/api/1098/55902)
  */
 export function getDescribeInstanceErrorLogs(args: GetDescribeInstanceErrorLogsArgs, opts?: pulumi.InvokeOptions): Promise<GetDescribeInstanceErrorLogsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -124,6 +130,12 @@ export interface GetDescribeInstanceErrorLogsResult {
  *     keyWords: ["Aborted"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeInstanceErrorLogs](https://www.tencentcloud.com/document/api/1098/55902)
  */
 export function getDescribeInstanceErrorLogsOutput(args: GetDescribeInstanceErrorLogsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDescribeInstanceErrorLogsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

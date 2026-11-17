@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bi
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ApplyEmbedInterval](https://www.tencentcloud.com/document/api/1270/72253)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Bi/embedIntervalApply:EmbedIntervalApply")]
     public partial class EmbedIntervalApply : global::Pulumi.CustomResource

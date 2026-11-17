@@ -364,6 +364,14 @@ class ProvisionedConcurrencyConfig(pulumi.CustomResource):
             max_capacity=2)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [PutProvisionedConcurrencyConfig](https://www.tencentcloud.com/document/api/583/39225)
+        * Read: [GetProvisionedConcurrencyConfig](https://www.tencentcloud.com/document/api/583/39227)
+        * Delete: [DeleteProvisionedConcurrencyConfig](https://www.tencentcloud.com/document/api/583/39229)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -408,6 +416,14 @@ class ProvisionedConcurrencyConfig(pulumi.CustomResource):
             min_capacity=1,
             max_capacity=2)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [PutProvisionedConcurrencyConfig](https://www.tencentcloud.com/document/api/583/39225)
+        * Read: [GetProvisionedConcurrencyConfig](https://www.tencentcloud.com/document/api/583/39227)
+        * Delete: [DeleteProvisionedConcurrencyConfig](https://www.tencentcloud.com/document/api/583/39229)
 
 
         :param str resource_name: The name of the resource.

@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeProxyDetail](https://www.tencentcloud.com/document/api/608/33098)
         /// </summary>
         public static Task<GetProxyDetailResult> InvokeAsync(GetProxyDetailArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetProxyDetailResult>("tencentcloud:Gaap/getProxyDetail:getProxyDetail", args ?? new GetProxyDetailArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeProxyDetail](https://www.tencentcloud.com/document/api/608/33098)
         /// </summary>
         public static Output<GetProxyDetailResult> Invoke(GetProxyDetailInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetProxyDetailResult>("tencentcloud:Gaap/getProxyDetail:getProxyDetail", args ?? new GetProxyDetailInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeProxyDetail](https://www.tencentcloud.com/document/api/608/33098)
         /// </summary>
         public static Output<GetProxyDetailResult> Invoke(GetProxyDetailInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetProxyDetailResult>("tencentcloud:Gaap/getProxyDetail:getProxyDetail", args ?? new GetProxyDetailInvokeArgs(), options.WithDefaults());

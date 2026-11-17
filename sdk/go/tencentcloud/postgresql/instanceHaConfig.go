@@ -71,6 +71,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [ModifyDBInstanceHAConfig](https://www.tencentcloud.com/document/api/409/57239)
+// * Read: [DescribeDBInstanceHAConfig](https://www.tencentcloud.com/document/api/409/57240)
+// * Update: [ModifyDBInstanceHAConfig](https://www.tencentcloud.com/document/api/409/57239)
 type InstanceHaConfig struct {
 	pulumi.CustomResourceState
 

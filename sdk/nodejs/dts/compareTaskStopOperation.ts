@@ -18,6 +18,12 @@ import * as utilities from "../utilities";
  *     compareTaskId: "dts-8yv4w2i1-cmp-37skmii9",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [StopCompare](https://www.tencentcloud.com/document/api/571/51800)
  */
 export class CompareTaskStopOperation extends pulumi.CustomResource {
     /**

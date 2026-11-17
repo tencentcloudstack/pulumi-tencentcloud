@@ -201,6 +201,15 @@ class AddressTemplate(pulumi.CustomResource):
             type=5)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateAddressTemplate](https://www.tencentcloud.com/search/?wd=CreateAddressTemplate&type=document&lang=en)
+        * Read: [DescribeAddressTemplateList](https://www.tencentcloud.com/search/?wd=DescribeAddressTemplateList&type=document&lang=en)
+        * Update: [ModifyAddressTemplate](https://www.tencentcloud.com/search/?wd=ModifyAddressTemplate&type=document&lang=en)
+        * Delete: [DeleteAddressTemplate](https://www.tencentcloud.com/search/?wd=DeleteAddressTemplate&type=document&lang=en)
+
         ## Import
 
         cfw address_template can be imported using the id, e.g.
@@ -253,6 +262,15 @@ class AddressTemplate(pulumi.CustomResource):
             ip_string="www.qq.com,www.tencent.com",
             type=5)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateAddressTemplate](https://www.tencentcloud.com/search/?wd=CreateAddressTemplate&type=document&lang=en)
+        * Read: [DescribeAddressTemplateList](https://www.tencentcloud.com/search/?wd=DescribeAddressTemplateList&type=document&lang=en)
+        * Update: [ModifyAddressTemplate](https://www.tencentcloud.com/search/?wd=ModifyAddressTemplate&type=document&lang=en)
+        * Delete: [DeleteAddressTemplate](https://www.tencentcloud.com/search/?wd=DeleteAddressTemplate&type=document&lang=en)
 
         ## Import
 

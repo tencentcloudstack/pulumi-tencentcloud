@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const mysql57 = new tencentcloud.index.MysqlDefaultParams("mysql_57", {dbVersion: "5.7"});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDefaultParams](https://www.tencentcloud.com/document/api/236/34469)
  */
 export function getDefaultParams(args?: GetDefaultParamsArgs, opts?: pulumi.InvokeOptions): Promise<GetDefaultParamsResult> {
     args = args || {};
@@ -67,6 +73,12 @@ export interface GetDefaultParamsResult {
  *
  * const mysql57 = new tencentcloud.index.MysqlDefaultParams("mysql_57", {dbVersion: "5.7"});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDefaultParams](https://www.tencentcloud.com/document/api/236/34469)
  */
 export function getDefaultParamsOutput(args?: GetDefaultParamsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDefaultParamsResult> {
     args = args || {};

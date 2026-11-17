@@ -27,7 +27,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// </summary>
         public readonly string Enabled;
         /// <summary>
-        /// ID of the resource.
+        /// Template ID. Output-only.
         /// </summary>
         public readonly string? Id;
         /// <summary>

@@ -198,6 +198,12 @@ class ExecuteScalingPolicy(pulumi.CustomResource):
             trigger_source="API")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ExecuteScalingPolicy](https://www.tencentcloud.com/document/api/377/33207)
+
         ## Import
 
         as execute_scaling_policy can be imported using the id, e.g.
@@ -277,6 +283,12 @@ class ExecuteScalingPolicy(pulumi.CustomResource):
             honor_cooldown=False,
             trigger_source="API")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ExecuteScalingPolicy](https://www.tencentcloud.com/document/api/377/33207)
 
         ## Import
 

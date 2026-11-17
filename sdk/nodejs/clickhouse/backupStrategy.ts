@@ -41,6 +41,18 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateBackUpSchedule](https://www.tencentcloud.com/search/?wd=CreateBackUpSchedule&type=document&lang=en)
+ *   - [DescribeBackUpSchedule](https://www.tencentcloud.com/search/?wd=DescribeBackUpSchedule&type=document&lang=en)
+ * * Read: [DescribeBackUpSchedule](https://www.tencentcloud.com/search/?wd=DescribeBackUpSchedule&type=document&lang=en)
+ * * Update:
+ *   - [CreateBackUpSchedule](https://www.tencentcloud.com/search/?wd=CreateBackUpSchedule&type=document&lang=en)
+ *   - [DescribeBackUpSchedule](https://www.tencentcloud.com/search/?wd=DescribeBackUpSchedule&type=document&lang=en)
+ *
  * ## Import
  *
  * clickhouse backupStrategy can be imported using the id, e.g.

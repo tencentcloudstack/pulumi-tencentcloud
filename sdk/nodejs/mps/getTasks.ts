@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     limit: 20,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeTasks](https://www.tencentcloud.com/document/api/1041/33643)
  */
 export function getTasks(args: GetTasksArgs, opts?: pulumi.InvokeOptions): Promise<GetTasksResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -84,6 +90,12 @@ export interface GetTasksResult {
  *     limit: 20,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeTasks](https://www.tencentcloud.com/document/api/1041/33643)
  */
 export function getTasksOutput(args: GetTasksOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetTasksResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

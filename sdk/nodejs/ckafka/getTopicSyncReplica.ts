@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     topicName: "xxxxxx",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeTopicSyncReplica](https://www.tencentcloud.com/document/api/597/42213)
  */
 export function getTopicSyncReplica(args: GetTopicSyncReplicaArgs, opts?: pulumi.InvokeOptions): Promise<GetTopicSyncReplicaResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -84,6 +90,12 @@ export interface GetTopicSyncReplicaResult {
  *     topicName: "xxxxxx",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeTopicSyncReplica](https://www.tencentcloud.com/document/api/597/42213)
  */
 export function getTopicSyncReplicaOutput(args: GetTopicSyncReplicaOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetTopicSyncReplicaResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

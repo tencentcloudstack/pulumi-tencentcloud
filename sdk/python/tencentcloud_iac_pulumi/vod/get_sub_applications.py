@@ -161,6 +161,12 @@ def get_sub_applications(name: Optional[_builtins.str] = None,
     export = tencentcloud.vod.get_sub_applications(result_output_file="/tmp/vod_apps.json")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSubAppIds](https://www.tencentcloud.com/document/api/266/34177)
+
 
     :param _builtins.str name: Application name for exact match filtering.
     :param _builtins.str result_output_file: Used to save results in JSON format.
@@ -243,6 +249,12 @@ def get_sub_applications_output(name: pulumi.Input[Optional[Optional[_builtins.s
 
     export = tencentcloud.vod.get_sub_applications(result_output_file="/tmp/vod_apps.json")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSubAppIds](https://www.tencentcloud.com/document/api/266/34177)
 
 
     :param _builtins.str name: Application name for exact match filtering.

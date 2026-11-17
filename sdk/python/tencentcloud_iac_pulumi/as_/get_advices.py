@@ -96,6 +96,12 @@ def get_advices(auto_scaling_group_ids: Optional[Sequence[_builtins.str]] = None
     advices = tencentcloud.as_.get_advices(auto_scaling_group_ids=["asc-lo0b94oy"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAutoScalingAdvices](https://www.tencentcloud.com/document/api/377/44581)
+
 
     :param Sequence[_builtins.str] auto_scaling_group_ids: List of scaling groups to be queried. Upper limit: 100.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_advices_output(auto_scaling_group_ids: pulumi.Input[Optional[Sequence[_b
 
     advices = tencentcloud.as_.get_advices(auto_scaling_group_ids=["asc-lo0b94oy"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAutoScalingAdvices](https://www.tencentcloud.com/document/api/377/44581)
 
 
     :param Sequence[_builtins.str] auto_scaling_group_ids: List of scaling groups to be queried. Upper limit: 100.

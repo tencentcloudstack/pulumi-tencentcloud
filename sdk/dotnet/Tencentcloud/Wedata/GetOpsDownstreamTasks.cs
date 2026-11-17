@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListDownstreamOpsTasks](https://www.tencentcloud.com/document/api/1174/73823)
         /// </summary>
         public static Task<GetOpsDownstreamTasksResult> InvokeAsync(GetOpsDownstreamTasksArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetOpsDownstreamTasksResult>("tencentcloud:Wedata/getOpsDownstreamTasks:getOpsDownstreamTasks", args ?? new GetOpsDownstreamTasksArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListDownstreamOpsTasks](https://www.tencentcloud.com/document/api/1174/73823)
         /// </summary>
         public static Output<GetOpsDownstreamTasksResult> Invoke(GetOpsDownstreamTasksInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetOpsDownstreamTasksResult>("tencentcloud:Wedata/getOpsDownstreamTasks:getOpsDownstreamTasks", args ?? new GetOpsDownstreamTasksInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListDownstreamOpsTasks](https://www.tencentcloud.com/document/api/1174/73823)
         /// </summary>
         public static Output<GetOpsDownstreamTasksResult> Invoke(GetOpsDownstreamTasksInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetOpsDownstreamTasksResult>("tencentcloud:Wedata/getOpsDownstreamTasks:getOpsDownstreamTasks", args ?? new GetOpsDownstreamTasksInvokeArgs(), options.WithDefaults());

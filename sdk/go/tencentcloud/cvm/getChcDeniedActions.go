@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeChcDeniedActions](https://www.tencentcloud.com/document/api/213/49703)
 func GetChcDeniedActions(ctx *pulumi.Context, args *GetChcDeniedActionsArgs, opts ...pulumi.InvokeOption) (*GetChcDeniedActionsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetChcDeniedActionsResult

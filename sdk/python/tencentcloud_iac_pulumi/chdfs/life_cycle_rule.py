@@ -129,6 +129,17 @@ class LifeCycleRule(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateLifeCycleRules](https://www.tencentcloud.com/document/api/1106/42440)
+          - [DescribeLifeCycleRules](https://www.tencentcloud.com/document/api/1106/42438)
+        * Read: [DescribeLifeCycleRules](https://www.tencentcloud.com/document/api/1106/42438)
+        * Update: [ModifyLifeCycleRules](https://www.tencentcloud.com/document/api/1106/42437)
+        * Delete: [DeleteLifeCycleRules](https://www.tencentcloud.com/document/api/1106/42439)
+
         ## Import
 
         chdfs life_cycle_rule can be imported using the id, e.g.
@@ -170,6 +181,17 @@ class LifeCycleRule(pulumi.CustomResource):
                 }],
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateLifeCycleRules](https://www.tencentcloud.com/document/api/1106/42440)
+          - [DescribeLifeCycleRules](https://www.tencentcloud.com/document/api/1106/42438)
+        * Read: [DescribeLifeCycleRules](https://www.tencentcloud.com/document/api/1106/42438)
+        * Update: [ModifyLifeCycleRules](https://www.tencentcloud.com/document/api/1106/42437)
+        * Delete: [DeleteLifeCycleRules](https://www.tencentcloud.com/document/api/1106/42439)
 
         ## Import
 

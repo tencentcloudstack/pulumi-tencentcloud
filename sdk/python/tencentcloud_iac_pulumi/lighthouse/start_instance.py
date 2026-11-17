@@ -85,6 +85,14 @@ class StartInstance(pulumi.CustomResource):
         start_instance = tencentcloud.lighthouse.StartInstance("start_instance", instance_id="lhins-xxxxxx")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeInstances](https://www.tencentcloud.com/document/api/1103/42498)
+          - [StartInstances](https://www.tencentcloud.com/document/api/1103/42488)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -107,6 +115,14 @@ class StartInstance(pulumi.CustomResource):
 
         start_instance = tencentcloud.lighthouse.StartInstance("start_instance", instance_id="lhins-xxxxxx")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeInstances](https://www.tencentcloud.com/document/api/1103/42498)
+          - [StartInstances](https://www.tencentcloud.com/document/api/1103/42488)
 
 
         :param str resource_name: The name of the resource.

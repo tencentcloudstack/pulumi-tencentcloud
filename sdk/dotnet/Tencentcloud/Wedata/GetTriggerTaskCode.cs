@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetTriggerTaskCode](https://www.tencentcloud.com/document/api/1174/77926)
         /// </summary>
         public static Task<GetTriggerTaskCodeResult> InvokeAsync(GetTriggerTaskCodeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetTriggerTaskCodeResult>("tencentcloud:Wedata/getTriggerTaskCode:getTriggerTaskCode", args ?? new GetTriggerTaskCodeArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetTriggerTaskCode](https://www.tencentcloud.com/document/api/1174/77926)
         /// </summary>
         public static Output<GetTriggerTaskCodeResult> Invoke(GetTriggerTaskCodeInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetTriggerTaskCodeResult>("tencentcloud:Wedata/getTriggerTaskCode:getTriggerTaskCode", args ?? new GetTriggerTaskCodeInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetTriggerTaskCode](https://www.tencentcloud.com/document/api/1174/77926)
         /// </summary>
         public static Output<GetTriggerTaskCodeResult> Invoke(GetTriggerTaskCodeInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetTriggerTaskCodeResult>("tencentcloud:Wedata/getTriggerTaskCode:getTriggerTaskCode", args ?? new GetTriggerTaskCodeInvokeArgs(), options.WithDefaults());

@@ -39,7 +39,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// </summary>
         public readonly string? Status;
         /// <summary>
-        /// Type of the certificate. Values: `Default`: Default certificate `Upload`: Specified certificate `Managed`: Tencent Cloud-managed certificate.
+        /// Type of the certificate.
         /// </summary>
         public readonly string? Type;
 

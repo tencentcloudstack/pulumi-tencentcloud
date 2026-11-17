@@ -16,21 +16,39 @@ import * as utilities from "../utilities";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const example = new tencentcloud.ckafka.Route("example", {
- *     instanceId: "ckafka-8j4rodrr",
+ *     instanceId: "ckafka-8j4ra928",
  *     vipType: 3,
- *     vpcId: "vpc-axrsmmrv",
- *     subnetId: "subnet-j5vja918",
+ *     vpcId: "vpc-i5yyodl9",
+ *     subnetId: "subnet-hhi88a58",
  *     accessType: 0,
  *     publicNetwork: 3,
+ *     securityGroupIds: [
+ *         "sg-8ztqghor",
+ *         "sg-rc9644tr",
+ *         "sg-n8zf5ry9",
+ *     ],
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateRoute](https://www.tencentcloud.com/document/api/597/74258)
+ *   - [DescribeTaskStatus](https://www.tencentcloud.com/document/api/597/55881)
+ * * Read:
+ *   - [DescribeRoute](https://www.tencentcloud.com/document/api/597/37090)
+ *   - [DescribeSecurityGroupRoutes](https://www.tencentcloud.com/document/api/597/74257)
+ * * Update: [ModifyRouteSecurityGroups](https://www.tencentcloud.com/search/?wd=ModifyRouteSecurityGroups&type=document&lang=en)
+ * * Delete: [DeleteRoute](https://www.tencentcloud.com/document/api/597/47140)
+ *
  * ## Import
  *
- * ckafka route can be imported using the id, e.g.
+ * ckafka route can be imported using the instanceId#routeId, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Ckafka/route:Route example ckafka-8j4rodrr#135912
+ * $ pulumi import tencentcloud:Ckafka/route:Route example ckafka-8j4ra928#135912
  * ```
  */
 export class Route extends pulumi.CustomResource {
@@ -94,6 +112,14 @@ export class Route extends pulumi.CustomResource {
      */
     declare public readonly publicNetwork: pulumi.Output<number | undefined>;
     /**
+     * Route ID.
+     */
+    declare public /*out*/ readonly routeId: pulumi.Output<number>;
+    /**
+     * List of associated security group IDs in order.
+     */
+    declare public readonly securityGroupIds: pulumi.Output<string[] | undefined>;
+    /**
      * Subnet id.
      */
     declare public readonly subnetId: pulumi.Output<string>;
@@ -130,6 +156,8 @@ export class Route extends pulumi.CustomResource {
             resourceInputs["instanceId"] = state?.instanceId;
             resourceInputs["ip"] = state?.ip;
             resourceInputs["publicNetwork"] = state?.publicNetwork;
+            resourceInputs["routeId"] = state?.routeId;
+            resourceInputs["securityGroupIds"] = state?.securityGroupIds;
             resourceInputs["subnetId"] = state?.subnetId;
             resourceInputs["vipLists"] = state?.vipLists;
             resourceInputs["vipType"] = state?.vipType;
@@ -148,10 +176,12 @@ export class Route extends pulumi.CustomResource {
             resourceInputs["instanceId"] = args?.instanceId;
             resourceInputs["ip"] = args?.ip;
             resourceInputs["publicNetwork"] = args?.publicNetwork;
+            resourceInputs["securityGroupIds"] = args?.securityGroupIds;
             resourceInputs["subnetId"] = args?.subnetId;
             resourceInputs["vipType"] = args?.vipType;
             resourceInputs["vpcId"] = args?.vpcId;
             resourceInputs["brokerVipLists"] = undefined /*out*/;
+            resourceInputs["routeId"] = undefined /*out*/;
             resourceInputs["vipLists"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
@@ -195,6 +225,14 @@ export interface RouteState {
      * Public network.
      */
     publicNetwork?: pulumi.Input<number | undefined>;
+    /**
+     * Route ID.
+     */
+    routeId?: pulumi.Input<number | undefined>;
+    /**
+     * List of associated security group IDs in order.
+     */
+    securityGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Subnet id.
      */
@@ -245,6 +283,10 @@ export interface RouteArgs {
      * Public network.
      */
     publicNetwork?: pulumi.Input<number | undefined>;
+    /**
+     * List of associated security group IDs in order.
+     */
+    securityGroupIds?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
      * Subnet id.
      */

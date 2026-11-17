@@ -332,6 +332,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     ///                         },
     ///                         Enabled = "off",
     ///                     },
+    ///                     new Tencentcloud.Teo.Inputs.SecurityPolicyConfigSecurityPolicyExceptionRulesRuleArgs
+    ///                     {
+    ///                         Name = "Skip managed rule set submodule",
+    ///                         Condition = "${http.request.uri.path} in ['/legacy/api']",
+    ///                         SkipScope = "WebSecuritySubmodules",
+    ///                         WebSecuritySubmodulesForExceptions = new[]
+    ///                         {
+    ///                             "websec-mod-managed-rules/managed-rule-groups",
+    ///                             "websec-mod-rate-limiting-rules",
+    ///                         },
+    ///                         Enabled = "off",
+    ///                     },
     ///                 },
     ///             },
     ///             BotManagementLite = new Tencentcloud.Teo.Inputs.SecurityPolicyConfigSecurityPolicyBotManagementLiteArgs
@@ -350,6 +362,110 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     ///                         {
     ///                             BlockIp = "on",
     ///                             BlockIpDuration = "120s",
+    ///                         },
+    ///                     },
+    ///                 },
+    ///             },
+    ///             BotManagement = new Tencentcloud.Teo.Inputs.SecurityPolicyConfigSecurityPolicyBotManagementArgs
+    ///             {
+    ///                 BasicBotSettings = new Tencentcloud.Teo.Inputs.SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsArgs
+    ///                 {
+    ///                     SourceIdc = new Tencentcloud.Teo.Inputs.SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSourceIdcArgs
+    ///                     {
+    ///                         BaseAction = new Tencentcloud.Teo.Inputs.SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSourceIdcBaseActionArgs
+    ///                         {
+    ///                             Name = "Monitor",
+    ///                         },
+    ///                         ActionOverrides = new[]
+    ///                         {
+    ///                             new Tencentcloud.Teo.Inputs.SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSourceIdcActionOverrideArgs
+    ///                             {
+    ///                                 RuleIds = new[]
+    ///                                 {
+    ///                                     "rule-a",
+    ///                                     "rule-b",
+    ///                                 },
+    ///                                 Action = new Tencentcloud.Teo.Inputs.SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSourceIdcActionOverrideActionArgs
+    ///                                 {
+    ///                                     Name = "Deny",
+    ///                                 },
+    ///                             },
+    ///                         },
+    ///                     },
+    ///                     SearchEngineBots = new Tencentcloud.Teo.Inputs.SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSearchEngineBotsArgs
+    ///                     {
+    ///                         BaseAction = new Tencentcloud.Teo.Inputs.SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSearchEngineBotsBaseActionArgs
+    ///                         {
+    ///                             Name = "Monitor",
+    ///                         },
+    ///                         ActionOverrides = new[]
+    ///                         {
+    ///                             new Tencentcloud.Teo.Inputs.SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSearchEngineBotsActionOverrideArgs
+    ///                             {
+    ///                                 RuleIds = new[]
+    ///                                 {
+    ///                                     "rule-c",
+    ///                                 },
+    ///                                 Action = new Tencentcloud.Teo.Inputs.SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSearchEngineBotsActionOverrideActionArgs
+    ///                                 {
+    ///                                     Name = "Monitor",
+    ///                                 },
+    ///                             },
+    ///                         },
+    ///                     },
+    ///                 },
+    ///                 ClientAttestationRules = new[]
+    ///                 {
+    ///                     new Tencentcloud.Teo.Inputs.SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleArgs
+    ///                     {
+    ///                         Name = "client-attestation-rule",
+    ///                         Enabled = "on",
+    ///                         Priority = 10,
+    ///                         Condition = "${http.request.host} contain ['abc']",
+    ///                         AttesterId = "attester-xxxx",
+    ///                         InvalidAttestationAction = new Tencentcloud.Teo.Inputs.SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleInvalidAttestationActionArgs
+    ///                         {
+    ///                             Name = "Monitor",
+    ///                         },
+    ///                         DeviceProfiles = new[]
+    ///                         {
+    ///                             new Tencentcloud.Teo.Inputs.SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArgs
+    ///                             {
+    ///                                 ClientType = "iOS",
+    ///                                 HighRiskMinScore = 60,
+    ///                                 HighRiskRequestAction = new Tencentcloud.Teo.Inputs.SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionArgs
+    ///                                 {
+    ///                                     Name = "Deny",
+    ///                                     DenyActionParameters = new Tencentcloud.Teo.Inputs.SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersArgs
+    ///                                     {
+    ///                                         BlockIp = "on",
+    ///                                         BlockIpDuration = "120s",
+    ///                                     },
+    ///                                 },
+    ///                                 MediumRiskMinScore = 20,
+    ///                                 MediumRiskRequestAction = new Tencentcloud.Teo.Inputs.SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionArgs
+    ///                                 {
+    ///                                     Name = "Monitor",
+    ///                                 },
+    ///                             },
+    ///                             new Tencentcloud.Teo.Inputs.SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArgs
+    ///                             {
+    ///                                 ClientType = "Android",
+    ///                                 HighRiskMinScore = 50,
+    ///                                 HighRiskRequestAction = new Tencentcloud.Teo.Inputs.SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionArgs
+    ///                                 {
+    ///                                     Name = "Challenge",
+    ///                                     ChallengeActionParameters = new Tencentcloud.Teo.Inputs.SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersArgs
+    ///                                     {
+    ///                                         ChallengeOption = "JSChallenge",
+    ///                                     },
+    ///                                 },
+    ///                                 MediumRiskMinScore = 15,
+    ///                                 MediumRiskRequestAction = new Tencentcloud.Teo.Inputs.SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionArgs
+    ///                                 {
+    ///                                     Name = "Monitor",
+    ///                                 },
+    ///                             },
     ///                         },
     ///                     },
     ///                 },
@@ -805,6 +921,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ModifySecurityPolicy](https://www.tencentcloud.com/document/api/1145/50950)
+    /// * Read: [DescribeSecurityPolicy](https://www.tencentcloud.com/document/api/1145/50958)
+    /// * Update: [ModifySecurityPolicy](https://www.tencentcloud.com/document/api/1145/50950)
     /// 
     /// ## Import
     /// 

@@ -117,6 +117,12 @@ def get_route_table_input_policies(ccn_id: Optional[_builtins.str] = None,
         route_table_id="ccnrtb-4jv5ltb9")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCcnRouteTableInputPolicys](https://www.tencentcloud.com/search/?wd=DescribeCcnRouteTableInputPolicys&type=document&lang=en)
+
 
     :param _builtins.str ccn_id: CCN Instance ID.
     :param _builtins.int policy_version: Policy version.
@@ -155,6 +161,12 @@ def get_route_table_input_policies_output(ccn_id: pulumi.Input[Optional[_builtin
     example = tencentcloud.ccn.get_route_table_input_policies(ccn_id="ccn-06jek8tf",
         route_table_id="ccnrtb-4jv5ltb9")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCcnRouteTableInputPolicys](https://www.tencentcloud.com/search/?wd=DescribeCcnRouteTableInputPolicys&type=document&lang=en)
 
 
     :param _builtins.str ccn_id: CCN Instance ID.

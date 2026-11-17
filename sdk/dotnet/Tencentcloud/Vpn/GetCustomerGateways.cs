@@ -55,6 +55,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeCustomerGateways](https://www.tencentcloud.com/document/api/215/17516)
+        ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
         /// </summary>
         public static Task<GetCustomerGatewaysResult> InvokeAsync(GetCustomerGatewaysArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetCustomerGatewaysResult>("tencentcloud:Vpn/getCustomerGateways:getCustomerGateways", args ?? new GetCustomerGatewaysArgs(), options.WithDefaults());
@@ -102,6 +110,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeCustomerGateways](https://www.tencentcloud.com/document/api/215/17516)
+        ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
         /// </summary>
         public static Output<GetCustomerGatewaysResult> Invoke(GetCustomerGatewaysInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetCustomerGatewaysResult>("tencentcloud:Vpn/getCustomerGateways:getCustomerGateways", args ?? new GetCustomerGatewaysInvokeArgs(), options.WithDefaults());
@@ -149,6 +165,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeCustomerGateways](https://www.tencentcloud.com/document/api/215/17516)
+        ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
         /// </summary>
         public static Output<GetCustomerGatewaysResult> Invoke(GetCustomerGatewaysInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetCustomerGatewaysResult>("tencentcloud:Vpn/getCustomerGateways:getCustomerGateways", args ?? new GetCustomerGatewaysInvokeArgs(), options.WithDefaults());

@@ -403,6 +403,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ga2
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateEndpointGroup](https://www.tencentcloud.com/document/api/1299/83838)
+    ///   - [DescribeTaskResult](https://www.tencentcloud.com/document/api/1299/83730)
+    /// * Read: [DescribeEndpointGroups](https://www.tencentcloud.com/document/api/1299/83817)
+    /// * Update:
+    ///   - [DescribeTaskResult](https://www.tencentcloud.com/document/api/1299/83730)
+    ///   - [ModifyEndpointGroup](https://www.tencentcloud.com/document/api/1299/83810)
+    /// * Delete:
+    ///   - [DeleteEndpointGroups](https://www.tencentcloud.com/document/api/1299/83747)
+    ///   - [DescribeTaskResult](https://www.tencentcloud.com/document/api/1299/83730)
+    /// 
     /// ## Import
     /// 
     /// GA2 endpoint group can be imported using the composite ID `&lt;global_accelerator_id&gt;#&lt;listener_id&gt;#&lt;endpoint_group_id&gt;`, e.g.

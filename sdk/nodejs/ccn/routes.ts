@@ -20,6 +20,18 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DisableCcnRoutes](https://www.tencentcloud.com/document/api/215/34785)
+ *   - [EnableCcnRoutes](https://www.tencentcloud.com/document/api/215/34784)
+ * * Read: [DescribeCcnRoutes](https://www.tencentcloud.com/document/api/215/34788)
+ * * Update:
+ *   - [DisableCcnRoutes](https://www.tencentcloud.com/document/api/215/34785)
+ *   - [EnableCcnRoutes](https://www.tencentcloud.com/document/api/215/34784)
+ *
  * ## Import
  *
  * vpc ccnRoutes can be imported using the id, e.g.

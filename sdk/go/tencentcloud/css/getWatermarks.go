@@ -36,6 +36,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeLiveWatermarks](https://www.tencentcloud.com/document/api/267/30820)
 func GetWatermarks(ctx *pulumi.Context, args *GetWatermarksArgs, opts ...pulumi.InvokeOption) (*GetWatermarksResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetWatermarksResult

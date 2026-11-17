@@ -34,6 +34,12 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAddressPoolList](https://www.tencentcloud.com/search/?wd=DescribeAddressPoolList&type=document&lang=en)
  */
 export function getAddressPoolList(args?: GetAddressPoolListArgs, opts?: pulumi.InvokeOptions): Promise<GetAddressPoolListResult> {
     args = args || {};
@@ -101,6 +107,12 @@ export interface GetAddressPoolListResult {
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAddressPoolList](https://www.tencentcloud.com/search/?wd=DescribeAddressPoolList&type=document&lang=en)
  */
 export function getAddressPoolListOutput(args?: GetAddressPoolListOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAddressPoolListResult> {
     args = args || {};

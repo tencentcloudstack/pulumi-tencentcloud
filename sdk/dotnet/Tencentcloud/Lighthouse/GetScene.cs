@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeScenes](https://www.tencentcloud.com/document/api/1103/52166)
         /// </summary>
         public static Task<GetSceneResult> InvokeAsync(GetSceneArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSceneResult>("tencentcloud:Lighthouse/getScene:getScene", args ?? new GetSceneArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeScenes](https://www.tencentcloud.com/document/api/1103/52166)
         /// </summary>
         public static Output<GetSceneResult> Invoke(GetSceneInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSceneResult>("tencentcloud:Lighthouse/getScene:getScene", args ?? new GetSceneInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeScenes](https://www.tencentcloud.com/document/api/1103/52166)
         /// </summary>
         public static Output<GetSceneResult> Invoke(GetSceneInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetSceneResult>("tencentcloud:Lighthouse/getScene:getScene", args ?? new GetSceneInvokeArgs(), options.WithDefaults());

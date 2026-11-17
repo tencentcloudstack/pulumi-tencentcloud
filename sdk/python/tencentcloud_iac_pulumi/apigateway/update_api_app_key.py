@@ -119,6 +119,12 @@ class UpdateApiAppKey(pulumi.CustomResource):
             api_app_key="APID6JmG21yRCc03h4z16hlsTqj1wpO3dB3ZQcUP")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [UpdateApiAppKey](https://www.tencentcloud.com/search/?wd=UpdateApiAppKey&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -144,6 +150,12 @@ class UpdateApiAppKey(pulumi.CustomResource):
             api_app_id="app-krljp4wn",
             api_app_key="APID6JmG21yRCc03h4z16hlsTqj1wpO3dB3ZQcUP")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [UpdateApiAppKey](https://www.tencentcloud.com/search/?wd=UpdateApiAppKey&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

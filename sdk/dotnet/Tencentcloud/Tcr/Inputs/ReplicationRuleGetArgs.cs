@@ -25,6 +25,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr.Inputs
         [Input("destNamespace", required: true)]
         public Input<string> DestNamespace { get; set; } = null!;
 
+        /// <summary>
+        /// Whether to enable the rule.
+        /// </summary>
+        [Input("enabled")]
+        public Input<bool>? Enabled { get; set; }
+
         [Input("filters", required: true)]
         private InputList<Inputs.ReplicationRuleFilterGetArgs>? _filters;
 

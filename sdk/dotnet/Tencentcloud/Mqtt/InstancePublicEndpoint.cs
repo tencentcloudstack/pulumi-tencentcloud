@@ -86,6 +86,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mqtt
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateInsPublicEndpoint](https://www.tencentcloud.com/search/?wd=CreateInsPublicEndpoint&amp;type=document&amp;lang=en)
+    ///   - [DescribeInsPublicEndpoints](https://www.tencentcloud.com/search/?wd=DescribeInsPublicEndpoints&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeInsPublicEndpoints](https://www.tencentcloud.com/search/?wd=DescribeInsPublicEndpoints&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [DescribeInsPublicEndpoints](https://www.tencentcloud.com/search/?wd=DescribeInsPublicEndpoints&amp;type=document&amp;lang=en)
+    ///   - [ModifyInsPublicEndpoint](https://www.tencentcloud.com/search/?wd=ModifyInsPublicEndpoint&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteInsPublicEndpoint](https://www.tencentcloud.com/search/?wd=DeleteInsPublicEndpoint&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// MQTT instance public endpoint can be imported using the id, e.g.

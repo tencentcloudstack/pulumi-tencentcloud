@@ -77,6 +77,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gs
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAndroidInstances](https://www.tencentcloud.com/search/?wd=DescribeAndroidInstances&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetAndroidInstancesResult> InvokeAsync(GetAndroidInstancesArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetAndroidInstancesResult>("tencentcloud:Gs/getAndroidInstances:getAndroidInstances", args ?? new GetAndroidInstancesArgs(), options.WithDefaults());
@@ -146,6 +152,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gs
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAndroidInstances](https://www.tencentcloud.com/search/?wd=DescribeAndroidInstances&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetAndroidInstancesResult> Invoke(GetAndroidInstancesInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetAndroidInstancesResult>("tencentcloud:Gs/getAndroidInstances:getAndroidInstances", args ?? new GetAndroidInstancesInvokeArgs(), options.WithDefaults());
@@ -215,6 +227,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gs
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAndroidInstances](https://www.tencentcloud.com/search/?wd=DescribeAndroidInstances&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetAndroidInstancesResult> Invoke(GetAndroidInstancesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetAndroidInstancesResult>("tencentcloud:Gs/getAndroidInstances:getAndroidInstances", args ?? new GetAndroidInstancesInvokeArgs(), options.WithDefaults());

@@ -192,6 +192,15 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateTrigger](https://www.tencentcloud.com/document/api/583/18589)
+ * * Read: [ListTriggers](https://www.tencentcloud.com/document/api/583/36314)
+ * * Update: [UpdateTrigger](https://www.tencentcloud.com/search/?wd=UpdateTrigger&type=document&lang=en)
+ * * Delete: [DeleteTrigger](https://www.tencentcloud.com/document/api/583/18588)
+ *
  * ## Import
  *
  * SCF trigger can be imported using the composite id `function_name#namespace#trigger_name`, e.g.

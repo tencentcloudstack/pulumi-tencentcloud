@@ -352,6 +352,12 @@ def get_certificate_bind_resource_task_detail(regions: Optional[Sequence[_builti
         ])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCertificateBindResourceTaskDetail](https://www.tencentcloud.com/document/api/1007/56822)
+
 
     :param Sequence[_builtins.str] regions: List of regions to query. clb, tke, waf, apigateway, tcb, cos, tse support region query.
     :param Sequence[_builtins.str] resource_types: Query the result details of the resource type. If not passed, query all. Supported values: clb, cdn, ddos, live, vod, waf, apigateway, teo, tke, cos, tse, tcb, tdmq, mqtt, gaap, scf.
@@ -438,6 +444,12 @@ def get_certificate_bind_resource_task_detail_output(regions: pulumi.Input[Optio
             "ap-beijing",
         ])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCertificateBindResourceTaskDetail](https://www.tencentcloud.com/document/api/1007/56822)
 
 
     :param Sequence[_builtins.str] regions: List of regions to query. clb, tke, waf, apigateway, tcb, cos, tse support region query.

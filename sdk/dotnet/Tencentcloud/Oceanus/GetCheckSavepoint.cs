@@ -36,6 +36,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [CheckSavepoint](https://www.tencentcloud.com/search/?wd=CheckSavepoint&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetCheckSavepointResult> InvokeAsync(GetCheckSavepointArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetCheckSavepointResult>("tencentcloud:Oceanus/getCheckSavepoint:getCheckSavepoint", args ?? new GetCheckSavepointArgs(), options.WithDefaults());
@@ -64,6 +70,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [CheckSavepoint](https://www.tencentcloud.com/search/?wd=CheckSavepoint&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetCheckSavepointResult> Invoke(GetCheckSavepointInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetCheckSavepointResult>("tencentcloud:Oceanus/getCheckSavepoint:getCheckSavepoint", args ?? new GetCheckSavepointInvokeArgs(), options.WithDefaults());
@@ -92,6 +104,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [CheckSavepoint](https://www.tencentcloud.com/search/?wd=CheckSavepoint&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetCheckSavepointResult> Invoke(GetCheckSavepointInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetCheckSavepointResult>("tencentcloud:Oceanus/getCheckSavepoint:getCheckSavepoint", args ?? new GetCheckSavepointInvokeArgs(), options.WithDefaults());

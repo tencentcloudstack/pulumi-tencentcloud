@@ -14,7 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
     public sealed class SecurityPolicyConfigSecurityPolicyManagedRulesManagedRuleGroupMetaDataRuleDetailArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Rule description.
+        /// Rule description. Output-only.
         /// </summary>
         [Input("description")]
         public Input<string>? Description { get; set; }
@@ -26,7 +26,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public Input<string>? RiskLevel { get; set; }
 
         /// <summary>
-        /// Managed rule Id.
+        /// Rule ID. Output-only.
         /// </summary>
         [Input("ruleId")]
         public Input<string>? RuleId { get; set; }

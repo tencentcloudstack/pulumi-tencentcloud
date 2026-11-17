@@ -40,6 +40,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListAttachedRolePolicies](https://www.tencentcloud.com/document/api/598/33556)
         /// </summary>
         public static Task<GetRolePolicyAttachmentsResult> InvokeAsync(GetRolePolicyAttachmentsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetRolePolicyAttachmentsResult>("tencentcloud:Cam/getRolePolicyAttachments:getRolePolicyAttachments", args ?? new GetRolePolicyAttachmentsArgs(), options.WithDefaults());
@@ -72,6 +78,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListAttachedRolePolicies](https://www.tencentcloud.com/document/api/598/33556)
         /// </summary>
         public static Output<GetRolePolicyAttachmentsResult> Invoke(GetRolePolicyAttachmentsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetRolePolicyAttachmentsResult>("tencentcloud:Cam/getRolePolicyAttachments:getRolePolicyAttachments", args ?? new GetRolePolicyAttachmentsInvokeArgs(), options.WithDefaults());
@@ -104,6 +116,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListAttachedRolePolicies](https://www.tencentcloud.com/document/api/598/33556)
         /// </summary>
         public static Output<GetRolePolicyAttachmentsResult> Invoke(GetRolePolicyAttachmentsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetRolePolicyAttachmentsResult>("tencentcloud:Cam/getRolePolicyAttachments:getRolePolicyAttachments", args ?? new GetRolePolicyAttachmentsInvokeArgs(), options.WithDefaults());

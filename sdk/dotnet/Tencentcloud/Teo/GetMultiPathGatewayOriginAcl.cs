@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMultiPathGatewayOriginACL](https://www.tencentcloud.com/document/api/1145/74212)
         /// </summary>
         public static Task<GetMultiPathGatewayOriginAclResult> InvokeAsync(GetMultiPathGatewayOriginAclArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetMultiPathGatewayOriginAclResult>("tencentcloud:Teo/getMultiPathGatewayOriginAcl:getMultiPathGatewayOriginAcl", args ?? new GetMultiPathGatewayOriginAclArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMultiPathGatewayOriginACL](https://www.tencentcloud.com/document/api/1145/74212)
         /// </summary>
         public static Output<GetMultiPathGatewayOriginAclResult> Invoke(GetMultiPathGatewayOriginAclInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetMultiPathGatewayOriginAclResult>("tencentcloud:Teo/getMultiPathGatewayOriginAcl:getMultiPathGatewayOriginAcl", args ?? new GetMultiPathGatewayOriginAclInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMultiPathGatewayOriginACL](https://www.tencentcloud.com/document/api/1145/74212)
         /// </summary>
         public static Output<GetMultiPathGatewayOriginAclResult> Invoke(GetMultiPathGatewayOriginAclInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetMultiPathGatewayOriginAclResult>("tencentcloud:Teo/getMultiPathGatewayOriginAcl:getMultiPathGatewayOriginAcl", args ?? new GetMultiPathGatewayOriginAclInvokeArgs(), options.WithDefaults());

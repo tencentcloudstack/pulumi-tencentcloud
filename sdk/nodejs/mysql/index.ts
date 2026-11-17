@@ -40,6 +40,11 @@ export type BackupPolicy = import("./backupPolicy").BackupPolicy;
 export const BackupPolicy: typeof import("./backupPolicy").BackupPolicy = null as any;
 utilities.lazyLoad(exports, ["BackupPolicy"], () => require("./backupPolicy"));
 
+export { CloneInstanceArgs, CloneInstanceState } from "./cloneInstance";
+export type CloneInstance = import("./cloneInstance").CloneInstance;
+export const CloneInstance: typeof import("./cloneInstance").CloneInstance = null as any;
+utilities.lazyLoad(exports, ["CloneInstance"], () => require("./cloneInstance"));
+
 export { ClsLogAttachmentArgs, ClsLogAttachmentState } from "./clsLogAttachment";
 export type ClsLogAttachment = import("./clsLogAttachment").ClsLogAttachment;
 export const ClsLogAttachment: typeof import("./clsLogAttachment").ClsLogAttachment = null as any;
@@ -374,6 +379,8 @@ const _module = {
                 return new BackupEncryptionStatus(name, <any>undefined, { urn })
             case "tencentcloud:Mysql/backupPolicy:BackupPolicy":
                 return new BackupPolicy(name, <any>undefined, { urn })
+            case "tencentcloud:Mysql/cloneInstance:CloneInstance":
+                return new CloneInstance(name, <any>undefined, { urn })
             case "tencentcloud:Mysql/clsLogAttachment:ClsLogAttachment":
                 return new ClsLogAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Mysql/database:Database":
@@ -456,6 +463,7 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/backup", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/backupDownloadRestriction", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/backupEncryptionStatus", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/backupPolicy", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/cloneInstance", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/clsLogAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/database", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Mysql/dbImportJobOperation", _module)

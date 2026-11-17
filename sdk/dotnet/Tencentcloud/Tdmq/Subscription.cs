@@ -70,6 +70,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateSubscription](https://www.tencentcloud.com/search/?wd=CreateSubscription&amp;type=document&amp;lang=en)
+    /// * Read:
+    ///   - [DescribeSubscriptions](https://www.tencentcloud.com/search/?wd=DescribeSubscriptions&amp;type=document&amp;lang=en)
+    ///   - [DescribeTopics](https://www.tencentcloud.com/search/?wd=DescribeTopics&amp;type=document&amp;lang=en)
+    /// * Delete:
+    ///   - [DeleteSubscriptions](https://www.tencentcloud.com/search/?wd=DeleteSubscriptions&amp;type=document&amp;lang=en)
+    ///   - [DeleteTopics](https://www.tencentcloud.com/search/?wd=DeleteTopics&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// tdmq subscription can be imported using the id, e.g.

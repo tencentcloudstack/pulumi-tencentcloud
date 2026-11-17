@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListLayerVersions](https://www.tencentcloud.com/document/api/583/36318)
         /// </summary>
         public static Task<GetLayerVersionsResult> InvokeAsync(GetLayerVersionsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetLayerVersionsResult>("tencentcloud:Scf/getLayerVersions:getLayerVersions", args ?? new GetLayerVersionsArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListLayerVersions](https://www.tencentcloud.com/document/api/583/36318)
         /// </summary>
         public static Output<GetLayerVersionsResult> Invoke(GetLayerVersionsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetLayerVersionsResult>("tencentcloud:Scf/getLayerVersions:getLayerVersions", args ?? new GetLayerVersionsInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListLayerVersions](https://www.tencentcloud.com/document/api/583/36318)
         /// </summary>
         public static Output<GetLayerVersionsResult> Invoke(GetLayerVersionsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetLayerVersionsResult>("tencentcloud:Scf/getLayerVersions:getLayerVersions", args ?? new GetLayerVersionsInvokeArgs(), options.WithDefaults());

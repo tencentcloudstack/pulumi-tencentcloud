@@ -167,6 +167,15 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateL7AccRules](https://www.tencentcloud.com/document/api/1145/68152)
+ * * Read: [DescribeL7AccRules](https://www.tencentcloud.com/document/api/1145/68150)
+ * * Update: [ModifyL7AccRule](https://www.tencentcloud.com/document/api/1145/68148)
+ * * Delete: [DeleteL7AccRules](https://www.tencentcloud.com/document/api/1145/68151)
+ *
  * ## Import
  *
  * TEO l7 acc rule v2 can be imported using the {zone_id}#{rule_id}, e.g.

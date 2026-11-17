@@ -27,9 +27,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns.Outputs
         /// </summary>
         public readonly string UniqVpcId;
         /// <summary>
-        /// VPC NAME.
+        /// It has been deprecated from version 1.83.35. Please do not re-enter this field as entering a value will be ignored. VPC NAME.
         /// </summary>
-        public readonly string VpcName;
+        public readonly string? VpcName;
 
         [OutputConstructor]
         private ZoneAccountVpcSet(
@@ -39,7 +39,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns.Outputs
 
             string uniqVpcId,
 
-            string vpcName)
+            string? vpcName)
         {
             Region = region;
             Uin = uin;

@@ -22,6 +22,15 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateDomainCustomLine](https://www.tencentcloud.com/search/?wd=CreateDomainCustomLine&type=document&lang=en)
+ * * Read: [DescribeDomainCustomLineList](https://www.tencentcloud.com/search/?wd=DescribeDomainCustomLineList&type=document&lang=en)
+ * * Update: [ModifyDomainCustomLine](https://www.tencentcloud.com/search/?wd=ModifyDomainCustomLine&type=document&lang=en)
+ * * Delete: [DeleteDomainCustomLine](https://www.tencentcloud.com/search/?wd=DeleteDomainCustomLine&type=document&lang=en)
+ *
  * ## Import
  *
  * dnspod customLine can be imported using the id, e.g.

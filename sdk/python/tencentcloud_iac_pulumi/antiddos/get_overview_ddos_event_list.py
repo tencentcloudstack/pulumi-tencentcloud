@@ -127,6 +127,12 @@ def get_overview_ddos_event_list(attack_status: Optional[_builtins.str] = None,
         attack_status="end")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeOverviewDDoSEventList](https://www.tencentcloud.com/document/api/1213/61338)
+
 
     :param _builtins.str attack_status: filter event by attack status, start: attacking; end: attack end.
     :param _builtins.str end_time: EndTime.
@@ -166,6 +172,12 @@ def get_overview_ddos_event_list_output(attack_status: pulumi.Input[Optional[Opt
         end_time="2023-11-21 00:00:00",
         attack_status="end")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeOverviewDDoSEventList](https://www.tencentcloud.com/document/api/1213/61338)
 
 
     :param _builtins.str attack_status: filter event by attack status, start: attacking; end: attack end.

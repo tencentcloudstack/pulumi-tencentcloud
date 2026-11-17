@@ -156,6 +156,12 @@ def get_redirections(clb_id: Optional[_builtins.str] = None,
         result_output_file="mytestpath")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRewrite](https://www.tencentcloud.com/document/api/214/33829)
+
 
     :param _builtins.str clb_id: ID of the CLB to be queried.
     :param _builtins.str result_output_file: Used to save results.
@@ -206,6 +212,12 @@ def get_redirections_output(clb_id: pulumi.Input[Optional[_builtins.str]] = None
         target_rule_id="loc-4xxr2cy7",
         result_output_file="mytestpath")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRewrite](https://www.tencentcloud.com/document/api/214/33829)
 
 
     :param _builtins.str clb_id: ID of the CLB to be queried.

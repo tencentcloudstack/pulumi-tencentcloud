@@ -21,6 +21,12 @@ import * as utilities from "../utilities";
  *     disableProgramAuthCheck: true,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSimpleClusters](https://www.tencentcloud.com/search/?wd=DescribeSimpleClusters&type=document&lang=en)
  */
 export function getCluster(args?: GetClusterArgs, opts?: pulumi.InvokeOptions): Promise<GetClusterResult> {
     args = args || {};
@@ -96,6 +102,12 @@ export interface GetClusterResult {
  *     disableProgramAuthCheck: true,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSimpleClusters](https://www.tencentcloud.com/search/?wd=DescribeSimpleClusters&type=document&lang=en)
  */
 export function getClusterOutput(args?: GetClusterOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetClusterResult> {
     args = args || {};

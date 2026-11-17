@@ -26,6 +26,12 @@ import * as utilities from "../utilities";
  *     ruleId: testRule.ruleId,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribleL4Rules](https://www.tencentcloud.com/search/?wd=DescribleL4Rules&type=document&lang=en)
  */
 export function getL4Rules(args: GetL4RulesArgs, opts?: pulumi.InvokeOptions): Promise<GetL4RulesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -108,6 +114,12 @@ export interface GetL4RulesResult {
  *     ruleId: testRule.ruleId,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribleL4Rules](https://www.tencentcloud.com/search/?wd=DescribleL4Rules&type=document&lang=en)
  */
 export function getL4RulesOutput(args: GetL4RulesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetL4RulesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

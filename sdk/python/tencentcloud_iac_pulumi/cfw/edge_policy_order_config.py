@@ -193,6 +193,18 @@ class EdgePolicyOrderConfig(pulumi.CustomResource):
             ])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeAclRule](https://www.tencentcloud.com/search/?wd=DescribeAclRule&type=document&lang=en)
+          - [ModifyAclRule](https://www.tencentcloud.com/search/?wd=ModifyAclRule&type=document&lang=en)
+        * Read: [DescribeAclRule](https://www.tencentcloud.com/search/?wd=DescribeAclRule&type=document&lang=en)
+        * Update:
+          - [DescribeAclRule](https://www.tencentcloud.com/search/?wd=DescribeAclRule&type=document&lang=en)
+          - [ModifyAclRule](https://www.tencentcloud.com/search/?wd=ModifyAclRule&type=document&lang=en)
+
         ## Import
 
         CFW edge policy order config can be imported using the customId(like uuid or base64 string), e.g.
@@ -297,6 +309,18 @@ class EdgePolicyOrderConfig(pulumi.CustomResource):
                 out_example1.uuid,
             ])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeAclRule](https://www.tencentcloud.com/search/?wd=DescribeAclRule&type=document&lang=en)
+          - [ModifyAclRule](https://www.tencentcloud.com/search/?wd=ModifyAclRule&type=document&lang=en)
+        * Read: [DescribeAclRule](https://www.tencentcloud.com/search/?wd=DescribeAclRule&type=document&lang=en)
+        * Update:
+          - [DescribeAclRule](https://www.tencentcloud.com/search/?wd=DescribeAclRule&type=document&lang=en)
+          - [ModifyAclRule](https://www.tencentcloud.com/search/?wd=ModifyAclRule&type=document&lang=en)
 
         ## Import
 

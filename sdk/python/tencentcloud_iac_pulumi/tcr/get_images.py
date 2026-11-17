@@ -157,6 +157,12 @@ def get_images(digest: Optional[_builtins.str] = None,
         exact_match=False)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeImages](https://www.tencentcloud.com/document/api/1051/50721)
+
 
     :param _builtins.str digest: specify image digest for lookup.
     :param _builtins.bool exact_match: specifies whether it is an exact match, true is an exact match, and not filled is a fuzzy match.
@@ -211,6 +217,12 @@ def get_images_output(digest: pulumi.Input[Optional[Optional[_builtins.str]]] = 
         digest="sha256:xxxxx",
         exact_match=False)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeImages](https://www.tencentcloud.com/document/api/1051/50721)
 
 
     :param _builtins.str digest: specify image digest for lookup.

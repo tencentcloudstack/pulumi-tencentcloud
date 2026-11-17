@@ -119,6 +119,14 @@ class SnapshotConfig(pulumi.CustomResource):
             period="hourly")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifySnapshotConfig](https://www.tencentcloud.com/search/?wd=ModifySnapshotConfig&type=document&lang=en)
+        * Read: [DescribeSnapshotConfig](https://www.tencentcloud.com/search/?wd=DescribeSnapshotConfig&type=document&lang=en)
+        * Update: [ModifySnapshotConfig](https://www.tencentcloud.com/search/?wd=ModifySnapshotConfig&type=document&lang=en)
+
         ## Import
 
         dnspod snapshot_config can be imported using the id, e.g.
@@ -152,6 +160,14 @@ class SnapshotConfig(pulumi.CustomResource):
             domain="dnspod.cn",
             period="hourly")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifySnapshotConfig](https://www.tencentcloud.com/search/?wd=ModifySnapshotConfig&type=document&lang=en)
+        * Read: [DescribeSnapshotConfig](https://www.tencentcloud.com/search/?wd=DescribeSnapshotConfig&type=document&lang=en)
+        * Update: [ModifySnapshotConfig](https://www.tencentcloud.com/search/?wd=ModifySnapshotConfig&type=document&lang=en)
 
         ## Import
 

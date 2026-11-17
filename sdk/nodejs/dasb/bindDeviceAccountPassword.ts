@@ -28,6 +28,13 @@ import * as utilities from "../utilities";
  *     password: "TerraformPassword",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [BindDeviceAccountPassword](https://www.tencentcloud.com/search/?wd=BindDeviceAccountPassword&type=document&lang=en)
+ * * Delete: [ResetDeviceAccountPassword](https://www.tencentcloud.com/search/?wd=ResetDeviceAccountPassword&type=document&lang=en)
  */
 export class BindDeviceAccountPassword extends pulumi.CustomResource {
     /**

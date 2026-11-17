@@ -127,6 +127,12 @@ def get_hbase_instances(asc: Optional[_builtins.int] = None,
     serverless_hbase_instances = tencentcloud.serverless.get_hbase_instances(display_strategy="clusterList")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSLInstanceList](https://www.tencentcloud.com/document/api/1026/71617)
+
 
     :param _builtins.int asc: Sort by OrderField in ascending or descending order. Value range:
            * 0: indicates the descending order;
@@ -176,6 +182,12 @@ def get_hbase_instances_output(asc: pulumi.Input[Optional[Optional[_builtins.int
 
     serverless_hbase_instances = tencentcloud.serverless.get_hbase_instances(display_strategy="clusterList")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSLInstanceList](https://www.tencentcloud.com/document/api/1026/71617)
 
 
     :param _builtins.int asc: Sort by OrderField in ascending or descending order. Value range:

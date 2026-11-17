@@ -42,6 +42,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeApiDetail](https://www.tencentcloud.com/search/?wd=DescribeApiDetail&type=document&lang=en)
 func LookupApiDetail(ctx *pulumi.Context, args *LookupApiDetailArgs, opts ...pulumi.InvokeOption) (*LookupApiDetailResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupApiDetailResult

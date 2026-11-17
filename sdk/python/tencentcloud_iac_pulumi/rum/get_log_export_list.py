@@ -94,6 +94,12 @@ def get_log_export_list(project_id: Optional[_builtins.int] = None,
     log_export_list = tencentcloud.rum.get_log_export_list(project_id=1)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRumLogExports](https://www.tencentcloud.com/document/api/1131/53809)
+
 
     :param _builtins.int project_id: Project ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -123,6 +129,12 @@ def get_log_export_list_output(project_id: pulumi.Input[Optional[_builtins.int]]
 
     log_export_list = tencentcloud.rum.get_log_export_list(project_id=1)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRumLogExports](https://www.tencentcloud.com/document/api/1131/53809)
 
 
     :param _builtins.int project_id: Project ID.

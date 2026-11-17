@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribleNewL7Rules](https://www.tencentcloud.com/search/?wd=DescribleNewL7Rules&type=document&lang=en)
 func GetL7RulesV2(ctx *pulumi.Context, args *GetL7RulesV2Args, opts ...pulumi.InvokeOption) (*GetL7RulesV2Result, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetL7RulesV2Result

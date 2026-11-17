@@ -39,6 +39,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTenantCcns](https://www.tencentcloud.com/search/?wd=DescribeTenantCcns&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetTenantInstancesResult> InvokeAsync(GetTenantInstancesArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetTenantInstancesResult>("tencentcloud:Ccn/getTenantInstances:getTenantInstances", args ?? new GetTenantInstancesArgs(), options.WithDefaults());
@@ -70,6 +76,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTenantCcns](https://www.tencentcloud.com/search/?wd=DescribeTenantCcns&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetTenantInstancesResult> Invoke(GetTenantInstancesInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetTenantInstancesResult>("tencentcloud:Ccn/getTenantInstances:getTenantInstances", args ?? new GetTenantInstancesInvokeArgs(), options.WithDefaults());
@@ -101,6 +113,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTenantCcns](https://www.tencentcloud.com/search/?wd=DescribeTenantCcns&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetTenantInstancesResult> Invoke(GetTenantInstancesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetTenantInstancesResult>("tencentcloud:Ccn/getTenantInstances:getTenantInstances", args ?? new GetTenantInstancesInvokeArgs(), options.WithDefaults());

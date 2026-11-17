@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     resultOutputFile: "mytestpath",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeScalingPolicies](https://www.tencentcloud.com/document/api/377/33208)
  */
 export function getScalingPolicies(args?: GetScalingPoliciesArgs, opts?: pulumi.InvokeOptions): Promise<GetScalingPoliciesResult> {
     args = args || {};
@@ -91,6 +97,12 @@ export interface GetScalingPoliciesResult {
  *     resultOutputFile: "mytestpath",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeScalingPolicies](https://www.tencentcloud.com/document/api/377/33208)
  */
 export function getScalingPoliciesOutput(args?: GetScalingPoliciesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetScalingPoliciesResult> {
     args = args || {};

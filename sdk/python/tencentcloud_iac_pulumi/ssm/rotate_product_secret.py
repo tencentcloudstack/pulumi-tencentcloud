@@ -85,6 +85,14 @@ class RotateProductSecret(pulumi.CustomResource):
         example = tencentcloud.ssm.RotateProductSecret("example", secret_name="tf_example")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/1078/41518)
+          - [RotateProductSecret](https://www.tencentcloud.com/document/api/1078/41515)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -107,6 +115,14 @@ class RotateProductSecret(pulumi.CustomResource):
 
         example = tencentcloud.ssm.RotateProductSecret("example", secret_name="tf_example")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/1078/41518)
+          - [RotateProductSecret](https://www.tencentcloud.com/document/api/1078/41515)
 
 
         :param str resource_name: The name of the resource.

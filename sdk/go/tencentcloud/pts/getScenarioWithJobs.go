@@ -48,6 +48,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeScenarioWithJobs](https://www.tencentcloud.com/document/api/1249/68503)
 func GetScenarioWithJobs(ctx *pulumi.Context, args *GetScenarioWithJobsArgs, opts ...pulumi.InvokeOption) (*GetScenarioWithJobsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetScenarioWithJobsResult

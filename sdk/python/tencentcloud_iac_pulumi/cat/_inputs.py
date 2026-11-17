@@ -13,6 +13,8 @@ else:
     from typing_extensions import TypedDict
 
 __all__ = [
+    'GetProbeTasksTagFilterArgs',
+    'GetProbeTasksTagFilterArgsDict',
     'TaskSetBatchTasksArgs',
     'TaskSetBatchTasksArgsDict',
 ]
@@ -62,5 +64,52 @@ class TaskSetBatchTasksArgs:
     @target_address.setter
     def target_address(self, value: pulumi.Input[_builtins.str]):
         pulumi.set(self, "target_address", value)
+
+
+class GetProbeTasksTagFilterArgsDict(TypedDict):
+    key: _builtins.str
+    """
+    Tag key.
+    """
+    value: _builtins.str
+    """
+    Tag value.
+    """
+
+@pulumi.input_type
+class GetProbeTasksTagFilterArgs:
+    def __init__(__self__, *,
+                 key: _builtins.str,
+                 value: _builtins.str):
+        """
+        :param _builtins.str key: Tag key.
+        :param _builtins.str value: Tag value.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def key(self) -> _builtins.str:
+        """
+        Tag key.
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: _builtins.str):
+        pulumi.set(self, "key", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def value(self) -> _builtins.str:
+        """
+        Tag value.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: _builtins.str):
+        pulumi.set(self, "value", value)
 
 

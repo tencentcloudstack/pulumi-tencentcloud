@@ -34,6 +34,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [RenewDataEngine](https://www.tencentcloud.com/document/api/1155/62690)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dlc/renewDataEngineOperation:RenewDataEngineOperation")]
     public partial class RenewDataEngineOperation : global::Pulumi.CustomResource

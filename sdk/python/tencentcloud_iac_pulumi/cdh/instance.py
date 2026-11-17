@@ -374,6 +374,17 @@ class Instance(pulumi.CustomResource):
             prepaid_renew_flag="NOTIFY_AND_MANUAL_RENEW")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [AllocateHosts](https://www.tencentcloud.com/search/?wd=AllocateHosts&type=document&lang=en)
+          - [DescribeHosts](https://www.tencentcloud.com/search/?wd=DescribeHosts&type=document&lang=en)
+          - [ModifyHostsAttribute](https://www.tencentcloud.com/search/?wd=ModifyHostsAttribute&type=document&lang=en)
+        * Read: [DescribeHosts](https://www.tencentcloud.com/search/?wd=DescribeHosts&type=document&lang=en)
+        * Update: [ModifyHostsAttribute](https://www.tencentcloud.com/search/?wd=ModifyHostsAttribute&type=document&lang=en)
+
         ## Import
 
         CDH instance can be imported using the id, e.g.
@@ -418,6 +429,17 @@ class Instance(pulumi.CustomResource):
             host_name="tf-example",
             prepaid_renew_flag="NOTIFY_AND_MANUAL_RENEW")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [AllocateHosts](https://www.tencentcloud.com/search/?wd=AllocateHosts&type=document&lang=en)
+          - [DescribeHosts](https://www.tencentcloud.com/search/?wd=DescribeHosts&type=document&lang=en)
+          - [ModifyHostsAttribute](https://www.tencentcloud.com/search/?wd=ModifyHostsAttribute&type=document&lang=en)
+        * Read: [DescribeHosts](https://www.tencentcloud.com/search/?wd=DescribeHosts&type=document&lang=en)
+        * Update: [ModifyHostsAttribute](https://www.tencentcloud.com/search/?wd=ModifyHostsAttribute&type=document&lang=en)
 
         ## Import
 

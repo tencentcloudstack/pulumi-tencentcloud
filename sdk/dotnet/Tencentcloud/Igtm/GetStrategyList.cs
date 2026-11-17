@@ -44,6 +44,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Igtm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeStrategyList](https://www.tencentcloud.com/search/?wd=DescribeStrategyList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetStrategyListResult> InvokeAsync(GetStrategyListArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetStrategyListResult>("tencentcloud:Igtm/getStrategyList:getStrategyList", args ?? new GetStrategyListArgs(), options.WithDefaults());
@@ -80,6 +86,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Igtm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeStrategyList](https://www.tencentcloud.com/search/?wd=DescribeStrategyList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetStrategyListResult> Invoke(GetStrategyListInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetStrategyListResult>("tencentcloud:Igtm/getStrategyList:getStrategyList", args ?? new GetStrategyListInvokeArgs(), options.WithDefaults());
@@ -116,6 +128,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Igtm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeStrategyList](https://www.tencentcloud.com/search/?wd=DescribeStrategyList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetStrategyListResult> Invoke(GetStrategyListInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetStrategyListResult>("tencentcloud:Igtm/getStrategyList:getStrategyList", args ?? new GetStrategyListInvokeArgs(), options.WithDefaults());

@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     invokeRequestId: "9de9405a-e33a-498d-bb59-e80b7bed1191",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GetAsyncEventStatus](https://www.tencentcloud.com/document/api/583/44482)
  */
 export function getAsyncEventStatus(args: GetAsyncEventStatusArgs, opts?: pulumi.InvokeOptions): Promise<GetAsyncEventStatusResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -73,6 +79,12 @@ export interface GetAsyncEventStatusResult {
  *     invokeRequestId: "9de9405a-e33a-498d-bb59-e80b7bed1191",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GetAsyncEventStatus](https://www.tencentcloud.com/document/api/583/44482)
  */
 export function getAsyncEventStatusOutput(args: GetAsyncEventStatusOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAsyncEventStatusResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

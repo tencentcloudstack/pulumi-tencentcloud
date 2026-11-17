@@ -68,6 +68,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeClusterAvailableExtraArgs](https://www.tencentcloud.com/search/?wd=DescribeClusterAvailableExtraArgs&type=document&lang=en)
 func GetClusterAvailableExtraArgs(ctx *pulumi.Context, args *GetClusterAvailableExtraArgsArgs, opts ...pulumi.InvokeOption) (*GetClusterAvailableExtraArgsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetClusterAvailableExtraArgsResult

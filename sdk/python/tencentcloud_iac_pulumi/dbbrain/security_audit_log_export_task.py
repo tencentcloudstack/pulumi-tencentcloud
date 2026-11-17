@@ -240,6 +240,16 @@ class SecurityAuditLogExportTask(pulumi.CustomResource):
             ])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateSecurityAuditLogExportTask](https://www.tencentcloud.com/document/api/1035/41198)
+          - [DescribeSecurityAuditLogExportTasks](https://www.tencentcloud.com/document/api/1035/41191)
+        * Read: [DescribeSecurityAuditLogExportTasks](https://www.tencentcloud.com/document/api/1035/41191)
+        * Delete: [DeleteSecurityAuditLogExportTasks](https://www.tencentcloud.com/document/api/1035/41197)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -275,6 +285,16 @@ class SecurityAuditLogExportTask(pulumi.CustomResource):
                 2,
             ])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateSecurityAuditLogExportTask](https://www.tencentcloud.com/document/api/1035/41198)
+          - [DescribeSecurityAuditLogExportTasks](https://www.tencentcloud.com/document/api/1035/41191)
+        * Read: [DescribeSecurityAuditLogExportTasks](https://www.tencentcloud.com/document/api/1035/41191)
+        * Delete: [DeleteSecurityAuditLogExportTasks](https://www.tencentcloud.com/document/api/1035/41197)
 
 
         :param str resource_name: The name of the resource.

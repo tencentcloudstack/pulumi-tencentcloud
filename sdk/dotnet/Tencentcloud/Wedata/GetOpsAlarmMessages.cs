@@ -36,6 +36,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListAlarmMessages](https://www.tencentcloud.com/document/api/1174/73825)
         /// </summary>
         public static Task<GetOpsAlarmMessagesResult> InvokeAsync(GetOpsAlarmMessagesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetOpsAlarmMessagesResult>("tencentcloud:Wedata/getOpsAlarmMessages:getOpsAlarmMessages", args ?? new GetOpsAlarmMessagesArgs(), options.WithDefaults());
@@ -64,6 +70,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListAlarmMessages](https://www.tencentcloud.com/document/api/1174/73825)
         /// </summary>
         public static Output<GetOpsAlarmMessagesResult> Invoke(GetOpsAlarmMessagesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetOpsAlarmMessagesResult>("tencentcloud:Wedata/getOpsAlarmMessages:getOpsAlarmMessages", args ?? new GetOpsAlarmMessagesInvokeArgs(), options.WithDefaults());
@@ -92,6 +104,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListAlarmMessages](https://www.tencentcloud.com/document/api/1174/73825)
         /// </summary>
         public static Output<GetOpsAlarmMessagesResult> Invoke(GetOpsAlarmMessagesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetOpsAlarmMessagesResult>("tencentcloud:Wedata/getOpsAlarmMessages:getOpsAlarmMessages", args ?? new GetOpsAlarmMessagesInvokeArgs(), options.WithDefaults());

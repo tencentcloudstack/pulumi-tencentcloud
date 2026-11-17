@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeGatewayFlowQos](https://www.tencentcloud.com/document/api/215/36088)
         /// </summary>
         public static Task<GetGatewayFlowQosResult> InvokeAsync(GetGatewayFlowQosArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetGatewayFlowQosResult>("tencentcloud:Vpc/getGatewayFlowQos:getGatewayFlowQos", args ?? new GetGatewayFlowQosArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeGatewayFlowQos](https://www.tencentcloud.com/document/api/215/36088)
         /// </summary>
         public static Output<GetGatewayFlowQosResult> Invoke(GetGatewayFlowQosInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetGatewayFlowQosResult>("tencentcloud:Vpc/getGatewayFlowQos:getGatewayFlowQos", args ?? new GetGatewayFlowQosInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeGatewayFlowQos](https://www.tencentcloud.com/document/api/215/36088)
         /// </summary>
         public static Output<GetGatewayFlowQosResult> Invoke(GetGatewayFlowQosInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetGatewayFlowQosResult>("tencentcloud:Vpc/getGatewayFlowQos:getGatewayFlowQos", args ?? new GetGatewayFlowQosInvokeArgs(), options.WithDefaults());

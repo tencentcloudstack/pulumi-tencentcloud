@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeImageSharePermission](https://www.tencentcloud.com/document/api/213/33273)
 func LookupImageSharePermission(ctx *pulumi.Context, args *LookupImageSharePermissionArgs, opts ...pulumi.InvokeOption) (*LookupImageSharePermissionResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupImageSharePermissionResult

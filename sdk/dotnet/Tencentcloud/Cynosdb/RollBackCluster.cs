@@ -57,6 +57,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+    ///   - [RollBackCluster](https://www.tencentcloud.com/document/api/1098/74208)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cynosdb/rollBackCluster:RollBackCluster")]
     public partial class RollBackCluster : global::Pulumi.CustomResource

@@ -47,6 +47,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeUsagePlansStatus](https://www.tencentcloud.com/search/?wd=DescribeUsagePlansStatus&type=document&lang=en)
 func GetUsagePlans(ctx *pulumi.Context, args *GetUsagePlansArgs, opts ...pulumi.InvokeOption) (*GetUsagePlansResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetUsagePlansResult

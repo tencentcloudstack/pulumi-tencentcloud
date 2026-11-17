@@ -42,6 +42,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeRocketMQClusters](https://www.tencentcloud.com/search/?wd=DescribeRocketMQClusters&type=document&lang=en)
 func LookupRocketmqCluster(ctx *pulumi.Context, args *LookupRocketmqClusterArgs, opts ...pulumi.InvokeOption) (*LookupRocketmqClusterResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupRocketmqClusterResult

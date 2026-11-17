@@ -178,6 +178,14 @@ def get_instance(eip_id: Optional[_builtins.str] = None,
     })
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeAddresses](https://www.tencentcloud.com/document/api/215/16702)
+      - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+
 
     :param _builtins.str eip_id: ID of the EIP to be queried.
     :param _builtins.str eip_name: Name of the EIP to be queried.
@@ -259,6 +267,14 @@ def get_instance_output(eip_id: pulumi.Input[Optional[Optional[_builtins.str]]] 
         "test": "test",
     })
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeAddresses](https://www.tencentcloud.com/document/api/215/16702)
+      - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
 
 
     :param _builtins.str eip_id: ID of the EIP to be queried.

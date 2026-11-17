@@ -61,6 +61,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateAuditLogFile](https://www.tencentcloud.com/search/?wd=CreateAuditLogFile&amp;type=document&amp;lang=en)
+    ///   - [DescribeAuditLogFiles](https://www.tencentcloud.com/document/api/240/79888)
+    /// * Read: [DescribeAuditLogFiles](https://www.tencentcloud.com/document/api/240/79888)
+    /// * Update: [DescribeAuditLogFiles](https://www.tencentcloud.com/document/api/240/79888)
+    /// * Delete:
+    ///   - [DeleteAuditLogFile](https://www.tencentcloud.com/search/?wd=DeleteAuditLogFile&amp;type=document&amp;lang=en)
+    ///   - [DescribeAuditLogFiles](https://www.tencentcloud.com/document/api/240/79888)
+    /// 
     /// ## Import
     /// 
     /// mongodb AuditLogFile can be imported using the composite instance_id#file_name, e.g.

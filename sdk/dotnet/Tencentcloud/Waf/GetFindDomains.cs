@@ -52,6 +52,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeFindDomainList](https://www.tencentcloud.com/document/api/627/64548)
         /// </summary>
         public static Task<GetFindDomainsResult> InvokeAsync(GetFindDomainsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetFindDomainsResult>("tencentcloud:Waf/getFindDomains:getFindDomains", args ?? new GetFindDomainsArgs(), options.WithDefaults());
@@ -96,6 +102,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeFindDomainList](https://www.tencentcloud.com/document/api/627/64548)
         /// </summary>
         public static Output<GetFindDomainsResult> Invoke(GetFindDomainsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetFindDomainsResult>("tencentcloud:Waf/getFindDomains:getFindDomains", args ?? new GetFindDomainsInvokeArgs(), options.WithDefaults());
@@ -140,6 +152,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeFindDomainList](https://www.tencentcloud.com/document/api/627/64548)
         /// </summary>
         public static Output<GetFindDomainsResult> Invoke(GetFindDomainsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetFindDomainsResult>("tencentcloud:Waf/getFindDomains:getFindDomains", args ?? new GetFindDomainsInvokeArgs(), options.WithDefaults());

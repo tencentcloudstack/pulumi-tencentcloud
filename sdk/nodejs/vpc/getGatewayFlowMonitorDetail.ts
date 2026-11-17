@@ -22,6 +22,12 @@ import * as utilities from "../utilities";
  *     orderDirection: "DESC",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeGatewayFlowMonitorDetail](https://www.tencentcloud.com/document/api/215/34739)
  */
 export function getGatewayFlowMonitorDetail(args: GetGatewayFlowMonitorDetailArgs, opts?: pulumi.InvokeOptions): Promise<GetGatewayFlowMonitorDetailResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -112,6 +118,12 @@ export interface GetGatewayFlowMonitorDetailResult {
  *     orderDirection: "DESC",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeGatewayFlowMonitorDetail](https://www.tencentcloud.com/document/api/215/34739)
  */
 export function getGatewayFlowMonitorDetailOutput(args: GetGatewayFlowMonitorDetailOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetGatewayFlowMonitorDetailResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

@@ -41,6 +41,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeVpcPrivateIpAddresses](https://www.tencentcloud.com/document/api/215/34804)
 func GetPrivateIpAddresses(ctx *pulumi.Context, args *GetPrivateIpAddressesArgs, opts ...pulumi.InvokeOption) (*GetPrivateIpAddressesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetPrivateIpAddressesResult

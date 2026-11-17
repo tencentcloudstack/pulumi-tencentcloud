@@ -87,6 +87,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [ClearInstance](https://www.tencentcloud.com/document/api/239/32070)
+//   - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
 type ClearInstanceOperation struct {
 	pulumi.CustomResourceState
 

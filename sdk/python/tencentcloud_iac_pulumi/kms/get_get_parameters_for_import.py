@@ -140,6 +140,12 @@ def get_get_parameters_for_import(key_id: Optional[_builtins.str] = None,
         wrapping_key_spec="RSA_2048")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetParametersForImport](https://www.tencentcloud.com/document/api/1030/33536)
+
 
     :param _builtins.str key_id: CMK unique identifier.
     :param _builtins.str result_output_file: Used to save results.
@@ -181,6 +187,12 @@ def get_get_parameters_for_import_output(key_id: pulumi.Input[Optional[_builtins
         wrapping_algorithm="RSAES_OAEP_SHA_1",
         wrapping_key_spec="RSA_2048")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetParametersForImport](https://www.tencentcloud.com/document/api/1030/33536)
 
 
     :param _builtins.str key_id: CMK unique identifier.

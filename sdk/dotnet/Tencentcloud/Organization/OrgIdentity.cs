@@ -41,6 +41,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateOrganizationIdentity](https://www.tencentcloud.com/document/api/1031/66412)
+    /// * Read: [ListOrganizationIdentity](https://www.tencentcloud.com/document/api/1031/52051)
+    /// * Update: [UpdateOrganizationIdentity](https://www.tencentcloud.com/document/api/1031/66406)
+    /// * Delete: [DeleteOrganizationIdentity](https://www.tencentcloud.com/document/api/1031/66409)
+    /// 
     /// ## Import
     /// 
     /// organization OrgIdentity can be imported using the id, e.g.

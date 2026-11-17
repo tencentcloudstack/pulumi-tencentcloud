@@ -159,6 +159,12 @@ class InstancesResetAttach(pulumi.CustomResource):
             }])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ResetAttachCcnInstances](https://www.tencentcloud.com/document/api/215/34780)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -190,6 +196,12 @@ class InstancesResetAttach(pulumi.CustomResource):
                 "instance_type": "VPC",
             }])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ResetAttachCcnInstances](https://www.tencentcloud.com/document/api/215/34780)
 
 
         :param str resource_name: The name of the resource.

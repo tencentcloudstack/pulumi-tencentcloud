@@ -42,6 +42,14 @@ import * as utilities from "../utilities";
  *     tags: routeTable.tags,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+ *   - [DescribeRouteTables](https://www.tencentcloud.com/document/api/215/15763)
  */
 export function getRouteTables(args?: GetRouteTablesArgs, opts?: pulumi.InvokeOptions): Promise<GetRouteTablesResult> {
     args = args || {};
@@ -159,6 +167,14 @@ export interface GetRouteTablesResult {
  *     tags: routeTable.tags,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+ *   - [DescribeRouteTables](https://www.tencentcloud.com/document/api/215/15763)
  */
 export function getRouteTablesOutput(args?: GetRouteTablesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRouteTablesResult> {
     args = args || {};

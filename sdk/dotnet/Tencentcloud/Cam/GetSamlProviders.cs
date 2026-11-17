@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListSAMLProviders](https://www.tencentcloud.com/document/api/598/32234)
         /// </summary>
         public static Task<GetSamlProvidersResult> InvokeAsync(GetSamlProvidersArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSamlProvidersResult>("tencentcloud:Cam/getSamlProviders:getSamlProviders", args ?? new GetSamlProvidersArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListSAMLProviders](https://www.tencentcloud.com/document/api/598/32234)
         /// </summary>
         public static Output<GetSamlProvidersResult> Invoke(GetSamlProvidersInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSamlProvidersResult>("tencentcloud:Cam/getSamlProviders:getSamlProviders", args ?? new GetSamlProvidersInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListSAMLProviders](https://www.tencentcloud.com/document/api/598/32234)
         /// </summary>
         public static Output<GetSamlProvidersResult> Invoke(GetSamlProvidersInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetSamlProvidersResult>("tencentcloud:Cam/getSamlProviders:getSamlProviders", args ?? new GetSamlProvidersInvokeArgs(), options.WithDefaults());

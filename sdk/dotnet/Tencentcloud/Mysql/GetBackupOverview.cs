@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBackupOverview](https://www.tencentcloud.com/document/api/236/35196)
         /// </summary>
         public static Task<GetBackupOverviewResult> InvokeAsync(GetBackupOverviewArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetBackupOverviewResult>("tencentcloud:Mysql/getBackupOverview:getBackupOverview", args ?? new GetBackupOverviewArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBackupOverview](https://www.tencentcloud.com/document/api/236/35196)
         /// </summary>
         public static Output<GetBackupOverviewResult> Invoke(GetBackupOverviewInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetBackupOverviewResult>("tencentcloud:Mysql/getBackupOverview:getBackupOverview", args ?? new GetBackupOverviewInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBackupOverview](https://www.tencentcloud.com/document/api/236/35196)
         /// </summary>
         public static Output<GetBackupOverviewResult> Invoke(GetBackupOverviewInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetBackupOverviewResult>("tencentcloud:Mysql/getBackupOverview:getBackupOverview", args ?? new GetBackupOverviewInvokeArgs(), options.WithDefaults());

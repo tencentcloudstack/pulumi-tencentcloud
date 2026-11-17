@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeUserDomainInfo](https://www.tencentcloud.com/document/api/627/64544)
         /// </summary>
         public static Task<GetUserDomainsResult> InvokeAsync(GetUserDomainsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetUserDomainsResult>("tencentcloud:Waf/getUserDomains:getUserDomains", args ?? new GetUserDomainsArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeUserDomainInfo](https://www.tencentcloud.com/document/api/627/64544)
         /// </summary>
         public static Output<GetUserDomainsResult> Invoke(GetUserDomainsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetUserDomainsResult>("tencentcloud:Waf/getUserDomains:getUserDomains", args ?? new GetUserDomainsInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeUserDomainInfo](https://www.tencentcloud.com/document/api/627/64544)
         /// </summary>
         public static Output<GetUserDomainsResult> Invoke(GetUserDomainsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetUserDomainsResult>("tencentcloud:Waf/getUserDomains:getUserDomains", args ?? new GetUserDomainsInvokeArgs(), options.WithDefaults());

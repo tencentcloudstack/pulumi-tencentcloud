@@ -183,6 +183,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreatePrometheusClusterAgent](https://www.tencentcloud.com/document/api/248/53774)
+    ///   - [DescribePrometheusClusterAgents](https://www.tencentcloud.com/document/api/248/53770)
+    /// * Read: [DescribePrometheusClusterAgents](https://www.tencentcloud.com/document/api/248/53770)
+    /// * Update: [ModifyPrometheusAgentExternalLabels](https://www.tencentcloud.com/document/api/248/53766)
+    /// * Delete:
+    ///   - [DeletePrometheusClusterAgent](https://www.tencentcloud.com/document/api/248/53771)
+    ///   - [DescribePrometheusClusterAgents](https://www.tencentcloud.com/document/api/248/53770)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Monitor/tmpTkeClusterAgent:TmpTkeClusterAgent")]
     public partial class TmpTkeClusterAgent : global::Pulumi.CustomResource

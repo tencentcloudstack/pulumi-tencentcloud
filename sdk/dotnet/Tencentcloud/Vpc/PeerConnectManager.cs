@@ -51,6 +51,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateVpcPeeringConnection](https://www.tencentcloud.com/search/?wd=CreateVpcPeeringConnection&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeVpcPeeringConnections](https://www.tencentcloud.com/search/?wd=DescribeVpcPeeringConnections&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyVpcPeeringConnection](https://www.tencentcloud.com/search/?wd=ModifyVpcPeeringConnection&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteVpcPeeringConnection](https://www.tencentcloud.com/search/?wd=DeleteVpcPeeringConnection&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// vpc PeerConnectManager can be imported using the id, e.g.

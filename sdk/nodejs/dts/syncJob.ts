@@ -32,6 +32,18 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateSyncJob](https://www.tencentcloud.com/document/api/571/51795)
+ * * Read: [DescribeSyncJobs](https://www.tencentcloud.com/document/api/571/51793)
+ * * Update: [ResizeSyncJob](https://www.tencentcloud.com/document/api/571/51789)
+ * * Delete:
+ *   - [DescribeSyncJobs](https://www.tencentcloud.com/document/api/571/51793)
+ *   - [DestroySyncJob](https://www.tencentcloud.com/document/api/571/51792)
+ *   - [IsolateSyncJob](https://www.tencentcloud.com/document/api/571/51791)
+ *
  * ## Import
  *
  * DTS sync job can be imported using the id, e.g.
@@ -113,7 +125,7 @@ export class SyncJob extends pulumi.CustomResource {
      */
     declare public readonly srcRegion: pulumi.Output<string>;
     /**
-     * Tag information.
+     * Tag information.Cannot be modified.
      */
     declare public readonly tags: pulumi.Output<outputs.Dts.SyncJobTag[]>;
 
@@ -226,7 +238,7 @@ export interface SyncJobState {
      */
     srcRegion?: pulumi.Input<string | undefined>;
     /**
-     * Tag information.
+     * Tag information.Cannot be modified.
      */
     tags?: pulumi.Input<pulumi.Input<inputs.Dts.SyncJobTag>[] | undefined>;
 }
@@ -276,7 +288,7 @@ export interface SyncJobArgs {
      */
     srcRegion: pulumi.Input<string>;
     /**
-     * Tag information.
+     * Tag information.Cannot be modified.
      */
     tags?: pulumi.Input<pulumi.Input<inputs.Dts.SyncJobTag>[] | undefined>;
 }

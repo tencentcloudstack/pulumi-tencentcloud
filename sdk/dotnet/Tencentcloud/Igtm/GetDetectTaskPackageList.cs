@@ -60,6 +60,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Igtm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDetectTaskPackageList](https://www.tencentcloud.com/search/?wd=DescribeDetectTaskPackageList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetDetectTaskPackageListResult> InvokeAsync(GetDetectTaskPackageListArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDetectTaskPackageListResult>("tencentcloud:Igtm/getDetectTaskPackageList:getDetectTaskPackageList", args ?? new GetDetectTaskPackageListArgs(), options.WithDefaults());
@@ -112,6 +118,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Igtm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDetectTaskPackageList](https://www.tencentcloud.com/search/?wd=DescribeDetectTaskPackageList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDetectTaskPackageListResult> Invoke(GetDetectTaskPackageListInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDetectTaskPackageListResult>("tencentcloud:Igtm/getDetectTaskPackageList:getDetectTaskPackageList", args ?? new GetDetectTaskPackageListInvokeArgs(), options.WithDefaults());
@@ -164,6 +176,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Igtm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDetectTaskPackageList](https://www.tencentcloud.com/search/?wd=DescribeDetectTaskPackageList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDetectTaskPackageListResult> Invoke(GetDetectTaskPackageListInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDetectTaskPackageListResult>("tencentcloud:Igtm/getDetectTaskPackageList:getDetectTaskPackageList", args ?? new GetDetectTaskPackageListInvokeArgs(), options.WithDefaults());

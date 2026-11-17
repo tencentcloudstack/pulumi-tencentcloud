@@ -124,6 +124,12 @@ def get_resource_package_sale_specs(instance_type: Optional[_builtins.str] = Non
         package_type="CCU")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeResourcePackageSaleSpec](https://www.tencentcloud.com/document/api/1098/55896)
+
 
     :param _builtins.str instance_type: Instance Type. Value range: cynosdb-serverless, cynosdb, cdb.
     :param _builtins.str package_region: Resource package usage region China - common in mainland China, overseas - common in Hong Kong, Macao, Taiwan, and overseas.
@@ -163,6 +169,12 @@ def get_resource_package_sale_specs_output(instance_type: pulumi.Input[Optional[
         package_region="china",
         package_type="CCU")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeResourcePackageSaleSpec](https://www.tencentcloud.com/document/api/1098/55896)
 
 
     :param _builtins.str instance_type: Instance Type. Value range: cynosdb-serverless, cynosdb, cdb.

@@ -516,7 +516,7 @@ class FunctionCfsConfigArgsDict(TypedDict):
     """
     ip_address: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
-    (Readonly) File system ip address.
+    If fixed intranet IP is enabled, this field returns the IP list used.
     """
     mount_subnet_id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
@@ -546,7 +546,7 @@ class FunctionCfsConfigArgs:
         :param pulumi.Input[_builtins.str] remote_mount_dir: Remote mount directory.
         :param pulumi.Input[_builtins.str] user_group_id: ID of user group.
         :param pulumi.Input[_builtins.str] user_id: ID of user.
-        :param pulumi.Input[_builtins.str] ip_address: (Readonly) File system ip address.
+        :param pulumi.Input[_builtins.str] ip_address: If fixed intranet IP is enabled, this field returns the IP list used.
         :param pulumi.Input[_builtins.str] mount_subnet_id: (Readonly) File system subnet ID.
         :param pulumi.Input[_builtins.str] mount_vpc_id: (Readonly) File system virtual private network ID.
         """
@@ -639,7 +639,7 @@ class FunctionCfsConfigArgs:
     @pulumi.getter(name="ipAddress")
     def ip_address(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        (Readonly) File system ip address.
+        If fixed intranet IP is enabled, this field returns the IP list used.
         """
         return pulumi.get(self, "ip_address")
 

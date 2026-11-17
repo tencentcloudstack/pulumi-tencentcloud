@@ -150,6 +150,23 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [BindEnvironment](https://www.tencentcloud.com/search/?wd=BindEnvironment&type=document&lang=en)
+//   - [BindSecretIds](https://www.tencentcloud.com/search/?wd=BindSecretIds&type=document&lang=en)
+//
+// * Read:
+//   - [DescribeApiUsagePlan](https://www.tencentcloud.com/search/?wd=DescribeApiUsagePlan&type=document&lang=en)
+//   - [DescribeServiceUsagePlan](https://www.tencentcloud.com/search/?wd=DescribeServiceUsagePlan&type=document&lang=en)
+//   - [DescribeUsagePlanSecretIds](https://www.tencentcloud.com/search/?wd=DescribeUsagePlanSecretIds&type=document&lang=en)
+//
+// * Delete:
+//   - [UnBindEnvironment](https://www.tencentcloud.com/search/?wd=UnBindEnvironment&type=document&lang=en)
+//   - [UnBindSecretIds](https://www.tencentcloud.com/search/?wd=UnBindSecretIds&type=document&lang=en)
+//
 // ## Import
 //
 // API gateway usage plan attachment can be imported using the id, e.g.

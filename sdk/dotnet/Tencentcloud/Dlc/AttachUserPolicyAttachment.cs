@@ -37,6 +37,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
     ///             DataEngine = "test_engine",
     ///             Operation = "USE,MONITOR",
     ///             Source = "USER",
+    ///             ReAuth = true,
     ///         },
     ///     });
     /// 
@@ -99,6 +100,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [AttachUserPolicy](https://www.tencentcloud.com/document/api/1155/62678)
+    ///   - [DescribeUserInfo](https://www.tencentcloud.com/document/api/1155/62670)
+    /// * Read: [DescribeUserInfo](https://www.tencentcloud.com/document/api/1155/62670)
+    /// * Delete: [DetachUserPolicy](https://www.tencentcloud.com/document/api/1155/62665)
     /// 
     /// ## Import
     /// 

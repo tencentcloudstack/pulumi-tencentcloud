@@ -31,6 +31,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [DeleteLogBackup](https://www.tencentcloud.com/document/api/409/54347)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Postgresql/deleteLogBackupOperation:DeleteLogBackupOperation")]
     public partial class DeleteLogBackupOperation : global::Pulumi.CustomResource

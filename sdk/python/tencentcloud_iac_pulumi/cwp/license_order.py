@@ -292,6 +292,22 @@ class LicenseOrder(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateLicenseOrder](https://www.tencentcloud.com/document/api/296/63791)
+          - [ModifyLicenseOrder](https://www.tencentcloud.com/document/api/296/63774)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribeLicenseList](https://www.tencentcloud.com/document/api/296/63781)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [ModifyLicenseOrder](https://www.tencentcloud.com/document/api/296/63774)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Delete: [DestroyOrder](https://www.tencentcloud.com/document/api/296/63777)
+
         ## Import
 
         CWP license order can be imported using the resourceId#regionId, e.g.
@@ -335,6 +351,22 @@ class LicenseOrder(pulumi.CustomResource):
                 "createdBy": "terraform",
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateLicenseOrder](https://www.tencentcloud.com/document/api/296/63791)
+          - [ModifyLicenseOrder](https://www.tencentcloud.com/document/api/296/63774)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribeLicenseList](https://www.tencentcloud.com/document/api/296/63781)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [ModifyLicenseOrder](https://www.tencentcloud.com/document/api/296/63774)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Delete: [DestroyOrder](https://www.tencentcloud.com/document/api/296/63777)
 
         ## Import
 

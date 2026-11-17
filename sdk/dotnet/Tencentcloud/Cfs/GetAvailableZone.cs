@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAvailableZoneInfo](https://www.tencentcloud.com/document/api/582/34500)
         /// </summary>
         public static Task<GetAvailableZoneResult> InvokeAsync(GetAvailableZoneArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetAvailableZoneResult>("tencentcloud:Cfs/getAvailableZone:getAvailableZone", args ?? new GetAvailableZoneArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAvailableZoneInfo](https://www.tencentcloud.com/document/api/582/34500)
         /// </summary>
         public static Output<GetAvailableZoneResult> Invoke(GetAvailableZoneInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetAvailableZoneResult>("tencentcloud:Cfs/getAvailableZone:getAvailableZone", args ?? new GetAvailableZoneInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAvailableZoneInfo](https://www.tencentcloud.com/document/api/582/34500)
         /// </summary>
         public static Output<GetAvailableZoneResult> Invoke(GetAvailableZoneInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetAvailableZoneResult>("tencentcloud:Cfs/getAvailableZone:getAvailableZone", args ?? new GetAvailableZoneInvokeArgs(), options.WithDefaults());

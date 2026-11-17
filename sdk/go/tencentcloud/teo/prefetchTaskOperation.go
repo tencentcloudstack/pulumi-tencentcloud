@@ -79,6 +79,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CreatePrefetchTask](https://www.tencentcloud.com/document/api/1145/50537)
+//   - [DescribePrefetchTasks](https://www.tencentcloud.com/document/api/1145/50533)
 type PrefetchTaskOperation struct {
 	pulumi.CustomResourceState
 

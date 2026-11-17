@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [ReturnNormalAddresses](https://www.tencentcloud.com/document/api/215/52741)
 type NormalAddressReturn struct {
 	pulumi.CustomResourceState
 

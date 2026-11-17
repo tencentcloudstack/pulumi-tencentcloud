@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSREInstanceAccessAddress](https://www.tencentcloud.com/search/?wd=DescribeSREInstanceAccessAddress&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetAccessAddressResult> InvokeAsync(GetAccessAddressArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetAccessAddressResult>("tencentcloud:Tse/getAccessAddress:getAccessAddress", args ?? new GetAccessAddressArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSREInstanceAccessAddress](https://www.tencentcloud.com/search/?wd=DescribeSREInstanceAccessAddress&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetAccessAddressResult> Invoke(GetAccessAddressInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetAccessAddressResult>("tencentcloud:Tse/getAccessAddress:getAccessAddress", args ?? new GetAccessAddressInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSREInstanceAccessAddress](https://www.tencentcloud.com/search/?wd=DescribeSREInstanceAccessAddress&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetAccessAddressResult> Invoke(GetAccessAddressInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetAccessAddressResult>("tencentcloud:Tse/getAccessAddress:getAccessAddress", args ?? new GetAccessAddressInvokeArgs(), options.WithDefaults());

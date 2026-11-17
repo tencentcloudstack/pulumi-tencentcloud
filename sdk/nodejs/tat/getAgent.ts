@@ -22,6 +22,12 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAutomationAgentStatus](https://www.tencentcloud.com/document/api/1147/46698)
  */
 export function getAgent(args?: GetAgentArgs, opts?: pulumi.InvokeOptions): Promise<GetAgentResult> {
     args = args || {};
@@ -83,6 +89,12 @@ export interface GetAgentResult {
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAutomationAgentStatus](https://www.tencentcloud.com/document/api/1147/46698)
  */
 export function getAgentOutput(args?: GetAgentOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAgentResult> {
     args = args || {};

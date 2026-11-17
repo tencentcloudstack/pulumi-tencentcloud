@@ -72,6 +72,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeAttackOverview](https://www.tencentcloud.com/document/api/627/66357)
 func GetAttackOverview(ctx *pulumi.Context, args *GetAttackOverviewArgs, opts ...pulumi.InvokeOption) (*GetAttackOverviewResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetAttackOverviewResult

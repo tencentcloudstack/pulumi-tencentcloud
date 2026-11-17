@@ -119,6 +119,18 @@ class OperateHourDbInstance(pulumi.CustomResource):
             operate="activate")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [ActivateHourDBInstance](https://www.tencentcloud.com/document/api/237/45573)
+          - [IsolateHourDBInstance](https://www.tencentcloud.com/document/api/237/45572)
+        * Read: [DescribeDBInstanceDetail](https://www.tencentcloud.com/document/api/237/54563)
+        * Update:
+          - [ActivateHourDBInstance](https://www.tencentcloud.com/document/api/237/45573)
+          - [IsolateHourDBInstance](https://www.tencentcloud.com/document/api/237/45572)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -144,6 +156,18 @@ class OperateHourDbInstance(pulumi.CustomResource):
             instance_id="tdsql-9vqvls95",
             operate="activate")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [ActivateHourDBInstance](https://www.tencentcloud.com/document/api/237/45573)
+          - [IsolateHourDBInstance](https://www.tencentcloud.com/document/api/237/45572)
+        * Read: [DescribeDBInstanceDetail](https://www.tencentcloud.com/document/api/237/54563)
+        * Update:
+          - [ActivateHourDBInstance](https://www.tencentcloud.com/document/api/237/45573)
+          - [IsolateHourDBInstance](https://www.tencentcloud.com/document/api/237/45572)
 
 
         :param str resource_name: The name of the resource.

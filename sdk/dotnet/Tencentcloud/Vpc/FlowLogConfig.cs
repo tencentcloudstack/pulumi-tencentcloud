@@ -34,6 +34,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DisableFlowLogs](https://www.tencentcloud.com/document/api/215/47421)
+    ///   - [EnableFlowLogs](https://www.tencentcloud.com/document/api/215/47420)
+    /// * Read: [DescribeFlowLogs](https://www.tencentcloud.com/document/api/215/36908)
+    /// * Update:
+    ///   - [DisableFlowLogs](https://www.tencentcloud.com/document/api/215/47421)
+    ///   - [EnableFlowLogs](https://www.tencentcloud.com/document/api/215/47420)
+    /// 
     /// ## Import
     /// 
     /// vpc FlowLogConfig can be imported using the id, e.g.

@@ -46,6 +46,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeProxyGroupList](https://www.tencentcloud.com/document/api/608/33081)
 func GetProxyGroups(ctx *pulumi.Context, args *GetProxyGroupsArgs, opts ...pulumi.InvokeOption) (*GetProxyGroupsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetProxyGroupsResult

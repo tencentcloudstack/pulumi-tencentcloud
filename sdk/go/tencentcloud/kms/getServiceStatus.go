@@ -36,6 +36,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [GetServiceStatus](https://www.tencentcloud.com/document/api/1030/32186)
 func GetServiceStatus(ctx *pulumi.Context, args *GetServiceStatusArgs, opts ...pulumi.InvokeOption) (*GetServiceStatusResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetServiceStatusResult

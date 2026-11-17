@@ -71,6 +71,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ModifyAccountPrivileges](https://www.tencentcloud.com/document/api/1098/55923)
+    /// * Read: [DescribeAccountAllGrantPrivileges](https://www.tencentcloud.com/search/?wd=DescribeAccountAllGrantPrivileges&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyAccountPrivileges](https://www.tencentcloud.com/document/api/1098/55923)
+    /// 
     /// ## Import
     /// 
     /// cynosdb AccountPrivileges can be imported using the id, e.g.

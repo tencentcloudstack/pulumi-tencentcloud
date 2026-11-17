@@ -46,6 +46,12 @@ import * as utilities from "../utilities";
  *     cursor: "next-page-cursor-from-previous-query",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [EdgeKVList](https://www.tencentcloud.com/document/api/1145/78825)
  */
 export function getEdgeKvList(args: GetEdgeKvListArgs, opts?: pulumi.InvokeOptions): Promise<GetEdgeKvListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -144,6 +150,12 @@ export interface GetEdgeKvListResult {
  *     cursor: "next-page-cursor-from-previous-query",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [EdgeKVList](https://www.tencentcloud.com/document/api/1145/78825)
  */
 export function getEdgeKvListOutput(args: GetEdgeKvListOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetEdgeKvListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

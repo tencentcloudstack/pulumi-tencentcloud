@@ -7134,6 +7134,166 @@ func (o ClusterV2LoginSettingsPtrOutput) PublicKeyId() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+type ClusterV2MetaDbGroupInfo struct {
+	// Components that use the MetaDB. A component can belong to only one `metaDbGroupInfo` block.
+	Components []string `pulumi:"components"`
+	// MetaDB version, e.g. `mysql8`.
+	DefaultMetaVersion *string `pulumi:"defaultMetaVersion"`
+	// CDB instance ID.
+	LinkInstanceId *string `pulumi:"linkInstanceId"`
+	// JDBC connection of the custom MetaDB, e.g. `jdbc:mysql://10.10.10.10:3306/dbname`.
+	MetaDataJdbcUrl *string `pulumi:"metaDataJdbcUrl"`
+	// Password of the custom MetaDB. It is a write-only value: the API never returns it, so the state always keeps the configured value.
+	MetaDataPass *string `pulumi:"metaDataPass"`
+	// Username of the custom MetaDB.
+	MetaDataUser *string `pulumi:"metaDataUser"`
+	// Hive shared meta DB type. `EMR_DEFAULT_META`: created by the cluster by default; `EMR_EXIST_META`: use the specified EMR-MetaDB; `USER_CUSTOM_META`: use a custom MetaDB.
+	MetaType *string `pulumi:"metaType"`
+	// EMR-MetaDB instance ID, required when `metaType` is `EMR_EXIST_META`.
+	UnifyMetaInstanceId *string `pulumi:"unifyMetaInstanceId"`
+}
+
+// ClusterV2MetaDbGroupInfoInput is an input type that accepts ClusterV2MetaDbGroupInfoArgs and ClusterV2MetaDbGroupInfoOutput values.
+// You can construct a concrete instance of `ClusterV2MetaDbGroupInfoInput` via:
+//
+//	ClusterV2MetaDbGroupInfoArgs{...}
+type ClusterV2MetaDbGroupInfoInput interface {
+	pulumi.Input
+
+	ToClusterV2MetaDbGroupInfoOutput() ClusterV2MetaDbGroupInfoOutput
+	ToClusterV2MetaDbGroupInfoOutputWithContext(context.Context) ClusterV2MetaDbGroupInfoOutput
+}
+
+type ClusterV2MetaDbGroupInfoArgs struct {
+	// Components that use the MetaDB. A component can belong to only one `metaDbGroupInfo` block.
+	Components pulumi.StringArrayInput `pulumi:"components"`
+	// MetaDB version, e.g. `mysql8`.
+	DefaultMetaVersion pulumi.StringPtrInput `pulumi:"defaultMetaVersion"`
+	// CDB instance ID.
+	LinkInstanceId pulumi.StringPtrInput `pulumi:"linkInstanceId"`
+	// JDBC connection of the custom MetaDB, e.g. `jdbc:mysql://10.10.10.10:3306/dbname`.
+	MetaDataJdbcUrl pulumi.StringPtrInput `pulumi:"metaDataJdbcUrl"`
+	// Password of the custom MetaDB. It is a write-only value: the API never returns it, so the state always keeps the configured value.
+	MetaDataPass pulumi.StringPtrInput `pulumi:"metaDataPass"`
+	// Username of the custom MetaDB.
+	MetaDataUser pulumi.StringPtrInput `pulumi:"metaDataUser"`
+	// Hive shared meta DB type. `EMR_DEFAULT_META`: created by the cluster by default; `EMR_EXIST_META`: use the specified EMR-MetaDB; `USER_CUSTOM_META`: use a custom MetaDB.
+	MetaType pulumi.StringPtrInput `pulumi:"metaType"`
+	// EMR-MetaDB instance ID, required when `metaType` is `EMR_EXIST_META`.
+	UnifyMetaInstanceId pulumi.StringPtrInput `pulumi:"unifyMetaInstanceId"`
+}
+
+func (ClusterV2MetaDbGroupInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2MetaDbGroupInfo)(nil)).Elem()
+}
+
+func (i ClusterV2MetaDbGroupInfoArgs) ToClusterV2MetaDbGroupInfoOutput() ClusterV2MetaDbGroupInfoOutput {
+	return i.ToClusterV2MetaDbGroupInfoOutputWithContext(context.Background())
+}
+
+func (i ClusterV2MetaDbGroupInfoArgs) ToClusterV2MetaDbGroupInfoOutputWithContext(ctx context.Context) ClusterV2MetaDbGroupInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2MetaDbGroupInfoOutput)
+}
+
+// ClusterV2MetaDbGroupInfoArrayInput is an input type that accepts ClusterV2MetaDbGroupInfoArray and ClusterV2MetaDbGroupInfoArrayOutput values.
+// You can construct a concrete instance of `ClusterV2MetaDbGroupInfoArrayInput` via:
+//
+//	ClusterV2MetaDbGroupInfoArray{ ClusterV2MetaDbGroupInfoArgs{...} }
+type ClusterV2MetaDbGroupInfoArrayInput interface {
+	pulumi.Input
+
+	ToClusterV2MetaDbGroupInfoArrayOutput() ClusterV2MetaDbGroupInfoArrayOutput
+	ToClusterV2MetaDbGroupInfoArrayOutputWithContext(context.Context) ClusterV2MetaDbGroupInfoArrayOutput
+}
+
+type ClusterV2MetaDbGroupInfoArray []ClusterV2MetaDbGroupInfoInput
+
+func (ClusterV2MetaDbGroupInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2MetaDbGroupInfo)(nil)).Elem()
+}
+
+func (i ClusterV2MetaDbGroupInfoArray) ToClusterV2MetaDbGroupInfoArrayOutput() ClusterV2MetaDbGroupInfoArrayOutput {
+	return i.ToClusterV2MetaDbGroupInfoArrayOutputWithContext(context.Background())
+}
+
+func (i ClusterV2MetaDbGroupInfoArray) ToClusterV2MetaDbGroupInfoArrayOutputWithContext(ctx context.Context) ClusterV2MetaDbGroupInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ClusterV2MetaDbGroupInfoArrayOutput)
+}
+
+type ClusterV2MetaDbGroupInfoOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2MetaDbGroupInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ClusterV2MetaDbGroupInfo)(nil)).Elem()
+}
+
+func (o ClusterV2MetaDbGroupInfoOutput) ToClusterV2MetaDbGroupInfoOutput() ClusterV2MetaDbGroupInfoOutput {
+	return o
+}
+
+func (o ClusterV2MetaDbGroupInfoOutput) ToClusterV2MetaDbGroupInfoOutputWithContext(ctx context.Context) ClusterV2MetaDbGroupInfoOutput {
+	return o
+}
+
+// Components that use the MetaDB. A component can belong to only one `metaDbGroupInfo` block.
+func (o ClusterV2MetaDbGroupInfoOutput) Components() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ClusterV2MetaDbGroupInfo) []string { return v.Components }).(pulumi.StringArrayOutput)
+}
+
+// MetaDB version, e.g. `mysql8`.
+func (o ClusterV2MetaDbGroupInfoOutput) DefaultMetaVersion() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2MetaDbGroupInfo) *string { return v.DefaultMetaVersion }).(pulumi.StringPtrOutput)
+}
+
+// CDB instance ID.
+func (o ClusterV2MetaDbGroupInfoOutput) LinkInstanceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2MetaDbGroupInfo) *string { return v.LinkInstanceId }).(pulumi.StringPtrOutput)
+}
+
+// JDBC connection of the custom MetaDB, e.g. `jdbc:mysql://10.10.10.10:3306/dbname`.
+func (o ClusterV2MetaDbGroupInfoOutput) MetaDataJdbcUrl() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2MetaDbGroupInfo) *string { return v.MetaDataJdbcUrl }).(pulumi.StringPtrOutput)
+}
+
+// Password of the custom MetaDB. It is a write-only value: the API never returns it, so the state always keeps the configured value.
+func (o ClusterV2MetaDbGroupInfoOutput) MetaDataPass() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2MetaDbGroupInfo) *string { return v.MetaDataPass }).(pulumi.StringPtrOutput)
+}
+
+// Username of the custom MetaDB.
+func (o ClusterV2MetaDbGroupInfoOutput) MetaDataUser() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2MetaDbGroupInfo) *string { return v.MetaDataUser }).(pulumi.StringPtrOutput)
+}
+
+// Hive shared meta DB type. `EMR_DEFAULT_META`: created by the cluster by default; `EMR_EXIST_META`: use the specified EMR-MetaDB; `USER_CUSTOM_META`: use a custom MetaDB.
+func (o ClusterV2MetaDbGroupInfoOutput) MetaType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2MetaDbGroupInfo) *string { return v.MetaType }).(pulumi.StringPtrOutput)
+}
+
+// EMR-MetaDB instance ID, required when `metaType` is `EMR_EXIST_META`.
+func (o ClusterV2MetaDbGroupInfoOutput) UnifyMetaInstanceId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ClusterV2MetaDbGroupInfo) *string { return v.UnifyMetaInstanceId }).(pulumi.StringPtrOutput)
+}
+
+type ClusterV2MetaDbGroupInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (ClusterV2MetaDbGroupInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ClusterV2MetaDbGroupInfo)(nil)).Elem()
+}
+
+func (o ClusterV2MetaDbGroupInfoArrayOutput) ToClusterV2MetaDbGroupInfoArrayOutput() ClusterV2MetaDbGroupInfoArrayOutput {
+	return o
+}
+
+func (o ClusterV2MetaDbGroupInfoArrayOutput) ToClusterV2MetaDbGroupInfoArrayOutputWithContext(ctx context.Context) ClusterV2MetaDbGroupInfoArrayOutput {
+	return o
+}
+
+func (o ClusterV2MetaDbGroupInfoArrayOutput) Index(i pulumi.IntInput) ClusterV2MetaDbGroupInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ClusterV2MetaDbGroupInfo {
+		return vs[0].([]ClusterV2MetaDbGroupInfo)[vs[1].(int)]
+	}).(ClusterV2MetaDbGroupInfoOutput)
+}
+
 type ClusterV2MetaDbInfo struct {
 	// Custom MetaDB JDBC URL, e.g., `jdbc:mysql://10.10.10.10:3306/dbname`.
 	MetaDataJdbcUrl *string `pulumi:"metaDataJdbcUrl"`
@@ -8265,7 +8425,7 @@ func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecA
 type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDisk struct {
 	// **Required** stable identity key for this `dataDisk` block. Must be unique within the same node's `dataDisk` set, and must remain stable across plan/apply once written to state. Renaming an existing `_disk_index` is rejected (treated as remove+add, which violates the no-shrink rule).
 	_diskIndex string `pulumi:"_diskIndex"`
-	// Disk ID (read-only, populated from API).
+	// Disk ID.
 	DiskId *string `pulumi:"diskId"`
 	// Disk size in GB. Can only be increased after creation; shrinking is rejected at plan time.
 	DiskSize *int `pulumi:"diskSize"`
@@ -8287,7 +8447,7 @@ type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecData
 type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArgs struct {
 	// **Required** stable identity key for this `dataDisk` block. Must be unique within the same node's `dataDisk` set, and must remain stable across plan/apply once written to state. Renaming an existing `_disk_index` is rejected (treated as remove+add, which violates the no-shrink rule).
 	_diskIndex pulumi.StringInput `pulumi:"_diskIndex"`
-	// Disk ID (read-only, populated from API).
+	// Disk ID.
 	DiskId pulumi.StringPtrInput `pulumi:"diskId"`
 	// Disk size in GB. Can only be increased after creation; shrinking is rejected at plan time.
 	DiskSize pulumi.IntPtrInput `pulumi:"diskSize"`
@@ -8353,7 +8513,7 @@ func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecD
 	}).(pulumi.StringOutput)
 }
 
-// Disk ID (read-only, populated from API).
+// Disk ID.
 func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskOutput) DiskId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDisk) *string {
 		return v.DiskId
@@ -8864,7 +9024,7 @@ func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArr
 type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDisk struct {
 	// **Required** stable identity key for this `dataDisk` block. Must be unique within the same node's `dataDisk` set, and must remain stable across plan/apply once written to state. Renaming an existing `_disk_index` is rejected (treated as remove+add, which violates the no-shrink rule).
 	_diskIndex string `pulumi:"_diskIndex"`
-	// Disk ID (read-only, populated from API).
+	// Disk ID.
 	DiskId *string `pulumi:"diskId"`
 	// Disk size in GB. Can only be increased after creation; shrinking is rejected at plan time.
 	DiskSize *int `pulumi:"diskSize"`
@@ -8886,7 +9046,7 @@ type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDi
 type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArgs struct {
 	// **Required** stable identity key for this `dataDisk` block. Must be unique within the same node's `dataDisk` set, and must remain stable across plan/apply once written to state. Renaming an existing `_disk_index` is rejected (treated as remove+add, which violates the no-shrink rule).
 	_diskIndex pulumi.StringInput `pulumi:"_diskIndex"`
-	// Disk ID (read-only, populated from API).
+	// Disk ID.
 	DiskId pulumi.StringPtrInput `pulumi:"diskId"`
 	// Disk size in GB. Can only be increased after creation; shrinking is rejected at plan time.
 	DiskSize pulumi.IntPtrInput `pulumi:"diskSize"`
@@ -8952,7 +9112,7 @@ func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDat
 	}).(pulumi.StringOutput)
 }
 
-// Disk ID (read-only, populated from API).
+// Disk ID.
 func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskOutput) DiskId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDisk) *string {
 		return v.DiskId
@@ -9463,7 +9623,7 @@ func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecA
 type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDisk struct {
 	// **Required** stable identity key for this `dataDisk` block. Must be unique within the same node's `dataDisk` set, and must remain stable across plan/apply once written to state. Renaming an existing `_disk_index` is rejected (treated as remove+add, which violates the no-shrink rule).
 	_diskIndex string `pulumi:"_diskIndex"`
-	// Disk ID (read-only, populated from API).
+	// Disk ID.
 	DiskId *string `pulumi:"diskId"`
 	// Disk size in GB. Can only be increased after creation; shrinking is rejected at plan time.
 	DiskSize *int `pulumi:"diskSize"`
@@ -9485,7 +9645,7 @@ type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecData
 type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArgs struct {
 	// **Required** stable identity key for this `dataDisk` block. Must be unique within the same node's `dataDisk` set, and must remain stable across plan/apply once written to state. Renaming an existing `_disk_index` is rejected (treated as remove+add, which violates the no-shrink rule).
 	_diskIndex pulumi.StringInput `pulumi:"_diskIndex"`
-	// Disk ID (read-only, populated from API).
+	// Disk ID.
 	DiskId pulumi.StringPtrInput `pulumi:"diskId"`
 	// Disk size in GB. Can only be increased after creation; shrinking is rejected at plan time.
 	DiskSize pulumi.IntPtrInput `pulumi:"diskSize"`
@@ -9551,7 +9711,7 @@ func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecD
 	}).(pulumi.StringOutput)
 }
 
-// Disk ID (read-only, populated from API).
+// Disk ID.
 func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskOutput) DiskId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDisk) *string {
 		return v.DiskId
@@ -10062,7 +10222,7 @@ func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecA
 type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDisk struct {
 	// **Required** stable identity key for this `dataDisk` block. Must be unique within the same node's `dataDisk` set, and must remain stable across plan/apply once written to state. Renaming an existing `_disk_index` is rejected (treated as remove+add, which violates the no-shrink rule).
 	_diskIndex string `pulumi:"_diskIndex"`
-	// Disk ID (read-only, populated from API).
+	// Disk ID.
 	DiskId *string `pulumi:"diskId"`
 	// Disk size in GB. Can only be increased after creation; shrinking is rejected at plan time.
 	DiskSize *int `pulumi:"diskSize"`
@@ -10084,7 +10244,7 @@ type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecData
 type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskArgs struct {
 	// **Required** stable identity key for this `dataDisk` block. Must be unique within the same node's `dataDisk` set, and must remain stable across plan/apply once written to state. Renaming an existing `_disk_index` is rejected (treated as remove+add, which violates the no-shrink rule).
 	_diskIndex pulumi.StringInput `pulumi:"_diskIndex"`
-	// Disk ID (read-only, populated from API).
+	// Disk ID.
 	DiskId pulumi.StringPtrInput `pulumi:"diskId"`
 	// Disk size in GB. Can only be increased after creation; shrinking is rejected at plan time.
 	DiskSize pulumi.IntPtrInput `pulumi:"diskSize"`
@@ -10150,7 +10310,7 @@ func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecD
 	}).(pulumi.StringOutput)
 }
 
-// Disk ID (read-only, populated from API).
+// Disk ID.
 func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDiskOutput) DiskId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecRouterResourceSpecDataDisk) *string {
 		return v.DiskId
@@ -10661,7 +10821,7 @@ func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArr
 type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDisk struct {
 	// **Required** stable identity key for this `dataDisk` block. Must be unique within the same node's `dataDisk` set, and must remain stable across plan/apply once written to state. Renaming an existing `_disk_index` is rejected (treated as remove+add, which violates the no-shrink rule).
 	_diskIndex string `pulumi:"_diskIndex"`
-	// Disk ID (read-only, populated from API).
+	// Disk ID.
 	DiskId *string `pulumi:"diskId"`
 	// Disk size in GB. Can only be increased after creation; shrinking is rejected at plan time.
 	DiskSize *int `pulumi:"diskSize"`
@@ -10683,7 +10843,7 @@ type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDi
 type ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArgs struct {
 	// **Required** stable identity key for this `dataDisk` block. Must be unique within the same node's `dataDisk` set, and must remain stable across plan/apply once written to state. Renaming an existing `_disk_index` is rejected (treated as remove+add, which violates the no-shrink rule).
 	_diskIndex pulumi.StringInput `pulumi:"_diskIndex"`
-	// Disk ID (read-only, populated from API).
+	// Disk ID.
 	DiskId pulumi.StringPtrInput `pulumi:"diskId"`
 	// Disk size in GB. Can only be increased after creation; shrinking is rejected at plan time.
 	DiskSize pulumi.IntPtrInput `pulumi:"diskSize"`
@@ -10749,7 +10909,7 @@ func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDat
 	}).(pulumi.StringOutput)
 }
 
-// Disk ID (read-only, populated from API).
+// Disk ID.
 func (o ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskOutput) DiskId() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDisk) *string {
 		return v.DiskId
@@ -14941,6 +15101,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2InstanceChargePrepaidPtrInput)(nil)).Elem(), ClusterV2InstanceChargePrepaidArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2LoginSettingsInput)(nil)).Elem(), ClusterV2LoginSettingsArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2LoginSettingsPtrInput)(nil)).Elem(), ClusterV2LoginSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2MetaDbGroupInfoInput)(nil)).Elem(), ClusterV2MetaDbGroupInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2MetaDbGroupInfoArrayInput)(nil)).Elem(), ClusterV2MetaDbGroupInfoArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2MetaDbInfoInput)(nil)).Elem(), ClusterV2MetaDbInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2MetaDbInfoPtrInput)(nil)).Elem(), ClusterV2MetaDbInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ClusterV2SceneSoftwareConfigInput)(nil)).Elem(), ClusterV2SceneSoftwareConfigArgs{})
@@ -15119,6 +15281,8 @@ func init() {
 	pulumi.RegisterOutputType(ClusterV2InstanceChargePrepaidPtrOutput{})
 	pulumi.RegisterOutputType(ClusterV2LoginSettingsOutput{})
 	pulumi.RegisterOutputType(ClusterV2LoginSettingsPtrOutput{})
+	pulumi.RegisterOutputType(ClusterV2MetaDbGroupInfoOutput{})
+	pulumi.RegisterOutputType(ClusterV2MetaDbGroupInfoArrayOutput{})
 	pulumi.RegisterOutputType(ClusterV2MetaDbInfoOutput{})
 	pulumi.RegisterOutputType(ClusterV2MetaDbInfoPtrOutput{})
 	pulumi.RegisterOutputType(ClusterV2SceneSoftwareConfigOutput{})

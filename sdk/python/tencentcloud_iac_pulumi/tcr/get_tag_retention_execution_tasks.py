@@ -121,6 +121,12 @@ def get_tag_retention_execution_tasks(execution_id: Optional[_builtins.int] = No
         execution_id=1)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTagRetentionExecutionTask](https://www.tencentcloud.com/document/api/1051/50687)
+
 
     :param _builtins.int execution_id: execution id.
     :param _builtins.str registry_id: instance id.
@@ -160,6 +166,12 @@ def get_tag_retention_execution_tasks_output(execution_id: pulumi.Input[Optional
         retention_id=1,
         execution_id=1)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTagRetentionExecutionTask](https://www.tencentcloud.com/document/api/1051/50687)
 
 
     :param _builtins.int execution_id: execution id.

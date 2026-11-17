@@ -494,6 +494,19 @@ class ConnectResource(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateConnectResource](https://www.tencentcloud.com/search/?wd=CreateConnectResource&type=document&lang=en)
+          - [DescribeConnectResource](https://www.tencentcloud.com/search/?wd=DescribeConnectResource&type=document&lang=en)
+        * Read: [DescribeConnectResource](https://www.tencentcloud.com/search/?wd=DescribeConnectResource&type=document&lang=en)
+        * Update:
+          - [DescribeConnectResource](https://www.tencentcloud.com/search/?wd=DescribeConnectResource&type=document&lang=en)
+          - [ModifyConnectResource](https://www.tencentcloud.com/search/?wd=ModifyConnectResource&type=document&lang=en)
+        * Delete: [DeleteConnectResource](https://www.tencentcloud.com/search/?wd=DeleteConnectResource&type=document&lang=en)
+
         ## Import
 
         ckafka connect_resource can be imported using the id, e.g.
@@ -548,6 +561,19 @@ class ConnectResource(pulumi.CustomResource):
                 "self_built": False,
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateConnectResource](https://www.tencentcloud.com/search/?wd=CreateConnectResource&type=document&lang=en)
+          - [DescribeConnectResource](https://www.tencentcloud.com/search/?wd=DescribeConnectResource&type=document&lang=en)
+        * Read: [DescribeConnectResource](https://www.tencentcloud.com/search/?wd=DescribeConnectResource&type=document&lang=en)
+        * Update:
+          - [DescribeConnectResource](https://www.tencentcloud.com/search/?wd=DescribeConnectResource&type=document&lang=en)
+          - [ModifyConnectResource](https://www.tencentcloud.com/search/?wd=ModifyConnectResource&type=document&lang=en)
+        * Delete: [DeleteConnectResource](https://www.tencentcloud.com/search/?wd=DeleteConnectResource&type=document&lang=en)
 
         ## Import
 

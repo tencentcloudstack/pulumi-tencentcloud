@@ -53,6 +53,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Audit
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeEvents](https://www.tencentcloud.com/search/?wd=DescribeEvents&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetEventsResult> InvokeAsync(GetEventsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetEventsResult>("tencentcloud:Audit/getEvents:getEvents", args ?? new GetEventsArgs(), options.WithDefaults());
@@ -98,6 +104,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Audit
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeEvents](https://www.tencentcloud.com/search/?wd=DescribeEvents&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetEventsResult> Invoke(GetEventsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetEventsResult>("tencentcloud:Audit/getEvents:getEvents", args ?? new GetEventsInvokeArgs(), options.WithDefaults());
@@ -143,6 +155,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Audit
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeEvents](https://www.tencentcloud.com/search/?wd=DescribeEvents&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetEventsResult> Invoke(GetEventsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetEventsResult>("tencentcloud:Audit/getEvents:getEvents", args ?? new GetEventsInvokeArgs(), options.WithDefaults());

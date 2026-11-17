@@ -129,6 +129,12 @@ def get_resource_related_job(desc_by_job_config_create_time: Optional[_builtins.
         work_space_id="space-2idq8wbr")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeResourceRelatedJobs](https://www.tencentcloud.com/search/?wd=DescribeResourceRelatedJobs&type=document&lang=en)
+
 
     :param _builtins.int desc_by_job_config_create_time: Default:0; 1:sort by job version creation time in descending order.
     :param _builtins.int resource_config_version: Resource version number.
@@ -173,6 +179,12 @@ def get_resource_related_job_output(desc_by_job_config_create_time: pulumi.Input
         resource_config_version=1,
         work_space_id="space-2idq8wbr")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeResourceRelatedJobs](https://www.tencentcloud.com/search/?wd=DescribeResourceRelatedJobs&type=document&lang=en)
 
 
     :param _builtins.int desc_by_job_config_create_time: Default:0; 1:sort by job version creation time in descending order.

@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeGroup](https://www.tencentcloud.com/document/api/597/35350)
 func GetGroup(ctx *pulumi.Context, args *GetGroupArgs, opts ...pulumi.InvokeOption) (*GetGroupResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetGroupResult

@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     scope: "page",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [ApplyEmbedInterval](https://www.tencentcloud.com/document/api/1270/72253)
  */
 export class EmbedIntervalApply extends pulumi.CustomResource {
     /**

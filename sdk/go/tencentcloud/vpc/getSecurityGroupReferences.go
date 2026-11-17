@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeSecurityGroupReferences](https://www.tencentcloud.com/document/api/215/36092)
 func GetSecurityGroupReferences(ctx *pulumi.Context, args *GetSecurityGroupReferencesArgs, opts ...pulumi.InvokeOption) (*GetSecurityGroupReferencesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSecurityGroupReferencesResult

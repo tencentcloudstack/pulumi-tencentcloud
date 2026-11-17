@@ -46,6 +46,14 @@ import * as utilities from "../utilities";
  * const dcnDcdbId = hourdbInstanceDcn.id;
  * const cancelOperation = new tencentcloud.dcdb.CancelDcnJobOperation("cancel_operation", {instanceId: dcnDcdbId});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CancelDcnJob](https://www.tencentcloud.com/document/api/1042/41451)
+ *   - [DescribeFlow](https://www.tencentcloud.com/document/api/1042/40887)
  */
 export class CancelDcnJobOperation extends pulumi.CustomResource {
     /**

@@ -82,6 +82,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDirectConnectGatewayCcnRoutes](https://www.tencentcloud.com/document/api/215/34775)
         /// </summary>
         public static Task<GetGatewayCcnRoutesResult> InvokeAsync(GetGatewayCcnRoutesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetGatewayCcnRoutesResult>("tencentcloud:Dc/getGatewayCcnRoutes:getGatewayCcnRoutes", args ?? new GetGatewayCcnRoutesArgs(), options.WithDefaults());
@@ -156,6 +162,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDirectConnectGatewayCcnRoutes](https://www.tencentcloud.com/document/api/215/34775)
         /// </summary>
         public static Output<GetGatewayCcnRoutesResult> Invoke(GetGatewayCcnRoutesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetGatewayCcnRoutesResult>("tencentcloud:Dc/getGatewayCcnRoutes:getGatewayCcnRoutes", args ?? new GetGatewayCcnRoutesInvokeArgs(), options.WithDefaults());
@@ -230,6 +242,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDirectConnectGatewayCcnRoutes](https://www.tencentcloud.com/document/api/215/34775)
         /// </summary>
         public static Output<GetGatewayCcnRoutesResult> Invoke(GetGatewayCcnRoutesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetGatewayCcnRoutesResult>("tencentcloud:Dc/getGatewayCcnRoutes:getGatewayCcnRoutes", args ?? new GetGatewayCcnRoutesInvokeArgs(), options.WithDefaults());

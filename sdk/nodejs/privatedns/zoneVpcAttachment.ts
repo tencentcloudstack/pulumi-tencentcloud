@@ -57,6 +57,19 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [AddSpecifyPrivateZoneVpc](https://www.tencentcloud.com/document/api/1097/81390)
+ *   - [QueryAsyncBindVpcStatus](https://www.tencentcloud.com/document/api/1097/81388)
+ * * Read: [DescribePrivateZone](https://www.tencentcloud.com/document/api/1097/42117)
+ * * Delete:
+ *   - [DeleteSpecifyPrivateZoneVpc](https://www.tencentcloud.com/document/api/1097/81389)
+ *   - [DescribePrivateZone](https://www.tencentcloud.com/document/api/1097/42117)
+ *   - [QueryAsyncBindVpcStatus](https://www.tencentcloud.com/document/api/1097/81388)
+ *
  * ## Import
  *
  * PrivateDns zone vpc attachment can be imported using the zoneId#uniqVpcId, e.g.

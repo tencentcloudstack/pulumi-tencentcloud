@@ -48,6 +48,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [EnableEncryptionProtection](https://www.tencentcloud.com/document/api/457/56946)
+ * * Read: [DescribeEncryptionStatus](https://www.tencentcloud.com/document/api/457/56948)
+ * * Delete: [DisableEncryptionProtection](https://www.tencentcloud.com/document/api/457/56947)
  */
 export class EncryptionProtection extends pulumi.CustomResource {
     /**

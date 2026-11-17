@@ -264,6 +264,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateCLSLogConfig](https://www.tencentcloud.com/search/?wd=CreateCLSLogConfig&amp;type=document&amp;lang=en)
+    ///   - [DescribeLogConfigs](https://www.tencentcloud.com/search/?wd=DescribeLogConfigs&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeLogConfigs](https://www.tencentcloud.com/search/?wd=DescribeLogConfigs&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyLogConfig](https://www.tencentcloud.com/search/?wd=ModifyLogConfig&amp;type=document&amp;lang=en)
+    /// * Delete:
+    ///   - [DeleteLogConfigs](https://www.tencentcloud.com/search/?wd=DeleteLogConfigs&amp;type=document&amp;lang=en)
+    ///   - [DescribeLogConfigs](https://www.tencentcloud.com/search/?wd=DescribeLogConfigs&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Kubernetes/logConfig:LogConfig")]
     public partial class LogConfig : global::Pulumi.CustomResource

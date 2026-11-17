@@ -83,6 +83,22 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
+//   - [ModifyConnectionConfig](https://www.tencentcloud.com/document/api/239/59981)
+//
+// * Read:
+//   - [DescribeBandwidthRange](https://www.tencentcloud.com/document/api/239/54675)
+//   - [DescribeInstances](https://www.tencentcloud.com/document/api/239/32065)
+//
+// * Update:
+//   - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
+//   - [ModifyConnectionConfig](https://www.tencentcloud.com/document/api/239/59981)
+//
 // ## Import
 //
 // redis connection config can be imported, e.g.

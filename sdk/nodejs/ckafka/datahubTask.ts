@@ -42,6 +42,21 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateDatahubTask](https://www.tencentcloud.com/search/?wd=CreateDatahubTask&type=document&lang=en)
+ *   - [DescribeDatahubTask](https://www.tencentcloud.com/search/?wd=DescribeDatahubTask&type=document&lang=en)
+ * * Read: [DescribeDatahubTask](https://www.tencentcloud.com/search/?wd=DescribeDatahubTask&type=document&lang=en)
+ * * Update:
+ *   - [DescribeDatahubTask](https://www.tencentcloud.com/search/?wd=DescribeDatahubTask&type=document&lang=en)
+ *   - [ModifyDatahubTask](https://www.tencentcloud.com/search/?wd=ModifyDatahubTask&type=document&lang=en)
+ * * Delete:
+ *   - [DeleteDatahubTask](https://www.tencentcloud.com/search/?wd=DeleteDatahubTask&type=document&lang=en)
+ *   - [DescribeDatahubTask](https://www.tencentcloud.com/search/?wd=DescribeDatahubTask&type=document&lang=en)
+ *
  * ## Import
  *
  * ckafka datahubTask can be imported using the id, e.g.

@@ -107,6 +107,12 @@ def get_user_project(all_page: Optional[_builtins.bool] = None,
         all_page=True)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeUserProjectList](https://www.tencentcloud.com/document/api/1270/72616)
+
 
     :param _builtins.bool all_page: Whether to display all, if true, ignore paging.
     :param _builtins.int project_id: Project id.
@@ -141,6 +147,12 @@ def get_user_project_output(all_page: pulumi.Input[Optional[Optional[_builtins.b
     user_project = tencentcloud.bi.get_user_project(project_id=123,
         all_page=True)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeUserProjectList](https://www.tencentcloud.com/document/api/1270/72616)
 
 
     :param _builtins.bool all_page: Whether to display all, if true, ignore paging.

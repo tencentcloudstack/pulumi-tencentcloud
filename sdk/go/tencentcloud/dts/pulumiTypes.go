@@ -6221,6 +6221,3177 @@ func (o SyncConfigSrcInfoPtrOutput) VpcId() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+type SyncJobConfigDynamicObjects struct {
+	// For advanced object types, such as function and procedure, when an advanced object needs to be synchronized, the initialization type must include the structure initialization type, that is, the value of the Options.InitType field is Structure or Full. Note: This field may return null, indicating that no valid value can be obtained.
+	AdvancedObjects []string `pulumi:"advancedObjects"`
+	// Synchronization object, not null when Mode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+	Databases []SyncJobConfigDynamicObjectsDatabase `pulumi:"databases"`
+	// Library/table/view level DML/DDL white list. Note: This field may return null, indicating that no valid value can be obtained.
+	DatabasesOpFilters []SyncJobConfigDynamicObjectsDatabasesOpFilter `pulumi:"databasesOpFilters"`
+	// Migration object type Partial (partial object). Note: This field may return null, indicating that no valid value can be obtained.
+	Mode *string `pulumi:"mode"`
+	// It has been deprecated. OnlineDDL type. Note: This field may return null, indicating that no valid value can be obtained.
+	//
+	// Deprecated: It has been deprecated.
+	OnlineDdl *SyncJobConfigDynamicObjectsOnlineDdl `pulumi:"onlineDdl"`
+}
+
+// SyncJobConfigDynamicObjectsInput is an input type that accepts SyncJobConfigDynamicObjectsArgs and SyncJobConfigDynamicObjectsOutput values.
+// You can construct a concrete instance of `SyncJobConfigDynamicObjectsInput` via:
+//
+//	SyncJobConfigDynamicObjectsArgs{...}
+type SyncJobConfigDynamicObjectsInput interface {
+	pulumi.Input
+
+	ToSyncJobConfigDynamicObjectsOutput() SyncJobConfigDynamicObjectsOutput
+	ToSyncJobConfigDynamicObjectsOutputWithContext(context.Context) SyncJobConfigDynamicObjectsOutput
+}
+
+type SyncJobConfigDynamicObjectsArgs struct {
+	// For advanced object types, such as function and procedure, when an advanced object needs to be synchronized, the initialization type must include the structure initialization type, that is, the value of the Options.InitType field is Structure or Full. Note: This field may return null, indicating that no valid value can be obtained.
+	AdvancedObjects pulumi.StringArrayInput `pulumi:"advancedObjects"`
+	// Synchronization object, not null when Mode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+	Databases SyncJobConfigDynamicObjectsDatabaseArrayInput `pulumi:"databases"`
+	// Library/table/view level DML/DDL white list. Note: This field may return null, indicating that no valid value can be obtained.
+	DatabasesOpFilters SyncJobConfigDynamicObjectsDatabasesOpFilterArrayInput `pulumi:"databasesOpFilters"`
+	// Migration object type Partial (partial object). Note: This field may return null, indicating that no valid value can be obtained.
+	Mode pulumi.StringPtrInput `pulumi:"mode"`
+	// It has been deprecated. OnlineDDL type. Note: This field may return null, indicating that no valid value can be obtained.
+	//
+	// Deprecated: It has been deprecated.
+	OnlineDdl SyncJobConfigDynamicObjectsOnlineDdlPtrInput `pulumi:"onlineDdl"`
+}
+
+func (SyncJobConfigDynamicObjectsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncJobConfigDynamicObjects)(nil)).Elem()
+}
+
+func (i SyncJobConfigDynamicObjectsArgs) ToSyncJobConfigDynamicObjectsOutput() SyncJobConfigDynamicObjectsOutput {
+	return i.ToSyncJobConfigDynamicObjectsOutputWithContext(context.Background())
+}
+
+func (i SyncJobConfigDynamicObjectsArgs) ToSyncJobConfigDynamicObjectsOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicObjectsOutput)
+}
+
+func (i SyncJobConfigDynamicObjectsArgs) ToSyncJobConfigDynamicObjectsPtrOutput() SyncJobConfigDynamicObjectsPtrOutput {
+	return i.ToSyncJobConfigDynamicObjectsPtrOutputWithContext(context.Background())
+}
+
+func (i SyncJobConfigDynamicObjectsArgs) ToSyncJobConfigDynamicObjectsPtrOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicObjectsOutput).ToSyncJobConfigDynamicObjectsPtrOutputWithContext(ctx)
+}
+
+// SyncJobConfigDynamicObjectsPtrInput is an input type that accepts SyncJobConfigDynamicObjectsArgs, SyncJobConfigDynamicObjectsPtr and SyncJobConfigDynamicObjectsPtrOutput values.
+// You can construct a concrete instance of `SyncJobConfigDynamicObjectsPtrInput` via:
+//
+//	        SyncJobConfigDynamicObjectsArgs{...}
+//
+//	or:
+//
+//	        nil
+type SyncJobConfigDynamicObjectsPtrInput interface {
+	pulumi.Input
+
+	ToSyncJobConfigDynamicObjectsPtrOutput() SyncJobConfigDynamicObjectsPtrOutput
+	ToSyncJobConfigDynamicObjectsPtrOutputWithContext(context.Context) SyncJobConfigDynamicObjectsPtrOutput
+}
+
+type syncJobConfigDynamicObjectsPtrType SyncJobConfigDynamicObjectsArgs
+
+func SyncJobConfigDynamicObjectsPtr(v *SyncJobConfigDynamicObjectsArgs) SyncJobConfigDynamicObjectsPtrInput {
+	return (*syncJobConfigDynamicObjectsPtrType)(v)
+}
+
+func (*syncJobConfigDynamicObjectsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SyncJobConfigDynamicObjects)(nil)).Elem()
+}
+
+func (i *syncJobConfigDynamicObjectsPtrType) ToSyncJobConfigDynamicObjectsPtrOutput() SyncJobConfigDynamicObjectsPtrOutput {
+	return i.ToSyncJobConfigDynamicObjectsPtrOutputWithContext(context.Background())
+}
+
+func (i *syncJobConfigDynamicObjectsPtrType) ToSyncJobConfigDynamicObjectsPtrOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicObjectsPtrOutput)
+}
+
+type SyncJobConfigDynamicObjectsOutput struct{ *pulumi.OutputState }
+
+func (SyncJobConfigDynamicObjectsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncJobConfigDynamicObjects)(nil)).Elem()
+}
+
+func (o SyncJobConfigDynamicObjectsOutput) ToSyncJobConfigDynamicObjectsOutput() SyncJobConfigDynamicObjectsOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsOutput) ToSyncJobConfigDynamicObjectsOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsOutput) ToSyncJobConfigDynamicObjectsPtrOutput() SyncJobConfigDynamicObjectsPtrOutput {
+	return o.ToSyncJobConfigDynamicObjectsPtrOutputWithContext(context.Background())
+}
+
+func (o SyncJobConfigDynamicObjectsOutput) ToSyncJobConfigDynamicObjectsPtrOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SyncJobConfigDynamicObjects) *SyncJobConfigDynamicObjects {
+		return &v
+	}).(SyncJobConfigDynamicObjectsPtrOutput)
+}
+
+// For advanced object types, such as function and procedure, when an advanced object needs to be synchronized, the initialization type must include the structure initialization type, that is, the value of the Options.InitType field is Structure or Full. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicObjectsOutput) AdvancedObjects() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjects) []string { return v.AdvancedObjects }).(pulumi.StringArrayOutput)
+}
+
+// Synchronization object, not null when Mode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicObjectsOutput) Databases() SyncJobConfigDynamicObjectsDatabaseArrayOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjects) []SyncJobConfigDynamicObjectsDatabase { return v.Databases }).(SyncJobConfigDynamicObjectsDatabaseArrayOutput)
+}
+
+// Library/table/view level DML/DDL white list. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicObjectsOutput) DatabasesOpFilters() SyncJobConfigDynamicObjectsDatabasesOpFilterArrayOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjects) []SyncJobConfigDynamicObjectsDatabasesOpFilter {
+		return v.DatabasesOpFilters
+	}).(SyncJobConfigDynamicObjectsDatabasesOpFilterArrayOutput)
+}
+
+// Migration object type Partial (partial object). Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicObjectsOutput) Mode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjects) *string { return v.Mode }).(pulumi.StringPtrOutput)
+}
+
+// It has been deprecated. OnlineDDL type. Note: This field may return null, indicating that no valid value can be obtained.
+//
+// Deprecated: It has been deprecated.
+func (o SyncJobConfigDynamicObjectsOutput) OnlineDdl() SyncJobConfigDynamicObjectsOnlineDdlPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjects) *SyncJobConfigDynamicObjectsOnlineDdl { return v.OnlineDdl }).(SyncJobConfigDynamicObjectsOnlineDdlPtrOutput)
+}
+
+type SyncJobConfigDynamicObjectsPtrOutput struct{ *pulumi.OutputState }
+
+func (SyncJobConfigDynamicObjectsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SyncJobConfigDynamicObjects)(nil)).Elem()
+}
+
+func (o SyncJobConfigDynamicObjectsPtrOutput) ToSyncJobConfigDynamicObjectsPtrOutput() SyncJobConfigDynamicObjectsPtrOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsPtrOutput) ToSyncJobConfigDynamicObjectsPtrOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsPtrOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsPtrOutput) Elem() SyncJobConfigDynamicObjectsOutput {
+	return o.ApplyT(func(v *SyncJobConfigDynamicObjects) SyncJobConfigDynamicObjects {
+		if v != nil {
+			return *v
+		}
+		var ret SyncJobConfigDynamicObjects
+		return ret
+	}).(SyncJobConfigDynamicObjectsOutput)
+}
+
+// For advanced object types, such as function and procedure, when an advanced object needs to be synchronized, the initialization type must include the structure initialization type, that is, the value of the Options.InitType field is Structure or Full. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicObjectsPtrOutput) AdvancedObjects() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *SyncJobConfigDynamicObjects) []string {
+		if v == nil {
+			return nil
+		}
+		return v.AdvancedObjects
+	}).(pulumi.StringArrayOutput)
+}
+
+// Synchronization object, not null when Mode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicObjectsPtrOutput) Databases() SyncJobConfigDynamicObjectsDatabaseArrayOutput {
+	return o.ApplyT(func(v *SyncJobConfigDynamicObjects) []SyncJobConfigDynamicObjectsDatabase {
+		if v == nil {
+			return nil
+		}
+		return v.Databases
+	}).(SyncJobConfigDynamicObjectsDatabaseArrayOutput)
+}
+
+// Library/table/view level DML/DDL white list. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicObjectsPtrOutput) DatabasesOpFilters() SyncJobConfigDynamicObjectsDatabasesOpFilterArrayOutput {
+	return o.ApplyT(func(v *SyncJobConfigDynamicObjects) []SyncJobConfigDynamicObjectsDatabasesOpFilter {
+		if v == nil {
+			return nil
+		}
+		return v.DatabasesOpFilters
+	}).(SyncJobConfigDynamicObjectsDatabasesOpFilterArrayOutput)
+}
+
+// Migration object type Partial (partial object). Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicObjectsPtrOutput) Mode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncJobConfigDynamicObjects) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Mode
+	}).(pulumi.StringPtrOutput)
+}
+
+// It has been deprecated. OnlineDDL type. Note: This field may return null, indicating that no valid value can be obtained.
+//
+// Deprecated: It has been deprecated.
+func (o SyncJobConfigDynamicObjectsPtrOutput) OnlineDdl() SyncJobConfigDynamicObjectsOnlineDdlPtrOutput {
+	return o.ApplyT(func(v *SyncJobConfigDynamicObjects) *SyncJobConfigDynamicObjectsOnlineDdl {
+		if v == nil {
+			return nil
+		}
+		return v.OnlineDdl
+	}).(SyncJobConfigDynamicObjectsOnlineDdlPtrOutput)
+}
+
+type SyncJobConfigDynamicObjectsDatabase struct {
+	// DB selection mode: All (for all objects under the current object), Partial (for some objects), when the Mode is Partial, this item is required. Note that synchronization of advanced objects does not depend on this value. Note: This field may return null, indicating that no valid value can be obtained.
+	DbMode *string `pulumi:"dbMode"`
+	// The name of the library that needs to be migrated or synchronized. This item is required when the ObjectMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+	DbName *string `pulumi:"dbName"`
+	// Event migration mode, all (for all objects under the current object), partial (partial objects). Note: This field may return null, indicating that no valid value can be obtained.
+	EventMode *string `pulumi:"eventMode"`
+	// When EventMode is partial, specify the name of the event to be migrated. Note: This field may return null, indicating that no valid value can be obtained.
+	Events []string `pulumi:"events"`
+	// Select the mode to be synchronized, Partial is a part, all is an entire selection. Note: This field may return null, indicating that no valid value can be obtained.
+	FunctionMode *string `pulumi:"functionMode"`
+	// Required when the FunctionMode value is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+	Functions []string `pulumi:"functions"`
+	// The name of the library after migration or synchronization, which is the same as the source library by default. Note: This field may return null, indicating that no valid value can be obtained.
+	NewDbName *string `pulumi:"newDbName"`
+	// Schema name after migration or synchronization. Note: This field may return null, indicating that no valid value can be obtained.
+	NewSchemaName *string `pulumi:"newSchemaName"`
+	// Select the mode to be synchronized, Partial is part, All is the whole selection. Note: This field may return null, indicating that no valid value can be obtained.
+	ProcedureMode *string `pulumi:"procedureMode"`
+	// Required when the value of ProcedureMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+	Procedures []string `pulumi:"procedures"`
+	// Schema selection mode, used by PostgreSQL and SQL Server sync links. Valid values: `All` (all objects under the current object), `Partial` (some objects). Note: This field may return null, indicating that no valid value can be obtained.
+	SchemaMode *string `pulumi:"schemaMode"`
+	// Migrated or synchronized schema. Note: This field may return null, indicating that no valid value can be obtained.
+	SchemaName *string `pulumi:"schemaName"`
+	// Table selection mode: All (for all objects under the current object), Partial (for some objects), this item is required when the DBMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+	TableMode *string `pulumi:"tableMode"`
+	// A collection of table graph objects, when TableMode is Partial, this item needs to be filled in. Note: This field may return null, indicating that no valid value can be obtained.
+	Tables []SyncJobConfigDynamicObjectsDatabaseTable `pulumi:"tables"`
+	// Trigger migration mode, all (for all objects under the current object), partial (partial objects). Note: This field may return null, indicating that no valid value can be obtained.
+	TriggerMode *string `pulumi:"triggerMode"`
+	// When TriggerMode is partial, specify the name of the trigger to be migrated. Note: This field may return null, indicating that no valid value can be obtained.
+	Triggers []string `pulumi:"triggers"`
+	// View selection mode: All is all view objects under the current object, Partial is part of the view objects. Note: This field may return null, indicating that no valid value can be obtained.
+	ViewMode *string `pulumi:"viewMode"`
+	// View object collection, when ViewMode is Partial, this item needs to be filled in. Note: This field may return null, indicating that no valid value can be obtained.
+	Views []SyncJobConfigDynamicObjectsDatabaseView `pulumi:"views"`
+}
+
+// SyncJobConfigDynamicObjectsDatabaseInput is an input type that accepts SyncJobConfigDynamicObjectsDatabaseArgs and SyncJobConfigDynamicObjectsDatabaseOutput values.
+// You can construct a concrete instance of `SyncJobConfigDynamicObjectsDatabaseInput` via:
+//
+//	SyncJobConfigDynamicObjectsDatabaseArgs{...}
+type SyncJobConfigDynamicObjectsDatabaseInput interface {
+	pulumi.Input
+
+	ToSyncJobConfigDynamicObjectsDatabaseOutput() SyncJobConfigDynamicObjectsDatabaseOutput
+	ToSyncJobConfigDynamicObjectsDatabaseOutputWithContext(context.Context) SyncJobConfigDynamicObjectsDatabaseOutput
+}
+
+type SyncJobConfigDynamicObjectsDatabaseArgs struct {
+	// DB selection mode: All (for all objects under the current object), Partial (for some objects), when the Mode is Partial, this item is required. Note that synchronization of advanced objects does not depend on this value. Note: This field may return null, indicating that no valid value can be obtained.
+	DbMode pulumi.StringPtrInput `pulumi:"dbMode"`
+	// The name of the library that needs to be migrated or synchronized. This item is required when the ObjectMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+	DbName pulumi.StringPtrInput `pulumi:"dbName"`
+	// Event migration mode, all (for all objects under the current object), partial (partial objects). Note: This field may return null, indicating that no valid value can be obtained.
+	EventMode pulumi.StringPtrInput `pulumi:"eventMode"`
+	// When EventMode is partial, specify the name of the event to be migrated. Note: This field may return null, indicating that no valid value can be obtained.
+	Events pulumi.StringArrayInput `pulumi:"events"`
+	// Select the mode to be synchronized, Partial is a part, all is an entire selection. Note: This field may return null, indicating that no valid value can be obtained.
+	FunctionMode pulumi.StringPtrInput `pulumi:"functionMode"`
+	// Required when the FunctionMode value is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+	Functions pulumi.StringArrayInput `pulumi:"functions"`
+	// The name of the library after migration or synchronization, which is the same as the source library by default. Note: This field may return null, indicating that no valid value can be obtained.
+	NewDbName pulumi.StringPtrInput `pulumi:"newDbName"`
+	// Schema name after migration or synchronization. Note: This field may return null, indicating that no valid value can be obtained.
+	NewSchemaName pulumi.StringPtrInput `pulumi:"newSchemaName"`
+	// Select the mode to be synchronized, Partial is part, All is the whole selection. Note: This field may return null, indicating that no valid value can be obtained.
+	ProcedureMode pulumi.StringPtrInput `pulumi:"procedureMode"`
+	// Required when the value of ProcedureMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+	Procedures pulumi.StringArrayInput `pulumi:"procedures"`
+	// Schema selection mode, used by PostgreSQL and SQL Server sync links. Valid values: `All` (all objects under the current object), `Partial` (some objects). Note: This field may return null, indicating that no valid value can be obtained.
+	SchemaMode pulumi.StringPtrInput `pulumi:"schemaMode"`
+	// Migrated or synchronized schema. Note: This field may return null, indicating that no valid value can be obtained.
+	SchemaName pulumi.StringPtrInput `pulumi:"schemaName"`
+	// Table selection mode: All (for all objects under the current object), Partial (for some objects), this item is required when the DBMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+	TableMode pulumi.StringPtrInput `pulumi:"tableMode"`
+	// A collection of table graph objects, when TableMode is Partial, this item needs to be filled in. Note: This field may return null, indicating that no valid value can be obtained.
+	Tables SyncJobConfigDynamicObjectsDatabaseTableArrayInput `pulumi:"tables"`
+	// Trigger migration mode, all (for all objects under the current object), partial (partial objects). Note: This field may return null, indicating that no valid value can be obtained.
+	TriggerMode pulumi.StringPtrInput `pulumi:"triggerMode"`
+	// When TriggerMode is partial, specify the name of the trigger to be migrated. Note: This field may return null, indicating that no valid value can be obtained.
+	Triggers pulumi.StringArrayInput `pulumi:"triggers"`
+	// View selection mode: All is all view objects under the current object, Partial is part of the view objects. Note: This field may return null, indicating that no valid value can be obtained.
+	ViewMode pulumi.StringPtrInput `pulumi:"viewMode"`
+	// View object collection, when ViewMode is Partial, this item needs to be filled in. Note: This field may return null, indicating that no valid value can be obtained.
+	Views SyncJobConfigDynamicObjectsDatabaseViewArrayInput `pulumi:"views"`
+}
+
+func (SyncJobConfigDynamicObjectsDatabaseArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabase)(nil)).Elem()
+}
+
+func (i SyncJobConfigDynamicObjectsDatabaseArgs) ToSyncJobConfigDynamicObjectsDatabaseOutput() SyncJobConfigDynamicObjectsDatabaseOutput {
+	return i.ToSyncJobConfigDynamicObjectsDatabaseOutputWithContext(context.Background())
+}
+
+func (i SyncJobConfigDynamicObjectsDatabaseArgs) ToSyncJobConfigDynamicObjectsDatabaseOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabaseOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicObjectsDatabaseOutput)
+}
+
+// SyncJobConfigDynamicObjectsDatabaseArrayInput is an input type that accepts SyncJobConfigDynamicObjectsDatabaseArray and SyncJobConfigDynamicObjectsDatabaseArrayOutput values.
+// You can construct a concrete instance of `SyncJobConfigDynamicObjectsDatabaseArrayInput` via:
+//
+//	SyncJobConfigDynamicObjectsDatabaseArray{ SyncJobConfigDynamicObjectsDatabaseArgs{...} }
+type SyncJobConfigDynamicObjectsDatabaseArrayInput interface {
+	pulumi.Input
+
+	ToSyncJobConfigDynamicObjectsDatabaseArrayOutput() SyncJobConfigDynamicObjectsDatabaseArrayOutput
+	ToSyncJobConfigDynamicObjectsDatabaseArrayOutputWithContext(context.Context) SyncJobConfigDynamicObjectsDatabaseArrayOutput
+}
+
+type SyncJobConfigDynamicObjectsDatabaseArray []SyncJobConfigDynamicObjectsDatabaseInput
+
+func (SyncJobConfigDynamicObjectsDatabaseArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SyncJobConfigDynamicObjectsDatabase)(nil)).Elem()
+}
+
+func (i SyncJobConfigDynamicObjectsDatabaseArray) ToSyncJobConfigDynamicObjectsDatabaseArrayOutput() SyncJobConfigDynamicObjectsDatabaseArrayOutput {
+	return i.ToSyncJobConfigDynamicObjectsDatabaseArrayOutputWithContext(context.Background())
+}
+
+func (i SyncJobConfigDynamicObjectsDatabaseArray) ToSyncJobConfigDynamicObjectsDatabaseArrayOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabaseArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicObjectsDatabaseArrayOutput)
+}
+
+type SyncJobConfigDynamicObjectsDatabaseOutput struct{ *pulumi.OutputState }
+
+func (SyncJobConfigDynamicObjectsDatabaseOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabase)(nil)).Elem()
+}
+
+func (o SyncJobConfigDynamicObjectsDatabaseOutput) ToSyncJobConfigDynamicObjectsDatabaseOutput() SyncJobConfigDynamicObjectsDatabaseOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsDatabaseOutput) ToSyncJobConfigDynamicObjectsDatabaseOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabaseOutput {
+	return o
+}
+
+// DB selection mode: All (for all objects under the current object), Partial (for some objects), when the Mode is Partial, this item is required. Note that synchronization of advanced objects does not depend on this value. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicObjectsDatabaseOutput) DbMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsDatabase) *string { return v.DbMode }).(pulumi.StringPtrOutput)
+}
+
+// The name of the library that needs to be migrated or synchronized. This item is required when the ObjectMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicObjectsDatabaseOutput) DbName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsDatabase) *string { return v.DbName }).(pulumi.StringPtrOutput)
+}
+
+// Event migration mode, all (for all objects under the current object), partial (partial objects). Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicObjectsDatabaseOutput) EventMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsDatabase) *string { return v.EventMode }).(pulumi.StringPtrOutput)
+}
+
+// When EventMode is partial, specify the name of the event to be migrated. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicObjectsDatabaseOutput) Events() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsDatabase) []string { return v.Events }).(pulumi.StringArrayOutput)
+}
+
+// Select the mode to be synchronized, Partial is a part, all is an entire selection. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicObjectsDatabaseOutput) FunctionMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsDatabase) *string { return v.FunctionMode }).(pulumi.StringPtrOutput)
+}
+
+// Required when the FunctionMode value is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicObjectsDatabaseOutput) Functions() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsDatabase) []string { return v.Functions }).(pulumi.StringArrayOutput)
+}
+
+// The name of the library after migration or synchronization, which is the same as the source library by default. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicObjectsDatabaseOutput) NewDbName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsDatabase) *string { return v.NewDbName }).(pulumi.StringPtrOutput)
+}
+
+// Schema name after migration or synchronization. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicObjectsDatabaseOutput) NewSchemaName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsDatabase) *string { return v.NewSchemaName }).(pulumi.StringPtrOutput)
+}
+
+// Select the mode to be synchronized, Partial is part, All is the whole selection. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicObjectsDatabaseOutput) ProcedureMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsDatabase) *string { return v.ProcedureMode }).(pulumi.StringPtrOutput)
+}
+
+// Required when the value of ProcedureMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicObjectsDatabaseOutput) Procedures() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsDatabase) []string { return v.Procedures }).(pulumi.StringArrayOutput)
+}
+
+// Schema selection mode, used by PostgreSQL and SQL Server sync links. Valid values: `All` (all objects under the current object), `Partial` (some objects). Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicObjectsDatabaseOutput) SchemaMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsDatabase) *string { return v.SchemaMode }).(pulumi.StringPtrOutput)
+}
+
+// Migrated or synchronized schema. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicObjectsDatabaseOutput) SchemaName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsDatabase) *string { return v.SchemaName }).(pulumi.StringPtrOutput)
+}
+
+// Table selection mode: All (for all objects under the current object), Partial (for some objects), this item is required when the DBMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicObjectsDatabaseOutput) TableMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsDatabase) *string { return v.TableMode }).(pulumi.StringPtrOutput)
+}
+
+// A collection of table graph objects, when TableMode is Partial, this item needs to be filled in. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicObjectsDatabaseOutput) Tables() SyncJobConfigDynamicObjectsDatabaseTableArrayOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsDatabase) []SyncJobConfigDynamicObjectsDatabaseTable {
+		return v.Tables
+	}).(SyncJobConfigDynamicObjectsDatabaseTableArrayOutput)
+}
+
+// Trigger migration mode, all (for all objects under the current object), partial (partial objects). Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicObjectsDatabaseOutput) TriggerMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsDatabase) *string { return v.TriggerMode }).(pulumi.StringPtrOutput)
+}
+
+// When TriggerMode is partial, specify the name of the trigger to be migrated. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicObjectsDatabaseOutput) Triggers() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsDatabase) []string { return v.Triggers }).(pulumi.StringArrayOutput)
+}
+
+// View selection mode: All is all view objects under the current object, Partial is part of the view objects. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicObjectsDatabaseOutput) ViewMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsDatabase) *string { return v.ViewMode }).(pulumi.StringPtrOutput)
+}
+
+// View object collection, when ViewMode is Partial, this item needs to be filled in. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicObjectsDatabaseOutput) Views() SyncJobConfigDynamicObjectsDatabaseViewArrayOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsDatabase) []SyncJobConfigDynamicObjectsDatabaseView { return v.Views }).(SyncJobConfigDynamicObjectsDatabaseViewArrayOutput)
+}
+
+type SyncJobConfigDynamicObjectsDatabaseArrayOutput struct{ *pulumi.OutputState }
+
+func (SyncJobConfigDynamicObjectsDatabaseArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SyncJobConfigDynamicObjectsDatabase)(nil)).Elem()
+}
+
+func (o SyncJobConfigDynamicObjectsDatabaseArrayOutput) ToSyncJobConfigDynamicObjectsDatabaseArrayOutput() SyncJobConfigDynamicObjectsDatabaseArrayOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsDatabaseArrayOutput) ToSyncJobConfigDynamicObjectsDatabaseArrayOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabaseArrayOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsDatabaseArrayOutput) Index(i pulumi.IntInput) SyncJobConfigDynamicObjectsDatabaseOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SyncJobConfigDynamicObjectsDatabase {
+		return vs[0].([]SyncJobConfigDynamicObjectsDatabase)[vs[1].(int)]
+	}).(SyncJobConfigDynamicObjectsDatabaseOutput)
+}
+
+type SyncJobConfigDynamicObjectsDatabaseTable struct {
+	// Whether to synchronize all columns in the table, All: all columns under the current table, Partial: part of the columns under the current table, fill in the detailed column information through the columns field. Note: This field may return null, indicating that no valid value can be obtained.
+	ColumnMode *string `pulumi:"columnMode"`
+	// Synchronized column information, required when ColumnMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+	Columns []SyncJobConfigDynamicObjectsDatabaseTableColumn `pulumi:"columns"`
+	// Filter condition. Note: This field may return null, indicating that no valid value can be obtained.
+	FilterCondition *string `pulumi:"filterCondition"`
+	// New table name. Note: This field may return null, indicating that no valid value can be obtained.
+	NewTableName *string `pulumi:"newTableName"`
+	// Edit table type, rename (table mapping), pt (synchronize attached tables). Note: This field may return null, indicating that no valid value can be obtained.
+	TableEditMode *string `pulumi:"tableEditMode"`
+	// Table name. Note: This field may return null, indicating that no valid value can be obtained.
+	TableName *string `pulumi:"tableName"`
+	// Temporary table generated by pt-osc/gh-ost. Note: This field may return null, indicating that no valid value can be obtained.
+	TmpTables []string `pulumi:"tmpTables"`
+}
+
+// SyncJobConfigDynamicObjectsDatabaseTableInput is an input type that accepts SyncJobConfigDynamicObjectsDatabaseTableArgs and SyncJobConfigDynamicObjectsDatabaseTableOutput values.
+// You can construct a concrete instance of `SyncJobConfigDynamicObjectsDatabaseTableInput` via:
+//
+//	SyncJobConfigDynamicObjectsDatabaseTableArgs{...}
+type SyncJobConfigDynamicObjectsDatabaseTableInput interface {
+	pulumi.Input
+
+	ToSyncJobConfigDynamicObjectsDatabaseTableOutput() SyncJobConfigDynamicObjectsDatabaseTableOutput
+	ToSyncJobConfigDynamicObjectsDatabaseTableOutputWithContext(context.Context) SyncJobConfigDynamicObjectsDatabaseTableOutput
+}
+
+type SyncJobConfigDynamicObjectsDatabaseTableArgs struct {
+	// Whether to synchronize all columns in the table, All: all columns under the current table, Partial: part of the columns under the current table, fill in the detailed column information through the columns field. Note: This field may return null, indicating that no valid value can be obtained.
+	ColumnMode pulumi.StringPtrInput `pulumi:"columnMode"`
+	// Synchronized column information, required when ColumnMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+	Columns SyncJobConfigDynamicObjectsDatabaseTableColumnArrayInput `pulumi:"columns"`
+	// Filter condition. Note: This field may return null, indicating that no valid value can be obtained.
+	FilterCondition pulumi.StringPtrInput `pulumi:"filterCondition"`
+	// New table name. Note: This field may return null, indicating that no valid value can be obtained.
+	NewTableName pulumi.StringPtrInput `pulumi:"newTableName"`
+	// Edit table type, rename (table mapping), pt (synchronize attached tables). Note: This field may return null, indicating that no valid value can be obtained.
+	TableEditMode pulumi.StringPtrInput `pulumi:"tableEditMode"`
+	// Table name. Note: This field may return null, indicating that no valid value can be obtained.
+	TableName pulumi.StringPtrInput `pulumi:"tableName"`
+	// Temporary table generated by pt-osc/gh-ost. Note: This field may return null, indicating that no valid value can be obtained.
+	TmpTables pulumi.StringArrayInput `pulumi:"tmpTables"`
+}
+
+func (SyncJobConfigDynamicObjectsDatabaseTableArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabaseTable)(nil)).Elem()
+}
+
+func (i SyncJobConfigDynamicObjectsDatabaseTableArgs) ToSyncJobConfigDynamicObjectsDatabaseTableOutput() SyncJobConfigDynamicObjectsDatabaseTableOutput {
+	return i.ToSyncJobConfigDynamicObjectsDatabaseTableOutputWithContext(context.Background())
+}
+
+func (i SyncJobConfigDynamicObjectsDatabaseTableArgs) ToSyncJobConfigDynamicObjectsDatabaseTableOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabaseTableOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicObjectsDatabaseTableOutput)
+}
+
+// SyncJobConfigDynamicObjectsDatabaseTableArrayInput is an input type that accepts SyncJobConfigDynamicObjectsDatabaseTableArray and SyncJobConfigDynamicObjectsDatabaseTableArrayOutput values.
+// You can construct a concrete instance of `SyncJobConfigDynamicObjectsDatabaseTableArrayInput` via:
+//
+//	SyncJobConfigDynamicObjectsDatabaseTableArray{ SyncJobConfigDynamicObjectsDatabaseTableArgs{...} }
+type SyncJobConfigDynamicObjectsDatabaseTableArrayInput interface {
+	pulumi.Input
+
+	ToSyncJobConfigDynamicObjectsDatabaseTableArrayOutput() SyncJobConfigDynamicObjectsDatabaseTableArrayOutput
+	ToSyncJobConfigDynamicObjectsDatabaseTableArrayOutputWithContext(context.Context) SyncJobConfigDynamicObjectsDatabaseTableArrayOutput
+}
+
+type SyncJobConfigDynamicObjectsDatabaseTableArray []SyncJobConfigDynamicObjectsDatabaseTableInput
+
+func (SyncJobConfigDynamicObjectsDatabaseTableArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SyncJobConfigDynamicObjectsDatabaseTable)(nil)).Elem()
+}
+
+func (i SyncJobConfigDynamicObjectsDatabaseTableArray) ToSyncJobConfigDynamicObjectsDatabaseTableArrayOutput() SyncJobConfigDynamicObjectsDatabaseTableArrayOutput {
+	return i.ToSyncJobConfigDynamicObjectsDatabaseTableArrayOutputWithContext(context.Background())
+}
+
+func (i SyncJobConfigDynamicObjectsDatabaseTableArray) ToSyncJobConfigDynamicObjectsDatabaseTableArrayOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabaseTableArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicObjectsDatabaseTableArrayOutput)
+}
+
+type SyncJobConfigDynamicObjectsDatabaseTableOutput struct{ *pulumi.OutputState }
+
+func (SyncJobConfigDynamicObjectsDatabaseTableOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabaseTable)(nil)).Elem()
+}
+
+func (o SyncJobConfigDynamicObjectsDatabaseTableOutput) ToSyncJobConfigDynamicObjectsDatabaseTableOutput() SyncJobConfigDynamicObjectsDatabaseTableOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsDatabaseTableOutput) ToSyncJobConfigDynamicObjectsDatabaseTableOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabaseTableOutput {
+	return o
+}
+
+// Whether to synchronize all columns in the table, All: all columns under the current table, Partial: part of the columns under the current table, fill in the detailed column information through the columns field. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicObjectsDatabaseTableOutput) ColumnMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsDatabaseTable) *string { return v.ColumnMode }).(pulumi.StringPtrOutput)
+}
+
+// Synchronized column information, required when ColumnMode is Partial. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicObjectsDatabaseTableOutput) Columns() SyncJobConfigDynamicObjectsDatabaseTableColumnArrayOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsDatabaseTable) []SyncJobConfigDynamicObjectsDatabaseTableColumn {
+		return v.Columns
+	}).(SyncJobConfigDynamicObjectsDatabaseTableColumnArrayOutput)
+}
+
+// Filter condition. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicObjectsDatabaseTableOutput) FilterCondition() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsDatabaseTable) *string { return v.FilterCondition }).(pulumi.StringPtrOutput)
+}
+
+// New table name. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicObjectsDatabaseTableOutput) NewTableName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsDatabaseTable) *string { return v.NewTableName }).(pulumi.StringPtrOutput)
+}
+
+// Edit table type, rename (table mapping), pt (synchronize attached tables). Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicObjectsDatabaseTableOutput) TableEditMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsDatabaseTable) *string { return v.TableEditMode }).(pulumi.StringPtrOutput)
+}
+
+// Table name. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicObjectsDatabaseTableOutput) TableName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsDatabaseTable) *string { return v.TableName }).(pulumi.StringPtrOutput)
+}
+
+// Temporary table generated by pt-osc/gh-ost. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicObjectsDatabaseTableOutput) TmpTables() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsDatabaseTable) []string { return v.TmpTables }).(pulumi.StringArrayOutput)
+}
+
+type SyncJobConfigDynamicObjectsDatabaseTableArrayOutput struct{ *pulumi.OutputState }
+
+func (SyncJobConfigDynamicObjectsDatabaseTableArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SyncJobConfigDynamicObjectsDatabaseTable)(nil)).Elem()
+}
+
+func (o SyncJobConfigDynamicObjectsDatabaseTableArrayOutput) ToSyncJobConfigDynamicObjectsDatabaseTableArrayOutput() SyncJobConfigDynamicObjectsDatabaseTableArrayOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsDatabaseTableArrayOutput) ToSyncJobConfigDynamicObjectsDatabaseTableArrayOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabaseTableArrayOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsDatabaseTableArrayOutput) Index(i pulumi.IntInput) SyncJobConfigDynamicObjectsDatabaseTableOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SyncJobConfigDynamicObjectsDatabaseTable {
+		return vs[0].([]SyncJobConfigDynamicObjectsDatabaseTable)[vs[1].(int)]
+	}).(SyncJobConfigDynamicObjectsDatabaseTableOutput)
+}
+
+type SyncJobConfigDynamicObjectsDatabaseTableColumn struct {
+	// Column name. Note: This field may return null, indicating that no valid value can be obtained.
+	ColumnName *string `pulumi:"columnName"`
+	// New column name. Note: This field may return null, indicating that no valid value can be obtained.
+	NewColumnName *string `pulumi:"newColumnName"`
+}
+
+// SyncJobConfigDynamicObjectsDatabaseTableColumnInput is an input type that accepts SyncJobConfigDynamicObjectsDatabaseTableColumnArgs and SyncJobConfigDynamicObjectsDatabaseTableColumnOutput values.
+// You can construct a concrete instance of `SyncJobConfigDynamicObjectsDatabaseTableColumnInput` via:
+//
+//	SyncJobConfigDynamicObjectsDatabaseTableColumnArgs{...}
+type SyncJobConfigDynamicObjectsDatabaseTableColumnInput interface {
+	pulumi.Input
+
+	ToSyncJobConfigDynamicObjectsDatabaseTableColumnOutput() SyncJobConfigDynamicObjectsDatabaseTableColumnOutput
+	ToSyncJobConfigDynamicObjectsDatabaseTableColumnOutputWithContext(context.Context) SyncJobConfigDynamicObjectsDatabaseTableColumnOutput
+}
+
+type SyncJobConfigDynamicObjectsDatabaseTableColumnArgs struct {
+	// Column name. Note: This field may return null, indicating that no valid value can be obtained.
+	ColumnName pulumi.StringPtrInput `pulumi:"columnName"`
+	// New column name. Note: This field may return null, indicating that no valid value can be obtained.
+	NewColumnName pulumi.StringPtrInput `pulumi:"newColumnName"`
+}
+
+func (SyncJobConfigDynamicObjectsDatabaseTableColumnArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabaseTableColumn)(nil)).Elem()
+}
+
+func (i SyncJobConfigDynamicObjectsDatabaseTableColumnArgs) ToSyncJobConfigDynamicObjectsDatabaseTableColumnOutput() SyncJobConfigDynamicObjectsDatabaseTableColumnOutput {
+	return i.ToSyncJobConfigDynamicObjectsDatabaseTableColumnOutputWithContext(context.Background())
+}
+
+func (i SyncJobConfigDynamicObjectsDatabaseTableColumnArgs) ToSyncJobConfigDynamicObjectsDatabaseTableColumnOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabaseTableColumnOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicObjectsDatabaseTableColumnOutput)
+}
+
+// SyncJobConfigDynamicObjectsDatabaseTableColumnArrayInput is an input type that accepts SyncJobConfigDynamicObjectsDatabaseTableColumnArray and SyncJobConfigDynamicObjectsDatabaseTableColumnArrayOutput values.
+// You can construct a concrete instance of `SyncJobConfigDynamicObjectsDatabaseTableColumnArrayInput` via:
+//
+//	SyncJobConfigDynamicObjectsDatabaseTableColumnArray{ SyncJobConfigDynamicObjectsDatabaseTableColumnArgs{...} }
+type SyncJobConfigDynamicObjectsDatabaseTableColumnArrayInput interface {
+	pulumi.Input
+
+	ToSyncJobConfigDynamicObjectsDatabaseTableColumnArrayOutput() SyncJobConfigDynamicObjectsDatabaseTableColumnArrayOutput
+	ToSyncJobConfigDynamicObjectsDatabaseTableColumnArrayOutputWithContext(context.Context) SyncJobConfigDynamicObjectsDatabaseTableColumnArrayOutput
+}
+
+type SyncJobConfigDynamicObjectsDatabaseTableColumnArray []SyncJobConfigDynamicObjectsDatabaseTableColumnInput
+
+func (SyncJobConfigDynamicObjectsDatabaseTableColumnArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SyncJobConfigDynamicObjectsDatabaseTableColumn)(nil)).Elem()
+}
+
+func (i SyncJobConfigDynamicObjectsDatabaseTableColumnArray) ToSyncJobConfigDynamicObjectsDatabaseTableColumnArrayOutput() SyncJobConfigDynamicObjectsDatabaseTableColumnArrayOutput {
+	return i.ToSyncJobConfigDynamicObjectsDatabaseTableColumnArrayOutputWithContext(context.Background())
+}
+
+func (i SyncJobConfigDynamicObjectsDatabaseTableColumnArray) ToSyncJobConfigDynamicObjectsDatabaseTableColumnArrayOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabaseTableColumnArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicObjectsDatabaseTableColumnArrayOutput)
+}
+
+type SyncJobConfigDynamicObjectsDatabaseTableColumnOutput struct{ *pulumi.OutputState }
+
+func (SyncJobConfigDynamicObjectsDatabaseTableColumnOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabaseTableColumn)(nil)).Elem()
+}
+
+func (o SyncJobConfigDynamicObjectsDatabaseTableColumnOutput) ToSyncJobConfigDynamicObjectsDatabaseTableColumnOutput() SyncJobConfigDynamicObjectsDatabaseTableColumnOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsDatabaseTableColumnOutput) ToSyncJobConfigDynamicObjectsDatabaseTableColumnOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabaseTableColumnOutput {
+	return o
+}
+
+// Column name. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicObjectsDatabaseTableColumnOutput) ColumnName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsDatabaseTableColumn) *string { return v.ColumnName }).(pulumi.StringPtrOutput)
+}
+
+// New column name. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicObjectsDatabaseTableColumnOutput) NewColumnName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsDatabaseTableColumn) *string { return v.NewColumnName }).(pulumi.StringPtrOutput)
+}
+
+type SyncJobConfigDynamicObjectsDatabaseTableColumnArrayOutput struct{ *pulumi.OutputState }
+
+func (SyncJobConfigDynamicObjectsDatabaseTableColumnArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SyncJobConfigDynamicObjectsDatabaseTableColumn)(nil)).Elem()
+}
+
+func (o SyncJobConfigDynamicObjectsDatabaseTableColumnArrayOutput) ToSyncJobConfigDynamicObjectsDatabaseTableColumnArrayOutput() SyncJobConfigDynamicObjectsDatabaseTableColumnArrayOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsDatabaseTableColumnArrayOutput) ToSyncJobConfigDynamicObjectsDatabaseTableColumnArrayOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabaseTableColumnArrayOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsDatabaseTableColumnArrayOutput) Index(i pulumi.IntInput) SyncJobConfigDynamicObjectsDatabaseTableColumnOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SyncJobConfigDynamicObjectsDatabaseTableColumn {
+		return vs[0].([]SyncJobConfigDynamicObjectsDatabaseTableColumn)[vs[1].(int)]
+	}).(SyncJobConfigDynamicObjectsDatabaseTableColumnOutput)
+}
+
+type SyncJobConfigDynamicObjectsDatabaseView struct {
+	// New view name. Note: This field may return null, indicating that no valid value can be obtained.
+	NewViewName *string `pulumi:"newViewName"`
+	// View name. Note: This field may return null, indicating that no valid value can be obtained.
+	ViewName *string `pulumi:"viewName"`
+}
+
+// SyncJobConfigDynamicObjectsDatabaseViewInput is an input type that accepts SyncJobConfigDynamicObjectsDatabaseViewArgs and SyncJobConfigDynamicObjectsDatabaseViewOutput values.
+// You can construct a concrete instance of `SyncJobConfigDynamicObjectsDatabaseViewInput` via:
+//
+//	SyncJobConfigDynamicObjectsDatabaseViewArgs{...}
+type SyncJobConfigDynamicObjectsDatabaseViewInput interface {
+	pulumi.Input
+
+	ToSyncJobConfigDynamicObjectsDatabaseViewOutput() SyncJobConfigDynamicObjectsDatabaseViewOutput
+	ToSyncJobConfigDynamicObjectsDatabaseViewOutputWithContext(context.Context) SyncJobConfigDynamicObjectsDatabaseViewOutput
+}
+
+type SyncJobConfigDynamicObjectsDatabaseViewArgs struct {
+	// New view name. Note: This field may return null, indicating that no valid value can be obtained.
+	NewViewName pulumi.StringPtrInput `pulumi:"newViewName"`
+	// View name. Note: This field may return null, indicating that no valid value can be obtained.
+	ViewName pulumi.StringPtrInput `pulumi:"viewName"`
+}
+
+func (SyncJobConfigDynamicObjectsDatabaseViewArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabaseView)(nil)).Elem()
+}
+
+func (i SyncJobConfigDynamicObjectsDatabaseViewArgs) ToSyncJobConfigDynamicObjectsDatabaseViewOutput() SyncJobConfigDynamicObjectsDatabaseViewOutput {
+	return i.ToSyncJobConfigDynamicObjectsDatabaseViewOutputWithContext(context.Background())
+}
+
+func (i SyncJobConfigDynamicObjectsDatabaseViewArgs) ToSyncJobConfigDynamicObjectsDatabaseViewOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabaseViewOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicObjectsDatabaseViewOutput)
+}
+
+// SyncJobConfigDynamicObjectsDatabaseViewArrayInput is an input type that accepts SyncJobConfigDynamicObjectsDatabaseViewArray and SyncJobConfigDynamicObjectsDatabaseViewArrayOutput values.
+// You can construct a concrete instance of `SyncJobConfigDynamicObjectsDatabaseViewArrayInput` via:
+//
+//	SyncJobConfigDynamicObjectsDatabaseViewArray{ SyncJobConfigDynamicObjectsDatabaseViewArgs{...} }
+type SyncJobConfigDynamicObjectsDatabaseViewArrayInput interface {
+	pulumi.Input
+
+	ToSyncJobConfigDynamicObjectsDatabaseViewArrayOutput() SyncJobConfigDynamicObjectsDatabaseViewArrayOutput
+	ToSyncJobConfigDynamicObjectsDatabaseViewArrayOutputWithContext(context.Context) SyncJobConfigDynamicObjectsDatabaseViewArrayOutput
+}
+
+type SyncJobConfigDynamicObjectsDatabaseViewArray []SyncJobConfigDynamicObjectsDatabaseViewInput
+
+func (SyncJobConfigDynamicObjectsDatabaseViewArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SyncJobConfigDynamicObjectsDatabaseView)(nil)).Elem()
+}
+
+func (i SyncJobConfigDynamicObjectsDatabaseViewArray) ToSyncJobConfigDynamicObjectsDatabaseViewArrayOutput() SyncJobConfigDynamicObjectsDatabaseViewArrayOutput {
+	return i.ToSyncJobConfigDynamicObjectsDatabaseViewArrayOutputWithContext(context.Background())
+}
+
+func (i SyncJobConfigDynamicObjectsDatabaseViewArray) ToSyncJobConfigDynamicObjectsDatabaseViewArrayOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabaseViewArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicObjectsDatabaseViewArrayOutput)
+}
+
+type SyncJobConfigDynamicObjectsDatabaseViewOutput struct{ *pulumi.OutputState }
+
+func (SyncJobConfigDynamicObjectsDatabaseViewOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabaseView)(nil)).Elem()
+}
+
+func (o SyncJobConfigDynamicObjectsDatabaseViewOutput) ToSyncJobConfigDynamicObjectsDatabaseViewOutput() SyncJobConfigDynamicObjectsDatabaseViewOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsDatabaseViewOutput) ToSyncJobConfigDynamicObjectsDatabaseViewOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabaseViewOutput {
+	return o
+}
+
+// New view name. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicObjectsDatabaseViewOutput) NewViewName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsDatabaseView) *string { return v.NewViewName }).(pulumi.StringPtrOutput)
+}
+
+// View name. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicObjectsDatabaseViewOutput) ViewName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsDatabaseView) *string { return v.ViewName }).(pulumi.StringPtrOutput)
+}
+
+type SyncJobConfigDynamicObjectsDatabaseViewArrayOutput struct{ *pulumi.OutputState }
+
+func (SyncJobConfigDynamicObjectsDatabaseViewArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SyncJobConfigDynamicObjectsDatabaseView)(nil)).Elem()
+}
+
+func (o SyncJobConfigDynamicObjectsDatabaseViewArrayOutput) ToSyncJobConfigDynamicObjectsDatabaseViewArrayOutput() SyncJobConfigDynamicObjectsDatabaseViewArrayOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsDatabaseViewArrayOutput) ToSyncJobConfigDynamicObjectsDatabaseViewArrayOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabaseViewArrayOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsDatabaseViewArrayOutput) Index(i pulumi.IntInput) SyncJobConfigDynamicObjectsDatabaseViewOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SyncJobConfigDynamicObjectsDatabaseView {
+		return vs[0].([]SyncJobConfigDynamicObjectsDatabaseView)[vs[1].(int)]
+	}).(SyncJobConfigDynamicObjectsDatabaseViewOutput)
+}
+
+type SyncJobConfigDynamicObjectsDatabasesOpFilter struct {
+	// Database name that the rule takes effect on.
+	DbName string `pulumi:"dbName"`
+	// View level DDL/DML filter rule.
+	OpFilter *SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilter `pulumi:"opFilter"`
+	// Table level DDL/DML filter info.
+	Tables []SyncJobConfigDynamicObjectsDatabasesOpFilterTable `pulumi:"tables"`
+	// View level DDL/DML filter info.
+	Views []SyncJobConfigDynamicObjectsDatabasesOpFilterView `pulumi:"views"`
+}
+
+// SyncJobConfigDynamicObjectsDatabasesOpFilterInput is an input type that accepts SyncJobConfigDynamicObjectsDatabasesOpFilterArgs and SyncJobConfigDynamicObjectsDatabasesOpFilterOutput values.
+// You can construct a concrete instance of `SyncJobConfigDynamicObjectsDatabasesOpFilterInput` via:
+//
+//	SyncJobConfigDynamicObjectsDatabasesOpFilterArgs{...}
+type SyncJobConfigDynamicObjectsDatabasesOpFilterInput interface {
+	pulumi.Input
+
+	ToSyncJobConfigDynamicObjectsDatabasesOpFilterOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterOutput
+	ToSyncJobConfigDynamicObjectsDatabasesOpFilterOutputWithContext(context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterOutput
+}
+
+type SyncJobConfigDynamicObjectsDatabasesOpFilterArgs struct {
+	// Database name that the rule takes effect on.
+	DbName pulumi.StringInput `pulumi:"dbName"`
+	// View level DDL/DML filter rule.
+	OpFilter SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtrInput `pulumi:"opFilter"`
+	// Table level DDL/DML filter info.
+	Tables SyncJobConfigDynamicObjectsDatabasesOpFilterTableArrayInput `pulumi:"tables"`
+	// View level DDL/DML filter info.
+	Views SyncJobConfigDynamicObjectsDatabasesOpFilterViewArrayInput `pulumi:"views"`
+}
+
+func (SyncJobConfigDynamicObjectsDatabasesOpFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabasesOpFilter)(nil)).Elem()
+}
+
+func (i SyncJobConfigDynamicObjectsDatabasesOpFilterArgs) ToSyncJobConfigDynamicObjectsDatabasesOpFilterOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterOutput {
+	return i.ToSyncJobConfigDynamicObjectsDatabasesOpFilterOutputWithContext(context.Background())
+}
+
+func (i SyncJobConfigDynamicObjectsDatabasesOpFilterArgs) ToSyncJobConfigDynamicObjectsDatabasesOpFilterOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicObjectsDatabasesOpFilterOutput)
+}
+
+// SyncJobConfigDynamicObjectsDatabasesOpFilterArrayInput is an input type that accepts SyncJobConfigDynamicObjectsDatabasesOpFilterArray and SyncJobConfigDynamicObjectsDatabasesOpFilterArrayOutput values.
+// You can construct a concrete instance of `SyncJobConfigDynamicObjectsDatabasesOpFilterArrayInput` via:
+//
+//	SyncJobConfigDynamicObjectsDatabasesOpFilterArray{ SyncJobConfigDynamicObjectsDatabasesOpFilterArgs{...} }
+type SyncJobConfigDynamicObjectsDatabasesOpFilterArrayInput interface {
+	pulumi.Input
+
+	ToSyncJobConfigDynamicObjectsDatabasesOpFilterArrayOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterArrayOutput
+	ToSyncJobConfigDynamicObjectsDatabasesOpFilterArrayOutputWithContext(context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterArrayOutput
+}
+
+type SyncJobConfigDynamicObjectsDatabasesOpFilterArray []SyncJobConfigDynamicObjectsDatabasesOpFilterInput
+
+func (SyncJobConfigDynamicObjectsDatabasesOpFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SyncJobConfigDynamicObjectsDatabasesOpFilter)(nil)).Elem()
+}
+
+func (i SyncJobConfigDynamicObjectsDatabasesOpFilterArray) ToSyncJobConfigDynamicObjectsDatabasesOpFilterArrayOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterArrayOutput {
+	return i.ToSyncJobConfigDynamicObjectsDatabasesOpFilterArrayOutputWithContext(context.Background())
+}
+
+func (i SyncJobConfigDynamicObjectsDatabasesOpFilterArray) ToSyncJobConfigDynamicObjectsDatabasesOpFilterArrayOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicObjectsDatabasesOpFilterArrayOutput)
+}
+
+type SyncJobConfigDynamicObjectsDatabasesOpFilterOutput struct{ *pulumi.OutputState }
+
+func (SyncJobConfigDynamicObjectsDatabasesOpFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabasesOpFilter)(nil)).Elem()
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterOutput) ToSyncJobConfigDynamicObjectsDatabasesOpFilterOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterOutput) ToSyncJobConfigDynamicObjectsDatabasesOpFilterOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterOutput {
+	return o
+}
+
+// Database name that the rule takes effect on.
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterOutput) DbName() pulumi.StringOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsDatabasesOpFilter) string { return v.DbName }).(pulumi.StringOutput)
+}
+
+// View level DDL/DML filter rule.
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterOutput) OpFilter() SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsDatabasesOpFilter) *SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilter {
+		return v.OpFilter
+	}).(SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtrOutput)
+}
+
+// Table level DDL/DML filter info.
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterOutput) Tables() SyncJobConfigDynamicObjectsDatabasesOpFilterTableArrayOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsDatabasesOpFilter) []SyncJobConfigDynamicObjectsDatabasesOpFilterTable {
+		return v.Tables
+	}).(SyncJobConfigDynamicObjectsDatabasesOpFilterTableArrayOutput)
+}
+
+// View level DDL/DML filter info.
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterOutput) Views() SyncJobConfigDynamicObjectsDatabasesOpFilterViewArrayOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsDatabasesOpFilter) []SyncJobConfigDynamicObjectsDatabasesOpFilterView {
+		return v.Views
+	}).(SyncJobConfigDynamicObjectsDatabasesOpFilterViewArrayOutput)
+}
+
+type SyncJobConfigDynamicObjectsDatabasesOpFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (SyncJobConfigDynamicObjectsDatabasesOpFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SyncJobConfigDynamicObjectsDatabasesOpFilter)(nil)).Elem()
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterArrayOutput) ToSyncJobConfigDynamicObjectsDatabasesOpFilterArrayOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterArrayOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterArrayOutput) ToSyncJobConfigDynamicObjectsDatabasesOpFilterArrayOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterArrayOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterArrayOutput) Index(i pulumi.IntInput) SyncJobConfigDynamicObjectsDatabasesOpFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SyncJobConfigDynamicObjectsDatabasesOpFilter {
+		return vs[0].([]SyncJobConfigDynamicObjectsDatabasesOpFilter)[vs[1].(int)]
+	}).(SyncJobConfigDynamicObjectsDatabasesOpFilterOutput)
+}
+
+type SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilter struct {
+	// DDL white list.
+	DdlOptions []SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOption `pulumi:"ddlOptions"`
+	// DML white list.
+	OpTypes []string `pulumi:"opTypes"`
+}
+
+// SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterInput is an input type that accepts SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterArgs and SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterOutput values.
+// You can construct a concrete instance of `SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterInput` via:
+//
+//	SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterArgs{...}
+type SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterInput interface {
+	pulumi.Input
+
+	ToSyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterOutput
+	ToSyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterOutputWithContext(context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterOutput
+}
+
+type SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterArgs struct {
+	// DDL white list.
+	DdlOptions SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionArrayInput `pulumi:"ddlOptions"`
+	// DML white list.
+	OpTypes pulumi.StringArrayInput `pulumi:"opTypes"`
+}
+
+func (SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilter)(nil)).Elem()
+}
+
+func (i SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterArgs) ToSyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterOutput {
+	return i.ToSyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterOutputWithContext(context.Background())
+}
+
+func (i SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterArgs) ToSyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterOutput)
+}
+
+func (i SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterArgs) ToSyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtrOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtrOutput {
+	return i.ToSyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtrOutputWithContext(context.Background())
+}
+
+func (i SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterArgs) ToSyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtrOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterOutput).ToSyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtrOutputWithContext(ctx)
+}
+
+// SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtrInput is an input type that accepts SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterArgs, SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtr and SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtrOutput values.
+// You can construct a concrete instance of `SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtrInput` via:
+//
+//	        SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterArgs{...}
+//
+//	or:
+//
+//	        nil
+type SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtrInput interface {
+	pulumi.Input
+
+	ToSyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtrOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtrOutput
+	ToSyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtrOutputWithContext(context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtrOutput
+}
+
+type syncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtrType SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterArgs
+
+func SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtr(v *SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterArgs) SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtrInput {
+	return (*syncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtrType)(v)
+}
+
+func (*syncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilter)(nil)).Elem()
+}
+
+func (i *syncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtrType) ToSyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtrOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtrOutput {
+	return i.ToSyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtrOutputWithContext(context.Background())
+}
+
+func (i *syncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtrType) ToSyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtrOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtrOutput)
+}
+
+type SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterOutput struct{ *pulumi.OutputState }
+
+func (SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilter)(nil)).Elem()
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterOutput) ToSyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterOutput) ToSyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterOutput) ToSyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtrOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtrOutput {
+	return o.ToSyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtrOutputWithContext(context.Background())
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterOutput) ToSyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtrOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilter) *SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilter {
+		return &v
+	}).(SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtrOutput)
+}
+
+// DDL white list.
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterOutput) DdlOptions() SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionArrayOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilter) []SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOption {
+		return v.DdlOptions
+	}).(SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionArrayOutput)
+}
+
+// DML white list.
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterOutput) OpTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilter) []string { return v.OpTypes }).(pulumi.StringArrayOutput)
+}
+
+type SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtrOutput struct{ *pulumi.OutputState }
+
+func (SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilter)(nil)).Elem()
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtrOutput) ToSyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtrOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtrOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtrOutput) ToSyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtrOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtrOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtrOutput) Elem() SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterOutput {
+	return o.ApplyT(func(v *SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilter) SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilter {
+		if v != nil {
+			return *v
+		}
+		var ret SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilter
+		return ret
+	}).(SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterOutput)
+}
+
+// DDL white list.
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtrOutput) DdlOptions() SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionArrayOutput {
+	return o.ApplyT(func(v *SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilter) []SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOption {
+		if v == nil {
+			return nil
+		}
+		return v.DdlOptions
+	}).(SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionArrayOutput)
+}
+
+// DML white list.
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtrOutput) OpTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.OpTypes
+	}).(pulumi.StringArrayOutput)
+}
+
+type SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOption struct {
+	// Ddl type, such as Database, Table, View, Index, etc. Note: This field may return null, indicating that no valid value can be obtained.
+	DdlObject *string `pulumi:"ddlObject"`
+	// The specific value of ddl, the possible values for Database [Create,Drop,Alter].The possible values for Table [Create,Drop,Alter,Truncate,Rename].The possible values for View[Create,Drop].For the possible values of Index [Create, Drop]. Note: This field may return null, indicating that no valid value can be obtained.
+	DdlValues []string `pulumi:"ddlValues"`
+}
+
+// SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionInput is an input type that accepts SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionArgs and SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionOutput values.
+// You can construct a concrete instance of `SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionInput` via:
+//
+//	SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionArgs{...}
+type SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionInput interface {
+	pulumi.Input
+
+	ToSyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionOutput
+	ToSyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionOutputWithContext(context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionOutput
+}
+
+type SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionArgs struct {
+	// Ddl type, such as Database, Table, View, Index, etc. Note: This field may return null, indicating that no valid value can be obtained.
+	DdlObject pulumi.StringPtrInput `pulumi:"ddlObject"`
+	// The specific value of ddl, the possible values for Database [Create,Drop,Alter].The possible values for Table [Create,Drop,Alter,Truncate,Rename].The possible values for View[Create,Drop].For the possible values of Index [Create, Drop]. Note: This field may return null, indicating that no valid value can be obtained.
+	DdlValues pulumi.StringArrayInput `pulumi:"ddlValues"`
+}
+
+func (SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOption)(nil)).Elem()
+}
+
+func (i SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionArgs) ToSyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionOutput {
+	return i.ToSyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionOutputWithContext(context.Background())
+}
+
+func (i SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionArgs) ToSyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionOutput)
+}
+
+// SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionArrayInput is an input type that accepts SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionArray and SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionArrayOutput values.
+// You can construct a concrete instance of `SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionArrayInput` via:
+//
+//	SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionArray{ SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionArgs{...} }
+type SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionArrayInput interface {
+	pulumi.Input
+
+	ToSyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionArrayOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionArrayOutput
+	ToSyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionArrayOutputWithContext(context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionArrayOutput
+}
+
+type SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionArray []SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionInput
+
+func (SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOption)(nil)).Elem()
+}
+
+func (i SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionArray) ToSyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionArrayOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionArrayOutput {
+	return i.ToSyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionArrayOutputWithContext(context.Background())
+}
+
+func (i SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionArray) ToSyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionArrayOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionArrayOutput)
+}
+
+type SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionOutput struct{ *pulumi.OutputState }
+
+func (SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOption)(nil)).Elem()
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionOutput) ToSyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionOutput) ToSyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionOutput {
+	return o
+}
+
+// Ddl type, such as Database, Table, View, Index, etc. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionOutput) DdlObject() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOption) *string { return v.DdlObject }).(pulumi.StringPtrOutput)
+}
+
+// The specific value of ddl, the possible values for Database [Create,Drop,Alter].The possible values for Table [Create,Drop,Alter,Truncate,Rename].The possible values for View[Create,Drop].For the possible values of Index [Create, Drop]. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionOutput) DdlValues() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOption) []string { return v.DdlValues }).(pulumi.StringArrayOutput)
+}
+
+type SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionArrayOutput struct{ *pulumi.OutputState }
+
+func (SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOption)(nil)).Elem()
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionArrayOutput) ToSyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionArrayOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionArrayOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionArrayOutput) ToSyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionArrayOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionArrayOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionArrayOutput) Index(i pulumi.IntInput) SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOption {
+		return vs[0].([]SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOption)[vs[1].(int)]
+	}).(SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionOutput)
+}
+
+type SyncJobConfigDynamicObjectsDatabasesOpFilterTable struct {
+	// Table level DDL/DML filter rule.
+	OpFilter *SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilter `pulumi:"opFilter"`
+	// Table name. Note: This field may return null, indicating that no valid value can be obtained.
+	TableName string `pulumi:"tableName"`
+}
+
+// SyncJobConfigDynamicObjectsDatabasesOpFilterTableInput is an input type that accepts SyncJobConfigDynamicObjectsDatabasesOpFilterTableArgs and SyncJobConfigDynamicObjectsDatabasesOpFilterTableOutput values.
+// You can construct a concrete instance of `SyncJobConfigDynamicObjectsDatabasesOpFilterTableInput` via:
+//
+//	SyncJobConfigDynamicObjectsDatabasesOpFilterTableArgs{...}
+type SyncJobConfigDynamicObjectsDatabasesOpFilterTableInput interface {
+	pulumi.Input
+
+	ToSyncJobConfigDynamicObjectsDatabasesOpFilterTableOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterTableOutput
+	ToSyncJobConfigDynamicObjectsDatabasesOpFilterTableOutputWithContext(context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterTableOutput
+}
+
+type SyncJobConfigDynamicObjectsDatabasesOpFilterTableArgs struct {
+	// Table level DDL/DML filter rule.
+	OpFilter SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtrInput `pulumi:"opFilter"`
+	// Table name. Note: This field may return null, indicating that no valid value can be obtained.
+	TableName pulumi.StringInput `pulumi:"tableName"`
+}
+
+func (SyncJobConfigDynamicObjectsDatabasesOpFilterTableArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabasesOpFilterTable)(nil)).Elem()
+}
+
+func (i SyncJobConfigDynamicObjectsDatabasesOpFilterTableArgs) ToSyncJobConfigDynamicObjectsDatabasesOpFilterTableOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterTableOutput {
+	return i.ToSyncJobConfigDynamicObjectsDatabasesOpFilterTableOutputWithContext(context.Background())
+}
+
+func (i SyncJobConfigDynamicObjectsDatabasesOpFilterTableArgs) ToSyncJobConfigDynamicObjectsDatabasesOpFilterTableOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterTableOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicObjectsDatabasesOpFilterTableOutput)
+}
+
+// SyncJobConfigDynamicObjectsDatabasesOpFilterTableArrayInput is an input type that accepts SyncJobConfigDynamicObjectsDatabasesOpFilterTableArray and SyncJobConfigDynamicObjectsDatabasesOpFilterTableArrayOutput values.
+// You can construct a concrete instance of `SyncJobConfigDynamicObjectsDatabasesOpFilterTableArrayInput` via:
+//
+//	SyncJobConfigDynamicObjectsDatabasesOpFilterTableArray{ SyncJobConfigDynamicObjectsDatabasesOpFilterTableArgs{...} }
+type SyncJobConfigDynamicObjectsDatabasesOpFilterTableArrayInput interface {
+	pulumi.Input
+
+	ToSyncJobConfigDynamicObjectsDatabasesOpFilterTableArrayOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterTableArrayOutput
+	ToSyncJobConfigDynamicObjectsDatabasesOpFilterTableArrayOutputWithContext(context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterTableArrayOutput
+}
+
+type SyncJobConfigDynamicObjectsDatabasesOpFilterTableArray []SyncJobConfigDynamicObjectsDatabasesOpFilterTableInput
+
+func (SyncJobConfigDynamicObjectsDatabasesOpFilterTableArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SyncJobConfigDynamicObjectsDatabasesOpFilterTable)(nil)).Elem()
+}
+
+func (i SyncJobConfigDynamicObjectsDatabasesOpFilterTableArray) ToSyncJobConfigDynamicObjectsDatabasesOpFilterTableArrayOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterTableArrayOutput {
+	return i.ToSyncJobConfigDynamicObjectsDatabasesOpFilterTableArrayOutputWithContext(context.Background())
+}
+
+func (i SyncJobConfigDynamicObjectsDatabasesOpFilterTableArray) ToSyncJobConfigDynamicObjectsDatabasesOpFilterTableArrayOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterTableArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicObjectsDatabasesOpFilterTableArrayOutput)
+}
+
+type SyncJobConfigDynamicObjectsDatabasesOpFilterTableOutput struct{ *pulumi.OutputState }
+
+func (SyncJobConfigDynamicObjectsDatabasesOpFilterTableOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabasesOpFilterTable)(nil)).Elem()
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterTableOutput) ToSyncJobConfigDynamicObjectsDatabasesOpFilterTableOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterTableOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterTableOutput) ToSyncJobConfigDynamicObjectsDatabasesOpFilterTableOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterTableOutput {
+	return o
+}
+
+// Table level DDL/DML filter rule.
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterTableOutput) OpFilter() SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsDatabasesOpFilterTable) *SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilter {
+		return v.OpFilter
+	}).(SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtrOutput)
+}
+
+// Table name. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterTableOutput) TableName() pulumi.StringOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsDatabasesOpFilterTable) string { return v.TableName }).(pulumi.StringOutput)
+}
+
+type SyncJobConfigDynamicObjectsDatabasesOpFilterTableArrayOutput struct{ *pulumi.OutputState }
+
+func (SyncJobConfigDynamicObjectsDatabasesOpFilterTableArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SyncJobConfigDynamicObjectsDatabasesOpFilterTable)(nil)).Elem()
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterTableArrayOutput) ToSyncJobConfigDynamicObjectsDatabasesOpFilterTableArrayOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterTableArrayOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterTableArrayOutput) ToSyncJobConfigDynamicObjectsDatabasesOpFilterTableArrayOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterTableArrayOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterTableArrayOutput) Index(i pulumi.IntInput) SyncJobConfigDynamicObjectsDatabasesOpFilterTableOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SyncJobConfigDynamicObjectsDatabasesOpFilterTable {
+		return vs[0].([]SyncJobConfigDynamicObjectsDatabasesOpFilterTable)[vs[1].(int)]
+	}).(SyncJobConfigDynamicObjectsDatabasesOpFilterTableOutput)
+}
+
+type SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilter struct {
+	// DDL white list.
+	DdlOptions []SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOption `pulumi:"ddlOptions"`
+	// DML white list.
+	OpTypes []string `pulumi:"opTypes"`
+}
+
+// SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterInput is an input type that accepts SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterArgs and SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterOutput values.
+// You can construct a concrete instance of `SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterInput` via:
+//
+//	SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterArgs{...}
+type SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterInput interface {
+	pulumi.Input
+
+	ToSyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterOutput
+	ToSyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterOutputWithContext(context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterOutput
+}
+
+type SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterArgs struct {
+	// DDL white list.
+	DdlOptions SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionArrayInput `pulumi:"ddlOptions"`
+	// DML white list.
+	OpTypes pulumi.StringArrayInput `pulumi:"opTypes"`
+}
+
+func (SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilter)(nil)).Elem()
+}
+
+func (i SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterArgs) ToSyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterOutput {
+	return i.ToSyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterOutputWithContext(context.Background())
+}
+
+func (i SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterArgs) ToSyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterOutput)
+}
+
+func (i SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterArgs) ToSyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtrOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtrOutput {
+	return i.ToSyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtrOutputWithContext(context.Background())
+}
+
+func (i SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterArgs) ToSyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtrOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterOutput).ToSyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtrOutputWithContext(ctx)
+}
+
+// SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtrInput is an input type that accepts SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterArgs, SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtr and SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtrOutput values.
+// You can construct a concrete instance of `SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtrInput` via:
+//
+//	        SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterArgs{...}
+//
+//	or:
+//
+//	        nil
+type SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtrInput interface {
+	pulumi.Input
+
+	ToSyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtrOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtrOutput
+	ToSyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtrOutputWithContext(context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtrOutput
+}
+
+type syncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtrType SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterArgs
+
+func SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtr(v *SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterArgs) SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtrInput {
+	return (*syncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtrType)(v)
+}
+
+func (*syncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilter)(nil)).Elem()
+}
+
+func (i *syncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtrType) ToSyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtrOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtrOutput {
+	return i.ToSyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtrOutputWithContext(context.Background())
+}
+
+func (i *syncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtrType) ToSyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtrOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtrOutput)
+}
+
+type SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterOutput struct{ *pulumi.OutputState }
+
+func (SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilter)(nil)).Elem()
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterOutput) ToSyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterOutput) ToSyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterOutput) ToSyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtrOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtrOutput {
+	return o.ToSyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtrOutputWithContext(context.Background())
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterOutput) ToSyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtrOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilter) *SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilter {
+		return &v
+	}).(SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtrOutput)
+}
+
+// DDL white list.
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterOutput) DdlOptions() SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionArrayOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilter) []SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOption {
+		return v.DdlOptions
+	}).(SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionArrayOutput)
+}
+
+// DML white list.
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterOutput) OpTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilter) []string { return v.OpTypes }).(pulumi.StringArrayOutput)
+}
+
+type SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtrOutput struct{ *pulumi.OutputState }
+
+func (SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilter)(nil)).Elem()
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtrOutput) ToSyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtrOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtrOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtrOutput) ToSyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtrOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtrOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtrOutput) Elem() SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterOutput {
+	return o.ApplyT(func(v *SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilter) SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilter {
+		if v != nil {
+			return *v
+		}
+		var ret SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilter
+		return ret
+	}).(SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterOutput)
+}
+
+// DDL white list.
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtrOutput) DdlOptions() SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionArrayOutput {
+	return o.ApplyT(func(v *SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilter) []SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOption {
+		if v == nil {
+			return nil
+		}
+		return v.DdlOptions
+	}).(SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionArrayOutput)
+}
+
+// DML white list.
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtrOutput) OpTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.OpTypes
+	}).(pulumi.StringArrayOutput)
+}
+
+type SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOption struct {
+	// Ddl type, such as Database, Table, View, Index, etc. Note: This field may return null, indicating that no valid value can be obtained.
+	DdlObject *string `pulumi:"ddlObject"`
+	// The specific value of ddl, the possible values for Database [Create,Drop,Alter].The possible values for Table [Create,Drop,Alter,Truncate,Rename].The possible values for View[Create,Drop].For the possible values of Index [Create, Drop]. Note: This field may return null, indicating that no valid value can be obtained.
+	DdlValues []string `pulumi:"ddlValues"`
+}
+
+// SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionInput is an input type that accepts SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionArgs and SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionOutput values.
+// You can construct a concrete instance of `SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionInput` via:
+//
+//	SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionArgs{...}
+type SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionInput interface {
+	pulumi.Input
+
+	ToSyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionOutput
+	ToSyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionOutputWithContext(context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionOutput
+}
+
+type SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionArgs struct {
+	// Ddl type, such as Database, Table, View, Index, etc. Note: This field may return null, indicating that no valid value can be obtained.
+	DdlObject pulumi.StringPtrInput `pulumi:"ddlObject"`
+	// The specific value of ddl, the possible values for Database [Create,Drop,Alter].The possible values for Table [Create,Drop,Alter,Truncate,Rename].The possible values for View[Create,Drop].For the possible values of Index [Create, Drop]. Note: This field may return null, indicating that no valid value can be obtained.
+	DdlValues pulumi.StringArrayInput `pulumi:"ddlValues"`
+}
+
+func (SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOption)(nil)).Elem()
+}
+
+func (i SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionArgs) ToSyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionOutput {
+	return i.ToSyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionOutputWithContext(context.Background())
+}
+
+func (i SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionArgs) ToSyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionOutput)
+}
+
+// SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionArrayInput is an input type that accepts SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionArray and SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionArrayOutput values.
+// You can construct a concrete instance of `SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionArrayInput` via:
+//
+//	SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionArray{ SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionArgs{...} }
+type SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionArrayInput interface {
+	pulumi.Input
+
+	ToSyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionArrayOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionArrayOutput
+	ToSyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionArrayOutputWithContext(context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionArrayOutput
+}
+
+type SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionArray []SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionInput
+
+func (SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOption)(nil)).Elem()
+}
+
+func (i SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionArray) ToSyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionArrayOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionArrayOutput {
+	return i.ToSyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionArrayOutputWithContext(context.Background())
+}
+
+func (i SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionArray) ToSyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionArrayOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionArrayOutput)
+}
+
+type SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionOutput struct{ *pulumi.OutputState }
+
+func (SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOption)(nil)).Elem()
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionOutput) ToSyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionOutput) ToSyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionOutput {
+	return o
+}
+
+// Ddl type, such as Database, Table, View, Index, etc. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionOutput) DdlObject() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOption) *string { return v.DdlObject }).(pulumi.StringPtrOutput)
+}
+
+// The specific value of ddl, the possible values for Database [Create,Drop,Alter].The possible values for Table [Create,Drop,Alter,Truncate,Rename].The possible values for View[Create,Drop].For the possible values of Index [Create, Drop]. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionOutput) DdlValues() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOption) []string {
+		return v.DdlValues
+	}).(pulumi.StringArrayOutput)
+}
+
+type SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionArrayOutput struct{ *pulumi.OutputState }
+
+func (SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOption)(nil)).Elem()
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionArrayOutput) ToSyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionArrayOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionArrayOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionArrayOutput) ToSyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionArrayOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionArrayOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionArrayOutput) Index(i pulumi.IntInput) SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOption {
+		return vs[0].([]SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOption)[vs[1].(int)]
+	}).(SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionOutput)
+}
+
+type SyncJobConfigDynamicObjectsDatabasesOpFilterView struct {
+	// View level DDL/DML filter rule.
+	OpFilter *SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilter `pulumi:"opFilter"`
+	// View name. Note: This field may return null, indicating that no valid value can be obtained.
+	ViewName string `pulumi:"viewName"`
+}
+
+// SyncJobConfigDynamicObjectsDatabasesOpFilterViewInput is an input type that accepts SyncJobConfigDynamicObjectsDatabasesOpFilterViewArgs and SyncJobConfigDynamicObjectsDatabasesOpFilterViewOutput values.
+// You can construct a concrete instance of `SyncJobConfigDynamicObjectsDatabasesOpFilterViewInput` via:
+//
+//	SyncJobConfigDynamicObjectsDatabasesOpFilterViewArgs{...}
+type SyncJobConfigDynamicObjectsDatabasesOpFilterViewInput interface {
+	pulumi.Input
+
+	ToSyncJobConfigDynamicObjectsDatabasesOpFilterViewOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterViewOutput
+	ToSyncJobConfigDynamicObjectsDatabasesOpFilterViewOutputWithContext(context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterViewOutput
+}
+
+type SyncJobConfigDynamicObjectsDatabasesOpFilterViewArgs struct {
+	// View level DDL/DML filter rule.
+	OpFilter SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtrInput `pulumi:"opFilter"`
+	// View name. Note: This field may return null, indicating that no valid value can be obtained.
+	ViewName pulumi.StringInput `pulumi:"viewName"`
+}
+
+func (SyncJobConfigDynamicObjectsDatabasesOpFilterViewArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabasesOpFilterView)(nil)).Elem()
+}
+
+func (i SyncJobConfigDynamicObjectsDatabasesOpFilterViewArgs) ToSyncJobConfigDynamicObjectsDatabasesOpFilterViewOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterViewOutput {
+	return i.ToSyncJobConfigDynamicObjectsDatabasesOpFilterViewOutputWithContext(context.Background())
+}
+
+func (i SyncJobConfigDynamicObjectsDatabasesOpFilterViewArgs) ToSyncJobConfigDynamicObjectsDatabasesOpFilterViewOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterViewOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicObjectsDatabasesOpFilterViewOutput)
+}
+
+// SyncJobConfigDynamicObjectsDatabasesOpFilterViewArrayInput is an input type that accepts SyncJobConfigDynamicObjectsDatabasesOpFilterViewArray and SyncJobConfigDynamicObjectsDatabasesOpFilterViewArrayOutput values.
+// You can construct a concrete instance of `SyncJobConfigDynamicObjectsDatabasesOpFilterViewArrayInput` via:
+//
+//	SyncJobConfigDynamicObjectsDatabasesOpFilterViewArray{ SyncJobConfigDynamicObjectsDatabasesOpFilterViewArgs{...} }
+type SyncJobConfigDynamicObjectsDatabasesOpFilterViewArrayInput interface {
+	pulumi.Input
+
+	ToSyncJobConfigDynamicObjectsDatabasesOpFilterViewArrayOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterViewArrayOutput
+	ToSyncJobConfigDynamicObjectsDatabasesOpFilterViewArrayOutputWithContext(context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterViewArrayOutput
+}
+
+type SyncJobConfigDynamicObjectsDatabasesOpFilterViewArray []SyncJobConfigDynamicObjectsDatabasesOpFilterViewInput
+
+func (SyncJobConfigDynamicObjectsDatabasesOpFilterViewArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SyncJobConfigDynamicObjectsDatabasesOpFilterView)(nil)).Elem()
+}
+
+func (i SyncJobConfigDynamicObjectsDatabasesOpFilterViewArray) ToSyncJobConfigDynamicObjectsDatabasesOpFilterViewArrayOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterViewArrayOutput {
+	return i.ToSyncJobConfigDynamicObjectsDatabasesOpFilterViewArrayOutputWithContext(context.Background())
+}
+
+func (i SyncJobConfigDynamicObjectsDatabasesOpFilterViewArray) ToSyncJobConfigDynamicObjectsDatabasesOpFilterViewArrayOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterViewArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicObjectsDatabasesOpFilterViewArrayOutput)
+}
+
+type SyncJobConfigDynamicObjectsDatabasesOpFilterViewOutput struct{ *pulumi.OutputState }
+
+func (SyncJobConfigDynamicObjectsDatabasesOpFilterViewOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabasesOpFilterView)(nil)).Elem()
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterViewOutput) ToSyncJobConfigDynamicObjectsDatabasesOpFilterViewOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterViewOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterViewOutput) ToSyncJobConfigDynamicObjectsDatabasesOpFilterViewOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterViewOutput {
+	return o
+}
+
+// View level DDL/DML filter rule.
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterViewOutput) OpFilter() SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsDatabasesOpFilterView) *SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilter {
+		return v.OpFilter
+	}).(SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtrOutput)
+}
+
+// View name. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterViewOutput) ViewName() pulumi.StringOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsDatabasesOpFilterView) string { return v.ViewName }).(pulumi.StringOutput)
+}
+
+type SyncJobConfigDynamicObjectsDatabasesOpFilterViewArrayOutput struct{ *pulumi.OutputState }
+
+func (SyncJobConfigDynamicObjectsDatabasesOpFilterViewArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SyncJobConfigDynamicObjectsDatabasesOpFilterView)(nil)).Elem()
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterViewArrayOutput) ToSyncJobConfigDynamicObjectsDatabasesOpFilterViewArrayOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterViewArrayOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterViewArrayOutput) ToSyncJobConfigDynamicObjectsDatabasesOpFilterViewArrayOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterViewArrayOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterViewArrayOutput) Index(i pulumi.IntInput) SyncJobConfigDynamicObjectsDatabasesOpFilterViewOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SyncJobConfigDynamicObjectsDatabasesOpFilterView {
+		return vs[0].([]SyncJobConfigDynamicObjectsDatabasesOpFilterView)[vs[1].(int)]
+	}).(SyncJobConfigDynamicObjectsDatabasesOpFilterViewOutput)
+}
+
+type SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilter struct {
+	// DDL white list.
+	DdlOptions []SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOption `pulumi:"ddlOptions"`
+	// DML white list.
+	OpTypes []string `pulumi:"opTypes"`
+}
+
+// SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterInput is an input type that accepts SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterArgs and SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterOutput values.
+// You can construct a concrete instance of `SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterInput` via:
+//
+//	SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterArgs{...}
+type SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterInput interface {
+	pulumi.Input
+
+	ToSyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterOutput
+	ToSyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterOutputWithContext(context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterOutput
+}
+
+type SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterArgs struct {
+	// DDL white list.
+	DdlOptions SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionArrayInput `pulumi:"ddlOptions"`
+	// DML white list.
+	OpTypes pulumi.StringArrayInput `pulumi:"opTypes"`
+}
+
+func (SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilter)(nil)).Elem()
+}
+
+func (i SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterArgs) ToSyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterOutput {
+	return i.ToSyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterOutputWithContext(context.Background())
+}
+
+func (i SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterArgs) ToSyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterOutput)
+}
+
+func (i SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterArgs) ToSyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtrOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtrOutput {
+	return i.ToSyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtrOutputWithContext(context.Background())
+}
+
+func (i SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterArgs) ToSyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtrOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterOutput).ToSyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtrOutputWithContext(ctx)
+}
+
+// SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtrInput is an input type that accepts SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterArgs, SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtr and SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtrOutput values.
+// You can construct a concrete instance of `SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtrInput` via:
+//
+//	        SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterArgs{...}
+//
+//	or:
+//
+//	        nil
+type SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtrInput interface {
+	pulumi.Input
+
+	ToSyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtrOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtrOutput
+	ToSyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtrOutputWithContext(context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtrOutput
+}
+
+type syncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtrType SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterArgs
+
+func SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtr(v *SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterArgs) SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtrInput {
+	return (*syncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtrType)(v)
+}
+
+func (*syncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilter)(nil)).Elem()
+}
+
+func (i *syncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtrType) ToSyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtrOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtrOutput {
+	return i.ToSyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtrOutputWithContext(context.Background())
+}
+
+func (i *syncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtrType) ToSyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtrOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtrOutput)
+}
+
+type SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterOutput struct{ *pulumi.OutputState }
+
+func (SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilter)(nil)).Elem()
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterOutput) ToSyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterOutput) ToSyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterOutput) ToSyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtrOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtrOutput {
+	return o.ToSyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtrOutputWithContext(context.Background())
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterOutput) ToSyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtrOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilter) *SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilter {
+		return &v
+	}).(SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtrOutput)
+}
+
+// DDL white list.
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterOutput) DdlOptions() SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionArrayOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilter) []SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOption {
+		return v.DdlOptions
+	}).(SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionArrayOutput)
+}
+
+// DML white list.
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterOutput) OpTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilter) []string { return v.OpTypes }).(pulumi.StringArrayOutput)
+}
+
+type SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtrOutput struct{ *pulumi.OutputState }
+
+func (SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilter)(nil)).Elem()
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtrOutput) ToSyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtrOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtrOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtrOutput) ToSyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtrOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtrOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtrOutput) Elem() SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterOutput {
+	return o.ApplyT(func(v *SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilter) SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilter {
+		if v != nil {
+			return *v
+		}
+		var ret SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilter
+		return ret
+	}).(SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterOutput)
+}
+
+// DDL white list.
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtrOutput) DdlOptions() SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionArrayOutput {
+	return o.ApplyT(func(v *SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilter) []SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOption {
+		if v == nil {
+			return nil
+		}
+		return v.DdlOptions
+	}).(SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionArrayOutput)
+}
+
+// DML white list.
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtrOutput) OpTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilter) []string {
+		if v == nil {
+			return nil
+		}
+		return v.OpTypes
+	}).(pulumi.StringArrayOutput)
+}
+
+type SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOption struct {
+	// Ddl type, such as Database, Table, View, Index, etc. Note: This field may return null, indicating that no valid value can be obtained.
+	DdlObject *string `pulumi:"ddlObject"`
+	// The specific value of ddl, the possible values for Database [Create,Drop,Alter].The possible values for Table [Create,Drop,Alter,Truncate,Rename].The possible values for View[Create,Drop].For the possible values of Index [Create, Drop]. Note: This field may return null, indicating that no valid value can be obtained.
+	DdlValues []string `pulumi:"ddlValues"`
+}
+
+// SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionInput is an input type that accepts SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionArgs and SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionOutput values.
+// You can construct a concrete instance of `SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionInput` via:
+//
+//	SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionArgs{...}
+type SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionInput interface {
+	pulumi.Input
+
+	ToSyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionOutput
+	ToSyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionOutputWithContext(context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionOutput
+}
+
+type SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionArgs struct {
+	// Ddl type, such as Database, Table, View, Index, etc. Note: This field may return null, indicating that no valid value can be obtained.
+	DdlObject pulumi.StringPtrInput `pulumi:"ddlObject"`
+	// The specific value of ddl, the possible values for Database [Create,Drop,Alter].The possible values for Table [Create,Drop,Alter,Truncate,Rename].The possible values for View[Create,Drop].For the possible values of Index [Create, Drop]. Note: This field may return null, indicating that no valid value can be obtained.
+	DdlValues pulumi.StringArrayInput `pulumi:"ddlValues"`
+}
+
+func (SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOption)(nil)).Elem()
+}
+
+func (i SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionArgs) ToSyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionOutput {
+	return i.ToSyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionOutputWithContext(context.Background())
+}
+
+func (i SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionArgs) ToSyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionOutput)
+}
+
+// SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionArrayInput is an input type that accepts SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionArray and SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionArrayOutput values.
+// You can construct a concrete instance of `SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionArrayInput` via:
+//
+//	SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionArray{ SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionArgs{...} }
+type SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionArrayInput interface {
+	pulumi.Input
+
+	ToSyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionArrayOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionArrayOutput
+	ToSyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionArrayOutputWithContext(context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionArrayOutput
+}
+
+type SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionArray []SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionInput
+
+func (SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOption)(nil)).Elem()
+}
+
+func (i SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionArray) ToSyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionArrayOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionArrayOutput {
+	return i.ToSyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionArrayOutputWithContext(context.Background())
+}
+
+func (i SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionArray) ToSyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionArrayOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionArrayOutput)
+}
+
+type SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionOutput struct{ *pulumi.OutputState }
+
+func (SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOption)(nil)).Elem()
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionOutput) ToSyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionOutput) ToSyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionOutput {
+	return o
+}
+
+// Ddl type, such as Database, Table, View, Index, etc. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionOutput) DdlObject() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOption) *string { return v.DdlObject }).(pulumi.StringPtrOutput)
+}
+
+// The specific value of ddl, the possible values for Database [Create,Drop,Alter].The possible values for Table [Create,Drop,Alter,Truncate,Rename].The possible values for View[Create,Drop].For the possible values of Index [Create, Drop]. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionOutput) DdlValues() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOption) []string { return v.DdlValues }).(pulumi.StringArrayOutput)
+}
+
+type SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionArrayOutput struct{ *pulumi.OutputState }
+
+func (SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOption)(nil)).Elem()
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionArrayOutput) ToSyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionArrayOutput() SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionArrayOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionArrayOutput) ToSyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionArrayOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionArrayOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionArrayOutput) Index(i pulumi.IntInput) SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOption {
+		return vs[0].([]SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOption)[vs[1].(int)]
+	}).(SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionOutput)
+}
+
+type SyncJobConfigDynamicObjectsOnlineDdl struct {
+	// It has been deprecated. Status: ON - Enabled, OFF - Disabled.
+	//
+	// Deprecated: It has been deprecated.
+	Status string `pulumi:"status"`
+}
+
+// SyncJobConfigDynamicObjectsOnlineDdlInput is an input type that accepts SyncJobConfigDynamicObjectsOnlineDdlArgs and SyncJobConfigDynamicObjectsOnlineDdlOutput values.
+// You can construct a concrete instance of `SyncJobConfigDynamicObjectsOnlineDdlInput` via:
+//
+//	SyncJobConfigDynamicObjectsOnlineDdlArgs{...}
+type SyncJobConfigDynamicObjectsOnlineDdlInput interface {
+	pulumi.Input
+
+	ToSyncJobConfigDynamicObjectsOnlineDdlOutput() SyncJobConfigDynamicObjectsOnlineDdlOutput
+	ToSyncJobConfigDynamicObjectsOnlineDdlOutputWithContext(context.Context) SyncJobConfigDynamicObjectsOnlineDdlOutput
+}
+
+type SyncJobConfigDynamicObjectsOnlineDdlArgs struct {
+	// It has been deprecated. Status: ON - Enabled, OFF - Disabled.
+	//
+	// Deprecated: It has been deprecated.
+	Status pulumi.StringInput `pulumi:"status"`
+}
+
+func (SyncJobConfigDynamicObjectsOnlineDdlArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncJobConfigDynamicObjectsOnlineDdl)(nil)).Elem()
+}
+
+func (i SyncJobConfigDynamicObjectsOnlineDdlArgs) ToSyncJobConfigDynamicObjectsOnlineDdlOutput() SyncJobConfigDynamicObjectsOnlineDdlOutput {
+	return i.ToSyncJobConfigDynamicObjectsOnlineDdlOutputWithContext(context.Background())
+}
+
+func (i SyncJobConfigDynamicObjectsOnlineDdlArgs) ToSyncJobConfigDynamicObjectsOnlineDdlOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsOnlineDdlOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicObjectsOnlineDdlOutput)
+}
+
+func (i SyncJobConfigDynamicObjectsOnlineDdlArgs) ToSyncJobConfigDynamicObjectsOnlineDdlPtrOutput() SyncJobConfigDynamicObjectsOnlineDdlPtrOutput {
+	return i.ToSyncJobConfigDynamicObjectsOnlineDdlPtrOutputWithContext(context.Background())
+}
+
+func (i SyncJobConfigDynamicObjectsOnlineDdlArgs) ToSyncJobConfigDynamicObjectsOnlineDdlPtrOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsOnlineDdlPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicObjectsOnlineDdlOutput).ToSyncJobConfigDynamicObjectsOnlineDdlPtrOutputWithContext(ctx)
+}
+
+// SyncJobConfigDynamicObjectsOnlineDdlPtrInput is an input type that accepts SyncJobConfigDynamicObjectsOnlineDdlArgs, SyncJobConfigDynamicObjectsOnlineDdlPtr and SyncJobConfigDynamicObjectsOnlineDdlPtrOutput values.
+// You can construct a concrete instance of `SyncJobConfigDynamicObjectsOnlineDdlPtrInput` via:
+//
+//	        SyncJobConfigDynamicObjectsOnlineDdlArgs{...}
+//
+//	or:
+//
+//	        nil
+type SyncJobConfigDynamicObjectsOnlineDdlPtrInput interface {
+	pulumi.Input
+
+	ToSyncJobConfigDynamicObjectsOnlineDdlPtrOutput() SyncJobConfigDynamicObjectsOnlineDdlPtrOutput
+	ToSyncJobConfigDynamicObjectsOnlineDdlPtrOutputWithContext(context.Context) SyncJobConfigDynamicObjectsOnlineDdlPtrOutput
+}
+
+type syncJobConfigDynamicObjectsOnlineDdlPtrType SyncJobConfigDynamicObjectsOnlineDdlArgs
+
+func SyncJobConfigDynamicObjectsOnlineDdlPtr(v *SyncJobConfigDynamicObjectsOnlineDdlArgs) SyncJobConfigDynamicObjectsOnlineDdlPtrInput {
+	return (*syncJobConfigDynamicObjectsOnlineDdlPtrType)(v)
+}
+
+func (*syncJobConfigDynamicObjectsOnlineDdlPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SyncJobConfigDynamicObjectsOnlineDdl)(nil)).Elem()
+}
+
+func (i *syncJobConfigDynamicObjectsOnlineDdlPtrType) ToSyncJobConfigDynamicObjectsOnlineDdlPtrOutput() SyncJobConfigDynamicObjectsOnlineDdlPtrOutput {
+	return i.ToSyncJobConfigDynamicObjectsOnlineDdlPtrOutputWithContext(context.Background())
+}
+
+func (i *syncJobConfigDynamicObjectsOnlineDdlPtrType) ToSyncJobConfigDynamicObjectsOnlineDdlPtrOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsOnlineDdlPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicObjectsOnlineDdlPtrOutput)
+}
+
+type SyncJobConfigDynamicObjectsOnlineDdlOutput struct{ *pulumi.OutputState }
+
+func (SyncJobConfigDynamicObjectsOnlineDdlOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncJobConfigDynamicObjectsOnlineDdl)(nil)).Elem()
+}
+
+func (o SyncJobConfigDynamicObjectsOnlineDdlOutput) ToSyncJobConfigDynamicObjectsOnlineDdlOutput() SyncJobConfigDynamicObjectsOnlineDdlOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsOnlineDdlOutput) ToSyncJobConfigDynamicObjectsOnlineDdlOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsOnlineDdlOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsOnlineDdlOutput) ToSyncJobConfigDynamicObjectsOnlineDdlPtrOutput() SyncJobConfigDynamicObjectsOnlineDdlPtrOutput {
+	return o.ToSyncJobConfigDynamicObjectsOnlineDdlPtrOutputWithContext(context.Background())
+}
+
+func (o SyncJobConfigDynamicObjectsOnlineDdlOutput) ToSyncJobConfigDynamicObjectsOnlineDdlPtrOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsOnlineDdlPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SyncJobConfigDynamicObjectsOnlineDdl) *SyncJobConfigDynamicObjectsOnlineDdl {
+		return &v
+	}).(SyncJobConfigDynamicObjectsOnlineDdlPtrOutput)
+}
+
+// It has been deprecated. Status: ON - Enabled, OFF - Disabled.
+//
+// Deprecated: It has been deprecated.
+func (o SyncJobConfigDynamicObjectsOnlineDdlOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicObjectsOnlineDdl) string { return v.Status }).(pulumi.StringOutput)
+}
+
+type SyncJobConfigDynamicObjectsOnlineDdlPtrOutput struct{ *pulumi.OutputState }
+
+func (SyncJobConfigDynamicObjectsOnlineDdlPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SyncJobConfigDynamicObjectsOnlineDdl)(nil)).Elem()
+}
+
+func (o SyncJobConfigDynamicObjectsOnlineDdlPtrOutput) ToSyncJobConfigDynamicObjectsOnlineDdlPtrOutput() SyncJobConfigDynamicObjectsOnlineDdlPtrOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsOnlineDdlPtrOutput) ToSyncJobConfigDynamicObjectsOnlineDdlPtrOutputWithContext(ctx context.Context) SyncJobConfigDynamicObjectsOnlineDdlPtrOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicObjectsOnlineDdlPtrOutput) Elem() SyncJobConfigDynamicObjectsOnlineDdlOutput {
+	return o.ApplyT(func(v *SyncJobConfigDynamicObjectsOnlineDdl) SyncJobConfigDynamicObjectsOnlineDdl {
+		if v != nil {
+			return *v
+		}
+		var ret SyncJobConfigDynamicObjectsOnlineDdl
+		return ret
+	}).(SyncJobConfigDynamicObjectsOnlineDdlOutput)
+}
+
+// It has been deprecated. Status: ON - Enabled, OFF - Disabled.
+//
+// Deprecated: It has been deprecated.
+func (o SyncJobConfigDynamicObjectsOnlineDdlPtrOutput) Status() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncJobConfigDynamicObjectsOnlineDdl) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Status
+	}).(pulumi.StringPtrOutput)
+}
+
+type SyncJobConfigDynamicOptions struct {
+	// Detailed options for conflict handling, such as conditional rows and conditional actions in conditional overrides. Note: This field may return null, indicating that no valid value can be obtained.
+	ConflictHandleOption *SyncJobConfigDynamicOptionsConflictHandleOption `pulumi:"conflictHandleOption"`
+	// Conflict handling options, ReportError (error report, the default value), Ignore (ignore), Cover (cover), ConditionCover (condition coverage). Note: This field may return null, indicating that no valid value can be obtained.
+	ConflictHandleType *string `pulumi:"conflictHandleType"`
+	// DDL synchronization options, specifically describe which DDLs to synchronize. Required field.
+	DdlOptions []SyncJobConfigDynamicOptionsDdlOption `pulumi:"ddlOptions"`
+	// The processing of the table with the same name, ReportErrorAfterCheck (pre-check and report error, default), ExecuteAfterIgnore (ignore and continue to execute). Note: This field may return null, indicating that no valid value can be obtained.
+	DealOfExistSameTable *string `pulumi:"dealOfExistSameTable"`
+	// Whether to filter out begin and commit messages for sync to kafka link. Currently only mysql2kafka link supports it.
+	FilterBeginCommit *bool `pulumi:"filterBeginCommit"`
+	// Whether to filter out checkpoint messages for sync to kafka link. Currently only mysql2kafka link supports it.
+	FilterCheckpoint *bool `pulumi:"filterCheckpoint"`
+	// Kafka config for sync to kafka link. Note: This field may return null, indicating that no valid value can be obtained.
+	KafkaOption *SyncJobConfigDynamicOptionsKafkaOption `pulumi:"kafkaOption"`
+	// DML and DDL options to be synchronized, Insert (insert operation), Update (update operation), Delete (delete operation), DDL (structure synchronization), PartialDDL (custom, work with DdlOptions). Required field.
+	OpTypes []string `pulumi:"opTypes"`
+	// Only incremental tasks reset the designated site.
+	StartPosition *string `pulumi:"startPosition"`
+}
+
+// SyncJobConfigDynamicOptionsInput is an input type that accepts SyncJobConfigDynamicOptionsArgs and SyncJobConfigDynamicOptionsOutput values.
+// You can construct a concrete instance of `SyncJobConfigDynamicOptionsInput` via:
+//
+//	SyncJobConfigDynamicOptionsArgs{...}
+type SyncJobConfigDynamicOptionsInput interface {
+	pulumi.Input
+
+	ToSyncJobConfigDynamicOptionsOutput() SyncJobConfigDynamicOptionsOutput
+	ToSyncJobConfigDynamicOptionsOutputWithContext(context.Context) SyncJobConfigDynamicOptionsOutput
+}
+
+type SyncJobConfigDynamicOptionsArgs struct {
+	// Detailed options for conflict handling, such as conditional rows and conditional actions in conditional overrides. Note: This field may return null, indicating that no valid value can be obtained.
+	ConflictHandleOption SyncJobConfigDynamicOptionsConflictHandleOptionPtrInput `pulumi:"conflictHandleOption"`
+	// Conflict handling options, ReportError (error report, the default value), Ignore (ignore), Cover (cover), ConditionCover (condition coverage). Note: This field may return null, indicating that no valid value can be obtained.
+	ConflictHandleType pulumi.StringPtrInput `pulumi:"conflictHandleType"`
+	// DDL synchronization options, specifically describe which DDLs to synchronize. Required field.
+	DdlOptions SyncJobConfigDynamicOptionsDdlOptionArrayInput `pulumi:"ddlOptions"`
+	// The processing of the table with the same name, ReportErrorAfterCheck (pre-check and report error, default), ExecuteAfterIgnore (ignore and continue to execute). Note: This field may return null, indicating that no valid value can be obtained.
+	DealOfExistSameTable pulumi.StringPtrInput `pulumi:"dealOfExistSameTable"`
+	// Whether to filter out begin and commit messages for sync to kafka link. Currently only mysql2kafka link supports it.
+	FilterBeginCommit pulumi.BoolPtrInput `pulumi:"filterBeginCommit"`
+	// Whether to filter out checkpoint messages for sync to kafka link. Currently only mysql2kafka link supports it.
+	FilterCheckpoint pulumi.BoolPtrInput `pulumi:"filterCheckpoint"`
+	// Kafka config for sync to kafka link. Note: This field may return null, indicating that no valid value can be obtained.
+	KafkaOption SyncJobConfigDynamicOptionsKafkaOptionPtrInput `pulumi:"kafkaOption"`
+	// DML and DDL options to be synchronized, Insert (insert operation), Update (update operation), Delete (delete operation), DDL (structure synchronization), PartialDDL (custom, work with DdlOptions). Required field.
+	OpTypes pulumi.StringArrayInput `pulumi:"opTypes"`
+	// Only incremental tasks reset the designated site.
+	StartPosition pulumi.StringPtrInput `pulumi:"startPosition"`
+}
+
+func (SyncJobConfigDynamicOptionsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncJobConfigDynamicOptions)(nil)).Elem()
+}
+
+func (i SyncJobConfigDynamicOptionsArgs) ToSyncJobConfigDynamicOptionsOutput() SyncJobConfigDynamicOptionsOutput {
+	return i.ToSyncJobConfigDynamicOptionsOutputWithContext(context.Background())
+}
+
+func (i SyncJobConfigDynamicOptionsArgs) ToSyncJobConfigDynamicOptionsOutputWithContext(ctx context.Context) SyncJobConfigDynamicOptionsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicOptionsOutput)
+}
+
+func (i SyncJobConfigDynamicOptionsArgs) ToSyncJobConfigDynamicOptionsPtrOutput() SyncJobConfigDynamicOptionsPtrOutput {
+	return i.ToSyncJobConfigDynamicOptionsPtrOutputWithContext(context.Background())
+}
+
+func (i SyncJobConfigDynamicOptionsArgs) ToSyncJobConfigDynamicOptionsPtrOutputWithContext(ctx context.Context) SyncJobConfigDynamicOptionsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicOptionsOutput).ToSyncJobConfigDynamicOptionsPtrOutputWithContext(ctx)
+}
+
+// SyncJobConfigDynamicOptionsPtrInput is an input type that accepts SyncJobConfigDynamicOptionsArgs, SyncJobConfigDynamicOptionsPtr and SyncJobConfigDynamicOptionsPtrOutput values.
+// You can construct a concrete instance of `SyncJobConfigDynamicOptionsPtrInput` via:
+//
+//	        SyncJobConfigDynamicOptionsArgs{...}
+//
+//	or:
+//
+//	        nil
+type SyncJobConfigDynamicOptionsPtrInput interface {
+	pulumi.Input
+
+	ToSyncJobConfigDynamicOptionsPtrOutput() SyncJobConfigDynamicOptionsPtrOutput
+	ToSyncJobConfigDynamicOptionsPtrOutputWithContext(context.Context) SyncJobConfigDynamicOptionsPtrOutput
+}
+
+type syncJobConfigDynamicOptionsPtrType SyncJobConfigDynamicOptionsArgs
+
+func SyncJobConfigDynamicOptionsPtr(v *SyncJobConfigDynamicOptionsArgs) SyncJobConfigDynamicOptionsPtrInput {
+	return (*syncJobConfigDynamicOptionsPtrType)(v)
+}
+
+func (*syncJobConfigDynamicOptionsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SyncJobConfigDynamicOptions)(nil)).Elem()
+}
+
+func (i *syncJobConfigDynamicOptionsPtrType) ToSyncJobConfigDynamicOptionsPtrOutput() SyncJobConfigDynamicOptionsPtrOutput {
+	return i.ToSyncJobConfigDynamicOptionsPtrOutputWithContext(context.Background())
+}
+
+func (i *syncJobConfigDynamicOptionsPtrType) ToSyncJobConfigDynamicOptionsPtrOutputWithContext(ctx context.Context) SyncJobConfigDynamicOptionsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicOptionsPtrOutput)
+}
+
+type SyncJobConfigDynamicOptionsOutput struct{ *pulumi.OutputState }
+
+func (SyncJobConfigDynamicOptionsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncJobConfigDynamicOptions)(nil)).Elem()
+}
+
+func (o SyncJobConfigDynamicOptionsOutput) ToSyncJobConfigDynamicOptionsOutput() SyncJobConfigDynamicOptionsOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicOptionsOutput) ToSyncJobConfigDynamicOptionsOutputWithContext(ctx context.Context) SyncJobConfigDynamicOptionsOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicOptionsOutput) ToSyncJobConfigDynamicOptionsPtrOutput() SyncJobConfigDynamicOptionsPtrOutput {
+	return o.ToSyncJobConfigDynamicOptionsPtrOutputWithContext(context.Background())
+}
+
+func (o SyncJobConfigDynamicOptionsOutput) ToSyncJobConfigDynamicOptionsPtrOutputWithContext(ctx context.Context) SyncJobConfigDynamicOptionsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SyncJobConfigDynamicOptions) *SyncJobConfigDynamicOptions {
+		return &v
+	}).(SyncJobConfigDynamicOptionsPtrOutput)
+}
+
+// Detailed options for conflict handling, such as conditional rows and conditional actions in conditional overrides. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicOptionsOutput) ConflictHandleOption() SyncJobConfigDynamicOptionsConflictHandleOptionPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicOptions) *SyncJobConfigDynamicOptionsConflictHandleOption {
+		return v.ConflictHandleOption
+	}).(SyncJobConfigDynamicOptionsConflictHandleOptionPtrOutput)
+}
+
+// Conflict handling options, ReportError (error report, the default value), Ignore (ignore), Cover (cover), ConditionCover (condition coverage). Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicOptionsOutput) ConflictHandleType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicOptions) *string { return v.ConflictHandleType }).(pulumi.StringPtrOutput)
+}
+
+// DDL synchronization options, specifically describe which DDLs to synchronize. Required field.
+func (o SyncJobConfigDynamicOptionsOutput) DdlOptions() SyncJobConfigDynamicOptionsDdlOptionArrayOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicOptions) []SyncJobConfigDynamicOptionsDdlOption { return v.DdlOptions }).(SyncJobConfigDynamicOptionsDdlOptionArrayOutput)
+}
+
+// The processing of the table with the same name, ReportErrorAfterCheck (pre-check and report error, default), ExecuteAfterIgnore (ignore and continue to execute). Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicOptionsOutput) DealOfExistSameTable() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicOptions) *string { return v.DealOfExistSameTable }).(pulumi.StringPtrOutput)
+}
+
+// Whether to filter out begin and commit messages for sync to kafka link. Currently only mysql2kafka link supports it.
+func (o SyncJobConfigDynamicOptionsOutput) FilterBeginCommit() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicOptions) *bool { return v.FilterBeginCommit }).(pulumi.BoolPtrOutput)
+}
+
+// Whether to filter out checkpoint messages for sync to kafka link. Currently only mysql2kafka link supports it.
+func (o SyncJobConfigDynamicOptionsOutput) FilterCheckpoint() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicOptions) *bool { return v.FilterCheckpoint }).(pulumi.BoolPtrOutput)
+}
+
+// Kafka config for sync to kafka link. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicOptionsOutput) KafkaOption() SyncJobConfigDynamicOptionsKafkaOptionPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicOptions) *SyncJobConfigDynamicOptionsKafkaOption { return v.KafkaOption }).(SyncJobConfigDynamicOptionsKafkaOptionPtrOutput)
+}
+
+// DML and DDL options to be synchronized, Insert (insert operation), Update (update operation), Delete (delete operation), DDL (structure synchronization), PartialDDL (custom, work with DdlOptions). Required field.
+func (o SyncJobConfigDynamicOptionsOutput) OpTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicOptions) []string { return v.OpTypes }).(pulumi.StringArrayOutput)
+}
+
+// Only incremental tasks reset the designated site.
+func (o SyncJobConfigDynamicOptionsOutput) StartPosition() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicOptions) *string { return v.StartPosition }).(pulumi.StringPtrOutput)
+}
+
+type SyncJobConfigDynamicOptionsPtrOutput struct{ *pulumi.OutputState }
+
+func (SyncJobConfigDynamicOptionsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SyncJobConfigDynamicOptions)(nil)).Elem()
+}
+
+func (o SyncJobConfigDynamicOptionsPtrOutput) ToSyncJobConfigDynamicOptionsPtrOutput() SyncJobConfigDynamicOptionsPtrOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicOptionsPtrOutput) ToSyncJobConfigDynamicOptionsPtrOutputWithContext(ctx context.Context) SyncJobConfigDynamicOptionsPtrOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicOptionsPtrOutput) Elem() SyncJobConfigDynamicOptionsOutput {
+	return o.ApplyT(func(v *SyncJobConfigDynamicOptions) SyncJobConfigDynamicOptions {
+		if v != nil {
+			return *v
+		}
+		var ret SyncJobConfigDynamicOptions
+		return ret
+	}).(SyncJobConfigDynamicOptionsOutput)
+}
+
+// Detailed options for conflict handling, such as conditional rows and conditional actions in conditional overrides. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicOptionsPtrOutput) ConflictHandleOption() SyncJobConfigDynamicOptionsConflictHandleOptionPtrOutput {
+	return o.ApplyT(func(v *SyncJobConfigDynamicOptions) *SyncJobConfigDynamicOptionsConflictHandleOption {
+		if v == nil {
+			return nil
+		}
+		return v.ConflictHandleOption
+	}).(SyncJobConfigDynamicOptionsConflictHandleOptionPtrOutput)
+}
+
+// Conflict handling options, ReportError (error report, the default value), Ignore (ignore), Cover (cover), ConditionCover (condition coverage). Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicOptionsPtrOutput) ConflictHandleType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncJobConfigDynamicOptions) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ConflictHandleType
+	}).(pulumi.StringPtrOutput)
+}
+
+// DDL synchronization options, specifically describe which DDLs to synchronize. Required field.
+func (o SyncJobConfigDynamicOptionsPtrOutput) DdlOptions() SyncJobConfigDynamicOptionsDdlOptionArrayOutput {
+	return o.ApplyT(func(v *SyncJobConfigDynamicOptions) []SyncJobConfigDynamicOptionsDdlOption {
+		if v == nil {
+			return nil
+		}
+		return v.DdlOptions
+	}).(SyncJobConfigDynamicOptionsDdlOptionArrayOutput)
+}
+
+// The processing of the table with the same name, ReportErrorAfterCheck (pre-check and report error, default), ExecuteAfterIgnore (ignore and continue to execute). Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicOptionsPtrOutput) DealOfExistSameTable() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncJobConfigDynamicOptions) *string {
+		if v == nil {
+			return nil
+		}
+		return v.DealOfExistSameTable
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether to filter out begin and commit messages for sync to kafka link. Currently only mysql2kafka link supports it.
+func (o SyncJobConfigDynamicOptionsPtrOutput) FilterBeginCommit() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *SyncJobConfigDynamicOptions) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.FilterBeginCommit
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Whether to filter out checkpoint messages for sync to kafka link. Currently only mysql2kafka link supports it.
+func (o SyncJobConfigDynamicOptionsPtrOutput) FilterCheckpoint() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *SyncJobConfigDynamicOptions) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.FilterCheckpoint
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Kafka config for sync to kafka link. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicOptionsPtrOutput) KafkaOption() SyncJobConfigDynamicOptionsKafkaOptionPtrOutput {
+	return o.ApplyT(func(v *SyncJobConfigDynamicOptions) *SyncJobConfigDynamicOptionsKafkaOption {
+		if v == nil {
+			return nil
+		}
+		return v.KafkaOption
+	}).(SyncJobConfigDynamicOptionsKafkaOptionPtrOutput)
+}
+
+// DML and DDL options to be synchronized, Insert (insert operation), Update (update operation), Delete (delete operation), DDL (structure synchronization), PartialDDL (custom, work with DdlOptions). Required field.
+func (o SyncJobConfigDynamicOptionsPtrOutput) OpTypes() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *SyncJobConfigDynamicOptions) []string {
+		if v == nil {
+			return nil
+		}
+		return v.OpTypes
+	}).(pulumi.StringArrayOutput)
+}
+
+// Only incremental tasks reset the designated site.
+func (o SyncJobConfigDynamicOptionsPtrOutput) StartPosition() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncJobConfigDynamicOptions) *string {
+		if v == nil {
+			return nil
+		}
+		return v.StartPosition
+	}).(pulumi.StringPtrOutput)
+}
+
+type SyncJobConfigDynamicOptionsConflictHandleOption struct {
+	// Columns covered by the condition. Note: This field may return null, indicating that no valid value can be obtained.
+	ConditionColumn *string `pulumi:"conditionColumn"`
+	// Conditional Override Operation. Note: This field may return null, indicating that no valid value can be obtained.
+	ConditionOperator *string `pulumi:"conditionOperator"`
+	// Conditional Override Priority Processing. Note: This field may return null, indicating that no valid value can be obtained.
+	ConditionOrderInSrcAndDst *string `pulumi:"conditionOrderInSrcAndDst"`
+}
+
+// SyncJobConfigDynamicOptionsConflictHandleOptionInput is an input type that accepts SyncJobConfigDynamicOptionsConflictHandleOptionArgs and SyncJobConfigDynamicOptionsConflictHandleOptionOutput values.
+// You can construct a concrete instance of `SyncJobConfigDynamicOptionsConflictHandleOptionInput` via:
+//
+//	SyncJobConfigDynamicOptionsConflictHandleOptionArgs{...}
+type SyncJobConfigDynamicOptionsConflictHandleOptionInput interface {
+	pulumi.Input
+
+	ToSyncJobConfigDynamicOptionsConflictHandleOptionOutput() SyncJobConfigDynamicOptionsConflictHandleOptionOutput
+	ToSyncJobConfigDynamicOptionsConflictHandleOptionOutputWithContext(context.Context) SyncJobConfigDynamicOptionsConflictHandleOptionOutput
+}
+
+type SyncJobConfigDynamicOptionsConflictHandleOptionArgs struct {
+	// Columns covered by the condition. Note: This field may return null, indicating that no valid value can be obtained.
+	ConditionColumn pulumi.StringPtrInput `pulumi:"conditionColumn"`
+	// Conditional Override Operation. Note: This field may return null, indicating that no valid value can be obtained.
+	ConditionOperator pulumi.StringPtrInput `pulumi:"conditionOperator"`
+	// Conditional Override Priority Processing. Note: This field may return null, indicating that no valid value can be obtained.
+	ConditionOrderInSrcAndDst pulumi.StringPtrInput `pulumi:"conditionOrderInSrcAndDst"`
+}
+
+func (SyncJobConfigDynamicOptionsConflictHandleOptionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncJobConfigDynamicOptionsConflictHandleOption)(nil)).Elem()
+}
+
+func (i SyncJobConfigDynamicOptionsConflictHandleOptionArgs) ToSyncJobConfigDynamicOptionsConflictHandleOptionOutput() SyncJobConfigDynamicOptionsConflictHandleOptionOutput {
+	return i.ToSyncJobConfigDynamicOptionsConflictHandleOptionOutputWithContext(context.Background())
+}
+
+func (i SyncJobConfigDynamicOptionsConflictHandleOptionArgs) ToSyncJobConfigDynamicOptionsConflictHandleOptionOutputWithContext(ctx context.Context) SyncJobConfigDynamicOptionsConflictHandleOptionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicOptionsConflictHandleOptionOutput)
+}
+
+func (i SyncJobConfigDynamicOptionsConflictHandleOptionArgs) ToSyncJobConfigDynamicOptionsConflictHandleOptionPtrOutput() SyncJobConfigDynamicOptionsConflictHandleOptionPtrOutput {
+	return i.ToSyncJobConfigDynamicOptionsConflictHandleOptionPtrOutputWithContext(context.Background())
+}
+
+func (i SyncJobConfigDynamicOptionsConflictHandleOptionArgs) ToSyncJobConfigDynamicOptionsConflictHandleOptionPtrOutputWithContext(ctx context.Context) SyncJobConfigDynamicOptionsConflictHandleOptionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicOptionsConflictHandleOptionOutput).ToSyncJobConfigDynamicOptionsConflictHandleOptionPtrOutputWithContext(ctx)
+}
+
+// SyncJobConfigDynamicOptionsConflictHandleOptionPtrInput is an input type that accepts SyncJobConfigDynamicOptionsConflictHandleOptionArgs, SyncJobConfigDynamicOptionsConflictHandleOptionPtr and SyncJobConfigDynamicOptionsConflictHandleOptionPtrOutput values.
+// You can construct a concrete instance of `SyncJobConfigDynamicOptionsConflictHandleOptionPtrInput` via:
+//
+//	        SyncJobConfigDynamicOptionsConflictHandleOptionArgs{...}
+//
+//	or:
+//
+//	        nil
+type SyncJobConfigDynamicOptionsConflictHandleOptionPtrInput interface {
+	pulumi.Input
+
+	ToSyncJobConfigDynamicOptionsConflictHandleOptionPtrOutput() SyncJobConfigDynamicOptionsConflictHandleOptionPtrOutput
+	ToSyncJobConfigDynamicOptionsConflictHandleOptionPtrOutputWithContext(context.Context) SyncJobConfigDynamicOptionsConflictHandleOptionPtrOutput
+}
+
+type syncJobConfigDynamicOptionsConflictHandleOptionPtrType SyncJobConfigDynamicOptionsConflictHandleOptionArgs
+
+func SyncJobConfigDynamicOptionsConflictHandleOptionPtr(v *SyncJobConfigDynamicOptionsConflictHandleOptionArgs) SyncJobConfigDynamicOptionsConflictHandleOptionPtrInput {
+	return (*syncJobConfigDynamicOptionsConflictHandleOptionPtrType)(v)
+}
+
+func (*syncJobConfigDynamicOptionsConflictHandleOptionPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SyncJobConfigDynamicOptionsConflictHandleOption)(nil)).Elem()
+}
+
+func (i *syncJobConfigDynamicOptionsConflictHandleOptionPtrType) ToSyncJobConfigDynamicOptionsConflictHandleOptionPtrOutput() SyncJobConfigDynamicOptionsConflictHandleOptionPtrOutput {
+	return i.ToSyncJobConfigDynamicOptionsConflictHandleOptionPtrOutputWithContext(context.Background())
+}
+
+func (i *syncJobConfigDynamicOptionsConflictHandleOptionPtrType) ToSyncJobConfigDynamicOptionsConflictHandleOptionPtrOutputWithContext(ctx context.Context) SyncJobConfigDynamicOptionsConflictHandleOptionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicOptionsConflictHandleOptionPtrOutput)
+}
+
+type SyncJobConfigDynamicOptionsConflictHandleOptionOutput struct{ *pulumi.OutputState }
+
+func (SyncJobConfigDynamicOptionsConflictHandleOptionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncJobConfigDynamicOptionsConflictHandleOption)(nil)).Elem()
+}
+
+func (o SyncJobConfigDynamicOptionsConflictHandleOptionOutput) ToSyncJobConfigDynamicOptionsConflictHandleOptionOutput() SyncJobConfigDynamicOptionsConflictHandleOptionOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicOptionsConflictHandleOptionOutput) ToSyncJobConfigDynamicOptionsConflictHandleOptionOutputWithContext(ctx context.Context) SyncJobConfigDynamicOptionsConflictHandleOptionOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicOptionsConflictHandleOptionOutput) ToSyncJobConfigDynamicOptionsConflictHandleOptionPtrOutput() SyncJobConfigDynamicOptionsConflictHandleOptionPtrOutput {
+	return o.ToSyncJobConfigDynamicOptionsConflictHandleOptionPtrOutputWithContext(context.Background())
+}
+
+func (o SyncJobConfigDynamicOptionsConflictHandleOptionOutput) ToSyncJobConfigDynamicOptionsConflictHandleOptionPtrOutputWithContext(ctx context.Context) SyncJobConfigDynamicOptionsConflictHandleOptionPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SyncJobConfigDynamicOptionsConflictHandleOption) *SyncJobConfigDynamicOptionsConflictHandleOption {
+		return &v
+	}).(SyncJobConfigDynamicOptionsConflictHandleOptionPtrOutput)
+}
+
+// Columns covered by the condition. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicOptionsConflictHandleOptionOutput) ConditionColumn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicOptionsConflictHandleOption) *string { return v.ConditionColumn }).(pulumi.StringPtrOutput)
+}
+
+// Conditional Override Operation. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicOptionsConflictHandleOptionOutput) ConditionOperator() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicOptionsConflictHandleOption) *string { return v.ConditionOperator }).(pulumi.StringPtrOutput)
+}
+
+// Conditional Override Priority Processing. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicOptionsConflictHandleOptionOutput) ConditionOrderInSrcAndDst() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicOptionsConflictHandleOption) *string { return v.ConditionOrderInSrcAndDst }).(pulumi.StringPtrOutput)
+}
+
+type SyncJobConfigDynamicOptionsConflictHandleOptionPtrOutput struct{ *pulumi.OutputState }
+
+func (SyncJobConfigDynamicOptionsConflictHandleOptionPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SyncJobConfigDynamicOptionsConflictHandleOption)(nil)).Elem()
+}
+
+func (o SyncJobConfigDynamicOptionsConflictHandleOptionPtrOutput) ToSyncJobConfigDynamicOptionsConflictHandleOptionPtrOutput() SyncJobConfigDynamicOptionsConflictHandleOptionPtrOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicOptionsConflictHandleOptionPtrOutput) ToSyncJobConfigDynamicOptionsConflictHandleOptionPtrOutputWithContext(ctx context.Context) SyncJobConfigDynamicOptionsConflictHandleOptionPtrOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicOptionsConflictHandleOptionPtrOutput) Elem() SyncJobConfigDynamicOptionsConflictHandleOptionOutput {
+	return o.ApplyT(func(v *SyncJobConfigDynamicOptionsConflictHandleOption) SyncJobConfigDynamicOptionsConflictHandleOption {
+		if v != nil {
+			return *v
+		}
+		var ret SyncJobConfigDynamicOptionsConflictHandleOption
+		return ret
+	}).(SyncJobConfigDynamicOptionsConflictHandleOptionOutput)
+}
+
+// Columns covered by the condition. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicOptionsConflictHandleOptionPtrOutput) ConditionColumn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncJobConfigDynamicOptionsConflictHandleOption) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ConditionColumn
+	}).(pulumi.StringPtrOutput)
+}
+
+// Conditional Override Operation. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicOptionsConflictHandleOptionPtrOutput) ConditionOperator() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncJobConfigDynamicOptionsConflictHandleOption) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ConditionOperator
+	}).(pulumi.StringPtrOutput)
+}
+
+// Conditional Override Priority Processing. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicOptionsConflictHandleOptionPtrOutput) ConditionOrderInSrcAndDst() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncJobConfigDynamicOptionsConflictHandleOption) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ConditionOrderInSrcAndDst
+	}).(pulumi.StringPtrOutput)
+}
+
+type SyncJobConfigDynamicOptionsDdlOption struct {
+	// Ddl type, such as Database, Table, View, Index, etc. Note: This field may return null, indicating that no valid value can be obtained.
+	DdlObject *string `pulumi:"ddlObject"`
+	// The specific value of ddl, the possible values for Database [Create,Drop,Alter].The possible values for Table [Create,Drop,Alter,Truncate,Rename].The possible values for View[Create,Drop].For the possible values of Index [Create, Drop]. Note: This field may return null, indicating that no valid value can be obtained.
+	DdlValues []string `pulumi:"ddlValues"`
+}
+
+// SyncJobConfigDynamicOptionsDdlOptionInput is an input type that accepts SyncJobConfigDynamicOptionsDdlOptionArgs and SyncJobConfigDynamicOptionsDdlOptionOutput values.
+// You can construct a concrete instance of `SyncJobConfigDynamicOptionsDdlOptionInput` via:
+//
+//	SyncJobConfigDynamicOptionsDdlOptionArgs{...}
+type SyncJobConfigDynamicOptionsDdlOptionInput interface {
+	pulumi.Input
+
+	ToSyncJobConfigDynamicOptionsDdlOptionOutput() SyncJobConfigDynamicOptionsDdlOptionOutput
+	ToSyncJobConfigDynamicOptionsDdlOptionOutputWithContext(context.Context) SyncJobConfigDynamicOptionsDdlOptionOutput
+}
+
+type SyncJobConfigDynamicOptionsDdlOptionArgs struct {
+	// Ddl type, such as Database, Table, View, Index, etc. Note: This field may return null, indicating that no valid value can be obtained.
+	DdlObject pulumi.StringPtrInput `pulumi:"ddlObject"`
+	// The specific value of ddl, the possible values for Database [Create,Drop,Alter].The possible values for Table [Create,Drop,Alter,Truncate,Rename].The possible values for View[Create,Drop].For the possible values of Index [Create, Drop]. Note: This field may return null, indicating that no valid value can be obtained.
+	DdlValues pulumi.StringArrayInput `pulumi:"ddlValues"`
+}
+
+func (SyncJobConfigDynamicOptionsDdlOptionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncJobConfigDynamicOptionsDdlOption)(nil)).Elem()
+}
+
+func (i SyncJobConfigDynamicOptionsDdlOptionArgs) ToSyncJobConfigDynamicOptionsDdlOptionOutput() SyncJobConfigDynamicOptionsDdlOptionOutput {
+	return i.ToSyncJobConfigDynamicOptionsDdlOptionOutputWithContext(context.Background())
+}
+
+func (i SyncJobConfigDynamicOptionsDdlOptionArgs) ToSyncJobConfigDynamicOptionsDdlOptionOutputWithContext(ctx context.Context) SyncJobConfigDynamicOptionsDdlOptionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicOptionsDdlOptionOutput)
+}
+
+// SyncJobConfigDynamicOptionsDdlOptionArrayInput is an input type that accepts SyncJobConfigDynamicOptionsDdlOptionArray and SyncJobConfigDynamicOptionsDdlOptionArrayOutput values.
+// You can construct a concrete instance of `SyncJobConfigDynamicOptionsDdlOptionArrayInput` via:
+//
+//	SyncJobConfigDynamicOptionsDdlOptionArray{ SyncJobConfigDynamicOptionsDdlOptionArgs{...} }
+type SyncJobConfigDynamicOptionsDdlOptionArrayInput interface {
+	pulumi.Input
+
+	ToSyncJobConfigDynamicOptionsDdlOptionArrayOutput() SyncJobConfigDynamicOptionsDdlOptionArrayOutput
+	ToSyncJobConfigDynamicOptionsDdlOptionArrayOutputWithContext(context.Context) SyncJobConfigDynamicOptionsDdlOptionArrayOutput
+}
+
+type SyncJobConfigDynamicOptionsDdlOptionArray []SyncJobConfigDynamicOptionsDdlOptionInput
+
+func (SyncJobConfigDynamicOptionsDdlOptionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SyncJobConfigDynamicOptionsDdlOption)(nil)).Elem()
+}
+
+func (i SyncJobConfigDynamicOptionsDdlOptionArray) ToSyncJobConfigDynamicOptionsDdlOptionArrayOutput() SyncJobConfigDynamicOptionsDdlOptionArrayOutput {
+	return i.ToSyncJobConfigDynamicOptionsDdlOptionArrayOutputWithContext(context.Background())
+}
+
+func (i SyncJobConfigDynamicOptionsDdlOptionArray) ToSyncJobConfigDynamicOptionsDdlOptionArrayOutputWithContext(ctx context.Context) SyncJobConfigDynamicOptionsDdlOptionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicOptionsDdlOptionArrayOutput)
+}
+
+type SyncJobConfigDynamicOptionsDdlOptionOutput struct{ *pulumi.OutputState }
+
+func (SyncJobConfigDynamicOptionsDdlOptionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncJobConfigDynamicOptionsDdlOption)(nil)).Elem()
+}
+
+func (o SyncJobConfigDynamicOptionsDdlOptionOutput) ToSyncJobConfigDynamicOptionsDdlOptionOutput() SyncJobConfigDynamicOptionsDdlOptionOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicOptionsDdlOptionOutput) ToSyncJobConfigDynamicOptionsDdlOptionOutputWithContext(ctx context.Context) SyncJobConfigDynamicOptionsDdlOptionOutput {
+	return o
+}
+
+// Ddl type, such as Database, Table, View, Index, etc. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicOptionsDdlOptionOutput) DdlObject() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicOptionsDdlOption) *string { return v.DdlObject }).(pulumi.StringPtrOutput)
+}
+
+// The specific value of ddl, the possible values for Database [Create,Drop,Alter].The possible values for Table [Create,Drop,Alter,Truncate,Rename].The possible values for View[Create,Drop].For the possible values of Index [Create, Drop]. Note: This field may return null, indicating that no valid value can be obtained.
+func (o SyncJobConfigDynamicOptionsDdlOptionOutput) DdlValues() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicOptionsDdlOption) []string { return v.DdlValues }).(pulumi.StringArrayOutput)
+}
+
+type SyncJobConfigDynamicOptionsDdlOptionArrayOutput struct{ *pulumi.OutputState }
+
+func (SyncJobConfigDynamicOptionsDdlOptionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SyncJobConfigDynamicOptionsDdlOption)(nil)).Elem()
+}
+
+func (o SyncJobConfigDynamicOptionsDdlOptionArrayOutput) ToSyncJobConfigDynamicOptionsDdlOptionArrayOutput() SyncJobConfigDynamicOptionsDdlOptionArrayOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicOptionsDdlOptionArrayOutput) ToSyncJobConfigDynamicOptionsDdlOptionArrayOutputWithContext(ctx context.Context) SyncJobConfigDynamicOptionsDdlOptionArrayOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicOptionsDdlOptionArrayOutput) Index(i pulumi.IntInput) SyncJobConfigDynamicOptionsDdlOptionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SyncJobConfigDynamicOptionsDdlOption {
+		return vs[0].([]SyncJobConfigDynamicOptionsDdlOption)[vs[1].(int)]
+	}).(SyncJobConfigDynamicOptionsDdlOptionOutput)
+}
+
+type SyncJobConfigDynamicOptionsKafkaOption struct {
+	// Other additional information, for specific data types extra parameters can be set.
+	DataOptions []SyncJobConfigDynamicOptionsKafkaOptionDataOption `pulumi:"dataOptions"`
+	// Data type delivered to kafka, such as Avro, Json, canal-pb, canal-json, debezium.
+	DataType *string `pulumi:"dataType"`
+	// Topic used to store ddl.
+	DdlTopicName *string `pulumi:"ddlTopicName"`
+	// Description of single topic and custom topic.
+	TopicRules []SyncJobConfigDynamicOptionsKafkaOptionTopicRule `pulumi:"topicRules"`
+	// Sync topic strategy, such as Single (centralized delivery to single topic), Multi (custom topic name).
+	TopicType *string `pulumi:"topicType"`
+}
+
+// SyncJobConfigDynamicOptionsKafkaOptionInput is an input type that accepts SyncJobConfigDynamicOptionsKafkaOptionArgs and SyncJobConfigDynamicOptionsKafkaOptionOutput values.
+// You can construct a concrete instance of `SyncJobConfigDynamicOptionsKafkaOptionInput` via:
+//
+//	SyncJobConfigDynamicOptionsKafkaOptionArgs{...}
+type SyncJobConfigDynamicOptionsKafkaOptionInput interface {
+	pulumi.Input
+
+	ToSyncJobConfigDynamicOptionsKafkaOptionOutput() SyncJobConfigDynamicOptionsKafkaOptionOutput
+	ToSyncJobConfigDynamicOptionsKafkaOptionOutputWithContext(context.Context) SyncJobConfigDynamicOptionsKafkaOptionOutput
+}
+
+type SyncJobConfigDynamicOptionsKafkaOptionArgs struct {
+	// Other additional information, for specific data types extra parameters can be set.
+	DataOptions SyncJobConfigDynamicOptionsKafkaOptionDataOptionArrayInput `pulumi:"dataOptions"`
+	// Data type delivered to kafka, such as Avro, Json, canal-pb, canal-json, debezium.
+	DataType pulumi.StringPtrInput `pulumi:"dataType"`
+	// Topic used to store ddl.
+	DdlTopicName pulumi.StringPtrInput `pulumi:"ddlTopicName"`
+	// Description of single topic and custom topic.
+	TopicRules SyncJobConfigDynamicOptionsKafkaOptionTopicRuleArrayInput `pulumi:"topicRules"`
+	// Sync topic strategy, such as Single (centralized delivery to single topic), Multi (custom topic name).
+	TopicType pulumi.StringPtrInput `pulumi:"topicType"`
+}
+
+func (SyncJobConfigDynamicOptionsKafkaOptionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncJobConfigDynamicOptionsKafkaOption)(nil)).Elem()
+}
+
+func (i SyncJobConfigDynamicOptionsKafkaOptionArgs) ToSyncJobConfigDynamicOptionsKafkaOptionOutput() SyncJobConfigDynamicOptionsKafkaOptionOutput {
+	return i.ToSyncJobConfigDynamicOptionsKafkaOptionOutputWithContext(context.Background())
+}
+
+func (i SyncJobConfigDynamicOptionsKafkaOptionArgs) ToSyncJobConfigDynamicOptionsKafkaOptionOutputWithContext(ctx context.Context) SyncJobConfigDynamicOptionsKafkaOptionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicOptionsKafkaOptionOutput)
+}
+
+func (i SyncJobConfigDynamicOptionsKafkaOptionArgs) ToSyncJobConfigDynamicOptionsKafkaOptionPtrOutput() SyncJobConfigDynamicOptionsKafkaOptionPtrOutput {
+	return i.ToSyncJobConfigDynamicOptionsKafkaOptionPtrOutputWithContext(context.Background())
+}
+
+func (i SyncJobConfigDynamicOptionsKafkaOptionArgs) ToSyncJobConfigDynamicOptionsKafkaOptionPtrOutputWithContext(ctx context.Context) SyncJobConfigDynamicOptionsKafkaOptionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicOptionsKafkaOptionOutput).ToSyncJobConfigDynamicOptionsKafkaOptionPtrOutputWithContext(ctx)
+}
+
+// SyncJobConfigDynamicOptionsKafkaOptionPtrInput is an input type that accepts SyncJobConfigDynamicOptionsKafkaOptionArgs, SyncJobConfigDynamicOptionsKafkaOptionPtr and SyncJobConfigDynamicOptionsKafkaOptionPtrOutput values.
+// You can construct a concrete instance of `SyncJobConfigDynamicOptionsKafkaOptionPtrInput` via:
+//
+//	        SyncJobConfigDynamicOptionsKafkaOptionArgs{...}
+//
+//	or:
+//
+//	        nil
+type SyncJobConfigDynamicOptionsKafkaOptionPtrInput interface {
+	pulumi.Input
+
+	ToSyncJobConfigDynamicOptionsKafkaOptionPtrOutput() SyncJobConfigDynamicOptionsKafkaOptionPtrOutput
+	ToSyncJobConfigDynamicOptionsKafkaOptionPtrOutputWithContext(context.Context) SyncJobConfigDynamicOptionsKafkaOptionPtrOutput
+}
+
+type syncJobConfigDynamicOptionsKafkaOptionPtrType SyncJobConfigDynamicOptionsKafkaOptionArgs
+
+func SyncJobConfigDynamicOptionsKafkaOptionPtr(v *SyncJobConfigDynamicOptionsKafkaOptionArgs) SyncJobConfigDynamicOptionsKafkaOptionPtrInput {
+	return (*syncJobConfigDynamicOptionsKafkaOptionPtrType)(v)
+}
+
+func (*syncJobConfigDynamicOptionsKafkaOptionPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SyncJobConfigDynamicOptionsKafkaOption)(nil)).Elem()
+}
+
+func (i *syncJobConfigDynamicOptionsKafkaOptionPtrType) ToSyncJobConfigDynamicOptionsKafkaOptionPtrOutput() SyncJobConfigDynamicOptionsKafkaOptionPtrOutput {
+	return i.ToSyncJobConfigDynamicOptionsKafkaOptionPtrOutputWithContext(context.Background())
+}
+
+func (i *syncJobConfigDynamicOptionsKafkaOptionPtrType) ToSyncJobConfigDynamicOptionsKafkaOptionPtrOutputWithContext(ctx context.Context) SyncJobConfigDynamicOptionsKafkaOptionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicOptionsKafkaOptionPtrOutput)
+}
+
+type SyncJobConfigDynamicOptionsKafkaOptionOutput struct{ *pulumi.OutputState }
+
+func (SyncJobConfigDynamicOptionsKafkaOptionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncJobConfigDynamicOptionsKafkaOption)(nil)).Elem()
+}
+
+func (o SyncJobConfigDynamicOptionsKafkaOptionOutput) ToSyncJobConfigDynamicOptionsKafkaOptionOutput() SyncJobConfigDynamicOptionsKafkaOptionOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicOptionsKafkaOptionOutput) ToSyncJobConfigDynamicOptionsKafkaOptionOutputWithContext(ctx context.Context) SyncJobConfigDynamicOptionsKafkaOptionOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicOptionsKafkaOptionOutput) ToSyncJobConfigDynamicOptionsKafkaOptionPtrOutput() SyncJobConfigDynamicOptionsKafkaOptionPtrOutput {
+	return o.ToSyncJobConfigDynamicOptionsKafkaOptionPtrOutputWithContext(context.Background())
+}
+
+func (o SyncJobConfigDynamicOptionsKafkaOptionOutput) ToSyncJobConfigDynamicOptionsKafkaOptionPtrOutputWithContext(ctx context.Context) SyncJobConfigDynamicOptionsKafkaOptionPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SyncJobConfigDynamicOptionsKafkaOption) *SyncJobConfigDynamicOptionsKafkaOption {
+		return &v
+	}).(SyncJobConfigDynamicOptionsKafkaOptionPtrOutput)
+}
+
+// Other additional information, for specific data types extra parameters can be set.
+func (o SyncJobConfigDynamicOptionsKafkaOptionOutput) DataOptions() SyncJobConfigDynamicOptionsKafkaOptionDataOptionArrayOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicOptionsKafkaOption) []SyncJobConfigDynamicOptionsKafkaOptionDataOption {
+		return v.DataOptions
+	}).(SyncJobConfigDynamicOptionsKafkaOptionDataOptionArrayOutput)
+}
+
+// Data type delivered to kafka, such as Avro, Json, canal-pb, canal-json, debezium.
+func (o SyncJobConfigDynamicOptionsKafkaOptionOutput) DataType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicOptionsKafkaOption) *string { return v.DataType }).(pulumi.StringPtrOutput)
+}
+
+// Topic used to store ddl.
+func (o SyncJobConfigDynamicOptionsKafkaOptionOutput) DdlTopicName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicOptionsKafkaOption) *string { return v.DdlTopicName }).(pulumi.StringPtrOutput)
+}
+
+// Description of single topic and custom topic.
+func (o SyncJobConfigDynamicOptionsKafkaOptionOutput) TopicRules() SyncJobConfigDynamicOptionsKafkaOptionTopicRuleArrayOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicOptionsKafkaOption) []SyncJobConfigDynamicOptionsKafkaOptionTopicRule {
+		return v.TopicRules
+	}).(SyncJobConfigDynamicOptionsKafkaOptionTopicRuleArrayOutput)
+}
+
+// Sync topic strategy, such as Single (centralized delivery to single topic), Multi (custom topic name).
+func (o SyncJobConfigDynamicOptionsKafkaOptionOutput) TopicType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicOptionsKafkaOption) *string { return v.TopicType }).(pulumi.StringPtrOutput)
+}
+
+type SyncJobConfigDynamicOptionsKafkaOptionPtrOutput struct{ *pulumi.OutputState }
+
+func (SyncJobConfigDynamicOptionsKafkaOptionPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SyncJobConfigDynamicOptionsKafkaOption)(nil)).Elem()
+}
+
+func (o SyncJobConfigDynamicOptionsKafkaOptionPtrOutput) ToSyncJobConfigDynamicOptionsKafkaOptionPtrOutput() SyncJobConfigDynamicOptionsKafkaOptionPtrOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicOptionsKafkaOptionPtrOutput) ToSyncJobConfigDynamicOptionsKafkaOptionPtrOutputWithContext(ctx context.Context) SyncJobConfigDynamicOptionsKafkaOptionPtrOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicOptionsKafkaOptionPtrOutput) Elem() SyncJobConfigDynamicOptionsKafkaOptionOutput {
+	return o.ApplyT(func(v *SyncJobConfigDynamicOptionsKafkaOption) SyncJobConfigDynamicOptionsKafkaOption {
+		if v != nil {
+			return *v
+		}
+		var ret SyncJobConfigDynamicOptionsKafkaOption
+		return ret
+	}).(SyncJobConfigDynamicOptionsKafkaOptionOutput)
+}
+
+// Other additional information, for specific data types extra parameters can be set.
+func (o SyncJobConfigDynamicOptionsKafkaOptionPtrOutput) DataOptions() SyncJobConfigDynamicOptionsKafkaOptionDataOptionArrayOutput {
+	return o.ApplyT(func(v *SyncJobConfigDynamicOptionsKafkaOption) []SyncJobConfigDynamicOptionsKafkaOptionDataOption {
+		if v == nil {
+			return nil
+		}
+		return v.DataOptions
+	}).(SyncJobConfigDynamicOptionsKafkaOptionDataOptionArrayOutput)
+}
+
+// Data type delivered to kafka, such as Avro, Json, canal-pb, canal-json, debezium.
+func (o SyncJobConfigDynamicOptionsKafkaOptionPtrOutput) DataType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncJobConfigDynamicOptionsKafkaOption) *string {
+		if v == nil {
+			return nil
+		}
+		return v.DataType
+	}).(pulumi.StringPtrOutput)
+}
+
+// Topic used to store ddl.
+func (o SyncJobConfigDynamicOptionsKafkaOptionPtrOutput) DdlTopicName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncJobConfigDynamicOptionsKafkaOption) *string {
+		if v == nil {
+			return nil
+		}
+		return v.DdlTopicName
+	}).(pulumi.StringPtrOutput)
+}
+
+// Description of single topic and custom topic.
+func (o SyncJobConfigDynamicOptionsKafkaOptionPtrOutput) TopicRules() SyncJobConfigDynamicOptionsKafkaOptionTopicRuleArrayOutput {
+	return o.ApplyT(func(v *SyncJobConfigDynamicOptionsKafkaOption) []SyncJobConfigDynamicOptionsKafkaOptionTopicRule {
+		if v == nil {
+			return nil
+		}
+		return v.TopicRules
+	}).(SyncJobConfigDynamicOptionsKafkaOptionTopicRuleArrayOutput)
+}
+
+// Sync topic strategy, such as Single (centralized delivery to single topic), Multi (custom topic name).
+func (o SyncJobConfigDynamicOptionsKafkaOptionPtrOutput) TopicType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SyncJobConfigDynamicOptionsKafkaOption) *string {
+		if v == nil {
+			return nil
+		}
+		return v.TopicType
+	}).(pulumi.StringPtrOutput)
+}
+
+type SyncJobConfigDynamicOptionsKafkaOptionDataOption struct {
+	// Option key.
+	Key *string `pulumi:"key"`
+	// Option value.
+	Value *string `pulumi:"value"`
+}
+
+// SyncJobConfigDynamicOptionsKafkaOptionDataOptionInput is an input type that accepts SyncJobConfigDynamicOptionsKafkaOptionDataOptionArgs and SyncJobConfigDynamicOptionsKafkaOptionDataOptionOutput values.
+// You can construct a concrete instance of `SyncJobConfigDynamicOptionsKafkaOptionDataOptionInput` via:
+//
+//	SyncJobConfigDynamicOptionsKafkaOptionDataOptionArgs{...}
+type SyncJobConfigDynamicOptionsKafkaOptionDataOptionInput interface {
+	pulumi.Input
+
+	ToSyncJobConfigDynamicOptionsKafkaOptionDataOptionOutput() SyncJobConfigDynamicOptionsKafkaOptionDataOptionOutput
+	ToSyncJobConfigDynamicOptionsKafkaOptionDataOptionOutputWithContext(context.Context) SyncJobConfigDynamicOptionsKafkaOptionDataOptionOutput
+}
+
+type SyncJobConfigDynamicOptionsKafkaOptionDataOptionArgs struct {
+	// Option key.
+	Key pulumi.StringPtrInput `pulumi:"key"`
+	// Option value.
+	Value pulumi.StringPtrInput `pulumi:"value"`
+}
+
+func (SyncJobConfigDynamicOptionsKafkaOptionDataOptionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncJobConfigDynamicOptionsKafkaOptionDataOption)(nil)).Elem()
+}
+
+func (i SyncJobConfigDynamicOptionsKafkaOptionDataOptionArgs) ToSyncJobConfigDynamicOptionsKafkaOptionDataOptionOutput() SyncJobConfigDynamicOptionsKafkaOptionDataOptionOutput {
+	return i.ToSyncJobConfigDynamicOptionsKafkaOptionDataOptionOutputWithContext(context.Background())
+}
+
+func (i SyncJobConfigDynamicOptionsKafkaOptionDataOptionArgs) ToSyncJobConfigDynamicOptionsKafkaOptionDataOptionOutputWithContext(ctx context.Context) SyncJobConfigDynamicOptionsKafkaOptionDataOptionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicOptionsKafkaOptionDataOptionOutput)
+}
+
+// SyncJobConfigDynamicOptionsKafkaOptionDataOptionArrayInput is an input type that accepts SyncJobConfigDynamicOptionsKafkaOptionDataOptionArray and SyncJobConfigDynamicOptionsKafkaOptionDataOptionArrayOutput values.
+// You can construct a concrete instance of `SyncJobConfigDynamicOptionsKafkaOptionDataOptionArrayInput` via:
+//
+//	SyncJobConfigDynamicOptionsKafkaOptionDataOptionArray{ SyncJobConfigDynamicOptionsKafkaOptionDataOptionArgs{...} }
+type SyncJobConfigDynamicOptionsKafkaOptionDataOptionArrayInput interface {
+	pulumi.Input
+
+	ToSyncJobConfigDynamicOptionsKafkaOptionDataOptionArrayOutput() SyncJobConfigDynamicOptionsKafkaOptionDataOptionArrayOutput
+	ToSyncJobConfigDynamicOptionsKafkaOptionDataOptionArrayOutputWithContext(context.Context) SyncJobConfigDynamicOptionsKafkaOptionDataOptionArrayOutput
+}
+
+type SyncJobConfigDynamicOptionsKafkaOptionDataOptionArray []SyncJobConfigDynamicOptionsKafkaOptionDataOptionInput
+
+func (SyncJobConfigDynamicOptionsKafkaOptionDataOptionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SyncJobConfigDynamicOptionsKafkaOptionDataOption)(nil)).Elem()
+}
+
+func (i SyncJobConfigDynamicOptionsKafkaOptionDataOptionArray) ToSyncJobConfigDynamicOptionsKafkaOptionDataOptionArrayOutput() SyncJobConfigDynamicOptionsKafkaOptionDataOptionArrayOutput {
+	return i.ToSyncJobConfigDynamicOptionsKafkaOptionDataOptionArrayOutputWithContext(context.Background())
+}
+
+func (i SyncJobConfigDynamicOptionsKafkaOptionDataOptionArray) ToSyncJobConfigDynamicOptionsKafkaOptionDataOptionArrayOutputWithContext(ctx context.Context) SyncJobConfigDynamicOptionsKafkaOptionDataOptionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicOptionsKafkaOptionDataOptionArrayOutput)
+}
+
+type SyncJobConfigDynamicOptionsKafkaOptionDataOptionOutput struct{ *pulumi.OutputState }
+
+func (SyncJobConfigDynamicOptionsKafkaOptionDataOptionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncJobConfigDynamicOptionsKafkaOptionDataOption)(nil)).Elem()
+}
+
+func (o SyncJobConfigDynamicOptionsKafkaOptionDataOptionOutput) ToSyncJobConfigDynamicOptionsKafkaOptionDataOptionOutput() SyncJobConfigDynamicOptionsKafkaOptionDataOptionOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicOptionsKafkaOptionDataOptionOutput) ToSyncJobConfigDynamicOptionsKafkaOptionDataOptionOutputWithContext(ctx context.Context) SyncJobConfigDynamicOptionsKafkaOptionDataOptionOutput {
+	return o
+}
+
+// Option key.
+func (o SyncJobConfigDynamicOptionsKafkaOptionDataOptionOutput) Key() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicOptionsKafkaOptionDataOption) *string { return v.Key }).(pulumi.StringPtrOutput)
+}
+
+// Option value.
+func (o SyncJobConfigDynamicOptionsKafkaOptionDataOptionOutput) Value() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicOptionsKafkaOptionDataOption) *string { return v.Value }).(pulumi.StringPtrOutput)
+}
+
+type SyncJobConfigDynamicOptionsKafkaOptionDataOptionArrayOutput struct{ *pulumi.OutputState }
+
+func (SyncJobConfigDynamicOptionsKafkaOptionDataOptionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SyncJobConfigDynamicOptionsKafkaOptionDataOption)(nil)).Elem()
+}
+
+func (o SyncJobConfigDynamicOptionsKafkaOptionDataOptionArrayOutput) ToSyncJobConfigDynamicOptionsKafkaOptionDataOptionArrayOutput() SyncJobConfigDynamicOptionsKafkaOptionDataOptionArrayOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicOptionsKafkaOptionDataOptionArrayOutput) ToSyncJobConfigDynamicOptionsKafkaOptionDataOptionArrayOutputWithContext(ctx context.Context) SyncJobConfigDynamicOptionsKafkaOptionDataOptionArrayOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicOptionsKafkaOptionDataOptionArrayOutput) Index(i pulumi.IntInput) SyncJobConfigDynamicOptionsKafkaOptionDataOptionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SyncJobConfigDynamicOptionsKafkaOptionDataOption {
+		return vs[0].([]SyncJobConfigDynamicOptionsKafkaOptionDataOption)[vs[1].(int)]
+	}).(SyncJobConfigDynamicOptionsKafkaOptionDataOptionOutput)
+}
+
+type SyncJobConfigDynamicOptionsKafkaOptionTopicRule struct {
+	// Column names for partition by columns, multiple columns can be selected.
+	Columns []string `pulumi:"columns"`
+	// Database name matching rule, such as Regular, Default.
+	DbMatchMode *string `pulumi:"dbMatchMode"`
+	// Database name, takes effect when DbMatchMode=Regular.
+	DbName *string `pulumi:"dbName"`
+	// Topic partition strategy.
+	PartitionType *string `pulumi:"partitionType"`
+	// Table name matching rule, such as Regular, Default.
+	TableMatchMode *string `pulumi:"tableMatchMode"`
+	// Table name, only takes effect when TableMatchMode=Regular.
+	TableName *string `pulumi:"tableName"`
+	// Topic name. When single topic, all TopicName must be the same.
+	TopicName *string `pulumi:"topicName"`
+}
+
+// SyncJobConfigDynamicOptionsKafkaOptionTopicRuleInput is an input type that accepts SyncJobConfigDynamicOptionsKafkaOptionTopicRuleArgs and SyncJobConfigDynamicOptionsKafkaOptionTopicRuleOutput values.
+// You can construct a concrete instance of `SyncJobConfigDynamicOptionsKafkaOptionTopicRuleInput` via:
+//
+//	SyncJobConfigDynamicOptionsKafkaOptionTopicRuleArgs{...}
+type SyncJobConfigDynamicOptionsKafkaOptionTopicRuleInput interface {
+	pulumi.Input
+
+	ToSyncJobConfigDynamicOptionsKafkaOptionTopicRuleOutput() SyncJobConfigDynamicOptionsKafkaOptionTopicRuleOutput
+	ToSyncJobConfigDynamicOptionsKafkaOptionTopicRuleOutputWithContext(context.Context) SyncJobConfigDynamicOptionsKafkaOptionTopicRuleOutput
+}
+
+type SyncJobConfigDynamicOptionsKafkaOptionTopicRuleArgs struct {
+	// Column names for partition by columns, multiple columns can be selected.
+	Columns pulumi.StringArrayInput `pulumi:"columns"`
+	// Database name matching rule, such as Regular, Default.
+	DbMatchMode pulumi.StringPtrInput `pulumi:"dbMatchMode"`
+	// Database name, takes effect when DbMatchMode=Regular.
+	DbName pulumi.StringPtrInput `pulumi:"dbName"`
+	// Topic partition strategy.
+	PartitionType pulumi.StringPtrInput `pulumi:"partitionType"`
+	// Table name matching rule, such as Regular, Default.
+	TableMatchMode pulumi.StringPtrInput `pulumi:"tableMatchMode"`
+	// Table name, only takes effect when TableMatchMode=Regular.
+	TableName pulumi.StringPtrInput `pulumi:"tableName"`
+	// Topic name. When single topic, all TopicName must be the same.
+	TopicName pulumi.StringPtrInput `pulumi:"topicName"`
+}
+
+func (SyncJobConfigDynamicOptionsKafkaOptionTopicRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncJobConfigDynamicOptionsKafkaOptionTopicRule)(nil)).Elem()
+}
+
+func (i SyncJobConfigDynamicOptionsKafkaOptionTopicRuleArgs) ToSyncJobConfigDynamicOptionsKafkaOptionTopicRuleOutput() SyncJobConfigDynamicOptionsKafkaOptionTopicRuleOutput {
+	return i.ToSyncJobConfigDynamicOptionsKafkaOptionTopicRuleOutputWithContext(context.Background())
+}
+
+func (i SyncJobConfigDynamicOptionsKafkaOptionTopicRuleArgs) ToSyncJobConfigDynamicOptionsKafkaOptionTopicRuleOutputWithContext(ctx context.Context) SyncJobConfigDynamicOptionsKafkaOptionTopicRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicOptionsKafkaOptionTopicRuleOutput)
+}
+
+// SyncJobConfigDynamicOptionsKafkaOptionTopicRuleArrayInput is an input type that accepts SyncJobConfigDynamicOptionsKafkaOptionTopicRuleArray and SyncJobConfigDynamicOptionsKafkaOptionTopicRuleArrayOutput values.
+// You can construct a concrete instance of `SyncJobConfigDynamicOptionsKafkaOptionTopicRuleArrayInput` via:
+//
+//	SyncJobConfigDynamicOptionsKafkaOptionTopicRuleArray{ SyncJobConfigDynamicOptionsKafkaOptionTopicRuleArgs{...} }
+type SyncJobConfigDynamicOptionsKafkaOptionTopicRuleArrayInput interface {
+	pulumi.Input
+
+	ToSyncJobConfigDynamicOptionsKafkaOptionTopicRuleArrayOutput() SyncJobConfigDynamicOptionsKafkaOptionTopicRuleArrayOutput
+	ToSyncJobConfigDynamicOptionsKafkaOptionTopicRuleArrayOutputWithContext(context.Context) SyncJobConfigDynamicOptionsKafkaOptionTopicRuleArrayOutput
+}
+
+type SyncJobConfigDynamicOptionsKafkaOptionTopicRuleArray []SyncJobConfigDynamicOptionsKafkaOptionTopicRuleInput
+
+func (SyncJobConfigDynamicOptionsKafkaOptionTopicRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SyncJobConfigDynamicOptionsKafkaOptionTopicRule)(nil)).Elem()
+}
+
+func (i SyncJobConfigDynamicOptionsKafkaOptionTopicRuleArray) ToSyncJobConfigDynamicOptionsKafkaOptionTopicRuleArrayOutput() SyncJobConfigDynamicOptionsKafkaOptionTopicRuleArrayOutput {
+	return i.ToSyncJobConfigDynamicOptionsKafkaOptionTopicRuleArrayOutputWithContext(context.Background())
+}
+
+func (i SyncJobConfigDynamicOptionsKafkaOptionTopicRuleArray) ToSyncJobConfigDynamicOptionsKafkaOptionTopicRuleArrayOutputWithContext(ctx context.Context) SyncJobConfigDynamicOptionsKafkaOptionTopicRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SyncJobConfigDynamicOptionsKafkaOptionTopicRuleArrayOutput)
+}
+
+type SyncJobConfigDynamicOptionsKafkaOptionTopicRuleOutput struct{ *pulumi.OutputState }
+
+func (SyncJobConfigDynamicOptionsKafkaOptionTopicRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SyncJobConfigDynamicOptionsKafkaOptionTopicRule)(nil)).Elem()
+}
+
+func (o SyncJobConfigDynamicOptionsKafkaOptionTopicRuleOutput) ToSyncJobConfigDynamicOptionsKafkaOptionTopicRuleOutput() SyncJobConfigDynamicOptionsKafkaOptionTopicRuleOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicOptionsKafkaOptionTopicRuleOutput) ToSyncJobConfigDynamicOptionsKafkaOptionTopicRuleOutputWithContext(ctx context.Context) SyncJobConfigDynamicOptionsKafkaOptionTopicRuleOutput {
+	return o
+}
+
+// Column names for partition by columns, multiple columns can be selected.
+func (o SyncJobConfigDynamicOptionsKafkaOptionTopicRuleOutput) Columns() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicOptionsKafkaOptionTopicRule) []string { return v.Columns }).(pulumi.StringArrayOutput)
+}
+
+// Database name matching rule, such as Regular, Default.
+func (o SyncJobConfigDynamicOptionsKafkaOptionTopicRuleOutput) DbMatchMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicOptionsKafkaOptionTopicRule) *string { return v.DbMatchMode }).(pulumi.StringPtrOutput)
+}
+
+// Database name, takes effect when DbMatchMode=Regular.
+func (o SyncJobConfigDynamicOptionsKafkaOptionTopicRuleOutput) DbName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicOptionsKafkaOptionTopicRule) *string { return v.DbName }).(pulumi.StringPtrOutput)
+}
+
+// Topic partition strategy.
+func (o SyncJobConfigDynamicOptionsKafkaOptionTopicRuleOutput) PartitionType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicOptionsKafkaOptionTopicRule) *string { return v.PartitionType }).(pulumi.StringPtrOutput)
+}
+
+// Table name matching rule, such as Regular, Default.
+func (o SyncJobConfigDynamicOptionsKafkaOptionTopicRuleOutput) TableMatchMode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicOptionsKafkaOptionTopicRule) *string { return v.TableMatchMode }).(pulumi.StringPtrOutput)
+}
+
+// Table name, only takes effect when TableMatchMode=Regular.
+func (o SyncJobConfigDynamicOptionsKafkaOptionTopicRuleOutput) TableName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicOptionsKafkaOptionTopicRule) *string { return v.TableName }).(pulumi.StringPtrOutput)
+}
+
+// Topic name. When single topic, all TopicName must be the same.
+func (o SyncJobConfigDynamicOptionsKafkaOptionTopicRuleOutput) TopicName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SyncJobConfigDynamicOptionsKafkaOptionTopicRule) *string { return v.TopicName }).(pulumi.StringPtrOutput)
+}
+
+type SyncJobConfigDynamicOptionsKafkaOptionTopicRuleArrayOutput struct{ *pulumi.OutputState }
+
+func (SyncJobConfigDynamicOptionsKafkaOptionTopicRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]SyncJobConfigDynamicOptionsKafkaOptionTopicRule)(nil)).Elem()
+}
+
+func (o SyncJobConfigDynamicOptionsKafkaOptionTopicRuleArrayOutput) ToSyncJobConfigDynamicOptionsKafkaOptionTopicRuleArrayOutput() SyncJobConfigDynamicOptionsKafkaOptionTopicRuleArrayOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicOptionsKafkaOptionTopicRuleArrayOutput) ToSyncJobConfigDynamicOptionsKafkaOptionTopicRuleArrayOutputWithContext(ctx context.Context) SyncJobConfigDynamicOptionsKafkaOptionTopicRuleArrayOutput {
+	return o
+}
+
+func (o SyncJobConfigDynamicOptionsKafkaOptionTopicRuleArrayOutput) Index(i pulumi.IntInput) SyncJobConfigDynamicOptionsKafkaOptionTopicRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) SyncJobConfigDynamicOptionsKafkaOptionTopicRule {
+		return vs[0].([]SyncJobConfigDynamicOptionsKafkaOptionTopicRule)[vs[1].(int)]
+	}).(SyncJobConfigDynamicOptionsKafkaOptionTopicRuleOutput)
+}
+
 type SyncJobTag struct {
 	// Tag key.
 	TagKey *string `pulumi:"tagKey"`
@@ -11792,6 +14963,8 @@ type GetSyncJobsListObjectDatabase struct {
 	ProcedureMode string `pulumi:"procedureMode"`
 	// procedures.
 	Procedures []string `pulumi:"procedures"`
+	// schema selection mode, used by pg and sqlserver. enum values: All (all objects under the current object), Partial (partial objects).
+	SchemaMode string `pulumi:"schemaMode"`
 	// schema name.
 	SchemaName string `pulumi:"schemaName"`
 	// table mode.
@@ -11832,6 +15005,8 @@ type GetSyncJobsListObjectDatabaseArgs struct {
 	ProcedureMode pulumi.StringInput `pulumi:"procedureMode"`
 	// procedures.
 	Procedures pulumi.StringArrayInput `pulumi:"procedures"`
+	// schema selection mode, used by pg and sqlserver. enum values: All (all objects under the current object), Partial (partial objects).
+	SchemaMode pulumi.StringInput `pulumi:"schemaMode"`
 	// schema name.
 	SchemaName pulumi.StringInput `pulumi:"schemaName"`
 	// table mode.
@@ -11933,6 +15108,11 @@ func (o GetSyncJobsListObjectDatabaseOutput) ProcedureMode() pulumi.StringOutput
 // procedures.
 func (o GetSyncJobsListObjectDatabaseOutput) Procedures() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v GetSyncJobsListObjectDatabase) []string { return v.Procedures }).(pulumi.StringArrayOutput)
+}
+
+// schema selection mode, used by pg and sqlserver. enum values: All (all objects under the current object), Partial (partial objects).
+func (o GetSyncJobsListObjectDatabaseOutput) SchemaMode() pulumi.StringOutput {
+	return o.ApplyT(func(v GetSyncJobsListObjectDatabase) string { return v.SchemaMode }).(pulumi.StringOutput)
 }
 
 // schema name.
@@ -13136,6 +16316,48 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*SyncConfigOptionsRateLimitOptionPtrInput)(nil)).Elem(), SyncConfigOptionsRateLimitOptionArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SyncConfigSrcInfoInput)(nil)).Elem(), SyncConfigSrcInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SyncConfigSrcInfoPtrInput)(nil)).Elem(), SyncConfigSrcInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncJobConfigDynamicObjectsInput)(nil)).Elem(), SyncJobConfigDynamicObjectsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncJobConfigDynamicObjectsPtrInput)(nil)).Elem(), SyncJobConfigDynamicObjectsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabaseInput)(nil)).Elem(), SyncJobConfigDynamicObjectsDatabaseArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabaseArrayInput)(nil)).Elem(), SyncJobConfigDynamicObjectsDatabaseArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabaseTableInput)(nil)).Elem(), SyncJobConfigDynamicObjectsDatabaseTableArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabaseTableArrayInput)(nil)).Elem(), SyncJobConfigDynamicObjectsDatabaseTableArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabaseTableColumnInput)(nil)).Elem(), SyncJobConfigDynamicObjectsDatabaseTableColumnArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabaseTableColumnArrayInput)(nil)).Elem(), SyncJobConfigDynamicObjectsDatabaseTableColumnArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabaseViewInput)(nil)).Elem(), SyncJobConfigDynamicObjectsDatabaseViewArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabaseViewArrayInput)(nil)).Elem(), SyncJobConfigDynamicObjectsDatabaseViewArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabasesOpFilterInput)(nil)).Elem(), SyncJobConfigDynamicObjectsDatabasesOpFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabasesOpFilterArrayInput)(nil)).Elem(), SyncJobConfigDynamicObjectsDatabasesOpFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterInput)(nil)).Elem(), SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtrInput)(nil)).Elem(), SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionInput)(nil)).Elem(), SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionArrayInput)(nil)).Elem(), SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabasesOpFilterTableInput)(nil)).Elem(), SyncJobConfigDynamicObjectsDatabasesOpFilterTableArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabasesOpFilterTableArrayInput)(nil)).Elem(), SyncJobConfigDynamicObjectsDatabasesOpFilterTableArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterInput)(nil)).Elem(), SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtrInput)(nil)).Elem(), SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionInput)(nil)).Elem(), SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionArrayInput)(nil)).Elem(), SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabasesOpFilterViewInput)(nil)).Elem(), SyncJobConfigDynamicObjectsDatabasesOpFilterViewArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabasesOpFilterViewArrayInput)(nil)).Elem(), SyncJobConfigDynamicObjectsDatabasesOpFilterViewArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterInput)(nil)).Elem(), SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtrInput)(nil)).Elem(), SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionInput)(nil)).Elem(), SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionArrayInput)(nil)).Elem(), SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncJobConfigDynamicObjectsOnlineDdlInput)(nil)).Elem(), SyncJobConfigDynamicObjectsOnlineDdlArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncJobConfigDynamicObjectsOnlineDdlPtrInput)(nil)).Elem(), SyncJobConfigDynamicObjectsOnlineDdlArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncJobConfigDynamicOptionsInput)(nil)).Elem(), SyncJobConfigDynamicOptionsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncJobConfigDynamicOptionsPtrInput)(nil)).Elem(), SyncJobConfigDynamicOptionsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncJobConfigDynamicOptionsConflictHandleOptionInput)(nil)).Elem(), SyncJobConfigDynamicOptionsConflictHandleOptionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncJobConfigDynamicOptionsConflictHandleOptionPtrInput)(nil)).Elem(), SyncJobConfigDynamicOptionsConflictHandleOptionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncJobConfigDynamicOptionsDdlOptionInput)(nil)).Elem(), SyncJobConfigDynamicOptionsDdlOptionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncJobConfigDynamicOptionsDdlOptionArrayInput)(nil)).Elem(), SyncJobConfigDynamicOptionsDdlOptionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncJobConfigDynamicOptionsKafkaOptionInput)(nil)).Elem(), SyncJobConfigDynamicOptionsKafkaOptionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncJobConfigDynamicOptionsKafkaOptionPtrInput)(nil)).Elem(), SyncJobConfigDynamicOptionsKafkaOptionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncJobConfigDynamicOptionsKafkaOptionDataOptionInput)(nil)).Elem(), SyncJobConfigDynamicOptionsKafkaOptionDataOptionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncJobConfigDynamicOptionsKafkaOptionDataOptionArrayInput)(nil)).Elem(), SyncJobConfigDynamicOptionsKafkaOptionDataOptionArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncJobConfigDynamicOptionsKafkaOptionTopicRuleInput)(nil)).Elem(), SyncJobConfigDynamicOptionsKafkaOptionTopicRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SyncJobConfigDynamicOptionsKafkaOptionTopicRuleArrayInput)(nil)).Elem(), SyncJobConfigDynamicOptionsKafkaOptionTopicRuleArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SyncJobTagInput)(nil)).Elem(), SyncJobTagArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SyncJobTagArrayInput)(nil)).Elem(), SyncJobTagArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetCompareTasksListInput)(nil)).Elem(), GetCompareTasksListArgs{})
@@ -13290,6 +16512,48 @@ func init() {
 	pulumi.RegisterOutputType(SyncConfigOptionsRateLimitOptionPtrOutput{})
 	pulumi.RegisterOutputType(SyncConfigSrcInfoOutput{})
 	pulumi.RegisterOutputType(SyncConfigSrcInfoPtrOutput{})
+	pulumi.RegisterOutputType(SyncJobConfigDynamicObjectsOutput{})
+	pulumi.RegisterOutputType(SyncJobConfigDynamicObjectsPtrOutput{})
+	pulumi.RegisterOutputType(SyncJobConfigDynamicObjectsDatabaseOutput{})
+	pulumi.RegisterOutputType(SyncJobConfigDynamicObjectsDatabaseArrayOutput{})
+	pulumi.RegisterOutputType(SyncJobConfigDynamicObjectsDatabaseTableOutput{})
+	pulumi.RegisterOutputType(SyncJobConfigDynamicObjectsDatabaseTableArrayOutput{})
+	pulumi.RegisterOutputType(SyncJobConfigDynamicObjectsDatabaseTableColumnOutput{})
+	pulumi.RegisterOutputType(SyncJobConfigDynamicObjectsDatabaseTableColumnArrayOutput{})
+	pulumi.RegisterOutputType(SyncJobConfigDynamicObjectsDatabaseViewOutput{})
+	pulumi.RegisterOutputType(SyncJobConfigDynamicObjectsDatabaseViewArrayOutput{})
+	pulumi.RegisterOutputType(SyncJobConfigDynamicObjectsDatabasesOpFilterOutput{})
+	pulumi.RegisterOutputType(SyncJobConfigDynamicObjectsDatabasesOpFilterArrayOutput{})
+	pulumi.RegisterOutputType(SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterOutput{})
+	pulumi.RegisterOutputType(SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterPtrOutput{})
+	pulumi.RegisterOutputType(SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionOutput{})
+	pulumi.RegisterOutputType(SyncJobConfigDynamicObjectsDatabasesOpFilterOpFilterDdlOptionArrayOutput{})
+	pulumi.RegisterOutputType(SyncJobConfigDynamicObjectsDatabasesOpFilterTableOutput{})
+	pulumi.RegisterOutputType(SyncJobConfigDynamicObjectsDatabasesOpFilterTableArrayOutput{})
+	pulumi.RegisterOutputType(SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterOutput{})
+	pulumi.RegisterOutputType(SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterPtrOutput{})
+	pulumi.RegisterOutputType(SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionOutput{})
+	pulumi.RegisterOutputType(SyncJobConfigDynamicObjectsDatabasesOpFilterTableOpFilterDdlOptionArrayOutput{})
+	pulumi.RegisterOutputType(SyncJobConfigDynamicObjectsDatabasesOpFilterViewOutput{})
+	pulumi.RegisterOutputType(SyncJobConfigDynamicObjectsDatabasesOpFilterViewArrayOutput{})
+	pulumi.RegisterOutputType(SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterOutput{})
+	pulumi.RegisterOutputType(SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterPtrOutput{})
+	pulumi.RegisterOutputType(SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionOutput{})
+	pulumi.RegisterOutputType(SyncJobConfigDynamicObjectsDatabasesOpFilterViewOpFilterDdlOptionArrayOutput{})
+	pulumi.RegisterOutputType(SyncJobConfigDynamicObjectsOnlineDdlOutput{})
+	pulumi.RegisterOutputType(SyncJobConfigDynamicObjectsOnlineDdlPtrOutput{})
+	pulumi.RegisterOutputType(SyncJobConfigDynamicOptionsOutput{})
+	pulumi.RegisterOutputType(SyncJobConfigDynamicOptionsPtrOutput{})
+	pulumi.RegisterOutputType(SyncJobConfigDynamicOptionsConflictHandleOptionOutput{})
+	pulumi.RegisterOutputType(SyncJobConfigDynamicOptionsConflictHandleOptionPtrOutput{})
+	pulumi.RegisterOutputType(SyncJobConfigDynamicOptionsDdlOptionOutput{})
+	pulumi.RegisterOutputType(SyncJobConfigDynamicOptionsDdlOptionArrayOutput{})
+	pulumi.RegisterOutputType(SyncJobConfigDynamicOptionsKafkaOptionOutput{})
+	pulumi.RegisterOutputType(SyncJobConfigDynamicOptionsKafkaOptionPtrOutput{})
+	pulumi.RegisterOutputType(SyncJobConfigDynamicOptionsKafkaOptionDataOptionOutput{})
+	pulumi.RegisterOutputType(SyncJobConfigDynamicOptionsKafkaOptionDataOptionArrayOutput{})
+	pulumi.RegisterOutputType(SyncJobConfigDynamicOptionsKafkaOptionTopicRuleOutput{})
+	pulumi.RegisterOutputType(SyncJobConfigDynamicOptionsKafkaOptionTopicRuleArrayOutput{})
 	pulumi.RegisterOutputType(SyncJobTagOutput{})
 	pulumi.RegisterOutputType(SyncJobTagArrayOutput{})
 	pulumi.RegisterOutputType(GetCompareTasksListOutput{})

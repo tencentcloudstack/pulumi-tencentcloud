@@ -36,6 +36,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeTemplateLimits](https://www.tencentcloud.com/search/?wd=DescribeTemplateLimits&type=document&lang=en)
 func GetTemplateLimits(ctx *pulumi.Context, args *GetTemplateLimitsArgs, opts ...pulumi.InvokeOption) (*GetTemplateLimitsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetTemplateLimitsResult

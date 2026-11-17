@@ -116,6 +116,12 @@ def get_inst_tables(database: Optional[_builtins.str] = None,
         database="tf_ci_test")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTables](https://www.tencentcloud.com/document/api/236/18727)
+
 
     :param _builtins.str database: The name of the database.
     :param _builtins.str instance_id: The instance ID, in the format: cdb-c1nl9rpv, is the same as the instance ID displayed on the cloud database console page.
@@ -154,6 +160,12 @@ def get_inst_tables_output(database: pulumi.Input[Optional[_builtins.str]] = Non
     inst_tables = tencentcloud.mysql.get_inst_tables(instance_id="cdb-fitq5t9h",
         database="tf_ci_test")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTables](https://www.tencentcloud.com/document/api/236/18727)
 
 
     :param _builtins.str database: The name of the database.

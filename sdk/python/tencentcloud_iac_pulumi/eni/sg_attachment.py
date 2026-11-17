@@ -156,6 +156,14 @@ class SgAttachment(pulumi.CustomResource):
             ])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AssociateNetworkInterfaceSecurityGroups](https://www.tencentcloud.com/document/api/215/36090)
+        * Read: [DescribeNetworkInterfaces](https://www.tencentcloud.com/document/api/215/15817)
+        * Delete: [DisassociateNetworkInterfaceSecurityGroups](https://www.tencentcloud.com/document/api/215/36089)
+
         ## Import
 
         vpc eni_sg_attachment can be imported using the id, e.g.
@@ -225,6 +233,14 @@ class SgAttachment(pulumi.CustomResource):
                 example2.id,
             ])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AssociateNetworkInterfaceSecurityGroups](https://www.tencentcloud.com/document/api/215/36090)
+        * Read: [DescribeNetworkInterfaces](https://www.tencentcloud.com/document/api/215/15817)
+        * Delete: [DisassociateNetworkInterfaceSecurityGroups](https://www.tencentcloud.com/document/api/215/36089)
 
         ## Import
 

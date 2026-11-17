@@ -658,6 +658,25 @@ class Instance(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateInstance](https://www.tencentcloud.com/document/api/1294/76527)
+          - [DescribeInstance](https://www.tencentcloud.com/document/api/1294/76523)
+          - [ModifyInstance](https://www.tencentcloud.com/document/api/1294/76521)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribeInstance](https://www.tencentcloud.com/document/api/1294/76523)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [ModifyInstance](https://www.tencentcloud.com/document/api/1294/76521)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Delete:
+          - [DeleteInstance](https://www.tencentcloud.com/document/api/1294/76525)
+          - [DescribeInstance](https://www.tencentcloud.com/document/api/1294/76523)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -771,6 +790,25 @@ class Instance(pulumi.CustomResource):
                 "createBy": "Terraform",
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateInstance](https://www.tencentcloud.com/document/api/1294/76527)
+          - [DescribeInstance](https://www.tencentcloud.com/document/api/1294/76523)
+          - [ModifyInstance](https://www.tencentcloud.com/document/api/1294/76521)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribeInstance](https://www.tencentcloud.com/document/api/1294/76523)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [ModifyInstance](https://www.tencentcloud.com/document/api/1294/76521)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Delete:
+          - [DeleteInstance](https://www.tencentcloud.com/document/api/1294/76525)
+          - [DescribeInstance](https://www.tencentcloud.com/document/api/1294/76523)
 
 
         :param str resource_name: The name of the resource.

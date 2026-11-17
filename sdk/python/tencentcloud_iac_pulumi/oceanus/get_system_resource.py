@@ -133,6 +133,12 @@ def get_system_resource(cluster_id: Optional[_builtins.str] = None,
         flink_version="Flink-1.11")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSystemResources](https://www.tencentcloud.com/search/?wd=DescribeSystemResources&type=document&lang=en)
+
 
     :param _builtins.str cluster_id: Cluster ID.
     :param Sequence[Union['GetSystemResourceFilterArgs', 'GetSystemResourceFilterArgsDict']] filters: Query the resource configuration list. If not specified, return all job configuration lists under ResourceIds.N.
@@ -180,6 +186,12 @@ def get_system_resource_output(cluster_id: pulumi.Input[Optional[Optional[_built
         cluster_id="cluster-n8yaia0p",
         flink_version="Flink-1.11")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSystemResources](https://www.tencentcloud.com/search/?wd=DescribeSystemResources&type=document&lang=en)
 
 
     :param _builtins.str cluster_id: Cluster ID.

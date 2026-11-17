@@ -117,6 +117,12 @@ def get_ops_trigger_workflows(filters: Optional[Sequence[Union['GetOpsTriggerWor
     ops_trigger_workflows = tencentcloud.wedata.get_ops_trigger_workflows(project_id="1840731342293643264")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListOpsTriggerWorkflows](https://www.tencentcloud.com/document/api/1174/77886)
+
 
     :param Sequence[Union['GetOpsTriggerWorkflowsFilterArgs', 'GetOpsTriggerWorkflowsFilterArgsDict']] filters: Filter parameters. Workflow name or ID query name: `Keyword`; workflow ID query name: `WorkflowId`; folder query name: `FolderId`; owner query name: `InChargeUin`.
     :param Sequence[Union['GetOpsTriggerWorkflowsOrderFieldArgs', 'GetOpsTriggerWorkflowsOrderFieldArgsDict']] order_fields: Sort fields. Sort field names include, for example, task count: TaskCount.
@@ -154,6 +160,12 @@ def get_ops_trigger_workflows_output(filters: pulumi.Input[Optional[Optional[Seq
 
     ops_trigger_workflows = tencentcloud.wedata.get_ops_trigger_workflows(project_id="1840731342293643264")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListOpsTriggerWorkflows](https://www.tencentcloud.com/document/api/1174/77886)
 
 
     :param Sequence[Union['GetOpsTriggerWorkflowsFilterArgs', 'GetOpsTriggerWorkflowsFilterArgsDict']] filters: Filter parameters. Workflow name or ID query name: `Keyword`; workflow ID query name: `WorkflowId`; folder query name: `FolderId`; owner query name: `InChargeUin`.

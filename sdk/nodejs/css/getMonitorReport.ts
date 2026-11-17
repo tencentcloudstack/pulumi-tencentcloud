@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     monitorId: "0e8a12b5-df2a-4a1b-aa98-97d5610aa142",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeMonitorReport](https://www.tencentcloud.com/search/?wd=DescribeMonitorReport&type=document&lang=en)
  */
 export function getMonitorReport(args: GetMonitorReportArgs, opts?: pulumi.InvokeOptions): Promise<GetMonitorReportResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -74,6 +80,12 @@ export interface GetMonitorReportResult {
  *     monitorId: "0e8a12b5-df2a-4a1b-aa98-97d5610aa142",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeMonitorReport](https://www.tencentcloud.com/search/?wd=DescribeMonitorReport&type=document&lang=en)
  */
 export function getMonitorReportOutput(args: GetMonitorReportOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetMonitorReportResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

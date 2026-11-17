@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetPolicy](https://www.tencentcloud.com/document/api/598/32244)
         /// </summary>
         public static Task<GetPolicyDetailResult> InvokeAsync(GetPolicyDetailArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetPolicyDetailResult>("tencentcloud:Cam/getPolicyDetail:getPolicyDetail", args ?? new GetPolicyDetailArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetPolicy](https://www.tencentcloud.com/document/api/598/32244)
         /// </summary>
         public static Output<GetPolicyDetailResult> Invoke(GetPolicyDetailInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetPolicyDetailResult>("tencentcloud:Cam/getPolicyDetail:getPolicyDetail", args ?? new GetPolicyDetailInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetPolicy](https://www.tencentcloud.com/document/api/598/32244)
         /// </summary>
         public static Output<GetPolicyDetailResult> Invoke(GetPolicyDetailInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetPolicyDetailResult>("tencentcloud:Cam/getPolicyDetail:getPolicyDetail", args ?? new GetPolicyDetailInvokeArgs(), options.WithDefaults());

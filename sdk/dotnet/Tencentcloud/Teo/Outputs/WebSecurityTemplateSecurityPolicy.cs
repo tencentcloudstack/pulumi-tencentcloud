@@ -19,6 +19,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// </summary>
         public readonly Outputs.WebSecurityTemplateSecurityPolicyBotManagement? BotManagement;
         /// <summary>
+        /// Basic Bot management configuration.
+        /// </summary>
+        public readonly Outputs.WebSecurityTemplateSecurityPolicyBotManagementLite? BotManagementLite;
+        /// <summary>
         /// Custom rules. If the parameter is null or not filled, the configuration last set will be used by default. Note: This field may return null, indicating that no valid value can be obtained.
         /// </summary>
         public readonly Outputs.WebSecurityTemplateSecurityPolicyCustomRules? CustomRules;
@@ -47,6 +51,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         private WebSecurityTemplateSecurityPolicy(
             Outputs.WebSecurityTemplateSecurityPolicyBotManagement? botManagement,
 
+            Outputs.WebSecurityTemplateSecurityPolicyBotManagementLite? botManagementLite,
+
             Outputs.WebSecurityTemplateSecurityPolicyCustomRules? customRules,
 
             Outputs.WebSecurityTemplateSecurityPolicyDefaultDenySecurityActionParameters? defaultDenySecurityActionParameters,
@@ -60,6 +66,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
             Outputs.WebSecurityTemplateSecurityPolicyRateLimitingRules? rateLimitingRules)
         {
             BotManagement = botManagement;
+            BotManagementLite = botManagementLite;
             CustomRules = customRules;
             DefaultDenySecurityActionParameters = defaultDenySecurityActionParameters;
             ExceptionRules = exceptionRules;

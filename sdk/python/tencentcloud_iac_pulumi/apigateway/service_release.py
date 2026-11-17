@@ -223,6 +223,16 @@ class ServiceRelease(pulumi.CustomResource):
             release_desc="test service release")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeService](https://www.tencentcloud.com/search/?wd=DescribeService&type=document&lang=en)
+          - [ReleaseService](https://www.tencentcloud.com/search/?wd=ReleaseService&type=document&lang=en)
+        * Read: [DescribeServiceEnvironmentReleaseHistory](https://www.tencentcloud.com/search/?wd=DescribeServiceEnvironmentReleaseHistory&type=document&lang=en)
+        * Delete: [UnReleaseService](https://www.tencentcloud.com/search/?wd=UnReleaseService&type=document&lang=en)
+
         ## Import
 
         API gateway service release can be imported using the id, e.g.
@@ -297,6 +307,16 @@ class ServiceRelease(pulumi.CustomResource):
             environment_name="release",
             release_desc="test service release")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeService](https://www.tencentcloud.com/search/?wd=DescribeService&type=document&lang=en)
+          - [ReleaseService](https://www.tencentcloud.com/search/?wd=ReleaseService&type=document&lang=en)
+        * Read: [DescribeServiceEnvironmentReleaseHistory](https://www.tencentcloud.com/search/?wd=DescribeServiceEnvironmentReleaseHistory&type=document&lang=en)
+        * Delete: [UnReleaseService](https://www.tencentcloud.com/search/?wd=UnReleaseService&type=document&lang=en)
 
         ## Import
 

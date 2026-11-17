@@ -2,6 +2,8 @@
 // *** Do not edit by hand unless you're certain you know what you are doing! ***
 
 import * as pulumi from "@pulumi/pulumi";
+import * as inputs from "../types/input";
+import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
@@ -15,11 +17,27 @@ import * as utilities from "../utilities";
  *
  * const example = new tencentcloud.cls.Logset("example", {
  *     logsetName: "tf-example",
- *     tags: {
- *         createdBy: "Terraform",
- *     },
+ *     tagLists: [{
+ *         key: "createdBy",
+ *         value: "Terraform",
+ *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateLogset](https://www.tencentcloud.com/document/api/614/42780)
+ *   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+ * * Read:
+ *   - [DescribeLogsets](https://www.tencentcloud.com/document/api/614/42778)
+ *   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+ * * Update:
+ *   - [ModifyLogset](https://www.tencentcloud.com/document/api/614/42777)
+ *   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+ * * Delete: [DeleteLogset](https://www.tencentcloud.com/document/api/614/42779)
  *
  * ## Import
  *
@@ -69,7 +87,13 @@ export class Logset extends pulumi.CustomResource {
      */
     declare public /*out*/ readonly roleName: pulumi.Output<string>;
     /**
-     * Tag description list.
+     * Tag description list. The CLS API supports up to 10 tag key-value pairs, and duplicate keys are not allowed.
+     */
+    declare public readonly tagLists: pulumi.Output<outputs.Cls.LogsetTagList[]>;
+    /**
+     * It is recommended to use `tagList` because the current `tags` field is binding resources by calling the tag API. Tag description list.
+     *
+     * @deprecated It is recommended to use `tagList` because the current `tags` field is binding resources by calling the tag API.
      */
     declare public readonly tags: pulumi.Output<{[key: string]: string} | undefined>;
     /**
@@ -93,6 +117,7 @@ export class Logset extends pulumi.CustomResource {
             resourceInputs["createTime"] = state?.createTime;
             resourceInputs["logsetName"] = state?.logsetName;
             resourceInputs["roleName"] = state?.roleName;
+            resourceInputs["tagLists"] = state?.tagLists;
             resourceInputs["tags"] = state?.tags;
             resourceInputs["topicCount"] = state?.topicCount;
         } else {
@@ -101,6 +126,7 @@ export class Logset extends pulumi.CustomResource {
                 throw new Error("Missing required property 'logsetName'");
             }
             resourceInputs["logsetName"] = args?.logsetName;
+            resourceInputs["tagLists"] = args?.tagLists;
             resourceInputs["tags"] = args?.tags;
             resourceInputs["createTime"] = undefined /*out*/;
             resourceInputs["roleName"] = undefined /*out*/;
@@ -128,7 +154,13 @@ export interface LogsetState {
      */
     roleName?: pulumi.Input<string | undefined>;
     /**
-     * Tag description list.
+     * Tag description list. The CLS API supports up to 10 tag key-value pairs, and duplicate keys are not allowed.
+     */
+    tagLists?: pulumi.Input<pulumi.Input<inputs.Cls.LogsetTagList>[] | undefined>;
+    /**
+     * It is recommended to use `tagList` because the current `tags` field is binding resources by calling the tag API. Tag description list.
+     *
+     * @deprecated It is recommended to use `tagList` because the current `tags` field is binding resources by calling the tag API.
      */
     tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
     /**
@@ -146,7 +178,13 @@ export interface LogsetArgs {
      */
     logsetName: pulumi.Input<string>;
     /**
-     * Tag description list.
+     * Tag description list. The CLS API supports up to 10 tag key-value pairs, and duplicate keys are not allowed.
+     */
+    tagLists?: pulumi.Input<pulumi.Input<inputs.Cls.LogsetTagList>[] | undefined>;
+    /**
+     * It is recommended to use `tagList` because the current `tags` field is binding resources by calling the tag API. Tag description list.
+     *
+     * @deprecated It is recommended to use `tagList` because the current `tags` field is binding resources by calling the tag API.
      */
     tags?: pulumi.Input<{[key: string]: pulumi.Input<string>} | undefined>;
 }

@@ -40,6 +40,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [GetUser](https://www.tencentcloud.com/document/api/598/32259)
+        ///   - [ListAttachedUserPolicies](https://www.tencentcloud.com/document/api/598/32242)
         /// </summary>
         public static Task<GetUserPolicyAttachmentsResult> InvokeAsync(GetUserPolicyAttachmentsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetUserPolicyAttachmentsResult>("tencentcloud:Cam/getUserPolicyAttachments:getUserPolicyAttachments", args ?? new GetUserPolicyAttachmentsArgs(), options.WithDefaults());
@@ -72,6 +80,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [GetUser](https://www.tencentcloud.com/document/api/598/32259)
+        ///   - [ListAttachedUserPolicies](https://www.tencentcloud.com/document/api/598/32242)
         /// </summary>
         public static Output<GetUserPolicyAttachmentsResult> Invoke(GetUserPolicyAttachmentsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetUserPolicyAttachmentsResult>("tencentcloud:Cam/getUserPolicyAttachments:getUserPolicyAttachments", args ?? new GetUserPolicyAttachmentsInvokeArgs(), options.WithDefaults());
@@ -104,6 +120,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [GetUser](https://www.tencentcloud.com/document/api/598/32259)
+        ///   - [ListAttachedUserPolicies](https://www.tencentcloud.com/document/api/598/32242)
         /// </summary>
         public static Output<GetUserPolicyAttachmentsResult> Invoke(GetUserPolicyAttachmentsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetUserPolicyAttachmentsResult>("tencentcloud:Cam/getUserPolicyAttachments:getUserPolicyAttachments", args ?? new GetUserPolicyAttachmentsInvokeArgs(), options.WithDefaults());

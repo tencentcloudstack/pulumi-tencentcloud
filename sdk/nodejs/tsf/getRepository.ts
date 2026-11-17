@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     repositoryType: "default",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRepositories](https://www.tencentcloud.com/search/?wd=DescribeRepositories&type=document&lang=en)
  */
 export function getRepository(args?: GetRepositoryArgs, opts?: pulumi.InvokeOptions): Promise<GetRepositoryResult> {
     args = args || {};
@@ -82,6 +88,12 @@ export interface GetRepositoryResult {
  *     repositoryType: "default",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRepositories](https://www.tencentcloud.com/search/?wd=DescribeRepositories&type=document&lang=en)
  */
 export function getRepositoryOutput(args?: GetRepositoryOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRepositoryResult> {
     args = args || {};

@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [GetTableColumns](https://www.tencentcloud.com/document/api/1174/77951)
 func GetGetTableColumns(ctx *pulumi.Context, args *GetGetTableColumnsArgs, opts ...pulumi.InvokeOption) (*GetGetTableColumnsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetGetTableColumnsResult

@@ -57,6 +57,15 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateTriggerWorkflow](https://www.tencentcloud.com/document/api/1174/77936)
+ * * Read: [GetTriggerWorkflow](https://www.tencentcloud.com/document/api/1174/77924)
+ * * Update: [UpdateTriggerWorkflow](https://www.tencentcloud.com/document/api/1174/77910)
+ * * Delete: [DeleteTriggerWorkflow](https://www.tencentcloud.com/document/api/1174/77932)
+ *
  * ## Import
  *
  * wedata triggerWorkflow can be imported using the id, e.g.

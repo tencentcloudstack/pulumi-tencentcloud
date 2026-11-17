@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     deployRecordId: "",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeHostDeployRecordDetail](https://www.tencentcloud.com/search/?wd=DescribeHostDeployRecordDetail&type=document&lang=en)
  */
 export function getDescribeHostDeployRecordDetail(args: GetDescribeHostDeployRecordDetailArgs, opts?: pulumi.InvokeOptions): Promise<GetDescribeHostDeployRecordDetailResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -82,6 +88,12 @@ export interface GetDescribeHostDeployRecordDetailResult {
  *     deployRecordId: "",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeHostDeployRecordDetail](https://www.tencentcloud.com/search/?wd=DescribeHostDeployRecordDetail&type=document&lang=en)
  */
 export function getDescribeHostDeployRecordDetailOutput(args: GetDescribeHostDeployRecordDetailOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDescribeHostDeployRecordDetailResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

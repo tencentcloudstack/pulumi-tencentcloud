@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeShareAreas](https://www.tencentcloud.com/document/api/1031/68231)
 func GetOrgShareArea(ctx *pulumi.Context, args *GetOrgShareAreaArgs, opts ...pulumi.InvokeOption) (*GetOrgShareAreaResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetOrgShareAreaResult

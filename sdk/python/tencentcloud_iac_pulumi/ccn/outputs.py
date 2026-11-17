@@ -50,6 +50,8 @@ class InstancesAcceptAttachInstance(dict):
             suggest = "instance_region"
         elif key == "instanceType":
             suggest = "instance_type"
+        elif key == "orderType":
+            suggest = "order_type"
         elif key == "routeTableId":
             suggest = "route_table_id"
 
@@ -69,12 +71,14 @@ class InstancesAcceptAttachInstance(dict):
                  instance_region: _builtins.str,
                  description: Optional[_builtins.str] = None,
                  instance_type: Optional[_builtins.str] = None,
+                 order_type: Optional[_builtins.str] = None,
                  route_table_id: Optional[_builtins.str] = None):
         """
         :param _builtins.str instance_id: Attachment Instance ID.
         :param _builtins.str instance_region: Instance Region.
         :param _builtins.str description: Description.
         :param _builtins.str instance_type: InstanceType: `VPC`, `DIRECTCONNECT`, `BMVPC`, `VPNGW`.
+        :param _builtins.str order_type: Instance billing method. Valid values: `PayByCcnOwner` (CCN owner pays), `PayByInstanceOwner` (instance owner pays).
         :param _builtins.str route_table_id: ID of the routing table associated with the instance. Note: This field may return null, indicating that no valid value can be obtained.
         """
         pulumi.set(__self__, "instance_id", instance_id)
@@ -83,6 +87,8 @@ class InstancesAcceptAttachInstance(dict):
             pulumi.set(__self__, "description", description)
         if instance_type is not None:
             pulumi.set(__self__, "instance_type", instance_type)
+        if order_type is not None:
+            pulumi.set(__self__, "order_type", order_type)
         if route_table_id is not None:
             pulumi.set(__self__, "route_table_id", route_table_id)
 
@@ -117,6 +123,14 @@ class InstancesAcceptAttachInstance(dict):
         InstanceType: `VPC`, `DIRECTCONNECT`, `BMVPC`, `VPNGW`.
         """
         return pulumi.get(self, "instance_type")
+
+    @_builtins.property
+    @pulumi.getter(name="orderType")
+    def order_type(self) -> Optional[_builtins.str]:
+        """
+        Instance billing method. Valid values: `PayByCcnOwner` (CCN owner pays), `PayByInstanceOwner` (instance owner pays).
+        """
+        return pulumi.get(self, "order_type")
 
     @_builtins.property
     @pulumi.getter(name="routeTableId")

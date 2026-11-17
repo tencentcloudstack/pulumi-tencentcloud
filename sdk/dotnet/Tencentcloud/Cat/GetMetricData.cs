@@ -39,6 +39,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cat
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeProbeMetricData](https://www.tencentcloud.com/search/?wd=DescribeProbeMetricData&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetMetricDataResult> InvokeAsync(GetMetricDataArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetMetricDataResult>("tencentcloud:Cat/getMetricData:getMetricData", args ?? new GetMetricDataArgs(), options.WithDefaults());
@@ -70,6 +76,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cat
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeProbeMetricData](https://www.tencentcloud.com/search/?wd=DescribeProbeMetricData&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetMetricDataResult> Invoke(GetMetricDataInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetMetricDataResult>("tencentcloud:Cat/getMetricData:getMetricData", args ?? new GetMetricDataInvokeArgs(), options.WithDefaults());
@@ -101,6 +113,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cat
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeProbeMetricData](https://www.tencentcloud.com/search/?wd=DescribeProbeMetricData&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetMetricDataResult> Invoke(GetMetricDataInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetMetricDataResult>("tencentcloud:Cat/getMetricData:getMetricData", args ?? new GetMetricDataInvokeArgs(), options.WithDefaults());

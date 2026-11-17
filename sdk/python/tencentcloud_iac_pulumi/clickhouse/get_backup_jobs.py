@@ -116,6 +116,12 @@ def get_backup_jobs(begin_time: Optional[_builtins.str] = None,
     backup_jobs = tencentcloud.clickhouse.get_backup_jobs(instance_id="cdwch-xxxxxx")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBackUpJob](https://www.tencentcloud.com/search/?wd=DescribeBackUpJob&type=document&lang=en)
+
 
     :param _builtins.str begin_time: Begin time.
     :param _builtins.str end_time: End time.
@@ -153,6 +159,12 @@ def get_backup_jobs_output(begin_time: pulumi.Input[Optional[Optional[_builtins.
 
     backup_jobs = tencentcloud.clickhouse.get_backup_jobs(instance_id="cdwch-xxxxxx")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBackUpJob](https://www.tencentcloud.com/search/?wd=DescribeBackUpJob&type=document&lang=en)
 
 
     :param _builtins.str begin_time: Begin time.

@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeNetworkInterfaceLimit](https://www.tencentcloud.com/document/api/215/34768)
         /// </summary>
         public static Task<GetNetworkInterfaceLimitResult> InvokeAsync(GetNetworkInterfaceLimitArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetNetworkInterfaceLimitResult>("tencentcloud:Vpc/getNetworkInterfaceLimit:getNetworkInterfaceLimit", args ?? new GetNetworkInterfaceLimitArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeNetworkInterfaceLimit](https://www.tencentcloud.com/document/api/215/34768)
         /// </summary>
         public static Output<GetNetworkInterfaceLimitResult> Invoke(GetNetworkInterfaceLimitInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetNetworkInterfaceLimitResult>("tencentcloud:Vpc/getNetworkInterfaceLimit:getNetworkInterfaceLimit", args ?? new GetNetworkInterfaceLimitInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeNetworkInterfaceLimit](https://www.tencentcloud.com/document/api/215/34768)
         /// </summary>
         public static Output<GetNetworkInterfaceLimitResult> Invoke(GetNetworkInterfaceLimitInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetNetworkInterfaceLimitResult>("tencentcloud:Vpc/getNetworkInterfaceLimit:getNetworkInterfaceLimit", args ?? new GetNetworkInterfaceLimitInvokeArgs(), options.WithDefaults());

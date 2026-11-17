@@ -158,6 +158,12 @@ def get_audit_logs(end_time: Optional[_builtins.str] = None,
         })
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAuditLogs](https://www.tencentcloud.com/document/api/1098/84940)
+
 
     :param _builtins.str end_time: The end time is in the format of 2017-07-12 10:29:20.
     :param Union['GetAuditLogsFilterArgs', 'GetAuditLogsFilterArgsDict'] filter: Filter conditions. You can filter logs according to the set filtering criteria.
@@ -218,6 +224,12 @@ def get_audit_logs_output(end_time: pulumi.Input[Optional[_builtins.str]] = None
             "sql": "SELECT @@max_allowed_packet",
         })
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAuditLogs](https://www.tencentcloud.com/document/api/1098/84940)
 
 
     :param _builtins.str end_time: The end time is in the format of 2017-07-12 10:29:20.

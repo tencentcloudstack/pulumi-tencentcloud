@@ -33,6 +33,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ModifySpartaProtectionMode](https://www.tencentcloud.com/document/api/627/64507)
+    /// * Read: [DescribeSpartaProtectionInfo](https://www.tencentcloud.com/document/api/627/64518)
+    /// * Update: [ModifySpartaProtectionMode](https://www.tencentcloud.com/document/api/627/64507)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Waf/protectionMode:ProtectionMode")]
     public partial class ProtectionMode : global::Pulumi.CustomResource

@@ -24,6 +24,20 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeDBParams](https://www.tencentcloud.com/document/api/1138/69317)
+ *   - [DescribeInstanceState](https://www.tencentcloud.com/document/api/1138/68302)
+ *   - [ModifyDBParameters](https://www.tencentcloud.com/document/api/1138/69330)
+ * * Read: [DescribeDBParams](https://www.tencentcloud.com/document/api/1138/69317)
+ * * Update:
+ *   - [DescribeDBParams](https://www.tencentcloud.com/document/api/1138/69317)
+ *   - [DescribeInstanceState](https://www.tencentcloud.com/document/api/1138/68302)
+ *   - [ModifyDBParameters](https://www.tencentcloud.com/document/api/1138/69330)
  */
 export class Dbconfig extends pulumi.CustomResource {
     /**

@@ -196,6 +196,12 @@ def get_param_templates(db_modes: Optional[Sequence[_builtins.str]] = None,
     param_templates = tencentcloud.cynosdb.get_param_templates()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeParamTemplates](https://www.tencentcloud.com/document/api/1098/49360)
+
 
     :param Sequence[_builtins.str] db_modes: Database mode, optional values: NORMAL, SERVERLESS.
     :param Sequence[_builtins.str] engine_types: Engine types.
@@ -265,6 +271,12 @@ def get_param_templates_output(db_modes: pulumi.Input[Optional[Optional[Sequence
 
     param_templates = tencentcloud.cynosdb.get_param_templates()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeParamTemplates](https://www.tencentcloud.com/document/api/1098/49360)
 
 
     :param Sequence[_builtins.str] db_modes: Database mode, optional values: NORMAL, SERVERLESS.

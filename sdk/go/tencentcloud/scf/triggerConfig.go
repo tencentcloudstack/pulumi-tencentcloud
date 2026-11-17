@@ -50,6 +50,14 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [UpdateTrigger](https://www.tencentcloud.com/search/?wd=UpdateTrigger&type=document&lang=en)
+// * Read: [ListTriggers](https://www.tencentcloud.com/document/api/583/36314)
+// * Update: [UpdateTrigger](https://www.tencentcloud.com/search/?wd=UpdateTrigger&type=document&lang=en)
+//
 // ## Import
 //
 // scf triggerConfig can be imported using the id, e.g.

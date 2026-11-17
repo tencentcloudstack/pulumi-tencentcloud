@@ -107,6 +107,12 @@ def get_disks(disk_ids: Optional[Sequence[_builtins.str]] = None,
     disks = tencentcloud.lighthouse.get_disks(disk_ids=["lhdisk-xxxxxx"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDisks](https://www.tencentcloud.com/document/api/1103/44573)
+
 
     :param Sequence[_builtins.str] disk_ids: List of disk ids.
     :param Sequence[Union['GetDisksFilterArgs', 'GetDisksFilterArgsDict']] filters: Filter list.
@@ -140,6 +146,12 @@ def get_disks_output(disk_ids: pulumi.Input[Optional[Optional[Sequence[_builtins
 
     disks = tencentcloud.lighthouse.get_disks(disk_ids=["lhdisk-xxxxxx"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDisks](https://www.tencentcloud.com/document/api/1103/44573)
 
 
     :param Sequence[_builtins.str] disk_ids: List of disk ids.

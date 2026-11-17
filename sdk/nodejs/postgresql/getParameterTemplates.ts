@@ -30,6 +30,12 @@ import * as utilities from "../utilities";
  *     orderByType: "desc",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeParameterTemplates](https://www.tencentcloud.com/document/api/409/52651)
  */
 export function getParameterTemplates(args?: GetParameterTemplatesArgs, opts?: pulumi.InvokeOptions): Promise<GetParameterTemplatesResult> {
     args = args || {};
@@ -105,6 +111,12 @@ export interface GetParameterTemplatesResult {
  *     orderByType: "desc",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeParameterTemplates](https://www.tencentcloud.com/document/api/409/52651)
  */
 export function getParameterTemplatesOutput(args?: GetParameterTemplatesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetParameterTemplatesResult> {
     args = args || {};

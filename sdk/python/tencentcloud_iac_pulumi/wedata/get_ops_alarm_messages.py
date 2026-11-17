@@ -150,6 +150,12 @@ def get_ops_alarm_messages(alarm_level: Optional[_builtins.int] = None,
         time_zone="UTC+8")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListAlarmMessages](https://www.tencentcloud.com/document/api/1174/73825)
+
 
     :param _builtins.int alarm_level: Alarm level.
     :param _builtins.str alarm_recipient_id: Alert recipient Id.
@@ -203,6 +209,12 @@ def get_ops_alarm_messages_output(alarm_level: pulumi.Input[Optional[Optional[_b
         alarm_level=1,
         time_zone="UTC+8")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListAlarmMessages](https://www.tencentcloud.com/document/api/1174/73825)
 
 
     :param _builtins.int alarm_level: Alarm level.

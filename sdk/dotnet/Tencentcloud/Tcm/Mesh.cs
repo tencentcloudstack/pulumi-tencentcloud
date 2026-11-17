@@ -118,6 +118,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateMesh](https://www.tencentcloud.com/search/?wd=CreateMesh&amp;type=document&amp;lang=en)
+    ///   - [DescribeMesh](https://www.tencentcloud.com/search/?wd=DescribeMesh&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeMesh](https://www.tencentcloud.com/search/?wd=DescribeMesh&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyMesh](https://www.tencentcloud.com/search/?wd=ModifyMesh&amp;type=document&amp;lang=en)
+    /// * Delete:
+    ///   - [DeleteMesh](https://www.tencentcloud.com/search/?wd=DeleteMesh&amp;type=document&amp;lang=en)
+    ///   - [DescribeMesh](https://www.tencentcloud.com/search/?wd=DescribeMesh&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// tcm mesh can be imported using the id, e.g.

@@ -173,6 +173,12 @@ def get_data(dimensions: Optional[Sequence[Union['GetDataDimensionArgs', 'GetDat
         end_time="2020-04-28T19:00:00+08:00")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetMonitorData](https://www.tencentcloud.com/document/api/248/33881)
+
 
     :param Sequence[Union['GetDataDimensionArgs', 'GetDataDimensionArgsDict']] dimensions: Dimensional composition of instance objects.
     :param _builtins.str end_time: End time for this query, eg:`2018-09-22T20:00:00+08:00`.
@@ -248,6 +254,12 @@ def get_data_output(dimensions: pulumi.Input[Optional[Sequence[Union['GetDataDim
         start_time="2020-04-28T18:30:00+08:00",
         end_time="2020-04-28T19:00:00+08:00")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetMonitorData](https://www.tencentcloud.com/document/api/248/33881)
 
 
     :param Sequence[Union['GetDataDimensionArgs', 'GetDataDimensionArgsDict']] dimensions: Dimensional composition of instance objects.

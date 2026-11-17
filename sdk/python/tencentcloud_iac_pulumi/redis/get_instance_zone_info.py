@@ -96,6 +96,12 @@ def get_instance_zone_info(instance_id: Optional[_builtins.str] = None,
     instance_zone_info = tencentcloud.redis.get_instance_zone_info(instance_id="crs-c1nl9rpv")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstanceZoneInfo](https://www.tencentcloud.com/document/api/239/39091)
+
 
     :param _builtins.str instance_id: The ID of instance.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_instance_zone_info_output(instance_id: pulumi.Input[Optional[Optional[_b
 
     instance_zone_info = tencentcloud.redis.get_instance_zone_info(instance_id="crs-c1nl9rpv")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstanceZoneInfo](https://www.tencentcloud.com/document/api/239/39091)
 
 
     :param _builtins.str instance_id: The ID of instance.

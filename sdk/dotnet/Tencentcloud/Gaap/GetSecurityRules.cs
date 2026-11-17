@@ -58,6 +58,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSecurityPolicyDetail](https://www.tencentcloud.com/document/api/608/33097)
         /// </summary>
         public static Task<GetSecurityRulesResult> InvokeAsync(GetSecurityRulesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSecurityRulesResult>("tencentcloud:Gaap/getSecurityRules:getSecurityRules", args ?? new GetSecurityRulesArgs(), options.WithDefaults());
@@ -108,6 +114,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSecurityPolicyDetail](https://www.tencentcloud.com/document/api/608/33097)
         /// </summary>
         public static Output<GetSecurityRulesResult> Invoke(GetSecurityRulesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSecurityRulesResult>("tencentcloud:Gaap/getSecurityRules:getSecurityRules", args ?? new GetSecurityRulesInvokeArgs(), options.WithDefaults());
@@ -158,6 +170,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSecurityPolicyDetail](https://www.tencentcloud.com/document/api/608/33097)
         /// </summary>
         public static Output<GetSecurityRulesResult> Invoke(GetSecurityRulesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetSecurityRulesResult>("tencentcloud:Gaap/getSecurityRules:getSecurityRules", args ?? new GetSecurityRulesInvokeArgs(), options.WithDefaults());

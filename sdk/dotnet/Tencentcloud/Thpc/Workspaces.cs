@@ -268,6 +268,29 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Thpc
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateWorkspaces](https://www.tencentcloud.com/search/?wd=CreateWorkspaces&amp;type=document&amp;lang=en)
+    ///   - [DescribeWorkspaces](https://www.tencentcloud.com/search/?wd=DescribeWorkspaces&amp;type=document&amp;lang=en)
+    /// * Read:
+    ///   - [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258)
+    ///   - [DescribeWorkspaces](https://www.tencentcloud.com/search/?wd=DescribeWorkspaces&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [AssociateInstancesKeyPairs](https://www.tencentcloud.com/document/api/213/33232)
+    ///   - [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+    ///   - [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258)
+    ///   - [DisassociateInstancesKeyPairs](https://www.tencentcloud.com/document/api/213/33228)
+    ///   - [ModifyWorkspacesAttribute](https://www.tencentcloud.com/search/?wd=ModifyWorkspacesAttribute&amp;type=document&amp;lang=en)
+    ///   - [ResetInstancesPassword](https://www.tencentcloud.com/document/api/213/33240)
+    ///   - [ResizeDisk](https://www.tencentcloud.com/document/api/362/16310)
+    ///   - [ResizeInstanceDisks](https://www.tencentcloud.com/document/api/213/33238)
+    /// * Delete:
+    ///   - [DescribeWorkspaces](https://www.tencentcloud.com/search/?wd=DescribeWorkspaces&amp;type=document&amp;lang=en)
+    ///   - [TerminateWorkspaces](https://www.tencentcloud.com/search/?wd=TerminateWorkspaces&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// THPC workspaces can be imported using the id, e.g.

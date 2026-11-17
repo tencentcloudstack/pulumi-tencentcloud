@@ -248,6 +248,14 @@ class UserVpcConnection(pulumi.CustomResource):
             user_vpc_endpoint_vip="10.0.1.10")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateUserVpcConnection](https://www.tencentcloud.com/search/?wd=CreateUserVpcConnection&type=document&lang=en)
+        * Read: [DescribeUserVpcConnection](https://www.tencentcloud.com/search/?wd=DescribeUserVpcConnection&type=document&lang=en)
+        * Delete: [DeleteUserVpcConnection](https://www.tencentcloud.com/search/?wd=DeleteUserVpcConnection&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -292,6 +300,14 @@ class UserVpcConnection(pulumi.CustomResource):
             engine_network_id="DataEngine-Network-2mfg9icb",
             user_vpc_endpoint_vip="10.0.1.10")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateUserVpcConnection](https://www.tencentcloud.com/search/?wd=CreateUserVpcConnection&type=document&lang=en)
+        * Read: [DescribeUserVpcConnection](https://www.tencentcloud.com/search/?wd=DescribeUserVpcConnection&type=document&lang=en)
+        * Delete: [DeleteUserVpcConnection](https://www.tencentcloud.com/search/?wd=DeleteUserVpcConnection&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

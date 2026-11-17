@@ -75,6 +75,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [EdgeKVList](https://www.tencentcloud.com/document/api/1145/78825)
         /// </summary>
         public static Task<GetEdgeKvListResult> InvokeAsync(GetEdgeKvListArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetEdgeKvListResult>("tencentcloud:Teo/getEdgeKvList:getEdgeKvList", args ?? new GetEdgeKvListArgs(), options.WithDefaults());
@@ -142,6 +148,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [EdgeKVList](https://www.tencentcloud.com/document/api/1145/78825)
         /// </summary>
         public static Output<GetEdgeKvListResult> Invoke(GetEdgeKvListInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetEdgeKvListResult>("tencentcloud:Teo/getEdgeKvList:getEdgeKvList", args ?? new GetEdgeKvListInvokeArgs(), options.WithDefaults());
@@ -209,6 +221,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [EdgeKVList](https://www.tencentcloud.com/document/api/1145/78825)
         /// </summary>
         public static Output<GetEdgeKvListResult> Invoke(GetEdgeKvListInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetEdgeKvListResult>("tencentcloud:Teo/getEdgeKvList:getEdgeKvList", args ?? new GetEdgeKvListInvokeArgs(), options.WithDefaults());

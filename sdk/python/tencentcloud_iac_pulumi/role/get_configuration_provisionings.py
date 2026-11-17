@@ -147,6 +147,12 @@ def get_configuration_provisionings(deployment_status: Optional[_builtins.str] =
         role_configuration_id="xxxxxx")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListRoleConfigurationProvisionings](https://www.tencentcloud.com/document/api/1031/63598)
+
 
     :param _builtins.str deployment_status: Deployed: Deployment succeeded; DeployedRequired: Redeployment required; DeployFailed: Deployment failed.
     :param _builtins.str filter: Search by configuration name is supported.
@@ -197,6 +203,12 @@ def get_configuration_provisionings_output(deployment_status: pulumi.Input[Optio
     role_configuration_provisionings = tencentcloud.role.get_configuration_provisionings(zone_id="xxxxxx",
         role_configuration_id="xxxxxx")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListRoleConfigurationProvisionings](https://www.tencentcloud.com/document/api/1031/63598)
 
 
     :param _builtins.str deployment_status: Deployed: Deployment succeeded; DeployedRequired: Redeployment required; DeployFailed: Deployment failed.

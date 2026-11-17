@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBInstanceSpecs](https://www.tencentcloud.com/search/?wd=DescribeDBInstanceSpecs&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetInstanceSpecsResult> InvokeAsync(GetInstanceSpecsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceSpecsResult>("tencentcloud:Mariadb/getInstanceSpecs:getInstanceSpecs", args ?? new GetInstanceSpecsArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBInstanceSpecs](https://www.tencentcloud.com/search/?wd=DescribeDBInstanceSpecs&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetInstanceSpecsResult> Invoke(GetInstanceSpecsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceSpecsResult>("tencentcloud:Mariadb/getInstanceSpecs:getInstanceSpecs", args ?? new GetInstanceSpecsInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBInstanceSpecs](https://www.tencentcloud.com/search/?wd=DescribeDBInstanceSpecs&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetInstanceSpecsResult> Invoke(GetInstanceSpecsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceSpecsResult>("tencentcloud:Mariadb/getInstanceSpecs:getInstanceSpecs", args ?? new GetInstanceSpecsInvokeArgs(), options.WithDefaults());

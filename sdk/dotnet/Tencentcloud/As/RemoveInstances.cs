@@ -139,6 +139,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [RemoveInstances](https://www.tencentcloud.com/document/api/377/31005)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:As/removeInstances:RemoveInstances")]
     public partial class RemoveInstances : global::Pulumi.CustomResource

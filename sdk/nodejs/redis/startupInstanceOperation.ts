@@ -17,6 +17,14 @@ import * as utilities from "../utilities";
  *
  * const example = new tencentcloud.redis.StartupInstanceOperation("example", {instanceId: "crs-c1nl9rpv"});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeInstances](https://www.tencentcloud.com/document/api/239/32065)
+ *   - [StartupInstance](https://www.tencentcloud.com/document/api/239/33291)
  */
 export class StartupInstanceOperation extends pulumi.CustomResource {
     /**

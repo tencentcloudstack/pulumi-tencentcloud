@@ -36,6 +36,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeCustomerGatewayVendors](https://www.tencentcloud.com/document/api/215/17517)
 func GetCustomerGatewayVendors(ctx *pulumi.Context, args *GetCustomerGatewayVendorsArgs, opts ...pulumi.InvokeOption) (*GetCustomerGatewayVendorsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetCustomerGatewayVendorsResult

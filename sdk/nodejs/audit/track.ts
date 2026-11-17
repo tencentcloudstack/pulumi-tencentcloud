@@ -56,6 +56,15 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateAuditTrack](https://www.tencentcloud.com/search/?wd=CreateAuditTrack&type=document&lang=en)
+ * * Read: [DescribeAuditTrack](https://www.tencentcloud.com/search/?wd=DescribeAuditTrack&type=document&lang=en)
+ * * Update: [ModifyAuditTrack](https://www.tencentcloud.com/search/?wd=ModifyAuditTrack&type=document&lang=en)
+ * * Delete: [DeleteAuditTrack](https://www.tencentcloud.com/search/?wd=DeleteAuditTrack&type=document&lang=en)
+ *
  * ## Import
  *
  * audit track can be imported using the id, e.g.

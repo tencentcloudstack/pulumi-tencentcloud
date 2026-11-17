@@ -36,6 +36,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [GetCallerIdentity](https://www.tencentcloud.com/document/api/1150/49453)
 func GetCallerIdentity(ctx *pulumi.Context, args *GetCallerIdentityArgs, opts ...pulumi.InvokeOption) (*GetCallerIdentityResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetCallerIdentityResult

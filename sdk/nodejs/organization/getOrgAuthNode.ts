@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const orgAuthNode = tencentcloud.organization.getOrgAuthNode({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeOrganizationAuthNode](https://www.tencentcloud.com/search/?wd=DescribeOrganizationAuthNode&type=document&lang=en)
  */
 export function getOrgAuthNode(args?: GetOrgAuthNodeArgs, opts?: pulumi.InvokeOptions): Promise<GetOrgAuthNodeResult> {
     args = args || {};
@@ -70,6 +76,12 @@ export interface GetOrgAuthNodeResult {
  *
  * const orgAuthNode = tencentcloud.organization.getOrgAuthNode({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeOrganizationAuthNode](https://www.tencentcloud.com/search/?wd=DescribeOrganizationAuthNode&type=document&lang=en)
  */
 export function getOrgAuthNodeOutput(args?: GetOrgAuthNodeOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetOrgAuthNodeResult> {
     args = args || {};

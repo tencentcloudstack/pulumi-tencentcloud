@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     groupId: "group-013c0d8e",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCloudNativeAPIGatewayNodes](https://www.tencentcloud.com/document/api/1290/79262)
  */
 export function getGatewayNodes(args: GetGatewayNodesArgs, opts?: pulumi.InvokeOptions): Promise<GetGatewayNodesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -81,6 +87,12 @@ export interface GetGatewayNodesResult {
  *     groupId: "group-013c0d8e",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCloudNativeAPIGatewayNodes](https://www.tencentcloud.com/document/api/1290/79262)
  */
 export function getGatewayNodesOutput(args: GetGatewayNodesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetGatewayNodesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

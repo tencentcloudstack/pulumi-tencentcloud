@@ -20,6 +20,14 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [UpdateOpsTasksOwner](https://www.tencentcloud.com/document/api/1174/73809)
+ * * Read: [GetOpsTask](https://www.tencentcloud.com/document/api/1174/73831)
+ * * Update: [UpdateOpsTasksOwner](https://www.tencentcloud.com/document/api/1174/73809)
+ *
  * ## Import
  *
  * wedata ops task owner can be imported using the id, e.g.

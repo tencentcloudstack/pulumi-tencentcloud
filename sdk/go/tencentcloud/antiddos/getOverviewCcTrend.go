@@ -42,6 +42,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeOverviewCCTrend](https://www.tencentcloud.com/search/?wd=DescribeOverviewCCTrend&type=document&lang=en)
 func GetOverviewCcTrend(ctx *pulumi.Context, args *GetOverviewCcTrendArgs, opts ...pulumi.InvokeOption) (*GetOverviewCcTrendResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetOverviewCcTrendResult

@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mqtt
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ApplyRegistrationCode](https://www.tencentcloud.com/search/?wd=ApplyRegistrationCode&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetRegistrationCodeResult> InvokeAsync(GetRegistrationCodeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetRegistrationCodeResult>("tencentcloud:Mqtt/getRegistrationCode:getRegistrationCode", args ?? new GetRegistrationCodeArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mqtt
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ApplyRegistrationCode](https://www.tencentcloud.com/search/?wd=ApplyRegistrationCode&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetRegistrationCodeResult> Invoke(GetRegistrationCodeInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetRegistrationCodeResult>("tencentcloud:Mqtt/getRegistrationCode:getRegistrationCode", args ?? new GetRegistrationCodeInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mqtt
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ApplyRegistrationCode](https://www.tencentcloud.com/search/?wd=ApplyRegistrationCode&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetRegistrationCodeResult> Invoke(GetRegistrationCodeInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetRegistrationCodeResult>("tencentcloud:Mqtt/getRegistrationCode:getRegistrationCode", args ?? new GetRegistrationCodeInvokeArgs(), options.WithDefaults());

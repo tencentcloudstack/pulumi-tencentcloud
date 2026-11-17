@@ -306,6 +306,21 @@ class Group(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateGroup](https://www.tencentcloud.com/search/?wd=CreateGroup&type=document&lang=en)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribeGroup](https://www.tencentcloud.com/search/?wd=DescribeGroup&type=document&lang=en)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [ModifyGroup](https://www.tencentcloud.com/search/?wd=ModifyGroup&type=document&lang=en)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Delete: [DeleteGroup](https://www.tencentcloud.com/search/?wd=DeleteGroup&type=document&lang=en)
+
         ## Import
 
         tsf group can be imported using the id, e.g.
@@ -351,6 +366,21 @@ class Group(pulumi.CustomResource):
                 "createdBy": "terraform",
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateGroup](https://www.tencentcloud.com/search/?wd=CreateGroup&type=document&lang=en)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribeGroup](https://www.tencentcloud.com/search/?wd=DescribeGroup&type=document&lang=en)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [ModifyGroup](https://www.tencentcloud.com/search/?wd=ModifyGroup&type=document&lang=en)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Delete: [DeleteGroup](https://www.tencentcloud.com/search/?wd=DeleteGroup&type=document&lang=en)
 
         ## Import
 

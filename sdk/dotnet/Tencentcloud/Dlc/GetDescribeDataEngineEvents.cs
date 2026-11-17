@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataEngineEvents](https://www.tencentcloud.com/search/?wd=DescribeDataEngineEvents&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetDescribeDataEngineEventsResult> InvokeAsync(GetDescribeDataEngineEventsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDescribeDataEngineEventsResult>("tencentcloud:Dlc/getDescribeDataEngineEvents:getDescribeDataEngineEvents", args ?? new GetDescribeDataEngineEventsArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataEngineEvents](https://www.tencentcloud.com/search/?wd=DescribeDataEngineEvents&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDescribeDataEngineEventsResult> Invoke(GetDescribeDataEngineEventsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDescribeDataEngineEventsResult>("tencentcloud:Dlc/getDescribeDataEngineEvents:getDescribeDataEngineEvents", args ?? new GetDescribeDataEngineEventsInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataEngineEvents](https://www.tencentcloud.com/search/?wd=DescribeDataEngineEvents&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDescribeDataEngineEventsResult> Invoke(GetDescribeDataEngineEventsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDescribeDataEngineEventsResult>("tencentcloud:Dlc/getDescribeDataEngineEvents:getDescribeDataEngineEvents", args ?? new GetDescribeDataEngineEventsInvokeArgs(), options.WithDefaults());

@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAccountLimits](https://www.tencentcloud.com/document/api/377/31003)
         /// </summary>
         public static Task<GetLimitsResult> InvokeAsync(GetLimitsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetLimitsResult>("tencentcloud:As/getLimits:getLimits", args ?? new GetLimitsArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAccountLimits](https://www.tencentcloud.com/document/api/377/31003)
         /// </summary>
         public static Output<GetLimitsResult> Invoke(GetLimitsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetLimitsResult>("tencentcloud:As/getLimits:getLimits", args ?? new GetLimitsInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAccountLimits](https://www.tencentcloud.com/document/api/377/31003)
         /// </summary>
         public static Output<GetLimitsResult> Invoke(GetLimitsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetLimitsResult>("tencentcloud:As/getLimits:getLimits", args ?? new GetLimitsInvokeArgs(), options.WithDefaults());

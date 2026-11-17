@@ -38,6 +38,30 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
     /// });
     /// ```
     /// 
+    /// ### Encrypted Nfs CFS
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var foo = new Tencentcloud.Cfs.FileSystem("foo", new()
+    ///     {
+    ///         Name = "test_file_system",
+    ///         AvailabilityZone = "ap-guangzhou-3",
+    ///         AccessGroupId = "pgroup-7nx89k7l",
+    ///         Protocol = "NFS",
+    ///         VpcId = "vpc-ah9fbkap",
+    ///         SubnetId = "subnet-9mu2t9iw",
+    ///         Encrypted = true,
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
     /// ### High-Performance Nfs CFS
     /// 
     /// ```csharp
@@ -114,6 +138,26 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateCfsFileSystem](https://www.tencentcloud.com/document/api/582/34517)
+    ///   - [DescribeCfsFileSystems](https://www.tencentcloud.com/document/api/582/34514)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    /// * Read:
+    ///   - [DescribeCfsFileSystems](https://www.tencentcloud.com/document/api/582/34514)
+    ///   - [DescribeMountTargets](https://www.tencentcloud.com/document/api/582/34513)
+    ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+    /// * Update:
+    ///   - [DescribeCfsFileSystems](https://www.tencentcloud.com/document/api/582/34514)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    ///   - [ScaleUpFileSystem](https://www.tencentcloud.com/document/api/582/55870)
+    ///   - [UpdateCfsFileSystemName](https://www.tencentcloud.com/document/api/582/35059)
+    ///   - [UpdateCfsFileSystemPGroup](https://www.tencentcloud.com/document/api/582/34512)
+    /// * Delete: [DeleteCfsFileSystem](https://www.tencentcloud.com/document/api/582/34516)
+    /// 
     /// ## Import
     /// 
     /// Cloud file system can be imported using the id, e.g.
@@ -160,6 +204,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         /// </summary>
         [Output("createTime")]
         public Output<string> CreateTime { get; private set; } = null!;
+
+        /// <summary>
+        /// Indicates whether the CfsFileSystem is encrypted. true means encrypted, false means not encrypted. Modifying this parameter will trigger a rebuild.
+        /// </summary>
+        [Output("encrypted")]
+        public Output<bool> Encrypted { get; private set; } = null!;
 
         /// <summary>
         /// Mount root-directory.
@@ -293,6 +343,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         public Input<string>? CidrBlock { get; set; }
 
         /// <summary>
+        /// Indicates whether the CfsFileSystem is encrypted. true means encrypted, false means not encrypted. Modifying this parameter will trigger a rebuild.
+        /// </summary>
+        [Input("encrypted")]
+        public Input<bool>? Encrypted { get; set; }
+
+        /// <summary>
         /// IP of mount point.
         /// </summary>
         [Input("mountIp")]
@@ -389,6 +445,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         /// </summary>
         [Input("createTime")]
         public Input<string>? CreateTime { get; set; }
+
+        /// <summary>
+        /// Indicates whether the CfsFileSystem is encrypted. true means encrypted, false means not encrypted. Modifying this parameter will trigger a rebuild.
+        /// </summary>
+        [Input("encrypted")]
+        public Input<bool>? Encrypted { get; set; }
 
         /// <summary>
         /// Mount root-directory.

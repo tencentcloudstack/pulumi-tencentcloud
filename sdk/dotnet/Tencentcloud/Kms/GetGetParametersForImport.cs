@@ -34,6 +34,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetParametersForImport](https://www.tencentcloud.com/document/api/1030/33536)
         /// </summary>
         public static Task<GetGetParametersForImportResult> InvokeAsync(GetGetParametersForImportArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetGetParametersForImportResult>("tencentcloud:Kms/getGetParametersForImport:getGetParametersForImport", args ?? new GetGetParametersForImportArgs(), options.WithDefaults());
@@ -60,6 +66,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetParametersForImport](https://www.tencentcloud.com/document/api/1030/33536)
         /// </summary>
         public static Output<GetGetParametersForImportResult> Invoke(GetGetParametersForImportInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetGetParametersForImportResult>("tencentcloud:Kms/getGetParametersForImport:getGetParametersForImport", args ?? new GetGetParametersForImportInvokeArgs(), options.WithDefaults());
@@ -86,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetParametersForImport](https://www.tencentcloud.com/document/api/1030/33536)
         /// </summary>
         public static Output<GetGetParametersForImportResult> Invoke(GetGetParametersForImportInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetGetParametersForImportResult>("tencentcloud:Kms/getGetParametersForImport:getGetParametersForImport", args ?? new GetGetParametersForImportInvokeArgs(), options.WithDefaults());

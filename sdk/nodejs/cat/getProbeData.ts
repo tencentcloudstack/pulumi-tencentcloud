@@ -27,6 +27,12 @@ import * as utilities from "../utilities";
  *     taskIds: ["task-knare1mk"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDetailedSingleProbeData](https://www.tencentcloud.com/search/?wd=DescribeDetailedSingleProbeData&type=document&lang=en)
  */
 export function getProbeData(args: GetProbeDataArgs, opts?: pulumi.InvokeOptions): Promise<GetProbeDataResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -164,6 +170,12 @@ export interface GetProbeDataResult {
  *     taskIds: ["task-knare1mk"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDetailedSingleProbeData](https://www.tencentcloud.com/search/?wd=DescribeDetailedSingleProbeData&type=document&lang=en)
  */
 export function getProbeDataOutput(args: GetProbeDataOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetProbeDataResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

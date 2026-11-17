@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     instanceId: "your_instance_id",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBSecurityGroups](https://www.tencentcloud.com/document/api/1042/39459)
  */
 export function getSecurityGroups(args: GetSecurityGroupsArgs, opts?: pulumi.InvokeOptions): Promise<GetSecurityGroupsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetSecurityGroupsResult {
  *     instanceId: "your_instance_id",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBSecurityGroups](https://www.tencentcloud.com/document/api/1042/39459)
  */
 export function getSecurityGroupsOutput(args: GetSecurityGroupsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSecurityGroupsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

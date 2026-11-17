@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeListenerRealServers](https://www.tencentcloud.com/document/api/608/33069)
         /// </summary>
         public static Task<GetListenerRealServersResult> InvokeAsync(GetListenerRealServersArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetListenerRealServersResult>("tencentcloud:Gaap/getListenerRealServers:getListenerRealServers", args ?? new GetListenerRealServersArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeListenerRealServers](https://www.tencentcloud.com/document/api/608/33069)
         /// </summary>
         public static Output<GetListenerRealServersResult> Invoke(GetListenerRealServersInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetListenerRealServersResult>("tencentcloud:Gaap/getListenerRealServers:getListenerRealServers", args ?? new GetListenerRealServersInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeListenerRealServers](https://www.tencentcloud.com/document/api/608/33069)
         /// </summary>
         public static Output<GetListenerRealServersResult> Invoke(GetListenerRealServersInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetListenerRealServersResult>("tencentcloud:Gaap/getListenerRealServers:getListenerRealServers", args ?? new GetListenerRealServersInvokeArgs(), options.WithDefaults());

@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCrossRegionZone](https://www.tencentcloud.com/document/api/238/72758)
         /// </summary>
         public static Task<GetCrossRegionZoneResult> InvokeAsync(GetCrossRegionZoneArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetCrossRegionZoneResult>("tencentcloud:Sqlserver/getCrossRegionZone:getCrossRegionZone", args ?? new GetCrossRegionZoneArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCrossRegionZone](https://www.tencentcloud.com/document/api/238/72758)
         /// </summary>
         public static Output<GetCrossRegionZoneResult> Invoke(GetCrossRegionZoneInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetCrossRegionZoneResult>("tencentcloud:Sqlserver/getCrossRegionZone:getCrossRegionZone", args ?? new GetCrossRegionZoneInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCrossRegionZone](https://www.tencentcloud.com/document/api/238/72758)
         /// </summary>
         public static Output<GetCrossRegionZoneResult> Invoke(GetCrossRegionZoneInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetCrossRegionZoneResult>("tencentcloud:Sqlserver/getCrossRegionZone:getCrossRegionZone", args ?? new GetCrossRegionZoneInvokeArgs(), options.WithDefaults());

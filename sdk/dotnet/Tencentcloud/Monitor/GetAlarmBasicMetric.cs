@@ -37,6 +37,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBaseMetrics](https://www.tencentcloud.com/document/api/248/33882)
         /// </summary>
         public static Task<GetAlarmBasicMetricResult> InvokeAsync(GetAlarmBasicMetricArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetAlarmBasicMetricResult>("tencentcloud:Monitor/getAlarmBasicMetric:getAlarmBasicMetric", args ?? new GetAlarmBasicMetricArgs(), options.WithDefaults());
@@ -66,6 +72,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBaseMetrics](https://www.tencentcloud.com/document/api/248/33882)
         /// </summary>
         public static Output<GetAlarmBasicMetricResult> Invoke(GetAlarmBasicMetricInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetAlarmBasicMetricResult>("tencentcloud:Monitor/getAlarmBasicMetric:getAlarmBasicMetric", args ?? new GetAlarmBasicMetricInvokeArgs(), options.WithDefaults());
@@ -95,6 +107,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBaseMetrics](https://www.tencentcloud.com/document/api/248/33882)
         /// </summary>
         public static Output<GetAlarmBasicMetricResult> Invoke(GetAlarmBasicMetricInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetAlarmBasicMetricResult>("tencentcloud:Monitor/getAlarmBasicMetric:getAlarmBasicMetric", args ?? new GetAlarmBasicMetricInvokeArgs(), options.WithDefaults());

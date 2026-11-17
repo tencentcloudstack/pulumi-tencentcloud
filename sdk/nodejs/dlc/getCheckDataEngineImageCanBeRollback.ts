@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *     dataEngineId: "DataEngine-80ibn1cj",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [CheckDataEngineImageCanBeRollback](https://www.tencentcloud.com/document/api/1155/62695)
  */
 export function getCheckDataEngineImageCanBeRollback(args: GetCheckDataEngineImageCanBeRollbackArgs, opts?: pulumi.InvokeOptions): Promise<GetCheckDataEngineImageCanBeRollbackResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -76,6 +82,12 @@ export interface GetCheckDataEngineImageCanBeRollbackResult {
  *     dataEngineId: "DataEngine-80ibn1cj",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [CheckDataEngineImageCanBeRollback](https://www.tencentcloud.com/document/api/1155/62695)
  */
 export function getCheckDataEngineImageCanBeRollbackOutput(args: GetCheckDataEngineImageCanBeRollbackOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetCheckDataEngineImageCanBeRollbackResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

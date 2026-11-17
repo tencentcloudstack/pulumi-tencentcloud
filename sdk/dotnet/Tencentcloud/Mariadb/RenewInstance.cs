@@ -31,6 +31,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeOrders](https://www.tencentcloud.com/document/api/237/47829)
+    ///   - [RenewDBInstance](https://www.tencentcloud.com/search/?wd=RenewDBInstance&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mariadb/renewInstance:RenewInstance")]
     public partial class RenewInstance : global::Pulumi.CustomResource

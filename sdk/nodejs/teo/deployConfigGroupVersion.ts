@@ -29,6 +29,15 @@ import * as utilities from "../utilities";
  *     ],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DeployConfigGroupVersion](https://www.tencentcloud.com/document/api/1145/57976)
+ *   - [DescribeEnvironments](https://www.tencentcloud.com/document/api/1145/57972)
+ * * Read: [DescribeDeployHistory](https://www.tencentcloud.com/document/api/1145/57973)
  */
 export class DeployConfigGroupVersion extends pulumi.CustomResource {
     /**
@@ -83,7 +92,7 @@ export class DeployConfigGroupVersion extends pulumi.CustomResource {
      */
     declare public /*out*/ readonly recordId: pulumi.Output<string>;
     /**
-     * Deploy status. Valid values: deploying (Deploying), failure (Deploy failed), success (Deploy successful).
+     * Version status. Valid values: creating (Being created), inactive (Not effective), active (Effective).
      */
     declare public /*out*/ readonly status: pulumi.Output<string>;
     /**
@@ -169,7 +178,7 @@ export interface DeployConfigGroupVersionState {
      */
     recordId?: pulumi.Input<string | undefined>;
     /**
-     * Deploy status. Valid values: deploying (Deploying), failure (Deploy failed), success (Deploy successful).
+     * Version status. Valid values: creating (Being created), inactive (Not effective), active (Effective).
      */
     status?: pulumi.Input<string | undefined>;
     /**

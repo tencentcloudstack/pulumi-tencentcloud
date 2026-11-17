@@ -168,6 +168,12 @@ def get_time_shift_record_detail(app_name: Optional[_builtins.str] = None,
         trans_code_id=0)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTimeShiftRecordDetail](https://www.tencentcloud.com/document/api/267/53720)
+
 
     :param _builtins.str app_name: Push path.
     :param _builtins.str domain: Push domain.
@@ -227,6 +233,12 @@ def get_time_shift_record_detail_output(app_name: pulumi.Input[Optional[_builtin
         domain_group="tf-test",
         trans_code_id=0)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTimeShiftRecordDetail](https://www.tencentcloud.com/document/api/267/53720)
 
 
     :param _builtins.str app_name: Push path.

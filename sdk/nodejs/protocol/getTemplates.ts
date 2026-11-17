@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     name: "test",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeServiceTemplates](https://www.tencentcloud.com/document/api/215/16719)
  */
 export function getTemplates(args?: GetTemplatesArgs, opts?: pulumi.InvokeOptions): Promise<GetTemplatesResult> {
     args = args || {};
@@ -79,6 +85,12 @@ export interface GetTemplatesResult {
  *     name: "test",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeServiceTemplates](https://www.tencentcloud.com/document/api/215/16719)
  */
 export function getTemplatesOutput(args?: GetTemplatesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetTemplatesResult> {
     args = args || {};

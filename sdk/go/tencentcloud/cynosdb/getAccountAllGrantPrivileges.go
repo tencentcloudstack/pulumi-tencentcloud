@@ -42,6 +42,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeAccountAllGrantPrivileges](https://www.tencentcloud.com/search/?wd=DescribeAccountAllGrantPrivileges&type=document&lang=en)
 func GetAccountAllGrantPrivileges(ctx *pulumi.Context, args *GetAccountAllGrantPrivilegesArgs, opts ...pulumi.InvokeOption) (*GetAccountAllGrantPrivilegesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetAccountAllGrantPrivilegesResult

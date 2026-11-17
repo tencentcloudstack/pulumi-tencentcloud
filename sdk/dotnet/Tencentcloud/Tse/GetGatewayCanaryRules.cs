@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCloudNativeAPIGatewayCanaryRules](https://www.tencentcloud.com/document/api/1290/79267)
         /// </summary>
         public static Task<GetGatewayCanaryRulesResult> InvokeAsync(GetGatewayCanaryRulesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetGatewayCanaryRulesResult>("tencentcloud:Tse/getGatewayCanaryRules:getGatewayCanaryRules", args ?? new GetGatewayCanaryRulesArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCloudNativeAPIGatewayCanaryRules](https://www.tencentcloud.com/document/api/1290/79267)
         /// </summary>
         public static Output<GetGatewayCanaryRulesResult> Invoke(GetGatewayCanaryRulesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetGatewayCanaryRulesResult>("tencentcloud:Tse/getGatewayCanaryRules:getGatewayCanaryRules", args ?? new GetGatewayCanaryRulesInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCloudNativeAPIGatewayCanaryRules](https://www.tencentcloud.com/document/api/1290/79267)
         /// </summary>
         public static Output<GetGatewayCanaryRulesResult> Invoke(GetGatewayCanaryRulesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetGatewayCanaryRulesResult>("tencentcloud:Tse/getGatewayCanaryRules:getGatewayCanaryRules", args ?? new GetGatewayCanaryRulesInvokeArgs(), options.WithDefaults());

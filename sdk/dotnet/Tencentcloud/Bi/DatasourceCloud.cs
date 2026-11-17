@@ -46,6 +46,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bi
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateDatasourceCloud](https://www.tencentcloud.com/document/api/1270/72677)
+    /// * Read: [DescribeDatasourceList](https://www.tencentcloud.com/document/api/1270/72631)
+    /// * Update: [ModifyDatasourceCloud](https://www.tencentcloud.com/document/api/1270/72632)
+    /// * Delete: [DeleteDatasource](https://www.tencentcloud.com/document/api/1270/72634)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Bi/datasourceCloud:DatasourceCloud")]
     public partial class DatasourceCloud : global::Pulumi.CustomResource

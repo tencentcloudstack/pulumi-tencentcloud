@@ -123,6 +123,16 @@ def get_services(result_output_file: Optional[_builtins.str] = None,
     id = tencentcloud.apigateway.get_services_output(service_id=service.id)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeApiUsagePlan](https://www.tencentcloud.com/search/?wd=DescribeApiUsagePlan&type=document&lang=en)
+      - [DescribeService](https://www.tencentcloud.com/search/?wd=DescribeService&type=document&lang=en)
+      - [DescribeServiceUsagePlan](https://www.tencentcloud.com/search/?wd=DescribeServiceUsagePlan&type=document&lang=en)
+      - [DescribeServicesStatus](https://www.tencentcloud.com/search/?wd=DescribeServicesStatus&type=document&lang=en)
+
 
     :param _builtins.str result_output_file: Used to save results.
     :param _builtins.str service_id: Service ID for query.
@@ -167,6 +177,16 @@ def get_services_output(result_output_file: pulumi.Input[Optional[Optional[_buil
     name = tencentcloud.apigateway.get_services_output(service_name=service.service_name)
     id = tencentcloud.apigateway.get_services_output(service_id=service.id)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeApiUsagePlan](https://www.tencentcloud.com/search/?wd=DescribeApiUsagePlan&type=document&lang=en)
+      - [DescribeService](https://www.tencentcloud.com/search/?wd=DescribeService&type=document&lang=en)
+      - [DescribeServiceUsagePlan](https://www.tencentcloud.com/search/?wd=DescribeServiceUsagePlan&type=document&lang=en)
+      - [DescribeServicesStatus](https://www.tencentcloud.com/search/?wd=DescribeServicesStatus&type=document&lang=en)
 
 
     :param _builtins.str result_output_file: Used to save results.

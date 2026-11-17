@@ -87,6 +87,14 @@ class VerifyDomain(pulumi.CustomResource):
         verify_domain = tencentcloud.ses.VerifyDomain("verify_domain", email_identity="example.com")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [GetEmailIdentity](https://www.tencentcloud.com/document/api/1084/39412)
+          - [UpdateEmailIdentity](https://www.tencentcloud.com/document/api/1084/39410)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -111,6 +119,14 @@ class VerifyDomain(pulumi.CustomResource):
 
         verify_domain = tencentcloud.ses.VerifyDomain("verify_domain", email_identity="example.com")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [GetEmailIdentity](https://www.tencentcloud.com/document/api/1084/39412)
+          - [UpdateEmailIdentity](https://www.tencentcloud.com/document/api/1084/39410)
 
 
         :param str resource_name: The name of the resource.

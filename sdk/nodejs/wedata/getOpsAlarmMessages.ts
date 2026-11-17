@@ -23,6 +23,12 @@ import * as utilities from "../utilities";
  *     timeZone: "UTC+8",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListAlarmMessages](https://www.tencentcloud.com/document/api/1174/73825)
  */
 export function getOpsAlarmMessages(args: GetOpsAlarmMessagesArgs, opts?: pulumi.InvokeOptions): Promise<GetOpsAlarmMessagesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -108,6 +114,12 @@ export interface GetOpsAlarmMessagesResult {
  *     timeZone: "UTC+8",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListAlarmMessages](https://www.tencentcloud.com/document/api/1174/73825)
  */
 export function getOpsAlarmMessagesOutput(args: GetOpsAlarmMessagesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetOpsAlarmMessagesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

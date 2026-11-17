@@ -300,6 +300,19 @@ class AuditLogFile(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateAuditLogFile](https://www.tencentcloud.com/search/?wd=CreateAuditLogFile&type=document&lang=en)
+          - [DescribeAuditLogFiles](https://www.tencentcloud.com/document/api/240/79888)
+        * Read: [DescribeAuditLogFiles](https://www.tencentcloud.com/document/api/240/79888)
+        * Update: [DescribeAuditLogFiles](https://www.tencentcloud.com/document/api/240/79888)
+        * Delete:
+          - [DeleteAuditLogFile](https://www.tencentcloud.com/search/?wd=DeleteAuditLogFile&type=document&lang=en)
+          - [DescribeAuditLogFiles](https://www.tencentcloud.com/document/api/240/79888)
+
         ## Import
 
         mongodb audit_log_file can be imported using the composite instance_id#file_name, e.g.
@@ -352,6 +365,19 @@ class AuditLogFile(pulumi.CustomResource):
                 "params": ["keyword"],
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateAuditLogFile](https://www.tencentcloud.com/search/?wd=CreateAuditLogFile&type=document&lang=en)
+          - [DescribeAuditLogFiles](https://www.tencentcloud.com/document/api/240/79888)
+        * Read: [DescribeAuditLogFiles](https://www.tencentcloud.com/document/api/240/79888)
+        * Update: [DescribeAuditLogFiles](https://www.tencentcloud.com/document/api/240/79888)
+        * Delete:
+          - [DeleteAuditLogFile](https://www.tencentcloud.com/search/?wd=DeleteAuditLogFile&type=document&lang=en)
+          - [DescribeAuditLogFiles](https://www.tencentcloud.com/document/api/240/79888)
 
         ## Import
 

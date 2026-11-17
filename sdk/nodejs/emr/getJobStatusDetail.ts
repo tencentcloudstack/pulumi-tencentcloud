@@ -23,6 +23,12 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeClusterFlowStatusDetail](https://www.tencentcloud.com/document/api/1026/73259)
  */
 export function getJobStatusDetail(args: GetJobStatusDetailArgs, opts?: pulumi.InvokeOptions): Promise<GetJobStatusDetailResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -110,6 +116,12 @@ export interface GetJobStatusDetailResult {
  *     },
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeClusterFlowStatusDetail](https://www.tencentcloud.com/document/api/1026/73259)
  */
 export function getJobStatusDetailOutput(args: GetJobStatusDetailOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetJobStatusDetailResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

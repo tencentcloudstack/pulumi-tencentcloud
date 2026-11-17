@@ -106,6 +106,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateNotificationConfiguration](https://www.tencentcloud.com/document/api/377/33194)
+    /// * Read: [DescribeNotificationConfigurations](https://www.tencentcloud.com/document/api/377/33192)
+    /// * Update: [ModifyNotificationConfiguration](https://www.tencentcloud.com/document/api/377/33191)
+    /// * Delete: [DeleteNotificationConfiguration](https://www.tencentcloud.com/document/api/377/33193)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:As/notification:Notification")]
     public partial class Notification : global::Pulumi.CustomResource

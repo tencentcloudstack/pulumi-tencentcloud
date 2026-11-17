@@ -31,6 +31,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [ApplyInstanceSnapshot](https://www.tencentcloud.com/document/api/1103/42465)
+    ///   - [DescribeSnapshots](https://www.tencentcloud.com/document/api/1103/42462)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Lighthouse/applyInstanceSnapshot:ApplyInstanceSnapshot")]
     public partial class ApplyInstanceSnapshot : global::Pulumi.CustomResource

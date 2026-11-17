@@ -165,6 +165,20 @@ class UserDataEngineConfig(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeDataEngine](https://www.tencentcloud.com/document/api/1155/62693)
+          - [DescribeDataEngines](https://www.tencentcloud.com/search/?wd=DescribeDataEngines&type=document&lang=en)
+          - [UpdateUserDataEngineConfig](https://www.tencentcloud.com/document/api/1155/62644)
+        * Read: [DescribeUserDataEngineConfig](https://www.tencentcloud.com/document/api/1155/62685)
+        * Update:
+          - [DescribeDataEngine](https://www.tencentcloud.com/document/api/1155/62693)
+          - [DescribeDataEngines](https://www.tencentcloud.com/search/?wd=DescribeDataEngines&type=document&lang=en)
+          - [UpdateUserDataEngineConfig](https://www.tencentcloud.com/document/api/1155/62644)
+
         ## Import
 
         dlc user_data_engine_config can be imported using the id, e.g.
@@ -208,6 +222,20 @@ class UserDataEngineConfig(pulumi.CustomResource):
                 "executor_max_numbers": 1,
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeDataEngine](https://www.tencentcloud.com/document/api/1155/62693)
+          - [DescribeDataEngines](https://www.tencentcloud.com/search/?wd=DescribeDataEngines&type=document&lang=en)
+          - [UpdateUserDataEngineConfig](https://www.tencentcloud.com/document/api/1155/62644)
+        * Read: [DescribeUserDataEngineConfig](https://www.tencentcloud.com/document/api/1155/62685)
+        * Update:
+          - [DescribeDataEngine](https://www.tencentcloud.com/document/api/1155/62693)
+          - [DescribeDataEngines](https://www.tencentcloud.com/search/?wd=DescribeDataEngines&type=document&lang=en)
+          - [UpdateUserDataEngineConfig](https://www.tencentcloud.com/document/api/1155/62644)
 
         ## Import
 

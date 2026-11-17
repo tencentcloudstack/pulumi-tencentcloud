@@ -115,6 +115,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBlueprints](https://www.tencentcloud.com/document/api/1103/42503)
         /// </summary>
         public static Task<GetBlueprintsResult> InvokeAsync(GetBlueprintsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetBlueprintsResult>("tencentcloud:Lighthouse/getBlueprints:getBlueprints", args ?? new GetBlueprintsArgs(), options.WithDefaults());
@@ -222,6 +228,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBlueprints](https://www.tencentcloud.com/document/api/1103/42503)
         /// </summary>
         public static Output<GetBlueprintsResult> Invoke(GetBlueprintsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetBlueprintsResult>("tencentcloud:Lighthouse/getBlueprints:getBlueprints", args ?? new GetBlueprintsInvokeArgs(), options.WithDefaults());
@@ -329,6 +341,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBlueprints](https://www.tencentcloud.com/document/api/1103/42503)
         /// </summary>
         public static Output<GetBlueprintsResult> Invoke(GetBlueprintsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetBlueprintsResult>("tencentcloud:Lighthouse/getBlueprints:getBlueprints", args ?? new GetBlueprintsInvokeArgs(), options.WithDefaults());

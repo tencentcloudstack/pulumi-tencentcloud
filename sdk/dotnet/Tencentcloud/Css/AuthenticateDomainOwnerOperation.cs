@@ -52,6 +52,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [AuthenticateDomainOwner](https://www.tencentcloud.com/document/api/267/50612)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Css/authenticateDomainOwnerOperation:AuthenticateDomainOwnerOperation")]
     public partial class AuthenticateDomainOwnerOperation : global::Pulumi.CustomResource

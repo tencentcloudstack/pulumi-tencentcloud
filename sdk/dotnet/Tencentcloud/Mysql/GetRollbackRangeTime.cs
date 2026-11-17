@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRollbackRangeTime](https://www.tencentcloud.com/document/api/236/18726)
         /// </summary>
         public static Task<GetRollbackRangeTimeResult> InvokeAsync(GetRollbackRangeTimeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetRollbackRangeTimeResult>("tencentcloud:Mysql/getRollbackRangeTime:getRollbackRangeTime", args ?? new GetRollbackRangeTimeArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRollbackRangeTime](https://www.tencentcloud.com/document/api/236/18726)
         /// </summary>
         public static Output<GetRollbackRangeTimeResult> Invoke(GetRollbackRangeTimeInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetRollbackRangeTimeResult>("tencentcloud:Mysql/getRollbackRangeTime:getRollbackRangeTime", args ?? new GetRollbackRangeTimeInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRollbackRangeTime](https://www.tencentcloud.com/document/api/236/18726)
         /// </summary>
         public static Output<GetRollbackRangeTimeResult> Invoke(GetRollbackRangeTimeInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetRollbackRangeTimeResult>("tencentcloud:Mysql/getRollbackRangeTime:getRollbackRangeTime", args ?? new GetRollbackRangeTimeInvokeArgs(), options.WithDefaults());

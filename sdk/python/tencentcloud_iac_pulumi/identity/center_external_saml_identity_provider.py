@@ -339,6 +339,20 @@ class CenterExternalSamlIdentityProvider(pulumi.CustomResource):
         \"\"\")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [SetExternalSAMLIdentityProvider](https://www.tencentcloud.com/document/api/1031/63582)
+        * Read:
+          - [GetExternalSAMLIdentityProvider](https://www.tencentcloud.com/document/api/1031/63586)
+          - [GetZoneSAMLServiceProviderInfo](https://www.tencentcloud.com/document/api/1031/63585)
+        * Update: [SetExternalSAMLIdentityProvider](https://www.tencentcloud.com/document/api/1031/63582)
+        * Delete:
+          - [ClearExternalSAMLIdentityProvider](https://www.tencentcloud.com/document/api/1031/63587)
+          - [GetExternalSAMLIdentityProvider](https://www.tencentcloud.com/document/api/1031/63586)
+          - [SetExternalSAMLIdentityProvider](https://www.tencentcloud.com/document/api/1031/63582)
+
         ## Import
 
         Organization identity center external saml identity provider can be imported using the id, e.g.
@@ -398,6 +412,20 @@ class CenterExternalSamlIdentityProvider(pulumi.CustomResource):
         -----END CERTIFICATE-----
         \"\"\")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [SetExternalSAMLIdentityProvider](https://www.tencentcloud.com/document/api/1031/63582)
+        * Read:
+          - [GetExternalSAMLIdentityProvider](https://www.tencentcloud.com/document/api/1031/63586)
+          - [GetZoneSAMLServiceProviderInfo](https://www.tencentcloud.com/document/api/1031/63585)
+        * Update: [SetExternalSAMLIdentityProvider](https://www.tencentcloud.com/document/api/1031/63582)
+        * Delete:
+          - [ClearExternalSAMLIdentityProvider](https://www.tencentcloud.com/document/api/1031/63587)
+          - [GetExternalSAMLIdentityProvider](https://www.tencentcloud.com/document/api/1031/63586)
+          - [SetExternalSAMLIdentityProvider](https://www.tencentcloud.com/document/api/1031/63582)
 
         ## Import
 

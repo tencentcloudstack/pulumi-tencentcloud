@@ -138,6 +138,12 @@ def get_db_versions(db_kernel_version: Optional[_builtins.str] = None,
         db_kernel_version="v16.0_r1.0")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBVersions](https://www.tencentcloud.com/document/api/409/54337)
+
 
     :param _builtins.str db_kernel_version: PostgreSQL kernel version number.
     :param _builtins.str db_major_version: PostgreSQL major version number.
@@ -188,6 +194,12 @@ def get_db_versions_output(db_kernel_version: pulumi.Input[Optional[Optional[_bu
         db_major_version="16",
         db_kernel_version="v16.0_r1.0")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBVersions](https://www.tencentcloud.com/document/api/409/54337)
 
 
     :param _builtins.str db_kernel_version: PostgreSQL kernel version number.

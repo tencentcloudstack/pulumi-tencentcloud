@@ -213,6 +213,12 @@ def get_migrate_db_instances(account_mode: Optional[_builtins.str] = None,
         tmp_token="JOqqCPVuWdNZvlVDLxxx")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeMigrateDBInstances](https://www.tencentcloud.com/document/api/571/51815)
+
 
     :param _builtins.str account_mode: The owning account of the resource is null or self(resources in the self account), other(resources in the other account).
     :param _builtins.str database_type: Database type.
@@ -288,6 +294,12 @@ def get_migrate_db_instances_output(account_mode: pulumi.Input[Optional[Optional
         tmp_secret_key="ZswjGWWHm24qMeiX6QUJsELDpC12345",
         tmp_token="JOqqCPVuWdNZvlVDLxxx")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeMigrateDBInstances](https://www.tencentcloud.com/document/api/571/51815)
 
 
     :param _builtins.str account_mode: The owning account of the resource is null or self(resources in the self account), other(resources in the other account).

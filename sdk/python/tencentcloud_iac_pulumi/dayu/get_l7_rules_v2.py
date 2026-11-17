@@ -159,6 +159,12 @@ def get_l7_rules_v2(business: Optional[_builtins.str] = None,
         protocol="https")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribleNewL7Rules](https://www.tencentcloud.com/search/?wd=DescribleNewL7Rules&type=document&lang=en)
+
 
     :param _builtins.str business: Type of the resource that the layer 4 rule works for, valid values are `bgpip`, `bgp`, `bgp-multip` and `net`.
     :param _builtins.str domain: Domain of resource.
@@ -210,6 +216,12 @@ def get_l7_rules_v2_output(business: pulumi.Input[Optional[_builtins.str]] = Non
         domain="qq.com",
         protocol="https")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribleNewL7Rules](https://www.tencentcloud.com/search/?wd=DescribleNewL7Rules&type=document&lang=en)
 
 
     :param _builtins.str business: Type of the resource that the layer 4 rule works for, valid values are `bgpip`, `bgp`, `bgp-multip` and `net`.

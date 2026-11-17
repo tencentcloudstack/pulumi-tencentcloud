@@ -387,6 +387,15 @@ class ContentReviewTemplate(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateContentReviewTemplate](https://www.tencentcloud.com/document/api/1041/33675)
+        * Read: [DescribeContentReviewTemplates](https://www.tencentcloud.com/document/api/1041/33659)
+        * Update: [ModifyContentReviewTemplate](https://www.tencentcloud.com/document/api/1041/33651)
+        * Delete: [DeleteContentReviewTemplate](https://www.tencentcloud.com/document/api/1041/33667)
+
         ## Import
 
         mps content_review_template can be imported using the id, e.g.
@@ -524,6 +533,15 @@ class ContentReviewTemplate(pulumi.CustomResource):
                 },
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateContentReviewTemplate](https://www.tencentcloud.com/document/api/1041/33675)
+        * Read: [DescribeContentReviewTemplates](https://www.tencentcloud.com/document/api/1041/33659)
+        * Update: [ModifyContentReviewTemplate](https://www.tencentcloud.com/document/api/1041/33651)
+        * Delete: [DeleteContentReviewTemplate](https://www.tencentcloud.com/document/api/1041/33667)
 
         ## Import
 

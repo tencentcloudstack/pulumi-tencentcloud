@@ -223,6 +223,27 @@ class GlobalDomain(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateGlobalDomain](https://www.tencentcloud.com/search/?wd=CreateGlobalDomain&type=document&lang=en)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribeGlobalDomains](https://www.tencentcloud.com/search/?wd=DescribeGlobalDomains&type=document&lang=en)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [DescribeGlobalDomains](https://www.tencentcloud.com/search/?wd=DescribeGlobalDomains&type=document&lang=en)
+          - [DisableGlobalDomain](https://www.tencentcloud.com/search/?wd=DisableGlobalDomain&type=document&lang=en)
+          - [EnableGlobalDomain](https://www.tencentcloud.com/search/?wd=EnableGlobalDomain&type=document&lang=en)
+          - [ModifyGlobalDomainAttribute](https://www.tencentcloud.com/search/?wd=ModifyGlobalDomainAttribute&type=document&lang=en)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Delete:
+          - [DeleteGlobalDomain](https://www.tencentcloud.com/search/?wd=DeleteGlobalDomain&type=document&lang=en)
+          - [DescribeGlobalDomains](https://www.tencentcloud.com/search/?wd=DescribeGlobalDomains&type=document&lang=en)
+          - [DisableGlobalDomain](https://www.tencentcloud.com/search/?wd=DisableGlobalDomain&type=document&lang=en)
+
         ## Import
 
         gaap global_domain can be imported using the id, e.g.
@@ -263,6 +284,27 @@ class GlobalDomain(pulumi.CustomResource):
                 "key": "value",
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateGlobalDomain](https://www.tencentcloud.com/search/?wd=CreateGlobalDomain&type=document&lang=en)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribeGlobalDomains](https://www.tencentcloud.com/search/?wd=DescribeGlobalDomains&type=document&lang=en)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [DescribeGlobalDomains](https://www.tencentcloud.com/search/?wd=DescribeGlobalDomains&type=document&lang=en)
+          - [DisableGlobalDomain](https://www.tencentcloud.com/search/?wd=DisableGlobalDomain&type=document&lang=en)
+          - [EnableGlobalDomain](https://www.tencentcloud.com/search/?wd=EnableGlobalDomain&type=document&lang=en)
+          - [ModifyGlobalDomainAttribute](https://www.tencentcloud.com/search/?wd=ModifyGlobalDomainAttribute&type=document&lang=en)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Delete:
+          - [DeleteGlobalDomain](https://www.tencentcloud.com/search/?wd=DeleteGlobalDomain&type=document&lang=en)
+          - [DescribeGlobalDomains](https://www.tencentcloud.com/search/?wd=DescribeGlobalDomains&type=document&lang=en)
+          - [DisableGlobalDomain](https://www.tencentcloud.com/search/?wd=DisableGlobalDomain&type=document&lang=en)
 
         ## Import
 

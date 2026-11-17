@@ -82,6 +82,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateNativeGatewayServerGroup](https://www.tencentcloud.com/document/api/1290/79288)
+    ///   - [DescribeNativeGatewayServerGroups](https://www.tencentcloud.com/document/api/1290/79253)
+    /// * Read: [DescribeNativeGatewayServerGroups](https://www.tencentcloud.com/document/api/1290/79253)
+    /// * Update:
+    ///   - [DescribeNativeGatewayServerGroups](https://www.tencentcloud.com/document/api/1290/79253)
+    ///   - [ModifyNativeGatewayServerGroup](https://www.tencentcloud.com/document/api/1290/79236)
+    /// * Delete:
+    ///   - [DeleteNativeGatewayServerGroup](https://www.tencentcloud.com/document/api/1290/79274)
+    ///   - [DescribeNativeGatewayServerGroups](https://www.tencentcloud.com/document/api/1290/79253)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tse/cngwGroup:CngwGroup")]
     public partial class CngwGroup : global::Pulumi.CustomResource

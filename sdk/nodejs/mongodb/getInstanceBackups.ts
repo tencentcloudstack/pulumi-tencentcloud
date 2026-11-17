@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     backupMethod: 0,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBBackups](https://www.tencentcloud.com/document/api/240/34707)
  */
 export function getInstanceBackups(args: GetInstanceBackupsArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceBackupsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -84,6 +90,12 @@ export interface GetInstanceBackupsResult {
  *     backupMethod: 0,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBBackups](https://www.tencentcloud.com/document/api/240/34707)
  */
 export function getInstanceBackupsOutput(args: GetInstanceBackupsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInstanceBackupsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

@@ -204,6 +204,18 @@ class EdgeFirewallSwitch(pulumi.CustomResource):
             enable=1)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeFwEdgeIps](https://www.tencentcloud.com/search/?wd=DescribeFwEdgeIps&type=document&lang=en)
+          - [ModifyEdgeIpSwitch](https://www.tencentcloud.com/search/?wd=ModifyEdgeIpSwitch&type=document&lang=en)
+        * Read: [DescribeFwEdgeIps](https://www.tencentcloud.com/search/?wd=DescribeFwEdgeIps&type=document&lang=en)
+        * Update:
+          - [DescribeFwEdgeIps](https://www.tencentcloud.com/search/?wd=DescribeFwEdgeIps&type=document&lang=en)
+          - [ModifyEdgeIpSwitch](https://www.tencentcloud.com/search/?wd=ModifyEdgeIpSwitch&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -251,6 +263,18 @@ class EdgeFirewallSwitch(pulumi.CustomResource):
             switch_mode=1,
             enable=1)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeFwEdgeIps](https://www.tencentcloud.com/search/?wd=DescribeFwEdgeIps&type=document&lang=en)
+          - [ModifyEdgeIpSwitch](https://www.tencentcloud.com/search/?wd=ModifyEdgeIpSwitch&type=document&lang=en)
+        * Read: [DescribeFwEdgeIps](https://www.tencentcloud.com/search/?wd=DescribeFwEdgeIps&type=document&lang=en)
+        * Update:
+          - [DescribeFwEdgeIps](https://www.tencentcloud.com/search/?wd=DescribeFwEdgeIps&type=document&lang=en)
+          - [ModifyEdgeIpSwitch](https://www.tencentcloud.com/search/?wd=ModifyEdgeIpSwitch&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

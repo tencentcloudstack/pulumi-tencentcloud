@@ -32,6 +32,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ipv6
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [AllocateIp6AddressesBandwidth](https://www.tencentcloud.com/document/api/215/68131)
+    ///   - [DescribeTaskResult](https://www.tencentcloud.com/document/api/215/34772)
+    /// * Read: [DescribeIp6Addresses](https://www.tencentcloud.com/document/api/215/68128)
+    /// * Update:
+    ///   - [DescribeTaskResult](https://www.tencentcloud.com/document/api/215/34772)
+    ///   - [ModifyIp6AddressesBandwidth](https://www.tencentcloud.com/document/api/215/68124)
+    /// * Delete: [ReleaseIp6AddressesBandwidth](https://www.tencentcloud.com/document/api/215/68122)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ipv6/addressBandwidth:AddressBandwidth")]
     public partial class AddressBandwidth : global::Pulumi.CustomResource

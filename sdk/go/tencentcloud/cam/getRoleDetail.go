@@ -66,6 +66,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [GetRole](https://www.tencentcloud.com/document/api/598/33557)
 func GetRoleDetail(ctx *pulumi.Context, args *GetRoleDetailArgs, opts ...pulumi.InvokeOption) (*GetRoleDetailResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetRoleDetailResult

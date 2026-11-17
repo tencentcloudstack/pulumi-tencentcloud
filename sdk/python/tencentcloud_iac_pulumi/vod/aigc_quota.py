@@ -3,7 +3,8 @@
 
 import builtins as _builtins
 import sys
-from typing import Optional, overload
+from collections.abc import Sequence
+from typing import Optional, Union, overload
 
 import pulumi
 import pulumi.runtime
@@ -13,6 +14,8 @@ if sys.version_info >= (3, 11):
 else:
     pass
 from .. import _utilities
+from . import outputs
+from ._inputs import *
 
 __all__ = ['AigcQuota', 'AigcQuotaArgs']
 
@@ -22,7 +25,11 @@ class AigcQuotaArgs:
                  quota_limit: pulumi.Input[_builtins.int],
                  quota_type: pulumi.Input[_builtins.str],
                  sub_app_id: pulumi.Input[_builtins.int],
-                 api_token: pulumi.Input[Optional[_builtins.str]] = None):
+                 api_token: pulumi.Input[Optional[_builtins.str]] = None,
+                 model_quota_switch: pulumi.Input[Optional[_builtins.str]] = None,
+                 model_quotas: pulumi.Input[Optional[Sequence[pulumi.Input['AigcQuotaModelQuotaArgs']]]] = None,
+                 quota_period: pulumi.Input[Optional[_builtins.str]] = None,
+                 reset_day: pulumi.Input[Optional[_builtins.int]] = None):
         """
         The set of arguments for constructing a AigcQuota resource.
 
@@ -30,12 +37,24 @@ class AigcQuotaArgs:
         :param pulumi.Input[_builtins.str] quota_type: Quota type. Valid values: `Image` (AIGC image generation), `Video` (AIGC video generation), `Text` (AIGC text generation).
         :param pulumi.Input[_builtins.int] sub_app_id: The VOD [sub application](https://intl.cloud.tencent.com/document/product/266/14574) ID. Users who activated VOD service after December 25, 2023 must specify the application ID.
         :param pulumi.Input[_builtins.str] api_token: API token for quota restriction. Only meaningful when `quota_type` is `Text`.
+        :param pulumi.Input[_builtins.str] model_quota_switch: Whether to enable per-model quota settings. Valid values: `ON`, `OFF`. Default value: `OFF`.
+        :param pulumi.Input[Sequence[pulumi.Input['AigcQuotaModelQuotaArgs']]] model_quotas: Per-model quotas, only valid when `model_quota_switch` is `ON`.
+        :param pulumi.Input[_builtins.str] quota_period: Quota reset period. Valid values: `Day` (reset every day), `Month` (reset on the specified day of each month), `Total` (never reset, `quota_limit` is the total quota).
+        :param pulumi.Input[_builtins.int] reset_day: Reset day of the month, only valid when `quota_period` is `Month`. If the specified day does not exist in the current month, the quota resets at 00:00 on the 1st day of the next month.
         """
         pulumi.set(__self__, "quota_limit", quota_limit)
         pulumi.set(__self__, "quota_type", quota_type)
         pulumi.set(__self__, "sub_app_id", sub_app_id)
         if api_token is not None:
             pulumi.set(__self__, "api_token", api_token)
+        if model_quota_switch is not None:
+            pulumi.set(__self__, "model_quota_switch", model_quota_switch)
+        if model_quotas is not None:
+            pulumi.set(__self__, "model_quotas", model_quotas)
+        if quota_period is not None:
+            pulumi.set(__self__, "quota_period", quota_period)
+        if reset_day is not None:
+            pulumi.set(__self__, "reset_day", reset_day)
 
     @_builtins.property
     @pulumi.getter(name="quotaLimit")
@@ -85,30 +104,94 @@ class AigcQuotaArgs:
     def api_token(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "api_token", value)
 
+    @_builtins.property
+    @pulumi.getter(name="modelQuotaSwitch")
+    def model_quota_switch(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Whether to enable per-model quota settings. Valid values: `ON`, `OFF`. Default value: `OFF`.
+        """
+        return pulumi.get(self, "model_quota_switch")
+
+    @model_quota_switch.setter
+    def model_quota_switch(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "model_quota_switch", value)
+
+    @_builtins.property
+    @pulumi.getter(name="modelQuotas")
+    def model_quotas(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['AigcQuotaModelQuotaArgs']]]]:
+        """
+        Per-model quotas, only valid when `model_quota_switch` is `ON`.
+        """
+        return pulumi.get(self, "model_quotas")
+
+    @model_quotas.setter
+    def model_quotas(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['AigcQuotaModelQuotaArgs']]]]):
+        pulumi.set(self, "model_quotas", value)
+
+    @_builtins.property
+    @pulumi.getter(name="quotaPeriod")
+    def quota_period(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Quota reset period. Valid values: `Day` (reset every day), `Month` (reset on the specified day of each month), `Total` (never reset, `quota_limit` is the total quota).
+        """
+        return pulumi.get(self, "quota_period")
+
+    @quota_period.setter
+    def quota_period(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "quota_period", value)
+
+    @_builtins.property
+    @pulumi.getter(name="resetDay")
+    def reset_day(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Reset day of the month, only valid when `quota_period` is `Month`. If the specified day does not exist in the current month, the quota resets at 00:00 on the 1st day of the next month.
+        """
+        return pulumi.get(self, "reset_day")
+
+    @reset_day.setter
+    def reset_day(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "reset_day", value)
+
 
 @pulumi.input_type
 class _AigcQuotaState:
     def __init__(__self__, *,
                  api_token: pulumi.Input[Optional[_builtins.str]] = None,
+                 model_quota_switch: pulumi.Input[Optional[_builtins.str]] = None,
+                 model_quotas: pulumi.Input[Optional[Sequence[pulumi.Input['AigcQuotaModelQuotaArgs']]]] = None,
                  quota_limit: pulumi.Input[Optional[_builtins.int]] = None,
+                 quota_period: pulumi.Input[Optional[_builtins.str]] = None,
                  quota_type: pulumi.Input[Optional[_builtins.str]] = None,
+                 reset_day: pulumi.Input[Optional[_builtins.int]] = None,
                  sub_app_id: pulumi.Input[Optional[_builtins.int]] = None,
                  usage: pulumi.Input[Optional[_builtins.int]] = None):
         """
         Input properties used for looking up and filtering AigcQuota resources.
 
         :param pulumi.Input[_builtins.str] api_token: API token for quota restriction. Only meaningful when `quota_type` is `Text`.
+        :param pulumi.Input[_builtins.str] model_quota_switch: Whether to enable per-model quota settings. Valid values: `ON`, `OFF`. Default value: `OFF`.
+        :param pulumi.Input[Sequence[pulumi.Input['AigcQuotaModelQuotaArgs']]] model_quotas: Per-model quotas, only valid when `model_quota_switch` is `ON`.
         :param pulumi.Input[_builtins.int] quota_limit: Quota limit value. Unit: when `quota_type` is `Image`, count by images; when `quota_type` is `Video`, count by seconds; when `quota_type` is `Text`, count by tokens.
+        :param pulumi.Input[_builtins.str] quota_period: Quota reset period. Valid values: `Day` (reset every day), `Month` (reset on the specified day of each month), `Total` (never reset, `quota_limit` is the total quota).
         :param pulumi.Input[_builtins.str] quota_type: Quota type. Valid values: `Image` (AIGC image generation), `Video` (AIGC video generation), `Text` (AIGC text generation).
+        :param pulumi.Input[_builtins.int] reset_day: Reset day of the month, only valid when `quota_period` is `Month`. If the specified day does not exist in the current month, the quota resets at 00:00 on the 1st day of the next month.
         :param pulumi.Input[_builtins.int] sub_app_id: The VOD [sub application](https://intl.cloud.tencent.com/document/product/266/14574) ID. Users who activated VOD service after December 25, 2023 must specify the application ID.
-        :param pulumi.Input[_builtins.int] usage: Current usage amount. Unit: when `quota_type` is `Image`, count by images; when `quota_type` is `Video`, count by seconds; when `quota_type` is `Text`, count by tokens.
+        :param pulumi.Input[_builtins.int] usage: Current usage amount of the model quota. Unit: when `quota_type` is `Image`, count by images; when `quota_type` is `Video`, count by seconds.
         """
         if api_token is not None:
             pulumi.set(__self__, "api_token", api_token)
+        if model_quota_switch is not None:
+            pulumi.set(__self__, "model_quota_switch", model_quota_switch)
+        if model_quotas is not None:
+            pulumi.set(__self__, "model_quotas", model_quotas)
         if quota_limit is not None:
             pulumi.set(__self__, "quota_limit", quota_limit)
+        if quota_period is not None:
+            pulumi.set(__self__, "quota_period", quota_period)
         if quota_type is not None:
             pulumi.set(__self__, "quota_type", quota_type)
+        if reset_day is not None:
+            pulumi.set(__self__, "reset_day", reset_day)
         if sub_app_id is not None:
             pulumi.set(__self__, "sub_app_id", sub_app_id)
         if usage is not None:
@@ -127,6 +210,30 @@ class _AigcQuotaState:
         pulumi.set(self, "api_token", value)
 
     @_builtins.property
+    @pulumi.getter(name="modelQuotaSwitch")
+    def model_quota_switch(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Whether to enable per-model quota settings. Valid values: `ON`, `OFF`. Default value: `OFF`.
+        """
+        return pulumi.get(self, "model_quota_switch")
+
+    @model_quota_switch.setter
+    def model_quota_switch(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "model_quota_switch", value)
+
+    @_builtins.property
+    @pulumi.getter(name="modelQuotas")
+    def model_quotas(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['AigcQuotaModelQuotaArgs']]]]:
+        """
+        Per-model quotas, only valid when `model_quota_switch` is `ON`.
+        """
+        return pulumi.get(self, "model_quotas")
+
+    @model_quotas.setter
+    def model_quotas(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['AigcQuotaModelQuotaArgs']]]]):
+        pulumi.set(self, "model_quotas", value)
+
+    @_builtins.property
     @pulumi.getter(name="quotaLimit")
     def quota_limit(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
@@ -139,6 +246,18 @@ class _AigcQuotaState:
         pulumi.set(self, "quota_limit", value)
 
     @_builtins.property
+    @pulumi.getter(name="quotaPeriod")
+    def quota_period(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Quota reset period. Valid values: `Day` (reset every day), `Month` (reset on the specified day of each month), `Total` (never reset, `quota_limit` is the total quota).
+        """
+        return pulumi.get(self, "quota_period")
+
+    @quota_period.setter
+    def quota_period(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "quota_period", value)
+
+    @_builtins.property
     @pulumi.getter(name="quotaType")
     def quota_type(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
@@ -149,6 +268,18 @@ class _AigcQuotaState:
     @quota_type.setter
     def quota_type(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "quota_type", value)
+
+    @_builtins.property
+    @pulumi.getter(name="resetDay")
+    def reset_day(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Reset day of the month, only valid when `quota_period` is `Month`. If the specified day does not exist in the current month, the quota resets at 00:00 on the 1st day of the next month.
+        """
+        return pulumi.get(self, "reset_day")
+
+    @reset_day.setter
+    def reset_day(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "reset_day", value)
 
     @_builtins.property
     @pulumi.getter(name="subAppId")
@@ -166,7 +297,7 @@ class _AigcQuotaState:
     @pulumi.getter
     def usage(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
-        Current usage amount. Unit: when `quota_type` is `Image`, count by images; when `quota_type` is `Video`, count by seconds; when `quota_type` is `Text`, count by tokens.
+        Current usage amount of the model quota. Unit: when `quota_type` is `Image`, count by images; when `quota_type` is `Video`, count by seconds.
         """
         return pulumi.get(self, "usage")
 
@@ -182,8 +313,12 @@ class AigcQuota(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  api_token: pulumi.Input[Optional[_builtins.str]] = None,
+                 model_quota_switch: pulumi.Input[Optional[_builtins.str]] = None,
+                 model_quotas: pulumi.Input[Optional[Sequence[pulumi.Input[Union['AigcQuotaModelQuotaArgs', 'AigcQuotaModelQuotaArgsDict']]]]] = None,
                  quota_limit: pulumi.Input[Optional[_builtins.int]] = None,
+                 quota_period: pulumi.Input[Optional[_builtins.str]] = None,
                  quota_type: pulumi.Input[Optional[_builtins.str]] = None,
+                 reset_day: pulumi.Input[Optional[_builtins.int]] = None,
                  sub_app_id: pulumi.Input[Optional[_builtins.int]] = None,
                  __props__=None):
         """
@@ -205,7 +340,27 @@ class AigcQuota(pulumi.CustomResource):
         example_aigc_quota = tencentcloud.vod.AigcQuota("example",
             sub_app_id=example.sub_app_id.apply(lambda x: int(x)),
             quota_type="Image",
-            quota_limit=100)
+            quota_limit=100,
+            quota_period="Month",
+            reset_day=1,
+            model_quota_switch="ON",
+            model_quotas=[
+                {
+                    "model_name": "model1",
+                    "model_version": "v1",
+                    "quota_limit": 100,
+                },
+                {
+                    "model_name": "model2",
+                    "model_version": "v2",
+                    "quota_limit": 50,
+                },
+                {
+                    "model_name": "model3",
+                    "model_version": "v3",
+                    "quota_limit": 80,
+                },
+            ])
         ```
 
         ### If quota type is Video
@@ -245,6 +400,15 @@ class AigcQuota(pulumi.CustomResource):
             api_token=example_aigc_api_token.api_token)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateAigcQuota](https://www.tencentcloud.com/document/api/266/81192)
+        * Read: [DescribeAigcQuotas](https://www.tencentcloud.com/document/api/266/81190)
+        * Update: [ModifyAigcQuota](https://www.tencentcloud.com/document/api/266/81189)
+        * Delete: [DeleteAigcQuota](https://www.tencentcloud.com/document/api/266/81191)
+
         ## Import
 
         VOD AIGC Quota can be imported using the composite id `sub_app_id#quota_type#api_token`, e.g.
@@ -266,8 +430,12 @@ class AigcQuota(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] api_token: API token for quota restriction. Only meaningful when `quota_type` is `Text`.
+        :param pulumi.Input[_builtins.str] model_quota_switch: Whether to enable per-model quota settings. Valid values: `ON`, `OFF`. Default value: `OFF`.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['AigcQuotaModelQuotaArgs', 'AigcQuotaModelQuotaArgsDict']]]] model_quotas: Per-model quotas, only valid when `model_quota_switch` is `ON`.
         :param pulumi.Input[_builtins.int] quota_limit: Quota limit value. Unit: when `quota_type` is `Image`, count by images; when `quota_type` is `Video`, count by seconds; when `quota_type` is `Text`, count by tokens.
+        :param pulumi.Input[_builtins.str] quota_period: Quota reset period. Valid values: `Day` (reset every day), `Month` (reset on the specified day of each month), `Total` (never reset, `quota_limit` is the total quota).
         :param pulumi.Input[_builtins.str] quota_type: Quota type. Valid values: `Image` (AIGC image generation), `Video` (AIGC video generation), `Text` (AIGC text generation).
+        :param pulumi.Input[_builtins.int] reset_day: Reset day of the month, only valid when `quota_period` is `Month`. If the specified day does not exist in the current month, the quota resets at 00:00 on the 1st day of the next month.
         :param pulumi.Input[_builtins.int] sub_app_id: The VOD [sub application](https://intl.cloud.tencent.com/document/product/266/14574) ID. Users who activated VOD service after December 25, 2023 must specify the application ID.
         """
         ...
@@ -295,7 +463,27 @@ class AigcQuota(pulumi.CustomResource):
         example_aigc_quota = tencentcloud.vod.AigcQuota("example",
             sub_app_id=example.sub_app_id.apply(lambda x: int(x)),
             quota_type="Image",
-            quota_limit=100)
+            quota_limit=100,
+            quota_period="Month",
+            reset_day=1,
+            model_quota_switch="ON",
+            model_quotas=[
+                {
+                    "model_name": "model1",
+                    "model_version": "v1",
+                    "quota_limit": 100,
+                },
+                {
+                    "model_name": "model2",
+                    "model_version": "v2",
+                    "quota_limit": 50,
+                },
+                {
+                    "model_name": "model3",
+                    "model_version": "v3",
+                    "quota_limit": 80,
+                },
+            ])
         ```
 
         ### If quota type is Video
@@ -334,6 +522,15 @@ class AigcQuota(pulumi.CustomResource):
             quota_limit=50,
             api_token=example_aigc_api_token.api_token)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateAigcQuota](https://www.tencentcloud.com/document/api/266/81192)
+        * Read: [DescribeAigcQuotas](https://www.tencentcloud.com/document/api/266/81190)
+        * Update: [ModifyAigcQuota](https://www.tencentcloud.com/document/api/266/81189)
+        * Delete: [DeleteAigcQuota](https://www.tencentcloud.com/document/api/266/81191)
 
         ## Import
 
@@ -369,8 +566,12 @@ class AigcQuota(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  api_token: pulumi.Input[Optional[_builtins.str]] = None,
+                 model_quota_switch: pulumi.Input[Optional[_builtins.str]] = None,
+                 model_quotas: pulumi.Input[Optional[Sequence[pulumi.Input[Union['AigcQuotaModelQuotaArgs', 'AigcQuotaModelQuotaArgsDict']]]]] = None,
                  quota_limit: pulumi.Input[Optional[_builtins.int]] = None,
+                 quota_period: pulumi.Input[Optional[_builtins.str]] = None,
                  quota_type: pulumi.Input[Optional[_builtins.str]] = None,
+                 reset_day: pulumi.Input[Optional[_builtins.int]] = None,
                  sub_app_id: pulumi.Input[Optional[_builtins.int]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -382,12 +583,16 @@ class AigcQuota(pulumi.CustomResource):
             __props__ = AigcQuotaArgs.__new__(AigcQuotaArgs)
 
             __props__.__dict__["api_token"] = api_token
+            __props__.__dict__["model_quota_switch"] = model_quota_switch
+            __props__.__dict__["model_quotas"] = model_quotas
             if quota_limit is None and not opts.urn:
                 raise TypeError("Missing required property 'quota_limit'")
             __props__.__dict__["quota_limit"] = quota_limit
+            __props__.__dict__["quota_period"] = quota_period
             if quota_type is None and not opts.urn:
                 raise TypeError("Missing required property 'quota_type'")
             __props__.__dict__["quota_type"] = quota_type
+            __props__.__dict__["reset_day"] = reset_day
             if sub_app_id is None and not opts.urn:
                 raise TypeError("Missing required property 'sub_app_id'")
             __props__.__dict__["sub_app_id"] = sub_app_id
@@ -403,8 +608,12 @@ class AigcQuota(pulumi.CustomResource):
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
             api_token: pulumi.Input[Optional[_builtins.str]] = None,
+            model_quota_switch: pulumi.Input[Optional[_builtins.str]] = None,
+            model_quotas: pulumi.Input[Optional[Sequence[pulumi.Input[Union['AigcQuotaModelQuotaArgs', 'AigcQuotaModelQuotaArgsDict']]]]] = None,
             quota_limit: pulumi.Input[Optional[_builtins.int]] = None,
+            quota_period: pulumi.Input[Optional[_builtins.str]] = None,
             quota_type: pulumi.Input[Optional[_builtins.str]] = None,
+            reset_day: pulumi.Input[Optional[_builtins.int]] = None,
             sub_app_id: pulumi.Input[Optional[_builtins.int]] = None,
             usage: pulumi.Input[Optional[_builtins.int]] = None) -> 'AigcQuota':
         """
@@ -415,18 +624,26 @@ class AigcQuota(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] api_token: API token for quota restriction. Only meaningful when `quota_type` is `Text`.
+        :param pulumi.Input[_builtins.str] model_quota_switch: Whether to enable per-model quota settings. Valid values: `ON`, `OFF`. Default value: `OFF`.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['AigcQuotaModelQuotaArgs', 'AigcQuotaModelQuotaArgsDict']]]] model_quotas: Per-model quotas, only valid when `model_quota_switch` is `ON`.
         :param pulumi.Input[_builtins.int] quota_limit: Quota limit value. Unit: when `quota_type` is `Image`, count by images; when `quota_type` is `Video`, count by seconds; when `quota_type` is `Text`, count by tokens.
+        :param pulumi.Input[_builtins.str] quota_period: Quota reset period. Valid values: `Day` (reset every day), `Month` (reset on the specified day of each month), `Total` (never reset, `quota_limit` is the total quota).
         :param pulumi.Input[_builtins.str] quota_type: Quota type. Valid values: `Image` (AIGC image generation), `Video` (AIGC video generation), `Text` (AIGC text generation).
+        :param pulumi.Input[_builtins.int] reset_day: Reset day of the month, only valid when `quota_period` is `Month`. If the specified day does not exist in the current month, the quota resets at 00:00 on the 1st day of the next month.
         :param pulumi.Input[_builtins.int] sub_app_id: The VOD [sub application](https://intl.cloud.tencent.com/document/product/266/14574) ID. Users who activated VOD service after December 25, 2023 must specify the application ID.
-        :param pulumi.Input[_builtins.int] usage: Current usage amount. Unit: when `quota_type` is `Image`, count by images; when `quota_type` is `Video`, count by seconds; when `quota_type` is `Text`, count by tokens.
+        :param pulumi.Input[_builtins.int] usage: Current usage amount of the model quota. Unit: when `quota_type` is `Image`, count by images; when `quota_type` is `Video`, count by seconds.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = _AigcQuotaState.__new__(_AigcQuotaState)
 
         __props__.__dict__["api_token"] = api_token
+        __props__.__dict__["model_quota_switch"] = model_quota_switch
+        __props__.__dict__["model_quotas"] = model_quotas
         __props__.__dict__["quota_limit"] = quota_limit
+        __props__.__dict__["quota_period"] = quota_period
         __props__.__dict__["quota_type"] = quota_type
+        __props__.__dict__["reset_day"] = reset_day
         __props__.__dict__["sub_app_id"] = sub_app_id
         __props__.__dict__["usage"] = usage
         return AigcQuota(resource_name, opts=opts, __props__=__props__)
@@ -440,6 +657,22 @@ class AigcQuota(pulumi.CustomResource):
         return pulumi.get(self, "api_token")
 
     @_builtins.property
+    @pulumi.getter(name="modelQuotaSwitch")
+    def model_quota_switch(self) -> pulumi.Output[_builtins.str]:
+        """
+        Whether to enable per-model quota settings. Valid values: `ON`, `OFF`. Default value: `OFF`.
+        """
+        return pulumi.get(self, "model_quota_switch")
+
+    @_builtins.property
+    @pulumi.getter(name="modelQuotas")
+    def model_quotas(self) -> pulumi.Output[Sequence['outputs.AigcQuotaModelQuota']]:
+        """
+        Per-model quotas, only valid when `model_quota_switch` is `ON`.
+        """
+        return pulumi.get(self, "model_quotas")
+
+    @_builtins.property
     @pulumi.getter(name="quotaLimit")
     def quota_limit(self) -> pulumi.Output[_builtins.int]:
         """
@@ -448,12 +681,28 @@ class AigcQuota(pulumi.CustomResource):
         return pulumi.get(self, "quota_limit")
 
     @_builtins.property
+    @pulumi.getter(name="quotaPeriod")
+    def quota_period(self) -> pulumi.Output[_builtins.str]:
+        """
+        Quota reset period. Valid values: `Day` (reset every day), `Month` (reset on the specified day of each month), `Total` (never reset, `quota_limit` is the total quota).
+        """
+        return pulumi.get(self, "quota_period")
+
+    @_builtins.property
     @pulumi.getter(name="quotaType")
     def quota_type(self) -> pulumi.Output[_builtins.str]:
         """
         Quota type. Valid values: `Image` (AIGC image generation), `Video` (AIGC video generation), `Text` (AIGC text generation).
         """
         return pulumi.get(self, "quota_type")
+
+    @_builtins.property
+    @pulumi.getter(name="resetDay")
+    def reset_day(self) -> pulumi.Output[_builtins.int]:
+        """
+        Reset day of the month, only valid when `quota_period` is `Month`. If the specified day does not exist in the current month, the quota resets at 00:00 on the 1st day of the next month.
+        """
+        return pulumi.get(self, "reset_day")
 
     @_builtins.property
     @pulumi.getter(name="subAppId")
@@ -467,7 +716,7 @@ class AigcQuota(pulumi.CustomResource):
     @pulumi.getter
     def usage(self) -> pulumi.Output[_builtins.int]:
         """
-        Current usage amount. Unit: when `quota_type` is `Image`, count by images; when `quota_type` is `Video`, count by seconds; when `quota_type` is `Text`, count by tokens.
+        Current usage amount of the model quota. Unit: when `quota_type` is `Image`, count by images; when `quota_type` is `Video`, count by seconds.
         """
         return pulumi.get(self, "usage")
 

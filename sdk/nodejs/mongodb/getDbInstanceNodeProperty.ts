@@ -41,6 +41,12 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBInstanceNodeProperty](https://www.tencentcloud.com/document/api/240/74083)
  */
 export function getDbInstanceNodeProperty(args: GetDbInstanceNodePropertyArgs, opts?: pulumi.InvokeOptions): Promise<GetDbInstanceNodePropertyResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -163,6 +169,12 @@ export interface GetDbInstanceNodePropertyResult {
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBInstanceNodeProperty](https://www.tencentcloud.com/document/api/240/74083)
  */
 export function getDbInstanceNodePropertyOutput(args: GetDbInstanceNodePropertyOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDbInstanceNodePropertyResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

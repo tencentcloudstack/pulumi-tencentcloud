@@ -106,6 +106,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CreatePurgeTask](https://www.tencentcloud.com/document/api/1145/50536)
+//   - [DescribePurgeTasks](https://www.tencentcloud.com/document/api/1145/50532)
 type PurgeTask struct {
 	pulumi.CustomResourceState
 

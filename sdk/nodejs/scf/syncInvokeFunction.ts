@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     namespace: "default",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [InvokeFunction](https://www.tencentcloud.com/document/api/583/41408)
  */
 export class SyncInvokeFunction extends pulumi.CustomResource {
     /**

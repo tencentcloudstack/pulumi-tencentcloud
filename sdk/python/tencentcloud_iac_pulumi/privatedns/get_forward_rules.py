@@ -133,6 +133,12 @@ def get_forward_rules(filters: Optional[Sequence[Union['GetForwardRulesFilterArg
     ])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeForwardRuleList](https://www.tencentcloud.com/document/api/1097/65935)
+
 
     :param Sequence[Union['GetForwardRulesFilterArgs', 'GetForwardRulesFilterArgsDict']] filters: Filter parameters.
     :param _builtins.str result_output_file: Used to save results.
@@ -198,6 +204,12 @@ def get_forward_rules_output(filters: pulumi.Input[Optional[Optional[Sequence[Un
         },
     ])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeForwardRuleList](https://www.tencentcloud.com/document/api/1097/65935)
 
 
     :param Sequence[Union['GetForwardRulesFilterArgs', 'GetForwardRulesFilterArgsDict']] filters: Filter parameters.

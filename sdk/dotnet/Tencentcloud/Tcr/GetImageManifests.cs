@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeImageManifests](https://www.tencentcloud.com/document/api/1051/50722)
         /// </summary>
         public static Task<GetImageManifestsResult> InvokeAsync(GetImageManifestsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetImageManifestsResult>("tencentcloud:Tcr/getImageManifests:getImageManifests", args ?? new GetImageManifestsArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeImageManifests](https://www.tencentcloud.com/document/api/1051/50722)
         /// </summary>
         public static Output<GetImageManifestsResult> Invoke(GetImageManifestsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetImageManifestsResult>("tencentcloud:Tcr/getImageManifests:getImageManifests", args ?? new GetImageManifestsInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeImageManifests](https://www.tencentcloud.com/document/api/1051/50722)
         /// </summary>
         public static Output<GetImageManifestsResult> Invoke(GetImageManifestsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetImageManifestsResult>("tencentcloud:Tcr/getImageManifests:getImageManifests", args ?? new GetImageManifestsInvokeArgs(), options.WithDefaults());

@@ -24,6 +24,12 @@ import * as utilities from "../utilities";
  *     resultOutputFile: "mytestpath",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRewrite](https://www.tencentcloud.com/document/api/214/33829)
  */
 export function getRedirections(args: GetRedirectionsArgs, opts?: pulumi.InvokeOptions): Promise<GetRedirectionsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -119,6 +125,12 @@ export interface GetRedirectionsResult {
  *     resultOutputFile: "mytestpath",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRewrite](https://www.tencentcloud.com/document/api/214/33829)
  */
 export function getRedirectionsOutput(args: GetRedirectionsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRedirectionsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

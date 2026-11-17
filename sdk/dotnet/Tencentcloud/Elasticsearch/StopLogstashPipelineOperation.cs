@@ -31,6 +31,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeLogstashPipelines](https://www.tencentcloud.com/search/?wd=DescribeLogstashPipelines&amp;type=document&amp;lang=en)
+    ///   - [StopLogstashPipelines](https://www.tencentcloud.com/search/?wd=StopLogstashPipelines&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Elasticsearch/stopLogstashPipelineOperation:StopLogstashPipelineOperation")]
     public partial class StopLogstashPipelineOperation : global::Pulumi.CustomResource

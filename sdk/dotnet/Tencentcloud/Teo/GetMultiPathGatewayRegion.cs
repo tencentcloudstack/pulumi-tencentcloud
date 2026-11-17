@@ -34,6 +34,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMultiPathGatewayRegions](https://www.tencentcloud.com/document/api/1145/72298)
         /// </summary>
         public static Task<GetMultiPathGatewayRegionResult> InvokeAsync(GetMultiPathGatewayRegionArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetMultiPathGatewayRegionResult>("tencentcloud:Teo/getMultiPathGatewayRegion:getMultiPathGatewayRegion", args ?? new GetMultiPathGatewayRegionArgs(), options.WithDefaults());
@@ -60,6 +66,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMultiPathGatewayRegions](https://www.tencentcloud.com/document/api/1145/72298)
         /// </summary>
         public static Output<GetMultiPathGatewayRegionResult> Invoke(GetMultiPathGatewayRegionInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetMultiPathGatewayRegionResult>("tencentcloud:Teo/getMultiPathGatewayRegion:getMultiPathGatewayRegion", args ?? new GetMultiPathGatewayRegionInvokeArgs(), options.WithDefaults());
@@ -86,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMultiPathGatewayRegions](https://www.tencentcloud.com/document/api/1145/72298)
         /// </summary>
         public static Output<GetMultiPathGatewayRegionResult> Invoke(GetMultiPathGatewayRegionInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetMultiPathGatewayRegionResult>("tencentcloud:Teo/getMultiPathGatewayRegion:getMultiPathGatewayRegion", args ?? new GetMultiPathGatewayRegionInvokeArgs(), options.WithDefaults());

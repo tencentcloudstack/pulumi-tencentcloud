@@ -72,6 +72,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [GetAttackTotalCount](https://www.tencentcloud.com/document/api/627/64555)
 func GetAttackTotalCount(ctx *pulumi.Context, args *GetAttackTotalCountArgs, opts ...pulumi.InvokeOption) (*GetAttackTotalCountResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetAttackTotalCountResult

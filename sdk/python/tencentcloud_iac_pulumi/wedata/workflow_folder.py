@@ -152,6 +152,15 @@ class WorkflowFolder(pulumi.CustomResource):
             folder_name="test")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateWorkflowFolder](https://www.tencentcloud.com/document/api/1174/73883)
+        * Read: [ListWorkflowFolders](https://www.tencentcloud.com/document/api/1174/73866)
+        * Update: [UpdateWorkflowFolder](https://www.tencentcloud.com/document/api/1174/73859)
+        * Delete: [DeleteWorkflowFolder](https://www.tencentcloud.com/document/api/1174/73878)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -179,6 +188,15 @@ class WorkflowFolder(pulumi.CustomResource):
             parent_folder_path="/",
             folder_name="test")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateWorkflowFolder](https://www.tencentcloud.com/document/api/1174/73883)
+        * Read: [ListWorkflowFolders](https://www.tencentcloud.com/document/api/1174/73866)
+        * Update: [UpdateWorkflowFolder](https://www.tencentcloud.com/document/api/1174/73859)
+        * Delete: [DeleteWorkflowFolder](https://www.tencentcloud.com/document/api/1174/73878)
 
 
         :param str resource_name: The name of the resource.

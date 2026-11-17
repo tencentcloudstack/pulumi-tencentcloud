@@ -10,6 +10,14 @@ import * as utilities from "../utilities";
  * Use this data source to query detailed information of TCR repositories.
  *
  * ## Example Usage
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeInstances](https://www.tencentcloud.com/document/api/1051/50703)
+ *   - [DescribeRepositories](https://www.tencentcloud.com/document/api/1051/50720)
  */
 export function getRepositories(args: GetRepositoriesArgs, opts?: pulumi.InvokeOptions): Promise<GetRepositoriesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -67,6 +75,14 @@ export interface GetRepositoriesResult {
  * Use this data source to query detailed information of TCR repositories.
  *
  * ## Example Usage
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeInstances](https://www.tencentcloud.com/document/api/1051/50703)
+ *   - [DescribeRepositories](https://www.tencentcloud.com/document/api/1051/50720)
  */
 export function getRepositoriesOutput(args: GetRepositoriesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRepositoriesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

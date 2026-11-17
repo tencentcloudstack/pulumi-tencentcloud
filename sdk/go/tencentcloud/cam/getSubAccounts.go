@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeSubAccounts](https://www.tencentcloud.com/document/api/598/39986)
 func GetSubAccounts(ctx *pulumi.Context, args *GetSubAccountsArgs, opts ...pulumi.InvokeOption) (*GetSubAccountsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSubAccountsResult

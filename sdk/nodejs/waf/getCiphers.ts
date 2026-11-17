@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const example = tencentcloud.waf.getCiphers({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCiphersDetail](https://www.tencentcloud.com/document/api/627/64566)
  */
 export function getCiphers(args?: GetCiphersArgs, opts?: pulumi.InvokeOptions): Promise<GetCiphersResult> {
     args = args || {};
@@ -61,6 +67,12 @@ export interface GetCiphersResult {
  *
  * const example = tencentcloud.waf.getCiphers({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCiphersDetail](https://www.tencentcloud.com/document/api/627/64566)
  */
 export function getCiphersOutput(args?: GetCiphersOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetCiphersResult> {
     args = args || {};

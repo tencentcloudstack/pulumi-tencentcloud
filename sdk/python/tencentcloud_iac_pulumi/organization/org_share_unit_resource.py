@@ -265,6 +265,14 @@ class OrgShareUnitResource(pulumi.CustomResource):
             product_resource_id="xxxxxx")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AddShareUnitResources](https://www.tencentcloud.com/document/api/1031/68235)
+        * Read: [DescribeShareUnitResources](https://www.tencentcloud.com/document/api/1031/68229)
+        * Delete: [DeleteShareUnitResources](https://www.tencentcloud.com/document/api/1031/68232)
+
         ## Import
 
         organization organization_org_share_unit_resource can be imported using the id, e.g.
@@ -302,6 +310,14 @@ class OrgShareUnitResource(pulumi.CustomResource):
             type="secret",
             product_resource_id="xxxxxx")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AddShareUnitResources](https://www.tencentcloud.com/document/api/1031/68235)
+        * Read: [DescribeShareUnitResources](https://www.tencentcloud.com/document/api/1031/68229)
+        * Delete: [DeleteShareUnitResources](https://www.tencentcloud.com/document/api/1031/68232)
 
         ## Import
 

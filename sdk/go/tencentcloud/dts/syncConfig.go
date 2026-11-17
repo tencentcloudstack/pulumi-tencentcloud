@@ -198,6 +198,19 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [ConfigureSyncJob](https://www.tencentcloud.com/document/api/571/51797)
+//   - [DescribeSyncJobs](https://www.tencentcloud.com/document/api/571/51793)
+//
+// * Read: [DescribeSyncJobs](https://www.tencentcloud.com/document/api/571/51793)
+// * Update:
+//   - [ConfigureSyncJob](https://www.tencentcloud.com/document/api/571/51797)
+//   - [DescribeSyncJobs](https://www.tencentcloud.com/document/api/571/51793)
+//
 // ## Import
 //
 // DTS sync config can be imported using the id, e.g.

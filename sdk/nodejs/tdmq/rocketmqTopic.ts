@@ -31,6 +31,15 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateRocketMQTopic](https://www.tencentcloud.com/search/?wd=CreateRocketMQTopic&type=document&lang=en)
+ * * Read: [DescribeRocketMQTopics](https://www.tencentcloud.com/search/?wd=DescribeRocketMQTopics&type=document&lang=en)
+ * * Update: [ModifyRocketMQTopic](https://www.tencentcloud.com/search/?wd=ModifyRocketMQTopic&type=document&lang=en)
+ * * Delete: [DeleteRocketMQTopic](https://www.tencentcloud.com/search/?wd=DeleteRocketMQTopic&type=document&lang=en)
+ *
  * ## Import
  *
  * tdmqRocketmq topic can be imported using the id, e.g.

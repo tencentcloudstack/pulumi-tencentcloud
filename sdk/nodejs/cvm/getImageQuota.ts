@@ -15,6 +15,12 @@ import * as utilities from "../utilities";
  *
  * const imageQuota = tencentcloud.cvm.getImageQuota({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeImageQuota](https://www.tencentcloud.com/document/api/213/33274)
  */
 export function getImageQuota(args?: GetImageQuotaArgs, opts?: pulumi.InvokeOptions): Promise<GetImageQuotaResult> {
     args = args || {};
@@ -59,6 +65,12 @@ export interface GetImageQuotaResult {
  *
  * const imageQuota = tencentcloud.cvm.getImageQuota({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeImageQuota](https://www.tencentcloud.com/document/api/213/33274)
  */
 export function getImageQuotaOutput(args?: GetImageQuotaOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetImageQuotaResult> {
     args = args || {};

@@ -70,6 +70,12 @@ import * as utilities from "../utilities";
  *     flowId: exampleGeneralBackup.flowId,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeBackupByFlowId](https://www.tencentcloud.com/document/api/238/72780)
  */
 export function getBackupByFlowId(args: GetBackupByFlowIdArgs, opts?: pulumi.InvokeOptions): Promise<GetBackupByFlowIdResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -220,6 +226,12 @@ export interface GetBackupByFlowIdResult {
  *     flowId: exampleGeneralBackup.flowId,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeBackupByFlowId](https://www.tencentcloud.com/document/api/238/72780)
  */
 export function getBackupByFlowIdOutput(args: GetBackupByFlowIdOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetBackupByFlowIdResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

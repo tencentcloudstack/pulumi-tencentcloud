@@ -152,6 +152,14 @@ class StartBackupIncrementalMigration(pulumi.CustomResource):
             incremental_migration_id="mssql-incremental-migration-kp7bgv8p")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+          - [StartIncrementalMigration](https://www.tencentcloud.com/document/api/238/39831)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -179,6 +187,14 @@ class StartBackupIncrementalMigration(pulumi.CustomResource):
             backup_migration_id="mssql-backup-migration-cg0ffgqt",
             incremental_migration_id="mssql-incremental-migration-kp7bgv8p")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+          - [StartIncrementalMigration](https://www.tencentcloud.com/document/api/238/39831)
 
 
         :param str resource_name: The name of the resource.

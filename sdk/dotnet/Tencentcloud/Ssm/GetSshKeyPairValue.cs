@@ -71,6 +71,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetSSHKeyPairValue](https://www.tencentcloud.com/document/api/1078/42261)
         /// </summary>
         public static Task<GetSshKeyPairValueResult> InvokeAsync(GetSshKeyPairValueArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSshKeyPairValueResult>("tencentcloud:Ssm/getSshKeyPairValue:getSshKeyPairValue", args ?? new GetSshKeyPairValueArgs(), options.WithDefaults());
@@ -134,6 +140,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetSSHKeyPairValue](https://www.tencentcloud.com/document/api/1078/42261)
         /// </summary>
         public static Output<GetSshKeyPairValueResult> Invoke(GetSshKeyPairValueInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSshKeyPairValueResult>("tencentcloud:Ssm/getSshKeyPairValue:getSshKeyPairValue", args ?? new GetSshKeyPairValueInvokeArgs(), options.WithDefaults());
@@ -197,6 +209,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetSSHKeyPairValue](https://www.tencentcloud.com/document/api/1078/42261)
         /// </summary>
         public static Output<GetSshKeyPairValueResult> Invoke(GetSshKeyPairValueInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetSshKeyPairValueResult>("tencentcloud:Ssm/getSshKeyPairValue:getSshKeyPairValue", args ?? new GetSshKeyPairValueInvokeArgs(), options.WithDefaults());

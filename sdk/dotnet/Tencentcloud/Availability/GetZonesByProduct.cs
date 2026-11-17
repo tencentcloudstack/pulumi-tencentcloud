@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Availability
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeZones](https://www.tencentcloud.com/search/?wd=DescribeZones&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetZonesByProductResult> InvokeAsync(GetZonesByProductArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetZonesByProductResult>("tencentcloud:Availability/getZonesByProduct:getZonesByProduct", args ?? new GetZonesByProductArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Availability
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeZones](https://www.tencentcloud.com/search/?wd=DescribeZones&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetZonesByProductResult> Invoke(GetZonesByProductInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetZonesByProductResult>("tencentcloud:Availability/getZonesByProduct:getZonesByProduct", args ?? new GetZonesByProductInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Availability
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeZones](https://www.tencentcloud.com/search/?wd=DescribeZones&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetZonesByProductResult> Invoke(GetZonesByProductInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetZonesByProductResult>("tencentcloud:Availability/getZonesByProduct:getZonesByProduct", args ?? new GetZonesByProductInvokeArgs(), options.WithDefaults());

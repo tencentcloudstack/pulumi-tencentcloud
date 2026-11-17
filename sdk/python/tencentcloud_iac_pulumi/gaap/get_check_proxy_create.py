@@ -157,6 +157,12 @@ def get_check_proxy_create(access_region: Optional[_builtins.str] = None,
 
     ## Example Usage
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [CheckProxyCreate](https://www.tencentcloud.com/document/api/608/33112)
+
 
     :param _builtins.str access_region: The access (acceleration) area of the proxy. The value can be obtained through the interface DescribeAccessRegionsByDestRegion.
     :param _builtins.int bandwidth: The upper limit of proxy bandwidth, in Mbps.
@@ -207,6 +213,12 @@ def get_check_proxy_create_output(access_region: pulumi.Input[Optional[_builtins
     Use this data source to query detailed information of gaap check proxy create
 
     ## Example Usage
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [CheckProxyCreate](https://www.tencentcloud.com/document/api/608/33112)
 
 
     :param _builtins.str access_region: The access (acceleration) area of the proxy. The value can be obtained through the interface DescribeAccessRegionsByDestRegion.

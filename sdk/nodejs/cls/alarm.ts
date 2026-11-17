@@ -176,6 +176,21 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateAlarm](https://www.tencentcloud.com/document/api/614/42830)
+ *   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+ * * Read:
+ *   - [DescribeAlarms](https://www.tencentcloud.com/document/api/614/42825)
+ *   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+ * * Update:
+ *   - [ModifyAlarm](https://www.tencentcloud.com/document/api/614/42823)
+ *   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+ * * Delete: [DeleteAlarm](https://www.tencentcloud.com/document/api/614/42828)
+ *
  * ## Import
  *
  * cls alarm can be imported using the id, e.g.

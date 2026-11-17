@@ -121,6 +121,14 @@ class ConfigTerminateDbInstance(pulumi.CustomResource):
         example_config_terminate_db_instance = tencentcloud.sqlserver.ConfigTerminateDbInstance("example", instance_id=example.id)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [TerminateDBInstance](https://www.tencentcloud.com/document/api/238/34685)
+        * Read: [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+        * Update: [TerminateDBInstance](https://www.tencentcloud.com/document/api/238/34685)
+
         ## Import
 
         sqlserver config_terminate_db_instance can be imported using the id, e.g.
@@ -187,6 +195,14 @@ class ConfigTerminateDbInstance(pulumi.CustomResource):
             })
         example_config_terminate_db_instance = tencentcloud.sqlserver.ConfigTerminateDbInstance("example", instance_id=example.id)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [TerminateDBInstance](https://www.tencentcloud.com/document/api/238/34685)
+        * Read: [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+        * Update: [TerminateDBInstance](https://www.tencentcloud.com/document/api/238/34685)
 
         ## Import
 

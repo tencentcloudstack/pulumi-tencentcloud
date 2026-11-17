@@ -124,6 +124,7 @@ class BindSecurityTemplateArgs:
 class _BindSecurityTemplateState:
     def __init__(__self__, *,
                  entity: pulumi.Input[Optional[_builtins.str]] = None,
+                 message: pulumi.Input[Optional[_builtins.str]] = None,
                  operate: pulumi.Input[Optional[_builtins.str]] = None,
                  over_write: pulumi.Input[Optional[_builtins.bool]] = None,
                  status: pulumi.Input[Optional[_builtins.str]] = None,
@@ -133,6 +134,7 @@ class _BindSecurityTemplateState:
         Input properties used for looking up and filtering BindSecurityTemplate resources.
 
         :param pulumi.Input[_builtins.str] entity: The domain name to be bound to the policy template (or unbound from the policy template).
+        :param pulumi.Input[_builtins.str] message: Instance configuration delivery message. This field provides human-readable information about the delivery status (e.g., failure reasons).
         :param pulumi.Input[_builtins.str] operate: Bind or unbind operation option. Valid values:
                <li>`unbind-keep-policy`: unbind the domain name from the policy template while retaining the current policy.</li>
                <li>`unbind-use-default`: unbind the domain name from the policy template and use the default blank policy.</li>
@@ -150,6 +152,8 @@ class _BindSecurityTemplateState:
         """
         if entity is not None:
             pulumi.set(__self__, "entity", entity)
+        if message is not None:
+            pulumi.set(__self__, "message", message)
         if operate is not None:
             pulumi.set(__self__, "operate", operate)
         if over_write is not None:
@@ -172,6 +176,18 @@ class _BindSecurityTemplateState:
     @entity.setter
     def entity(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "entity", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def message(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Instance configuration delivery message. This field provides human-readable information about the delivery status (e.g., failure reasons).
+        """
+        return pulumi.get(self, "message")
+
+    @message.setter
+    def message(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "message", value)
 
     @_builtins.property
     @pulumi.getter
@@ -273,7 +289,18 @@ class BindSecurityTemplate(pulumi.CustomResource):
             template_id="temp-3s1pzyam2nxp",
             entity="tf.example.com",
             operate="unbind-use-default")
+        pulumi.export("bindMessage", example.message)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [BindSecurityTemplateToEntity](https://www.tencentcloud.com/document/api/1145/57572)
+        * Read:
+          - [DescribeWebSecurityTemplates](https://www.tencentcloud.com/document/api/1145/71945)
+          - [DescribeZones](https://www.tencentcloud.com/document/api/1145/50481)
+        * Delete: [BindSecurityTemplateToEntity](https://www.tencentcloud.com/document/api/1145/57572)
 
         ## Import
 
@@ -325,7 +352,18 @@ class BindSecurityTemplate(pulumi.CustomResource):
             template_id="temp-3s1pzyam2nxp",
             entity="tf.example.com",
             operate="unbind-use-default")
+        pulumi.export("bindMessage", example.message)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [BindSecurityTemplateToEntity](https://www.tencentcloud.com/document/api/1145/57572)
+        * Read:
+          - [DescribeWebSecurityTemplates](https://www.tencentcloud.com/document/api/1145/71945)
+          - [DescribeZones](https://www.tencentcloud.com/document/api/1145/50481)
+        * Delete: [BindSecurityTemplateToEntity](https://www.tencentcloud.com/document/api/1145/57572)
 
         ## Import
 
@@ -376,6 +414,7 @@ class BindSecurityTemplate(pulumi.CustomResource):
             if zone_id is None and not opts.urn:
                 raise TypeError("Missing required property 'zone_id'")
             __props__.__dict__["zone_id"] = zone_id
+            __props__.__dict__["message"] = None
             __props__.__dict__["status"] = None
         super(BindSecurityTemplate, __self__).__init__(
             'tencentcloud:Teo/bindSecurityTemplate:BindSecurityTemplate',
@@ -388,6 +427,7 @@ class BindSecurityTemplate(pulumi.CustomResource):
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
             entity: pulumi.Input[Optional[_builtins.str]] = None,
+            message: pulumi.Input[Optional[_builtins.str]] = None,
             operate: pulumi.Input[Optional[_builtins.str]] = None,
             over_write: pulumi.Input[Optional[_builtins.bool]] = None,
             status: pulumi.Input[Optional[_builtins.str]] = None,
@@ -401,6 +441,7 @@ class BindSecurityTemplate(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] entity: The domain name to be bound to the policy template (or unbound from the policy template).
+        :param pulumi.Input[_builtins.str] message: Instance configuration delivery message. This field provides human-readable information about the delivery status (e.g., failure reasons).
         :param pulumi.Input[_builtins.str] operate: Bind or unbind operation option. Valid values:
                <li>`unbind-keep-policy`: unbind the domain name from the policy template while retaining the current policy.</li>
                <li>`unbind-use-default`: unbind the domain name from the policy template and use the default blank policy.</li>
@@ -421,6 +462,7 @@ class BindSecurityTemplate(pulumi.CustomResource):
         __props__ = _BindSecurityTemplateState.__new__(_BindSecurityTemplateState)
 
         __props__.__dict__["entity"] = entity
+        __props__.__dict__["message"] = message
         __props__.__dict__["operate"] = operate
         __props__.__dict__["over_write"] = over_write
         __props__.__dict__["status"] = status
@@ -435,6 +477,14 @@ class BindSecurityTemplate(pulumi.CustomResource):
         The domain name to be bound to the policy template (or unbound from the policy template).
         """
         return pulumi.get(self, "entity")
+
+    @_builtins.property
+    @pulumi.getter
+    def message(self) -> pulumi.Output[_builtins.str]:
+        """
+        Instance configuration delivery message. This field provides human-readable information about the delivery status (e.g., failure reasons).
+        """
+        return pulumi.get(self, "message")
 
     @_builtins.property
     @pulumi.getter

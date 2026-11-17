@@ -66,6 +66,14 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [ModifyAccessLogConfig](https://www.tencentcloud.com/search/?wd=ModifyAccessLogConfig&type=document&lang=en)
+ * * Read: [DescribeAccessLogConfig](https://www.tencentcloud.com/search/?wd=DescribeAccessLogConfig&type=document&lang=en)
+ * * Update: [ModifyAccessLogConfig](https://www.tencentcloud.com/search/?wd=ModifyAccessLogConfig&type=document&lang=en)
+ *
  * ## Import
  *
  * tcm accessLogConfig can be imported using the mesh_id(mesh_name), e.g.

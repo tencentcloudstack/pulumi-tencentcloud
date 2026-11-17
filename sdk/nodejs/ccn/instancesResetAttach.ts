@@ -25,6 +25,12 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [ResetAttachCcnInstances](https://www.tencentcloud.com/document/api/215/34780)
  */
 export class InstancesResetAttach extends pulumi.CustomResource {
     /**

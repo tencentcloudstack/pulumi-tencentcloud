@@ -86,6 +86,12 @@ def get_customer_gateway_vendors(result_output_file: Optional[_builtins.str] = N
     vpn_customer_gateway_vendors = tencentcloud.vpn.get_customer_gateway_vendors()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCustomerGatewayVendors](https://www.tencentcloud.com/document/api/215/17517)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -111,6 +117,12 @@ def get_customer_gateway_vendors_output(result_output_file: pulumi.Input[Optiona
 
     vpn_customer_gateway_vendors = tencentcloud.vpn.get_customer_gateway_vendors()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCustomerGatewayVendors](https://www.tencentcloud.com/document/api/215/17517)
 
 
     :param _builtins.str result_output_file: Used to save results.

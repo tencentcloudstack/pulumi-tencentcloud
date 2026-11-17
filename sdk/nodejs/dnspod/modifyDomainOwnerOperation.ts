@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     domainId: 123,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [ModifyDomainOwner](https://www.tencentcloud.com/document/api/1157/53849)
  */
 export class ModifyDomainOwnerOperation extends pulumi.CustomResource {
     /**

@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDBCustomRegions](https://www.tencentcloud.com/search/?wd=DescribeDBCustomRegions&type=document&lang=en)
 func GetDbCustomRegions(ctx *pulumi.Context, args *GetDbCustomRegionsArgs, opts ...pulumi.InvokeOption) (*GetDbCustomRegionsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDbCustomRegionsResult

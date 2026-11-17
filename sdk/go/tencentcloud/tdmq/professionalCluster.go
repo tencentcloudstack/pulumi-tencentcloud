@@ -12,11 +12,11 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provides a resource to create a tdmq professionalCluster
+// Provides a resource to create a TDMQ professional cluster
 //
 // ## Example Usage
 //
-// ### single-zone Professional Cluster
+// ### Single-zone Professional Cluster
 //
 // ```go
 // package main
@@ -30,20 +30,21 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := tdmq.NewProfessionalCluster(ctx, "professional_cluster", &tdmq.ProfessionalClusterArgs{
-//				AutoRenewFlag: pulumi.Int(1),
-//				ClusterName:   pulumi.String("single_zone_cluster"),
-//				ProductName:   pulumi.String("PULSAR.P1.MINI2"),
-//				StorageSize:   pulumi.Int(600),
-//				Tags: pulumi.StringMap{
-//					"createby": pulumi.String("terrafrom"),
-//				},
+//			_, err := tdmq.NewProfessionalCluster(ctx, "example", &tdmq.ProfessionalClusterArgs{
+//				AutoRenewFlag:   pulumi.Int(1),
+//				ClusterName:     pulumi.String("tf_example"),
+//				ProductName:     pulumi.String("PULSAR.P2.SMALL4"),
+//				StorageSize:     pulumi.Int(600),
+//				InstanceVersion: pulumi.String("2.9.2"),
 //				ZoneIds: pulumi.IntArray{
-//					pulumi.Int(100004),
+//					pulumi.Int(100006),
 //				},
 //				Vpc: &tdmq.ProfessionalClusterVpcArgs{
-//					SubnetId: pulumi.String("subnet-xxxx"),
-//					VpcId:    pulumi.String("vpc-xxxx"),
+//					VpcId:    pulumi.String("vpc-i5yyodl9"),
+//					SubnetId: pulumi.String("subnet-hhi88a58"),
+//				},
+//				Tags: pulumi.StringMap{
+//					"createby": pulumi.String("Terrafrom"),
 //				},
 //			})
 //			if err != nil {
@@ -69,23 +70,22 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := tdmq.NewProfessionalCluster(ctx, "professional_cluster", &tdmq.ProfessionalClusterArgs{
-//				AutoRenewFlag: pulumi.Int(1),
-//				ClusterName:   pulumi.String("multi_zone_cluster"),
-//				ProductName:   pulumi.String("PULSAR.P1.MINI2"),
-//				StorageSize:   pulumi.Int(200),
-//				Tags: pulumi.StringMap{
-//					"key":  pulumi.String("value1"),
-//					"key2": pulumi.String("value2"),
-//				},
+//			_, err := tdmq.NewProfessionalCluster(ctx, "example", &tdmq.ProfessionalClusterArgs{
+//				AutoRenewFlag:   pulumi.Int(1),
+//				ClusterName:     pulumi.String("tf_example"),
+//				ProductName:     pulumi.String("PULSAR.P2.SMALL4"),
+//				StorageSize:     pulumi.Int(600),
+//				InstanceVersion: pulumi.String("3.0.0"),
 //				ZoneIds: pulumi.IntArray{
-//					pulumi.Int(330001),
-//					pulumi.Int(330002),
-//					pulumi.Int(330003),
+//					pulumi.Int(100006),
+//					pulumi.Int(100007),
 //				},
 //				Vpc: &tdmq.ProfessionalClusterVpcArgs{
-//					SubnetId: pulumi.String("subnet-xxxx"),
-//					VpcId:    pulumi.String("vpc-xxxx"),
+//					VpcId:    pulumi.String("vpc-i5yyodl9"),
+//					SubnetId: pulumi.String("subnet-hhi88a58"),
+//				},
+//				Tags: pulumi.StringMap{
+//					"createby": pulumi.String("Terrafrom"),
 //				},
 //			})
 //			if err != nil {
@@ -97,12 +97,32 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CreateProCluster](https://www.tencentcloud.com/search/?wd=CreateProCluster&type=document&lang=en)
+//   - [DescribePulsarProInstances](https://www.tencentcloud.com/search/?wd=DescribePulsarProInstances&type=document&lang=en)
+//   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+//
+// * Read:
+//   - [DescribePulsarProInstanceDetail](https://www.tencentcloud.com/search/?wd=DescribePulsarProInstanceDetail&type=document&lang=en)
+//   - [DescribePulsarProInstances](https://www.tencentcloud.com/search/?wd=DescribePulsarProInstances&type=document&lang=en)
+//   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+//
+// * Update:
+//   - [ModifyCluster](https://www.tencentcloud.com/search/?wd=ModifyCluster&type=document&lang=en)
+//   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+//
+// * Delete: [DeleteProCluster](https://www.tencentcloud.com/search/?wd=DeleteProCluster&type=document&lang=en)
+//
 // ## Import
 //
-// tdmq professionalCluster can be imported using the id, e.g.
+// TDMQ professional cluster can be imported using the id, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Tdmq/professionalCluster:ProfessionalCluster professional_cluster professional_cluster_id
+// $ pulumi import tencentcloud:Tdmq/professionalCluster:ProfessionalCluster example pulsar-x4r939zkwmm2
 // ```
 type ProfessionalCluster struct {
 	pulumi.CustomResourceState
@@ -111,8 +131,12 @@ type ProfessionalCluster struct {
 	AutoRenewFlag pulumi.IntOutput `pulumi:"autoRenewFlag"`
 	// Whether to automatically select vouchers. `1`: Yes, `0`: No. Default is `0`.
 	AutoVoucher pulumi.IntOutput `pulumi:"autoVoucher"`
+	// Id of cluster.
+	ClusterId pulumi.StringOutput `pulumi:"clusterId"`
 	// Name of cluster. It does not support Chinese characters and special characters except dashes and underscores and cannot exceed 64 characters.
 	ClusterName pulumi.StringOutput `pulumi:"clusterName"`
+	// Cluster version information. User can specify a version when creating the cluster.
+	InstanceVersion pulumi.StringOutput `pulumi:"instanceVersion"`
 	// Cluster specification code. Reference[Professional Cluster Specifications](https://cloud.tencent.com/document/product/1179/83705).
 	ProductName pulumi.StringOutput `pulumi:"productName"`
 	// Storage specifications. Reference[Professional Cluster Specifications](https://cloud.tencent.com/document/product/1179/83705).
@@ -176,8 +200,12 @@ type professionalClusterState struct {
 	AutoRenewFlag *int `pulumi:"autoRenewFlag"`
 	// Whether to automatically select vouchers. `1`: Yes, `0`: No. Default is `0`.
 	AutoVoucher *int `pulumi:"autoVoucher"`
+	// Id of cluster.
+	ClusterId *string `pulumi:"clusterId"`
 	// Name of cluster. It does not support Chinese characters and special characters except dashes and underscores and cannot exceed 64 characters.
 	ClusterName *string `pulumi:"clusterName"`
+	// Cluster version information. User can specify a version when creating the cluster.
+	InstanceVersion *string `pulumi:"instanceVersion"`
 	// Cluster specification code. Reference[Professional Cluster Specifications](https://cloud.tencent.com/document/product/1179/83705).
 	ProductName *string `pulumi:"productName"`
 	// Storage specifications. Reference[Professional Cluster Specifications](https://cloud.tencent.com/document/product/1179/83705).
@@ -197,8 +225,12 @@ type ProfessionalClusterState struct {
 	AutoRenewFlag pulumi.IntPtrInput
 	// Whether to automatically select vouchers. `1`: Yes, `0`: No. Default is `0`.
 	AutoVoucher pulumi.IntPtrInput
+	// Id of cluster.
+	ClusterId pulumi.StringPtrInput
 	// Name of cluster. It does not support Chinese characters and special characters except dashes and underscores and cannot exceed 64 characters.
 	ClusterName pulumi.StringPtrInput
+	// Cluster version information. User can specify a version when creating the cluster.
+	InstanceVersion pulumi.StringPtrInput
 	// Cluster specification code. Reference[Professional Cluster Specifications](https://cloud.tencent.com/document/product/1179/83705).
 	ProductName pulumi.StringPtrInput
 	// Storage specifications. Reference[Professional Cluster Specifications](https://cloud.tencent.com/document/product/1179/83705).
@@ -224,6 +256,8 @@ type professionalClusterArgs struct {
 	AutoVoucher *int `pulumi:"autoVoucher"`
 	// Name of cluster. It does not support Chinese characters and special characters except dashes and underscores and cannot exceed 64 characters.
 	ClusterName string `pulumi:"clusterName"`
+	// Cluster version information. User can specify a version when creating the cluster.
+	InstanceVersion *string `pulumi:"instanceVersion"`
 	// Cluster specification code. Reference[Professional Cluster Specifications](https://cloud.tencent.com/document/product/1179/83705).
 	ProductName string `pulumi:"productName"`
 	// Storage specifications. Reference[Professional Cluster Specifications](https://cloud.tencent.com/document/product/1179/83705).
@@ -246,6 +280,8 @@ type ProfessionalClusterArgs struct {
 	AutoVoucher pulumi.IntPtrInput
 	// Name of cluster. It does not support Chinese characters and special characters except dashes and underscores and cannot exceed 64 characters.
 	ClusterName pulumi.StringInput
+	// Cluster version information. User can specify a version when creating the cluster.
+	InstanceVersion pulumi.StringPtrInput
 	// Cluster specification code. Reference[Professional Cluster Specifications](https://cloud.tencent.com/document/product/1179/83705).
 	ProductName pulumi.StringInput
 	// Storage specifications. Reference[Professional Cluster Specifications](https://cloud.tencent.com/document/product/1179/83705).
@@ -357,9 +393,19 @@ func (o ProfessionalClusterOutput) AutoVoucher() pulumi.IntOutput {
 	return o.ApplyT(func(v *ProfessionalCluster) pulumi.IntOutput { return v.AutoVoucher }).(pulumi.IntOutput)
 }
 
+// Id of cluster.
+func (o ProfessionalClusterOutput) ClusterId() pulumi.StringOutput {
+	return o.ApplyT(func(v *ProfessionalCluster) pulumi.StringOutput { return v.ClusterId }).(pulumi.StringOutput)
+}
+
 // Name of cluster. It does not support Chinese characters and special characters except dashes and underscores and cannot exceed 64 characters.
 func (o ProfessionalClusterOutput) ClusterName() pulumi.StringOutput {
 	return o.ApplyT(func(v *ProfessionalCluster) pulumi.StringOutput { return v.ClusterName }).(pulumi.StringOutput)
+}
+
+// Cluster version information. User can specify a version when creating the cluster.
+func (o ProfessionalClusterOutput) InstanceVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v *ProfessionalCluster) pulumi.StringOutput { return v.InstanceVersion }).(pulumi.StringOutput)
 }
 
 // Cluster specification code. Reference[Professional Cluster Specifications](https://cloud.tencent.com/document/product/1179/83705).

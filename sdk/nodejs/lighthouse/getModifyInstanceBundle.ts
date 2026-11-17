@@ -23,6 +23,12 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeModifyInstanceBundles](https://www.tencentcloud.com/document/api/1103/42494)
  */
 export function getModifyInstanceBundle(args: GetModifyInstanceBundleArgs, opts?: pulumi.InvokeOptions): Promise<GetModifyInstanceBundleResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -89,6 +95,12 @@ export interface GetModifyInstanceBundleResult {
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeModifyInstanceBundles](https://www.tencentcloud.com/document/api/1103/42494)
  */
 export function getModifyInstanceBundleOutput(args: GetModifyInstanceBundleOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetModifyInstanceBundleResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

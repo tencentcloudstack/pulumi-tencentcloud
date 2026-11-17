@@ -173,6 +173,12 @@ class ReloadBalanceProxyNode(pulumi.CustomResource):
             proxy_address_id=example_proxy.proxy_address_id)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ReloadBalanceProxyNode](https://www.tencentcloud.com/document/api/236/45189)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -251,6 +257,12 @@ class ReloadBalanceProxyNode(pulumi.CustomResource):
             proxy_group_id=example_proxy.proxy_group_id,
             proxy_address_id=example_proxy.proxy_address_id)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ReloadBalanceProxyNode](https://www.tencentcloud.com/document/api/236/45189)
 
 
         :param str resource_name: The name of the resource.

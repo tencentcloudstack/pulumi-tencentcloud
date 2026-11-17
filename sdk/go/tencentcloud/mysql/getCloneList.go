@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeCloneList](https://www.tencentcloud.com/document/api/236/38952)
 func GetCloneList(ctx *pulumi.Context, args *GetCloneListArgs, opts ...pulumi.InvokeOption) (*GetCloneListResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetCloneListResult

@@ -55,6 +55,13 @@ import * as utilities from "../utilities";
  *     targetGroupId: gwlbTargetGroup.id,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [AssociateTargetGroups](https://www.tencentcloud.com/document/api/1245/66067)
+ * * Delete: [DisassociateTargetGroups](https://www.tencentcloud.com/document/api/1245/66059)
  */
 export class InstanceAssociateTargetGroup extends pulumi.CustomResource {
     /**

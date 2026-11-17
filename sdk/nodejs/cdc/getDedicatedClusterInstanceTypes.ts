@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     dedicatedClusterId: "cluster-262n63e8",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDedicatedClusterInstanceTypes](https://www.tencentcloud.com/document/api/1226/66392)
  */
 export function getDedicatedClusterInstanceTypes(args: GetDedicatedClusterInstanceTypesArgs, opts?: pulumi.InvokeOptions): Promise<GetDedicatedClusterInstanceTypesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetDedicatedClusterInstanceTypesResult {
  *     dedicatedClusterId: "cluster-262n63e8",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDedicatedClusterInstanceTypes](https://www.tencentcloud.com/document/api/1226/66392)
  */
 export function getDedicatedClusterInstanceTypesOutput(args: GetDedicatedClusterInstanceTypesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDedicatedClusterInstanceTypesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

@@ -165,6 +165,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ModifyBackupStrategy](https://www.tencentcloud.com/document/api/238/37929)
+    /// * Read: [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+    /// * Update: [ModifyBackupStrategy](https://www.tencentcloud.com/document/api/238/37929)
+    /// 
     /// ## Import
     /// 
     /// sqlserver ConfigBackupStrategy can be imported using the id, e.g.

@@ -181,6 +181,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [SetInstancesProtection](https://www.tencentcloud.com/document/api/377/33203)
 type ProtectInstances struct {
 	pulumi.CustomResourceState
 

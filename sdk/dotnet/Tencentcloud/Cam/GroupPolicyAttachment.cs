@@ -45,6 +45,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [AttachGroupPolicy](https://www.tencentcloud.com/document/api/598/32250)
+    ///   - [ListAttachedGroupPolicies](https://www.tencentcloud.com/document/api/598/32243)
+    /// * Read: [ListAttachedGroupPolicies](https://www.tencentcloud.com/document/api/598/32243)
+    /// * Delete: [DetachGroupPolicy](https://www.tencentcloud.com/document/api/598/32246)
+    /// 
     /// ## Import
     /// 
     /// CAM group policy attachment can be imported using the id, e.g.

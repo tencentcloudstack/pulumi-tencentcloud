@@ -52,6 +52,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [ListQualityRuleGroupExecResultsByPage](https://www.tencentcloud.com/search/?wd=ListQualityRuleGroupExecResultsByPage&type=document&lang=en)
 func GetQualityRuleGroupExecResults(ctx *pulumi.Context, args *GetQualityRuleGroupExecResultsArgs, opts ...pulumi.InvokeOption) (*GetQualityRuleGroupExecResultsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetQualityRuleGroupExecResultsResult

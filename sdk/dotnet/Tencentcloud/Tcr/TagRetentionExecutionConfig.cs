@@ -73,6 +73,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateTagRetentionExecution](https://www.tencentcloud.com/document/api/1051/50691)
+    ///   - [DescribeTagRetentionExecution](https://www.tencentcloud.com/document/api/1051/50688)
+    /// * Read: [DescribeTagRetentionExecution](https://www.tencentcloud.com/document/api/1051/50688)
+    /// * Update:
+    ///   - [CreateTagRetentionExecution](https://www.tencentcloud.com/document/api/1051/50691)
+    ///   - [DescribeTagRetentionExecution](https://www.tencentcloud.com/document/api/1051/50688)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tcr/tagRetentionExecutionConfig:TagRetentionExecutionConfig")]
     public partial class TagRetentionExecutionConfig : global::Pulumi.CustomResource

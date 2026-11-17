@@ -50,7 +50,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps.Inputs
         public Input<int>? Height { get; set; }
 
         /// <summary>
-        /// Adaptive resolution, optional values:```open: open, at this time, Width represents the long side of the video, Height represents the short side of the video.close: close, at this time, Width represents the width of the video, and Height represents the height of the video.Default: open.Note: In adaptive mode, Width cannot be smaller than Height.
+        /// Adaptive resolution, optional values:\`\`\`open: open, at this time, Width represents the long side of the video, Height represents the short side of the video.close: close, at this time, Width represents the width of the video, and Height represents the height of the video.Default: open.Note: In adaptive mode, Width cannot be smaller than Height.
         /// </summary>
         [Input("resolutionAdaptive")]
         public Input<string>? ResolutionAdaptive { get; set; }

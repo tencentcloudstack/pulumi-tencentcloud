@@ -31,6 +31,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [RecoverBackUpJob](https://www.tencentcloud.com/search/?wd=RecoverBackUpJob&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Clickhouse/recoverBackupJob:RecoverBackupJob")]
     public partial class RecoverBackupJob : global::Pulumi.CustomResource

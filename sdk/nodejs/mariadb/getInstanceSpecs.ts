@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const instanceSpecs = tencentcloud.mariadb.getInstanceSpecs({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBInstanceSpecs](https://www.tencentcloud.com/search/?wd=DescribeDBInstanceSpecs&type=document&lang=en)
  */
 export function getInstanceSpecs(args?: GetInstanceSpecsArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceSpecsResult> {
     args = args || {};
@@ -61,6 +67,12 @@ export interface GetInstanceSpecsResult {
  *
  * const instanceSpecs = tencentcloud.mariadb.getInstanceSpecs({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBInstanceSpecs](https://www.tencentcloud.com/search/?wd=DescribeDBInstanceSpecs&type=document&lang=en)
  */
 export function getInstanceSpecsOutput(args?: GetInstanceSpecsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInstanceSpecsResult> {
     args = args || {};

@@ -38,6 +38,30 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
     ///         SubAppId = example.SubAppId,
     ///         QuotaType = "Image",
     ///         QuotaLimit = 100,
+    ///         QuotaPeriod = "Month",
+    ///         ResetDay = 1,
+    ///         ModelQuotaSwitch = "ON",
+    ///         ModelQuotas = new[]
+    ///         {
+    ///             new Tencentcloud.Vod.Inputs.AigcQuotaModelQuotaArgs
+    ///             {
+    ///                 ModelName = "model1",
+    ///                 ModelVersion = "v1",
+    ///                 QuotaLimit = 100,
+    ///             },
+    ///             new Tencentcloud.Vod.Inputs.AigcQuotaModelQuotaArgs
+    ///             {
+    ///                 ModelName = "model2",
+    ///                 ModelVersion = "v2",
+    ///                 QuotaLimit = 50,
+    ///             },
+    ///             new Tencentcloud.Vod.Inputs.AigcQuotaModelQuotaArgs
+    ///             {
+    ///                 ModelName = "model3",
+    ///                 ModelVersion = "v3",
+    ///                 QuotaLimit = 80,
+    ///             },
+    ///         },
     ///     });
     /// 
     /// });
@@ -106,6 +130,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateAigcQuota](https://www.tencentcloud.com/document/api/266/81192)
+    /// * Read: [DescribeAigcQuotas](https://www.tencentcloud.com/document/api/266/81190)
+    /// * Update: [ModifyAigcQuota](https://www.tencentcloud.com/document/api/266/81189)
+    /// * Delete: [DeleteAigcQuota](https://www.tencentcloud.com/document/api/266/81191)
+    /// 
     /// ## Import
     /// 
     /// VOD AIGC Quota can be imported using the composite id `sub_app_id#quota_type#api_token`, e.g.
@@ -133,10 +166,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         public Output<string?> ApiToken { get; private set; } = null!;
 
         /// <summary>
+        /// Whether to enable per-model quota settings. Valid values: `ON`, `OFF`. Default value: `OFF`.
+        /// </summary>
+        [Output("modelQuotaSwitch")]
+        public Output<string> ModelQuotaSwitch { get; private set; } = null!;
+
+        /// <summary>
+        /// Per-model quotas, only valid when `ModelQuotaSwitch` is `ON`.
+        /// </summary>
+        [Output("modelQuotas")]
+        public Output<ImmutableArray<Outputs.AigcQuotaModelQuota>> ModelQuotas { get; private set; } = null!;
+
+        /// <summary>
         /// Quota limit value. Unit: when `QuotaType` is `Image`, count by images; when `QuotaType` is `Video`, count by seconds; when `QuotaType` is `Text`, count by tokens.
         /// </summary>
         [Output("quotaLimit")]
         public Output<int> QuotaLimit { get; private set; } = null!;
+
+        /// <summary>
+        /// Quota reset period. Valid values: `Day` (reset every day), `Month` (reset on the specified day of each month), `Total` (never reset, `QuotaLimit` is the total quota).
+        /// </summary>
+        [Output("quotaPeriod")]
+        public Output<string> QuotaPeriod { get; private set; } = null!;
 
         /// <summary>
         /// Quota type. Valid values: `Image` (AIGC image generation), `Video` (AIGC video generation), `Text` (AIGC text generation).
@@ -145,13 +196,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         public Output<string> QuotaType { get; private set; } = null!;
 
         /// <summary>
+        /// Reset day of the month, only valid when `QuotaPeriod` is `Month`. If the specified day does not exist in the current month, the quota resets at 00:00 on the 1st day of the next month.
+        /// </summary>
+        [Output("resetDay")]
+        public Output<int> ResetDay { get; private set; } = null!;
+
+        /// <summary>
         /// The VOD [sub application](https://intl.cloud.tencent.com/document/product/266/14574) ID. Users who activated VOD service after December 25, 2023 must specify the application ID.
         /// </summary>
         [Output("subAppId")]
         public Output<int> SubAppId { get; private set; } = null!;
 
         /// <summary>
-        /// Current usage amount. Unit: when `QuotaType` is `Image`, count by images; when `QuotaType` is `Video`, count by seconds; when `QuotaType` is `Text`, count by tokens.
+        /// Current usage amount of the model quota. Unit: when `QuotaType` is `Image`, count by images; when `QuotaType` is `Video`, count by seconds.
         /// </summary>
         [Output("usage")]
         public Output<int> Usage { get; private set; } = null!;
@@ -210,16 +267,46 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         public Input<string>? ApiToken { get; set; }
 
         /// <summary>
+        /// Whether to enable per-model quota settings. Valid values: `ON`, `OFF`. Default value: `OFF`.
+        /// </summary>
+        [Input("modelQuotaSwitch")]
+        public Input<string>? ModelQuotaSwitch { get; set; }
+
+        [Input("modelQuotas")]
+        private InputList<Inputs.AigcQuotaModelQuotaArgs>? _modelQuotas;
+
+        /// <summary>
+        /// Per-model quotas, only valid when `ModelQuotaSwitch` is `ON`.
+        /// </summary>
+        public InputList<Inputs.AigcQuotaModelQuotaArgs> ModelQuotas
+        {
+            get => _modelQuotas ?? (_modelQuotas = new InputList<Inputs.AigcQuotaModelQuotaArgs>());
+            set => _modelQuotas = value;
+        }
+
+        /// <summary>
         /// Quota limit value. Unit: when `QuotaType` is `Image`, count by images; when `QuotaType` is `Video`, count by seconds; when `QuotaType` is `Text`, count by tokens.
         /// </summary>
         [Input("quotaLimit", required: true)]
         public Input<int> QuotaLimit { get; set; } = null!;
 
         /// <summary>
+        /// Quota reset period. Valid values: `Day` (reset every day), `Month` (reset on the specified day of each month), `Total` (never reset, `QuotaLimit` is the total quota).
+        /// </summary>
+        [Input("quotaPeriod")]
+        public Input<string>? QuotaPeriod { get; set; }
+
+        /// <summary>
         /// Quota type. Valid values: `Image` (AIGC image generation), `Video` (AIGC video generation), `Text` (AIGC text generation).
         /// </summary>
         [Input("quotaType", required: true)]
         public Input<string> QuotaType { get; set; } = null!;
+
+        /// <summary>
+        /// Reset day of the month, only valid when `QuotaPeriod` is `Month`. If the specified day does not exist in the current month, the quota resets at 00:00 on the 1st day of the next month.
+        /// </summary>
+        [Input("resetDay")]
+        public Input<int>? ResetDay { get; set; }
 
         /// <summary>
         /// The VOD [sub application](https://intl.cloud.tencent.com/document/product/266/14574) ID. Users who activated VOD service after December 25, 2023 must specify the application ID.
@@ -242,10 +329,34 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         public Input<string>? ApiToken { get; set; }
 
         /// <summary>
+        /// Whether to enable per-model quota settings. Valid values: `ON`, `OFF`. Default value: `OFF`.
+        /// </summary>
+        [Input("modelQuotaSwitch")]
+        public Input<string>? ModelQuotaSwitch { get; set; }
+
+        [Input("modelQuotas")]
+        private InputList<Inputs.AigcQuotaModelQuotaGetArgs>? _modelQuotas;
+
+        /// <summary>
+        /// Per-model quotas, only valid when `ModelQuotaSwitch` is `ON`.
+        /// </summary>
+        public InputList<Inputs.AigcQuotaModelQuotaGetArgs> ModelQuotas
+        {
+            get => _modelQuotas ?? (_modelQuotas = new InputList<Inputs.AigcQuotaModelQuotaGetArgs>());
+            set => _modelQuotas = value;
+        }
+
+        /// <summary>
         /// Quota limit value. Unit: when `QuotaType` is `Image`, count by images; when `QuotaType` is `Video`, count by seconds; when `QuotaType` is `Text`, count by tokens.
         /// </summary>
         [Input("quotaLimit")]
         public Input<int>? QuotaLimit { get; set; }
+
+        /// <summary>
+        /// Quota reset period. Valid values: `Day` (reset every day), `Month` (reset on the specified day of each month), `Total` (never reset, `QuotaLimit` is the total quota).
+        /// </summary>
+        [Input("quotaPeriod")]
+        public Input<string>? QuotaPeriod { get; set; }
 
         /// <summary>
         /// Quota type. Valid values: `Image` (AIGC image generation), `Video` (AIGC video generation), `Text` (AIGC text generation).
@@ -254,13 +365,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         public Input<string>? QuotaType { get; set; }
 
         /// <summary>
+        /// Reset day of the month, only valid when `QuotaPeriod` is `Month`. If the specified day does not exist in the current month, the quota resets at 00:00 on the 1st day of the next month.
+        /// </summary>
+        [Input("resetDay")]
+        public Input<int>? ResetDay { get; set; }
+
+        /// <summary>
         /// The VOD [sub application](https://intl.cloud.tencent.com/document/product/266/14574) ID. Users who activated VOD service after December 25, 2023 must specify the application ID.
         /// </summary>
         [Input("subAppId")]
         public Input<int>? SubAppId { get; set; }
 
         /// <summary>
-        /// Current usage amount. Unit: when `QuotaType` is `Image`, count by images; when `QuotaType` is `Video`, count by seconds; when `QuotaType` is `Text`, count by tokens.
+        /// Current usage amount of the model quota. Unit: when `QuotaType` is `Image`, count by images; when `QuotaType` is `Video`, count by seconds.
         /// </summary>
         [Input("usage")]
         public Input<int>? Usage { get; set; }

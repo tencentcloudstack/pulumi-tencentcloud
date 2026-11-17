@@ -33,6 +33,12 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [InviteOrganizationMember](https://www.tencentcloud.com/document/api/1031/64469)
  */
 export class OrganizationMemberOperation extends pulumi.CustomResource {
     /**

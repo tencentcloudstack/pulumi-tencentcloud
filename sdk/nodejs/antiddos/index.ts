@@ -55,6 +55,11 @@ export const getBgpInstances: typeof import("./getBgpInstances").getBgpInstances
 export const getBgpInstancesOutput: typeof import("./getBgpInstances").getBgpInstancesOutput = null as any;
 utilities.lazyLoad(exports, ["getBgpInstances","getBgpInstancesOutput"], () => require("./getBgpInstances"));
 
+export { GetDdosBlockRecordsArgs, GetDdosBlockRecordsResult, GetDdosBlockRecordsOutputArgs } from "./getDdosBlockRecords";
+export const getDdosBlockRecords: typeof import("./getDdosBlockRecords").getDdosBlockRecords = null as any;
+export const getDdosBlockRecordsOutput: typeof import("./getDdosBlockRecords").getDdosBlockRecordsOutput = null as any;
+utilities.lazyLoad(exports, ["getDdosBlockRecords","getDdosBlockRecordsOutput"], () => require("./getDdosBlockRecords"));
+
 export { GetListListenerArgs, GetListListenerResult, GetListListenerOutputArgs } from "./getListListener";
 export const getListListener: typeof import("./getListListener").getListListener = null as any;
 export const getListListenerOutput: typeof import("./getListListener").getListListenerOutput = null as any;

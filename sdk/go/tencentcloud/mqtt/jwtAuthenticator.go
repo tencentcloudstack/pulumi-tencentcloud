@@ -76,6 +76,15 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateJWTAuthenticator](https://www.tencentcloud.com/search/?wd=CreateJWTAuthenticator&type=document&lang=en)
+// * Read: [DescribeAuthenticator](https://www.tencentcloud.com/search/?wd=DescribeAuthenticator&type=document&lang=en)
+// * Update: [ModifyJWTAuthenticator](https://www.tencentcloud.com/search/?wd=ModifyJWTAuthenticator&type=document&lang=en)
+// * Delete: [DeleteAuthenticator](https://www.tencentcloud.com/search/?wd=DeleteAuthenticator&type=document&lang=en)
+//
 // ## Import
 //
 // MQTT jwt authenticator can be imported using the id, e.g.

@@ -147,6 +147,12 @@ def get_publishers(cluster_id: Optional[_builtins.str] = None,
         })
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribePublishers](https://www.tencentcloud.com/search/?wd=DescribePublishers&type=document&lang=en)
+
 
     :param _builtins.str cluster_id: Cluster ID.
     :param Sequence[Union['GetPublishersFilterArgs', 'GetPublishersFilterArgsDict']] filters: Parameter filter, support ProducerName, Address field.
@@ -202,6 +208,12 @@ def get_publishers_output(cluster_id: pulumi.Input[Optional[_builtins.str]] = No
             "order": "DESC",
         })
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribePublishers](https://www.tencentcloud.com/search/?wd=DescribePublishers&type=document&lang=en)
 
 
     :param _builtins.str cluster_id: Cluster ID.

@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *     domainGrade: "DP_FREE",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRecordType](https://www.tencentcloud.com/document/api/1157/53838)
  */
 export function getRecordType(args: GetRecordTypeArgs, opts?: pulumi.InvokeOptions): Promise<GetRecordTypeResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -68,6 +74,12 @@ export interface GetRecordTypeResult {
  *     domainGrade: "DP_FREE",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRecordType](https://www.tencentcloud.com/document/api/1157/53838)
  */
 export function getRecordTypeOutput(args: GetRecordTypeOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRecordTypeResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

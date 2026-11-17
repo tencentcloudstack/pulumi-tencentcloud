@@ -256,6 +256,16 @@ class CcBlackWhiteIp(pulumi.CustomResource):
             protocol="http")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateCcBlackWhiteIpList](https://www.tencentcloud.com/document/api/1213/61383)
+          - [DescribeCcBlackWhiteIpList](https://www.tencentcloud.com/document/api/1213/61366)
+        * Read: [DescribeCcBlackWhiteIpList](https://www.tencentcloud.com/document/api/1213/61366)
+        * Delete: [DeleteCcBlackWhiteIpList](https://www.tencentcloud.com/document/api/1213/61374)
+
         ## Import
 
         antiddos cc_black_white_ip can be imported using the id, e.g.
@@ -300,6 +310,16 @@ class CcBlackWhiteIp(pulumi.CustomResource):
             domain="t.baidu.com",
             protocol="http")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateCcBlackWhiteIpList](https://www.tencentcloud.com/document/api/1213/61383)
+          - [DescribeCcBlackWhiteIpList](https://www.tencentcloud.com/document/api/1213/61366)
+        * Read: [DescribeCcBlackWhiteIpList](https://www.tencentcloud.com/document/api/1213/61366)
+        * Delete: [DeleteCcBlackWhiteIpList](https://www.tencentcloud.com/document/api/1213/61374)
 
         ## Import
 

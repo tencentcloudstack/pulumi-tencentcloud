@@ -203,6 +203,12 @@ class DeleteImageOperation(pulumi.CustomResource):
             namespace_name=example_namespace.name)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [DeleteImage](https://www.tencentcloud.com/document/api/1051/50726)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -250,6 +256,12 @@ class DeleteImageOperation(pulumi.CustomResource):
             image_version="v1",
             namespace_name=example_namespace.name)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [DeleteImage](https://www.tencentcloud.com/document/api/1051/50726)
 
 
         :param str resource_name: The name of the resource.

@@ -121,6 +121,18 @@ class RestartDbInstance(pulumi.CustomResource):
         example_restart_db_instance = tencentcloud.sqlserver.RestartDbInstance("example", instance_id=example.id)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+          - [RestartDBInstance](https://www.tencentcloud.com/document/api/238/32097)
+        * Read: [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+        * Update:
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+          - [RestartDBInstance](https://www.tencentcloud.com/document/api/238/32097)
+
         ## Import
 
         sqlserver restart_db_instance can be imported using the id, e.g.
@@ -187,6 +199,18 @@ class RestartDbInstance(pulumi.CustomResource):
             })
         example_restart_db_instance = tencentcloud.sqlserver.RestartDbInstance("example", instance_id=example.id)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+          - [RestartDBInstance](https://www.tencentcloud.com/document/api/238/32097)
+        * Read: [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+        * Update:
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+          - [RestartDBInstance](https://www.tencentcloud.com/document/api/238/32097)
 
         ## Import
 

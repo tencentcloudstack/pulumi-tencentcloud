@@ -45,6 +45,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeTargetGroupList](https://www.tencentcloud.com/document/api/214/33827)
 func GetTargetGroupList(ctx *pulumi.Context, args *GetTargetGroupListArgs, opts ...pulumi.InvokeOption) (*GetTargetGroupListResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetTargetGroupListResult

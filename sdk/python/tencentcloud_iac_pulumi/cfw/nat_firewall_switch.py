@@ -170,6 +170,18 @@ class NatFirewallSwitch(pulumi.CustomResource):
             enable=1)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeNatFwSwitch](https://www.tencentcloud.com/search/?wd=DescribeNatFwSwitch&type=document&lang=en)
+          - [ModifyNatFwSwitch](https://www.tencentcloud.com/document/api/1160/51332)
+        * Read: [DescribeNatFwSwitch](https://www.tencentcloud.com/search/?wd=DescribeNatFwSwitch&type=document&lang=en)
+        * Update:
+          - [DescribeNatFwSwitch](https://www.tencentcloud.com/search/?wd=DescribeNatFwSwitch&type=document&lang=en)
+          - [ModifyNatFwSwitch](https://www.tencentcloud.com/document/api/1160/51332)
+
         ## Import
 
         CFW nat firewall switch can be imported using the natInsId#subnetId, e.g.
@@ -223,6 +235,18 @@ class NatFirewallSwitch(pulumi.CustomResource):
             subnet_id=example.datas[0].subnet_id,
             enable=1)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeNatFwSwitch](https://www.tencentcloud.com/search/?wd=DescribeNatFwSwitch&type=document&lang=en)
+          - [ModifyNatFwSwitch](https://www.tencentcloud.com/document/api/1160/51332)
+        * Read: [DescribeNatFwSwitch](https://www.tencentcloud.com/search/?wd=DescribeNatFwSwitch&type=document&lang=en)
+        * Update:
+          - [DescribeNatFwSwitch](https://www.tencentcloud.com/search/?wd=DescribeNatFwSwitch&type=document&lang=en)
+          - [ModifyNatFwSwitch](https://www.tencentcloud.com/document/api/1160/51332)
 
         ## Import
 

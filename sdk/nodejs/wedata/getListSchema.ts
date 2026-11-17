@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const example = tencentcloud.wedata.getListSchema({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListSchema](https://www.tencentcloud.com/document/api/1174/77945)
  */
 export function getListSchema(args?: GetListSchemaArgs, opts?: pulumi.InvokeOptions): Promise<GetListSchemaResult> {
     args = args || {};
@@ -88,6 +94,12 @@ export interface GetListSchemaResult {
  *
  * const example = tencentcloud.wedata.getListSchema({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListSchema](https://www.tencentcloud.com/document/api/1174/77945)
  */
 export function getListSchemaOutput(args?: GetListSchemaOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetListSchemaResult> {
     args = args || {};

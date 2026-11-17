@@ -132,6 +132,14 @@ class StoreLocationConfig(pulumi.CustomResource):
             enable=0)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyAdvancedStoreLocation](https://www.tencentcloud.com/document/api/1155/62684)
+        * Read: [DescribeAdvancedStoreLocation](https://www.tencentcloud.com/document/api/1155/62686)
+        * Update: [ModifyAdvancedStoreLocation](https://www.tencentcloud.com/document/api/1155/62684)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -170,6 +178,14 @@ class StoreLocationConfig(pulumi.CustomResource):
             store_location="",
             enable=0)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyAdvancedStoreLocation](https://www.tencentcloud.com/document/api/1155/62684)
+        * Read: [DescribeAdvancedStoreLocation](https://www.tencentcloud.com/document/api/1155/62686)
+        * Update: [ModifyAdvancedStoreLocation](https://www.tencentcloud.com/document/api/1155/62684)
 
 
         :param str resource_name: The name of the resource.

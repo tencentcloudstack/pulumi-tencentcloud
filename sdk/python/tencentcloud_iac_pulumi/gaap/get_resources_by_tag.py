@@ -120,6 +120,12 @@ def get_resources_by_tag(resource_type: Optional[_builtins.str] = None,
         tag_value="tagValue")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeResourcesByTag](https://www.tencentcloud.com/document/api/608/33049)
+
 
     :param _builtins.str resource_type: Resource type, where:Proxy represents the proxy;ProxyGroup represents a proxy group;RealServer represents the Real Server.If this field is not specified, all resources under the label will be queried.
     :param _builtins.str result_output_file: Used to save results.
@@ -158,6 +164,12 @@ def get_resources_by_tag_output(resource_type: pulumi.Input[Optional[Optional[_b
     resources_by_tag = tencentcloud.gaap.get_resources_by_tag(tag_key="tagKey",
         tag_value="tagValue")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeResourcesByTag](https://www.tencentcloud.com/document/api/608/33049)
 
 
     :param _builtins.str resource_type: Resource type, where:Proxy represents the proxy;ProxyGroup represents a proxy group;RealServer represents the Real Server.If this field is not specified, all resources under the label will be queried.

@@ -107,6 +107,12 @@ def get_instances_modification(filters: Optional[Sequence[Union['GetInstancesMod
     foo = tencentcloud.cvm.get_instances_modification(instance_ids=["ins-xxxxxxx"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstancesModification](https://www.tencentcloud.com/search/?wd=DescribeInstancesModification&type=document&lang=en)
+
 
     :param Sequence[Union['GetInstancesModificationFilterArgs', 'GetInstancesModificationFilterArgsDict']] filters: The upper limit of Filters for each request is 10 and the upper limit for Filter.Values is 2.
     :param Sequence[_builtins.str] instance_ids: One or more instance ID to be queried. It can be obtained from the InstanceId in the returned value of API DescribeInstances. The maximum number of instances in batch for each request is 20.
@@ -140,6 +146,12 @@ def get_instances_modification_output(filters: pulumi.Input[Optional[Optional[Se
 
     foo = tencentcloud.cvm.get_instances_modification(instance_ids=["ins-xxxxxxx"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstancesModification](https://www.tencentcloud.com/search/?wd=DescribeInstancesModification&type=document&lang=en)
 
 
     :param Sequence[Union['GetInstancesModificationFilterArgs', 'GetInstancesModificationFilterArgsDict']] filters: The upper limit of Filters for each request is 10 and the upper limit for Filter.Values is 2.

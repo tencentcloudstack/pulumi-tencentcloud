@@ -190,6 +190,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateStreamLinkFlow](https://www.tencentcloud.com/search/?wd=CreateStreamLinkFlow&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeStreamLinkFlow](https://www.tencentcloud.com/search/?wd=DescribeStreamLinkFlow&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyStreamLinkFlow](https://www.tencentcloud.com/search/?wd=ModifyStreamLinkFlow&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteStreamLinkFlow](https://www.tencentcloud.com/search/?wd=DeleteStreamLinkFlow&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// mps flow can be imported using the id, e.g.

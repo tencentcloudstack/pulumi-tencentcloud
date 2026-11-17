@@ -110,6 +110,12 @@ def get_gateway_nodes(gateway_id: Optional[_builtins.str] = None,
         group_id="group-013c0d8e")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCloudNativeAPIGatewayNodes](https://www.tencentcloud.com/document/api/1290/79262)
+
 
     :param _builtins.str gateway_id: gateway ID.
     :param _builtins.str group_id: gateway group ID.
@@ -144,6 +150,12 @@ def get_gateway_nodes_output(gateway_id: pulumi.Input[Optional[_builtins.str]] =
     gateway_nodes = tencentcloud.tse.get_gateway_nodes(gateway_id="gateway-ddbb709b",
         group_id="group-013c0d8e")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCloudNativeAPIGatewayNodes](https://www.tencentcloud.com/document/api/1290/79262)
 
 
     :param _builtins.str gateway_id: gateway ID.

@@ -96,6 +96,12 @@ def get_application_attribute(application_id: Optional[_builtins.str] = None,
     application_attribute = tencentcloud.tsf.get_application_attribute(application_id="application-a24x29xv")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeApplicationAttribute](https://www.tencentcloud.com/search/?wd=DescribeApplicationAttribute&type=document&lang=en)
+
 
     :param _builtins.str application_id: application Id.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_application_attribute_output(application_id: pulumi.Input[Optional[_buil
 
     application_attribute = tencentcloud.tsf.get_application_attribute(application_id="application-a24x29xv")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeApplicationAttribute](https://www.tencentcloud.com/search/?wd=DescribeApplicationAttribute&type=document&lang=en)
 
 
     :param _builtins.str application_id: application Id.

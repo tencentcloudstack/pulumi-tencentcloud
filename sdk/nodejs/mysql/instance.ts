@@ -143,6 +143,90 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ### Create instance with destroy protect enabled
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.mysql.Instance("example", {
+ *     internetService: 1,
+ *     engineVersion: "5.7",
+ *     chargeType: "POSTPAID",
+ *     rootPassword: "PassWord123",
+ *     slaveDeployMode: 0,
+ *     availabilityZone: zones.zones[0].name,
+ *     slaveSyncMode: 1,
+ *     instanceName: "tf-example-mysql",
+ *     memSize: 4000,
+ *     volumeSize: 200,
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     intranetPort: 3306,
+ *     securityGroups: [securityGroup.id],
+ *     destroyProtect: "on",
+ *     tags: {
+ *         name: "test",
+ *     },
+ *     parameters: {
+ *         character_set_server: "utf8",
+ *         max_connections: "1000",
+ *     },
+ * });
+ * ```
+ *
+ * ### Create instance with disk encryption enabled
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.mysql.Instance("example", {
+ *     internetService: 1,
+ *     engineVersion: "5.7",
+ *     chargeType: "POSTPAID",
+ *     rootPassword: "PassWord123",
+ *     slaveDeployMode: 0,
+ *     availabilityZone: zones.zones[0].name,
+ *     slaveSyncMode: 1,
+ *     instanceName: "tf-example-mysql",
+ *     memSize: 4000,
+ *     volumeSize: 200,
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     intranetPort: 3306,
+ *     securityGroups: [securityGroup.id],
+ *     diskType: "CLOUD_SSD",
+ *     diskEncryption: "on",
+ *     tags: {
+ *         name: "test",
+ *     },
+ *     parameters: {
+ *         character_set_server: "utf8",
+ *         max_connections: "1000",
+ *     },
+ * });
+ * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateDBInstance](https://www.tencentcloud.com/document/api/236/15871)
+ *   - [CreateDBInstanceHour](https://www.tencentcloud.com/document/api/236/15865)
+ *   - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+ *   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872)
+ *   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+ *   - [OpenWanService](https://www.tencentcloud.com/document/api/236/15875)
+ * * Read:
+ *   - [DescribeDBInstanceConfig](https://www.tencentcloud.com/document/api/236/17491)
+ *   - [DescribeInstanceParams](https://www.tencentcloud.com/document/api/236/34467)
+ * * Delete:
+ *   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872)
+ *   - [IsolateDBInstance](https://www.tencentcloud.com/document/api/236/15869)
+ *   - [OfflineIsolatedInstances](https://www.tencentcloud.com/document/api/236/34475)
+ *
  * ## Import
  *
  * MySQL instance can be imported using the id, e.g.
@@ -200,6 +284,10 @@ export class Instance extends pulumi.CustomResource {
      */
     declare public readonly cpu: pulumi.Output<number>;
     /**
+     * Instance destroy protection status. Valid values: `on` (enable destroy protection), `off` (disable destroy protection).
+     */
+    declare public readonly destroyProtect: pulumi.Output<string>;
+    /**
      * Specify device type, available values:
      * - `UNIVERSAL` (default): universal instance,
      * - `EXCLUSIVE`: exclusive instance,
@@ -209,6 +297,10 @@ export class Instance extends pulumi.CustomResource {
      *   If it is not specified, it defaults to a universal instance.
      */
     declare public readonly deviceType: pulumi.Output<string>;
+    /**
+     * Whether to enable disk encryption for the CDB instance. Valid value: `on` (enable disk encryption); otherwise disk encryption is not enabled. Only cloud-disk edition instances support this feature. This parameter can only be set at creation time and cannot be modified.
+     */
+    declare public readonly diskEncryption: pulumi.Output<string>;
     /**
      * Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. `CLOUD_SSD` designates an SSD cloud disk; `CLOUD_HSSD` designates an Enhanced SSD cloud disk; and `CLOUD_PREMIUM` designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to `Regions and Availability Zones` for specific support details.
      */
@@ -372,7 +464,9 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["chargeType"] = state?.chargeType;
             resourceInputs["clusterTopology"] = state?.clusterTopology;
             resourceInputs["cpu"] = state?.cpu;
+            resourceInputs["destroyProtect"] = state?.destroyProtect;
             resourceInputs["deviceType"] = state?.deviceType;
+            resourceInputs["diskEncryption"] = state?.diskEncryption;
             resourceInputs["diskType"] = state?.diskType;
             resourceInputs["engineType"] = state?.engineType;
             resourceInputs["engineVersion"] = state?.engineVersion;
@@ -424,7 +518,9 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["chargeType"] = args?.chargeType;
             resourceInputs["clusterTopology"] = args?.clusterTopology;
             resourceInputs["cpu"] = args?.cpu;
+            resourceInputs["destroyProtect"] = args?.destroyProtect;
             resourceInputs["deviceType"] = args?.deviceType;
+            resourceInputs["diskEncryption"] = args?.diskEncryption;
             resourceInputs["diskType"] = args?.diskType;
             resourceInputs["engineType"] = args?.engineType;
             resourceInputs["engineVersion"] = args?.engineVersion;
@@ -493,6 +589,10 @@ export interface InstanceState {
      */
     cpu?: pulumi.Input<number | undefined>;
     /**
+     * Instance destroy protection status. Valid values: `on` (enable destroy protection), `off` (disable destroy protection).
+     */
+    destroyProtect?: pulumi.Input<string | undefined>;
+    /**
      * Specify device type, available values:
      * - `UNIVERSAL` (default): universal instance,
      * - `EXCLUSIVE`: exclusive instance,
@@ -502,6 +602,10 @@ export interface InstanceState {
      *   If it is not specified, it defaults to a universal instance.
      */
     deviceType?: pulumi.Input<string | undefined>;
+    /**
+     * Whether to enable disk encryption for the CDB instance. Valid value: `on` (enable disk encryption); otherwise disk encryption is not enabled. Only cloud-disk edition instances support this feature. This parameter can only be set at creation time and cannot be modified.
+     */
+    diskEncryption?: pulumi.Input<string | undefined>;
     /**
      * Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. `CLOUD_SSD` designates an SSD cloud disk; `CLOUD_HSSD` designates an Enhanced SSD cloud disk; and `CLOUD_PREMIUM` designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to `Regions and Availability Zones` for specific support details.
      */
@@ -673,6 +777,10 @@ export interface InstanceArgs {
      */
     cpu?: pulumi.Input<number | undefined>;
     /**
+     * Instance destroy protection status. Valid values: `on` (enable destroy protection), `off` (disable destroy protection).
+     */
+    destroyProtect?: pulumi.Input<string | undefined>;
+    /**
      * Specify device type, available values:
      * - `UNIVERSAL` (default): universal instance,
      * - `EXCLUSIVE`: exclusive instance,
@@ -682,6 +790,10 @@ export interface InstanceArgs {
      *   If it is not specified, it defaults to a universal instance.
      */
     deviceType?: pulumi.Input<string | undefined>;
+    /**
+     * Whether to enable disk encryption for the CDB instance. Valid value: `on` (enable disk encryption); otherwise disk encryption is not enabled. Only cloud-disk edition instances support this feature. This parameter can only be set at creation time and cannot be modified.
+     */
+    diskEncryption?: pulumi.Input<string | undefined>;
     /**
      * Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. `CLOUD_SSD` designates an SSD cloud disk; `CLOUD_HSSD` designates an Enhanced SSD cloud disk; and `CLOUD_PREMIUM` designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to `Regions and Availability Zones` for specific support details.
      */

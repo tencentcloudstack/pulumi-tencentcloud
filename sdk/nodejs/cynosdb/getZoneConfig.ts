@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const foo = tencentcloud.cynosdb.getZoneConfig({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeInstanceSpecs](https://www.tencentcloud.com/document/api/1098/40748)
  */
 export function getZoneConfig(args?: GetZoneConfigArgs, opts?: pulumi.InvokeOptions): Promise<GetZoneConfigResult> {
     args = args || {};
@@ -61,6 +67,12 @@ export interface GetZoneConfigResult {
  *
  * const foo = tencentcloud.cynosdb.getZoneConfig({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeInstanceSpecs](https://www.tencentcloud.com/document/api/1098/40748)
  */
 export function getZoneConfigOutput(args?: GetZoneConfigOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetZoneConfigResult> {
     args = args || {};

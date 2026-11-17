@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [SendRocketMQMessage](https://www.tencentcloud.com/search/?wd=SendRocketMQMessage&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tdmq/sendRocketmqMessage:SendRocketmqMessage")]
     public partial class SendRocketmqMessage : global::Pulumi.CustomResource

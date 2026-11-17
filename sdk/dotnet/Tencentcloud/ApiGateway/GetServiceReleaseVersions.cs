@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeServiceReleaseVersion](https://www.tencentcloud.com/search/?wd=DescribeServiceReleaseVersion&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetServiceReleaseVersionsResult> InvokeAsync(GetServiceReleaseVersionsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetServiceReleaseVersionsResult>("tencentcloud:ApiGateway/getServiceReleaseVersions:getServiceReleaseVersions", args ?? new GetServiceReleaseVersionsArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeServiceReleaseVersion](https://www.tencentcloud.com/search/?wd=DescribeServiceReleaseVersion&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetServiceReleaseVersionsResult> Invoke(GetServiceReleaseVersionsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetServiceReleaseVersionsResult>("tencentcloud:ApiGateway/getServiceReleaseVersions:getServiceReleaseVersions", args ?? new GetServiceReleaseVersionsInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeServiceReleaseVersion](https://www.tencentcloud.com/search/?wd=DescribeServiceReleaseVersion&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetServiceReleaseVersionsResult> Invoke(GetServiceReleaseVersionsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetServiceReleaseVersionsResult>("tencentcloud:ApiGateway/getServiceReleaseVersions:getServiceReleaseVersions", args ?? new GetServiceReleaseVersionsInvokeArgs(), options.WithDefaults());

@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     serviceType: "cam",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListPoliciesGrantingServiceAccess](https://www.tencentcloud.com/search/?wd=ListPoliciesGrantingServiceAccess&type=document&lang=en)
  */
 export function getPolicyGrantingServiceAccess(args?: GetPolicyGrantingServiceAccessArgs, opts?: pulumi.InvokeOptions): Promise<GetPolicyGrantingServiceAccessResult> {
     args = args || {};
@@ -94,6 +100,12 @@ export interface GetPolicyGrantingServiceAccessResult {
  *     serviceType: "cam",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListPoliciesGrantingServiceAccess](https://www.tencentcloud.com/search/?wd=ListPoliciesGrantingServiceAccess&type=document&lang=en)
  */
 export function getPolicyGrantingServiceAccessOutput(args?: GetPolicyGrantingServiceAccessOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetPolicyGrantingServiceAccessResult> {
     args = args || {};

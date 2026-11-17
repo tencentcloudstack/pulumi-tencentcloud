@@ -150,6 +150,16 @@ class TmpManageGrafanaAttachment(pulumi.CustomResource):
             instance_id=foo.id)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [BindPrometheusManagedGrafana](https://www.tencentcloud.com/document/api/248/48768)
+        * Read: [DescribePrometheusInstances](https://www.tencentcloud.com/document/api/248/48753)
+        * Delete:
+          - [DescribePrometheusInstances](https://www.tencentcloud.com/document/api/248/48753)
+          - [UnbindPrometheusManagedGrafana](https://www.tencentcloud.com/document/api/248/48745)
+
         ## Import
 
         monitor tmp_manage_grafana_attachment can be imported using the id, e.g.
@@ -214,6 +224,16 @@ class TmpManageGrafanaAttachment(pulumi.CustomResource):
             grafana_id=foo_grafana_instance.id,
             instance_id=foo.id)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [BindPrometheusManagedGrafana](https://www.tencentcloud.com/document/api/248/48768)
+        * Read: [DescribePrometheusInstances](https://www.tencentcloud.com/document/api/248/48753)
+        * Delete:
+          - [DescribePrometheusInstances](https://www.tencentcloud.com/document/api/248/48753)
+          - [UnbindPrometheusManagedGrafana](https://www.tencentcloud.com/document/api/248/48745)
 
         ## Import
 

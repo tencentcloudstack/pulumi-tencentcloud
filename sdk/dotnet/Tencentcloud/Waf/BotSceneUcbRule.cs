@@ -241,6 +241,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ModifyBotSceneUCBRule](https://www.tencentcloud.com/search/?wd=ModifyBotSceneUCBRule&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeBotSceneUCBRule](https://www.tencentcloud.com/search/?wd=DescribeBotSceneUCBRule&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyBotSceneUCBRule](https://www.tencentcloud.com/search/?wd=ModifyBotSceneUCBRule&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteBotSceneUCBRule](https://www.tencentcloud.com/search/?wd=DeleteBotSceneUCBRule&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// WAF bot scene ucb rule can be imported using the id, e.g.

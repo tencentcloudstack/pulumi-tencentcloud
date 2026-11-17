@@ -36,6 +36,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeShardSpec](https://www.tencentcloud.com/search/?wd=DescribeShardSpec&type=document&lang=en)
 func GetShardSpec(ctx *pulumi.Context, args *GetShardSpecArgs, opts ...pulumi.InvokeOption) (*GetShardSpecResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetShardSpecResult

@@ -101,6 +101,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ModifyTimeWindow](https://www.tencentcloud.com/document/api/236/34476)
+    /// * Read: [DescribeTimeWindow](https://www.tencentcloud.com/document/api/236/34480)
+    /// * Update: [ModifyTimeWindow](https://www.tencentcloud.com/document/api/236/34476)
+    /// * Delete: [DeleteTimeWindow](https://www.tencentcloud.com/document/api/236/34483)
+    /// 
     /// ## Import
     /// 
     /// mysql TimeWindow can be imported using the id, e.g.

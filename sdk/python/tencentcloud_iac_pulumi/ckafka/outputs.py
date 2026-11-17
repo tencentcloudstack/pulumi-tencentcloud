@@ -217,6 +217,9 @@ __all__ = [
     'GetInstancesInstanceListTagResult',
     'GetInstancesInstanceListVipListResult',
     'GetRegionResultResult',
+    'GetRoutesRouterBrokerVipListResult',
+    'GetRoutesRouterResult',
+    'GetRoutesRouterVipListResult',
     'GetTaskStatusResultResult',
     'GetTopicFlowRankingResultConsumeSpeedResult',
     'GetTopicFlowRankingResultResult',
@@ -21746,6 +21749,203 @@ class GetRegionResultResult(dict):
         NONE: The default value does not support any special models CVM: Supports CVM types.
         """
         return pulumi.get(self, "support")
+
+
+@pulumi.output_type
+class GetRoutesRouterResult(dict):
+    def __init__(__self__, *,
+                 access_type: _builtins.int,
+                 broker_vip_lists: Sequence['outputs.GetRoutesRouterBrokerVipListResult'],
+                 delete_timestamp: _builtins.str,
+                 domain: _builtins.str,
+                 domain_port: _builtins.int,
+                 note: _builtins.str,
+                 route_id: _builtins.int,
+                 status: _builtins.int,
+                 subnet: _builtins.str,
+                 vip_lists: Sequence['outputs.GetRoutesRouterVipListResult'],
+                 vip_type: _builtins.int,
+                 vpc_id: _builtins.str):
+        """
+        :param _builtins.int access_type: Instance access type. 0: PLAINTEXT, 1: SASL_PLAINTEXT, 2: SSL, 3: SASL_SSL.
+        :param Sequence['GetRoutesRouterBrokerVipListArgs'] broker_vip_lists: Virtual IP list (1 to 1 broker nodes).
+        :param _builtins.str delete_timestamp: Delete timestamp.
+        :param _builtins.str domain: Domain.
+        :param _builtins.int domain_port: Domain port.
+        :param _builtins.str note: Remark.
+        :param _builtins.int route_id: Route id, used to query a specific route.
+        :param _builtins.int status: Route status. 1: creating, 2: created, 3: create failed, 4: deleting, 6: delete failed.
+        :param _builtins.str subnet: Subnet id.
+        :param Sequence['GetRoutesRouterVipListArgs'] vip_lists: Virtual IP list.
+        :param _builtins.int vip_type: Routing network type. 3: vpc routing, 7: internal support routing, 1: public network routing.
+        :param _builtins.str vpc_id: Vpc id.
+        """
+        pulumi.set(__self__, "access_type", access_type)
+        pulumi.set(__self__, "broker_vip_lists", broker_vip_lists)
+        pulumi.set(__self__, "delete_timestamp", delete_timestamp)
+        pulumi.set(__self__, "domain", domain)
+        pulumi.set(__self__, "domain_port", domain_port)
+        pulumi.set(__self__, "note", note)
+        pulumi.set(__self__, "route_id", route_id)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "subnet", subnet)
+        pulumi.set(__self__, "vip_lists", vip_lists)
+        pulumi.set(__self__, "vip_type", vip_type)
+        pulumi.set(__self__, "vpc_id", vpc_id)
+
+    @_builtins.property
+    @pulumi.getter(name="accessType")
+    def access_type(self) -> _builtins.int:
+        """
+        Instance access type. 0: PLAINTEXT, 1: SASL_PLAINTEXT, 2: SSL, 3: SASL_SSL.
+        """
+        return pulumi.get(self, "access_type")
+
+    @_builtins.property
+    @pulumi.getter(name="brokerVipLists")
+    def broker_vip_lists(self) -> Sequence['outputs.GetRoutesRouterBrokerVipListResult']:
+        """
+        Virtual IP list (1 to 1 broker nodes).
+        """
+        return pulumi.get(self, "broker_vip_lists")
+
+    @_builtins.property
+    @pulumi.getter(name="deleteTimestamp")
+    def delete_timestamp(self) -> _builtins.str:
+        """
+        Delete timestamp.
+        """
+        return pulumi.get(self, "delete_timestamp")
+
+    @_builtins.property
+    @pulumi.getter
+    def domain(self) -> _builtins.str:
+        """
+        Domain.
+        """
+        return pulumi.get(self, "domain")
+
+    @_builtins.property
+    @pulumi.getter(name="domainPort")
+    def domain_port(self) -> _builtins.int:
+        """
+        Domain port.
+        """
+        return pulumi.get(self, "domain_port")
+
+    @_builtins.property
+    @pulumi.getter
+    def note(self) -> _builtins.str:
+        """
+        Remark.
+        """
+        return pulumi.get(self, "note")
+
+    @_builtins.property
+    @pulumi.getter(name="routeId")
+    def route_id(self) -> _builtins.int:
+        """
+        Route id, used to query a specific route.
+        """
+        return pulumi.get(self, "route_id")
+
+    @_builtins.property
+    @pulumi.getter
+    def status(self) -> _builtins.int:
+        """
+        Route status. 1: creating, 2: created, 3: create failed, 4: deleting, 6: delete failed.
+        """
+        return pulumi.get(self, "status")
+
+    @_builtins.property
+    @pulumi.getter
+    def subnet(self) -> _builtins.str:
+        """
+        Subnet id.
+        """
+        return pulumi.get(self, "subnet")
+
+    @_builtins.property
+    @pulumi.getter(name="vipLists")
+    def vip_lists(self) -> Sequence['outputs.GetRoutesRouterVipListResult']:
+        """
+        Virtual IP list.
+        """
+        return pulumi.get(self, "vip_lists")
+
+    @_builtins.property
+    @pulumi.getter(name="vipType")
+    def vip_type(self) -> _builtins.int:
+        """
+        Routing network type. 3: vpc routing, 7: internal support routing, 1: public network routing.
+        """
+        return pulumi.get(self, "vip_type")
+
+    @_builtins.property
+    @pulumi.getter(name="vpcId")
+    def vpc_id(self) -> _builtins.str:
+        """
+        Vpc id.
+        """
+        return pulumi.get(self, "vpc_id")
+
+
+@pulumi.output_type
+class GetRoutesRouterBrokerVipListResult(dict):
+    def __init__(__self__, *,
+                 vip: _builtins.str,
+                 vport: _builtins.str):
+        """
+        :param _builtins.str vip: Virtual IP.
+        :param _builtins.str vport: Virtual port.
+        """
+        pulumi.set(__self__, "vip", vip)
+        pulumi.set(__self__, "vport", vport)
+
+    @_builtins.property
+    @pulumi.getter
+    def vip(self) -> _builtins.str:
+        """
+        Virtual IP.
+        """
+        return pulumi.get(self, "vip")
+
+    @_builtins.property
+    @pulumi.getter
+    def vport(self) -> _builtins.str:
+        """
+        Virtual port.
+        """
+        return pulumi.get(self, "vport")
+
+
+@pulumi.output_type
+class GetRoutesRouterVipListResult(dict):
+    def __init__(__self__, *,
+                 vip: _builtins.str,
+                 vport: _builtins.str):
+        """
+        :param _builtins.str vip: Virtual IP.
+        :param _builtins.str vport: Virtual port.
+        """
+        pulumi.set(__self__, "vip", vip)
+        pulumi.set(__self__, "vport", vport)
+
+    @_builtins.property
+    @pulumi.getter
+    def vip(self) -> _builtins.str:
+        """
+        Virtual IP.
+        """
+        return pulumi.get(self, "vip")
+
+    @_builtins.property
+    @pulumi.getter
+    def vport(self) -> _builtins.str:
+        """
+        Virtual port.
+        """
+        return pulumi.get(self, "vport")
 
 
 @pulumi.output_type

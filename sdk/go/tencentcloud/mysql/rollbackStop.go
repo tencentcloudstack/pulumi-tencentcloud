@@ -41,6 +41,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+//   - [StopRollback](https://www.tencentcloud.com/document/api/236/38951)
 type RollbackStop struct {
 	pulumi.CustomResourceState
 

@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeVpcResourceDashboard](https://www.tencentcloud.com/document/api/215/36076)
 func GetResourceDashboard(ctx *pulumi.Context, args *GetResourceDashboardArgs, opts ...pulumi.InvokeOption) (*GetResourceDashboardResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetResourceDashboardResult

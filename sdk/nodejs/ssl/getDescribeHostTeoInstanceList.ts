@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     resourceType: "teo",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeHostTeoInstanceList](https://www.tencentcloud.com/document/api/1007/57016)
  */
 export function getDescribeHostTeoInstanceList(args: GetDescribeHostTeoInstanceListArgs, opts?: pulumi.InvokeOptions): Promise<GetDescribeHostTeoInstanceListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -96,6 +102,12 @@ export interface GetDescribeHostTeoInstanceListResult {
  *     resourceType: "teo",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeHostTeoInstanceList](https://www.tencentcloud.com/document/api/1007/57016)
  */
 export function getDescribeHostTeoInstanceListOutput(args: GetDescribeHostTeoInstanceListOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDescribeHostTeoInstanceListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

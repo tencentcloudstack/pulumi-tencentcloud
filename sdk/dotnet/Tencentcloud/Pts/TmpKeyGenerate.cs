@@ -31,6 +31,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [GenerateTmpKey](https://www.tencentcloud.com/document/api/1249/68501)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Pts/tmpKeyGenerate:TmpKeyGenerate")]
     public partial class TmpKeyGenerate : global::Pulumi.CustomResource

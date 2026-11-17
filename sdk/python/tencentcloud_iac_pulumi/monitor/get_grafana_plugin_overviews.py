@@ -86,6 +86,12 @@ def get_grafana_plugin_overviews(result_output_file: Optional[_builtins.str] = N
     grafana_plugin_overviews = tencentcloud.monitor.get_grafana_plugin_overviews()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribePluginOverviews](https://www.tencentcloud.com/search/?wd=DescribePluginOverviews&type=document&lang=en)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -111,6 +117,12 @@ def get_grafana_plugin_overviews_output(result_output_file: pulumi.Input[Optiona
 
     grafana_plugin_overviews = tencentcloud.monitor.get_grafana_plugin_overviews()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribePluginOverviews](https://www.tencentcloud.com/search/?wd=DescribePluginOverviews&type=document&lang=en)
 
 
     :param _builtins.str result_output_file: Used to save results.

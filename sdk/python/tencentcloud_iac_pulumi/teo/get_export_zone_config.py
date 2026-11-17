@@ -117,6 +117,12 @@ def get_export_zone_config(result_output_file: Optional[_builtins.str] = None,
         types=["L7AccelerationConfig"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ExportZoneConfig](https://www.tencentcloud.com/document/api/1145/67242)
+
 
     :param _builtins.str result_output_file: Used to save results.
     :param Sequence[_builtins.str] types: Types of configuration to export. If not specified, all types of configuration will be exported. Valid values: `L7AccelerationConfig`, `WebSecurity`.
@@ -162,6 +168,12 @@ def get_export_zone_config_output(result_output_file: pulumi.Input[Optional[Opti
     example = tencentcloud.teo.get_export_zone_config(zone_id="zone-3fkff38fyw8s",
         types=["L7AccelerationConfig"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ExportZoneConfig](https://www.tencentcloud.com/document/api/1145/67242)
 
 
     :param _builtins.str result_output_file: Used to save results.

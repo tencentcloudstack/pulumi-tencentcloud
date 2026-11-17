@@ -120,6 +120,14 @@ class OrgMemberAuthIdentityAttachment(pulumi.CustomResource):
             identity_ids=[1657])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateOrganizationMemberAuthIdentity](https://www.tencentcloud.com/document/api/1031/66411)
+        * Read: [DescribeOrganizationMemberAuthIdentities](https://www.tencentcloud.com/document/api/1031/52053)
+        * Delete: [DeleteOrganizationMemberAuthIdentity](https://www.tencentcloud.com/document/api/1031/66408)
+
         ## Import
 
         organization org_member_auth_identity can be imported using the id, e.g.
@@ -153,6 +161,14 @@ class OrgMemberAuthIdentityAttachment(pulumi.CustomResource):
             member_uin=int(100033704327),
             identity_ids=[1657])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateOrganizationMemberAuthIdentity](https://www.tencentcloud.com/document/api/1031/66411)
+        * Read: [DescribeOrganizationMemberAuthIdentities](https://www.tencentcloud.com/document/api/1031/52053)
+        * Delete: [DeleteOrganizationMemberAuthIdentity](https://www.tencentcloud.com/document/api/1031/66408)
 
         ## Import
 

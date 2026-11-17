@@ -86,6 +86,12 @@ def get_pad_templates(result_output_file: Optional[_builtins.str] = None,
     pad_templates = tencentcloud.css.get_pad_templates()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeLivePadTemplates](https://www.tencentcloud.com/search/?wd=DescribeLivePadTemplates&type=document&lang=en)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -111,6 +117,12 @@ def get_pad_templates_output(result_output_file: pulumi.Input[Optional[Optional[
 
     pad_templates = tencentcloud.css.get_pad_templates()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeLivePadTemplates](https://www.tencentcloud.com/search/?wd=DescribeLivePadTemplates&type=document&lang=en)
 
 
     :param _builtins.str result_output_file: Used to save results.

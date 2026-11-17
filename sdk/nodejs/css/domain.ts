@@ -23,6 +23,22 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [AddLiveDomain](https://www.tencentcloud.com/document/api/267/35189)
+ *   - [AuthenticateDomainOwner](https://www.tencentcloud.com/document/api/267/50612)
+ *   - [EnableLiveDomain](https://www.tencentcloud.com/document/api/267/35185)
+ *   - [ForbidLiveDomain](https://www.tencentcloud.com/document/api/267/35184)
+ * * Read: [DescribeLiveDomain](https://www.tencentcloud.com/document/api/267/35187)
+ * * Update:
+ *   - [EnableLiveDomain](https://www.tencentcloud.com/document/api/267/35185)
+ *   - [ForbidLiveDomain](https://www.tencentcloud.com/document/api/267/35184)
+ *   - [ModifyLivePlayDomain](https://www.tencentcloud.com/document/api/267/35183)
+ * * Delete: [DeleteLiveDomain](https://www.tencentcloud.com/document/api/267/35188)
+ *
  * ## Import
  *
  * css domain can be imported using the id, e.g.

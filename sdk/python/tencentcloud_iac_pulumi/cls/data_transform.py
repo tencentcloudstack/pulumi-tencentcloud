@@ -622,6 +622,55 @@ class DataTransform(pulumi.CustomResource):
             }])
         ```
 
+        ### Cross-account data transform example:
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        logset_src = tencentcloud.cls.Logset("logset_src",
+            logset_name="tf-example-src",
+            tags={
+                "createdBy": "terraform",
+            })
+        topic_src = tencentcloud.cls.Topic("topic_src",
+            topic_name="tf-example_src",
+            logset_id=logset_src.id,
+            auto_split=False,
+            max_split_partitions=20,
+            partition_count=1,
+            period=10,
+            storage_type="hot",
+            tags={
+                "createdBy": "terraform",
+            })
+        example_cross_account = tencentcloud.cls.DataTransform("example_cross_account",
+            func_type=1,
+            src_topic_id=topic_src.id,
+            name="tf-example-cross-account",
+            etl_content="ext_sep(\\"content\\", \\"f1, f2, f3\\", sep=\\",\\", quote=\\"\\", restrict=False, mode=\\"overwrite\\")fields_drop(\\"content\\")",
+            task_type=3,
+            enable_flag=1,
+            dst_resources=[{
+                "topic_id": "topic-id-in-target-account",
+                "alias": "cross-account-dst",
+                "is_cross_account": True,
+                "role_arn": "qcs::cam::uin/123456789:roleName/cls-cross-account-role",
+                "external_id": "external-id-value",
+                "topic_name": "target-topic-name",
+                "logset_name": "target-logset-name",
+            }])
+        ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateDataTransform](https://www.tencentcloud.com/document/api/614/56119)
+        * Read: [DescribeDataTransformInfo](https://www.tencentcloud.com/document/api/614/56117)
+        * Update: [ModifyDataTransform](https://www.tencentcloud.com/document/api/614/56116)
+        * Delete: [DeleteDataTransform](https://www.tencentcloud.com/document/api/614/56118)
+
         ## Import
 
         CLS data transform can be imported using the id, e.g.
@@ -709,6 +758,55 @@ class DataTransform(pulumi.CustomResource):
                 "alias": "iac-test-dst",
             }])
         ```
+
+        ### Cross-account data transform example:
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        logset_src = tencentcloud.cls.Logset("logset_src",
+            logset_name="tf-example-src",
+            tags={
+                "createdBy": "terraform",
+            })
+        topic_src = tencentcloud.cls.Topic("topic_src",
+            topic_name="tf-example_src",
+            logset_id=logset_src.id,
+            auto_split=False,
+            max_split_partitions=20,
+            partition_count=1,
+            period=10,
+            storage_type="hot",
+            tags={
+                "createdBy": "terraform",
+            })
+        example_cross_account = tencentcloud.cls.DataTransform("example_cross_account",
+            func_type=1,
+            src_topic_id=topic_src.id,
+            name="tf-example-cross-account",
+            etl_content="ext_sep(\\"content\\", \\"f1, f2, f3\\", sep=\\",\\", quote=\\"\\", restrict=False, mode=\\"overwrite\\")fields_drop(\\"content\\")",
+            task_type=3,
+            enable_flag=1,
+            dst_resources=[{
+                "topic_id": "topic-id-in-target-account",
+                "alias": "cross-account-dst",
+                "is_cross_account": True,
+                "role_arn": "qcs::cam::uin/123456789:roleName/cls-cross-account-role",
+                "external_id": "external-id-value",
+                "topic_name": "target-topic-name",
+                "logset_name": "target-logset-name",
+            }])
+        ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateDataTransform](https://www.tencentcloud.com/document/api/614/56119)
+        * Read: [DescribeDataTransformInfo](https://www.tencentcloud.com/document/api/614/56117)
+        * Update: [ModifyDataTransform](https://www.tencentcloud.com/document/api/614/56116)
+        * Delete: [DeleteDataTransform](https://www.tencentcloud.com/document/api/614/56118)
 
         ## Import
 

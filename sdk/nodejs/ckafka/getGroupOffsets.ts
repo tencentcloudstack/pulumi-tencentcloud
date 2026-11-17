@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     group: "xxxxxx",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeGroupOffsets](https://www.tencentcloud.com/document/api/597/35359)
  */
 export function getGroupOffsets(args: GetGroupOffsetsArgs, opts?: pulumi.InvokeOptions): Promise<GetGroupOffsetsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -90,6 +96,12 @@ export interface GetGroupOffsetsResult {
  *     group: "xxxxxx",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeGroupOffsets](https://www.tencentcloud.com/document/api/597/35359)
  */
 export function getGroupOffsetsOutput(args: GetGroupOffsetsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetGroupOffsetsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

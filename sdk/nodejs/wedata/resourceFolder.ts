@@ -19,6 +19,15 @@ import * as utilities from "../utilities";
  *     folderName: "folder",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateResourceFolder](https://www.tencentcloud.com/document/api/1174/73886)
+ * * Read: [ListResourceFolders](https://www.tencentcloud.com/document/api/1174/73870)
+ * * Update: [UpdateResourceFolder](https://www.tencentcloud.com/document/api/1174/73862)
+ * * Delete: [DeleteResourceFolder](https://www.tencentcloud.com/document/api/1174/73881)
  */
 export class ResourceFolder extends pulumi.CustomResource {
     /**

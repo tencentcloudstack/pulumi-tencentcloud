@@ -37,6 +37,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [BindSharedCNAME](https://www.tencentcloud.com/document/api/1145/57469)
+    ///   - [DescribeSharedCNAME](https://www.tencentcloud.com/document/api/1145/78836)
+    /// * Read: [DescribeSharedCNAME](https://www.tencentcloud.com/document/api/1145/78836)
+    /// * Update:
+    ///   - [BindSharedCNAME](https://www.tencentcloud.com/document/api/1145/57469)
+    ///   - [DescribeSharedCNAME](https://www.tencentcloud.com/document/api/1145/78836)
+    /// * Delete: [BindSharedCNAME](https://www.tencentcloud.com/document/api/1145/57469)
+    /// 
     /// ## Import
     /// 
     /// teo DomainSharedCnameAttachment can be imported using the zone_id#shared_cname, e.g.

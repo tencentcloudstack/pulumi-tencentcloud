@@ -43,6 +43,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeSlowLogTopSqls](https://www.tencentcloud.com/document/api/1035/41183)
 func GetSlowLogTopSqls(ctx *pulumi.Context, args *GetSlowLogTopSqlsArgs, opts ...pulumi.InvokeOption) (*GetSlowLogTopSqlsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSlowLogTopSqlsResult

@@ -21,6 +21,12 @@ import * as utilities from "../utilities";
  *     domainId: 123,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRecordLineList](https://www.tencentcloud.com/document/api/1157/53834)
  */
 export function getRecordLineList(args: GetRecordLineListArgs, opts?: pulumi.InvokeOptions): Promise<GetRecordLineListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -90,6 +96,12 @@ export interface GetRecordLineListResult {
  *     domainId: 123,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRecordLineList](https://www.tencentcloud.com/document/api/1157/53834)
  */
 export function getRecordLineListOutput(args: GetRecordLineListOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRecordLineListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

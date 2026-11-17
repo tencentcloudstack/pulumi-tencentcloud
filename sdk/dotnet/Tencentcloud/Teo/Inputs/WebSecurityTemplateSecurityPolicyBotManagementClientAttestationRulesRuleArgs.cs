@@ -44,7 +44,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public Input<string>? Enabled { get; set; }
 
         /// <summary>
-        /// ID of the resource.
+        /// The ID of precise rate limiting. rule ID supports different rule configuration operations: - add a new rule: leave the ID empty or do not specify the ID parameter. - modify an existing rule: specify the rule ID that needs to be updated/modified. - delete an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.
         /// </summary>
         [Input("id")]
         public Input<string>? Id { get; set; }

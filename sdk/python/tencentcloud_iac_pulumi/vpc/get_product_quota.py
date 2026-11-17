@@ -96,6 +96,12 @@ def get_product_quota(product: Optional[_builtins.str] = None,
     product_quota = tencentcloud.vpc.get_product_quota(product="vpc")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeProductQuota](https://www.tencentcloud.com/search/?wd=DescribeProductQuota&type=document&lang=en)
+
 
     :param _builtins.str product: The name of the network product to be queried. The products that can be queried are:vpc, ccn, vpn, dc, dfw, clb, eip.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_product_quota_output(product: pulumi.Input[Optional[_builtins.str]] = No
 
     product_quota = tencentcloud.vpc.get_product_quota(product="vpc")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeProductQuota](https://www.tencentcloud.com/search/?wd=DescribeProductQuota&type=document&lang=en)
 
 
     :param _builtins.str product: The name of the network product to be queried. The products that can be queried are:vpc, ccn, vpn, dc, dfw, clb, eip.

@@ -39,6 +39,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeResourceToShareMember](https://www.tencentcloud.com/document/api/1031/78348)
         /// </summary>
         public static Task<GetResourceToShareMemberResult> InvokeAsync(GetResourceToShareMemberArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetResourceToShareMemberResult>("tencentcloud:Organization/getResourceToShareMember:getResourceToShareMember", args ?? new GetResourceToShareMemberArgs(), options.WithDefaults());
@@ -70,6 +76,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeResourceToShareMember](https://www.tencentcloud.com/document/api/1031/78348)
         /// </summary>
         public static Output<GetResourceToShareMemberResult> Invoke(GetResourceToShareMemberInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetResourceToShareMemberResult>("tencentcloud:Organization/getResourceToShareMember:getResourceToShareMember", args ?? new GetResourceToShareMemberInvokeArgs(), options.WithDefaults());
@@ -101,6 +113,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeResourceToShareMember](https://www.tencentcloud.com/document/api/1031/78348)
         /// </summary>
         public static Output<GetResourceToShareMemberResult> Invoke(GetResourceToShareMemberInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetResourceToShareMemberResult>("tencentcloud:Organization/getResourceToShareMember:getResourceToShareMember", args ?? new GetResourceToShareMemberInvokeArgs(), options.WithDefaults());

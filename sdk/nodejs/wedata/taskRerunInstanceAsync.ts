@@ -20,6 +20,14 @@ import * as utilities from "../utilities";
  *     instanceKeyLists: ["20250324192240178_2025-10-13 16:20:00"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [GetOpsAsyncJob](https://www.tencentcloud.com/document/api/1174/73832)
+ *   - [RerunTaskInstancesAsync](https://www.tencentcloud.com/document/api/1174/73813)
  */
 export class TaskRerunInstanceAsync extends pulumi.CustomResource {
     /**

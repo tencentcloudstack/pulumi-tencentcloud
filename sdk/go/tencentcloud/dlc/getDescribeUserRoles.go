@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeUserRoles](https://www.tencentcloud.com/document/api/1155/56962)
 func GetDescribeUserRoles(ctx *pulumi.Context, args *GetDescribeUserRolesArgs, opts ...pulumi.InvokeOption) (*GetDescribeUserRolesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDescribeUserRolesResult

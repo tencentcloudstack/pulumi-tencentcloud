@@ -34,6 +34,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetFunctionAddress](https://www.tencentcloud.com/document/api/583/34409)
         /// </summary>
         public static Task<GetFunctionAddressResult> InvokeAsync(GetFunctionAddressArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetFunctionAddressResult>("tencentcloud:Scf/getFunctionAddress:getFunctionAddress", args ?? new GetFunctionAddressArgs(), options.WithDefaults());
@@ -60,6 +66,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetFunctionAddress](https://www.tencentcloud.com/document/api/583/34409)
         /// </summary>
         public static Output<GetFunctionAddressResult> Invoke(GetFunctionAddressInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetFunctionAddressResult>("tencentcloud:Scf/getFunctionAddress:getFunctionAddress", args ?? new GetFunctionAddressInvokeArgs(), options.WithDefaults());
@@ -86,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetFunctionAddress](https://www.tencentcloud.com/document/api/583/34409)
         /// </summary>
         public static Output<GetFunctionAddressResult> Invoke(GetFunctionAddressInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetFunctionAddressResult>("tencentcloud:Scf/getFunctionAddress:getFunctionAddress", args ?? new GetFunctionAddressInvokeArgs(), options.WithDefaults());

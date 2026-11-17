@@ -31,6 +31,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ModifyUserType](https://www.tencentcloud.com/document/api/1155/62662)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dlc/modifyUserTypOperation:ModifyUserTypOperation")]
     public partial class ModifyUserTypOperation : global::Pulumi.CustomResource

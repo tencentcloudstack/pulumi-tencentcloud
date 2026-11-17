@@ -32,6 +32,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+    ///   - [OpenWan](https://www.tencentcloud.com/document/api/1098/55909)
+    /// * Read: [DescribeClusterInstanceGrps](https://www.tencentcloud.com/document/api/1098/40751)
+    /// * Delete:
+    ///   - [CloseWan](https://www.tencentcloud.com/document/api/1098/55915)
+    ///   - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+    /// 
     /// ## Import
     /// 
     /// cynosdb wan can be imported using the id, e.g.

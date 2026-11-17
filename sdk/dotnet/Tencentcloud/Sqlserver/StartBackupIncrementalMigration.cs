@@ -32,6 +32,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+    ///   - [StartIncrementalMigration](https://www.tencentcloud.com/document/api/238/39831)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Sqlserver/startBackupIncrementalMigration:StartBackupIncrementalMigration")]
     public partial class StartBackupIncrementalMigration : global::Pulumi.CustomResource

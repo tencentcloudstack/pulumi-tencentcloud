@@ -118,6 +118,12 @@ def get_certificates(id: Optional[_builtins.str] = None,
     foo = tencentcloud.gaap.get_certificates_output(id=foo_certificate.id)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCertificates](https://www.tencentcloud.com/document/api/608/33115)
+
 
     :param _builtins.str id: ID of the certificate to be queried.
     :param _builtins.str name: Name of the certificate to be queried.
@@ -159,6 +165,12 @@ def get_certificates_output(id: pulumi.Input[Optional[Optional[_builtins.str]]] 
         name="test_certificate")
     foo = tencentcloud.gaap.get_certificates_output(id=foo_certificate.id)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCertificates](https://www.tencentcloud.com/document/api/608/33115)
 
 
     :param _builtins.str id: ID of the certificate to be queried.

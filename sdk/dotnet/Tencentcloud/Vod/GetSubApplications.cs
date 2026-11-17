@@ -126,6 +126,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSubAppIds](https://www.tencentcloud.com/document/api/266/34177)
         /// </summary>
         public static Task<GetSubApplicationsResult> InvokeAsync(GetSubApplicationsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSubApplicationsResult>("tencentcloud:Vod/getSubApplications:getSubApplications", args ?? new GetSubApplicationsArgs(), options.WithDefaults());
@@ -244,6 +250,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSubAppIds](https://www.tencentcloud.com/document/api/266/34177)
         /// </summary>
         public static Output<GetSubApplicationsResult> Invoke(GetSubApplicationsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSubApplicationsResult>("tencentcloud:Vod/getSubApplications:getSubApplications", args ?? new GetSubApplicationsInvokeArgs(), options.WithDefaults());
@@ -362,6 +374,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSubAppIds](https://www.tencentcloud.com/document/api/266/34177)
         /// </summary>
         public static Output<GetSubApplicationsResult> Invoke(GetSubApplicationsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetSubApplicationsResult>("tencentcloud:Vod/getSubApplications:getSubApplications", args ?? new GetSubApplicationsInvokeArgs(), options.WithDefaults());

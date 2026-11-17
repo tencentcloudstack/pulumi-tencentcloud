@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeRuleRealServers](https://www.tencentcloud.com/document/api/608/33042)
 func GetRuleRealServers(ctx *pulumi.Context, args *GetRuleRealServersArgs, opts ...pulumi.InvokeOption) (*GetRuleRealServersResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetRuleRealServersResult

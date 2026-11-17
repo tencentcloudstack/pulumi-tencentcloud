@@ -26,6 +26,12 @@ import * as utilities from "../utilities";
  *     orderByType: "desc",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeLogBackups](https://www.tencentcloud.com/document/api/409/54342)
  */
 export function getLogBackups(args?: GetLogBackupsArgs, opts?: pulumi.InvokeOptions): Promise<GetLogBackupsResult> {
     args = args || {};
@@ -109,6 +115,12 @@ export interface GetLogBackupsResult {
  *     orderByType: "desc",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeLogBackups](https://www.tencentcloud.com/document/api/409/54342)
  */
 export function getLogBackupsOutput(args?: GetLogBackupsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetLogBackupsResult> {
     args = args || {};

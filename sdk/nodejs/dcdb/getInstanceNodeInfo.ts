@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     instanceId: dcdbId,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDCDBInstanceNodeInfo](https://www.tencentcloud.com/document/api/1042/40254)
  */
 export function getInstanceNodeInfo(args: GetInstanceNodeInfoArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceNodeInfoResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetInstanceNodeInfoResult {
  *     instanceId: dcdbId,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDCDBInstanceNodeInfo](https://www.tencentcloud.com/document/api/1042/40254)
  */
 export function getInstanceNodeInfoOutput(args: GetInstanceNodeInfoOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInstanceNodeInfoResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

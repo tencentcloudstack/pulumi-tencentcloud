@@ -233,6 +233,14 @@ class BackupDownloadRestriction(pulumi.CustomResource):
             ])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyBackupDownloadRestriction](https://www.tencentcloud.com/document/api/239/54068)
+        * Read: [DescribeBackupDownloadRestriction](https://www.tencentcloud.com/document/api/239/54069)
+        * Update: [ModifyBackupDownloadRestriction](https://www.tencentcloud.com/document/api/239/54068)
+
         ## Import
 
         redis backup download restriction can be imported using the region, e.g.
@@ -280,6 +288,14 @@ class BackupDownloadRestriction(pulumi.CustomResource):
                 "10.1.1.13",
             ])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyBackupDownloadRestriction](https://www.tencentcloud.com/document/api/239/54068)
+        * Read: [DescribeBackupDownloadRestriction](https://www.tencentcloud.com/document/api/239/54069)
+        * Update: [ModifyBackupDownloadRestriction](https://www.tencentcloud.com/document/api/239/54068)
 
         ## Import
 

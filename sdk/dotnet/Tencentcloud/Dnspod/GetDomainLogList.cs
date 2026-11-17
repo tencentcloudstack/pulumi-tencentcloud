@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDomainLogList](https://www.tencentcloud.com/document/api/1157/53853)
         /// </summary>
         public static Task<GetDomainLogListResult> InvokeAsync(GetDomainLogListArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDomainLogListResult>("tencentcloud:Dnspod/getDomainLogList:getDomainLogList", args ?? new GetDomainLogListArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDomainLogList](https://www.tencentcloud.com/document/api/1157/53853)
         /// </summary>
         public static Output<GetDomainLogListResult> Invoke(GetDomainLogListInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDomainLogListResult>("tencentcloud:Dnspod/getDomainLogList:getDomainLogList", args ?? new GetDomainLogListInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDomainLogList](https://www.tencentcloud.com/document/api/1157/53853)
         /// </summary>
         public static Output<GetDomainLogListResult> Invoke(GetDomainLogListInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDomainLogListResult>("tencentcloud:Dnspod/getDomainLogList:getDomainLogList", args ?? new GetDomainLogListInvokeArgs(), options.WithDefaults());

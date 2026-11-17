@@ -59,6 +59,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns
     ///     };
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreatePrivateDNSAccount](https://www.tencentcloud.com/document/api/1097/44057)
+    /// * Read: [DescribePrivateDNSAccountList](https://www.tencentcloud.com/document/api/1097/42527)
+    /// * Delete: [DeletePrivateDNSAccount](https://www.tencentcloud.com/document/api/1097/44056)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:PrivateDns/account:Account")]
     public partial class Account : global::Pulumi.CustomResource

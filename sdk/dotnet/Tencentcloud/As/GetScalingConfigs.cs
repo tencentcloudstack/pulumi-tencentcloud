@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeLaunchConfigurations](https://www.tencentcloud.com/document/api/377/30999)
         /// </summary>
         public static Task<GetScalingConfigsResult> InvokeAsync(GetScalingConfigsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetScalingConfigsResult>("tencentcloud:As/getScalingConfigs:getScalingConfigs", args ?? new GetScalingConfigsArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeLaunchConfigurations](https://www.tencentcloud.com/document/api/377/30999)
         /// </summary>
         public static Output<GetScalingConfigsResult> Invoke(GetScalingConfigsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetScalingConfigsResult>("tencentcloud:As/getScalingConfigs:getScalingConfigs", args ?? new GetScalingConfigsInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeLaunchConfigurations](https://www.tencentcloud.com/document/api/377/30999)
         /// </summary>
         public static Output<GetScalingConfigsResult> Invoke(GetScalingConfigsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetScalingConfigsResult>("tencentcloud:As/getScalingConfigs:getScalingConfigs", args ?? new GetScalingConfigsInvokeArgs(), options.WithDefaults());

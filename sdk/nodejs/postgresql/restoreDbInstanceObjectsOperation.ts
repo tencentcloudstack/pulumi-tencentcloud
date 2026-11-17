@@ -39,6 +39,14 @@ import * as utilities from "../utilities";
  *     restoreTargetTime: "2024-04-30 00:20:27",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeTasks](https://www.tencentcloud.com/document/api/409/78807)
+ *   - [RestoreDBInstanceObjects](https://www.tencentcloud.com/document/api/409/60785)
  */
 export class RestoreDbInstanceObjectsOperation extends pulumi.CustomResource {
     /**

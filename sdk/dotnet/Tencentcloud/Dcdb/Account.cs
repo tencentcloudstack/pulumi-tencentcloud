@@ -23,12 +23,38 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var account = new Tencentcloud.Dcdb.Account("account", new()
+    ///     var example = new Tencentcloud.Dcdb.HourdbInstance("example", new()
     ///     {
-    ///         InstanceId = "tdsqlshard-kkpoxvnv",
+    ///         InstanceName = "tf-example",
+    ///         Zones = new[]
+    ///         {
+    ///             "ap-guangzhou-6",
+    ///             "ap-guangzhou-7",
+    ///         },
+    ///         ShardMemory = 4,
+    ///         ShardStorage = 100,
+    ///         ShardNodeCount = 2,
+    ///         ShardCount = 2,
+    ///         VpcId = "vpc-i5yyodl9",
+    ///         SubnetId = "subnet-hhi88a58",
+    ///         SecurityGroupId = "sg-4z20n68d",
+    ///         DbVersionId = "8.0",
+    ///         ResourceTags = new[]
+    ///         {
+    ///             new Tencentcloud.Dcdb.Inputs.HourdbInstanceResourceTagArgs
+    ///             {
+    ///                 TagKey = "tagKey",
+    ///                 TagValue = "tagValue",
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    ///     var exampleAccount = new Tencentcloud.Dcdb.Account("example", new()
+    ///     {
+    ///         InstanceId = example.Id,
     ///         UserName = "mysql",
     ///         Host = "127.0.0.1",
-    ///         Password = "===password===",
+    ///         Password = "Password@2026",
     ///         ReadOnly = 0,
     ///         Description = "this is a test account",
     ///         MaxUserConnections = 10,
@@ -37,11 +63,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateAccount](https://www.tencentcloud.com/document/api/1042/34449)
+    /// * Read: [DescribeAccounts](https://www.tencentcloud.com/document/api/1042/34446)
+    /// * Update:
+    ///   - [ModifyAccountDescription](https://www.tencentcloud.com/document/api/1042/34435)
+    ///   - [ResetAccountPassword](https://www.tencentcloud.com/document/api/1042/34430)
+    /// * Delete:
+    ///   - [DeleteAccount](https://www.tencentcloud.com/document/api/1042/34448)
+    ///   - [DescribeAccounts](https://www.tencentcloud.com/document/api/1042/34446)
+    /// 
     /// ## Import
     /// 
-    /// dcdb account can be imported using the id, e.g.
+    /// dcdb account can be imported using the instanceId#userName, e.g.
     /// ```sh
-    /// $ pulumi import tencentcloud:Dcdb/account:Account account account_id
+    /// $ pulumi import tencentcloud:Dcdb/account:Account example tdsqlshard-0tyhkwkzj5#mysql
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dcdb/account:Account")]

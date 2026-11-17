@@ -119,6 +119,12 @@ class DeleteLogBackupOperation(pulumi.CustomResource):
             log_backup_id="local.pg_log_backup_id")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [DeleteLogBackup](https://www.tencentcloud.com/document/api/409/54347)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -144,6 +150,12 @@ class DeleteLogBackupOperation(pulumi.CustomResource):
             db_instance_id="local.pg_id",
             log_backup_id="local.pg_log_backup_id")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [DeleteLogBackup](https://www.tencentcloud.com/document/api/409/54347)
 
 
         :param str resource_name: The name of the resource.

@@ -43,6 +43,12 @@ import * as utilities from "../utilities";
  *     ],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBDiagEvents](https://www.tencentcloud.com/document/api/1035/44292)
  */
 export function getDiagEvents(args: GetDiagEventsArgs, opts?: pulumi.InvokeOptions): Promise<GetDiagEventsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -148,6 +154,12 @@ export interface GetDiagEventsResult {
  *     ],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBDiagEvents](https://www.tencentcloud.com/document/api/1035/44292)
  */
 export function getDiagEventsOutput(args: GetDiagEventsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDiagEventsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

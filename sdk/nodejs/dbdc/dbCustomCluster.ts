@@ -18,6 +18,7 @@ import * as utilities from "../utilities";
  * const example = new tencentcloud.dbdc.DbCustomCluster("example", {
  *     clusterName: "tf-example",
  *     clusterDescription: "cluster description.",
+ *     deletionProtection: true,
  *     containerNetwork: {
  *         vpcId: "vpc-py7mlxqm",
  *         subnetIds: [
@@ -35,6 +36,17 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateDBCustomCluster](https://www.tencentcloud.com/search/?wd=CreateDBCustomCluster&type=document&lang=en)
+ * * Read: [DescribeDBCustomClusterDetail](https://www.tencentcloud.com/search/?wd=DescribeDBCustomClusterDetail&type=document&lang=en)
+ * * Update:
+ *   - [ModifyDBCustomClusterAttributes](https://www.tencentcloud.com/search/?wd=ModifyDBCustomClusterAttributes&type=document&lang=en)
+ *   - [ModifyDBCustomClusterTags](https://www.tencentcloud.com/search/?wd=ModifyDBCustomClusterTags&type=document&lang=en)
+ * * Delete: [DestroyDBCustomCluster](https://www.tencentcloud.com/search/?wd=DestroyDBCustomCluster&type=document&lang=en)
  *
  * ## Import
  *
@@ -109,6 +121,10 @@ export class DbCustomCluster extends pulumi.CustomResource {
      */
     declare public /*out*/ readonly createdTime: pulumi.Output<string>;
     /**
+     * Whether to enable cluster deletion protection. Valid values: `true` (enabled, API default), `false` (disabled).
+     */
+    declare public readonly deletionProtection: pulumi.Output<boolean>;
+    /**
      * Region that the cluster belongs to.
      */
     declare public /*out*/ readonly region: pulumi.Output<string>;
@@ -139,6 +155,7 @@ export class DbCustomCluster extends pulumi.CustomResource {
             resourceInputs["clusterVersion"] = state?.clusterVersion;
             resourceInputs["containerNetwork"] = state?.containerNetwork;
             resourceInputs["createdTime"] = state?.createdTime;
+            resourceInputs["deletionProtection"] = state?.deletionProtection;
             resourceInputs["region"] = state?.region;
             resourceInputs["tags"] = state?.tags;
         } else {
@@ -156,6 +173,7 @@ export class DbCustomCluster extends pulumi.CustomResource {
             resourceInputs["clusterDescription"] = args?.clusterDescription;
             resourceInputs["clusterName"] = args?.clusterName;
             resourceInputs["containerNetwork"] = args?.containerNetwork;
+            resourceInputs["deletionProtection"] = args?.deletionProtection;
             resourceInputs["tags"] = args?.tags;
             resourceInputs["clusterLevel"] = undefined /*out*/;
             resourceInputs["clusterNodeNum"] = undefined /*out*/;
@@ -210,6 +228,10 @@ export interface DbCustomClusterState {
      */
     createdTime?: pulumi.Input<string | undefined>;
     /**
+     * Whether to enable cluster deletion protection. Valid values: `true` (enabled, API default), `false` (disabled).
+     */
+    deletionProtection?: pulumi.Input<boolean | undefined>;
+    /**
      * Region that the cluster belongs to.
      */
     region?: pulumi.Input<string | undefined>;
@@ -239,6 +261,10 @@ export interface DbCustomClusterArgs {
      * Container network. All pods in this cluster are connected to this network.
      */
     containerNetwork: pulumi.Input<inputs.Dbdc.DbCustomClusterContainerNetwork>;
+    /**
+     * Whether to enable cluster deletion protection. Valid values: `true` (enabled, API default), `false` (disabled).
+     */
+    deletionProtection?: pulumi.Input<boolean | undefined>;
     /**
      * Cluster tags.
      */

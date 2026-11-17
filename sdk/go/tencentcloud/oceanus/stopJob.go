@@ -45,6 +45,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [StopJobs](https://www.tencentcloud.com/search/?wd=StopJobs&type=document&lang=en)
 type StopJob struct {
 	pulumi.CustomResourceState
 

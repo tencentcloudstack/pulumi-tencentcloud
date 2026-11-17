@@ -47,6 +47,12 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [ProcessLiveStream](https://www.tencentcloud.com/document/api/1041/33641)
  */
 export class ProcessLiveStreamOperation extends pulumi.CustomResource {
     /**

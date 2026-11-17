@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     types: ["live"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeLiveXP2PDetailInfoList](https://www.tencentcloud.com/search/?wd=DescribeLiveXP2PDetailInfoList&type=document&lang=en)
  */
 export function getXp2pDetailInfoList(args?: GetXp2pDetailInfoListArgs, opts?: pulumi.InvokeOptions): Promise<GetXp2pDetailInfoListResult> {
     args = args || {};
@@ -94,6 +100,12 @@ export interface GetXp2pDetailInfoListResult {
  *     types: ["live"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeLiveXP2PDetailInfoList](https://www.tencentcloud.com/search/?wd=DescribeLiveXP2PDetailInfoList&type=document&lang=en)
  */
 export function getXp2pDetailInfoListOutput(args?: GetXp2pDetailInfoListOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetXp2pDetailInfoListResult> {
     args = args || {};

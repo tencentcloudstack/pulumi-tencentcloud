@@ -50,6 +50,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [BatchSendEmail](https://www.tencentcloud.com/document/api/1084/43052)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ses/batchSendEmail:BatchSendEmail")]
     public partial class BatchSendEmail : global::Pulumi.CustomResource

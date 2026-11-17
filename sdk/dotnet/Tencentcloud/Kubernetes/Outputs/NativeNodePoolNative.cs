@@ -19,6 +19,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
         /// </summary>
         public readonly bool? AutoRepair;
         /// <summary>
+        /// Custom image ID.
+        /// </summary>
+        public readonly string? CustomImage;
+        /// <summary>
         /// Native node pool data disk list.
         /// </summary>
         public readonly ImmutableArray<Outputs.NativeNodePoolNativeDataDisk> DataDisks;
@@ -99,6 +103,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
         private NativeNodePoolNative(
             bool? autoRepair,
 
+            string? customImage,
+
             ImmutableArray<Outputs.NativeNodePoolNativeDataDisk> dataDisks,
 
             bool? enableAutoscaling,
@@ -138,6 +144,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Outputs
             Outputs.NativeNodePoolNativeSystemDisk systemDisk)
         {
             AutoRepair = autoRepair;
+            CustomImage = customImage;
             DataDisks = dataDisks;
             EnableAutoscaling = enableAutoscaling;
             HealthCheckPolicyName = healthCheckPolicyName;

@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const foo = tencentcloud.audit.getCosRegions({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListCosEnableRegion](https://www.tencentcloud.com/search/?wd=ListCosEnableRegion&type=document&lang=en)
  */
 export function getCosRegions(args?: GetCosRegionsArgs, opts?: pulumi.InvokeOptions): Promise<GetCosRegionsResult> {
     args = args || {};
@@ -61,6 +67,12 @@ export interface GetCosRegionsResult {
  *
  * const foo = tencentcloud.audit.getCosRegions({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListCosEnableRegion](https://www.tencentcloud.com/search/?wd=ListCosEnableRegion&type=document&lang=en)
  */
 export function getCosRegionsOutput(args?: GetCosRegionsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetCosRegionsResult> {
     args = args || {};

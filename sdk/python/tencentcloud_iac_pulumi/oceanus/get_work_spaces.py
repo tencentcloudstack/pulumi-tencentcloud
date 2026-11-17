@@ -111,6 +111,12 @@ def get_work_spaces(filters: Optional[Sequence[Union['GetWorkSpacesFilterArgs', 
         }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeWorkSpaces](https://www.tencentcloud.com/search/?wd=DescribeWorkSpaces&type=document&lang=en)
+
 
     :param Sequence[Union['GetWorkSpacesFilterArgs', 'GetWorkSpacesFilterArgsDict']] filters: Filter rules.
     :param _builtins.int order_type: 1:sort by creation time in descending order (default); 2:sort by creation time in ascending order; 3:sort by status in descending order; 4:sort by status in ascending order; default is 0.
@@ -148,6 +154,12 @@ def get_work_spaces_output(filters: pulumi.Input[Optional[Optional[Sequence[Unio
             "values": ["tf_example"],
         }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeWorkSpaces](https://www.tencentcloud.com/search/?wd=DescribeWorkSpaces&type=document&lang=en)
 
 
     :param Sequence[Union['GetWorkSpacesFilterArgs', 'GetWorkSpacesFilterArgsDict']] filters: Filter rules.

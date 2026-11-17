@@ -107,6 +107,12 @@ def get_net_detect_states(filters: Optional[Sequence[Union['GetNetDetectStatesFi
     net_detect_states = tencentcloud.vpc.get_net_detect_states(net_detect_ids=["netd-12345678"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeNetDetectStates](https://www.tencentcloud.com/document/api/215/34743)
+
 
     :param Sequence[Union['GetNetDetectStatesFilterArgs', 'GetNetDetectStatesFilterArgsDict']] filters: Filter conditions. `NetDetectIds` and `Filters` cannot be specified at the same time.net-detect-id - String - (Filter condition) The network detection instance ID, such as netd-12345678.
     :param Sequence[_builtins.str] net_detect_ids: The array of network detection instance `IDs`, such as [`netd-12345678`].
@@ -140,6 +146,12 @@ def get_net_detect_states_output(filters: pulumi.Input[Optional[Optional[Sequenc
 
     net_detect_states = tencentcloud.vpc.get_net_detect_states(net_detect_ids=["netd-12345678"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeNetDetectStates](https://www.tencentcloud.com/document/api/215/34743)
 
 
     :param Sequence[Union['GetNetDetectStatesFilterArgs', 'GetNetDetectStatesFilterArgsDict']] filters: Filter conditions. `NetDetectIds` and `Filters` cannot be specified at the same time.net-detect-id - String - (Filter condition) The network detection instance ID, such as netd-12345678.

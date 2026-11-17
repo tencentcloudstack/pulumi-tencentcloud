@@ -28,6 +28,12 @@ import * as utilities from "../utilities";
  *     tmpToken: "JOqqCPVuWdNZvlVDLxxx",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeMigrateDBInstances](https://www.tencentcloud.com/document/api/571/51815)
  */
 export function getMigrateDbInstances(args: GetMigrateDbInstancesArgs, opts?: pulumi.InvokeOptions): Promise<GetMigrateDbInstancesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -152,6 +158,12 @@ export interface GetMigrateDbInstancesResult {
  *     tmpToken: "JOqqCPVuWdNZvlVDLxxx",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeMigrateDBInstances](https://www.tencentcloud.com/document/api/571/51815)
  */
 export function getMigrateDbInstancesOutput(args: GetMigrateDbInstancesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetMigrateDbInstancesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

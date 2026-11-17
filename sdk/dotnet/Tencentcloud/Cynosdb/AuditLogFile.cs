@@ -32,6 +32,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateAuditLogFile](https://www.tencentcloud.com/search/?wd=CreateAuditLogFile&amp;type=document&amp;lang=en)
+    ///   - [DescribeAuditLogFiles](https://www.tencentcloud.com/search/?wd=DescribeAuditLogFiles&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeAuditLogFiles](https://www.tencentcloud.com/search/?wd=DescribeAuditLogFiles&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteAuditLogFile](https://www.tencentcloud.com/search/?wd=DeleteAuditLogFile&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cynosdb/auditLogFile:AuditLogFile")]
     public partial class AuditLogFile : global::Pulumi.CustomResource

@@ -72,6 +72,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [GetAttackHistogram](https://www.tencentcloud.com/document/api/627/66360)
 func GetAttackLogHistogram(ctx *pulumi.Context, args *GetAttackLogHistogramArgs, opts ...pulumi.InvokeOption) (*GetAttackLogHistogramResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetAttackLogHistogramResult

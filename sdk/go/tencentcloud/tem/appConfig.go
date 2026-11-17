@@ -51,6 +51,15 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateConfigData](https://www.tencentcloud.com/document/api/1094/52769)
+// * Read: [DescribeConfigData](https://www.tencentcloud.com/document/api/1094/52768)
+// * Update: [ModifyConfigData](https://www.tencentcloud.com/document/api/1094/52765)
+// * Delete: [DestroyConfigData](https://www.tencentcloud.com/document/api/1094/52766)
+//
 // ## Import
 //
 // tem appConfig can be imported using the id, e.g.

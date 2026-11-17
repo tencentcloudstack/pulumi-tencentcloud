@@ -124,6 +124,12 @@ def get_send_tasks(receiver_id: Optional[_builtins.int] = None,
         task_type=1)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListSendTasks](https://www.tencentcloud.com/document/api/1084/44865)
+
 
     :param _builtins.int receiver_id: Recipient group ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -163,6 +169,12 @@ def get_send_tasks_output(receiver_id: pulumi.Input[Optional[Optional[_builtins.
         receiver_id=1063742,
         task_type=1)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListSendTasks](https://www.tencentcloud.com/document/api/1084/44865)
 
 
     :param _builtins.int receiver_id: Recipient group ID.

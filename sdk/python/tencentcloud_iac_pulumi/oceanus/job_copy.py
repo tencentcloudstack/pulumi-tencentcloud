@@ -305,6 +305,14 @@ class JobCopy(pulumi.CustomResource):
             work_space_id="space-2idq8wbr")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CopyJobs](https://www.tencentcloud.com/search/?wd=CopyJobs&type=document&lang=en)
+        * Read: [DescribeJobs](https://www.tencentcloud.com/search/?wd=DescribeJobs&type=document&lang=en)
+        * Delete: [DeleteJobs](https://www.tencentcloud.com/search/?wd=DeleteJobs&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -340,6 +348,14 @@ class JobCopy(pulumi.CustomResource):
             job_type=2,
             work_space_id="space-2idq8wbr")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CopyJobs](https://www.tencentcloud.com/search/?wd=CopyJobs&type=document&lang=en)
+        * Read: [DescribeJobs](https://www.tencentcloud.com/search/?wd=DescribeJobs&type=document&lang=en)
+        * Delete: [DeleteJobs](https://www.tencentcloud.com/search/?wd=DeleteJobs&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

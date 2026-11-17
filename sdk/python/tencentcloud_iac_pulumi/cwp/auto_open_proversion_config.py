@@ -332,6 +332,14 @@ class AutoOpenProversionConfig(pulumi.CustomResource):
             auto_downgrade_switch=0)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyAutoOpenProVersionConfig](https://www.tencentcloud.com/document/api/296/30875)
+        * Read: [DescribeLicenseGeneral](https://www.tencentcloud.com/document/api/296/63782)
+        * Update: [ModifyAutoOpenProVersionConfig](https://www.tencentcloud.com/document/api/296/30875)
+
         ## Import
 
         CWP auto open proversion config can be imported using the customId(like uuid or base64 string), e.g.
@@ -379,6 +387,14 @@ class AutoOpenProversionConfig(pulumi.CustomResource):
             auto_open_rasp_switch=1,
             auto_downgrade_switch=0)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyAutoOpenProVersionConfig](https://www.tencentcloud.com/document/api/296/30875)
+        * Read: [DescribeLicenseGeneral](https://www.tencentcloud.com/document/api/296/63782)
+        * Update: [ModifyAutoOpenProVersionConfig](https://www.tencentcloud.com/document/api/296/30875)
 
         ## Import
 

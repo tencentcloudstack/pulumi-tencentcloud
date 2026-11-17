@@ -155,6 +155,12 @@ def get_realservers(domain: Optional[_builtins.str] = None,
     foo = tencentcloud.gaap.get_realservers_output(ip=foo_realserver.ip)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRealServers](https://www.tencentcloud.com/document/api/608/33060)
+
 
     :param _builtins.str domain: Domain of the GAAP realserver to be queried, conflict with `ip`.
     :param _builtins.str ip: IP of the GAAP realserver to be queried, conflict with `domain`.
@@ -204,6 +210,12 @@ def get_realservers_output(domain: pulumi.Input[Optional[Optional[_builtins.str]
         name="ci-test-gaap-realserver")
     foo = tencentcloud.gaap.get_realservers_output(ip=foo_realserver.ip)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRealServers](https://www.tencentcloud.com/document/api/608/33060)
 
 
     :param _builtins.str domain: Domain of the GAAP realserver to be queried, conflict with `ip`.

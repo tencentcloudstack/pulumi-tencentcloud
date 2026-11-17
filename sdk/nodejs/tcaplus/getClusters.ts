@@ -26,6 +26,12 @@ import * as utilities from "../utilities";
  *     clusterName: "cluster",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeClusters](https://www.tencentcloud.com/document/api/1016/35050)
  */
 export function getClusters(args?: GetClustersArgs, opts?: pulumi.InvokeOptions): Promise<GetClustersResult> {
     args = args || {};
@@ -97,6 +103,12 @@ export interface GetClustersResult {
  *     clusterName: "cluster",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeClusters](https://www.tencentcloud.com/document/api/1016/35050)
  */
 export function getClustersOutput(args?: GetClustersOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetClustersResult> {
     args = args || {};

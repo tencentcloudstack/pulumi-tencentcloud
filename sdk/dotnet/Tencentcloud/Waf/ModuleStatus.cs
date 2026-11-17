@@ -37,6 +37,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ModifyModuleStatus](https://www.tencentcloud.com/document/api/627/64510)
+    /// * Read: [DescribeModuleStatus](https://www.tencentcloud.com/document/api/627/64522)
+    /// * Update: [ModifyModuleStatus](https://www.tencentcloud.com/document/api/627/64510)
+    /// 
     /// ## Import
     /// 
     /// waf ModuleStatus can be imported using the id, e.g.

@@ -107,6 +107,12 @@ def get_specinfos(availability_zone: Optional[_builtins.str] = None,
         storage_type="CLOUD_HSSD")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeProductConfig](https://www.tencentcloud.com/document/api/409/16776)
+
 
     :param _builtins.str availability_zone: The zone of the postgresql instance to query.
     :param _builtins.str result_output_file: Used to save results.
@@ -141,6 +147,12 @@ def get_specinfos_output(availability_zone: pulumi.Input[Optional[_builtins.str]
     example = tencentcloud.postgresql.get_specinfos(availability_zone="ap-guangzhou-7",
         storage_type="CLOUD_HSSD")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeProductConfig](https://www.tencentcloud.com/document/api/409/16776)
 
 
     :param _builtins.str availability_zone: The zone of the postgresql instance to query.

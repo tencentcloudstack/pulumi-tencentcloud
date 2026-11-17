@@ -69,6 +69,12 @@ import * as utilities from "../utilities";
  *     resultOutputFile: "./quota.json",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAccountQuota](https://www.tencentcloud.com/search/?wd=DescribeAccountQuota&type=document&lang=en)
  */
 export function getAccountQuota(args?: GetAccountQuotaArgs, opts?: pulumi.InvokeOptions): Promise<GetAccountQuotaResult> {
     args = args || {};
@@ -184,6 +190,12 @@ export interface GetAccountQuotaResult {
  *     resultOutputFile: "./quota.json",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAccountQuota](https://www.tencentcloud.com/search/?wd=DescribeAccountQuota&type=document&lang=en)
  */
 export function getAccountQuotaOutput(args?: GetAccountQuotaOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAccountQuotaResult> {
     args = args || {};

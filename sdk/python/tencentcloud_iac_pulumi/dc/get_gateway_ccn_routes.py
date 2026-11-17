@@ -149,6 +149,12 @@ def get_gateway_ccn_routes(address_type: Optional[_builtins.str] = None,
         address_type="IPv4")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDirectConnectGatewayCcnRoutes](https://www.tencentcloud.com/document/api/215/34775)
+
 
     :param _builtins.str address_type: Address type, supports: IPv4, IPv6. Default is IPv4.
     :param _builtins.str ccn_route_type: Cloud networking routing learning type, optional values: BGP - Automatic Learning; STATIC - User configured. Default is STATIC.
@@ -216,6 +222,12 @@ def get_gateway_ccn_routes_output(address_type: pulumi.Input[Optional[Optional[_
         ccn_route_type="STATIC",
         address_type="IPv4")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDirectConnectGatewayCcnRoutes](https://www.tencentcloud.com/document/api/215/34775)
 
 
     :param _builtins.str address_type: Address type, supports: IPv4, IPv6. Default is IPv4.

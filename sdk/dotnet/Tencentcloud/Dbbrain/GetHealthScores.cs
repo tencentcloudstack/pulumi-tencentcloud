@@ -34,6 +34,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeHealthScore](https://www.tencentcloud.com/document/api/1035/41194)
         /// </summary>
         public static Task<GetHealthScoresResult> InvokeAsync(GetHealthScoresArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetHealthScoresResult>("tencentcloud:Dbbrain/getHealthScores:getHealthScores", args ?? new GetHealthScoresArgs(), options.WithDefaults());
@@ -60,6 +66,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeHealthScore](https://www.tencentcloud.com/document/api/1035/41194)
         /// </summary>
         public static Output<GetHealthScoresResult> Invoke(GetHealthScoresInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetHealthScoresResult>("tencentcloud:Dbbrain/getHealthScores:getHealthScores", args ?? new GetHealthScoresInvokeArgs(), options.WithDefaults());
@@ -86,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeHealthScore](https://www.tencentcloud.com/document/api/1035/41194)
         /// </summary>
         public static Output<GetHealthScoresResult> Invoke(GetHealthScoresInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetHealthScoresResult>("tencentcloud:Dbbrain/getHealthScores:getHealthScores", args ?? new GetHealthScoresInvokeArgs(), options.WithDefaults());

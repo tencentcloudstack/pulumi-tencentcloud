@@ -52,6 +52,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBInstanceSecurityGroups](https://www.tencentcloud.com/document/api/409/52648)
         /// </summary>
         public static Task<GetDbInstanceSecurityGroupsResult> InvokeAsync(GetDbInstanceSecurityGroupsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDbInstanceSecurityGroupsResult>("tencentcloud:Postgresql/getDbInstanceSecurityGroups:getDbInstanceSecurityGroups", args ?? new GetDbInstanceSecurityGroupsArgs(), options.WithDefaults());
@@ -96,6 +102,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBInstanceSecurityGroups](https://www.tencentcloud.com/document/api/409/52648)
         /// </summary>
         public static Output<GetDbInstanceSecurityGroupsResult> Invoke(GetDbInstanceSecurityGroupsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDbInstanceSecurityGroupsResult>("tencentcloud:Postgresql/getDbInstanceSecurityGroups:getDbInstanceSecurityGroups", args ?? new GetDbInstanceSecurityGroupsInvokeArgs(), options.WithDefaults());
@@ -140,6 +152,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBInstanceSecurityGroups](https://www.tencentcloud.com/document/api/409/52648)
         /// </summary>
         public static Output<GetDbInstanceSecurityGroupsResult> Invoke(GetDbInstanceSecurityGroupsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDbInstanceSecurityGroupsResult>("tencentcloud:Postgresql/getDbInstanceSecurityGroups:getDbInstanceSecurityGroups", args ?? new GetDbInstanceSecurityGroupsInvokeArgs(), options.WithDefaults());

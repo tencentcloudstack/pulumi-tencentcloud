@@ -34,6 +34,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeUploadIncrementalInfo](https://www.tencentcloud.com/document/api/238/72765)
         /// </summary>
         public static Task<GetUploadIncrementalInfoResult> InvokeAsync(GetUploadIncrementalInfoArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetUploadIncrementalInfoResult>("tencentcloud:Sqlserver/getUploadIncrementalInfo:getUploadIncrementalInfo", args ?? new GetUploadIncrementalInfoArgs(), options.WithDefaults());
@@ -60,6 +66,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeUploadIncrementalInfo](https://www.tencentcloud.com/document/api/238/72765)
         /// </summary>
         public static Output<GetUploadIncrementalInfoResult> Invoke(GetUploadIncrementalInfoInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetUploadIncrementalInfoResult>("tencentcloud:Sqlserver/getUploadIncrementalInfo:getUploadIncrementalInfo", args ?? new GetUploadIncrementalInfoInvokeArgs(), options.WithDefaults());
@@ -86,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeUploadIncrementalInfo](https://www.tencentcloud.com/document/api/238/72765)
         /// </summary>
         public static Output<GetUploadIncrementalInfoResult> Invoke(GetUploadIncrementalInfoInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetUploadIncrementalInfoResult>("tencentcloud:Sqlserver/getUploadIncrementalInfo:getUploadIncrementalInfo", args ?? new GetUploadIncrementalInfoInvokeArgs(), options.WithDefaults());

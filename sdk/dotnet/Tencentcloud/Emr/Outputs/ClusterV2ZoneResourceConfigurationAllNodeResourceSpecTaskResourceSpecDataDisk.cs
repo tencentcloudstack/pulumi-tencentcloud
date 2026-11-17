@@ -19,7 +19,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr.Outputs
         /// </summary>
         public readonly string _diskIndex;
         /// <summary>
-        /// Disk ID (read-only, populated from API).
+        /// Disk ID.
         /// </summary>
         public readonly string? DiskId;
         /// <summary>

@@ -169,6 +169,12 @@ def get_sg_snapshot_file_content(result_output_file: Optional[_builtins.str] = N
         security_group_id="sg-ntrgm89v")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSgSnapshotFileContent](https://www.tencentcloud.com/document/api/215/55057)
+
 
     :param _builtins.str result_output_file: Used to save results.
     :param _builtins.str security_group_id: Security group ID.
@@ -212,6 +218,12 @@ def get_sg_snapshot_file_content_output(result_output_file: pulumi.Input[Optiona
         snapshot_file_id="ssfile-017gepjxpr",
         security_group_id="sg-ntrgm89v")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSgSnapshotFileContent](https://www.tencentcloud.com/document/api/215/55057)
 
 
     :param _builtins.str result_output_file: Used to save results.

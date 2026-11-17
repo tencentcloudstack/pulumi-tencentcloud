@@ -108,6 +108,12 @@ def get_content_quota(result_output_file: Optional[_builtins.str] = None,
     example = tencentcloud.teo.get_content_quota(zone_id="zone-2qtuhspy7cr6")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeContentQuota](https://www.tencentcloud.com/document/api/1145/50534)
+
 
     :param _builtins.str result_output_file: Used to save results.
     :param _builtins.str zone_id: Site ID.
@@ -138,6 +144,12 @@ def get_content_quota_output(result_output_file: pulumi.Input[Optional[Optional[
 
     example = tencentcloud.teo.get_content_quota(zone_id="zone-2qtuhspy7cr6")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeContentQuota](https://www.tencentcloud.com/document/api/1145/50534)
 
 
     :param _builtins.str result_output_file: Used to save results.

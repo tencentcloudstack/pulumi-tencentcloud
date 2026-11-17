@@ -45,6 +45,14 @@ import * as utilities from "../utilities";
  *     workSpaceId: "space-2idq8wbr",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateResourceConfig](https://www.tencentcloud.com/search/?wd=CreateResourceConfig&type=document&lang=en)
+ * * Read: [DescribeResourceConfigs](https://www.tencentcloud.com/search/?wd=DescribeResourceConfigs&type=document&lang=en)
+ * * Delete: [DeleteResourceConfigs](https://www.tencentcloud.com/search/?wd=DeleteResourceConfigs&type=document&lang=en)
  */
 export class ResourceConfig extends pulumi.CustomResource {
     /**

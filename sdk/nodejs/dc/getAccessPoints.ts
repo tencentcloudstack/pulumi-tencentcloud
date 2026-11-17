@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     regionId: "ap-guangzhou",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAccessPoints](https://www.tencentcloud.com/document/api/216/37476)
  */
 export function getAccessPoints(args?: GetAccessPointsArgs, opts?: pulumi.InvokeOptions): Promise<GetAccessPointsResult> {
     args = args || {};
@@ -74,6 +80,12 @@ export interface GetAccessPointsResult {
  *     regionId: "ap-guangzhou",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAccessPoints](https://www.tencentcloud.com/document/api/216/37476)
  */
 export function getAccessPointsOutput(args?: GetAccessPointsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAccessPointsResult> {
     args = args || {};

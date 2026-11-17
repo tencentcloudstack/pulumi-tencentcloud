@@ -152,6 +152,15 @@ class MountPoint(pulumi.CustomResource):
             mount_point_status=1)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateMountPoint](https://www.tencentcloud.com/document/api/1106/42434)
+        * Read: [DescribeMountPoint](https://www.tencentcloud.com/document/api/1106/42432)
+        * Update: [ModifyMountPoint](https://www.tencentcloud.com/document/api/1106/42429)
+        * Delete: [DeleteMountPoint](https://www.tencentcloud.com/document/api/1106/42433)
+
         ## Import
 
         chdfs mount_point can be imported using the id, e.g.
@@ -187,6 +196,15 @@ class MountPoint(pulumi.CustomResource):
             mount_point_name="terraform-test",
             mount_point_status=1)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateMountPoint](https://www.tencentcloud.com/document/api/1106/42434)
+        * Read: [DescribeMountPoint](https://www.tencentcloud.com/document/api/1106/42432)
+        * Update: [ModifyMountPoint](https://www.tencentcloud.com/document/api/1106/42429)
+        * Delete: [DeleteMountPoint](https://www.tencentcloud.com/document/api/1106/42433)
 
         ## Import
 

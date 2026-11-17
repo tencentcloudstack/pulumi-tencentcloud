@@ -31,6 +31,15 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateDedicatedCluster](https://www.tencentcloud.com/document/api/1226/66400)
+ * * Read: [DescribeDedicatedClusters](https://www.tencentcloud.com/document/api/1226/66388)
+ * * Update: [ModifyDedicatedClusterInfo](https://www.tencentcloud.com/document/api/1226/66384)
+ * * Delete: [DeleteDedicatedClusters](https://www.tencentcloud.com/document/api/1226/66397)
+ *
  * ## Import
  *
  * CDC dedicated cluster can be imported using the id, e.g.

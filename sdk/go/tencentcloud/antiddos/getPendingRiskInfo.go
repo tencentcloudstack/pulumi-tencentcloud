@@ -36,6 +36,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribePendingRiskInfo](https://www.tencentcloud.com/document/api/1213/61337)
 func GetPendingRiskInfo(ctx *pulumi.Context, args *GetPendingRiskInfoArgs, opts ...pulumi.InvokeOption) (*GetPendingRiskInfoResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetPendingRiskInfoResult

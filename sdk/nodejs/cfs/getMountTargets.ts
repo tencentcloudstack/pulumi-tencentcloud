@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     fileSystemId: "cfs-iobiaxtj",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeMountTargets](https://www.tencentcloud.com/document/api/582/34513)
  */
 export function getMountTargets(args: GetMountTargetsArgs, opts?: pulumi.InvokeOptions): Promise<GetMountTargetsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -73,6 +79,12 @@ export interface GetMountTargetsResult {
  *     fileSystemId: "cfs-iobiaxtj",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeMountTargets](https://www.tencentcloud.com/document/api/582/34513)
  */
 export function getMountTargetsOutput(args: GetMountTargetsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetMountTargetsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

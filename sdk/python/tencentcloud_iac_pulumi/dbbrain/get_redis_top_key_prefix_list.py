@@ -118,6 +118,12 @@ def get_redis_top_key_prefix_list(date: Optional[_builtins.str] = None,
         product="redis")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRedisTopKeyPrefixList](https://www.tencentcloud.com/document/api/1035/50450)
+
 
     :param _builtins.str date: Query date, such as 2021-05-27, the earliest date can be the previous 30 days.
     :param _builtins.str instance_id: instance id.
@@ -157,6 +163,12 @@ def get_redis_top_key_prefix_list_output(date: pulumi.Input[Optional[_builtins.s
         date="%s",
         product="redis")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRedisTopKeyPrefixList](https://www.tencentcloud.com/document/api/1035/50450)
 
 
     :param _builtins.str date: Query date, such as 2021-05-27, the earliest date can be the previous 30 days.

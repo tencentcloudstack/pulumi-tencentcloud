@@ -37,6 +37,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeInstanceState](https://www.tencentcloud.com/search/?wd=DescribeInstanceState&amp;type=document&amp;lang=en)
+    ///   - [ModifyClusterConfigs](https://www.tencentcloud.com/search/?wd=ModifyClusterConfigs&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeClusterConfigs](https://www.tencentcloud.com/search/?wd=DescribeClusterConfigs&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [DescribeInstanceState](https://www.tencentcloud.com/search/?wd=DescribeInstanceState&amp;type=document&amp;lang=en)
+    ///   - [ModifyClusterConfigs](https://www.tencentcloud.com/search/?wd=ModifyClusterConfigs&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// clickhouse XmlConfig can be imported using the id, e.g.

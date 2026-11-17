@@ -39,6 +39,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [AddUsersForUserManager](https://www.tencentcloud.com/document/api/1026/47537)
+    /// * Read: [DescribeUsersForUserManager](https://www.tencentcloud.com/document/api/1026/47536)
+    /// * Update: [ModifyUserManagerPwd](https://www.tencentcloud.com/document/api/1026/58391)
+    /// * Delete: [DeleteUserManagerUserList](https://www.tencentcloud.com/search/?wd=DeleteUserManagerUserList&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// emr UserManager can be imported using the id, e.g.

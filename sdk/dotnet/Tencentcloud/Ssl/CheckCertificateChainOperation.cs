@@ -31,6 +31,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CheckCertificateChain](https://www.tencentcloud.com/search/?wd=CheckCertificateChain&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// ssl CheckCertificateChain can be imported using the id, e.g.

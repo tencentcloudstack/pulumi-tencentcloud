@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     searchWord: "test",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeGroupGateways](https://www.tencentcloud.com/search/?wd=DescribeGroupGateways&type=document&lang=en)
  */
 export function getGroupGateways(args: GetGroupGatewaysArgs, opts?: pulumi.InvokeOptions): Promise<GetGroupGatewaysResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -78,6 +84,12 @@ export interface GetGroupGatewaysResult {
  *     searchWord: "test",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeGroupGateways](https://www.tencentcloud.com/search/?wd=DescribeGroupGateways&type=document&lang=en)
  */
 export function getGroupGatewaysOutput(args: GetGroupGatewaysOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetGroupGatewaysResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

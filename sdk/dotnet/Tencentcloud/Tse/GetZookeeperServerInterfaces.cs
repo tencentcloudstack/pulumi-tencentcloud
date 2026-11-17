@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeZookeeperServerInterfaces](https://www.tencentcloud.com/search/?wd=DescribeZookeeperServerInterfaces&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetZookeeperServerInterfacesResult> InvokeAsync(GetZookeeperServerInterfacesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetZookeeperServerInterfacesResult>("tencentcloud:Tse/getZookeeperServerInterfaces:getZookeeperServerInterfaces", args ?? new GetZookeeperServerInterfacesArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeZookeeperServerInterfaces](https://www.tencentcloud.com/search/?wd=DescribeZookeeperServerInterfaces&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetZookeeperServerInterfacesResult> Invoke(GetZookeeperServerInterfacesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetZookeeperServerInterfacesResult>("tencentcloud:Tse/getZookeeperServerInterfaces:getZookeeperServerInterfaces", args ?? new GetZookeeperServerInterfacesInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeZookeeperServerInterfaces](https://www.tencentcloud.com/search/?wd=DescribeZookeeperServerInterfaces&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetZookeeperServerInterfacesResult> Invoke(GetZookeeperServerInterfacesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetZookeeperServerInterfacesResult>("tencentcloud:Tse/getZookeeperServerInterfaces:getZookeeperServerInterfaces", args ?? new GetZookeeperServerInterfacesInvokeArgs(), options.WithDefaults());

@@ -83,6 +83,21 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateAccelerationDomain](https://www.tencentcloud.com/document/api/1145/54134)
+ *   - [ModifyAccelerationDomainStatuses](https://www.tencentcloud.com/document/api/1145/54130)
+ * * Read: [DescribeAccelerationDomains](https://www.tencentcloud.com/document/api/1145/54132)
+ * * Update:
+ *   - [ModifyAccelerationDomain](https://www.tencentcloud.com/document/api/1145/54131)
+ *   - [ModifyAccelerationDomainStatuses](https://www.tencentcloud.com/document/api/1145/54130)
+ * * Delete:
+ *   - [DeleteAccelerationDomains](https://www.tencentcloud.com/document/api/1145/54133)
+ *   - [ModifyAccelerationDomainStatuses](https://www.tencentcloud.com/document/api/1145/54130)
+ *
  * ## Import
  *
  * TEO acceleration domain can be imported using the id, e.g.

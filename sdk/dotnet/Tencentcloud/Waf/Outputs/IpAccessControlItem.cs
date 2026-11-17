@@ -19,7 +19,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf.Outputs
         /// </summary>
         public readonly int Action;
         /// <summary>
-        /// ID of the resource.
+        /// Id.
         /// </summary>
         public readonly string? Id;
         /// <summary>

@@ -44,6 +44,12 @@ import * as utilities from "../utilities";
  *     page: 1,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [SearchAttackLog](https://www.tencentcloud.com/document/api/627/66358)
  */
 export function getAttackLogList(args: GetAttackLogListArgs, opts?: pulumi.InvokeOptions): Promise<GetAttackLogListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -156,6 +162,12 @@ export interface GetAttackLogListResult {
  *     page: 1,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [SearchAttackLog](https://www.tencentcloud.com/document/api/627/66358)
  */
 export function getAttackLogListOutput(args: GetAttackLogListOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAttackLogListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

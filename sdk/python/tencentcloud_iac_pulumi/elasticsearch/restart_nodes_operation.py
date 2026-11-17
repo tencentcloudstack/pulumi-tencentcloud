@@ -219,6 +219,14 @@ class RestartNodesOperation(pulumi.CustomResource):
             node_names=["1648026612002990732"])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeInstances](https://www.tencentcloud.com/document/api/845/32214)
+          - [RestartNodes](https://www.tencentcloud.com/document/api/845/38511)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -247,6 +255,14 @@ class RestartNodesOperation(pulumi.CustomResource):
             instance_id="es-xxxxxx",
             node_names=["1648026612002990732"])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeInstances](https://www.tencentcloud.com/document/api/845/32214)
+          - [RestartNodes](https://www.tencentcloud.com/document/api/845/38511)
 
 
         :param str resource_name: The name of the resource.

@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const fileSystems = tencentcloud.chdfs.getFileSystems({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeFileSystems](https://www.tencentcloud.com/document/api/1106/42443)
  */
 export function getFileSystems(args?: GetFileSystemsArgs, opts?: pulumi.InvokeOptions): Promise<GetFileSystemsResult> {
     args = args || {};
@@ -61,6 +67,12 @@ export interface GetFileSystemsResult {
  *
  * const fileSystems = tencentcloud.chdfs.getFileSystems({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeFileSystems](https://www.tencentcloud.com/document/api/1106/42443)
  */
 export function getFileSystemsOutput(args?: GetFileSystemsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetFileSystemsResult> {
     args = args || {};

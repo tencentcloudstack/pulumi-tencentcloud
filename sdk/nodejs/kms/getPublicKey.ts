@@ -24,6 +24,12 @@ import * as utilities from "../utilities";
  *     keyId: exampleKey.id,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GetPublicKey](https://www.tencentcloud.com/document/api/1030/35179)
  */
 export function getPublicKey(args: GetPublicKeyArgs, opts?: pulumi.InvokeOptions): Promise<GetPublicKeyResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -86,6 +92,12 @@ export interface GetPublicKeyResult {
  *     keyId: exampleKey.id,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GetPublicKey](https://www.tencentcloud.com/document/api/1030/35179)
  */
 export function getPublicKeyOutput(args: GetPublicKeyOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetPublicKeyResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

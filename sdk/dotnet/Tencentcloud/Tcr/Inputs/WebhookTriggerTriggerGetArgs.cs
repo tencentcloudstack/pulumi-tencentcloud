@@ -44,7 +44,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr.Inputs
         }
 
         /// <summary>
-        /// ID of the resource.
+        /// trigger Id.
         /// </summary>
         [Input("id")]
         public Input<int>? Id { get; set; }

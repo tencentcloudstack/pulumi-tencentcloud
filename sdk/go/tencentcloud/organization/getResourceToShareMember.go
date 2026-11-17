@@ -44,6 +44,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeResourceToShareMember](https://www.tencentcloud.com/document/api/1031/78348)
 func GetResourceToShareMember(ctx *pulumi.Context, args *GetResourceToShareMemberArgs, opts ...pulumi.InvokeOption) (*GetResourceToShareMemberResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetResourceToShareMemberResult

@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Role
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListRoleConfigurationProvisionings](https://www.tencentcloud.com/document/api/1031/63598)
         /// </summary>
         public static Task<GetConfigurationProvisioningsResult> InvokeAsync(GetConfigurationProvisioningsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetConfigurationProvisioningsResult>("tencentcloud:Role/getConfigurationProvisionings:getConfigurationProvisionings", args ?? new GetConfigurationProvisioningsArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Role
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListRoleConfigurationProvisionings](https://www.tencentcloud.com/document/api/1031/63598)
         /// </summary>
         public static Output<GetConfigurationProvisioningsResult> Invoke(GetConfigurationProvisioningsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetConfigurationProvisioningsResult>("tencentcloud:Role/getConfigurationProvisionings:getConfigurationProvisionings", args ?? new GetConfigurationProvisioningsInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Role
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListRoleConfigurationProvisionings](https://www.tencentcloud.com/document/api/1031/63598)
         /// </summary>
         public static Output<GetConfigurationProvisioningsResult> Invoke(GetConfigurationProvisioningsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetConfigurationProvisioningsResult>("tencentcloud:Role/getConfigurationProvisionings:getConfigurationProvisionings", args ?? new GetConfigurationProvisioningsInvokeArgs(), options.WithDefaults());

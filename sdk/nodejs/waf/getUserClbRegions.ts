@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const example = tencentcloud.waf.getUserClbRegions({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeUserClbWafRegions](https://www.tencentcloud.com/document/api/627/64769)
  */
 export function getUserClbRegions(args?: GetUserClbRegionsArgs, opts?: pulumi.InvokeOptions): Promise<GetUserClbRegionsResult> {
     args = args || {};
@@ -65,6 +71,12 @@ export interface GetUserClbRegionsResult {
  *
  * const example = tencentcloud.waf.getUserClbRegions({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeUserClbWafRegions](https://www.tencentcloud.com/document/api/627/64769)
  */
 export function getUserClbRegionsOutput(args?: GetUserClbRegionsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetUserClbRegionsResult> {
     args = args || {};

@@ -59,6 +59,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [UpsertIpAccessControl](https://www.tencentcloud.com/search/?wd=UpsertIpAccessControl&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeIpAccessControl](https://www.tencentcloud.com/document/api/627/64773)
+    /// * Update:
+    ///   - [DeleteIpAccessControl](https://www.tencentcloud.com/search/?wd=DeleteIpAccessControl&amp;type=document&amp;lang=en)
+    ///   - [UpsertIpAccessControl](https://www.tencentcloud.com/search/?wd=UpsertIpAccessControl&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteIpAccessControl](https://www.tencentcloud.com/search/?wd=DeleteIpAccessControl&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// waf IpAccessControl can be imported using the id, e.g.

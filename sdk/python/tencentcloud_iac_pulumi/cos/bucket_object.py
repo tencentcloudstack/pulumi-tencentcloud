@@ -468,6 +468,13 @@ class BucketObject(pulumi.CustomResource):
             content="the content that you want to upload.")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [GetSecretValue](https://www.tencentcloud.com/document/api/1078/38649)
+        * Update: [GetSecretValue](https://www.tencentcloud.com/document/api/1078/38649)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -521,6 +528,13 @@ class BucketObject(pulumi.CustomResource):
             key="new_object_key",
             content="the content that you want to upload.")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [GetSecretValue](https://www.tencentcloud.com/document/api/1078/38649)
+        * Update: [GetSecretValue](https://www.tencentcloud.com/document/api/1078/38649)
 
 
         :param str resource_name: The name of the resource.

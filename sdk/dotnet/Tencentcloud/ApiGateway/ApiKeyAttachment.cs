@@ -46,6 +46,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [BindSecretIds](https://www.tencentcloud.com/search/?wd=BindSecretIds&amp;type=document&amp;lang=en)
+    ///   - [DescribeApiKeysStatus](https://www.tencentcloud.com/search/?wd=DescribeApiKeysStatus&amp;type=document&amp;lang=en)
+    ///   - [DescribeUsagePlan](https://www.tencentcloud.com/search/?wd=DescribeUsagePlan&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeUsagePlan](https://www.tencentcloud.com/search/?wd=DescribeUsagePlan&amp;type=document&amp;lang=en)
+    /// * Delete:
+    ///   - [DescribeUsagePlan](https://www.tencentcloud.com/search/?wd=DescribeUsagePlan&amp;type=document&amp;lang=en)
+    ///   - [UnBindSecretIds](https://www.tencentcloud.com/search/?wd=UnBindSecretIds&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// API gateway attach access key can be imported using the id, e.g.

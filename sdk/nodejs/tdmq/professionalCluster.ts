@@ -7,28 +7,29 @@ import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a tdmq professionalCluster
+ * Provides a resource to create a TDMQ professional cluster
  *
  * ## Example Usage
  *
- * ### single-zone Professional Cluster
+ * ### Single-zone Professional Cluster
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const professionalCluster = new tencentcloud.tdmq.ProfessionalCluster("professional_cluster", {
+ * const example = new tencentcloud.tdmq.ProfessionalCluster("example", {
  *     autoRenewFlag: 1,
- *     clusterName: "single_zone_cluster",
- *     productName: "PULSAR.P1.MINI2",
+ *     clusterName: "tf_example",
+ *     productName: "PULSAR.P2.SMALL4",
  *     storageSize: 600,
- *     tags: {
- *         createby: "terrafrom",
- *     },
- *     zoneIds: [100004],
+ *     instanceVersion: "2.9.2",
+ *     zoneIds: [100006],
  *     vpc: {
- *         subnetId: "subnet-xxxx",
- *         vpcId: "vpc-xxxx",
+ *         vpcId: "vpc-i5yyodl9",
+ *         subnetId: "subnet-hhi88a58",
+ *     },
+ *     tags: {
+ *         createby: "Terrafrom",
  *     },
  * });
  * ```
@@ -39,33 +40,49 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const professionalCluster = new tencentcloud.tdmq.ProfessionalCluster("professional_cluster", {
+ * const example = new tencentcloud.tdmq.ProfessionalCluster("example", {
  *     autoRenewFlag: 1,
- *     clusterName: "multi_zone_cluster",
- *     productName: "PULSAR.P1.MINI2",
- *     storageSize: 200,
- *     tags: {
- *         key: "value1",
- *         key2: "value2",
- *     },
+ *     clusterName: "tf_example",
+ *     productName: "PULSAR.P2.SMALL4",
+ *     storageSize: 600,
+ *     instanceVersion: "3.0.0",
  *     zoneIds: [
- *         330001,
- *         330002,
- *         330003,
+ *         100006,
+ *         100007,
  *     ],
  *     vpc: {
- *         subnetId: "subnet-xxxx",
- *         vpcId: "vpc-xxxx",
+ *         vpcId: "vpc-i5yyodl9",
+ *         subnetId: "subnet-hhi88a58",
+ *     },
+ *     tags: {
+ *         createby: "Terrafrom",
  *     },
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateProCluster](https://www.tencentcloud.com/search/?wd=CreateProCluster&type=document&lang=en)
+ *   - [DescribePulsarProInstances](https://www.tencentcloud.com/search/?wd=DescribePulsarProInstances&type=document&lang=en)
+ *   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+ * * Read:
+ *   - [DescribePulsarProInstanceDetail](https://www.tencentcloud.com/search/?wd=DescribePulsarProInstanceDetail&type=document&lang=en)
+ *   - [DescribePulsarProInstances](https://www.tencentcloud.com/search/?wd=DescribePulsarProInstances&type=document&lang=en)
+ *   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+ * * Update:
+ *   - [ModifyCluster](https://www.tencentcloud.com/search/?wd=ModifyCluster&type=document&lang=en)
+ *   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+ * * Delete: [DeleteProCluster](https://www.tencentcloud.com/search/?wd=DeleteProCluster&type=document&lang=en)
+ *
  * ## Import
  *
- * tdmq professionalCluster can be imported using the id, e.g.
+ * TDMQ professional cluster can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Tdmq/professionalCluster:ProfessionalCluster professional_cluster professional_cluster_id
+ * $ pulumi import tencentcloud:Tdmq/professionalCluster:ProfessionalCluster example pulsar-x4r939zkwmm2
  * ```
  */
 export class ProfessionalCluster extends pulumi.CustomResource {
@@ -105,9 +122,17 @@ export class ProfessionalCluster extends pulumi.CustomResource {
      */
     declare public readonly autoVoucher: pulumi.Output<number>;
     /**
+     * Id of cluster.
+     */
+    declare public /*out*/ readonly clusterId: pulumi.Output<string>;
+    /**
      * Name of cluster. It does not support Chinese characters and special characters except dashes and underscores and cannot exceed 64 characters.
      */
     declare public readonly clusterName: pulumi.Output<string>;
+    /**
+     * Cluster version information. User can specify a version when creating the cluster.
+     */
+    declare public readonly instanceVersion: pulumi.Output<string>;
     /**
      * Cluster specification code. Reference[Professional Cluster Specifications](https://cloud.tencent.com/document/product/1179/83705).
      */
@@ -148,7 +173,9 @@ export class ProfessionalCluster extends pulumi.CustomResource {
             const state = argsOrState as ProfessionalClusterState | undefined;
             resourceInputs["autoRenewFlag"] = state?.autoRenewFlag;
             resourceInputs["autoVoucher"] = state?.autoVoucher;
+            resourceInputs["clusterId"] = state?.clusterId;
             resourceInputs["clusterName"] = state?.clusterName;
+            resourceInputs["instanceVersion"] = state?.instanceVersion;
             resourceInputs["productName"] = state?.productName;
             resourceInputs["storageSize"] = state?.storageSize;
             resourceInputs["tags"] = state?.tags;
@@ -175,12 +202,14 @@ export class ProfessionalCluster extends pulumi.CustomResource {
             resourceInputs["autoRenewFlag"] = args?.autoRenewFlag;
             resourceInputs["autoVoucher"] = args?.autoVoucher;
             resourceInputs["clusterName"] = args?.clusterName;
+            resourceInputs["instanceVersion"] = args?.instanceVersion;
             resourceInputs["productName"] = args?.productName;
             resourceInputs["storageSize"] = args?.storageSize;
             resourceInputs["tags"] = args?.tags;
             resourceInputs["timeSpan"] = args?.timeSpan;
             resourceInputs["vpc"] = args?.vpc;
             resourceInputs["zoneIds"] = args?.zoneIds;
+            resourceInputs["clusterId"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(ProfessionalCluster.__pulumiType, name, resourceInputs, opts);
@@ -200,9 +229,17 @@ export interface ProfessionalClusterState {
      */
     autoVoucher?: pulumi.Input<number | undefined>;
     /**
+     * Id of cluster.
+     */
+    clusterId?: pulumi.Input<string | undefined>;
+    /**
      * Name of cluster. It does not support Chinese characters and special characters except dashes and underscores and cannot exceed 64 characters.
      */
     clusterName?: pulumi.Input<string | undefined>;
+    /**
+     * Cluster version information. User can specify a version when creating the cluster.
+     */
+    instanceVersion?: pulumi.Input<string | undefined>;
     /**
      * Cluster specification code. Reference[Professional Cluster Specifications](https://cloud.tencent.com/document/product/1179/83705).
      */
@@ -245,6 +282,10 @@ export interface ProfessionalClusterArgs {
      * Name of cluster. It does not support Chinese characters and special characters except dashes and underscores and cannot exceed 64 characters.
      */
     clusterName: pulumi.Input<string>;
+    /**
+     * Cluster version information. User can specify a version when creating the cluster.
+     */
+    instanceVersion?: pulumi.Input<string | undefined>;
     /**
      * Cluster specification code. Reference[Professional Cluster Specifications](https://cloud.tencent.com/document/product/1179/83705).
      */

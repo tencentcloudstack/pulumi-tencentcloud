@@ -111,6 +111,12 @@ def get_modify_instance_bundle(filters: Optional[Sequence[Union['GetModifyInstan
         }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeModifyInstanceBundles](https://www.tencentcloud.com/document/api/1103/42494)
+
 
     :param Sequence[Union['GetModifyInstanceBundleFilterArgs', 'GetModifyInstanceBundleFilterArgsDict']] filters: Filter list.
            - `bundle-id`: filter by the bundle ID.
@@ -153,6 +159,12 @@ def get_modify_instance_bundle_output(filters: pulumi.Input[Optional[Optional[Se
             "values": ["bundle_gen_mc_med2_02"],
         }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeModifyInstanceBundles](https://www.tencentcloud.com/document/api/1103/42494)
 
 
     :param Sequence[Union['GetModifyInstanceBundleFilterArgs', 'GetModifyInstanceBundleFilterArgsDict']] filters: Filter list.

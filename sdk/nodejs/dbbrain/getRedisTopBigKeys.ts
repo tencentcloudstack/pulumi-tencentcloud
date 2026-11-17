@@ -23,6 +23,12 @@ import * as utilities from "../utilities";
  *     keyType: "string",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRedisTopBigKeys](https://www.tencentcloud.com/search/?wd=DescribeRedisTopBigKeys&type=document&lang=en)
  */
 export function getRedisTopBigKeys(args: GetRedisTopBigKeysArgs, opts?: pulumi.InvokeOptions): Promise<GetRedisTopBigKeysResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -102,6 +108,12 @@ export interface GetRedisTopBigKeysResult {
  *     keyType: "string",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRedisTopBigKeys](https://www.tencentcloud.com/search/?wd=DescribeRedisTopBigKeys&type=document&lang=en)
  */
 export function getRedisTopBigKeysOutput(args: GetRedisTopBigKeysOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRedisTopBigKeysResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     zoneId: 100003,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCvmQuota](https://www.tencentcloud.com/search/?wd=DescribeCvmQuota&type=document&lang=en)
  */
 export function getCvmQuota(args: GetCvmQuotaArgs, opts?: pulumi.InvokeOptions): Promise<GetCvmQuotaResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -86,6 +92,12 @@ export interface GetCvmQuotaResult {
  *     zoneId: 100003,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCvmQuota](https://www.tencentcloud.com/search/?wd=DescribeCvmQuota&type=document&lang=en)
  */
 export function getCvmQuotaOutput(args: GetCvmQuotaOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetCvmQuotaResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

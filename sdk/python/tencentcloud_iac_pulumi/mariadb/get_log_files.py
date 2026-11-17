@@ -131,6 +131,12 @@ def get_log_files(instance_id: Optional[_builtins.str] = None,
         type=1)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBLogFiles](https://www.tencentcloud.com/document/api/237/16162)
+
 
     :param _builtins.str instance_id: Instance ID in the format of `tdsql-ow728lmc`.
     :param _builtins.str result_output_file: Used to save results.
@@ -167,6 +173,12 @@ def get_log_files_output(instance_id: pulumi.Input[Optional[_builtins.str]] = No
     log_files = tencentcloud.mariadb.get_log_files(instance_id="tdsql-9vqvls95",
         type=1)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBLogFiles](https://www.tencentcloud.com/document/api/237/16162)
 
 
     :param _builtins.str instance_id: Instance ID in the format of `tdsql-ow728lmc`.

@@ -33,6 +33,12 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDedicatedClusters](https://www.tencentcloud.com/document/api/409/78809)
  */
 export function getDedicatedClusters(args?: GetDedicatedClustersArgs, opts?: pulumi.InvokeOptions): Promise<GetDedicatedClustersResult> {
     args = args || {};
@@ -99,6 +105,12 @@ export interface GetDedicatedClustersResult {
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDedicatedClusters](https://www.tencentcloud.com/document/api/409/78809)
  */
 export function getDedicatedClustersOutput(args?: GetDedicatedClustersOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDedicatedClustersResult> {
     args = args || {};

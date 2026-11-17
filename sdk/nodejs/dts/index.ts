@@ -75,6 +75,11 @@ export type SyncJob = import("./syncJob").SyncJob;
 export const SyncJob: typeof import("./syncJob").SyncJob = null as any;
 utilities.lazyLoad(exports, ["SyncJob"], () => require("./syncJob"));
 
+export { SyncJobConfigArgs, SyncJobConfigState } from "./syncJobConfig";
+export type SyncJobConfig = import("./syncJobConfig").SyncJobConfig;
+export const SyncJobConfig: typeof import("./syncJobConfig").SyncJobConfig = null as any;
+utilities.lazyLoad(exports, ["SyncJobConfig"], () => require("./syncJobConfig"));
+
 export { SyncJobContinueOperationArgs, SyncJobContinueOperationState } from "./syncJobContinueOperation";
 export type SyncJobContinueOperation = import("./syncJobContinueOperation").SyncJobContinueOperation;
 export const SyncJobContinueOperation: typeof import("./syncJobContinueOperation").SyncJobContinueOperation = null as any;
@@ -140,6 +145,8 @@ const _module = {
                 return new SyncConfig(name, <any>undefined, { urn })
             case "tencentcloud:Dts/syncJob:SyncJob":
                 return new SyncJob(name, <any>undefined, { urn })
+            case "tencentcloud:Dts/syncJobConfig:SyncJobConfig":
+                return new SyncJobConfig(name, <any>undefined, { urn })
             case "tencentcloud:Dts/syncJobContinueOperation:SyncJobContinueOperation":
                 return new SyncJobContinueOperation(name, <any>undefined, { urn })
             case "tencentcloud:Dts/syncJobIsolateOperation:SyncJobIsolateOperation":
@@ -171,6 +178,7 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Dts/migrateService", _mod
 pulumi.runtime.registerResourceModule("tencentcloud", "Dts/syncCheckJobOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Dts/syncConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Dts/syncJob", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Dts/syncJobConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Dts/syncJobContinueOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Dts/syncJobIsolateOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Dts/syncJobPauseOperation", _module)

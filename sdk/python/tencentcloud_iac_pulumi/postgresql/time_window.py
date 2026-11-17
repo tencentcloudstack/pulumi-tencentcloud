@@ -197,6 +197,14 @@ class TimeWindow(pulumi.CustomResource):
             ])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyMaintainTimeWindow](https://www.tencentcloud.com/document/api/409/78801)
+        * Read: [DescribeMaintainTimeWindow](https://www.tencentcloud.com/document/api/409/78803)
+        * Update: [ModifyMaintainTimeWindow](https://www.tencentcloud.com/document/api/409/78801)
+
         ## Import
 
         postgres postgresql_time_window can be imported using the id, e.g.
@@ -242,6 +250,14 @@ class TimeWindow(pulumi.CustomResource):
                 "wednesday",
             ])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyMaintainTimeWindow](https://www.tencentcloud.com/document/api/409/78801)
+        * Read: [DescribeMaintainTimeWindow](https://www.tencentcloud.com/document/api/409/78803)
+        * Update: [ModifyMaintainTimeWindow](https://www.tencentcloud.com/document/api/409/78801)
 
         ## Import
 

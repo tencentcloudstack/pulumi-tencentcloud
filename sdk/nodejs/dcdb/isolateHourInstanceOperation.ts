@@ -15,6 +15,12 @@ import * as utilities from "../utilities";
  *
  * const isolateHourInstanceOperation = new tencentcloud.dcdb.IsolateHourInstanceOperation("isolate_hour_instance_operation", {instanceIds: dcdbId});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [IsolateHourDCDBInstance](https://www.tencentcloud.com/document/api/1042/45898)
  */
 export class IsolateHourInstanceOperation extends pulumi.CustomResource {
     /**

@@ -19,6 +19,14 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateOfflineLogConfig](https://www.tencentcloud.com/search/?wd=CreateOfflineLogConfig&type=document&lang=en)
+ * * Read: [DescribeOfflineLogConfigs](https://www.tencentcloud.com/search/?wd=DescribeOfflineLogConfigs&type=document&lang=en)
+ * * Delete: [DeleteOfflineLogConfig](https://www.tencentcloud.com/search/?wd=DeleteOfflineLogConfig&type=document&lang=en)
+ *
  * ## Import
  *
  * rum offlineLogConfigAttachment can be imported using the id, e.g.

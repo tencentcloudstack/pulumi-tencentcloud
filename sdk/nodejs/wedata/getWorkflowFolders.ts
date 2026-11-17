@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     parentFolderPath: "/",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListWorkflowFolders](https://www.tencentcloud.com/document/api/1174/73866)
  */
 export function getWorkflowFolders(args: GetWorkflowFoldersArgs, opts?: pulumi.InvokeOptions): Promise<GetWorkflowFoldersResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -78,6 +84,12 @@ export interface GetWorkflowFoldersResult {
  *     parentFolderPath: "/",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListWorkflowFolders](https://www.tencentcloud.com/document/api/1174/73866)
  */
 export function getWorkflowFoldersOutput(args: GetWorkflowFoldersOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetWorkflowFoldersResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

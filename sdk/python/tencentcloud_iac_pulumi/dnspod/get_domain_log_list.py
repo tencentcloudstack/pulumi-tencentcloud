@@ -106,6 +106,12 @@ def get_domain_log_list(domain: Optional[_builtins.str] = None,
         domain_id=123)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDomainLogList](https://www.tencentcloud.com/document/api/1157/53853)
+
 
     :param _builtins.str domain: Domain.
     :param _builtins.int domain_id: Domain ID. The parameter DomainId has a higher priority than the parameter Domain. If the parameter DomainId is passed, the parameter Domain will be ignored. You can find all Domains and DomainIds through the DescribeDomainList interface.
@@ -140,6 +146,12 @@ def get_domain_log_list_output(domain: pulumi.Input[Optional[_builtins.str]] = N
     domain_log_list = tencentcloud.dnspod.get_domain_log_list(domain="iac-tf.cloud",
         domain_id=123)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDomainLogList](https://www.tencentcloud.com/document/api/1157/53853)
 
 
     :param _builtins.str domain: Domain.

@@ -66,6 +66,14 @@ import * as utilities from "../utilities";
  *     instanceId: exampleDb.instanceId,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+ *   - [DescribeDBs](https://www.tencentcloud.com/document/api/238/32114)
  */
 export function getDbs(args: GetDbsArgs, opts?: pulumi.InvokeOptions): Promise<GetDbsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -167,6 +175,14 @@ export interface GetDbsResult {
  *     instanceId: exampleDb.instanceId,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+ *   - [DescribeDBs](https://www.tencentcloud.com/document/api/238/32114)
  */
 export function getDbsOutput(args: GetDbsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDbsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

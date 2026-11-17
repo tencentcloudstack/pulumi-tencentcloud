@@ -77,17 +77,21 @@ class WebSecurityTemplateArgs:
 class _WebSecurityTemplateState:
     def __init__(__self__, *,
                  security_policy: pulumi.Input[Optional['WebSecurityTemplateSecurityPolicyArgs']] = None,
+                 template_id: pulumi.Input[Optional[_builtins.str]] = None,
                  template_name: pulumi.Input[Optional[_builtins.str]] = None,
                  zone_id: pulumi.Input[Optional[_builtins.str]] = None):
         """
         Input properties used for looking up and filtering WebSecurityTemplate resources.
 
         :param pulumi.Input['WebSecurityTemplateSecurityPolicyArgs'] security_policy: Web security policy template configuration. Generates default config if empty. Supported: Exception rules, custom rules, rate limiting rules, managed rules. Not supported: Bot management rules (under development).
+        :param pulumi.Input[_builtins.str] template_id: Template ID.
         :param pulumi.Input[_builtins.str] template_name: Policy template name. Composed of Chinese characters, letters, digits, and underscores. Cannot begin with an underscore and must be less than or equal to 32 characters.
         :param pulumi.Input[_builtins.str] zone_id: Zone ID. Explicitly identifies the zone to which the policy template belongs for access control purposes.
         """
         if security_policy is not None:
             pulumi.set(__self__, "security_policy", security_policy)
+        if template_id is not None:
+            pulumi.set(__self__, "template_id", template_id)
         if template_name is not None:
             pulumi.set(__self__, "template_name", template_name)
         if zone_id is not None:
@@ -104,6 +108,18 @@ class _WebSecurityTemplateState:
     @security_policy.setter
     def security_policy(self, value: pulumi.Input[Optional['WebSecurityTemplateSecurityPolicyArgs']]):
         pulumi.set(self, "security_policy", value)
+
+    @_builtins.property
+    @pulumi.getter(name="templateId")
+    def template_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Template ID.
+        """
+        return pulumi.get(self, "template_id")
+
+    @template_id.setter
+    def template_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "template_id", value)
 
     @_builtins.property
     @pulumi.getter(name="templateName")
@@ -141,9 +157,9 @@ class WebSecurityTemplate(pulumi.CustomResource):
                  zone_id: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         """
-        Provides a resource to create a teo web security template
+        Provides a resource to create a TEO web security template
 
-        > **NOTE:** The current resources do not support managed_rule_groups.
+        > **NOTE:** The current resources do not support `managed_rule_groups`.
 
         ## Example Usage
 
@@ -153,7 +169,7 @@ class WebSecurityTemplate(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        web_security_template = tencentcloud.teo.WebSecurityTemplate("web_security_template",
+        example = tencentcloud.teo.WebSecurityTemplate("example",
             template_name="tf_example",
             zone_id="zone-3fkff38fyw8s",
             security_policy={
@@ -193,7 +209,7 @@ class WebSecurityTemplate(pulumi.CustomResource):
                             "bot_management_action_overrides": [{
                                 "ids": ["9126905504"],
                                 "action": {
-                                    "name": "Deny",
+                                    "name": "Allow",
                                 },
                             }],
                         },
@@ -254,6 +270,17 @@ class WebSecurityTemplate(pulumi.CustomResource):
                                 },
                             }],
                         }],
+                    },
+                },
+                "bot_management_lite": {
+                    "captcha_page_challenge": {
+                        "enabled": "on",
+                    },
+                    "ai_crawler_detection": {
+                        "enabled": "on",
+                        "action": {
+                            "name": "Deny",
+                        },
                     },
                 },
                 "custom_rules": {
@@ -385,12 +412,23 @@ class WebSecurityTemplate(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateWebSecurityTemplate](https://www.tencentcloud.com/document/api/1145/71948)
+        * Read:
+          - [DescribeWebSecurityTemplate](https://www.tencentcloud.com/document/api/1145/71946)
+          - [DescribeWebSecurityTemplates](https://www.tencentcloud.com/document/api/1145/71945)
+        * Update: [ModifyWebSecurityTemplate](https://www.tencentcloud.com/document/api/1145/71944)
+        * Delete: [DeleteWebSecurityTemplate](https://www.tencentcloud.com/document/api/1145/71947)
+
         ## Import
 
-        teo web security template can be imported using the id, e.g.
+        TEO web security template can be imported using the zoneId#templateId, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Teo/webSecurityTemplate:WebSecurityTemplate example zone-3fkff38fyw8s#temp-rpccs7c6
+        $ pulumi import tencentcloud:Teo/webSecurityTemplate:WebSecurityTemplate example zone-3fkff38fyw8s#temp-3u86ilp39yyn
         ```
 
 
@@ -407,9 +445,9 @@ class WebSecurityTemplate(pulumi.CustomResource):
                  args: WebSecurityTemplateArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Provides a resource to create a teo web security template
+        Provides a resource to create a TEO web security template
 
-        > **NOTE:** The current resources do not support managed_rule_groups.
+        > **NOTE:** The current resources do not support `managed_rule_groups`.
 
         ## Example Usage
 
@@ -419,7 +457,7 @@ class WebSecurityTemplate(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        web_security_template = tencentcloud.teo.WebSecurityTemplate("web_security_template",
+        example = tencentcloud.teo.WebSecurityTemplate("example",
             template_name="tf_example",
             zone_id="zone-3fkff38fyw8s",
             security_policy={
@@ -459,7 +497,7 @@ class WebSecurityTemplate(pulumi.CustomResource):
                             "bot_management_action_overrides": [{
                                 "ids": ["9126905504"],
                                 "action": {
-                                    "name": "Deny",
+                                    "name": "Allow",
                                 },
                             }],
                         },
@@ -520,6 +558,17 @@ class WebSecurityTemplate(pulumi.CustomResource):
                                 },
                             }],
                         }],
+                    },
+                },
+                "bot_management_lite": {
+                    "captcha_page_challenge": {
+                        "enabled": "on",
+                    },
+                    "ai_crawler_detection": {
+                        "enabled": "on",
+                        "action": {
+                            "name": "Deny",
+                        },
                     },
                 },
                 "custom_rules": {
@@ -651,12 +700,23 @@ class WebSecurityTemplate(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateWebSecurityTemplate](https://www.tencentcloud.com/document/api/1145/71948)
+        * Read:
+          - [DescribeWebSecurityTemplate](https://www.tencentcloud.com/document/api/1145/71946)
+          - [DescribeWebSecurityTemplates](https://www.tencentcloud.com/document/api/1145/71945)
+        * Update: [ModifyWebSecurityTemplate](https://www.tencentcloud.com/document/api/1145/71944)
+        * Delete: [DeleteWebSecurityTemplate](https://www.tencentcloud.com/document/api/1145/71947)
+
         ## Import
 
-        teo web security template can be imported using the id, e.g.
+        TEO web security template can be imported using the zoneId#templateId, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Teo/webSecurityTemplate:WebSecurityTemplate example zone-3fkff38fyw8s#temp-rpccs7c6
+        $ pulumi import tencentcloud:Teo/webSecurityTemplate:WebSecurityTemplate example zone-3fkff38fyw8s#temp-3u86ilp39yyn
         ```
 
 
@@ -694,6 +754,7 @@ class WebSecurityTemplate(pulumi.CustomResource):
             if zone_id is None and not opts.urn:
                 raise TypeError("Missing required property 'zone_id'")
             __props__.__dict__["zone_id"] = zone_id
+            __props__.__dict__["template_id"] = None
         super(WebSecurityTemplate, __self__).__init__(
             'tencentcloud:Teo/webSecurityTemplate:WebSecurityTemplate',
             resource_name,
@@ -705,6 +766,7 @@ class WebSecurityTemplate(pulumi.CustomResource):
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
             security_policy: pulumi.Input[Optional[Union['WebSecurityTemplateSecurityPolicyArgs', 'WebSecurityTemplateSecurityPolicyArgsDict']]] = None,
+            template_id: pulumi.Input[Optional[_builtins.str]] = None,
             template_name: pulumi.Input[Optional[_builtins.str]] = None,
             zone_id: pulumi.Input[Optional[_builtins.str]] = None) -> 'WebSecurityTemplate':
         """
@@ -715,6 +777,7 @@ class WebSecurityTemplate(pulumi.CustomResource):
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[Union['WebSecurityTemplateSecurityPolicyArgs', 'WebSecurityTemplateSecurityPolicyArgsDict']] security_policy: Web security policy template configuration. Generates default config if empty. Supported: Exception rules, custom rules, rate limiting rules, managed rules. Not supported: Bot management rules (under development).
+        :param pulumi.Input[_builtins.str] template_id: Template ID.
         :param pulumi.Input[_builtins.str] template_name: Policy template name. Composed of Chinese characters, letters, digits, and underscores. Cannot begin with an underscore and must be less than or equal to 32 characters.
         :param pulumi.Input[_builtins.str] zone_id: Zone ID. Explicitly identifies the zone to which the policy template belongs for access control purposes.
         """
@@ -723,6 +786,7 @@ class WebSecurityTemplate(pulumi.CustomResource):
         __props__ = _WebSecurityTemplateState.__new__(_WebSecurityTemplateState)
 
         __props__.__dict__["security_policy"] = security_policy
+        __props__.__dict__["template_id"] = template_id
         __props__.__dict__["template_name"] = template_name
         __props__.__dict__["zone_id"] = zone_id
         return WebSecurityTemplate(resource_name, opts=opts, __props__=__props__)
@@ -734,6 +798,14 @@ class WebSecurityTemplate(pulumi.CustomResource):
         Web security policy template configuration. Generates default config if empty. Supported: Exception rules, custom rules, rate limiting rules, managed rules. Not supported: Bot management rules (under development).
         """
         return pulumi.get(self, "security_policy")
+
+    @_builtins.property
+    @pulumi.getter(name="templateId")
+    def template_id(self) -> pulumi.Output[_builtins.str]:
+        """
+        Template ID.
+        """
+        return pulumi.get(self, "template_id")
 
     @_builtins.property
     @pulumi.getter(name="templateName")

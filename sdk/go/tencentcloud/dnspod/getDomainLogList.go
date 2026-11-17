@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDomainLogList](https://www.tencentcloud.com/document/api/1157/53853)
 func GetDomainLogList(ctx *pulumi.Context, args *GetDomainLogListArgs, opts ...pulumi.InvokeOption) (*GetDomainLogListResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDomainLogListResult

@@ -44,6 +44,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeEngineNetworks](https://www.tencentcloud.com/search/?wd=DescribeEngineNetworks&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetDataEngineNetworkResult> InvokeAsync(GetDataEngineNetworkArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDataEngineNetworkResult>("tencentcloud:Dlc/getDataEngineNetwork:getDataEngineNetwork", args ?? new GetDataEngineNetworkArgs(), options.WithDefaults());
@@ -80,6 +86,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeEngineNetworks](https://www.tencentcloud.com/search/?wd=DescribeEngineNetworks&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDataEngineNetworkResult> Invoke(GetDataEngineNetworkInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDataEngineNetworkResult>("tencentcloud:Dlc/getDataEngineNetwork:getDataEngineNetwork", args ?? new GetDataEngineNetworkInvokeArgs(), options.WithDefaults());
@@ -116,6 +128,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeEngineNetworks](https://www.tencentcloud.com/search/?wd=DescribeEngineNetworks&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDataEngineNetworkResult> Invoke(GetDataEngineNetworkInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDataEngineNetworkResult>("tencentcloud:Dlc/getDataEngineNetwork:getDataEngineNetwork", args ?? new GetDataEngineNetworkInvokeArgs(), options.WithDefaults());

@@ -30,6 +30,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateAssetSyncJob](https://www.tencentcloud.com/search/?wd=CreateAssetSyncJob&amp;type=document&amp;lang=en)
+    ///   - [DescribeAssetSyncStatus](https://www.tencentcloud.com/search/?wd=DescribeAssetSyncStatus&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dasb/assetSyncJobOperation:AssetSyncJobOperation")]
     public partial class AssetSyncJobOperation : global::Pulumi.CustomResource

@@ -66,6 +66,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDBInstanceSecurityGroups](https://www.tencentcloud.com/document/api/409/52648)
 func GetDbInstanceSecurityGroups(ctx *pulumi.Context, args *GetDbInstanceSecurityGroupsArgs, opts ...pulumi.InvokeOption) (*GetDbInstanceSecurityGroupsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDbInstanceSecurityGroupsResult

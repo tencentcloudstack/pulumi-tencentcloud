@@ -5,5 +5,6 @@
 from ._inputs import *
 from .allocation_tag import *
 from .budget import *
+from .get_bill_detail import *
 from .get_budget_operation_log import *
 from .instance import *

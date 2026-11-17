@@ -208,6 +208,18 @@ class DatabaseTde(pulumi.CustomResource):
             encryption="disable")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+          - [ModifyDBEncryptAttributes](https://www.tencentcloud.com/document/api/238/56945)
+        * Read: [DescribeDBs](https://www.tencentcloud.com/document/api/238/32114)
+        * Update:
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+          - [ModifyDBEncryptAttributes](https://www.tencentcloud.com/document/api/238/56945)
+
         ## Import
 
         sqlserver database_tde can be imported using the id, e.g.
@@ -298,6 +310,18 @@ class DatabaseTde(pulumi.CustomResource):
             db_names=[example_tencentcloud_sqlserver_db["name"]],
             encryption="disable")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+          - [ModifyDBEncryptAttributes](https://www.tencentcloud.com/document/api/238/56945)
+        * Read: [DescribeDBs](https://www.tencentcloud.com/document/api/238/32114)
+        * Update:
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+          - [ModifyDBEncryptAttributes](https://www.tencentcloud.com/document/api/238/56945)
 
         ## Import
 

@@ -132,6 +132,14 @@ class OrgManagePolicyConfig(pulumi.CustomResource):
             policy_type="SERVICE_CONTROL_POLICY")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [EnablePolicyType](https://www.tencentcloud.com/document/api/1031/78356)
+        * Read: [DescribePolicyConfig](https://www.tencentcloud.com/document/api/1031/78359)
+        * Delete: [DisablePolicyType](https://www.tencentcloud.com/document/api/1031/78357)
+
         ## Import
 
         organization org_manage_policy_config can be imported using the id, e.g.
@@ -168,6 +176,14 @@ class OrgManagePolicyConfig(pulumi.CustomResource):
             organization_id=80001,
             policy_type="SERVICE_CONTROL_POLICY")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [EnablePolicyType](https://www.tencentcloud.com/document/api/1031/78356)
+        * Read: [DescribePolicyConfig](https://www.tencentcloud.com/document/api/1031/78359)
+        * Delete: [DisablePolicyType](https://www.tencentcloud.com/document/api/1031/78357)
 
         ## Import
 

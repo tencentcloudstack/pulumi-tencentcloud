@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeAutoScalingAdvices](https://www.tencentcloud.com/document/api/377/44581)
 func GetAdvices(ctx *pulumi.Context, args *GetAdvicesArgs, opts ...pulumi.InvokeOption) (*GetAdvicesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetAdvicesResult

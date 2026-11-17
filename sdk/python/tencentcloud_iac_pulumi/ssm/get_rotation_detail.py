@@ -130,6 +130,12 @@ def get_rotation_detail(result_output_file: Optional[_builtins.str] = None,
     example = tencentcloud.ssm.get_rotation_detail(secret_name="tf_example")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRotationDetail](https://www.tencentcloud.com/document/api/1078/41517)
+
 
     :param _builtins.str result_output_file: Used to save results.
     :param _builtins.str secret_name: Secret name.
@@ -162,6 +168,12 @@ def get_rotation_detail_output(result_output_file: pulumi.Input[Optional[Optiona
 
     example = tencentcloud.ssm.get_rotation_detail(secret_name="tf_example")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRotationDetail](https://www.tencentcloud.com/document/api/1078/41517)
 
 
     :param _builtins.str result_output_file: Used to save results.

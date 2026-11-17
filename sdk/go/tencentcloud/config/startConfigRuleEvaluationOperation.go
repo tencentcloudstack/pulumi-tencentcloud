@@ -66,6 +66,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [StartConfigRuleEvaluation](https://www.tencentcloud.com/document/api/1164/84958)
 type StartConfigRuleEvaluationOperation struct {
 	pulumi.CustomResourceState
 

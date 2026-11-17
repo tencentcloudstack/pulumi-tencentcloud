@@ -135,6 +135,20 @@ class GatewayFlowMonitor(pulumi.CustomResource):
             enable=True)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CheckGatewayFlowMonitor](https://www.tencentcloud.com/document/api/215/83846)
+          - [DisableGatewayFlowMonitor](https://www.tencentcloud.com/document/api/215/36087)
+          - [EnableGatewayFlowMonitor](https://www.tencentcloud.com/document/api/215/36086)
+        * Read: [CheckGatewayFlowMonitor](https://www.tencentcloud.com/document/api/215/83846)
+        * Update:
+          - [CheckGatewayFlowMonitor](https://www.tencentcloud.com/document/api/215/83846)
+          - [DisableGatewayFlowMonitor](https://www.tencentcloud.com/document/api/215/36087)
+          - [EnableGatewayFlowMonitor](https://www.tencentcloud.com/document/api/215/36086)
+
         ## Import
 
         NAT gateway flow monitor can be imported using the id, e.g.
@@ -168,6 +182,20 @@ class GatewayFlowMonitor(pulumi.CustomResource):
             gateway_id="nat-e6u6axsm",
             enable=True)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CheckGatewayFlowMonitor](https://www.tencentcloud.com/document/api/215/83846)
+          - [DisableGatewayFlowMonitor](https://www.tencentcloud.com/document/api/215/36087)
+          - [EnableGatewayFlowMonitor](https://www.tencentcloud.com/document/api/215/36086)
+        * Read: [CheckGatewayFlowMonitor](https://www.tencentcloud.com/document/api/215/83846)
+        * Update:
+          - [CheckGatewayFlowMonitor](https://www.tencentcloud.com/document/api/215/83846)
+          - [DisableGatewayFlowMonitor](https://www.tencentcloud.com/document/api/215/36087)
+          - [EnableGatewayFlowMonitor](https://www.tencentcloud.com/document/api/215/36086)
 
         ## Import
 

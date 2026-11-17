@@ -105,6 +105,24 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [DescribeCcns](https://www.tencentcloud.com/document/api/215/34787)
+//   - [SetCcnRegionBandwidthLimits](https://www.tencentcloud.com/document/api/215/34779)
+//
+// * Read:
+//   - [DescribeCcns](https://www.tencentcloud.com/document/api/215/34787)
+//   - [GetCcnRegionBandwidthLimits](https://www.tencentcloud.com/document/api/215/37319)
+//
+// * Update:
+//   - [DescribeCcns](https://www.tencentcloud.com/document/api/215/34787)
+//   - [SetCcnRegionBandwidthLimits](https://www.tencentcloud.com/document/api/215/34779)
+//
+// * Delete: [SetCcnRegionBandwidthLimits](https://www.tencentcloud.com/document/api/215/34779)
 type BandwidthLimit struct {
 	pulumi.CustomResourceState
 

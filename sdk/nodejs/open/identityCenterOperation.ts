@@ -15,6 +15,12 @@ import * as utilities from "../utilities";
  *
  * const openIdentityCenterOperation = new tencentcloud.open.IdentityCenterOperation("open_identity_center_operation", {zoneName: "test"});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [OpenIdentityCenter](https://www.tencentcloud.com/document/api/1031/63591)
  */
 export class IdentityCenterOperation extends pulumi.CustomResource {
     /**

@@ -10,6 +10,11 @@ export type Attachment = import("./attachment").Attachment;
 export const Attachment: typeof import("./attachment").Attachment = null as any;
 utilities.lazyLoad(exports, ["Attachment"], () => require("./attachment"));
 
+export { AttachmentV2Args, AttachmentV2State } from "./attachmentV2";
+export type AttachmentV2 = import("./attachmentV2").AttachmentV2;
+export const AttachmentV2: typeof import("./attachmentV2").AttachmentV2 = null as any;
+utilities.lazyLoad(exports, ["AttachmentV2"], () => require("./attachmentV2"));
+
 export { GetKeysArgs, GetKeysResult, GetKeysOutputArgs } from "./getKeys";
 export const getKeys: typeof import("./getKeys").getKeys = null as any;
 export const getKeysOutput: typeof import("./getKeys").getKeysOutput = null as any;
@@ -27,6 +32,8 @@ const _module = {
         switch (type) {
             case "tencentcloud:Tag/attachment:Attachment":
                 return new Attachment(name, <any>undefined, { urn })
+            case "tencentcloud:Tag/attachmentV2:AttachmentV2":
+                return new AttachmentV2(name, <any>undefined, { urn })
             case "tencentcloud:Tag/instance:Instance":
                 return new Instance(name, <any>undefined, { urn })
             default:
@@ -35,4 +42,5 @@ const _module = {
     },
 };
 pulumi.runtime.registerResourceModule("tencentcloud", "Tag/attachment", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Tag/attachmentV2", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Tag/instance", _module)

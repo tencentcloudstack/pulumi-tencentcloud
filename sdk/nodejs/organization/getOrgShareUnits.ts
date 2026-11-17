@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     searchKey: "xxxxxx",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeShareUnits](https://www.tencentcloud.com/document/api/1031/68228)
  */
 export function getOrgShareUnits(args: GetOrgShareUnitsArgs, opts?: pulumi.InvokeOptions): Promise<GetOrgShareUnitsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -78,6 +84,12 @@ export interface GetOrgShareUnitsResult {
  *     searchKey: "xxxxxx",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeShareUnits](https://www.tencentcloud.com/document/api/1031/68228)
  */
 export function getOrgShareUnitsOutput(args: GetOrgShareUnitsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetOrgShareUnitsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

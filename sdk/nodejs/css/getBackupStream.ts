@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     streamName: "live",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeBackupStreamList](https://www.tencentcloud.com/search/?wd=DescribeBackupStreamList&type=document&lang=en)
  */
 export function getBackupStream(args?: GetBackupStreamArgs, opts?: pulumi.InvokeOptions): Promise<GetBackupStreamResult> {
     args = args || {};
@@ -74,6 +80,12 @@ export interface GetBackupStreamResult {
  *     streamName: "live",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeBackupStreamList](https://www.tencentcloud.com/search/?wd=DescribeBackupStreamList&type=document&lang=en)
  */
 export function getBackupStreamOutput(args?: GetBackupStreamOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetBackupStreamResult> {
     args = args || {};

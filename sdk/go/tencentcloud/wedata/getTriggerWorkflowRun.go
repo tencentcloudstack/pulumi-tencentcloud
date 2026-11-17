@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [GetTriggerWorkflowRun](https://www.tencentcloud.com/document/api/1174/77888)
 func GetTriggerWorkflowRun(ctx *pulumi.Context, args *GetTriggerWorkflowRunArgs, opts ...pulumi.InvokeOption) (*GetTriggerWorkflowRunResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetTriggerWorkflowRunResult

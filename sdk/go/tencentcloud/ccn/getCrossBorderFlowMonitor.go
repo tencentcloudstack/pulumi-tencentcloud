@@ -44,6 +44,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeCrossBorderFlowMonitor](https://www.tencentcloud.com/search/?wd=DescribeCrossBorderFlowMonitor&type=document&lang=en)
 func GetCrossBorderFlowMonitor(ctx *pulumi.Context, args *GetCrossBorderFlowMonitorArgs, opts ...pulumi.InvokeOption) (*GetCrossBorderFlowMonitorResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetCrossBorderFlowMonitorResult

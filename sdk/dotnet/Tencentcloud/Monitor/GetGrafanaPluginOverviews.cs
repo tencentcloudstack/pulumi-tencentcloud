@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePluginOverviews](https://www.tencentcloud.com/search/?wd=DescribePluginOverviews&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetGrafanaPluginOverviewsResult> InvokeAsync(GetGrafanaPluginOverviewsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetGrafanaPluginOverviewsResult>("tencentcloud:Monitor/getGrafanaPluginOverviews:getGrafanaPluginOverviews", args ?? new GetGrafanaPluginOverviewsArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePluginOverviews](https://www.tencentcloud.com/search/?wd=DescribePluginOverviews&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetGrafanaPluginOverviewsResult> Invoke(GetGrafanaPluginOverviewsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetGrafanaPluginOverviewsResult>("tencentcloud:Monitor/getGrafanaPluginOverviews:getGrafanaPluginOverviews", args ?? new GetGrafanaPluginOverviewsInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePluginOverviews](https://www.tencentcloud.com/search/?wd=DescribePluginOverviews&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetGrafanaPluginOverviewsResult> Invoke(GetGrafanaPluginOverviewsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetGrafanaPluginOverviewsResult>("tencentcloud:Monitor/getGrafanaPluginOverviews:getGrafanaPluginOverviews", args ?? new GetGrafanaPluginOverviewsInvokeArgs(), options.WithDefaults());

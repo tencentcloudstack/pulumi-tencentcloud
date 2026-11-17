@@ -18,6 +18,12 @@ import * as utilities from "../utilities";
  *     domainId: 123,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDomainLogList](https://www.tencentcloud.com/document/api/1157/53853)
  */
 export function getDomainLogList(args: GetDomainLogListArgs, opts?: pulumi.InvokeOptions): Promise<GetDomainLogListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -76,6 +82,12 @@ export interface GetDomainLogListResult {
  *     domainId: 123,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDomainLogList](https://www.tencentcloud.com/document/api/1157/53853)
  */
 export function getDomainLogListOutput(args: GetDomainLogListOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDomainLogListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

@@ -41,6 +41,19 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [ResumeInstance](https://www.tencentcloud.com/document/api/1131/45296)
+//   - [StopInstance](https://www.tencentcloud.com/document/api/1131/45295)
+//
+// * Read: [DescribeTawInstances](https://www.tencentcloud.com/document/api/1131/45302)
+// * Update:
+//   - [ResumeInstance](https://www.tencentcloud.com/document/api/1131/45296)
+//   - [StopInstance](https://www.tencentcloud.com/document/api/1131/45295)
+//
 // ## Import
 //
 // rum instanceStatusConfig can be imported using the id, e.g.

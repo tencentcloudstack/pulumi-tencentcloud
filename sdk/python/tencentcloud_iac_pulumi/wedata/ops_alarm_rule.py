@@ -378,6 +378,15 @@ class OpsAlarmRule(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateOpsAlarmRule](https://www.tencentcloud.com/document/api/1174/73836)
+        * Read: [GetOpsAlarmRule](https://www.tencentcloud.com/document/api/1174/73833)
+        * Update: [UpdateOpsAlarmRule](https://www.tencentcloud.com/document/api/1174/73810)
+        * Delete: [DeleteOpsAlarmRule](https://www.tencentcloud.com/document/api/1174/73835)
+
         ## Import
 
         wedata ops alarm rule can be imported using the id, e.g.
@@ -446,6 +455,15 @@ class OpsAlarmRule(pulumi.CustomResource):
                 "trigger": 2,
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateOpsAlarmRule](https://www.tencentcloud.com/document/api/1174/73836)
+        * Read: [GetOpsAlarmRule](https://www.tencentcloud.com/document/api/1174/73833)
+        * Update: [UpdateOpsAlarmRule](https://www.tencentcloud.com/document/api/1174/73810)
+        * Delete: [DeleteOpsAlarmRule](https://www.tencentcloud.com/document/api/1174/73835)
 
         ## Import
 

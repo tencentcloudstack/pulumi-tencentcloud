@@ -56,6 +56,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateNewL7Rules](https://www.tencentcloud.com/search/?wd=CreateNewL7Rules&amp;type=document&amp;lang=en)
+    /// * Read: [DescribleNewL7Rules](https://www.tencentcloud.com/search/?wd=DescribleNewL7Rules&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [DescribleNewL7Rules](https://www.tencentcloud.com/search/?wd=DescribleNewL7Rules&amp;type=document&amp;lang=en)
+    ///   - [ModifyNewDomainRules](https://www.tencentcloud.com/search/?wd=ModifyNewDomainRules&amp;type=document&amp;lang=en)
+    /// * Delete:
+    ///   - [DeleteNewL7Rules](https://www.tencentcloud.com/search/?wd=DeleteNewL7Rules&amp;type=document&amp;lang=en)
+    ///   - [DescribleNewL7Rules](https://www.tencentcloud.com/search/?wd=DescribleNewL7Rules&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dayu/l7RuleV2:L7RuleV2")]
     public partial class L7RuleV2 : global::Pulumi.CustomResource

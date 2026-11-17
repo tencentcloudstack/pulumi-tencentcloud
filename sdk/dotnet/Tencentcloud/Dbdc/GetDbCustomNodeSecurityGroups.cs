@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbdc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBCustomNodeSecurityGroups](https://www.tencentcloud.com/search/?wd=DescribeDBCustomNodeSecurityGroups&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetDbCustomNodeSecurityGroupsResult> InvokeAsync(GetDbCustomNodeSecurityGroupsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDbCustomNodeSecurityGroupsResult>("tencentcloud:Dbdc/getDbCustomNodeSecurityGroups:getDbCustomNodeSecurityGroups", args ?? new GetDbCustomNodeSecurityGroupsArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbdc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBCustomNodeSecurityGroups](https://www.tencentcloud.com/search/?wd=DescribeDBCustomNodeSecurityGroups&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDbCustomNodeSecurityGroupsResult> Invoke(GetDbCustomNodeSecurityGroupsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDbCustomNodeSecurityGroupsResult>("tencentcloud:Dbdc/getDbCustomNodeSecurityGroups:getDbCustomNodeSecurityGroups", args ?? new GetDbCustomNodeSecurityGroupsInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbdc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBCustomNodeSecurityGroups](https://www.tencentcloud.com/search/?wd=DescribeDBCustomNodeSecurityGroups&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDbCustomNodeSecurityGroupsResult> Invoke(GetDbCustomNodeSecurityGroupsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDbCustomNodeSecurityGroupsResult>("tencentcloud:Dbdc/getDbCustomNodeSecurityGroups:getDbCustomNodeSecurityGroups", args ?? new GetDbCustomNodeSecurityGroupsInvokeArgs(), options.WithDefaults());

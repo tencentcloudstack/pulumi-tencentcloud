@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSubnetResourceDashboard](https://www.tencentcloud.com/document/api/215/55086)
         /// </summary>
         public static Task<GetSubnetResourceDashboardResult> InvokeAsync(GetSubnetResourceDashboardArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSubnetResourceDashboardResult>("tencentcloud:Vpc/getSubnetResourceDashboard:getSubnetResourceDashboard", args ?? new GetSubnetResourceDashboardArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSubnetResourceDashboard](https://www.tencentcloud.com/document/api/215/55086)
         /// </summary>
         public static Output<GetSubnetResourceDashboardResult> Invoke(GetSubnetResourceDashboardInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSubnetResourceDashboardResult>("tencentcloud:Vpc/getSubnetResourceDashboard:getSubnetResourceDashboard", args ?? new GetSubnetResourceDashboardInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSubnetResourceDashboard](https://www.tencentcloud.com/document/api/215/55086)
         /// </summary>
         public static Output<GetSubnetResourceDashboardResult> Invoke(GetSubnetResourceDashboardInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetSubnetResourceDashboardResult>("tencentcloud:Vpc/getSubnetResourceDashboard:getSubnetResourceDashboard", args ?? new GetSubnetResourceDashboardInvokeArgs(), options.WithDefaults());

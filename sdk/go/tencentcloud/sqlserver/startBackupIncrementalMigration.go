@@ -41,6 +41,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+//   - [StartIncrementalMigration](https://www.tencentcloud.com/document/api/238/39831)
 type StartBackupIncrementalMigration struct {
 	pulumi.CustomResourceState
 

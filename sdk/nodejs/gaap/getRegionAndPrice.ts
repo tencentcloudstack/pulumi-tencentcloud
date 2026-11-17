@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const regionAndPrice = tencentcloud.gaap.getRegionAndPrice({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRegionAndPrice](https://www.tencentcloud.com/document/api/608/33050)
  */
 export function getRegionAndPrice(args?: GetRegionAndPriceArgs, opts?: pulumi.InvokeOptions): Promise<GetRegionAndPriceResult> {
     args = args || {};
@@ -81,6 +87,12 @@ export interface GetRegionAndPriceResult {
  *
  * const regionAndPrice = tencentcloud.gaap.getRegionAndPrice({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRegionAndPrice](https://www.tencentcloud.com/document/api/608/33050)
  */
 export function getRegionAndPriceOutput(args?: GetRegionAndPriceOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRegionAndPriceResult> {
     args = args || {};

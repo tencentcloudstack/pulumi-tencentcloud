@@ -99,6 +99,12 @@ def get_org_auth_node(auth_name: Optional[_builtins.str] = None,
     org_auth_node = tencentcloud.organization.get_org_auth_node()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeOrganizationAuthNode](https://www.tencentcloud.com/search/?wd=DescribeOrganizationAuthNode&type=document&lang=en)
+
 
     :param _builtins.str auth_name: Verified company name.
     :param _builtins.str result_output_file: Used to save results.
@@ -128,6 +134,12 @@ def get_org_auth_node_output(auth_name: pulumi.Input[Optional[Optional[_builtins
 
     org_auth_node = tencentcloud.organization.get_org_auth_node()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeOrganizationAuthNode](https://www.tencentcloud.com/search/?wd=DescribeOrganizationAuthNode&type=document&lang=en)
 
 
     :param _builtins.str auth_name: Verified company name.

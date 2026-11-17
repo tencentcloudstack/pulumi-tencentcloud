@@ -45,6 +45,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [BindDeviceAccountPassword](https://www.tencentcloud.com/search/?wd=BindDeviceAccountPassword&amp;type=document&amp;lang=en)
+    /// * Delete: [ResetDeviceAccountPassword](https://www.tencentcloud.com/search/?wd=ResetDeviceAccountPassword&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dasb/bindDeviceAccountPassword:BindDeviceAccountPassword")]
     public partial class BindDeviceAccountPassword : global::Pulumi.CustomResource

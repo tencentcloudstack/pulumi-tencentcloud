@@ -167,6 +167,14 @@ class Ipv6CidrBlock(pulumi.CustomResource):
             address_type="ULA")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AssignIpv6CidrBlock](https://www.tencentcloud.com/document/api/215/34801)
+        * Read: [DescribeVpcs](https://www.tencentcloud.com/document/api/215/15778)
+        * Delete: [UnassignIpv6CidrBlock](https://www.tencentcloud.com/document/api/215/34803)
+
         ## Import
 
         vpc ipv6_cidr_block can be imported using the id, e.g.
@@ -212,6 +220,14 @@ class Ipv6CidrBlock(pulumi.CustomResource):
             vpc_id=vpc["id"],
             address_type="ULA")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AssignIpv6CidrBlock](https://www.tencentcloud.com/document/api/215/34801)
+        * Read: [DescribeVpcs](https://www.tencentcloud.com/document/api/215/15778)
+        * Delete: [UnassignIpv6CidrBlock](https://www.tencentcloud.com/document/api/215/34803)
 
         ## Import
 

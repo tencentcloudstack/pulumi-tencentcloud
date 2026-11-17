@@ -64,6 +64,13 @@ import * as utilities from "../utilities";
  *     modifyPayType: "PREPAID",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [RenewDBInstance](https://www.tencentcloud.com/document/api/236/53308)
+ * * Read: [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872)
  */
 export class RenewDbInstanceOperation extends pulumi.CustomResource {
     /**

@@ -99,6 +99,12 @@ def get_instance(name: Optional[_builtins.str] = None,
     audits = tencentcloud.audits.get_instance(name="test")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListAudits](https://www.tencentcloud.com/search/?wd=ListAudits&type=document&lang=en)
+
 
     :param _builtins.str name: Name of the audits.
     :param _builtins.str result_output_file: Used to save results.
@@ -128,6 +134,12 @@ def get_instance_output(name: pulumi.Input[Optional[Optional[_builtins.str]]] = 
 
     audits = tencentcloud.audits.get_instance(name="test")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListAudits](https://www.tencentcloud.com/search/?wd=ListAudits&type=document&lang=en)
 
 
     :param _builtins.str name: Name of the audits.

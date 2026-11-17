@@ -40,6 +40,7 @@ class InstanceArgs:
                  disable_monitor_service: pulumi.Input[Optional[_builtins.bool]] = None,
                  disable_security_service: pulumi.Input[Optional[_builtins.bool]] = None,
                  disaster_recover_group_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 enable_jumbo_frame: pulumi.Input[Optional[_builtins.bool]] = None,
                  force_delete: pulumi.Input[Optional[_builtins.bool]] = None,
                  force_replace_placement_group_id: pulumi.Input[Optional[_builtins.bool]] = None,
                  force_stop: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -107,6 +108,7 @@ class InstanceArgs:
         :param pulumi.Input[_builtins.bool] disable_monitor_service: Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifications may lead to the reinstallation of the instance's operating system.
         :param pulumi.Input[_builtins.bool] disable_security_service: Disable enhance service for security, it is enabled by default. When this options is set, security agent won't be installed. Modifications may lead to the reinstallation of the instance's operating system.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] disaster_recover_group_ids: Placement group ID list. Supports up to 3 group IDs. When set, `placement_group_id` will be ignored and this list will be used for CRUD operations.
+        :param pulumi.Input[_builtins.bool] enable_jumbo_frame: Whether to enable jumbo frames for the instance. Only supported instance types accept `true`. See https://cloud.tencent.com/document/product/213/11518 for supported instance types. **NOTE: modifying this field automatically reboots the instance (`AutoReboot` is always set to `true` on update); use with caution**.
         :param pulumi.Input[_builtins.bool] force_delete: Indicate whether to force delete the instance. Default is `false`. If set true, the instance will be permanently deleted instead of being moved into the recycle bin. Note: only works for `PREPAID` instance.
         :param pulumi.Input[_builtins.bool] force_replace_placement_group_id: Whether to force the instance host to be replaced. Value range: true: Allows the instance to change the host and restart the instance. Local disk machines do not support specifying this parameter; false: Does not allow the instance to change the host and only join the placement group on the current host. This may cause the placement group to fail to change. Can be used with both `placement_group_id` and `disaster_recover_group_ids`. Default is false.
         :param pulumi.Input[_builtins.bool] force_stop: Whether to forcibly shut down a running instance. Default is false. Forcing a shutdown is equivalent to switching off the power button on a physical computer. Forcing a shutdown may result in data loss or file system corruption; therefore, please use this option only when the server cannot be shut down normally.
@@ -189,6 +191,8 @@ class InstanceArgs:
             pulumi.set(__self__, "disable_security_service", disable_security_service)
         if disaster_recover_group_ids is not None:
             pulumi.set(__self__, "disaster_recover_group_ids", disaster_recover_group_ids)
+        if enable_jumbo_frame is not None:
+            pulumi.set(__self__, "enable_jumbo_frame", enable_jumbo_frame)
         if force_delete is not None:
             pulumi.set(__self__, "force_delete", force_delete)
         if force_replace_placement_group_id is not None:
@@ -493,6 +497,18 @@ class InstanceArgs:
     @disaster_recover_group_ids.setter
     def disaster_recover_group_ids(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "disaster_recover_group_ids", value)
+
+    @_builtins.property
+    @pulumi.getter(name="enableJumboFrame")
+    def enable_jumbo_frame(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Whether to enable jumbo frames for the instance. Only supported instance types accept `true`. See https://cloud.tencent.com/document/product/213/11518 for supported instance types. **NOTE: modifying this field automatically reboots the instance (`AutoReboot` is always set to `true` on update); use with caution**.
+        """
+        return pulumi.get(self, "enable_jumbo_frame")
+
+    @enable_jumbo_frame.setter
+    def enable_jumbo_frame(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "enable_jumbo_frame", value)
 
     @_builtins.property
     @pulumi.getter(name="forceDelete")
@@ -1083,6 +1099,7 @@ class _InstanceState:
                  disable_monitor_service: pulumi.Input[Optional[_builtins.bool]] = None,
                  disable_security_service: pulumi.Input[Optional[_builtins.bool]] = None,
                  disaster_recover_group_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 enable_jumbo_frame: pulumi.Input[Optional[_builtins.bool]] = None,
                  expired_time: pulumi.Input[Optional[_builtins.str]] = None,
                  force_delete: pulumi.Input[Optional[_builtins.bool]] = None,
                  force_replace_placement_group_id: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -1161,6 +1178,7 @@ class _InstanceState:
         :param pulumi.Input[_builtins.bool] disable_monitor_service: Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifications may lead to the reinstallation of the instance's operating system.
         :param pulumi.Input[_builtins.bool] disable_security_service: Disable enhance service for security, it is enabled by default. When this options is set, security agent won't be installed. Modifications may lead to the reinstallation of the instance's operating system.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] disaster_recover_group_ids: Placement group ID list. Supports up to 3 group IDs. When set, `placement_group_id` will be ignored and this list will be used for CRUD operations.
+        :param pulumi.Input[_builtins.bool] enable_jumbo_frame: Whether to enable jumbo frames for the instance. Only supported instance types accept `true`. See https://cloud.tencent.com/document/product/213/11518 for supported instance types. **NOTE: modifying this field automatically reboots the instance (`AutoReboot` is always set to `true` on update); use with caution**.
         :param pulumi.Input[_builtins.str] expired_time: Expired time of the instance.
         :param pulumi.Input[_builtins.bool] force_delete: Indicate whether to force delete the instance. Default is `false`. If set true, the instance will be permanently deleted instead of being moved into the recycle bin. Note: only works for `PREPAID` instance.
         :param pulumi.Input[_builtins.bool] force_replace_placement_group_id: Whether to force the instance host to be replaced. Value range: true: Allows the instance to change the host and restart the instance. Local disk machines do not support specifying this parameter; false: Does not allow the instance to change the host and only join the placement group on the current host. This may cause the placement group to fail to change. Can be used with both `placement_group_id` and `disaster_recover_group_ids`. Default is false.
@@ -1256,6 +1274,8 @@ class _InstanceState:
             pulumi.set(__self__, "disable_security_service", disable_security_service)
         if disaster_recover_group_ids is not None:
             pulumi.set(__self__, "disaster_recover_group_ids", disaster_recover_group_ids)
+        if enable_jumbo_frame is not None:
+            pulumi.set(__self__, "enable_jumbo_frame", enable_jumbo_frame)
         if expired_time is not None:
             pulumi.set(__self__, "expired_time", expired_time)
         if force_delete is not None:
@@ -1602,6 +1622,18 @@ class _InstanceState:
     @disaster_recover_group_ids.setter
     def disaster_recover_group_ids(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "disaster_recover_group_ids", value)
+
+    @_builtins.property
+    @pulumi.getter(name="enableJumboFrame")
+    def enable_jumbo_frame(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Whether to enable jumbo frames for the instance. Only supported instance types accept `true`. See https://cloud.tencent.com/document/product/213/11518 for supported instance types. **NOTE: modifying this field automatically reboots the instance (`AutoReboot` is always set to `true` on update); use with caution**.
+        """
+        return pulumi.get(self, "enable_jumbo_frame")
+
+    @enable_jumbo_frame.setter
+    def enable_jumbo_frame(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "enable_jumbo_frame", value)
 
     @_builtins.property
     @pulumi.getter(name="expiredTime")
@@ -2301,6 +2333,7 @@ class Instance(pulumi.CustomResource):
                  disable_monitor_service: pulumi.Input[Optional[_builtins.bool]] = None,
                  disable_security_service: pulumi.Input[Optional[_builtins.bool]] = None,
                  disaster_recover_group_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 enable_jumbo_frame: pulumi.Input[Optional[_builtins.bool]] = None,
                  force_delete: pulumi.Input[Optional[_builtins.bool]] = None,
                  force_replace_placement_group_id: pulumi.Input[Optional[_builtins.bool]] = None,
                  force_stop: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -2476,6 +2509,8 @@ class Instance(pulumi.CustomResource):
             instance_charge_type="PREPAID",
             instance_charge_type_prepaid_period=1,
             instance_charge_type_prepaid_renew_flag="NOTIFY_AND_MANUAL_RENEW",
+            delete_with_instance=False,
+            delete_with_instance_prepaid=True,
             force_delete=True,
             data_disks=[{
                 "data_disk_type": "CLOUD_PREMIUM",
@@ -2783,6 +2818,82 @@ class Instance(pulumi.CustomResource):
             })
         ```
 
+        ### Create CVM instance with enable_jumbo_frame
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.instance.Instance("example",
+            instance_name="tf-example",
+            availability_zone="ap-guangzhou-6",
+            image_id="img-eb30mz89",
+            instance_type="S5.MEDIUM4",
+            system_disk_type="CLOUD_HSSD",
+            system_disk_size=50,
+            hostname="user",
+            project_id=0,
+            vpc_id="vpc-i5yyodl9",
+            subnet_id="subnet-hhi88a58",
+            enable_jumbo_frame=True,
+            data_disks=[{
+                "data_disk_type": "CLOUD_HSSD",
+                "data_disk_size": 100,
+                "encrypt": False,
+            }],
+            tags={
+                "tagKey": "tagValue",
+            })
+        ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+          - [DescribeImages](https://www.tencentcloud.com/document/api/213/33272)
+          - [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258)
+          - [DescribeInstancesAttributes](https://www.tencentcloud.com/document/api/213/68775)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+          - [ModifyInstancesDisasterRecoverGroup](https://www.tencentcloud.com/document/api/213/73189)
+          - [RunInstances](https://www.tencentcloud.com/document/api/213/33237)
+          - [StopInstances](https://www.tencentcloud.com/document/api/213/33235)
+        * Read:
+          - [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+          - [DescribeImages](https://www.tencentcloud.com/document/api/213/33272)
+          - [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258)
+          - [DescribeInstancesAttributes](https://www.tencentcloud.com/document/api/213/68775)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [AssociateInstancesKeyPairs](https://www.tencentcloud.com/document/api/213/33232)
+          - [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+          - [DescribeImages](https://www.tencentcloud.com/document/api/213/33272)
+          - [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258)
+          - [DescribeInstancesAttributes](https://www.tencentcloud.com/document/api/213/68775)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+          - [DisassociateInstancesKeyPairs](https://www.tencentcloud.com/document/api/213/33228)
+          - [ModifyDiskAttributes](https://www.tencentcloud.com/document/api/362/15659)
+          - [ModifyInstancesAttribute](https://www.tencentcloud.com/document/api/213/33246)
+          - [ModifyInstancesChargeType](https://www.tencentcloud.com/document/api/213/73503)
+          - [ModifyInstancesDisasterRecoverGroup](https://www.tencentcloud.com/document/api/213/73189)
+          - [ModifyInstancesProject](https://www.tencentcloud.com/document/api/213/33245)
+          - [ModifyInstancesRenewFlag](https://www.tencentcloud.com/document/api/213/68324)
+          - [ModifyInstancesVpcAttribute](https://www.tencentcloud.com/document/api/213/33244)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+          - [ResetInstance](https://www.tencentcloud.com/document/api/213/33242)
+          - [ResetInstancesInternetMaxBandwidth](https://www.tencentcloud.com/document/api/213/33241)
+          - [ResetInstancesPassword](https://www.tencentcloud.com/document/api/213/33240)
+          - [ResetInstancesType](https://www.tencentcloud.com/document/api/213/33239)
+          - [ResizeDisk](https://www.tencentcloud.com/document/api/362/16310)
+          - [ResizeInstanceDisks](https://www.tencentcloud.com/document/api/213/33238)
+        * Delete:
+          - [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+          - [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258)
+          - [DetachDisks](https://www.tencentcloud.com/document/api/362/16316)
+          - [TerminateDisks](https://www.tencentcloud.com/document/api/362/16321)
+          - [TerminateInstances](https://www.tencentcloud.com/document/api/213/33234)
+
         ## Import
 
         CVM instance can be imported using the id, e.g.
@@ -2811,6 +2922,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[_builtins.bool] disable_monitor_service: Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifications may lead to the reinstallation of the instance's operating system.
         :param pulumi.Input[_builtins.bool] disable_security_service: Disable enhance service for security, it is enabled by default. When this options is set, security agent won't be installed. Modifications may lead to the reinstallation of the instance's operating system.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] disaster_recover_group_ids: Placement group ID list. Supports up to 3 group IDs. When set, `placement_group_id` will be ignored and this list will be used for CRUD operations.
+        :param pulumi.Input[_builtins.bool] enable_jumbo_frame: Whether to enable jumbo frames for the instance. Only supported instance types accept `true`. See https://cloud.tencent.com/document/product/213/11518 for supported instance types. **NOTE: modifying this field automatically reboots the instance (`AutoReboot` is always set to `true` on update); use with caution**.
         :param pulumi.Input[_builtins.bool] force_delete: Indicate whether to force delete the instance. Default is `false`. If set true, the instance will be permanently deleted instead of being moved into the recycle bin. Note: only works for `PREPAID` instance.
         :param pulumi.Input[_builtins.bool] force_replace_placement_group_id: Whether to force the instance host to be replaced. Value range: true: Allows the instance to change the host and restart the instance. Local disk machines do not support specifying this parameter; false: Does not allow the instance to change the host and only join the placement group on the current host. This may cause the placement group to fail to change. Can be used with both `placement_group_id` and `disaster_recover_group_ids`. Default is false.
         :param pulumi.Input[_builtins.bool] force_stop: Whether to forcibly shut down a running instance. Default is false. Forcing a shutdown is equivalent to switching off the power button on a physical computer. Forcing a shutdown may result in data loss or file system corruption; therefore, please use this option only when the server cannot be shut down normally.
@@ -2992,6 +3104,8 @@ class Instance(pulumi.CustomResource):
             instance_charge_type="PREPAID",
             instance_charge_type_prepaid_period=1,
             instance_charge_type_prepaid_renew_flag="NOTIFY_AND_MANUAL_RENEW",
+            delete_with_instance=False,
+            delete_with_instance_prepaid=True,
             force_delete=True,
             data_disks=[{
                 "data_disk_type": "CLOUD_PREMIUM",
@@ -3299,6 +3413,82 @@ class Instance(pulumi.CustomResource):
             })
         ```
 
+        ### Create CVM instance with enable_jumbo_frame
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.instance.Instance("example",
+            instance_name="tf-example",
+            availability_zone="ap-guangzhou-6",
+            image_id="img-eb30mz89",
+            instance_type="S5.MEDIUM4",
+            system_disk_type="CLOUD_HSSD",
+            system_disk_size=50,
+            hostname="user",
+            project_id=0,
+            vpc_id="vpc-i5yyodl9",
+            subnet_id="subnet-hhi88a58",
+            enable_jumbo_frame=True,
+            data_disks=[{
+                "data_disk_type": "CLOUD_HSSD",
+                "data_disk_size": 100,
+                "encrypt": False,
+            }],
+            tags={
+                "tagKey": "tagValue",
+            })
+        ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+          - [DescribeImages](https://www.tencentcloud.com/document/api/213/33272)
+          - [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258)
+          - [DescribeInstancesAttributes](https://www.tencentcloud.com/document/api/213/68775)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+          - [ModifyInstancesDisasterRecoverGroup](https://www.tencentcloud.com/document/api/213/73189)
+          - [RunInstances](https://www.tencentcloud.com/document/api/213/33237)
+          - [StopInstances](https://www.tencentcloud.com/document/api/213/33235)
+        * Read:
+          - [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+          - [DescribeImages](https://www.tencentcloud.com/document/api/213/33272)
+          - [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258)
+          - [DescribeInstancesAttributes](https://www.tencentcloud.com/document/api/213/68775)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [AssociateInstancesKeyPairs](https://www.tencentcloud.com/document/api/213/33232)
+          - [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+          - [DescribeImages](https://www.tencentcloud.com/document/api/213/33272)
+          - [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258)
+          - [DescribeInstancesAttributes](https://www.tencentcloud.com/document/api/213/68775)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+          - [DisassociateInstancesKeyPairs](https://www.tencentcloud.com/document/api/213/33228)
+          - [ModifyDiskAttributes](https://www.tencentcloud.com/document/api/362/15659)
+          - [ModifyInstancesAttribute](https://www.tencentcloud.com/document/api/213/33246)
+          - [ModifyInstancesChargeType](https://www.tencentcloud.com/document/api/213/73503)
+          - [ModifyInstancesDisasterRecoverGroup](https://www.tencentcloud.com/document/api/213/73189)
+          - [ModifyInstancesProject](https://www.tencentcloud.com/document/api/213/33245)
+          - [ModifyInstancesRenewFlag](https://www.tencentcloud.com/document/api/213/68324)
+          - [ModifyInstancesVpcAttribute](https://www.tencentcloud.com/document/api/213/33244)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+          - [ResetInstance](https://www.tencentcloud.com/document/api/213/33242)
+          - [ResetInstancesInternetMaxBandwidth](https://www.tencentcloud.com/document/api/213/33241)
+          - [ResetInstancesPassword](https://www.tencentcloud.com/document/api/213/33240)
+          - [ResetInstancesType](https://www.tencentcloud.com/document/api/213/33239)
+          - [ResizeDisk](https://www.tencentcloud.com/document/api/362/16310)
+          - [ResizeInstanceDisks](https://www.tencentcloud.com/document/api/213/33238)
+        * Delete:
+          - [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+          - [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258)
+          - [DetachDisks](https://www.tencentcloud.com/document/api/362/16316)
+          - [TerminateDisks](https://www.tencentcloud.com/document/api/362/16321)
+          - [TerminateInstances](https://www.tencentcloud.com/document/api/213/33234)
+
         ## Import
 
         CVM instance can be imported using the id, e.g.
@@ -3340,6 +3530,7 @@ class Instance(pulumi.CustomResource):
                  disable_monitor_service: pulumi.Input[Optional[_builtins.bool]] = None,
                  disable_security_service: pulumi.Input[Optional[_builtins.bool]] = None,
                  disaster_recover_group_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 enable_jumbo_frame: pulumi.Input[Optional[_builtins.bool]] = None,
                  force_delete: pulumi.Input[Optional[_builtins.bool]] = None,
                  force_replace_placement_group_id: pulumi.Input[Optional[_builtins.bool]] = None,
                  force_stop: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -3413,6 +3604,7 @@ class Instance(pulumi.CustomResource):
             __props__.__dict__["disable_monitor_service"] = disable_monitor_service
             __props__.__dict__["disable_security_service"] = disable_security_service
             __props__.__dict__["disaster_recover_group_ids"] = disaster_recover_group_ids
+            __props__.__dict__["enable_jumbo_frame"] = enable_jumbo_frame
             __props__.__dict__["force_delete"] = force_delete
             __props__.__dict__["force_replace_placement_group_id"] = force_replace_placement_group_id
             __props__.__dict__["force_stop"] = force_stop
@@ -3502,6 +3694,7 @@ class Instance(pulumi.CustomResource):
             disable_monitor_service: pulumi.Input[Optional[_builtins.bool]] = None,
             disable_security_service: pulumi.Input[Optional[_builtins.bool]] = None,
             disaster_recover_group_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+            enable_jumbo_frame: pulumi.Input[Optional[_builtins.bool]] = None,
             expired_time: pulumi.Input[Optional[_builtins.str]] = None,
             force_delete: pulumi.Input[Optional[_builtins.bool]] = None,
             force_replace_placement_group_id: pulumi.Input[Optional[_builtins.bool]] = None,
@@ -3584,6 +3777,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[_builtins.bool] disable_monitor_service: Disable enhance service for monitor, it is enabled by default. When this options is set, monitor agent won't be installed. Modifications may lead to the reinstallation of the instance's operating system.
         :param pulumi.Input[_builtins.bool] disable_security_service: Disable enhance service for security, it is enabled by default. When this options is set, security agent won't be installed. Modifications may lead to the reinstallation of the instance's operating system.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] disaster_recover_group_ids: Placement group ID list. Supports up to 3 group IDs. When set, `placement_group_id` will be ignored and this list will be used for CRUD operations.
+        :param pulumi.Input[_builtins.bool] enable_jumbo_frame: Whether to enable jumbo frames for the instance. Only supported instance types accept `true`. See https://cloud.tencent.com/document/product/213/11518 for supported instance types. **NOTE: modifying this field automatically reboots the instance (`AutoReboot` is always set to `true` on update); use with caution**.
         :param pulumi.Input[_builtins.str] expired_time: Expired time of the instance.
         :param pulumi.Input[_builtins.bool] force_delete: Indicate whether to force delete the instance. Default is `false`. If set true, the instance will be permanently deleted instead of being moved into the recycle bin. Note: only works for `PREPAID` instance.
         :param pulumi.Input[_builtins.bool] force_replace_placement_group_id: Whether to force the instance host to be replaced. Value range: true: Allows the instance to change the host and restart the instance. Local disk machines do not support specifying this parameter; false: Does not allow the instance to change the host and only join the placement group on the current host. This may cause the placement group to fail to change. Can be used with both `placement_group_id` and `disaster_recover_group_ids`. Default is false.
@@ -3664,6 +3858,7 @@ class Instance(pulumi.CustomResource):
         __props__.__dict__["disable_monitor_service"] = disable_monitor_service
         __props__.__dict__["disable_security_service"] = disable_security_service
         __props__.__dict__["disaster_recover_group_ids"] = disaster_recover_group_ids
+        __props__.__dict__["enable_jumbo_frame"] = enable_jumbo_frame
         __props__.__dict__["expired_time"] = expired_time
         __props__.__dict__["force_delete"] = force_delete
         __props__.__dict__["force_replace_placement_group_id"] = force_replace_placement_group_id
@@ -3873,6 +4068,14 @@ class Instance(pulumi.CustomResource):
         Placement group ID list. Supports up to 3 group IDs. When set, `placement_group_id` will be ignored and this list will be used for CRUD operations.
         """
         return pulumi.get(self, "disaster_recover_group_ids")
+
+    @_builtins.property
+    @pulumi.getter(name="enableJumboFrame")
+    def enable_jumbo_frame(self) -> pulumi.Output[_builtins.bool]:
+        """
+        Whether to enable jumbo frames for the instance. Only supported instance types accept `true`. See https://cloud.tencent.com/document/product/213/11518 for supported instance types. **NOTE: modifying this field automatically reboots the instance (`AutoReboot` is always set to `true` on update); use with caution**.
+        """
+        return pulumi.get(self, "enable_jumbo_frame")
 
     @_builtins.property
     @pulumi.getter(name="expiredTime")

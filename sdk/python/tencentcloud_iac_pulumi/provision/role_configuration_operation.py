@@ -185,6 +185,14 @@ class RoleConfigurationOperation(pulumi.CustomResource):
             target_uin=int("xxxxxx"))
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [GetTaskStatus](https://www.tencentcloud.com/document/api/1031/63608)
+          - [ProvisionRoleConfiguration](https://www.tencentcloud.com/document/api/1031/63605)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -214,6 +222,14 @@ class RoleConfigurationOperation(pulumi.CustomResource):
             target_type="MemberUin",
             target_uin=int("xxxxxx"))
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [GetTaskStatus](https://www.tencentcloud.com/document/api/1031/63608)
+          - [ProvisionRoleConfiguration](https://www.tencentcloud.com/document/api/1031/63605)
 
 
         :param str resource_name: The name of the resource.

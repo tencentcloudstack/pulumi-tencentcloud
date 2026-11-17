@@ -45,6 +45,14 @@ import * as utilities from "../utilities";
  *     targetGroupId: test.id,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeTargetGroupInstances](https://www.tencentcloud.com/document/api/214/33828)
+ *   - [DescribeTargetGroups](https://www.tencentcloud.com/document/api/214/33826)
  */
 export function getTargetGroups(args?: GetTargetGroupsArgs, opts?: pulumi.InvokeOptions): Promise<GetTargetGroupsResult> {
     args = args || {};
@@ -144,6 +152,14 @@ export interface GetTargetGroupsResult {
  *     targetGroupId: test.id,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeTargetGroupInstances](https://www.tencentcloud.com/document/api/214/33828)
+ *   - [DescribeTargetGroups](https://www.tencentcloud.com/document/api/214/33826)
  */
 export function getTargetGroupsOutput(args?: GetTargetGroupsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetTargetGroupsResult> {
     args = args || {};

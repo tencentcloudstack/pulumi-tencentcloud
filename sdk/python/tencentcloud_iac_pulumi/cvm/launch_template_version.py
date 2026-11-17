@@ -987,6 +987,14 @@ class LaunchTemplateVersion(pulumi.CustomResource):
             image_id="img-9qrfy1xt")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateLaunchTemplateVersion](https://www.tencentcloud.com/document/api/213/45361)
+        * Read: [DescribeLaunchTemplateVersions](https://www.tencentcloud.com/document/api/213/45358)
+        * Delete: [DeleteLaunchTemplateVersions](https://www.tencentcloud.com/document/api/213/45359)
+
         ## Import
 
         cvm launch_template_version can be imported using the id, e.g.
@@ -1053,6 +1061,14 @@ class LaunchTemplateVersion(pulumi.CustomResource):
             instance_type="S5.MEDIUM4",
             image_id="img-9qrfy1xt")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateLaunchTemplateVersion](https://www.tencentcloud.com/document/api/213/45361)
+        * Read: [DescribeLaunchTemplateVersions](https://www.tencentcloud.com/document/api/213/45358)
+        * Delete: [DeleteLaunchTemplateVersions](https://www.tencentcloud.com/document/api/213/45359)
 
         ## Import
 

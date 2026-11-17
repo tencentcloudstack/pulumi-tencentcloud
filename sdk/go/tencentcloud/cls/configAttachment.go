@@ -14,6 +14,14 @@ import (
 
 // Provides a resource to create a cls config attachment
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [ApplyConfigToMachineGroup](https://www.tencentcloud.com/document/api/614/42814)
+// * Read: [DescribeConfigMachineGroups](https://www.tencentcloud.com/document/api/614/42810)
+// * Delete: [DeleteConfigFromMachineGroup](https://www.tencentcloud.com/document/api/614/42811)
+//
 // ## Import
 //
 // cls configAttachment can be imported using the id, e.g.

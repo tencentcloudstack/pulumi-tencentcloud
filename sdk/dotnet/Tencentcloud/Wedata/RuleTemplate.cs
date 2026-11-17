@@ -49,6 +49,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateRuleTemplate](https://www.tencentcloud.com/document/api/1174/61130)
+    /// * Read: [DescribeRuleTemplate](https://www.tencentcloud.com/document/api/1174/61111)
+    /// * Update: [ModifyRuleTemplate](https://www.tencentcloud.com/document/api/1174/61097)
+    /// * Delete: [DeleteRuleTemplate](https://www.tencentcloud.com/document/api/1174/61128)
+    /// 
     /// ## Import
     /// 
     /// wedata RuleTemplate can be imported using the id, e.g.

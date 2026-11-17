@@ -192,6 +192,12 @@ def get_users(console_login: Optional[_builtins.bool] = None,
     far = tencentcloud.cam.get_users(phone_num="12345678910")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListUsers](https://www.tencentcloud.com/document/api/598/32256)
+
 
     :param _builtins.bool console_login: Indicate whether the user can login in.
     :param _builtins.str country_code: Country code of the CAM user to be queried.
@@ -254,6 +260,12 @@ def get_users_output(console_login: pulumi.Input[Optional[Optional[_builtins.boo
     # query by phone
     far = tencentcloud.cam.get_users(phone_num="12345678910")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListUsers](https://www.tencentcloud.com/document/api/598/32256)
 
 
     :param _builtins.bool console_login: Indicate whether the user can login in.

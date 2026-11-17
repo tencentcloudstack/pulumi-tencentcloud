@@ -15,10 +15,19 @@ else:
     pass
 
 __all__ = [
+    'GetInstantTasksTaskResult',
+    'GetNodeGroupsDistrictListResult',
+    'GetNodeGroupsNetServiceListResult',
+    'GetNodeGroupsNodeListChildrenChildrenResult',
+    'GetNodeGroupsNodeListChildrenResult',
+    'GetNodeGroupsNodeListResult',
     'GetNodeNodeDefineResult',
     'GetProbeDataDetailedSingleDataDefineFieldResult',
     'GetProbeDataDetailedSingleDataDefineLabelResult',
     'GetProbeDataDetailedSingleDataDefineResult',
+    'GetProbeTasksTagFilterResult',
+    'GetProbeTasksTaskSetResult',
+    'GetProbeTasksTaskSetTagInfoListResult',
     'TaskSetBatchTasks',
 ]
 
@@ -66,6 +75,268 @@ class TaskSetBatchTasks(dict):
         Target address.
         """
         return pulumi.get(self, "target_address")
+
+
+@pulumi.output_type
+class GetInstantTasksTaskResult(dict):
+    def __init__(__self__, *,
+                 node_count: _builtins.int,
+                 probe_time: _builtins.int,
+                 status: _builtins.str,
+                 success_rate: _builtins.float,
+                 target_address: _builtins.str,
+                 task_category: _builtins.int,
+                 task_id: _builtins.str,
+                 task_type: _builtins.int):
+        """
+        :param _builtins.int node_count: Node count.
+        :param _builtins.int probe_time: Probe time.
+        :param _builtins.str status: Task status.
+        :param _builtins.float success_rate: Success rate.
+        :param _builtins.str target_address: Target address.
+        :param _builtins.int task_category: Task category.
+        :param _builtins.str task_id: Task ID.
+        :param _builtins.int task_type: Task type.
+        """
+        pulumi.set(__self__, "node_count", node_count)
+        pulumi.set(__self__, "probe_time", probe_time)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "success_rate", success_rate)
+        pulumi.set(__self__, "target_address", target_address)
+        pulumi.set(__self__, "task_category", task_category)
+        pulumi.set(__self__, "task_id", task_id)
+        pulumi.set(__self__, "task_type", task_type)
+
+    @_builtins.property
+    @pulumi.getter(name="nodeCount")
+    def node_count(self) -> _builtins.int:
+        """
+        Node count.
+        """
+        return pulumi.get(self, "node_count")
+
+    @_builtins.property
+    @pulumi.getter(name="probeTime")
+    def probe_time(self) -> _builtins.int:
+        """
+        Probe time.
+        """
+        return pulumi.get(self, "probe_time")
+
+    @_builtins.property
+    @pulumi.getter
+    def status(self) -> _builtins.str:
+        """
+        Task status.
+        """
+        return pulumi.get(self, "status")
+
+    @_builtins.property
+    @pulumi.getter(name="successRate")
+    def success_rate(self) -> _builtins.float:
+        """
+        Success rate.
+        """
+        return pulumi.get(self, "success_rate")
+
+    @_builtins.property
+    @pulumi.getter(name="targetAddress")
+    def target_address(self) -> _builtins.str:
+        """
+        Target address.
+        """
+        return pulumi.get(self, "target_address")
+
+    @_builtins.property
+    @pulumi.getter(name="taskCategory")
+    def task_category(self) -> _builtins.int:
+        """
+        Task category.
+        """
+        return pulumi.get(self, "task_category")
+
+    @_builtins.property
+    @pulumi.getter(name="taskId")
+    def task_id(self) -> _builtins.str:
+        """
+        Task ID.
+        """
+        return pulumi.get(self, "task_id")
+
+    @_builtins.property
+    @pulumi.getter(name="taskType")
+    def task_type(self) -> _builtins.int:
+        """
+        Task type.
+        """
+        return pulumi.get(self, "task_type")
+
+
+@pulumi.output_type
+class GetNodeGroupsDistrictListResult(dict):
+    def __init__(__self__, *,
+                 id: _builtins.str,
+                 name: _builtins.str):
+        """
+        :param _builtins.str id: Node ID.
+        :param _builtins.str name: Probe node description keyword.
+        """
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "name", name)
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> _builtins.str:
+        """
+        Node ID.
+        """
+        return pulumi.get(self, "id")
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        Probe node description keyword.
+        """
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class GetNodeGroupsNetServiceListResult(dict):
+    def __init__(__self__, *,
+                 id: _builtins.str,
+                 name: _builtins.str):
+        """
+        :param _builtins.str id: Node ID.
+        :param _builtins.str name: Probe node description keyword.
+        """
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "name", name)
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> _builtins.str:
+        """
+        Node ID.
+        """
+        return pulumi.get(self, "id")
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        Probe node description keyword.
+        """
+        return pulumi.get(self, "name")
+
+
+@pulumi.output_type
+class GetNodeGroupsNodeListResult(dict):
+    def __init__(__self__, *,
+                 childrens: Sequence['outputs.GetNodeGroupsNodeListChildrenResult'],
+                 content: _builtins.str,
+                 id: _builtins.str):
+        """
+        :param Sequence['GetNodeGroupsNodeListChildrenArgs'] childrens: Node list.
+        :param _builtins.str content: Node name.
+        :param _builtins.str id: Node ID.
+        """
+        pulumi.set(__self__, "childrens", childrens)
+        pulumi.set(__self__, "content", content)
+        pulumi.set(__self__, "id", id)
+
+    @_builtins.property
+    @pulumi.getter
+    def childrens(self) -> Sequence['outputs.GetNodeGroupsNodeListChildrenResult']:
+        """
+        Node list.
+        """
+        return pulumi.get(self, "childrens")
+
+    @_builtins.property
+    @pulumi.getter
+    def content(self) -> _builtins.str:
+        """
+        Node name.
+        """
+        return pulumi.get(self, "content")
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> _builtins.str:
+        """
+        Node ID.
+        """
+        return pulumi.get(self, "id")
+
+
+@pulumi.output_type
+class GetNodeGroupsNodeListChildrenResult(dict):
+    def __init__(__self__, *,
+                 childrens: Sequence['outputs.GetNodeGroupsNodeListChildrenChildrenResult'],
+                 content: _builtins.str,
+                 id: _builtins.str):
+        """
+        :param Sequence['GetNodeGroupsNodeListChildrenChildrenArgs'] childrens: Node list.
+        :param _builtins.str content: Node name.
+        :param _builtins.str id: Node ID.
+        """
+        pulumi.set(__self__, "childrens", childrens)
+        pulumi.set(__self__, "content", content)
+        pulumi.set(__self__, "id", id)
+
+    @_builtins.property
+    @pulumi.getter
+    def childrens(self) -> Sequence['outputs.GetNodeGroupsNodeListChildrenChildrenResult']:
+        """
+        Node list.
+        """
+        return pulumi.get(self, "childrens")
+
+    @_builtins.property
+    @pulumi.getter
+    def content(self) -> _builtins.str:
+        """
+        Node name.
+        """
+        return pulumi.get(self, "content")
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> _builtins.str:
+        """
+        Node ID.
+        """
+        return pulumi.get(self, "id")
+
+
+@pulumi.output_type
+class GetNodeGroupsNodeListChildrenChildrenResult(dict):
+    def __init__(__self__, *,
+                 content: _builtins.str,
+                 id: _builtins.str):
+        """
+        :param _builtins.str content: Node name.
+        :param _builtins.str id: Node ID.
+        """
+        pulumi.set(__self__, "content", content)
+        pulumi.set(__self__, "id", id)
+
+    @_builtins.property
+    @pulumi.getter
+    def content(self) -> _builtins.str:
+        """
+        Node name.
+        """
+        return pulumi.get(self, "content")
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> _builtins.str:
+        """
+        Node ID.
+        """
+        return pulumi.get(self, "id")
 
 
 @pulumi.output_type
@@ -312,6 +583,258 @@ class GetProbeDataDetailedSingleDataDefineLabelResult(dict):
     def value(self) -> _builtins.str:
         """
         Value.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetProbeTasksTagFilterResult(dict):
+    def __init__(__self__, *,
+                 key: _builtins.str,
+                 value: _builtins.str):
+        """
+        :param _builtins.str key: Tag key.
+        :param _builtins.str value: Tag value.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def key(self) -> _builtins.str:
+        """
+        Tag key.
+        """
+        return pulumi.get(self, "key")
+
+    @_builtins.property
+    @pulumi.getter
+    def value(self) -> _builtins.str:
+        """
+        Tag value.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetProbeTasksTaskSetResult(dict):
+    def __init__(__self__, *,
+                 created_at: _builtins.str,
+                 cron: _builtins.str,
+                 cron_state: _builtins.int,
+                 interval: _builtins.int,
+                 name: _builtins.str,
+                 node_ip_type: _builtins.int,
+                 nodes: Sequence[_builtins.str],
+                 order_state: _builtins.int,
+                 parameters: _builtins.str,
+                 pay_mode: _builtins.int,
+                 status: _builtins.int,
+                 sub_sync_flag: _builtins.int,
+                 tag_info_lists: Sequence['outputs.GetProbeTasksTaskSetTagInfoListResult'],
+                 target_address: _builtins.str,
+                 task_category: _builtins.int,
+                 task_id: _builtins.str,
+                 task_type: _builtins.int):
+        """
+        :param _builtins.str created_at: Created time.
+        :param _builtins.str cron: Cron expression for scheduled task.
+        :param _builtins.int cron_state: Scheduled task start status.
+        :param _builtins.int interval: Probe interval in minutes.
+        :param _builtins.str name: Task name.
+        :param _builtins.int node_ip_type: Probe node IP type.
+        :param Sequence[_builtins.str] nodes: Probe node list.
+        :param _builtins.int order_state: Order state.
+        :param _builtins.str parameters: Probe parameters.
+        :param _builtins.int pay_mode: Pay mode.
+        :param _builtins.int status: Task status.
+        :param _builtins.int sub_sync_flag: Whether it is a sync account.
+        :param Sequence['GetProbeTasksTaskSetTagInfoListArgs'] tag_info_lists: Tag info list.
+        :param _builtins.str target_address: Target address.
+        :param _builtins.int task_category: Task category list.
+        :param _builtins.str task_id: Task ID.
+        :param _builtins.int task_type: Task type list.
+        """
+        pulumi.set(__self__, "created_at", created_at)
+        pulumi.set(__self__, "cron", cron)
+        pulumi.set(__self__, "cron_state", cron_state)
+        pulumi.set(__self__, "interval", interval)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "node_ip_type", node_ip_type)
+        pulumi.set(__self__, "nodes", nodes)
+        pulumi.set(__self__, "order_state", order_state)
+        pulumi.set(__self__, "parameters", parameters)
+        pulumi.set(__self__, "pay_mode", pay_mode)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "sub_sync_flag", sub_sync_flag)
+        pulumi.set(__self__, "tag_info_lists", tag_info_lists)
+        pulumi.set(__self__, "target_address", target_address)
+        pulumi.set(__self__, "task_category", task_category)
+        pulumi.set(__self__, "task_id", task_id)
+        pulumi.set(__self__, "task_type", task_type)
+
+    @_builtins.property
+    @pulumi.getter(name="createdAt")
+    def created_at(self) -> _builtins.str:
+        """
+        Created time.
+        """
+        return pulumi.get(self, "created_at")
+
+    @_builtins.property
+    @pulumi.getter
+    def cron(self) -> _builtins.str:
+        """
+        Cron expression for scheduled task.
+        """
+        return pulumi.get(self, "cron")
+
+    @_builtins.property
+    @pulumi.getter(name="cronState")
+    def cron_state(self) -> _builtins.int:
+        """
+        Scheduled task start status.
+        """
+        return pulumi.get(self, "cron_state")
+
+    @_builtins.property
+    @pulumi.getter
+    def interval(self) -> _builtins.int:
+        """
+        Probe interval in minutes.
+        """
+        return pulumi.get(self, "interval")
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        Task name.
+        """
+        return pulumi.get(self, "name")
+
+    @_builtins.property
+    @pulumi.getter(name="nodeIpType")
+    def node_ip_type(self) -> _builtins.int:
+        """
+        Probe node IP type.
+        """
+        return pulumi.get(self, "node_ip_type")
+
+    @_builtins.property
+    @pulumi.getter
+    def nodes(self) -> Sequence[_builtins.str]:
+        """
+        Probe node list.
+        """
+        return pulumi.get(self, "nodes")
+
+    @_builtins.property
+    @pulumi.getter(name="orderState")
+    def order_state(self) -> _builtins.int:
+        """
+        Order state.
+        """
+        return pulumi.get(self, "order_state")
+
+    @_builtins.property
+    @pulumi.getter
+    def parameters(self) -> _builtins.str:
+        """
+        Probe parameters.
+        """
+        return pulumi.get(self, "parameters")
+
+    @_builtins.property
+    @pulumi.getter(name="payMode")
+    def pay_mode(self) -> _builtins.int:
+        """
+        Pay mode.
+        """
+        return pulumi.get(self, "pay_mode")
+
+    @_builtins.property
+    @pulumi.getter
+    def status(self) -> _builtins.int:
+        """
+        Task status.
+        """
+        return pulumi.get(self, "status")
+
+    @_builtins.property
+    @pulumi.getter(name="subSyncFlag")
+    def sub_sync_flag(self) -> _builtins.int:
+        """
+        Whether it is a sync account.
+        """
+        return pulumi.get(self, "sub_sync_flag")
+
+    @_builtins.property
+    @pulumi.getter(name="tagInfoLists")
+    def tag_info_lists(self) -> Sequence['outputs.GetProbeTasksTaskSetTagInfoListResult']:
+        """
+        Tag info list.
+        """
+        return pulumi.get(self, "tag_info_lists")
+
+    @_builtins.property
+    @pulumi.getter(name="targetAddress")
+    def target_address(self) -> _builtins.str:
+        """
+        Target address.
+        """
+        return pulumi.get(self, "target_address")
+
+    @_builtins.property
+    @pulumi.getter(name="taskCategory")
+    def task_category(self) -> _builtins.int:
+        """
+        Task category list.
+        """
+        return pulumi.get(self, "task_category")
+
+    @_builtins.property
+    @pulumi.getter(name="taskId")
+    def task_id(self) -> _builtins.str:
+        """
+        Task ID.
+        """
+        return pulumi.get(self, "task_id")
+
+    @_builtins.property
+    @pulumi.getter(name="taskType")
+    def task_type(self) -> _builtins.int:
+        """
+        Task type list.
+        """
+        return pulumi.get(self, "task_type")
+
+
+@pulumi.output_type
+class GetProbeTasksTaskSetTagInfoListResult(dict):
+    def __init__(__self__, *,
+                 key: _builtins.str,
+                 value: _builtins.str):
+        """
+        :param _builtins.str key: Tag key.
+        :param _builtins.str value: Tag value.
+        """
+        pulumi.set(__self__, "key", key)
+        pulumi.set(__self__, "value", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def key(self) -> _builtins.str:
+        """
+        Tag key.
+        """
+        return pulumi.get(self, "key")
+
+    @_builtins.property
+    @pulumi.getter
+    def value(self) -> _builtins.str:
+        """
+        Tag value.
         """
         return pulumi.get(self, "value")
 

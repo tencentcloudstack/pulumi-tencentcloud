@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [OverwriteWhiteBoxDeviceFingerprints](https://www.tencentcloud.com/search/?wd=OverwriteWhiteBoxDeviceFingerprints&type=document&lang=en)
 type OverwriteWhiteBoxDeviceFingerprints struct {
 	pulumi.CustomResourceState
 

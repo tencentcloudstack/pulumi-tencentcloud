@@ -115,6 +115,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeBackupByFlowId](https://www.tencentcloud.com/document/api/238/72780)
 func GetBackupByFlowId(ctx *pulumi.Context, args *GetBackupByFlowIdArgs, opts ...pulumi.InvokeOption) (*GetBackupByFlowIdResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetBackupByFlowIdResult

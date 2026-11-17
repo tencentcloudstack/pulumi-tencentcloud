@@ -31,6 +31,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [RestartCronJobs](https://www.tencentcloud.com/document/api/1249/68500)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Pts/cronJobRestart:CronJobRestart")]
     public partial class CronJobRestart : global::Pulumi.CustomResource

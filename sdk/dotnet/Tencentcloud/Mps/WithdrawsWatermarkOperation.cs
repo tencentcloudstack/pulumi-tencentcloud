@@ -55,6 +55,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [WithdrawsWatermark](https://www.tencentcloud.com/search/?wd=WithdrawsWatermark&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mps/withdrawsWatermarkOperation:WithdrawsWatermarkOperation")]
     public partial class WithdrawsWatermarkOperation : global::Pulumi.CustomResource

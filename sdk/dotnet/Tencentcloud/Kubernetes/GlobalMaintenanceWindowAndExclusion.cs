@@ -67,6 +67,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateGlobalMaintenanceWindowAndExclusions](https://www.tencentcloud.com/search/?wd=CreateGlobalMaintenanceWindowAndExclusions&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeGlobalMaintenanceWindowAndExclusions](https://www.tencentcloud.com/search/?wd=DescribeGlobalMaintenanceWindowAndExclusions&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyGlobalMaintenanceWindowAndExclusions](https://www.tencentcloud.com/search/?wd=ModifyGlobalMaintenanceWindowAndExclusions&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteGlobalMaintenanceWindowAndExclusion](https://www.tencentcloud.com/search/?wd=DeleteGlobalMaintenanceWindowAndExclusion&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// TKE kubernetes global maintenance window and exclusion can be imported using the id, e.g.

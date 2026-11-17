@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     availableZone: "ap-guangzhou-2",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSpecInfo](https://www.tencentcloud.com/document/api/240/34701)
  */
 export function getZoneConfig(args?: GetZoneConfigArgs, opts?: pulumi.InvokeOptions): Promise<GetZoneConfigResult> {
     args = args || {};
@@ -74,6 +80,12 @@ export interface GetZoneConfigResult {
  *     availableZone: "ap-guangzhou-2",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSpecInfo](https://www.tencentcloud.com/document/api/240/34701)
  */
 export function getZoneConfigOutput(args?: GetZoneConfigOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetZoneConfigResult> {
     args = args || {};

@@ -152,6 +152,12 @@ class ModifyAccountRemarkOperation(pulumi.CustomResource):
             remark="hello_world")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyAccountRemark](https://www.tencentcloud.com/document/api/409/18108)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -179,6 +185,12 @@ class ModifyAccountRemarkOperation(pulumi.CustomResource):
             user_name="root",
             remark="hello_world")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyAccountRemark](https://www.tencentcloud.com/document/api/409/18108)
 
 
         :param str resource_name: The name of the resource.

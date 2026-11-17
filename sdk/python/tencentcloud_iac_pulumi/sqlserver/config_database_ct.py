@@ -227,6 +227,18 @@ class ConfigDatabaseCt(pulumi.CustomResource):
             change_retention_day=7)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+          - [ModifyDatabaseCT](https://www.tencentcloud.com/document/api/238/41639)
+        * Read: [DescribeDBsNormal](https://www.tencentcloud.com/document/api/238/41643)
+        * Update:
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+          - [ModifyDatabaseCT](https://www.tencentcloud.com/document/api/238/41639)
+
         ## Import
 
         sqlserver Sqlserver.ConfigDatabaseCt can be imported using the id, e.g.
@@ -305,6 +317,18 @@ class ConfigDatabaseCt(pulumi.CustomResource):
             modify_type="disable",
             change_retention_day=7)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+          - [ModifyDatabaseCT](https://www.tencentcloud.com/document/api/238/41639)
+        * Read: [DescribeDBsNormal](https://www.tencentcloud.com/document/api/238/41643)
+        * Update:
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+          - [ModifyDatabaseCT](https://www.tencentcloud.com/document/api/238/41639)
 
         ## Import
 

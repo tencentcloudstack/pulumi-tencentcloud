@@ -318,6 +318,14 @@ class Idl(pulumi.CustomResource):
         \"\"\")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [VerifyIdlFiles](https://www.tencentcloud.com/document/api/1016/35029)
+        * Read: [VerifyIdlFiles](https://www.tencentcloud.com/document/api/1016/35029)
+        * Delete: [DeleteIdlFiles](https://www.tencentcloud.com/document/api/1016/35051)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -399,6 +407,14 @@ class Idl(pulumi.CustomResource):
             }
         \"\"\")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [VerifyIdlFiles](https://www.tencentcloud.com/document/api/1016/35029)
+        * Read: [VerifyIdlFiles](https://www.tencentcloud.com/document/api/1016/35029)
+        * Delete: [DeleteIdlFiles](https://www.tencentcloud.com/document/api/1016/35051)
 
 
         :param str resource_name: The name of the resource.

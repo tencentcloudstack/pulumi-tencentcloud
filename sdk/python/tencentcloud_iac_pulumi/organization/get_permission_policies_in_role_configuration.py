@@ -154,6 +154,12 @@ def get_permission_policies_in_role_configuration(filter: Optional[_builtins.str
         filter="AdministratorAccess")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListPermissionPoliciesInRoleConfiguration](https://www.tencentcloud.com/document/api/1031/63599)
+
 
     :param _builtins.str filter: Search by policy name.
     :param _builtins.str result_output_file: Used to save results.
@@ -220,6 +226,12 @@ def get_permission_policies_in_role_configuration_output(filter: pulumi.Input[Op
         role_configuration_id="rc-ihogrs0e6ceg",
         filter="AdministratorAccess")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListPermissionPoliciesInRoleConfiguration](https://www.tencentcloud.com/document/api/1031/63599)
 
 
     :param _builtins.str filter: Search by policy name.

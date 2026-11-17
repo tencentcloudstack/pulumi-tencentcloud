@@ -86,6 +86,12 @@ def get_cos_regions(result_output_file: Optional[_builtins.str] = None,
     foo = tencentcloud.audit.get_cos_regions()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListCosEnableRegion](https://www.tencentcloud.com/search/?wd=ListCosEnableRegion&type=document&lang=en)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -111,6 +117,12 @@ def get_cos_regions_output(result_output_file: pulumi.Input[Optional[Optional[_b
 
     foo = tencentcloud.audit.get_cos_regions()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListCosEnableRegion](https://www.tencentcloud.com/search/?wd=ListCosEnableRegion&type=document&lang=en)
 
 
     :param _builtins.str result_output_file: Used to save results.

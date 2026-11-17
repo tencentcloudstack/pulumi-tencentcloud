@@ -120,6 +120,12 @@ def get_limits(result_output_file: Optional[_builtins.str] = None,
     limits = tencentcloud.as_.get_limits()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAccountLimits](https://www.tencentcloud.com/document/api/377/31003)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -148,6 +154,12 @@ def get_limits_output(result_output_file: pulumi.Input[Optional[Optional[_builti
 
     limits = tencentcloud.as_.get_limits()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAccountLimits](https://www.tencentcloud.com/document/api/377/31003)
 
 
     :param _builtins.str result_output_file: Used to save results.

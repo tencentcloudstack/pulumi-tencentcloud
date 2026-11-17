@@ -34,9 +34,9 @@ class GatewaySnatArgs:
         :param pulumi.Input[_builtins.str] description: Description.
         :param pulumi.Input[_builtins.str] nat_gateway_id: NAT gateway ID.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] public_ip_addrs: Elastic IP address pool.
-        :param pulumi.Input[_builtins.str] resource_type: Resource type. Valid values: SUBNET, NETWORKINTERFACE.
+        :param pulumi.Input[_builtins.str] resource_type: Resource type. Valid values: SUBNET, NETWORKINTERFACE, USERDEFINED.
         :param pulumi.Input[_builtins.str] instance_id: Instance ID, required when `resource_type` is NETWORKINTERFACE.
-        :param pulumi.Input[_builtins.str] instance_private_ip_addr: Private IPs of the instance's primary ENI, required when `resource_type` is NETWORKINTERFACE.
+        :param pulumi.Input[_builtins.str] instance_private_ip_addr: Private IPs of the instance's primary ENI, required when `resource_type` is NETWORKINTERFACE or USERDEFINED.
         :param pulumi.Input[_builtins.str] subnet_cidr_block: The IPv4 CIDR of the subnet, required when `resource_type` is SUBNET.
         :param pulumi.Input[_builtins.str] subnet_id: Subnet instance ID, required when `resource_type` is SUBNET.
         """
@@ -93,7 +93,7 @@ class GatewaySnatArgs:
     @pulumi.getter(name="resourceType")
     def resource_type(self) -> pulumi.Input[_builtins.str]:
         """
-        Resource type. Valid values: SUBNET, NETWORKINTERFACE.
+        Resource type. Valid values: SUBNET, NETWORKINTERFACE, USERDEFINED.
         """
         return pulumi.get(self, "resource_type")
 
@@ -117,7 +117,7 @@ class GatewaySnatArgs:
     @pulumi.getter(name="instancePrivateIpAddr")
     def instance_private_ip_addr(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Private IPs of the instance's primary ENI, required when `resource_type` is NETWORKINTERFACE.
+        Private IPs of the instance's primary ENI, required when `resource_type` is NETWORKINTERFACE or USERDEFINED.
         """
         return pulumi.get(self, "instance_private_ip_addr")
 
@@ -169,10 +169,10 @@ class _GatewaySnatState:
         :param pulumi.Input[_builtins.str] create_time: Create time.
         :param pulumi.Input[_builtins.str] description: Description.
         :param pulumi.Input[_builtins.str] instance_id: Instance ID, required when `resource_type` is NETWORKINTERFACE.
-        :param pulumi.Input[_builtins.str] instance_private_ip_addr: Private IPs of the instance's primary ENI, required when `resource_type` is NETWORKINTERFACE.
+        :param pulumi.Input[_builtins.str] instance_private_ip_addr: Private IPs of the instance's primary ENI, required when `resource_type` is NETWORKINTERFACE or USERDEFINED.
         :param pulumi.Input[_builtins.str] nat_gateway_id: NAT gateway ID.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] public_ip_addrs: Elastic IP address pool.
-        :param pulumi.Input[_builtins.str] resource_type: Resource type. Valid values: SUBNET, NETWORKINTERFACE.
+        :param pulumi.Input[_builtins.str] resource_type: Resource type. Valid values: SUBNET, NETWORKINTERFACE, USERDEFINED.
         :param pulumi.Input[_builtins.str] snat_id: SNAT rule ID.
         :param pulumi.Input[_builtins.str] subnet_cidr_block: The IPv4 CIDR of the subnet, required when `resource_type` is SUBNET.
         :param pulumi.Input[_builtins.str] subnet_id: Subnet instance ID, required when `resource_type` is SUBNET.
@@ -238,7 +238,7 @@ class _GatewaySnatState:
     @pulumi.getter(name="instancePrivateIpAddr")
     def instance_private_ip_addr(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Private IPs of the instance's primary ENI, required when `resource_type` is NETWORKINTERFACE.
+        Private IPs of the instance's primary ENI, required when `resource_type` is NETWORKINTERFACE or USERDEFINED.
         """
         return pulumi.get(self, "instance_private_ip_addr")
 
@@ -274,7 +274,7 @@ class _GatewaySnatState:
     @pulumi.getter(name="resourceType")
     def resource_type(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Resource type. Valid values: SUBNET, NETWORKINTERFACE.
+        Resource type. Valid values: SUBNET, NETWORKINTERFACE, USERDEFINED.
         """
         return pulumi.get(self, "resource_type")
 
@@ -339,100 +339,81 @@ class GatewaySnat(pulumi.CustomResource):
 
         ## Example Usage
 
+        ### If resource_type is SUBNET
+
         ```python
         import pulumi
-        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        zones = tencentcloud.availability.get_zones_by_product(product="nat")
-        image = tencentcloud.images.get_instance(os_name="centos")
-        instance_types = tencentcloud.instance.get_types(filters=[
-                {
-                    "name": "zone",
-                    "values": [zones.zones[0].name],
-                },
-                {
-                    "name": "instance-family",
-                    "values": ["S5"],
-                },
-            ],
-            cpu_core_count=2,
-            exclude_sold_out=True)
-        vpc = tencentcloud.vpc.Instance("vpc",
-            name="vpc-example",
-            cidr_block="10.0.0.0/16")
-        # Create route_table and entry
-        route_table = tencentcloud.route.Table("route_table",
-            vpc_id=vpc.id,
-            name="tf_example")
-        subnet = tencentcloud.subnet.Instance("subnet",
-            vpc_id=vpc.id,
-            name="subnet-example",
-            cidr_block="10.0.0.0/16",
-            availability_zone=zones.zones[0].name,
-            route_table_id=route_table.id)
-        eip_example1 = tencentcloud.eip.Instance("eip_example1", name="eip_example1")
-        eip_example2 = tencentcloud.eip.Instance("eip_example2", name="eip_example2")
-        # Create NAT Gateway
-        my_nat = tencentcloud.nat.Gateway("my_nat",
-            vpc_id=vpc.id,
-            name="tf_example_nat_gateway",
-            max_concurrent=3000000,
-            bandwidth=500,
-            assigned_eip_sets=[
-                eip_example1.public_ip,
-                eip_example2.public_ip,
-            ])
-        route_entry = tencentcloud.route.TableEntry("route_entry",
-            route_table_id=route_table.id,
-            destination_cidr_block="10.0.0.0/8",
-            next_type="NAT",
-            next_hub=my_nat.id)
-        # Subnet Nat gateway snat
-        subnet_snat = tencentcloud.nat.GatewaySnat("subnet_snat",
-            nat_gateway_id=my_nat.id,
+        example = tencentcloud.nat.GatewaySnat("example",
+            nat_gateway_id="nat-jmf9955g",
             resource_type="SUBNET",
-            subnet_id=subnet.id,
-            subnet_cidr_block=subnet.cidr_block,
-            description="terraform test",
-            public_ip_addrs=[
-                eip_example1.public_ip,
-                eip_example2.public_ip,
-            ])
-        # Create instance
-        example = tencentcloud.instance.Instance("example",
-            instance_name="tf_example",
-            availability_zone=zones.zones[0].name,
-            image_id=image.images[0].image_id,
-            instance_type=instance_types.instance_types[0].instance_type,
-            system_disk_type="CLOUD_PREMIUM",
-            system_disk_size=50,
-            hostname="user",
-            project_id=0,
-            vpc_id=vpc.id,
-            subnet_id=subnet.id)
-        # NetWorkInterface Nat gateway snat
-        my_instance_snat = tencentcloud.nat.GatewaySnat("my_instance_snat",
-            nat_gateway_id=my_nat.id,
-            resource_type="NETWORKINTERFACE",
-            instance_id=example.id,
-            instance_private_ip_addr=example.private_ip,
-            description="terraform test",
-            public_ip_addrs=[eip_example1.public_ip])
+            subnet_id="subnet-hhi88a58",
+            subnet_cidr_block="10.0.30.0/24",
+            description="remark.",
+            public_ip_addrs=["106.55.167.123"])
         ```
+
+        ### If resource_type is NETWORKINTERFACE
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.nat.GatewaySnat("example",
+            nat_gateway_id="nat-jmf9955g",
+            resource_type="NETWORKINTERFACE",
+            instance_id="ins-p97oyxt6",
+            instance_private_ip_addr="10.0.30.62",
+            description="remark.",
+            public_ip_addrs=["106.55.167.123"])
+        ```
+
+        ### If resource_type is USERDEFINED
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.nat.GatewaySnat("example",
+            nat_gateway_id="nat-jmf9955g",
+            resource_type="USERDEFINED",
+            instance_private_ip_addr="10.0.40.0/24",
+            description="remark.",
+            public_ip_addrs=["106.55.167.123"])
+        ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateNatGatewaySourceIpTranslationNatRule](https://www.tencentcloud.com/document/api/215/39646)
+          - [DescribeNatGatewaySourceIpTranslationNatRules](https://www.tencentcloud.com/document/api/215/39644)
+        * Read: [DescribeNatGatewaySourceIpTranslationNatRules](https://www.tencentcloud.com/document/api/215/39644)
+        * Update: [ModifyNatGatewaySourceIpTranslationNatRule](https://www.tencentcloud.com/document/api/215/39643)
+        * Delete: [DeleteNatGatewaySourceIpTranslationNatRule](https://www.tencentcloud.com/document/api/215/39645)
 
         ## Import
 
-        VPN gateway route can be imported using the id, the id format must be '{nat_gateway_id}#{resource_id}', resource_id range `subnet_id`, `instance_id`, e.g.
+        VPN gateway route can be imported using the id, the id format must be '{nat_gateway_id}#{resource_id}', resource_id range `subnet_id`, `instance_id` and `""`, e.g.
 
         SUBNET SNat
+
         ```sh
-        $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat my_snat nat-r4ip1cwt#subnet-2ap74y35
+        $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat example nat-jmf9955g#subnet-hhi88a58
         ```
 
         NETWORKINTERFACT SNat
+
         ```sh
-        $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat my_snat nat-r4ip1cwt#ins-da412f5a
+        $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat example nat-jmf9955g#ins-p97oyxt6
+        ```
+
+        USERDEFINED SNat
+
+        ```sh
+        $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat example nat-jmf9955g#
         ```
 
 
@@ -440,10 +421,10 @@ class GatewaySnat(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] description: Description.
         :param pulumi.Input[_builtins.str] instance_id: Instance ID, required when `resource_type` is NETWORKINTERFACE.
-        :param pulumi.Input[_builtins.str] instance_private_ip_addr: Private IPs of the instance's primary ENI, required when `resource_type` is NETWORKINTERFACE.
+        :param pulumi.Input[_builtins.str] instance_private_ip_addr: Private IPs of the instance's primary ENI, required when `resource_type` is NETWORKINTERFACE or USERDEFINED.
         :param pulumi.Input[_builtins.str] nat_gateway_id: NAT gateway ID.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] public_ip_addrs: Elastic IP address pool.
-        :param pulumi.Input[_builtins.str] resource_type: Resource type. Valid values: SUBNET, NETWORKINTERFACE.
+        :param pulumi.Input[_builtins.str] resource_type: Resource type. Valid values: SUBNET, NETWORKINTERFACE, USERDEFINED.
         :param pulumi.Input[_builtins.str] subnet_cidr_block: The IPv4 CIDR of the subnet, required when `resource_type` is SUBNET.
         :param pulumi.Input[_builtins.str] subnet_id: Subnet instance ID, required when `resource_type` is SUBNET.
         """
@@ -458,100 +439,81 @@ class GatewaySnat(pulumi.CustomResource):
 
         ## Example Usage
 
+        ### If resource_type is SUBNET
+
         ```python
         import pulumi
-        import pulumi_tencentcloud as tencentcloud
         import tencentcloud_iac_pulumi as tencentcloud
 
-        zones = tencentcloud.availability.get_zones_by_product(product="nat")
-        image = tencentcloud.images.get_instance(os_name="centos")
-        instance_types = tencentcloud.instance.get_types(filters=[
-                {
-                    "name": "zone",
-                    "values": [zones.zones[0].name],
-                },
-                {
-                    "name": "instance-family",
-                    "values": ["S5"],
-                },
-            ],
-            cpu_core_count=2,
-            exclude_sold_out=True)
-        vpc = tencentcloud.vpc.Instance("vpc",
-            name="vpc-example",
-            cidr_block="10.0.0.0/16")
-        # Create route_table and entry
-        route_table = tencentcloud.route.Table("route_table",
-            vpc_id=vpc.id,
-            name="tf_example")
-        subnet = tencentcloud.subnet.Instance("subnet",
-            vpc_id=vpc.id,
-            name="subnet-example",
-            cidr_block="10.0.0.0/16",
-            availability_zone=zones.zones[0].name,
-            route_table_id=route_table.id)
-        eip_example1 = tencentcloud.eip.Instance("eip_example1", name="eip_example1")
-        eip_example2 = tencentcloud.eip.Instance("eip_example2", name="eip_example2")
-        # Create NAT Gateway
-        my_nat = tencentcloud.nat.Gateway("my_nat",
-            vpc_id=vpc.id,
-            name="tf_example_nat_gateway",
-            max_concurrent=3000000,
-            bandwidth=500,
-            assigned_eip_sets=[
-                eip_example1.public_ip,
-                eip_example2.public_ip,
-            ])
-        route_entry = tencentcloud.route.TableEntry("route_entry",
-            route_table_id=route_table.id,
-            destination_cidr_block="10.0.0.0/8",
-            next_type="NAT",
-            next_hub=my_nat.id)
-        # Subnet Nat gateway snat
-        subnet_snat = tencentcloud.nat.GatewaySnat("subnet_snat",
-            nat_gateway_id=my_nat.id,
+        example = tencentcloud.nat.GatewaySnat("example",
+            nat_gateway_id="nat-jmf9955g",
             resource_type="SUBNET",
-            subnet_id=subnet.id,
-            subnet_cidr_block=subnet.cidr_block,
-            description="terraform test",
-            public_ip_addrs=[
-                eip_example1.public_ip,
-                eip_example2.public_ip,
-            ])
-        # Create instance
-        example = tencentcloud.instance.Instance("example",
-            instance_name="tf_example",
-            availability_zone=zones.zones[0].name,
-            image_id=image.images[0].image_id,
-            instance_type=instance_types.instance_types[0].instance_type,
-            system_disk_type="CLOUD_PREMIUM",
-            system_disk_size=50,
-            hostname="user",
-            project_id=0,
-            vpc_id=vpc.id,
-            subnet_id=subnet.id)
-        # NetWorkInterface Nat gateway snat
-        my_instance_snat = tencentcloud.nat.GatewaySnat("my_instance_snat",
-            nat_gateway_id=my_nat.id,
-            resource_type="NETWORKINTERFACE",
-            instance_id=example.id,
-            instance_private_ip_addr=example.private_ip,
-            description="terraform test",
-            public_ip_addrs=[eip_example1.public_ip])
+            subnet_id="subnet-hhi88a58",
+            subnet_cidr_block="10.0.30.0/24",
+            description="remark.",
+            public_ip_addrs=["106.55.167.123"])
         ```
+
+        ### If resource_type is NETWORKINTERFACE
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.nat.GatewaySnat("example",
+            nat_gateway_id="nat-jmf9955g",
+            resource_type="NETWORKINTERFACE",
+            instance_id="ins-p97oyxt6",
+            instance_private_ip_addr="10.0.30.62",
+            description="remark.",
+            public_ip_addrs=["106.55.167.123"])
+        ```
+
+        ### If resource_type is USERDEFINED
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.nat.GatewaySnat("example",
+            nat_gateway_id="nat-jmf9955g",
+            resource_type="USERDEFINED",
+            instance_private_ip_addr="10.0.40.0/24",
+            description="remark.",
+            public_ip_addrs=["106.55.167.123"])
+        ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateNatGatewaySourceIpTranslationNatRule](https://www.tencentcloud.com/document/api/215/39646)
+          - [DescribeNatGatewaySourceIpTranslationNatRules](https://www.tencentcloud.com/document/api/215/39644)
+        * Read: [DescribeNatGatewaySourceIpTranslationNatRules](https://www.tencentcloud.com/document/api/215/39644)
+        * Update: [ModifyNatGatewaySourceIpTranslationNatRule](https://www.tencentcloud.com/document/api/215/39643)
+        * Delete: [DeleteNatGatewaySourceIpTranslationNatRule](https://www.tencentcloud.com/document/api/215/39645)
 
         ## Import
 
-        VPN gateway route can be imported using the id, the id format must be '{nat_gateway_id}#{resource_id}', resource_id range `subnet_id`, `instance_id`, e.g.
+        VPN gateway route can be imported using the id, the id format must be '{nat_gateway_id}#{resource_id}', resource_id range `subnet_id`, `instance_id` and `""`, e.g.
 
         SUBNET SNat
+
         ```sh
-        $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat my_snat nat-r4ip1cwt#subnet-2ap74y35
+        $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat example nat-jmf9955g#subnet-hhi88a58
         ```
 
         NETWORKINTERFACT SNat
+
         ```sh
-        $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat my_snat nat-r4ip1cwt#ins-da412f5a
+        $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat example nat-jmf9955g#ins-p97oyxt6
+        ```
+
+        USERDEFINED SNat
+
+        ```sh
+        $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat example nat-jmf9955g#
         ```
 
 
@@ -635,10 +597,10 @@ class GatewaySnat(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] create_time: Create time.
         :param pulumi.Input[_builtins.str] description: Description.
         :param pulumi.Input[_builtins.str] instance_id: Instance ID, required when `resource_type` is NETWORKINTERFACE.
-        :param pulumi.Input[_builtins.str] instance_private_ip_addr: Private IPs of the instance's primary ENI, required when `resource_type` is NETWORKINTERFACE.
+        :param pulumi.Input[_builtins.str] instance_private_ip_addr: Private IPs of the instance's primary ENI, required when `resource_type` is NETWORKINTERFACE or USERDEFINED.
         :param pulumi.Input[_builtins.str] nat_gateway_id: NAT gateway ID.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] public_ip_addrs: Elastic IP address pool.
-        :param pulumi.Input[_builtins.str] resource_type: Resource type. Valid values: SUBNET, NETWORKINTERFACE.
+        :param pulumi.Input[_builtins.str] resource_type: Resource type. Valid values: SUBNET, NETWORKINTERFACE, USERDEFINED.
         :param pulumi.Input[_builtins.str] snat_id: SNAT rule ID.
         :param pulumi.Input[_builtins.str] subnet_cidr_block: The IPv4 CIDR of the subnet, required when `resource_type` is SUBNET.
         :param pulumi.Input[_builtins.str] subnet_id: Subnet instance ID, required when `resource_type` is SUBNET.
@@ -687,7 +649,7 @@ class GatewaySnat(pulumi.CustomResource):
     @pulumi.getter(name="instancePrivateIpAddr")
     def instance_private_ip_addr(self) -> pulumi.Output[Optional[_builtins.str]]:
         """
-        Private IPs of the instance's primary ENI, required when `resource_type` is NETWORKINTERFACE.
+        Private IPs of the instance's primary ENI, required when `resource_type` is NETWORKINTERFACE or USERDEFINED.
         """
         return pulumi.get(self, "instance_private_ip_addr")
 
@@ -711,7 +673,7 @@ class GatewaySnat(pulumi.CustomResource):
     @pulumi.getter(name="resourceType")
     def resource_type(self) -> pulumi.Output[_builtins.str]:
         """
-        Resource type. Valid values: SUBNET, NETWORKINTERFACE.
+        Resource type. Valid values: SUBNET, NETWORKINTERFACE, USERDEFINED.
         """
         return pulumi.get(self, "resource_type")
 

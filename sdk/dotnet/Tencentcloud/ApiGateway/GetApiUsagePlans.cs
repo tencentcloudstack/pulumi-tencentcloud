@@ -105,6 +105,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeApiUsagePlan](https://www.tencentcloud.com/search/?wd=DescribeApiUsagePlan&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetApiUsagePlansResult> InvokeAsync(GetApiUsagePlansArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetApiUsagePlansResult>("tencentcloud:ApiGateway/getApiUsagePlans:getApiUsagePlans", args ?? new GetApiUsagePlansArgs(), options.WithDefaults());
@@ -202,6 +208,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeApiUsagePlan](https://www.tencentcloud.com/search/?wd=DescribeApiUsagePlan&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetApiUsagePlansResult> Invoke(GetApiUsagePlansInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetApiUsagePlansResult>("tencentcloud:ApiGateway/getApiUsagePlans:getApiUsagePlans", args ?? new GetApiUsagePlansInvokeArgs(), options.WithDefaults());
@@ -299,6 +311,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeApiUsagePlan](https://www.tencentcloud.com/search/?wd=DescribeApiUsagePlan&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetApiUsagePlansResult> Invoke(GetApiUsagePlansInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetApiUsagePlansResult>("tencentcloud:ApiGateway/getApiUsagePlans:getApiUsagePlans", args ?? new GetApiUsagePlansInvokeArgs(), options.WithDefaults());

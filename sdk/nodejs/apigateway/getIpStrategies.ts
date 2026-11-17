@@ -39,6 +39,14 @@ import * as utilities from "../utilities";
  *     strategyName: test.strategyName,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeIPStrategy](https://www.tencentcloud.com/search/?wd=DescribeIPStrategy&type=document&lang=en)
+ *   - [DescribeIPStrategysStatus](https://www.tencentcloud.com/search/?wd=DescribeIPStrategysStatus&type=document&lang=en)
  */
 export function getIpStrategies(args: GetIpStrategiesArgs, opts?: pulumi.InvokeOptions): Promise<GetIpStrategiesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -122,6 +130,14 @@ export interface GetIpStrategiesResult {
  *     strategyName: test.strategyName,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeIPStrategy](https://www.tencentcloud.com/search/?wd=DescribeIPStrategy&type=document&lang=en)
+ *   - [DescribeIPStrategysStatus](https://www.tencentcloud.com/search/?wd=DescribeIPStrategysStatus&type=document&lang=en)
  */
 export function getIpStrategiesOutput(args: GetIpStrategiesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetIpStrategiesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

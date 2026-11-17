@@ -390,6 +390,15 @@ class User(pulumi.CustomResource):
             auth_type=0)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateUser](https://www.tencentcloud.com/search/?wd=CreateUser&type=document&lang=en)
+        * Read: [DescribeUsers](https://www.tencentcloud.com/search/?wd=DescribeUsers&type=document&lang=en)
+        * Update: [ModifyUser](https://www.tencentcloud.com/search/?wd=ModifyUser&type=document&lang=en)
+        * Delete: [DeleteUsers](https://www.tencentcloud.com/search/?wd=DeleteUsers&type=document&lang=en)
+
         ## Import
 
         dasb user can be imported using the id, e.g.
@@ -437,6 +446,15 @@ class User(pulumi.CustomResource):
             department_id="1.2",
             auth_type=0)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateUser](https://www.tencentcloud.com/search/?wd=CreateUser&type=document&lang=en)
+        * Read: [DescribeUsers](https://www.tencentcloud.com/search/?wd=DescribeUsers&type=document&lang=en)
+        * Update: [ModifyUser](https://www.tencentcloud.com/search/?wd=ModifyUser&type=document&lang=en)
+        * Delete: [DeleteUsers](https://www.tencentcloud.com/search/?wd=DeleteUsers&type=document&lang=en)
 
         ## Import
 

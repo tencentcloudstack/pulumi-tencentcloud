@@ -466,6 +466,15 @@ class Namespace(pulumi.CustomResource):
             is_ha_enable="0")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateNamespace](https://www.tencentcloud.com/search/?wd=CreateNamespace&type=document&lang=en)
+        * Read: [DescribeSimpleNamespaces](https://www.tencentcloud.com/search/?wd=DescribeSimpleNamespaces&type=document&lang=en)
+        * Update: [ModifyNamespace](https://www.tencentcloud.com/search/?wd=ModifyNamespace&type=document&lang=en)
+        * Delete: [DeleteNamespace](https://www.tencentcloud.com/search/?wd=DeleteNamespace&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -500,6 +509,15 @@ class Namespace(pulumi.CustomResource):
             namespace_type="DEF",
             is_ha_enable="0")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateNamespace](https://www.tencentcloud.com/search/?wd=CreateNamespace&type=document&lang=en)
+        * Read: [DescribeSimpleNamespaces](https://www.tencentcloud.com/search/?wd=DescribeSimpleNamespaces&type=document&lang=en)
+        * Update: [ModifyNamespace](https://www.tencentcloud.com/search/?wd=ModifyNamespace&type=document&lang=en)
+        * Delete: [DeleteNamespace](https://www.tencentcloud.com/search/?wd=DeleteNamespace&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

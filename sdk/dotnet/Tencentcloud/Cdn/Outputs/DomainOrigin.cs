@@ -47,7 +47,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Outputs
         /// </summary>
         public readonly string OriginType;
         /// <summary>
-        /// Host header used when accessing the master origin server. If left empty, the acceleration domain name will be used by default.
+        /// Origin path rewrite rules. Each element configures a path-based origin routing rule.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.DomainOriginPathRule> PathRules;
+        /// <summary>
+        /// Host header used when accessing the origin server on path match. If left empty, the default ServerName is used.
         /// </summary>
         public readonly string? ServerName;
 
@@ -69,6 +73,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Outputs
 
             string originType,
 
+            ImmutableArray<Outputs.DomainOriginPathRule> pathRules,
+
             string? serverName)
         {
             BackupOriginLists = backupOriginLists;
@@ -79,6 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Outputs
             OriginLists = originLists;
             OriginPullProtocol = originPullProtocol;
             OriginType = originType;
+            PathRules = pathRules;
             ServerName = serverName;
         }
     }

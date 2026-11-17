@@ -18,6 +18,14 @@ import * as utilities from "../utilities";
  *     nodeNames: ["1648026612002990732"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeInstances](https://www.tencentcloud.com/document/api/845/32214)
+ *   - [RestartNodes](https://www.tencentcloud.com/document/api/845/38511)
  */
 export class RestartNodesOperation extends pulumi.CustomResource {
     /**

@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     instanceType: "S2.MEDIUM8",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeReservedInstances](https://www.tencentcloud.com/document/api/213/68457)
  */
 export function getInstances(args?: GetInstancesArgs, opts?: pulumi.InvokeOptions): Promise<GetInstancesResult> {
     args = args || {};
@@ -94,6 +100,12 @@ export interface GetInstancesResult {
  *     instanceType: "S2.MEDIUM8",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeReservedInstances](https://www.tencentcloud.com/document/api/213/68457)
  */
 export function getInstancesOutput(args?: GetInstancesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInstancesResult> {
     args = args || {};

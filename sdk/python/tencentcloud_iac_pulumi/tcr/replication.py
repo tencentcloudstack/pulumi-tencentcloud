@@ -239,7 +239,7 @@ class Replication(pulumi.CustomResource):
                  source_registry_id: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         """
-        Provides a resource to create a TCR replication
+        Provides a resource to create and update a TCR replication
 
         ## Example Usage
 
@@ -305,6 +305,15 @@ class Replication(pulumi.CustomResource):
             destination_region_id=1,
             description="remark.")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ManageReplication](https://www.tencentcloud.com/document/api/1051/42669)
+        * Read: [DescribeReplicationPolicies](https://www.tencentcloud.com/search/?wd=DescribeReplicationPolicies&type=document&lang=en)
+        * Update: [ModifyReplication](https://www.tencentcloud.com/search/?wd=ModifyReplication&type=document&lang=en)
+        * Delete: [DeleteReplicationRule](https://www.tencentcloud.com/search/?wd=DeleteReplicationRule&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.
@@ -323,7 +332,7 @@ class Replication(pulumi.CustomResource):
                  args: ReplicationArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Provides a resource to create a TCR replication
+        Provides a resource to create and update a TCR replication
 
         ## Example Usage
 
@@ -389,6 +398,15 @@ class Replication(pulumi.CustomResource):
             destination_region_id=1,
             description="remark.")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ManageReplication](https://www.tencentcloud.com/document/api/1051/42669)
+        * Read: [DescribeReplicationPolicies](https://www.tencentcloud.com/search/?wd=DescribeReplicationPolicies&type=document&lang=en)
+        * Update: [ModifyReplication](https://www.tencentcloud.com/search/?wd=ModifyReplication&type=document&lang=en)
+        * Delete: [DeleteReplicationRule](https://www.tencentcloud.com/search/?wd=DeleteReplicationRule&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

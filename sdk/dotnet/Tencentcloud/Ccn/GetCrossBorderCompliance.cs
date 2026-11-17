@@ -37,6 +37,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCrossBorderCompliance](https://www.tencentcloud.com/document/api/215/38275)
         /// </summary>
         public static Task<GetCrossBorderComplianceResult> InvokeAsync(GetCrossBorderComplianceArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetCrossBorderComplianceResult>("tencentcloud:Ccn/getCrossBorderCompliance:getCrossBorderCompliance", args ?? new GetCrossBorderComplianceArgs(), options.WithDefaults());
@@ -66,6 +72,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCrossBorderCompliance](https://www.tencentcloud.com/document/api/215/38275)
         /// </summary>
         public static Output<GetCrossBorderComplianceResult> Invoke(GetCrossBorderComplianceInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetCrossBorderComplianceResult>("tencentcloud:Ccn/getCrossBorderCompliance:getCrossBorderCompliance", args ?? new GetCrossBorderComplianceInvokeArgs(), options.WithDefaults());
@@ -95,6 +107,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCrossBorderCompliance](https://www.tencentcloud.com/document/api/215/38275)
         /// </summary>
         public static Output<GetCrossBorderComplianceResult> Invoke(GetCrossBorderComplianceInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetCrossBorderComplianceResult>("tencentcloud:Ccn/getCrossBorderCompliance:getCrossBorderCompliance", args ?? new GetCrossBorderComplianceInvokeArgs(), options.WithDefaults());

@@ -25,6 +25,15 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateContentIdentifier](https://www.tencentcloud.com/document/api/1145/68158)
+ * * Read: [DescribeContentIdentifiers](https://www.tencentcloud.com/document/api/1145/68156)
+ * * Update: [ModifyContentIdentifier](https://www.tencentcloud.com/document/api/1145/68155)
+ * * Delete: [DeleteContentIdentifier](https://www.tencentcloud.com/document/api/1145/68157)
+ *
  * ## Import
  *
  * TEO content identifier can be imported using the id, e.g.

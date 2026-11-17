@@ -22,6 +22,12 @@ import * as utilities from "../utilities";
  *     instanceId: "emr-rnzqrleq",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeClusterNodes](https://www.tencentcloud.com/document/api/1026/35198)
  */
 export function getNodes(args: GetNodesArgs, opts?: pulumi.InvokeOptions): Promise<GetNodesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -114,6 +120,12 @@ export interface GetNodesResult {
  *     instanceId: "emr-rnzqrleq",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeClusterNodes](https://www.tencentcloud.com/document/api/1026/35198)
  */
 export function getNodesOutput(args: GetNodesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetNodesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

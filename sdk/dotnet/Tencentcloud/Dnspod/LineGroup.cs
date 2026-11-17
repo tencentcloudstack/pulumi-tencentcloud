@@ -37,6 +37,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateLineGroup](https://www.tencentcloud.com/search/?wd=CreateLineGroup&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeLineGroupList](https://www.tencentcloud.com/search/?wd=DescribeLineGroupList&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyLineGroup](https://www.tencentcloud.com/search/?wd=ModifyLineGroup&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteLineGroup](https://www.tencentcloud.com/search/?wd=DeleteLineGroup&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// DNSPod line group can be imported using the id (format: `{domain}#{line_group_id}`), e.g.

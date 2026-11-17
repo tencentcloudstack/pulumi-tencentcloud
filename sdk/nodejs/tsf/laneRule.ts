@@ -28,6 +28,17 @@ import * as utilities from "../utilities";
  *     enable: false,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateLaneRule](https://www.tencentcloud.com/search/?wd=CreateLaneRule&type=document&lang=en)
+ *   - [ModifyLaneRule](https://www.tencentcloud.com/search/?wd=ModifyLaneRule&type=document&lang=en)
+ * * Read: [DescribeLaneRules](https://www.tencentcloud.com/search/?wd=DescribeLaneRules&type=document&lang=en)
+ * * Update: [ModifyLaneRule](https://www.tencentcloud.com/search/?wd=ModifyLaneRule&type=document&lang=en)
+ * * Delete: [DeleteLaneRule](https://www.tencentcloud.com/search/?wd=DeleteLaneRule&type=document&lang=en)
  */
 export class LaneRule extends pulumi.CustomResource {
     /**

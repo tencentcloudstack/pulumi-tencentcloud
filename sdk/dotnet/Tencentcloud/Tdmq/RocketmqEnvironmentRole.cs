@@ -58,6 +58,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateEnvironmentRole](https://www.tencentcloud.com/search/?wd=CreateEnvironmentRole&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeEnvironmentRoles](https://www.tencentcloud.com/search/?wd=DescribeEnvironmentRoles&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyEnvironmentRole](https://www.tencentcloud.com/search/?wd=ModifyEnvironmentRole&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteEnvironmentRoles](https://www.tencentcloud.com/search/?wd=DeleteEnvironmentRoles&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// tdmqRocketmq EnvironmentRole can be imported using the id, e.g.

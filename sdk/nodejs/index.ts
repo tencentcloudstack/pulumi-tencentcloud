@@ -13,6 +13,7 @@ import { Provider } from "./provider";
 import * as accept from "./accept";
 import * as address from "./address";
 import * as advisor from "./advisor";
+import * as ags from "./ags";
 import * as antiddos from "./antiddos";
 import * as apigateway from "./apigateway";
 import * as apm from "./apm";
@@ -21,10 +22,12 @@ import * as audit from "./audit";
 import * as audits from "./audits";
 import * as availability from "./availability";
 import * as batch from "./batch";
+import * as bdrc from "./bdrc";
 import * as bh from "./bh";
 import * as bi from "./bi";
 import * as billing from "./billing";
 import * as cam from "./cam";
+import * as captcha from "./captcha";
 import * as cat from "./cat";
 import * as cbs from "./cbs";
 import * as ccn from "./ccn";
@@ -75,6 +78,7 @@ import * as emr from "./emr";
 import * as eni from "./eni";
 import * as enis from "./enis";
 import * as events from "./events";
+import * as fwm from "./fwm";
 import * as ga2 from "./ga2";
 import * as gaap from "./gaap";
 import * as gs from "./gs";
@@ -87,6 +91,7 @@ import * as images from "./images";
 import * as instance from "./instance";
 import * as instances from "./instances";
 import * as invite from "./invite";
+import * as ioa from "./ioa";
 import * as ipv6 from "./ipv6";
 import * as keewidb from "./keewidb";
 import * as key from "./key";
@@ -145,6 +150,7 @@ import * as tcr from "./tcr";
 import * as tcss from "./tcss";
 import * as tdcpg from "./tdcpg";
 import * as tdmq from "./tdmq";
+import * as tdmysql from "./tdmysql";
 import * as tem from "./tem";
 import * as teo from "./teo";
 import * as thpc from "./thpc";
@@ -166,6 +172,7 @@ export {
     accept,
     address,
     advisor,
+    ags,
     antiddos,
     apigateway,
     apm,
@@ -174,10 +181,12 @@ export {
     audits,
     availability,
     batch,
+    bdrc,
     bh,
     bi,
     billing,
     cam,
+    captcha,
     cat,
     cbs,
     ccn,
@@ -228,6 +237,7 @@ export {
     eni,
     enis,
     events,
+    fwm,
     ga2,
     gaap,
     gs,
@@ -240,6 +250,7 @@ export {
     instance,
     instances,
     invite,
+    ioa,
     ipv6,
     keewidb,
     key,
@@ -298,6 +309,7 @@ export {
     tcss,
     tdcpg,
     tdmq,
+    tdmysql,
     tem,
     teo,
     thpc,

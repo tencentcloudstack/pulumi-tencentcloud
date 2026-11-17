@@ -84,6 +84,12 @@ def get_image_quota(result_output_file: Optional[_builtins.str] = None,
     image_quota = tencentcloud.cvm.get_image_quota()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeImageQuota](https://www.tencentcloud.com/document/api/213/33274)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -109,6 +115,12 @@ def get_image_quota_output(result_output_file: pulumi.Input[Optional[Optional[_b
 
     image_quota = tencentcloud.cvm.get_image_quota()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeImageQuota](https://www.tencentcloud.com/document/api/213/33274)
 
 
     :param _builtins.str result_output_file: Used to save results.

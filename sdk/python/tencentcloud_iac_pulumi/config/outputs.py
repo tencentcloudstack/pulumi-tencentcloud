@@ -15,6 +15,9 @@ else:
     pass
 
 __all__ = [
+    'AggregateCompliancePackConfigRule',
+    'AggregateCompliancePackConfigRuleInputParameter',
+    'AggregatorAggregatorAccount',
     'AssumeRole',
     'AssumeRoleWithSaml',
     'AssumeRoleWithWebIdentity',
@@ -25,6 +28,8 @@ __all__ = [
     'GetDiscoveredResourcesResourceListResult',
     'GetDiscoveredResourcesResourceListTagResult',
     'GetDiscoveredResourcesTagResult',
+    'GetListAggregateCompliancePacksItemResult',
+    'GetListAggregatorsItemResult',
     'GetResourceTypesResourceTypeListResult',
     'GetRuleEvaluationResultsResultListAnnotationResult',
     'GetRuleEvaluationResultsResultListResult',
@@ -35,6 +40,240 @@ __all__ = [
     'RuleTagsScope',
     'RuleTriggerType',
 ]
+
+@pulumi.output_type
+class AggregateCompliancePackConfigRule(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "inputParameters":
+            suggest = "input_parameters"
+        elif key == "riskLevel":
+            suggest = "risk_level"
+        elif key == "ruleName":
+            suggest = "rule_name"
+        elif key == "compliancePackId":
+            suggest = "compliance_pack_id"
+        elif key == "configRuleId":
+            suggest = "config_rule_id"
+        elif key == "managedRuleIdentifier":
+            suggest = "managed_rule_identifier"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in AggregateCompliancePackConfigRule. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        AggregateCompliancePackConfigRule.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        AggregateCompliancePackConfigRule.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 input_parameters: Sequence['outputs.AggregateCompliancePackConfigRuleInputParameter'],
+                 risk_level: _builtins.int,
+                 rule_name: _builtins.str,
+                 compliance_pack_id: Optional[_builtins.str] = None,
+                 config_rule_id: Optional[_builtins.str] = None,
+                 description: Optional[_builtins.str] = None,
+                 identifier: Optional[_builtins.str] = None,
+                 managed_rule_identifier: Optional[_builtins.str] = None):
+        """
+        :param Sequence['AggregateCompliancePackConfigRuleInputParameterArgs'] input_parameters: Rule input parameters.
+        :param _builtins.int risk_level: Rule risk level. Valid values: 1 (high risk), 2 (medium risk), 3 (low risk).
+        :param _builtins.str rule_name: Rule name.
+        :param _builtins.str compliance_pack_id: Compliance pack id that this rule belongs to.
+        :param _builtins.str config_rule_id: Config rule id.
+        :param _builtins.str description: Rule description.
+        :param _builtins.str identifier: Rule identifier (managed rule name or custom rule cloud function ARN).
+        :param _builtins.str managed_rule_identifier: Managed rule identifier (preset rule identity).
+        """
+        pulumi.set(__self__, "input_parameters", input_parameters)
+        pulumi.set(__self__, "risk_level", risk_level)
+        pulumi.set(__self__, "rule_name", rule_name)
+        if compliance_pack_id is not None:
+            pulumi.set(__self__, "compliance_pack_id", compliance_pack_id)
+        if config_rule_id is not None:
+            pulumi.set(__self__, "config_rule_id", config_rule_id)
+        if description is not None:
+            pulumi.set(__self__, "description", description)
+        if identifier is not None:
+            pulumi.set(__self__, "identifier", identifier)
+        if managed_rule_identifier is not None:
+            pulumi.set(__self__, "managed_rule_identifier", managed_rule_identifier)
+
+    @_builtins.property
+    @pulumi.getter(name="inputParameters")
+    def input_parameters(self) -> Sequence['outputs.AggregateCompliancePackConfigRuleInputParameter']:
+        """
+        Rule input parameters.
+        """
+        return pulumi.get(self, "input_parameters")
+
+    @_builtins.property
+    @pulumi.getter(name="riskLevel")
+    def risk_level(self) -> _builtins.int:
+        """
+        Rule risk level. Valid values: 1 (high risk), 2 (medium risk), 3 (low risk).
+        """
+        return pulumi.get(self, "risk_level")
+
+    @_builtins.property
+    @pulumi.getter(name="ruleName")
+    def rule_name(self) -> _builtins.str:
+        """
+        Rule name.
+        """
+        return pulumi.get(self, "rule_name")
+
+    @_builtins.property
+    @pulumi.getter(name="compliancePackId")
+    def compliance_pack_id(self) -> Optional[_builtins.str]:
+        """
+        Compliance pack id that this rule belongs to.
+        """
+        return pulumi.get(self, "compliance_pack_id")
+
+    @_builtins.property
+    @pulumi.getter(name="configRuleId")
+    def config_rule_id(self) -> Optional[_builtins.str]:
+        """
+        Config rule id.
+        """
+        return pulumi.get(self, "config_rule_id")
+
+    @_builtins.property
+    @pulumi.getter
+    def description(self) -> Optional[_builtins.str]:
+        """
+        Rule description.
+        """
+        return pulumi.get(self, "description")
+
+    @_builtins.property
+    @pulumi.getter
+    def identifier(self) -> Optional[_builtins.str]:
+        """
+        Rule identifier (managed rule name or custom rule cloud function ARN).
+        """
+        return pulumi.get(self, "identifier")
+
+    @_builtins.property
+    @pulumi.getter(name="managedRuleIdentifier")
+    def managed_rule_identifier(self) -> Optional[_builtins.str]:
+        """
+        Managed rule identifier (preset rule identity).
+        """
+        return pulumi.get(self, "managed_rule_identifier")
+
+
+@pulumi.output_type
+class AggregateCompliancePackConfigRuleInputParameter(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "parameterKey":
+            suggest = "parameter_key"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in AggregateCompliancePackConfigRuleInputParameter. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        AggregateCompliancePackConfigRuleInputParameter.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        AggregateCompliancePackConfigRuleInputParameter.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 parameter_key: _builtins.str,
+                 type: Optional[_builtins.str] = None,
+                 value: Optional[_builtins.str] = None):
+        """
+        :param _builtins.str parameter_key: Parameter key.
+        :param _builtins.str type: Parameter type. Required: `Require`, optional: `Optional`.
+        :param _builtins.str value: Parameter value.
+        """
+        pulumi.set(__self__, "parameter_key", parameter_key)
+        if type is not None:
+            pulumi.set(__self__, "type", type)
+        if value is not None:
+            pulumi.set(__self__, "value", value)
+
+    @_builtins.property
+    @pulumi.getter(name="parameterKey")
+    def parameter_key(self) -> _builtins.str:
+        """
+        Parameter key.
+        """
+        return pulumi.get(self, "parameter_key")
+
+    @_builtins.property
+    @pulumi.getter
+    def type(self) -> Optional[_builtins.str]:
+        """
+        Parameter type. Required: `Require`, optional: `Optional`.
+        """
+        return pulumi.get(self, "type")
+
+    @_builtins.property
+    @pulumi.getter
+    def value(self) -> Optional[_builtins.str]:
+        """
+        Parameter value.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class AggregatorAggregatorAccount(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "memberName":
+            suggest = "member_name"
+        elif key == "memberUin":
+            suggest = "member_uin"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in AggregatorAggregatorAccount. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        AggregatorAggregatorAccount.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        AggregatorAggregatorAccount.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 member_name: _builtins.str,
+                 member_uin: _builtins.int):
+        """
+        :param _builtins.str member_name: Member account name.
+        :param _builtins.int member_uin: Member account ID.
+        """
+        pulumi.set(__self__, "member_name", member_name)
+        pulumi.set(__self__, "member_uin", member_uin)
+
+    @_builtins.property
+    @pulumi.getter(name="memberName")
+    def member_name(self) -> _builtins.str:
+        """
+        Member account name.
+        """
+        return pulumi.get(self, "member_name")
+
+    @_builtins.property
+    @pulumi.getter(name="memberUin")
+    def member_uin(self) -> _builtins.int:
+        """
+        Member account ID.
+        """
+        return pulumi.get(self, "member_uin")
+
 
 @pulumi.output_type
 class CompliancePackConfigRule(dict):
@@ -714,6 +953,218 @@ class GetDiscoveredResourcesTagResult(dict):
         Tag value.
         """
         return pulumi.get(self, "tag_value")
+
+
+@pulumi.output_type
+class GetListAggregateCompliancePacksItemResult(dict):
+    def __init__(__self__, *,
+                 compliance_pack_id: _builtins.str,
+                 compliance_pack_name: _builtins.str,
+                 compliance_result: _builtins.str,
+                 create_time: _builtins.str,
+                 description: _builtins.str,
+                 no_compliant_names: Sequence[_builtins.str],
+                 risk_level: _builtins.int,
+                 rule_count: _builtins.int,
+                 status: _builtins.str):
+        """
+        :param _builtins.str compliance_pack_id: Compliance pack ID.
+        :param _builtins.str compliance_pack_name: Compliance pack name.
+        :param _builtins.str compliance_result: Compliance result. Valid values: COMPLIANT, NON_COMPLIANT.
+        :param _builtins.str create_time: Creation time.
+        :param _builtins.str description: Compliance pack description.
+        :param Sequence[_builtins.str] no_compliant_names: List of non-compliant rule names.
+        :param _builtins.int risk_level: Risk level. Valid values: 1 (high risk), 2 (medium risk), 3 (low risk).
+        :param _builtins.int rule_count: Number of rules in the compliance pack.
+        :param _builtins.str status: Compliance pack status. Valid values: ACTIVE, NO_ACTIVE.
+        """
+        pulumi.set(__self__, "compliance_pack_id", compliance_pack_id)
+        pulumi.set(__self__, "compliance_pack_name", compliance_pack_name)
+        pulumi.set(__self__, "compliance_result", compliance_result)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "no_compliant_names", no_compliant_names)
+        pulumi.set(__self__, "risk_level", risk_level)
+        pulumi.set(__self__, "rule_count", rule_count)
+        pulumi.set(__self__, "status", status)
+
+    @_builtins.property
+    @pulumi.getter(name="compliancePackId")
+    def compliance_pack_id(self) -> _builtins.str:
+        """
+        Compliance pack ID.
+        """
+        return pulumi.get(self, "compliance_pack_id")
+
+    @_builtins.property
+    @pulumi.getter(name="compliancePackName")
+    def compliance_pack_name(self) -> _builtins.str:
+        """
+        Compliance pack name.
+        """
+        return pulumi.get(self, "compliance_pack_name")
+
+    @_builtins.property
+    @pulumi.getter(name="complianceResult")
+    def compliance_result(self) -> _builtins.str:
+        """
+        Compliance result. Valid values: COMPLIANT, NON_COMPLIANT.
+        """
+        return pulumi.get(self, "compliance_result")
+
+    @_builtins.property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> _builtins.str:
+        """
+        Creation time.
+        """
+        return pulumi.get(self, "create_time")
+
+    @_builtins.property
+    @pulumi.getter
+    def description(self) -> _builtins.str:
+        """
+        Compliance pack description.
+        """
+        return pulumi.get(self, "description")
+
+    @_builtins.property
+    @pulumi.getter(name="noCompliantNames")
+    def no_compliant_names(self) -> Sequence[_builtins.str]:
+        """
+        List of non-compliant rule names.
+        """
+        return pulumi.get(self, "no_compliant_names")
+
+    @_builtins.property
+    @pulumi.getter(name="riskLevel")
+    def risk_level(self) -> _builtins.int:
+        """
+        Risk level. Valid values: 1 (high risk), 2 (medium risk), 3 (low risk).
+        """
+        return pulumi.get(self, "risk_level")
+
+    @_builtins.property
+    @pulumi.getter(name="ruleCount")
+    def rule_count(self) -> _builtins.int:
+        """
+        Number of rules in the compliance pack.
+        """
+        return pulumi.get(self, "rule_count")
+
+    @_builtins.property
+    @pulumi.getter
+    def status(self) -> _builtins.str:
+        """
+        Compliance pack status. Valid values: ACTIVE, NO_ACTIVE.
+        """
+        return pulumi.get(self, "status")
+
+
+@pulumi.output_type
+class GetListAggregatorsItemResult(dict):
+    def __init__(__self__, *,
+                 account_count: _builtins.int,
+                 account_group_id: _builtins.str,
+                 aggregator_status: _builtins.int,
+                 create_time: _builtins.str,
+                 description: _builtins.str,
+                 member_name: _builtins.str,
+                 name: _builtins.str,
+                 owner_uin: _builtins.int,
+                 type: _builtins.str):
+        """
+        :param _builtins.int account_count: Number of accounts in the aggregator.
+        :param _builtins.str account_group_id: Aggregator ID.
+        :param _builtins.int aggregator_status: Aggregator status.
+        :param _builtins.str create_time: Creation time.
+        :param _builtins.str description: Aggregator description.
+        :param _builtins.str member_name: Member name.
+        :param _builtins.str name: Aggregator name.
+        :param _builtins.int owner_uin: Owner UIN.
+        :param _builtins.str type: Aggregator type.
+        """
+        pulumi.set(__self__, "account_count", account_count)
+        pulumi.set(__self__, "account_group_id", account_group_id)
+        pulumi.set(__self__, "aggregator_status", aggregator_status)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "description", description)
+        pulumi.set(__self__, "member_name", member_name)
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "owner_uin", owner_uin)
+        pulumi.set(__self__, "type", type)
+
+    @_builtins.property
+    @pulumi.getter(name="accountCount")
+    def account_count(self) -> _builtins.int:
+        """
+        Number of accounts in the aggregator.
+        """
+        return pulumi.get(self, "account_count")
+
+    @_builtins.property
+    @pulumi.getter(name="accountGroupId")
+    def account_group_id(self) -> _builtins.str:
+        """
+        Aggregator ID.
+        """
+        return pulumi.get(self, "account_group_id")
+
+    @_builtins.property
+    @pulumi.getter(name="aggregatorStatus")
+    def aggregator_status(self) -> _builtins.int:
+        """
+        Aggregator status.
+        """
+        return pulumi.get(self, "aggregator_status")
+
+    @_builtins.property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> _builtins.str:
+        """
+        Creation time.
+        """
+        return pulumi.get(self, "create_time")
+
+    @_builtins.property
+    @pulumi.getter
+    def description(self) -> _builtins.str:
+        """
+        Aggregator description.
+        """
+        return pulumi.get(self, "description")
+
+    @_builtins.property
+    @pulumi.getter(name="memberName")
+    def member_name(self) -> _builtins.str:
+        """
+        Member name.
+        """
+        return pulumi.get(self, "member_name")
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        Aggregator name.
+        """
+        return pulumi.get(self, "name")
+
+    @_builtins.property
+    @pulumi.getter(name="ownerUin")
+    def owner_uin(self) -> _builtins.int:
+        """
+        Owner UIN.
+        """
+        return pulumi.get(self, "owner_uin")
+
+    @_builtins.property
+    @pulumi.getter
+    def type(self) -> _builtins.str:
+        """
+        Aggregator type.
+        """
+        return pulumi.get(self, "type")
 
 
 @pulumi.output_type

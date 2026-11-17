@@ -85,6 +85,12 @@ class JoinShareUnitInvitationOperation(pulumi.CustomResource):
         example = tencentcloud.accept.JoinShareUnitInvitationOperation("example", unit_id="shareUnit-xhreo**2p")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AcceptJoinShareUnitInvitation](https://www.tencentcloud.com/document/api/1031/68238)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -107,6 +113,12 @@ class JoinShareUnitInvitationOperation(pulumi.CustomResource):
 
         example = tencentcloud.accept.JoinShareUnitInvitationOperation("example", unit_id="shareUnit-xhreo**2p")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AcceptJoinShareUnitInvitation](https://www.tencentcloud.com/document/api/1031/68238)
 
 
         :param str resource_name: The name of the resource.

@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstancesDiskNum](https://www.tencentcloud.com/document/api/1103/44563)
         /// </summary>
         public static Task<GetInstanceDiskNumResult> InvokeAsync(GetInstanceDiskNumArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceDiskNumResult>("tencentcloud:Lighthouse/getInstanceDiskNum:getInstanceDiskNum", args ?? new GetInstanceDiskNumArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstancesDiskNum](https://www.tencentcloud.com/document/api/1103/44563)
         /// </summary>
         public static Output<GetInstanceDiskNumResult> Invoke(GetInstanceDiskNumInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceDiskNumResult>("tencentcloud:Lighthouse/getInstanceDiskNum:getInstanceDiskNum", args ?? new GetInstanceDiskNumInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstancesDiskNum](https://www.tencentcloud.com/document/api/1103/44563)
         /// </summary>
         public static Output<GetInstanceDiskNumResult> Invoke(GetInstanceDiskNumInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceDiskNumResult>("tencentcloud:Lighthouse/getInstanceDiskNum:getInstanceDiskNum", args ?? new GetInstanceDiskNumInvokeArgs(), options.WithDefaults());

@@ -16,7 +16,7 @@ var _ = internal.GetEnvOrDefault
 type ImmutableTagRuleRule struct {
 	// disable rule.
 	Disabled *bool `pulumi:"disabled"`
-	// ID of the resource.
+	// rule id.
 	Id *int `pulumi:"id"`
 	// namespace name.
 	NsName *string `pulumi:"nsName"`
@@ -44,7 +44,7 @@ type ImmutableTagRuleRuleInput interface {
 type ImmutableTagRuleRuleArgs struct {
 	// disable rule.
 	Disabled pulumi.BoolPtrInput `pulumi:"disabled"`
-	// ID of the resource.
+	// rule id.
 	Id pulumi.IntPtrInput `pulumi:"id"`
 	// namespace name.
 	NsName pulumi.StringPtrInput `pulumi:"nsName"`
@@ -140,7 +140,7 @@ func (o ImmutableTagRuleRuleOutput) Disabled() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v ImmutableTagRuleRule) *bool { return v.Disabled }).(pulumi.BoolPtrOutput)
 }
 
-// ID of the resource.
+// rule id.
 func (o ImmutableTagRuleRuleOutput) Id() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ImmutableTagRuleRule) *int { return v.Id }).(pulumi.IntPtrOutput)
 }
@@ -204,7 +204,7 @@ func (o ImmutableTagRuleRulePtrOutput) Disabled() pulumi.BoolPtrOutput {
 	}).(pulumi.BoolPtrOutput)
 }
 
-// ID of the resource.
+// rule id.
 func (o ImmutableTagRuleRulePtrOutput) Id() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ImmutableTagRuleRule) *int {
 		if v == nil {
@@ -265,7 +265,7 @@ func (o ImmutableTagRuleRulePtrOutput) TagPattern() pulumi.StringPtrOutput {
 }
 
 type InstanceReplication struct {
-	// ID of the resource.
+	// Replication registry ID (readonly).
 	Id *string `pulumi:"id"`
 	// Replication region ID, check the example at the top of page to find out id of region.
 	RegionId *int `pulumi:"regionId"`
@@ -287,7 +287,7 @@ type InstanceReplicationInput interface {
 }
 
 type InstanceReplicationArgs struct {
-	// ID of the resource.
+	// Replication registry ID (readonly).
 	Id pulumi.StringPtrInput `pulumi:"id"`
 	// Replication region ID, check the example at the top of page to find out id of region.
 	RegionId pulumi.IntPtrInput `pulumi:"regionId"`
@@ -348,7 +348,7 @@ func (o InstanceReplicationOutput) ToInstanceReplicationOutputWithContext(ctx co
 	return o
 }
 
-// ID of the resource.
+// Replication registry ID (readonly).
 func (o InstanceReplicationOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v InstanceReplication) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
@@ -789,6 +789,8 @@ type ReplicationRule struct {
 	Deletion *bool `pulumi:"deletion"`
 	// Destination namespace.
 	DestNamespace string `pulumi:"destNamespace"`
+	// Whether to enable the rule.
+	Enabled *bool `pulumi:"enabled"`
 	// Synchronization filters.
 	Filters []ReplicationRuleFilter `pulumi:"filters"`
 	// Name of synchronization rule.
@@ -813,6 +815,8 @@ type ReplicationRuleArgs struct {
 	Deletion pulumi.BoolPtrInput `pulumi:"deletion"`
 	// Destination namespace.
 	DestNamespace pulumi.StringInput `pulumi:"destNamespace"`
+	// Whether to enable the rule.
+	Enabled pulumi.BoolPtrInput `pulumi:"enabled"`
 	// Synchronization filters.
 	Filters ReplicationRuleFilterArrayInput `pulumi:"filters"`
 	// Name of synchronization rule.
@@ -908,6 +912,11 @@ func (o ReplicationRuleOutput) DestNamespace() pulumi.StringOutput {
 	return o.ApplyT(func(v ReplicationRule) string { return v.DestNamespace }).(pulumi.StringOutput)
 }
 
+// Whether to enable the rule.
+func (o ReplicationRuleOutput) Enabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v ReplicationRule) *bool { return v.Enabled }).(pulumi.BoolPtrOutput)
+}
+
 // Synchronization filters.
 func (o ReplicationRuleOutput) Filters() ReplicationRuleFilterArrayOutput {
 	return o.ApplyT(func(v ReplicationRule) []ReplicationRuleFilter { return v.Filters }).(ReplicationRuleFilterArrayOutput)
@@ -965,6 +974,16 @@ func (o ReplicationRulePtrOutput) DestNamespace() pulumi.StringPtrOutput {
 		}
 		return &v.DestNamespace
 	}).(pulumi.StringPtrOutput)
+}
+
+// Whether to enable the rule.
+func (o ReplicationRulePtrOutput) Enabled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *ReplicationRule) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.Enabled
+	}).(pulumi.BoolPtrOutput)
 }
 
 // Synchronization filters.
@@ -1963,7 +1982,7 @@ type WebhookTriggerTrigger struct {
 	Enabled bool `pulumi:"enabled"`
 	// trigger action.
 	EventTypes []string `pulumi:"eventTypes"`
-	// ID of the resource.
+	// trigger Id.
 	Id *int `pulumi:"id"`
 	// trigger name.
 	Name string `pulumi:"name"`
@@ -1993,7 +2012,7 @@ type WebhookTriggerTriggerArgs struct {
 	Enabled pulumi.BoolInput `pulumi:"enabled"`
 	// trigger action.
 	EventTypes pulumi.StringArrayInput `pulumi:"eventTypes"`
-	// ID of the resource.
+	// trigger Id.
 	Id pulumi.IntPtrInput `pulumi:"id"`
 	// trigger name.
 	Name pulumi.StringInput `pulumi:"name"`
@@ -2100,7 +2119,7 @@ func (o WebhookTriggerTriggerOutput) EventTypes() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v WebhookTriggerTrigger) []string { return v.EventTypes }).(pulumi.StringArrayOutput)
 }
 
-// ID of the resource.
+// trigger Id.
 func (o WebhookTriggerTriggerOutput) Id() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v WebhookTriggerTrigger) *int { return v.Id }).(pulumi.IntPtrOutput)
 }
@@ -2184,7 +2203,7 @@ func (o WebhookTriggerTriggerPtrOutput) EventTypes() pulumi.StringArrayOutput {
 	}).(pulumi.StringArrayOutput)
 }
 
-// ID of the resource.
+// trigger Id.
 func (o WebhookTriggerTriggerPtrOutput) Id() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *WebhookTriggerTrigger) *int {
 		if v == nil {

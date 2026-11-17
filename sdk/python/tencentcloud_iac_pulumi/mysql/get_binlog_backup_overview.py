@@ -178,6 +178,12 @@ def get_binlog_backup_overview(product: Optional[_builtins.str] = None,
     binlog_backup_overview = tencentcloud.mysql.get_binlog_backup_overview(product="mysql")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBinlogBackupOverview](https://www.tencentcloud.com/document/api/236/35194)
+
 
     :param _builtins.str product: The type of cloud database product to be queried, currently only supports `mysql`.
     :param _builtins.str result_output_file: Used to save results.
@@ -214,6 +220,12 @@ def get_binlog_backup_overview_output(product: pulumi.Input[Optional[_builtins.s
 
     binlog_backup_overview = tencentcloud.mysql.get_binlog_backup_overview(product="mysql")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBinlogBackupOverview](https://www.tencentcloud.com/document/api/236/35194)
 
 
     :param _builtins.str product: The type of cloud database product to be queried, currently only supports `mysql`.

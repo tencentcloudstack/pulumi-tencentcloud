@@ -196,6 +196,12 @@ def get_tasks(bundle_id: Optional[_builtins.str] = None,
     wedata_tasks = tencentcloud.wedata.get_tasks(project_id="2905622749543821312")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListTasks](https://www.tencentcloud.com/document/api/1174/73868)
+
 
     :param _builtins.str bundle_id: Bundle id.
     :param Sequence[_builtins.str] create_times: Creation time range (yyyy-MM-dd HH:MM:ss). Two time values must be provided in the array.
@@ -271,6 +277,12 @@ def get_tasks_output(bundle_id: pulumi.Input[Optional[Optional[_builtins.str]]] 
 
     wedata_tasks = tencentcloud.wedata.get_tasks(project_id="2905622749543821312")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListTasks](https://www.tencentcloud.com/document/api/1174/73868)
 
 
     :param _builtins.str bundle_id: Bundle id.

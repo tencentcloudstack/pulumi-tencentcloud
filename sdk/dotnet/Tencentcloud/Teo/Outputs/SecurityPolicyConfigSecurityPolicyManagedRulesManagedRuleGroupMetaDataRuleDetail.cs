@@ -15,7 +15,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     public sealed class SecurityPolicyConfigSecurityPolicyManagedRulesManagedRuleGroupMetaDataRuleDetail
     {
         /// <summary>
-        /// Rule description.
+        /// Rule description. Output-only.
         /// </summary>
         public readonly string? Description;
         /// <summary>
@@ -23,7 +23,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// </summary>
         public readonly string? RiskLevel;
         /// <summary>
-        /// Managed rule Id.
+        /// Rule ID. Output-only.
         /// </summary>
         public readonly string? RuleId;
         /// <summary>

@@ -22,6 +22,12 @@ import * as utilities from "../utilities";
  *     forceAll: true,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeInstanceNodes](https://www.tencentcloud.com/search/?wd=DescribeInstanceNodes&type=document&lang=en)
  */
 export function getInstanceNodes(args: GetInstanceNodesArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceNodesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -94,6 +100,12 @@ export interface GetInstanceNodesResult {
  *     forceAll: true,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeInstanceNodes](https://www.tencentcloud.com/search/?wd=DescribeInstanceNodes&type=document&lang=en)
  */
 export function getInstanceNodesOutput(args: GetInstanceNodesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInstanceNodesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

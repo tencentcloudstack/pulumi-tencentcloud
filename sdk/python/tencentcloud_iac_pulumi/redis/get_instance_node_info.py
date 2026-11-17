@@ -132,6 +132,12 @@ def get_instance_node_info(instance_id: Optional[_builtins.str] = None,
     instance_node_info = tencentcloud.redis.get_instance_node_info(instance_id="crs-c1nl9rpv")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstanceNodeInfo](https://www.tencentcloud.com/document/api/239/38627)
+
 
     :param _builtins.str instance_id: The ID of instance.
     :param _builtins.str result_output_file: Used to save results.
@@ -164,6 +170,12 @@ def get_instance_node_info_output(instance_id: pulumi.Input[Optional[_builtins.s
 
     instance_node_info = tencentcloud.redis.get_instance_node_info(instance_id="crs-c1nl9rpv")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstanceNodeInfo](https://www.tencentcloud.com/document/api/239/38627)
 
 
     :param _builtins.str instance_id: The ID of instance.

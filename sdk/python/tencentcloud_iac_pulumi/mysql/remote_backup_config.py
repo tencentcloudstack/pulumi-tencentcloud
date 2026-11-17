@@ -255,6 +255,14 @@ class RemoteBackupConfig(pulumi.CustomResource):
             expire_days=7)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyRemoteBackupConfig](https://www.tencentcloud.com/document/api/236/52528)
+        * Read: [DescribeRemoteBackupConfig](https://www.tencentcloud.com/document/api/236/52529)
+        * Update: [ModifyRemoteBackupConfig](https://www.tencentcloud.com/document/api/236/52528)
+
         ## Import
 
         mysql remote_backup_config can be imported using the id, e.g.
@@ -330,6 +338,14 @@ class RemoteBackupConfig(pulumi.CustomResource):
             remote_regions=["ap-shanghai"],
             expire_days=7)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyRemoteBackupConfig](https://www.tencentcloud.com/document/api/236/52528)
+        * Read: [DescribeRemoteBackupConfig](https://www.tencentcloud.com/document/api/236/52529)
+        * Update: [ModifyRemoteBackupConfig](https://www.tencentcloud.com/document/api/236/52528)
 
         ## Import
 

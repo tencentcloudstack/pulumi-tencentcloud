@@ -270,6 +270,15 @@ class Rollback(pulumi.CustomResource):
             }])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+          - [StartBatchRollback](https://www.tencentcloud.com/document/api/236/18725)
+        * Read: [DescribeRollbackTaskDetail](https://www.tencentcloud.com/document/api/236/36099)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -348,6 +357,15 @@ class Rollback(pulumi.CustomResource):
                 }],
             }])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+          - [StartBatchRollback](https://www.tencentcloud.com/document/api/236/18725)
+        * Read: [DescribeRollbackTaskDetail](https://www.tencentcloud.com/document/api/236/36099)
 
 
         :param str resource_name: The name of the resource.

@@ -85,6 +85,12 @@ class CheckCertificateChainOperation(pulumi.CustomResource):
         check_certificate_chain = tencentcloud.ssl.CheckCertificateChainOperation("check_certificate_chain", certificate_chain="-----BEGIN CERTIFICATE--·····---END CERTIFICATE-----")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CheckCertificateChain](https://www.tencentcloud.com/search/?wd=CheckCertificateChain&type=document&lang=en)
+
         ## Import
 
         ssl check_certificate_chain can be imported using the id, e.g.
@@ -115,6 +121,12 @@ class CheckCertificateChainOperation(pulumi.CustomResource):
 
         check_certificate_chain = tencentcloud.ssl.CheckCertificateChainOperation("check_certificate_chain", certificate_chain="-----BEGIN CERTIFICATE--·····---END CERTIFICATE-----")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CheckCertificateChain](https://www.tencentcloud.com/search/?wd=CheckCertificateChain&type=document&lang=en)
 
         ## Import
 

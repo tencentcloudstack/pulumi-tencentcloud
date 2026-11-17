@@ -37,6 +37,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeImages](https://www.tencentcloud.com/document/api/1051/50721)
         /// </summary>
         public static Task<GetImagesResult> InvokeAsync(GetImagesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetImagesResult>("tencentcloud:Tcr/getImages:getImages", args ?? new GetImagesArgs(), options.WithDefaults());
@@ -66,6 +72,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeImages](https://www.tencentcloud.com/document/api/1051/50721)
         /// </summary>
         public static Output<GetImagesResult> Invoke(GetImagesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetImagesResult>("tencentcloud:Tcr/getImages:getImages", args ?? new GetImagesInvokeArgs(), options.WithDefaults());
@@ -95,6 +107,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeImages](https://www.tencentcloud.com/document/api/1051/50721)
         /// </summary>
         public static Output<GetImagesResult> Invoke(GetImagesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetImagesResult>("tencentcloud:Tcr/getImages:getImages", args ?? new GetImagesInvokeArgs(), options.WithDefaults());

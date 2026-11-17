@@ -105,6 +105,12 @@ def get_binlog_download_url(binlog_id: Optional[_builtins.int] = None,
         binlog_id=6202249)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBinlogDownloadUrl](https://www.tencentcloud.com/document/api/1098/48596)
+
 
     :param _builtins.int binlog_id: Binlog file ID.
     :param _builtins.str cluster_id: Cluster ID.
@@ -139,6 +145,12 @@ def get_binlog_download_url_output(binlog_id: pulumi.Input[Optional[_builtins.in
     binlog_download_url = tencentcloud.cynosdb.get_binlog_download_url(cluster_id="cynosdbmysql-bws8h88b",
         binlog_id=6202249)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBinlogDownloadUrl](https://www.tencentcloud.com/document/api/1098/48596)
 
 
     :param _builtins.int binlog_id: Binlog file ID.

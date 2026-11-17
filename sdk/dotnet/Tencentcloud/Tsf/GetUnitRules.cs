@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeUnitRulesV2](https://www.tencentcloud.com/search/?wd=DescribeUnitRulesV2&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetUnitRulesResult> InvokeAsync(GetUnitRulesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetUnitRulesResult>("tencentcloud:Tsf/getUnitRules:getUnitRules", args ?? new GetUnitRulesArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeUnitRulesV2](https://www.tencentcloud.com/search/?wd=DescribeUnitRulesV2&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetUnitRulesResult> Invoke(GetUnitRulesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetUnitRulesResult>("tencentcloud:Tsf/getUnitRules:getUnitRules", args ?? new GetUnitRulesInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeUnitRulesV2](https://www.tencentcloud.com/search/?wd=DescribeUnitRulesV2&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetUnitRulesResult> Invoke(GetUnitRulesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetUnitRulesResult>("tencentcloud:Tsf/getUnitRules:getUnitRules", args ?? new GetUnitRulesInvokeArgs(), options.WithDefaults());

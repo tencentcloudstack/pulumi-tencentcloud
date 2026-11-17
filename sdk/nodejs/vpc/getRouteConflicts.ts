@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     destinationCidrBlocks: ["172.18.111.0/24"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRouteConflicts](https://www.tencentcloud.com/search/?wd=DescribeRouteConflicts&type=document&lang=en)
  */
 export function getRouteConflicts(args: GetRouteConflictsArgs, opts?: pulumi.InvokeOptions): Promise<GetRouteConflictsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -81,6 +87,12 @@ export interface GetRouteConflictsResult {
  *     destinationCidrBlocks: ["172.18.111.0/24"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRouteConflicts](https://www.tencentcloud.com/search/?wd=DescribeRouteConflicts&type=document&lang=en)
  */
 export function getRouteConflictsOutput(args: GetRouteConflictsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRouteConflictsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

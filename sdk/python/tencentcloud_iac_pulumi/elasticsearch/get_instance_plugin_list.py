@@ -129,6 +129,12 @@ def get_instance_plugin_list(instance_id: Optional[_builtins.str] = None,
     instance_plugin_list = tencentcloud.elasticsearch.get_instance_plugin_list(instance_id="es-xxxxxx")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstancePluginList](https://www.tencentcloud.com/search/?wd=DescribeInstancePluginList&type=document&lang=en)
+
 
     :param _builtins.str instance_id: Instance id.
     :param _builtins.str order_by: order field. Valid values: `pluginName`.
@@ -172,6 +178,12 @@ def get_instance_plugin_list_output(instance_id: pulumi.Input[Optional[_builtins
 
     instance_plugin_list = tencentcloud.elasticsearch.get_instance_plugin_list(instance_id="es-xxxxxx")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstancePluginList](https://www.tencentcloud.com/search/?wd=DescribeInstancePluginList&type=document&lang=en)
 
 
     :param _builtins.str instance_id: Instance id.

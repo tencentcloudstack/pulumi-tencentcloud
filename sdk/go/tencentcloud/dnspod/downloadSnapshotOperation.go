@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [DownloadSnapshot](https://www.tencentcloud.com/search/?wd=DownloadSnapshot&type=document&lang=en)
 type DownloadSnapshotOperation struct {
 	pulumi.CustomResourceState
 

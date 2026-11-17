@@ -162,6 +162,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateEngine](https://www.tencentcloud.com/search/?wd=CreateEngine&amp;type=document&amp;lang=en)
+    ///   - [DescribeSREInstances](https://www.tencentcloud.com/search/?wd=DescribeSREInstances&amp;type=document&amp;lang=en)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    /// * Read:
+    ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+    ///   - [DescribeSREInstances](https://www.tencentcloud.com/search/?wd=DescribeSREInstances&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [DescribeSREInstances](https://www.tencentcloud.com/search/?wd=DescribeSREInstances&amp;type=document&amp;lang=en)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    ///   - [UpdateEngineInternetAccess](https://www.tencentcloud.com/search/?wd=UpdateEngineInternetAccess&amp;type=document&amp;lang=en)
+    /// * Delete:
+    ///   - [DeleteEngine](https://www.tencentcloud.com/search/?wd=DeleteEngine&amp;type=document&amp;lang=en)
+    ///   - [DescribeSREInstances](https://www.tencentcloud.com/search/?wd=DescribeSREInstances&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// tse instance can be imported using the id, e.g.

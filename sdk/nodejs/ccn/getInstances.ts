@@ -27,6 +27,14 @@ import * as utilities from "../utilities";
  *     name: main.name,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeCcnAttachedInstances](https://www.tencentcloud.com/document/api/215/34789)
+ *   - [DescribeCcns](https://www.tencentcloud.com/document/api/215/34787)
  */
 export function getInstances(args?: GetInstancesArgs, opts?: pulumi.InvokeOptions): Promise<GetInstancesResult> {
     args = args || {};
@@ -99,6 +107,14 @@ export interface GetInstancesResult {
  *     name: main.name,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeCcnAttachedInstances](https://www.tencentcloud.com/document/api/215/34789)
+ *   - [DescribeCcns](https://www.tencentcloud.com/document/api/215/34787)
  */
 export function getInstancesOutput(args?: GetInstancesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInstancesResult> {
     args = args || {};

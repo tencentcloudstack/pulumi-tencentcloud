@@ -17,6 +17,14 @@ import * as utilities from "../utilities";
  *
  * const example = tencentcloud.sqlserver.getZoneConfig({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeProductConfig](https://www.tencentcloud.com/document/api/238/32112)
+ *   - [DescribeZones](https://www.tencentcloud.com/document/api/238/32109)
  */
 export function getZoneConfig(args?: GetZoneConfigArgs, opts?: pulumi.InvokeOptions): Promise<GetZoneConfigResult> {
     args = args || {};
@@ -61,6 +69,14 @@ export interface GetZoneConfigResult {
  *
  * const example = tencentcloud.sqlserver.getZoneConfig({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeProductConfig](https://www.tencentcloud.com/document/api/238/32112)
+ *   - [DescribeZones](https://www.tencentcloud.com/document/api/238/32109)
  */
 export function getZoneConfigOutput(args?: GetZoneConfigOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetZoneConfigResult> {
     args = args || {};

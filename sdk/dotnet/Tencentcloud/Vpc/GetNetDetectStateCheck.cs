@@ -39,6 +39,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [CheckNetDetectState](https://www.tencentcloud.com/document/api/215/34746)
         /// </summary>
         public static Task<GetNetDetectStateCheckResult> InvokeAsync(GetNetDetectStateCheckArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetNetDetectStateCheckResult>("tencentcloud:Vpc/getNetDetectStateCheck:getNetDetectStateCheck", args ?? new GetNetDetectStateCheckArgs(), options.WithDefaults());
@@ -70,6 +76,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [CheckNetDetectState](https://www.tencentcloud.com/document/api/215/34746)
         /// </summary>
         public static Output<GetNetDetectStateCheckResult> Invoke(GetNetDetectStateCheckInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetNetDetectStateCheckResult>("tencentcloud:Vpc/getNetDetectStateCheck:getNetDetectStateCheck", args ?? new GetNetDetectStateCheckInvokeArgs(), options.WithDefaults());
@@ -101,6 +113,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [CheckNetDetectState](https://www.tencentcloud.com/document/api/215/34746)
         /// </summary>
         public static Output<GetNetDetectStateCheckResult> Invoke(GetNetDetectStateCheckInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetNetDetectStateCheckResult>("tencentcloud:Vpc/getNetDetectStateCheck:getNetDetectStateCheck", args ?? new GetNetDetectStateCheckInvokeArgs(), options.WithDefaults());

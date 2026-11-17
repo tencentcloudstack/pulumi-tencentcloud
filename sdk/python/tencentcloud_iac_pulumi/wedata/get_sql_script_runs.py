@@ -166,6 +166,12 @@ def get_sql_script_runs(end_time: Optional[_builtins.str] = None,
         script_id="971c1520-836f-41be-b13f-7a6c637317c8")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListSQLScriptRuns](https://www.tencentcloud.com/document/api/1174/73845)
+
 
     :param _builtins.str end_time: End time.
     :param _builtins.str execute_user_uin: Execute user UIN.
@@ -220,6 +226,12 @@ def get_sql_script_runs_output(end_time: pulumi.Input[Optional[Optional[_builtin
     example = tencentcloud.wedata.get_sql_script_runs(project_id="1460947878944567296",
         script_id="971c1520-836f-41be-b13f-7a6c637317c8")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListSQLScriptRuns](https://www.tencentcloud.com/document/api/1174/73845)
 
 
     :param _builtins.str end_time: End time.

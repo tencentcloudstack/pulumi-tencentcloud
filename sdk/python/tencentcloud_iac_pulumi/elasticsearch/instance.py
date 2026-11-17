@@ -27,13 +27,18 @@ class InstanceArgs:
                  vpc_id: pulumi.Input[_builtins.str],
                  availability_zone: pulumi.Input[Optional[_builtins.str]] = None,
                  basic_security_type: pulumi.Input[Optional[_builtins.int]] = None,
+                 cerebro_private_access: pulumi.Input[Optional[_builtins.str]] = None,
+                 cerebro_private_domain: pulumi.Input[Optional[_builtins.str]] = None,
+                 cerebro_public_access: pulumi.Input[Optional[_builtins.str]] = None,
                  charge_period: pulumi.Input[Optional[_builtins.int]] = None,
                  charge_type: pulumi.Input[Optional[_builtins.str]] = None,
                  cos_backup: pulumi.Input[Optional['InstanceCosBackupArgs']] = None,
                  deploy_mode: pulumi.Input[Optional[_builtins.int]] = None,
+                 enable_cerebro: pulumi.Input[Optional[_builtins.bool]] = None,
                  enable_destroy_protection: pulumi.Input[Optional[_builtins.str]] = None,
                  es_acl: pulumi.Input[Optional['InstanceEsAclArgs']] = None,
                  es_public_acl: pulumi.Input[Optional['InstanceEsPublicAclArgs']] = None,
+                 force_delete: pulumi.Input[Optional[_builtins.bool]] = None,
                  instance_name: pulumi.Input[Optional[_builtins.str]] = None,
                  kibana_private_access: pulumi.Input[Optional[_builtins.str]] = None,
                  kibana_public_access: pulumi.Input[Optional[_builtins.str]] = None,
@@ -44,6 +49,7 @@ class InstanceArgs:
                  public_access: pulumi.Input[Optional[_builtins.str]] = None,
                  renew_flag: pulumi.Input[Optional[_builtins.str]] = None,
                  scene_type: pulumi.Input[Optional[_builtins.int]] = None,
+                 sub_product_code: pulumi.Input[Optional[_builtins.str]] = None,
                  subnet_id: pulumi.Input[Optional[_builtins.str]] = None,
                  tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
                  web_node_type_infos: pulumi.Input[Optional[Sequence[pulumi.Input['InstanceWebNodeTypeInfoArgs']]]] = None):
@@ -55,13 +61,18 @@ class InstanceArgs:
         :param pulumi.Input[_builtins.str] vpc_id: The ID of a VPC network.
         :param pulumi.Input[_builtins.str] availability_zone: Availability zone. When create multi-az es, this parameter must be the primary availability zone.
         :param pulumi.Input[_builtins.int] basic_security_type: Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`. Notice: this parameter is only take effect on `basic` license.
+        :param pulumi.Input[_builtins.str] cerebro_private_access: Cerebro private network access status. Valid values are `OPEN` and `CLOSE`. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
+        :param pulumi.Input[_builtins.str] cerebro_private_domain: Cerebro private network custom domain. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
+        :param pulumi.Input[_builtins.str] cerebro_public_access: Cerebro public network access status. Valid values are `OPEN` and `CLOSE`. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
         :param pulumi.Input[_builtins.int] charge_period: The tenancy of the prepaid instance, and uint is month. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[_builtins.str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`.
         :param pulumi.Input['InstanceCosBackupArgs'] cos_backup: COS automatic backup information.
         :param pulumi.Input[_builtins.int] deploy_mode: Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment. Default value is `0`.
+        :param pulumi.Input[_builtins.bool] enable_cerebro: Whether to enable Cerebro. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
         :param pulumi.Input[_builtins.str] enable_destroy_protection: Cluster destroy protection status. Valid values are `OPEN` (enable protection) and `CLOSE` (disable protection). NOTE: when destroy protection is `OPEN`, `terraform destroy` will fail at the cloud API `DeleteInstance` call until this field is set to `CLOSE`.
         :param pulumi.Input['InstanceEsAclArgs'] es_acl: Kibana Access Control Configuration.
         :param pulumi.Input['InstanceEsPublicAclArgs'] es_public_acl: Public network access control list.
+        :param pulumi.Input[_builtins.bool] force_delete: Whether to force delete the instance. Default is `false`. Set it to `true` while deleting the instance.
         :param pulumi.Input[_builtins.str] instance_name: Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
         :param pulumi.Input[_builtins.str] kibana_private_access: Kibana private network access status. Valid values are `OPEN` and `CLOSE`.
         :param pulumi.Input[_builtins.str] kibana_public_access: Kibana public network access status. Valid values are `OPEN` and `CLOSE`.
@@ -72,6 +83,7 @@ class InstanceArgs:
         :param pulumi.Input[_builtins.str] public_access: ES cluster public network access status. Valid values are `OPEN` and `CLOSE`. Cannot be changed at the same time as `es_acl`.
         :param pulumi.Input[_builtins.str] renew_flag: When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[_builtins.int] scene_type: Scenario based template type. 0: Not enabled; 1: Universal; 2: Log; 3: Search.
+        :param pulumi.Input[_builtins.str] sub_product_code: Sub-product code of the instance. Valid values: `sp_es_io2` (open source), `sp_es_basic` (basic), `sp_es_platinum` (platinum), `sp_es_enterprise` (enterprise), `sp_es_cdc_platinum` (CDC platinum), `sp_es_enlogging` (logging enhanced), `sp_es_aisearch` (AI search enhanced), `sp_tsearch_io2` (tsearch), `sp_es_logstash` (logstash). If omitted, the value is mapped from `license_type` by the backend. NOTE: this field can only be set when creating the instance.
         :param pulumi.Input[_builtins.str] subnet_id: The ID of a VPC subnetwork. When create multi-az es, this parameter must be the subnet in the primary availability zone.
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: A mapping of tags to assign to the instance. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
         :param pulumi.Input[Sequence[pulumi.Input['InstanceWebNodeTypeInfoArgs']]] web_node_type_infos: Visual node configuration.
@@ -83,6 +95,12 @@ class InstanceArgs:
             pulumi.set(__self__, "availability_zone", availability_zone)
         if basic_security_type is not None:
             pulumi.set(__self__, "basic_security_type", basic_security_type)
+        if cerebro_private_access is not None:
+            pulumi.set(__self__, "cerebro_private_access", cerebro_private_access)
+        if cerebro_private_domain is not None:
+            pulumi.set(__self__, "cerebro_private_domain", cerebro_private_domain)
+        if cerebro_public_access is not None:
+            pulumi.set(__self__, "cerebro_public_access", cerebro_public_access)
         if charge_period is not None:
             pulumi.set(__self__, "charge_period", charge_period)
         if charge_type is not None:
@@ -91,12 +109,16 @@ class InstanceArgs:
             pulumi.set(__self__, "cos_backup", cos_backup)
         if deploy_mode is not None:
             pulumi.set(__self__, "deploy_mode", deploy_mode)
+        if enable_cerebro is not None:
+            pulumi.set(__self__, "enable_cerebro", enable_cerebro)
         if enable_destroy_protection is not None:
             pulumi.set(__self__, "enable_destroy_protection", enable_destroy_protection)
         if es_acl is not None:
             pulumi.set(__self__, "es_acl", es_acl)
         if es_public_acl is not None:
             pulumi.set(__self__, "es_public_acl", es_public_acl)
+        if force_delete is not None:
+            pulumi.set(__self__, "force_delete", force_delete)
         if instance_name is not None:
             pulumi.set(__self__, "instance_name", instance_name)
         if kibana_private_access is not None:
@@ -117,6 +139,8 @@ class InstanceArgs:
             pulumi.set(__self__, "renew_flag", renew_flag)
         if scene_type is not None:
             pulumi.set(__self__, "scene_type", scene_type)
+        if sub_product_code is not None:
+            pulumi.set(__self__, "sub_product_code", sub_product_code)
         if subnet_id is not None:
             pulumi.set(__self__, "subnet_id", subnet_id)
         if tags is not None:
@@ -185,6 +209,42 @@ class InstanceArgs:
         pulumi.set(self, "basic_security_type", value)
 
     @_builtins.property
+    @pulumi.getter(name="cerebroPrivateAccess")
+    def cerebro_private_access(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Cerebro private network access status. Valid values are `OPEN` and `CLOSE`. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
+        """
+        return pulumi.get(self, "cerebro_private_access")
+
+    @cerebro_private_access.setter
+    def cerebro_private_access(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "cerebro_private_access", value)
+
+    @_builtins.property
+    @pulumi.getter(name="cerebroPrivateDomain")
+    def cerebro_private_domain(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Cerebro private network custom domain. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
+        """
+        return pulumi.get(self, "cerebro_private_domain")
+
+    @cerebro_private_domain.setter
+    def cerebro_private_domain(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "cerebro_private_domain", value)
+
+    @_builtins.property
+    @pulumi.getter(name="cerebroPublicAccess")
+    def cerebro_public_access(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Cerebro public network access status. Valid values are `OPEN` and `CLOSE`. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
+        """
+        return pulumi.get(self, "cerebro_public_access")
+
+    @cerebro_public_access.setter
+    def cerebro_public_access(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "cerebro_public_access", value)
+
+    @_builtins.property
     @pulumi.getter(name="chargePeriod")
     def charge_period(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
@@ -233,6 +293,18 @@ class InstanceArgs:
         pulumi.set(self, "deploy_mode", value)
 
     @_builtins.property
+    @pulumi.getter(name="enableCerebro")
+    def enable_cerebro(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Whether to enable Cerebro. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
+        """
+        return pulumi.get(self, "enable_cerebro")
+
+    @enable_cerebro.setter
+    def enable_cerebro(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "enable_cerebro", value)
+
+    @_builtins.property
     @pulumi.getter(name="enableDestroyProtection")
     def enable_destroy_protection(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
@@ -267,6 +339,18 @@ class InstanceArgs:
     @es_public_acl.setter
     def es_public_acl(self, value: pulumi.Input[Optional['InstanceEsPublicAclArgs']]):
         pulumi.set(self, "es_public_acl", value)
+
+    @_builtins.property
+    @pulumi.getter(name="forceDelete")
+    def force_delete(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Whether to force delete the instance. Default is `false`. Set it to `true` while deleting the instance.
+        """
+        return pulumi.get(self, "force_delete")
+
+    @force_delete.setter
+    def force_delete(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "force_delete", value)
 
     @_builtins.property
     @pulumi.getter(name="instanceName")
@@ -389,6 +473,18 @@ class InstanceArgs:
         pulumi.set(self, "scene_type", value)
 
     @_builtins.property
+    @pulumi.getter(name="subProductCode")
+    def sub_product_code(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Sub-product code of the instance. Valid values: `sp_es_io2` (open source), `sp_es_basic` (basic), `sp_es_platinum` (platinum), `sp_es_enterprise` (enterprise), `sp_es_cdc_platinum` (CDC platinum), `sp_es_enlogging` (logging enhanced), `sp_es_aisearch` (AI search enhanced), `sp_tsearch_io2` (tsearch), `sp_es_logstash` (logstash). If omitted, the value is mapped from `license_type` by the backend. NOTE: this field can only be set when creating the instance.
+        """
+        return pulumi.get(self, "sub_product_code")
+
+    @sub_product_code.setter
+    def sub_product_code(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "sub_product_code", value)
+
+    @_builtins.property
     @pulumi.getter(name="subnetId")
     def subnet_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
@@ -430,6 +526,9 @@ class _InstanceState:
     def __init__(__self__, *,
                  availability_zone: pulumi.Input[Optional[_builtins.str]] = None,
                  basic_security_type: pulumi.Input[Optional[_builtins.int]] = None,
+                 cerebro_private_access: pulumi.Input[Optional[_builtins.str]] = None,
+                 cerebro_private_domain: pulumi.Input[Optional[_builtins.str]] = None,
+                 cerebro_public_access: pulumi.Input[Optional[_builtins.str]] = None,
                  charge_period: pulumi.Input[Optional[_builtins.int]] = None,
                  charge_type: pulumi.Input[Optional[_builtins.str]] = None,
                  cos_backup: pulumi.Input[Optional['InstanceCosBackupArgs']] = None,
@@ -438,10 +537,12 @@ class _InstanceState:
                  elasticsearch_domain: pulumi.Input[Optional[_builtins.str]] = None,
                  elasticsearch_port: pulumi.Input[Optional[_builtins.int]] = None,
                  elasticsearch_vip: pulumi.Input[Optional[_builtins.str]] = None,
+                 enable_cerebro: pulumi.Input[Optional[_builtins.bool]] = None,
                  enable_destroy_protection: pulumi.Input[Optional[_builtins.str]] = None,
                  es_acl: pulumi.Input[Optional['InstanceEsAclArgs']] = None,
                  es_public_acl: pulumi.Input[Optional['InstanceEsPublicAclArgs']] = None,
                  es_public_url: pulumi.Input[Optional[_builtins.str]] = None,
+                 force_delete: pulumi.Input[Optional[_builtins.bool]] = None,
                  instance_name: pulumi.Input[Optional[_builtins.str]] = None,
                  kibana_private_access: pulumi.Input[Optional[_builtins.str]] = None,
                  kibana_private_url: pulumi.Input[Optional[_builtins.str]] = None,
@@ -455,6 +556,7 @@ class _InstanceState:
                  public_access: pulumi.Input[Optional[_builtins.str]] = None,
                  renew_flag: pulumi.Input[Optional[_builtins.str]] = None,
                  scene_type: pulumi.Input[Optional[_builtins.int]] = None,
+                 sub_product_code: pulumi.Input[Optional[_builtins.str]] = None,
                  subnet_id: pulumi.Input[Optional[_builtins.str]] = None,
                  tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
                  version: pulumi.Input[Optional[_builtins.str]] = None,
@@ -465,6 +567,9 @@ class _InstanceState:
 
         :param pulumi.Input[_builtins.str] availability_zone: Availability zone. When create multi-az es, this parameter must be the primary availability zone.
         :param pulumi.Input[_builtins.int] basic_security_type: Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`. Notice: this parameter is only take effect on `basic` license.
+        :param pulumi.Input[_builtins.str] cerebro_private_access: Cerebro private network access status. Valid values are `OPEN` and `CLOSE`. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
+        :param pulumi.Input[_builtins.str] cerebro_private_domain: Cerebro private network custom domain. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
+        :param pulumi.Input[_builtins.str] cerebro_public_access: Cerebro public network access status. Valid values are `OPEN` and `CLOSE`. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
         :param pulumi.Input[_builtins.int] charge_period: The tenancy of the prepaid instance, and uint is month. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[_builtins.str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`.
         :param pulumi.Input['InstanceCosBackupArgs'] cos_backup: COS automatic backup information.
@@ -473,10 +578,12 @@ class _InstanceState:
         :param pulumi.Input[_builtins.str] elasticsearch_domain: Elasticsearch domain name.
         :param pulumi.Input[_builtins.int] elasticsearch_port: Elasticsearch port.
         :param pulumi.Input[_builtins.str] elasticsearch_vip: Elasticsearch VIP.
+        :param pulumi.Input[_builtins.bool] enable_cerebro: Whether to enable Cerebro. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
         :param pulumi.Input[_builtins.str] enable_destroy_protection: Cluster destroy protection status. Valid values are `OPEN` (enable protection) and `CLOSE` (disable protection). NOTE: when destroy protection is `OPEN`, `terraform destroy` will fail at the cloud API `DeleteInstance` call until this field is set to `CLOSE`.
         :param pulumi.Input['InstanceEsAclArgs'] es_acl: Kibana Access Control Configuration.
         :param pulumi.Input['InstanceEsPublicAclArgs'] es_public_acl: Public network access control list.
         :param pulumi.Input[_builtins.str] es_public_url: Es public network address.
+        :param pulumi.Input[_builtins.bool] force_delete: Whether to force delete the instance. Default is `false`. Set it to `true` while deleting the instance.
         :param pulumi.Input[_builtins.str] instance_name: Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
         :param pulumi.Input[_builtins.str] kibana_private_access: Kibana private network access status. Valid values are `OPEN` and `CLOSE`.
         :param pulumi.Input[_builtins.str] kibana_private_url: Kibana private URL.
@@ -490,6 +597,7 @@ class _InstanceState:
         :param pulumi.Input[_builtins.str] public_access: ES cluster public network access status. Valid values are `OPEN` and `CLOSE`. Cannot be changed at the same time as `es_acl`.
         :param pulumi.Input[_builtins.str] renew_flag: When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[_builtins.int] scene_type: Scenario based template type. 0: Not enabled; 1: Universal; 2: Log; 3: Search.
+        :param pulumi.Input[_builtins.str] sub_product_code: Sub-product code of the instance. Valid values: `sp_es_io2` (open source), `sp_es_basic` (basic), `sp_es_platinum` (platinum), `sp_es_enterprise` (enterprise), `sp_es_cdc_platinum` (CDC platinum), `sp_es_enlogging` (logging enhanced), `sp_es_aisearch` (AI search enhanced), `sp_tsearch_io2` (tsearch), `sp_es_logstash` (logstash). If omitted, the value is mapped from `license_type` by the backend. NOTE: this field can only be set when creating the instance.
         :param pulumi.Input[_builtins.str] subnet_id: The ID of a VPC subnetwork. When create multi-az es, this parameter must be the subnet in the primary availability zone.
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: A mapping of tags to assign to the instance. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
         :param pulumi.Input[_builtins.str] version: Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2`, `7.5.1` and `7.10.1`.
@@ -500,6 +608,12 @@ class _InstanceState:
             pulumi.set(__self__, "availability_zone", availability_zone)
         if basic_security_type is not None:
             pulumi.set(__self__, "basic_security_type", basic_security_type)
+        if cerebro_private_access is not None:
+            pulumi.set(__self__, "cerebro_private_access", cerebro_private_access)
+        if cerebro_private_domain is not None:
+            pulumi.set(__self__, "cerebro_private_domain", cerebro_private_domain)
+        if cerebro_public_access is not None:
+            pulumi.set(__self__, "cerebro_public_access", cerebro_public_access)
         if charge_period is not None:
             pulumi.set(__self__, "charge_period", charge_period)
         if charge_type is not None:
@@ -516,6 +630,8 @@ class _InstanceState:
             pulumi.set(__self__, "elasticsearch_port", elasticsearch_port)
         if elasticsearch_vip is not None:
             pulumi.set(__self__, "elasticsearch_vip", elasticsearch_vip)
+        if enable_cerebro is not None:
+            pulumi.set(__self__, "enable_cerebro", enable_cerebro)
         if enable_destroy_protection is not None:
             pulumi.set(__self__, "enable_destroy_protection", enable_destroy_protection)
         if es_acl is not None:
@@ -524,6 +640,8 @@ class _InstanceState:
             pulumi.set(__self__, "es_public_acl", es_public_acl)
         if es_public_url is not None:
             pulumi.set(__self__, "es_public_url", es_public_url)
+        if force_delete is not None:
+            pulumi.set(__self__, "force_delete", force_delete)
         if instance_name is not None:
             pulumi.set(__self__, "instance_name", instance_name)
         if kibana_private_access is not None:
@@ -550,6 +668,8 @@ class _InstanceState:
             pulumi.set(__self__, "renew_flag", renew_flag)
         if scene_type is not None:
             pulumi.set(__self__, "scene_type", scene_type)
+        if sub_product_code is not None:
+            pulumi.set(__self__, "sub_product_code", sub_product_code)
         if subnet_id is not None:
             pulumi.set(__self__, "subnet_id", subnet_id)
         if tags is not None:
@@ -584,6 +704,42 @@ class _InstanceState:
     @basic_security_type.setter
     def basic_security_type(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "basic_security_type", value)
+
+    @_builtins.property
+    @pulumi.getter(name="cerebroPrivateAccess")
+    def cerebro_private_access(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Cerebro private network access status. Valid values are `OPEN` and `CLOSE`. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
+        """
+        return pulumi.get(self, "cerebro_private_access")
+
+    @cerebro_private_access.setter
+    def cerebro_private_access(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "cerebro_private_access", value)
+
+    @_builtins.property
+    @pulumi.getter(name="cerebroPrivateDomain")
+    def cerebro_private_domain(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Cerebro private network custom domain. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
+        """
+        return pulumi.get(self, "cerebro_private_domain")
+
+    @cerebro_private_domain.setter
+    def cerebro_private_domain(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "cerebro_private_domain", value)
+
+    @_builtins.property
+    @pulumi.getter(name="cerebroPublicAccess")
+    def cerebro_public_access(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Cerebro public network access status. Valid values are `OPEN` and `CLOSE`. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
+        """
+        return pulumi.get(self, "cerebro_public_access")
+
+    @cerebro_public_access.setter
+    def cerebro_public_access(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "cerebro_public_access", value)
 
     @_builtins.property
     @pulumi.getter(name="chargePeriod")
@@ -682,6 +838,18 @@ class _InstanceState:
         pulumi.set(self, "elasticsearch_vip", value)
 
     @_builtins.property
+    @pulumi.getter(name="enableCerebro")
+    def enable_cerebro(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Whether to enable Cerebro. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
+        """
+        return pulumi.get(self, "enable_cerebro")
+
+    @enable_cerebro.setter
+    def enable_cerebro(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "enable_cerebro", value)
+
+    @_builtins.property
     @pulumi.getter(name="enableDestroyProtection")
     def enable_destroy_protection(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
@@ -728,6 +896,18 @@ class _InstanceState:
     @es_public_url.setter
     def es_public_url(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "es_public_url", value)
+
+    @_builtins.property
+    @pulumi.getter(name="forceDelete")
+    def force_delete(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Whether to force delete the instance. Default is `false`. Set it to `true` while deleting the instance.
+        """
+        return pulumi.get(self, "force_delete")
+
+    @force_delete.setter
+    def force_delete(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "force_delete", value)
 
     @_builtins.property
     @pulumi.getter(name="instanceName")
@@ -886,6 +1066,18 @@ class _InstanceState:
         pulumi.set(self, "scene_type", value)
 
     @_builtins.property
+    @pulumi.getter(name="subProductCode")
+    def sub_product_code(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Sub-product code of the instance. Valid values: `sp_es_io2` (open source), `sp_es_basic` (basic), `sp_es_platinum` (platinum), `sp_es_enterprise` (enterprise), `sp_es_cdc_platinum` (CDC platinum), `sp_es_enlogging` (logging enhanced), `sp_es_aisearch` (AI search enhanced), `sp_tsearch_io2` (tsearch), `sp_es_logstash` (logstash). If omitted, the value is mapped from `license_type` by the backend. NOTE: this field can only be set when creating the instance.
+        """
+        return pulumi.get(self, "sub_product_code")
+
+    @sub_product_code.setter
+    def sub_product_code(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "sub_product_code", value)
+
+    @_builtins.property
     @pulumi.getter(name="subnetId")
     def subnet_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
@@ -954,13 +1146,18 @@ class Instance(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  availability_zone: pulumi.Input[Optional[_builtins.str]] = None,
                  basic_security_type: pulumi.Input[Optional[_builtins.int]] = None,
+                 cerebro_private_access: pulumi.Input[Optional[_builtins.str]] = None,
+                 cerebro_private_domain: pulumi.Input[Optional[_builtins.str]] = None,
+                 cerebro_public_access: pulumi.Input[Optional[_builtins.str]] = None,
                  charge_period: pulumi.Input[Optional[_builtins.int]] = None,
                  charge_type: pulumi.Input[Optional[_builtins.str]] = None,
                  cos_backup: pulumi.Input[Optional[Union['InstanceCosBackupArgs', 'InstanceCosBackupArgsDict']]] = None,
                  deploy_mode: pulumi.Input[Optional[_builtins.int]] = None,
+                 enable_cerebro: pulumi.Input[Optional[_builtins.bool]] = None,
                  enable_destroy_protection: pulumi.Input[Optional[_builtins.str]] = None,
                  es_acl: pulumi.Input[Optional[Union['InstanceEsAclArgs', 'InstanceEsAclArgsDict']]] = None,
                  es_public_acl: pulumi.Input[Optional[Union['InstanceEsPublicAclArgs', 'InstanceEsPublicAclArgsDict']]] = None,
+                 force_delete: pulumi.Input[Optional[_builtins.bool]] = None,
                  instance_name: pulumi.Input[Optional[_builtins.str]] = None,
                  kibana_private_access: pulumi.Input[Optional[_builtins.str]] = None,
                  kibana_public_access: pulumi.Input[Optional[_builtins.str]] = None,
@@ -972,6 +1169,7 @@ class Instance(pulumi.CustomResource):
                  public_access: pulumi.Input[Optional[_builtins.str]] = None,
                  renew_flag: pulumi.Input[Optional[_builtins.str]] = None,
                  scene_type: pulumi.Input[Optional[_builtins.int]] = None,
+                 sub_product_code: pulumi.Input[Optional[_builtins.str]] = None,
                  subnet_id: pulumi.Input[Optional[_builtins.str]] = None,
                  tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
                  version: pulumi.Input[Optional[_builtins.str]] = None,
@@ -980,6 +1178,12 @@ class Instance(pulumi.CustomResource):
                  __props__=None):
         """
         Provides an elasticsearch instance resource.
+
+        > **NOTE:** After executing `terraform destroy`, the resource instance will be isolated in the recycle bin(reserved for 24 hours by default). If you need to completely destroy the instance, you can set `force_delete` to `true`.
+
+        > **NOTE:** Currently, Once the `enable_cerebro` field is `true`, it cannot be `false`.
+
+        > **NOTE:** `sub_product_code` specifies the sub-product of the instance (e.g. `sp_es_enterprise` for enterprise edition). It can only be set at creation time. If omitted, the backend maps it from `license_type`.
 
         ## Example Usage
 
@@ -1066,6 +1270,94 @@ class Instance(pulumi.CustomResource):
             }])
         ```
 
+        ### Create a elasticsearch instance with Cerebro public access enabled
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.elasticsearch.Instance("example",
+            instance_name="tf_example",
+            availability_zone="ap-guangzhou-6",
+            version="7.14.2",
+            vpc_id="vpc-i5yyodl9",
+            subnet_id="subnet-hhi88a58",
+            password="Password@2026",
+            license_type="platinum",
+            basic_security_type=2,
+            enable_cerebro=True,
+            force_delete=True,
+            web_node_type_infos=[{
+                "node_num": 1,
+                "node_type": "ES.S1.MEDIUM4",
+            }],
+            node_info_lists=[
+                {
+                    "type": "dedicatedMaster",
+                    "node_num": 3,
+                    "node_type": "ES.S1.MEDIUM8",
+                    "encrypt": False,
+                },
+                {
+                    "type": "hotData",
+                    "node_num": 2,
+                    "node_type": "ES.S1.MEDIUM8",
+                    "encrypt": False,
+                },
+            ],
+            es_acl={
+                "white_lists": ["127.0.0.1"],
+            },
+            tags={
+                "createBy": "Terraform",
+            })
+        ```
+
+        ### Create a elasticsearch instance with Cerebro private access enabled
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.elasticsearch.Instance("example",
+            instance_name="tf_example",
+            availability_zone="ap-guangzhou-6",
+            version="7.14.2",
+            vpc_id="vpc-i5yyodl9",
+            subnet_id="subnet-hhi88a58",
+            password="Password@2026",
+            license_type="platinum",
+            basic_security_type=2,
+            enable_cerebro=True,
+            cerebro_private_access="OPEN",
+            cerebro_private_domain="http://10.0.30.56:9000",
+            force_delete=True,
+            web_node_type_infos=[{
+                "node_num": 1,
+                "node_type": "ES.S1.MEDIUM4",
+            }],
+            node_info_lists=[
+                {
+                    "type": "dedicatedMaster",
+                    "node_num": 3,
+                    "node_type": "ES.S1.MEDIUM8",
+                    "encrypt": False,
+                },
+                {
+                    "type": "hotData",
+                    "node_num": 2,
+                    "node_type": "ES.S1.MEDIUM8",
+                    "encrypt": False,
+                },
+            ],
+            es_acl={
+                "white_lists": ["127.0.0.1"],
+            },
+            tags={
+                "createBy": "Terraform",
+            })
+        ```
+
         ### Create a basic version of elasticsearch instance for multi-availability zone deployment
 
         ```python
@@ -1133,6 +1425,81 @@ class Instance(pulumi.CustomResource):
             })
         ```
 
+        ### Create a basic version of elasticsearch instance with dedicated coordinating node
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        availability_zone = tencentcloud.availability.get_zones_by_product(product="es")
+        vpc = tencentcloud.vpc.Instance("vpc",
+            cidr_block="10.0.0.0/16",
+            name="tf_es_vpc")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=availability_zone.zones[0].name,
+            name="tf_es_subnet",
+            cidr_block="10.0.1.0/24")
+        example = tencentcloud.elasticsearch.Instance("example",
+            instance_name="tf_example_es",
+            availability_zone=availability_zone.zones[0].name,
+            version="7.10.1",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            password="Test12345",
+            license_type="basic",
+            basic_security_type=2,
+            web_node_type_infos=[{
+                "node_num": 1,
+                "node_type": "ES.S1.MEDIUM4",
+            }],
+            node_info_lists=[
+                {
+                    "type": "hotData",
+                    "node_num": 2,
+                    "node_type": "ES.S1.MEDIUM8",
+                    "disk_type": "CLOUD_SSD",
+                    "disk_size": 100,
+                    "encrypt": False,
+                },
+                {
+                    "type": "dedicatedMaster",
+                    "node_num": 3,
+                    "node_type": "ES.S1.MEDIUM4",
+                    "disk_type": "CLOUD_SSD",
+                    "disk_size": 50,
+                    "encrypt": False,
+                },
+                {
+                    "type": "dedicatedCoordinating",
+                    "node_num": 2,
+                    "node_type": "ES.S1.MEDIUM4",
+                    "disk_type": "CLOUD_SSD",
+                    "disk_size": 50,
+                    "encrypt": False,
+                },
+            ])
+        ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateInstance](https://www.tencentcloud.com/document/api/845/32218)
+          - [DescribeInstances](https://www.tencentcloud.com/document/api/845/32214)
+          - [UpdateInstance](https://www.tencentcloud.com/document/api/845/32212)
+        * Read: [DescribeInstances](https://www.tencentcloud.com/document/api/845/32214)
+        * Update:
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+          - [UpdateInstance](https://www.tencentcloud.com/document/api/845/32212)
+          - [UpgradeInstance](https://www.tencentcloud.com/document/api/845/34396)
+          - [UpgradeLicense](https://www.tencentcloud.com/document/api/845/34395)
+        * Delete:
+          - [DeleteInstance](https://www.tencentcloud.com/document/api/845/32217)
+          - [DescribeInstances](https://www.tencentcloud.com/document/api/845/32214)
+
         ## Import
 
         Elasticsearch instance can be imported using the id, e.g.
@@ -1146,13 +1513,18 @@ class Instance(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] availability_zone: Availability zone. When create multi-az es, this parameter must be the primary availability zone.
         :param pulumi.Input[_builtins.int] basic_security_type: Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`. Notice: this parameter is only take effect on `basic` license.
+        :param pulumi.Input[_builtins.str] cerebro_private_access: Cerebro private network access status. Valid values are `OPEN` and `CLOSE`. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
+        :param pulumi.Input[_builtins.str] cerebro_private_domain: Cerebro private network custom domain. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
+        :param pulumi.Input[_builtins.str] cerebro_public_access: Cerebro public network access status. Valid values are `OPEN` and `CLOSE`. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
         :param pulumi.Input[_builtins.int] charge_period: The tenancy of the prepaid instance, and uint is month. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[_builtins.str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`.
         :param pulumi.Input[Union['InstanceCosBackupArgs', 'InstanceCosBackupArgsDict']] cos_backup: COS automatic backup information.
         :param pulumi.Input[_builtins.int] deploy_mode: Cluster deployment mode. Valid values are `0` and `1`. `0` is single-AZ deployment, and `1` is multi-AZ deployment. Default value is `0`.
+        :param pulumi.Input[_builtins.bool] enable_cerebro: Whether to enable Cerebro. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
         :param pulumi.Input[_builtins.str] enable_destroy_protection: Cluster destroy protection status. Valid values are `OPEN` (enable protection) and `CLOSE` (disable protection). NOTE: when destroy protection is `OPEN`, `terraform destroy` will fail at the cloud API `DeleteInstance` call until this field is set to `CLOSE`.
         :param pulumi.Input[Union['InstanceEsAclArgs', 'InstanceEsAclArgsDict']] es_acl: Kibana Access Control Configuration.
         :param pulumi.Input[Union['InstanceEsPublicAclArgs', 'InstanceEsPublicAclArgsDict']] es_public_acl: Public network access control list.
+        :param pulumi.Input[_builtins.bool] force_delete: Whether to force delete the instance. Default is `false`. Set it to `true` while deleting the instance.
         :param pulumi.Input[_builtins.str] instance_name: Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
         :param pulumi.Input[_builtins.str] kibana_private_access: Kibana private network access status. Valid values are `OPEN` and `CLOSE`.
         :param pulumi.Input[_builtins.str] kibana_public_access: Kibana public network access status. Valid values are `OPEN` and `CLOSE`.
@@ -1164,6 +1536,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] public_access: ES cluster public network access status. Valid values are `OPEN` and `CLOSE`. Cannot be changed at the same time as `es_acl`.
         :param pulumi.Input[_builtins.str] renew_flag: When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[_builtins.int] scene_type: Scenario based template type. 0: Not enabled; 1: Universal; 2: Log; 3: Search.
+        :param pulumi.Input[_builtins.str] sub_product_code: Sub-product code of the instance. Valid values: `sp_es_io2` (open source), `sp_es_basic` (basic), `sp_es_platinum` (platinum), `sp_es_enterprise` (enterprise), `sp_es_cdc_platinum` (CDC platinum), `sp_es_enlogging` (logging enhanced), `sp_es_aisearch` (AI search enhanced), `sp_tsearch_io2` (tsearch), `sp_es_logstash` (logstash). If omitted, the value is mapped from `license_type` by the backend. NOTE: this field can only be set when creating the instance.
         :param pulumi.Input[_builtins.str] subnet_id: The ID of a VPC subnetwork. When create multi-az es, this parameter must be the subnet in the primary availability zone.
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: A mapping of tags to assign to the instance. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
         :param pulumi.Input[_builtins.str] version: Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2`, `7.5.1` and `7.10.1`.
@@ -1179,6 +1552,12 @@ class Instance(pulumi.CustomResource):
         """
         Provides an elasticsearch instance resource.
 
+        > **NOTE:** After executing `terraform destroy`, the resource instance will be isolated in the recycle bin(reserved for 24 hours by default). If you need to completely destroy the instance, you can set `force_delete` to `true`.
+
+        > **NOTE:** Currently, Once the `enable_cerebro` field is `true`, it cannot be `false`.
+
+        > **NOTE:** `sub_product_code` specifies the sub-product of the instance (e.g. `sp_es_enterprise` for enterprise edition). It can only be set at creation time. If omitted, the backend maps it from `license_type`.
+
         ## Example Usage
 
         ### Create a basic version of elasticsearch instance paid by the hour
@@ -1264,6 +1643,94 @@ class Instance(pulumi.CustomResource):
             }])
         ```
 
+        ### Create a elasticsearch instance with Cerebro public access enabled
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.elasticsearch.Instance("example",
+            instance_name="tf_example",
+            availability_zone="ap-guangzhou-6",
+            version="7.14.2",
+            vpc_id="vpc-i5yyodl9",
+            subnet_id="subnet-hhi88a58",
+            password="Password@2026",
+            license_type="platinum",
+            basic_security_type=2,
+            enable_cerebro=True,
+            force_delete=True,
+            web_node_type_infos=[{
+                "node_num": 1,
+                "node_type": "ES.S1.MEDIUM4",
+            }],
+            node_info_lists=[
+                {
+                    "type": "dedicatedMaster",
+                    "node_num": 3,
+                    "node_type": "ES.S1.MEDIUM8",
+                    "encrypt": False,
+                },
+                {
+                    "type": "hotData",
+                    "node_num": 2,
+                    "node_type": "ES.S1.MEDIUM8",
+                    "encrypt": False,
+                },
+            ],
+            es_acl={
+                "white_lists": ["127.0.0.1"],
+            },
+            tags={
+                "createBy": "Terraform",
+            })
+        ```
+
+        ### Create a elasticsearch instance with Cerebro private access enabled
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.elasticsearch.Instance("example",
+            instance_name="tf_example",
+            availability_zone="ap-guangzhou-6",
+            version="7.14.2",
+            vpc_id="vpc-i5yyodl9",
+            subnet_id="subnet-hhi88a58",
+            password="Password@2026",
+            license_type="platinum",
+            basic_security_type=2,
+            enable_cerebro=True,
+            cerebro_private_access="OPEN",
+            cerebro_private_domain="http://10.0.30.56:9000",
+            force_delete=True,
+            web_node_type_infos=[{
+                "node_num": 1,
+                "node_type": "ES.S1.MEDIUM4",
+            }],
+            node_info_lists=[
+                {
+                    "type": "dedicatedMaster",
+                    "node_num": 3,
+                    "node_type": "ES.S1.MEDIUM8",
+                    "encrypt": False,
+                },
+                {
+                    "type": "hotData",
+                    "node_num": 2,
+                    "node_type": "ES.S1.MEDIUM8",
+                    "encrypt": False,
+                },
+            ],
+            es_acl={
+                "white_lists": ["127.0.0.1"],
+            },
+            tags={
+                "createBy": "Terraform",
+            })
+        ```
+
         ### Create a basic version of elasticsearch instance for multi-availability zone deployment
 
         ```python
@@ -1330,6 +1797,81 @@ class Instance(pulumi.CustomResource):
                 "test": "test",
             })
         ```
+
+        ### Create a basic version of elasticsearch instance with dedicated coordinating node
+
+        ```python
+        import pulumi
+        import pulumi_tencentcloud as tencentcloud
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        availability_zone = tencentcloud.availability.get_zones_by_product(product="es")
+        vpc = tencentcloud.vpc.Instance("vpc",
+            cidr_block="10.0.0.0/16",
+            name="tf_es_vpc")
+        subnet = tencentcloud.subnet.Instance("subnet",
+            vpc_id=vpc.id,
+            availability_zone=availability_zone.zones[0].name,
+            name="tf_es_subnet",
+            cidr_block="10.0.1.0/24")
+        example = tencentcloud.elasticsearch.Instance("example",
+            instance_name="tf_example_es",
+            availability_zone=availability_zone.zones[0].name,
+            version="7.10.1",
+            vpc_id=vpc.id,
+            subnet_id=subnet.id,
+            password="Test12345",
+            license_type="basic",
+            basic_security_type=2,
+            web_node_type_infos=[{
+                "node_num": 1,
+                "node_type": "ES.S1.MEDIUM4",
+            }],
+            node_info_lists=[
+                {
+                    "type": "hotData",
+                    "node_num": 2,
+                    "node_type": "ES.S1.MEDIUM8",
+                    "disk_type": "CLOUD_SSD",
+                    "disk_size": 100,
+                    "encrypt": False,
+                },
+                {
+                    "type": "dedicatedMaster",
+                    "node_num": 3,
+                    "node_type": "ES.S1.MEDIUM4",
+                    "disk_type": "CLOUD_SSD",
+                    "disk_size": 50,
+                    "encrypt": False,
+                },
+                {
+                    "type": "dedicatedCoordinating",
+                    "node_num": 2,
+                    "node_type": "ES.S1.MEDIUM4",
+                    "disk_type": "CLOUD_SSD",
+                    "disk_size": 50,
+                    "encrypt": False,
+                },
+            ])
+        ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateInstance](https://www.tencentcloud.com/document/api/845/32218)
+          - [DescribeInstances](https://www.tencentcloud.com/document/api/845/32214)
+          - [UpdateInstance](https://www.tencentcloud.com/document/api/845/32212)
+        * Read: [DescribeInstances](https://www.tencentcloud.com/document/api/845/32214)
+        * Update:
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+          - [UpdateInstance](https://www.tencentcloud.com/document/api/845/32212)
+          - [UpgradeInstance](https://www.tencentcloud.com/document/api/845/34396)
+          - [UpgradeLicense](https://www.tencentcloud.com/document/api/845/34395)
+        * Delete:
+          - [DeleteInstance](https://www.tencentcloud.com/document/api/845/32217)
+          - [DescribeInstances](https://www.tencentcloud.com/document/api/845/32214)
 
         ## Import
 
@@ -1357,13 +1899,18 @@ class Instance(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  availability_zone: pulumi.Input[Optional[_builtins.str]] = None,
                  basic_security_type: pulumi.Input[Optional[_builtins.int]] = None,
+                 cerebro_private_access: pulumi.Input[Optional[_builtins.str]] = None,
+                 cerebro_private_domain: pulumi.Input[Optional[_builtins.str]] = None,
+                 cerebro_public_access: pulumi.Input[Optional[_builtins.str]] = None,
                  charge_period: pulumi.Input[Optional[_builtins.int]] = None,
                  charge_type: pulumi.Input[Optional[_builtins.str]] = None,
                  cos_backup: pulumi.Input[Optional[Union['InstanceCosBackupArgs', 'InstanceCosBackupArgsDict']]] = None,
                  deploy_mode: pulumi.Input[Optional[_builtins.int]] = None,
+                 enable_cerebro: pulumi.Input[Optional[_builtins.bool]] = None,
                  enable_destroy_protection: pulumi.Input[Optional[_builtins.str]] = None,
                  es_acl: pulumi.Input[Optional[Union['InstanceEsAclArgs', 'InstanceEsAclArgsDict']]] = None,
                  es_public_acl: pulumi.Input[Optional[Union['InstanceEsPublicAclArgs', 'InstanceEsPublicAclArgsDict']]] = None,
+                 force_delete: pulumi.Input[Optional[_builtins.bool]] = None,
                  instance_name: pulumi.Input[Optional[_builtins.str]] = None,
                  kibana_private_access: pulumi.Input[Optional[_builtins.str]] = None,
                  kibana_public_access: pulumi.Input[Optional[_builtins.str]] = None,
@@ -1375,6 +1922,7 @@ class Instance(pulumi.CustomResource):
                  public_access: pulumi.Input[Optional[_builtins.str]] = None,
                  renew_flag: pulumi.Input[Optional[_builtins.str]] = None,
                  scene_type: pulumi.Input[Optional[_builtins.int]] = None,
+                 sub_product_code: pulumi.Input[Optional[_builtins.str]] = None,
                  subnet_id: pulumi.Input[Optional[_builtins.str]] = None,
                  tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
                  version: pulumi.Input[Optional[_builtins.str]] = None,
@@ -1391,13 +1939,18 @@ class Instance(pulumi.CustomResource):
 
             __props__.__dict__["availability_zone"] = availability_zone
             __props__.__dict__["basic_security_type"] = basic_security_type
+            __props__.__dict__["cerebro_private_access"] = cerebro_private_access
+            __props__.__dict__["cerebro_private_domain"] = cerebro_private_domain
+            __props__.__dict__["cerebro_public_access"] = cerebro_public_access
             __props__.__dict__["charge_period"] = charge_period
             __props__.__dict__["charge_type"] = charge_type
             __props__.__dict__["cos_backup"] = cos_backup
             __props__.__dict__["deploy_mode"] = deploy_mode
+            __props__.__dict__["enable_cerebro"] = enable_cerebro
             __props__.__dict__["enable_destroy_protection"] = enable_destroy_protection
             __props__.__dict__["es_acl"] = es_acl
             __props__.__dict__["es_public_acl"] = es_public_acl
+            __props__.__dict__["force_delete"] = force_delete
             __props__.__dict__["instance_name"] = instance_name
             __props__.__dict__["kibana_private_access"] = kibana_private_access
             __props__.__dict__["kibana_public_access"] = kibana_public_access
@@ -1411,6 +1964,7 @@ class Instance(pulumi.CustomResource):
             __props__.__dict__["public_access"] = public_access
             __props__.__dict__["renew_flag"] = renew_flag
             __props__.__dict__["scene_type"] = scene_type
+            __props__.__dict__["sub_product_code"] = sub_product_code
             __props__.__dict__["subnet_id"] = subnet_id
             __props__.__dict__["tags"] = tags
             if version is None and not opts.urn:
@@ -1441,6 +1995,9 @@ class Instance(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             availability_zone: pulumi.Input[Optional[_builtins.str]] = None,
             basic_security_type: pulumi.Input[Optional[_builtins.int]] = None,
+            cerebro_private_access: pulumi.Input[Optional[_builtins.str]] = None,
+            cerebro_private_domain: pulumi.Input[Optional[_builtins.str]] = None,
+            cerebro_public_access: pulumi.Input[Optional[_builtins.str]] = None,
             charge_period: pulumi.Input[Optional[_builtins.int]] = None,
             charge_type: pulumi.Input[Optional[_builtins.str]] = None,
             cos_backup: pulumi.Input[Optional[Union['InstanceCosBackupArgs', 'InstanceCosBackupArgsDict']]] = None,
@@ -1449,10 +2006,12 @@ class Instance(pulumi.CustomResource):
             elasticsearch_domain: pulumi.Input[Optional[_builtins.str]] = None,
             elasticsearch_port: pulumi.Input[Optional[_builtins.int]] = None,
             elasticsearch_vip: pulumi.Input[Optional[_builtins.str]] = None,
+            enable_cerebro: pulumi.Input[Optional[_builtins.bool]] = None,
             enable_destroy_protection: pulumi.Input[Optional[_builtins.str]] = None,
             es_acl: pulumi.Input[Optional[Union['InstanceEsAclArgs', 'InstanceEsAclArgsDict']]] = None,
             es_public_acl: pulumi.Input[Optional[Union['InstanceEsPublicAclArgs', 'InstanceEsPublicAclArgsDict']]] = None,
             es_public_url: pulumi.Input[Optional[_builtins.str]] = None,
+            force_delete: pulumi.Input[Optional[_builtins.bool]] = None,
             instance_name: pulumi.Input[Optional[_builtins.str]] = None,
             kibana_private_access: pulumi.Input[Optional[_builtins.str]] = None,
             kibana_private_url: pulumi.Input[Optional[_builtins.str]] = None,
@@ -1466,6 +2025,7 @@ class Instance(pulumi.CustomResource):
             public_access: pulumi.Input[Optional[_builtins.str]] = None,
             renew_flag: pulumi.Input[Optional[_builtins.str]] = None,
             scene_type: pulumi.Input[Optional[_builtins.int]] = None,
+            sub_product_code: pulumi.Input[Optional[_builtins.str]] = None,
             subnet_id: pulumi.Input[Optional[_builtins.str]] = None,
             tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
             version: pulumi.Input[Optional[_builtins.str]] = None,
@@ -1480,6 +2040,9 @@ class Instance(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] availability_zone: Availability zone. When create multi-az es, this parameter must be the primary availability zone.
         :param pulumi.Input[_builtins.int] basic_security_type: Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`. Notice: this parameter is only take effect on `basic` license.
+        :param pulumi.Input[_builtins.str] cerebro_private_access: Cerebro private network access status. Valid values are `OPEN` and `CLOSE`. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
+        :param pulumi.Input[_builtins.str] cerebro_private_domain: Cerebro private network custom domain. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
+        :param pulumi.Input[_builtins.str] cerebro_public_access: Cerebro public network access status. Valid values are `OPEN` and `CLOSE`. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
         :param pulumi.Input[_builtins.int] charge_period: The tenancy of the prepaid instance, and uint is month. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[_builtins.str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`.
         :param pulumi.Input[Union['InstanceCosBackupArgs', 'InstanceCosBackupArgsDict']] cos_backup: COS automatic backup information.
@@ -1488,10 +2051,12 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] elasticsearch_domain: Elasticsearch domain name.
         :param pulumi.Input[_builtins.int] elasticsearch_port: Elasticsearch port.
         :param pulumi.Input[_builtins.str] elasticsearch_vip: Elasticsearch VIP.
+        :param pulumi.Input[_builtins.bool] enable_cerebro: Whether to enable Cerebro. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
         :param pulumi.Input[_builtins.str] enable_destroy_protection: Cluster destroy protection status. Valid values are `OPEN` (enable protection) and `CLOSE` (disable protection). NOTE: when destroy protection is `OPEN`, `terraform destroy` will fail at the cloud API `DeleteInstance` call until this field is set to `CLOSE`.
         :param pulumi.Input[Union['InstanceEsAclArgs', 'InstanceEsAclArgsDict']] es_acl: Kibana Access Control Configuration.
         :param pulumi.Input[Union['InstanceEsPublicAclArgs', 'InstanceEsPublicAclArgsDict']] es_public_acl: Public network access control list.
         :param pulumi.Input[_builtins.str] es_public_url: Es public network address.
+        :param pulumi.Input[_builtins.bool] force_delete: Whether to force delete the instance. Default is `false`. Set it to `true` while deleting the instance.
         :param pulumi.Input[_builtins.str] instance_name: Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
         :param pulumi.Input[_builtins.str] kibana_private_access: Kibana private network access status. Valid values are `OPEN` and `CLOSE`.
         :param pulumi.Input[_builtins.str] kibana_private_url: Kibana private URL.
@@ -1505,6 +2070,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] public_access: ES cluster public network access status. Valid values are `OPEN` and `CLOSE`. Cannot be changed at the same time as `es_acl`.
         :param pulumi.Input[_builtins.str] renew_flag: When enabled, the instance will be renew automatically when it reach the end of the prepaid tenancy. Valid values are `RENEW_FLAG_AUTO` and `RENEW_FLAG_MANUAL`. NOTE: it only works when charge_type is set to `PREPAID`.
         :param pulumi.Input[_builtins.int] scene_type: Scenario based template type. 0: Not enabled; 1: Universal; 2: Log; 3: Search.
+        :param pulumi.Input[_builtins.str] sub_product_code: Sub-product code of the instance. Valid values: `sp_es_io2` (open source), `sp_es_basic` (basic), `sp_es_platinum` (platinum), `sp_es_enterprise` (enterprise), `sp_es_cdc_platinum` (CDC platinum), `sp_es_enlogging` (logging enhanced), `sp_es_aisearch` (AI search enhanced), `sp_tsearch_io2` (tsearch), `sp_es_logstash` (logstash). If omitted, the value is mapped from `license_type` by the backend. NOTE: this field can only be set when creating the instance.
         :param pulumi.Input[_builtins.str] subnet_id: The ID of a VPC subnetwork. When create multi-az es, this parameter must be the subnet in the primary availability zone.
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: A mapping of tags to assign to the instance. For tag limits, please refer to [Use Limits](https://intl.cloud.tencent.com/document/product/651/13354).
         :param pulumi.Input[_builtins.str] version: Version of the instance. Valid values are `5.6.4`, `6.4.3`, `6.8.2`, `7.5.1` and `7.10.1`.
@@ -1517,6 +2083,9 @@ class Instance(pulumi.CustomResource):
 
         __props__.__dict__["availability_zone"] = availability_zone
         __props__.__dict__["basic_security_type"] = basic_security_type
+        __props__.__dict__["cerebro_private_access"] = cerebro_private_access
+        __props__.__dict__["cerebro_private_domain"] = cerebro_private_domain
+        __props__.__dict__["cerebro_public_access"] = cerebro_public_access
         __props__.__dict__["charge_period"] = charge_period
         __props__.__dict__["charge_type"] = charge_type
         __props__.__dict__["cos_backup"] = cos_backup
@@ -1525,10 +2094,12 @@ class Instance(pulumi.CustomResource):
         __props__.__dict__["elasticsearch_domain"] = elasticsearch_domain
         __props__.__dict__["elasticsearch_port"] = elasticsearch_port
         __props__.__dict__["elasticsearch_vip"] = elasticsearch_vip
+        __props__.__dict__["enable_cerebro"] = enable_cerebro
         __props__.__dict__["enable_destroy_protection"] = enable_destroy_protection
         __props__.__dict__["es_acl"] = es_acl
         __props__.__dict__["es_public_acl"] = es_public_acl
         __props__.__dict__["es_public_url"] = es_public_url
+        __props__.__dict__["force_delete"] = force_delete
         __props__.__dict__["instance_name"] = instance_name
         __props__.__dict__["kibana_private_access"] = kibana_private_access
         __props__.__dict__["kibana_private_url"] = kibana_private_url
@@ -1542,6 +2113,7 @@ class Instance(pulumi.CustomResource):
         __props__.__dict__["public_access"] = public_access
         __props__.__dict__["renew_flag"] = renew_flag
         __props__.__dict__["scene_type"] = scene_type
+        __props__.__dict__["sub_product_code"] = sub_product_code
         __props__.__dict__["subnet_id"] = subnet_id
         __props__.__dict__["tags"] = tags
         __props__.__dict__["version"] = version
@@ -1564,6 +2136,30 @@ class Instance(pulumi.CustomResource):
         Whether to enable X-Pack security authentication in Basic Edition 6.8 and above. Valid values are `1` and `2`. `1` is disabled, `2` is enabled, and default value is `1`. Notice: this parameter is only take effect on `basic` license.
         """
         return pulumi.get(self, "basic_security_type")
+
+    @_builtins.property
+    @pulumi.getter(name="cerebroPrivateAccess")
+    def cerebro_private_access(self) -> pulumi.Output[_builtins.str]:
+        """
+        Cerebro private network access status. Valid values are `OPEN` and `CLOSE`. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
+        """
+        return pulumi.get(self, "cerebro_private_access")
+
+    @_builtins.property
+    @pulumi.getter(name="cerebroPrivateDomain")
+    def cerebro_private_domain(self) -> pulumi.Output[_builtins.str]:
+        """
+        Cerebro private network custom domain. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
+        """
+        return pulumi.get(self, "cerebro_private_domain")
+
+    @_builtins.property
+    @pulumi.getter(name="cerebroPublicAccess")
+    def cerebro_public_access(self) -> pulumi.Output[_builtins.str]:
+        """
+        Cerebro public network access status. Valid values are `OPEN` and `CLOSE`. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
+        """
+        return pulumi.get(self, "cerebro_public_access")
 
     @_builtins.property
     @pulumi.getter(name="chargePeriod")
@@ -1630,6 +2226,14 @@ class Instance(pulumi.CustomResource):
         return pulumi.get(self, "elasticsearch_vip")
 
     @_builtins.property
+    @pulumi.getter(name="enableCerebro")
+    def enable_cerebro(self) -> pulumi.Output[_builtins.bool]:
+        """
+        Whether to enable Cerebro. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
+        """
+        return pulumi.get(self, "enable_cerebro")
+
+    @_builtins.property
     @pulumi.getter(name="enableDestroyProtection")
     def enable_destroy_protection(self) -> pulumi.Output[_builtins.str]:
         """
@@ -1660,6 +2264,14 @@ class Instance(pulumi.CustomResource):
         Es public network address.
         """
         return pulumi.get(self, "es_public_url")
+
+    @_builtins.property
+    @pulumi.getter(name="forceDelete")
+    def force_delete(self) -> pulumi.Output[Optional[_builtins.bool]]:
+        """
+        Whether to force delete the instance. Default is `false`. Set it to `true` while deleting the instance.
+        """
+        return pulumi.get(self, "force_delete")
 
     @_builtins.property
     @pulumi.getter(name="instanceName")
@@ -1764,6 +2376,14 @@ class Instance(pulumi.CustomResource):
         Scenario based template type. 0: Not enabled; 1: Universal; 2: Log; 3: Search.
         """
         return pulumi.get(self, "scene_type")
+
+    @_builtins.property
+    @pulumi.getter(name="subProductCode")
+    def sub_product_code(self) -> pulumi.Output[_builtins.str]:
+        """
+        Sub-product code of the instance. Valid values: `sp_es_io2` (open source), `sp_es_basic` (basic), `sp_es_platinum` (platinum), `sp_es_enterprise` (enterprise), `sp_es_cdc_platinum` (CDC platinum), `sp_es_enlogging` (logging enhanced), `sp_es_aisearch` (AI search enhanced), `sp_tsearch_io2` (tsearch), `sp_es_logstash` (logstash). If omitted, the value is mapped from `license_type` by the backend. NOTE: this field can only be set when creating the instance.
+        """
+        return pulumi.get(self, "sub_product_code")
 
     @_builtins.property
     @pulumi.getter(name="subnetId")

@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elastic
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeIPv6Addresses](https://www.tencentcloud.com/document/api/215/68129)
         /// </summary>
         public static Task<GetPublicIpv6sResult> InvokeAsync(GetPublicIpv6sArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetPublicIpv6sResult>("tencentcloud:Elastic/getPublicIpv6s:getPublicIpv6s", args ?? new GetPublicIpv6sArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elastic
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeIPv6Addresses](https://www.tencentcloud.com/document/api/215/68129)
         /// </summary>
         public static Output<GetPublicIpv6sResult> Invoke(GetPublicIpv6sInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetPublicIpv6sResult>("tencentcloud:Elastic/getPublicIpv6s:getPublicIpv6s", args ?? new GetPublicIpv6sInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elastic
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeIPv6Addresses](https://www.tencentcloud.com/document/api/215/68129)
         /// </summary>
         public static Output<GetPublicIpv6sResult> Invoke(GetPublicIpv6sInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetPublicIpv6sResult>("tencentcloud:Elastic/getPublicIpv6s:getPublicIpv6s", args ?? new GetPublicIpv6sInvokeArgs(), options.WithDefaults());

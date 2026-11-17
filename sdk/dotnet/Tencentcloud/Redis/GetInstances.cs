@@ -36,6 +36,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeInstances](https://www.tencentcloud.com/document/api/239/32065)
+        ///   - [DescribeZones](https://www.tencentcloud.com/document/api/1271/71924)
         /// </summary>
         public static Task<GetInstancesResult> InvokeAsync(GetInstancesArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstancesResult>("tencentcloud:Redis/getInstances:getInstances", args ?? new GetInstancesArgs(), options.WithDefaults());
@@ -64,6 +72,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeInstances](https://www.tencentcloud.com/document/api/239/32065)
+        ///   - [DescribeZones](https://www.tencentcloud.com/document/api/1271/71924)
         /// </summary>
         public static Output<GetInstancesResult> Invoke(GetInstancesInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstancesResult>("tencentcloud:Redis/getInstances:getInstances", args ?? new GetInstancesInvokeArgs(), options.WithDefaults());
@@ -92,6 +108,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeInstances](https://www.tencentcloud.com/document/api/239/32065)
+        ///   - [DescribeZones](https://www.tencentcloud.com/document/api/1271/71924)
         /// </summary>
         public static Output<GetInstancesResult> Invoke(GetInstancesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstancesResult>("tencentcloud:Redis/getInstances:getInstances", args ?? new GetInstancesInvokeArgs(), options.WithDefaults());

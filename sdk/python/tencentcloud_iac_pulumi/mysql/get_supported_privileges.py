@@ -131,6 +131,12 @@ def get_supported_privileges(instance_id: Optional[_builtins.str] = None,
     supported_privileges = tencentcloud.mysql.get_supported_privileges(instance_id="cdb-fitq5t9h")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSupportedPrivileges](https://www.tencentcloud.com/document/api/236/34488)
+
 
     :param _builtins.str instance_id: The instance ID, in the format: cdb-c1nl9rpv, is the same as the instance ID displayed on the cloud database console page.
     :param _builtins.str result_output_file: Used to save results.
@@ -163,6 +169,12 @@ def get_supported_privileges_output(instance_id: pulumi.Input[Optional[_builtins
 
     supported_privileges = tencentcloud.mysql.get_supported_privileges(instance_id="cdb-fitq5t9h")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSupportedPrivileges](https://www.tencentcloud.com/document/api/236/34488)
 
 
     :param _builtins.str instance_id: The instance ID, in the format: cdb-c1nl9rpv, is the same as the instance ID displayed on the cloud database console page.

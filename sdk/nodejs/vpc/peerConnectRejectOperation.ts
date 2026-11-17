@@ -15,6 +15,12 @@ import * as utilities from "../utilities";
  *
  * const peerConnectRejectOperation = new tencentcloud.vpc.PeerConnectRejectOperation("peer_connect_reject_operation", {peeringConnectionId: "pcx-abced"});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [RejectVpcPeeringConnection](https://www.tencentcloud.com/search/?wd=RejectVpcPeeringConnection&type=document&lang=en)
  */
 export class PeerConnectRejectOperation extends pulumi.CustomResource {
     /**

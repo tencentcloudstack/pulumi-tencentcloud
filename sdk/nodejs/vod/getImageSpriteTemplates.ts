@@ -32,6 +32,12 @@ import * as utilities from "../utilities";
  *     definition: fooImageSpriteTemplate.id,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeImageSpriteTemplates](https://www.tencentcloud.com/document/api/266/34148)
  */
 export function getImageSpriteTemplates(args?: GetImageSpriteTemplatesArgs, opts?: pulumi.InvokeOptions): Promise<GetImageSpriteTemplatesResult> {
     args = args || {};
@@ -115,6 +121,12 @@ export interface GetImageSpriteTemplatesResult {
  *     definition: fooImageSpriteTemplate.id,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeImageSpriteTemplates](https://www.tencentcloud.com/document/api/266/34148)
  */
 export function getImageSpriteTemplatesOutput(args?: GetImageSpriteTemplatesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetImageSpriteTemplatesResult> {
     args = args || {};

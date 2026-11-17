@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeOrders](https://www.tencentcloud.com/document/api/237/47829)
         /// </summary>
         public static Task<GetOrdersResult> InvokeAsync(GetOrdersArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetOrdersResult>("tencentcloud:Mariadb/getOrders:getOrders", args ?? new GetOrdersArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeOrders](https://www.tencentcloud.com/document/api/237/47829)
         /// </summary>
         public static Output<GetOrdersResult> Invoke(GetOrdersInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetOrdersResult>("tencentcloud:Mariadb/getOrders:getOrders", args ?? new GetOrdersInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeOrders](https://www.tencentcloud.com/document/api/237/47829)
         /// </summary>
         public static Output<GetOrdersResult> Invoke(GetOrdersInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetOrdersResult>("tencentcloud:Mariadb/getOrders:getOrders", args ?? new GetOrdersInvokeArgs(), options.WithDefaults());

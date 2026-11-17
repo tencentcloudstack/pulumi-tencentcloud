@@ -26,6 +26,14 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+ *   - [DescribeVpnGateways](https://www.tencentcloud.com/document/api/215/17514)
  */
 export function getGateways(args?: GetGatewaysArgs, opts?: pulumi.InvokeOptions): Promise<GetGatewaysResult> {
     args = args || {};
@@ -129,6 +137,14 @@ export interface GetGatewaysResult {
  *     },
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+ *   - [DescribeVpnGateways](https://www.tencentcloud.com/document/api/215/17514)
  */
 export function getGatewaysOutput(args?: GetGatewaysOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetGatewaysResult> {
     args = args || {};

@@ -120,6 +120,14 @@ class TaskKillInstanceAsync(pulumi.CustomResource):
             instance_key_lists=["20250324192240178_2025-10-13 17:00:00"])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [GetOpsAsyncJob](https://www.tencentcloud.com/document/api/1174/73832)
+          - [KillTaskInstancesAsync](https://www.tencentcloud.com/document/api/1174/73826)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -145,6 +153,14 @@ class TaskKillInstanceAsync(pulumi.CustomResource):
             project_id="1859317240494305280",
             instance_key_lists=["20250324192240178_2025-10-13 17:00:00"])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [GetOpsAsyncJob](https://www.tencentcloud.com/document/api/1174/73832)
+          - [KillTaskInstancesAsync](https://www.tencentcloud.com/document/api/1174/73826)
 
 
         :param str resource_name: The name of the resource.

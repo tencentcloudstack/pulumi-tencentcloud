@@ -22,6 +22,12 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeClassicLinkInstances](https://www.tencentcloud.com/document/api/215/15776)
  */
 export function getClassicLinkInstances(args?: GetClassicLinkInstancesArgs, opts?: pulumi.InvokeOptions): Promise<GetClassicLinkInstancesResult> {
     args = args || {};
@@ -77,6 +83,12 @@ export interface GetClassicLinkInstancesResult {
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeClassicLinkInstances](https://www.tencentcloud.com/document/api/215/15776)
  */
 export function getClassicLinkInstancesOutput(args?: GetClassicLinkInstancesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetClassicLinkInstancesResult> {
     args = args || {};

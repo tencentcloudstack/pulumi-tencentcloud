@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     dataEngineName: "tf-example",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeEngineNodeSpec](https://www.tencentcloud.com/search/?wd=DescribeEngineNodeSpec&type=document&lang=en)
  */
 export function getEngineNodeSpecifications(args?: GetEngineNodeSpecificationsArgs, opts?: pulumi.InvokeOptions): Promise<GetEngineNodeSpecificationsResult> {
     args = args || {};
@@ -75,6 +81,12 @@ export interface GetEngineNodeSpecificationsResult {
  *     dataEngineName: "tf-example",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeEngineNodeSpec](https://www.tencentcloud.com/search/?wd=DescribeEngineNodeSpec&type=document&lang=en)
  */
 export function getEngineNodeSpecificationsOutput(args?: GetEngineNodeSpecificationsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetEngineNodeSpecificationsResult> {
     args = args || {};

@@ -99,6 +99,12 @@ def get_async_event_status(invoke_request_id: Optional[_builtins.str] = None,
     async_event_status = tencentcloud.scf.get_async_event_status(invoke_request_id="9de9405a-e33a-498d-bb59-e80b7bed1191")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetAsyncEventStatus](https://www.tencentcloud.com/document/api/583/44482)
+
 
     :param _builtins.str invoke_request_id: ID of the async execution request.
     :param _builtins.str result_output_file: Used to save results.
@@ -128,6 +134,12 @@ def get_async_event_status_output(invoke_request_id: pulumi.Input[Optional[_buil
 
     async_event_status = tencentcloud.scf.get_async_event_status(invoke_request_id="9de9405a-e33a-498d-bb59-e80b7bed1191")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetAsyncEventStatus](https://www.tencentcloud.com/document/api/583/44482)
 
 
     :param _builtins.str invoke_request_id: ID of the async execution request.

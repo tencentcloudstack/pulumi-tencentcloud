@@ -151,6 +151,12 @@ def get_meta_table(catalog: Optional[_builtins.str] = None,
         table="tf_table")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetMetaTable](https://www.tencentcloud.com/search/?wd=GetMetaTable&type=document&lang=en)
+
 
     :param _builtins.str catalog: Catalog name.
     :param _builtins.str database: Database name.
@@ -197,6 +203,12 @@ def get_meta_table_output(catalog: pulumi.Input[Optional[_builtins.str]] = None,
         database="_db",
         table="tf_table")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetMetaTable](https://www.tencentcloud.com/search/?wd=GetMetaTable&type=document&lang=en)
 
 
     :param _builtins.str catalog: Catalog name.

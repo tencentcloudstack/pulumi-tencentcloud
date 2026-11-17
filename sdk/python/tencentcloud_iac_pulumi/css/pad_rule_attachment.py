@@ -187,6 +187,16 @@ class PadRuleAttachment(pulumi.CustomResource):
             stream_name="ppp")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateLivePadRule](https://www.tencentcloud.com/document/api/267/71832)
+        * Read: [DescribeLivePadRules](https://www.tencentcloud.com/search/?wd=DescribeLivePadRules&type=document&lang=en)
+        * Delete:
+          - [DeleteLivePadRule](https://www.tencentcloud.com/search/?wd=DeleteLivePadRule&type=document&lang=en)
+          - [DescribeLivePadRules](https://www.tencentcloud.com/search/?wd=DescribeLivePadRules&type=document&lang=en)
+
         ## Import
 
         css pad_rule_attachment can be imported using the id, e.g.
@@ -224,6 +234,16 @@ class PadRuleAttachment(pulumi.CustomResource):
             app_name="qqq",
             stream_name="ppp")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateLivePadRule](https://www.tencentcloud.com/document/api/267/71832)
+        * Read: [DescribeLivePadRules](https://www.tencentcloud.com/search/?wd=DescribeLivePadRules&type=document&lang=en)
+        * Delete:
+          - [DeleteLivePadRule](https://www.tencentcloud.com/search/?wd=DeleteLivePadRule&type=document&lang=en)
+          - [DescribeLivePadRules](https://www.tencentcloud.com/search/?wd=DescribeLivePadRules&type=document&lang=en)
 
         ## Import
 

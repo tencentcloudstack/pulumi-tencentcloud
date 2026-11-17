@@ -73,8 +73,20 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn.Inputs
         [Input("originType", required: true)]
         public Input<string> OriginType { get; set; } = null!;
 
+        [Input("pathRules")]
+        private InputList<Inputs.DomainOriginPathRuleArgs>? _pathRules;
+
         /// <summary>
-        /// Host header used when accessing the master origin server. If left empty, the acceleration domain name will be used by default.
+        /// Origin path rewrite rules. Each element configures a path-based origin routing rule.
+        /// </summary>
+        public InputList<Inputs.DomainOriginPathRuleArgs> PathRules
+        {
+            get => _pathRules ?? (_pathRules = new InputList<Inputs.DomainOriginPathRuleArgs>());
+            set => _pathRules = value;
+        }
+
+        /// <summary>
+        /// Host header used when accessing the origin server on path match. If left empty, the default ServerName is used.
         /// </summary>
         [Input("serverName")]
         public Input<string>? ServerName { get; set; }

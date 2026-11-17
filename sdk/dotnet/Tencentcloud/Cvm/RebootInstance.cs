@@ -31,6 +31,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [RebootInstances](https://www.tencentcloud.com/document/api/213/33243)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cvm/rebootInstance:RebootInstance")]
     public partial class RebootInstance : global::Pulumi.CustomResource

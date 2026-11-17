@@ -24,6 +24,12 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeNatFwClusterRegionStatus](https://www.tencentcloud.com/search/?wd=DescribeNatFwClusterRegionStatus&type=document&lang=en)
  */
 export function getNatFwClusterRegionStatus(args: GetNatFwClusterRegionStatusArgs, opts?: pulumi.InvokeOptions): Promise<GetNatFwClusterRegionStatusResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -80,6 +86,12 @@ export interface GetNatFwClusterRegionStatusResult {
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeNatFwClusterRegionStatus](https://www.tencentcloud.com/search/?wd=DescribeNatFwClusterRegionStatus&type=document&lang=en)
  */
 export function getNatFwClusterRegionStatusOutput(args: GetNatFwClusterRegionStatusOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetNatFwClusterRegionStatusResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

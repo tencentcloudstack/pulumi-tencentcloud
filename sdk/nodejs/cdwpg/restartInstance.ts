@@ -18,6 +18,14 @@ import * as utilities from "../utilities";
  *     nodeTypes: ["gtm"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeInstanceState](https://www.tencentcloud.com/document/api/1138/68302)
+ *   - [RestartInstance](https://www.tencentcloud.com/document/api/1138/69329)
  */
 export class RestartInstance extends pulumi.CustomResource {
     /**

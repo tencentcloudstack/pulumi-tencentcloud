@@ -104,6 +104,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateAssistantCidr](https://www.tencentcloud.com/document/api/215/36081)
+    ///   - [CreateVpc](https://www.tencentcloud.com/document/api/215/15774)
+    /// * Read:
+    ///   - [DescribeRouteTables](https://www.tencentcloud.com/document/api/215/15763)
+    ///   - [DescribeVpcs](https://www.tencentcloud.com/document/api/215/15778)
+    /// * Update:
+    ///   - [ModifyAssistantCidr](https://www.tencentcloud.com/document/api/215/36077)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    ///   - [ModifyVpcAttribute](https://www.tencentcloud.com/document/api/215/15773)
+    /// * Delete: [DeleteVpc](https://www.tencentcloud.com/document/api/215/15775)
+    /// 
     /// ## Import
     /// 
     /// Vpc instance can be imported, e.g.

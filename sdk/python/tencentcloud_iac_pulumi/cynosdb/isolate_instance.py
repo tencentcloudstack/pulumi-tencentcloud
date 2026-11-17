@@ -155,6 +155,19 @@ class IsolateInstance(pulumi.CustomResource):
             max_user_connections=2)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [ActivateInstance](https://www.tencentcloud.com/document/api/1098/45568)
+          - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+          - [IsolateInstance](https://www.tencentcloud.com/document/api/1098/40744)
+        * Update:
+          - [ActivateInstance](https://www.tencentcloud.com/document/api/1098/45568)
+          - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+          - [IsolateInstance](https://www.tencentcloud.com/document/api/1098/40744)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -185,6 +198,19 @@ class IsolateInstance(pulumi.CustomResource):
             description="testx",
             max_user_connections=2)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [ActivateInstance](https://www.tencentcloud.com/document/api/1098/45568)
+          - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+          - [IsolateInstance](https://www.tencentcloud.com/document/api/1098/40744)
+        * Update:
+          - [ActivateInstance](https://www.tencentcloud.com/document/api/1098/45568)
+          - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+          - [IsolateInstance](https://www.tencentcloud.com/document/api/1098/40744)
 
 
         :param str resource_name: The name of the resource.

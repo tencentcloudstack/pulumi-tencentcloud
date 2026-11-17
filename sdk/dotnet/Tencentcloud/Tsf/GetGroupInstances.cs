@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeGroupInstances](https://www.tencentcloud.com/search/?wd=DescribeGroupInstances&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetGroupInstancesResult> InvokeAsync(GetGroupInstancesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetGroupInstancesResult>("tencentcloud:Tsf/getGroupInstances:getGroupInstances", args ?? new GetGroupInstancesArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeGroupInstances](https://www.tencentcloud.com/search/?wd=DescribeGroupInstances&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetGroupInstancesResult> Invoke(GetGroupInstancesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetGroupInstancesResult>("tencentcloud:Tsf/getGroupInstances:getGroupInstances", args ?? new GetGroupInstancesInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeGroupInstances](https://www.tencentcloud.com/search/?wd=DescribeGroupInstances&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetGroupInstancesResult> Invoke(GetGroupInstancesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetGroupInstancesResult>("tencentcloud:Tsf/getGroupInstances:getGroupInstances", args ?? new GetGroupInstancesInvokeArgs(), options.WithDefaults());

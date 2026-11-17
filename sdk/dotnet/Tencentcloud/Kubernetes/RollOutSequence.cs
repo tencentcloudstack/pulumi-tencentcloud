@@ -96,6 +96,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateRollOutSequence](https://www.tencentcloud.com/search/?wd=CreateRollOutSequence&amp;type=document&amp;lang=en)
+    ///   - [DescribeRollOutSequences](https://www.tencentcloud.com/search/?wd=DescribeRollOutSequences&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeRollOutSequences](https://www.tencentcloud.com/search/?wd=DescribeRollOutSequences&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [DescribeRollOutSequences](https://www.tencentcloud.com/search/?wd=DescribeRollOutSequences&amp;type=document&amp;lang=en)
+    ///   - [ModifyRollOutSequence](https://www.tencentcloud.com/search/?wd=ModifyRollOutSequence&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteRollOutSequence](https://www.tencentcloud.com/search/?wd=DeleteRollOutSequence&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// TKE roll-out sequence can be imported using the sequenceId, e.g.

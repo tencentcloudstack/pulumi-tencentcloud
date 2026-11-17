@@ -86,6 +86,12 @@ def get_security_group_limits(result_output_file: Optional[_builtins.str] = None
     security_group_limits = tencentcloud.vpc.get_security_group_limits()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSecurityGroupLimits](https://www.tencentcloud.com/search/?wd=DescribeSecurityGroupLimits&type=document&lang=en)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -111,6 +117,12 @@ def get_security_group_limits_output(result_output_file: pulumi.Input[Optional[O
 
     security_group_limits = tencentcloud.vpc.get_security_group_limits()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSecurityGroupLimits](https://www.tencentcloud.com/search/?wd=DescribeSecurityGroupLimits&type=document&lang=en)
 
 
     :param _builtins.str result_output_file: Used to save results.

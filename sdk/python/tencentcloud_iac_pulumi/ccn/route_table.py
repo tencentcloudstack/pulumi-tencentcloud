@@ -214,6 +214,15 @@ class RouteTable(pulumi.CustomResource):
             description="desc.")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateCcnRouteTables](https://www.tencentcloud.com/search/?wd=CreateCcnRouteTables&type=document&lang=en)
+        * Read: [DescribeCcnRouteTables](https://www.tencentcloud.com/search/?wd=DescribeCcnRouteTables&type=document&lang=en)
+        * Update: [ModifyCcnRouteTables](https://www.tencentcloud.com/search/?wd=ModifyCcnRouteTables&type=document&lang=en)
+        * Delete: [DeleteCcnRouteTables](https://www.tencentcloud.com/search/?wd=DeleteCcnRouteTables&type=document&lang=en)
+
         ## Import
 
         Ccn instance can be imported, e.g.
@@ -278,6 +287,15 @@ class RouteTable(pulumi.CustomResource):
             name="tf-example",
             description="desc.")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateCcnRouteTables](https://www.tencentcloud.com/search/?wd=CreateCcnRouteTables&type=document&lang=en)
+        * Read: [DescribeCcnRouteTables](https://www.tencentcloud.com/search/?wd=DescribeCcnRouteTables&type=document&lang=en)
+        * Update: [ModifyCcnRouteTables](https://www.tencentcloud.com/search/?wd=ModifyCcnRouteTables&type=document&lang=en)
+        * Delete: [DeleteCcnRouteTables](https://www.tencentcloud.com/search/?wd=DeleteCcnRouteTables&type=document&lang=en)
 
         ## Import
 

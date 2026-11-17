@@ -28,6 +28,7 @@ class ProfessionalClusterArgs:
                  storage_size: pulumi.Input[_builtins.int],
                  zone_ids: pulumi.Input[Sequence[pulumi.Input[_builtins.int]]],
                  auto_voucher: pulumi.Input[Optional[_builtins.int]] = None,
+                 instance_version: pulumi.Input[Optional[_builtins.str]] = None,
                  tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
                  time_span: pulumi.Input[Optional[_builtins.int]] = None,
                  vpc: pulumi.Input[Optional['ProfessionalClusterVpcArgs']] = None):
@@ -40,6 +41,7 @@ class ProfessionalClusterArgs:
         :param pulumi.Input[_builtins.int] storage_size: Storage specifications. Reference[Professional Cluster Specifications](https://cloud.tencent.com/document/product/1179/83705).
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.int]]] zone_ids: Multi-AZ deployment select three Availability Zones, like: [200002,200003,200004]. Single availability zone deployment selects an availability zone, like [200002].
         :param pulumi.Input[_builtins.int] auto_voucher: Whether to automatically select vouchers. `1`: Yes, `0`: No. Default is `0`.
+        :param pulumi.Input[_builtins.str] instance_version: Cluster version information. User can specify a version when creating the cluster.
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: Tag description list.
         :param pulumi.Input[_builtins.int] time_span: Purchase duration, value range: 1~50. Default: 1.
         :param pulumi.Input['ProfessionalClusterVpcArgs'] vpc: Label of VPC network.
@@ -51,6 +53,8 @@ class ProfessionalClusterArgs:
         pulumi.set(__self__, "zone_ids", zone_ids)
         if auto_voucher is not None:
             pulumi.set(__self__, "auto_voucher", auto_voucher)
+        if instance_version is not None:
+            pulumi.set(__self__, "instance_version", instance_version)
         if tags is not None:
             pulumi.set(__self__, "tags", tags)
         if time_span is not None:
@@ -131,6 +135,18 @@ class ProfessionalClusterArgs:
         pulumi.set(self, "auto_voucher", value)
 
     @_builtins.property
+    @pulumi.getter(name="instanceVersion")
+    def instance_version(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Cluster version information. User can specify a version when creating the cluster.
+        """
+        return pulumi.get(self, "instance_version")
+
+    @instance_version.setter
+    def instance_version(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "instance_version", value)
+
+    @_builtins.property
     @pulumi.getter
     def tags(self) -> pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]]:
         """
@@ -172,7 +188,9 @@ class _ProfessionalClusterState:
     def __init__(__self__, *,
                  auto_renew_flag: pulumi.Input[Optional[_builtins.int]] = None,
                  auto_voucher: pulumi.Input[Optional[_builtins.int]] = None,
+                 cluster_id: pulumi.Input[Optional[_builtins.str]] = None,
                  cluster_name: pulumi.Input[Optional[_builtins.str]] = None,
+                 instance_version: pulumi.Input[Optional[_builtins.str]] = None,
                  product_name: pulumi.Input[Optional[_builtins.str]] = None,
                  storage_size: pulumi.Input[Optional[_builtins.int]] = None,
                  tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
@@ -184,7 +202,9 @@ class _ProfessionalClusterState:
 
         :param pulumi.Input[_builtins.int] auto_renew_flag: Whether to turn on automatic monthly renewal. `1`: turn on, `0`: turn off.
         :param pulumi.Input[_builtins.int] auto_voucher: Whether to automatically select vouchers. `1`: Yes, `0`: No. Default is `0`.
+        :param pulumi.Input[_builtins.str] cluster_id: Id of cluster.
         :param pulumi.Input[_builtins.str] cluster_name: Name of cluster. It does not support Chinese characters and special characters except dashes and underscores and cannot exceed 64 characters.
+        :param pulumi.Input[_builtins.str] instance_version: Cluster version information. User can specify a version when creating the cluster.
         :param pulumi.Input[_builtins.str] product_name: Cluster specification code. Reference[Professional Cluster Specifications](https://cloud.tencent.com/document/product/1179/83705).
         :param pulumi.Input[_builtins.int] storage_size: Storage specifications. Reference[Professional Cluster Specifications](https://cloud.tencent.com/document/product/1179/83705).
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: Tag description list.
@@ -196,8 +216,12 @@ class _ProfessionalClusterState:
             pulumi.set(__self__, "auto_renew_flag", auto_renew_flag)
         if auto_voucher is not None:
             pulumi.set(__self__, "auto_voucher", auto_voucher)
+        if cluster_id is not None:
+            pulumi.set(__self__, "cluster_id", cluster_id)
         if cluster_name is not None:
             pulumi.set(__self__, "cluster_name", cluster_name)
+        if instance_version is not None:
+            pulumi.set(__self__, "instance_version", instance_version)
         if product_name is not None:
             pulumi.set(__self__, "product_name", product_name)
         if storage_size is not None:
@@ -236,6 +260,18 @@ class _ProfessionalClusterState:
         pulumi.set(self, "auto_voucher", value)
 
     @_builtins.property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Id of cluster.
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @cluster_id.setter
+    def cluster_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "cluster_id", value)
+
+    @_builtins.property
     @pulumi.getter(name="clusterName")
     def cluster_name(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
@@ -246,6 +282,18 @@ class _ProfessionalClusterState:
     @cluster_name.setter
     def cluster_name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "cluster_name", value)
+
+    @_builtins.property
+    @pulumi.getter(name="instanceVersion")
+    def instance_version(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Cluster version information. User can specify a version when creating the cluster.
+        """
+        return pulumi.get(self, "instance_version")
+
+    @instance_version.setter
+    def instance_version(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "instance_version", value)
 
     @_builtins.property
     @pulumi.getter(name="productName")
@@ -329,6 +377,7 @@ class ProfessionalCluster(pulumi.CustomResource):
                  auto_renew_flag: pulumi.Input[Optional[_builtins.int]] = None,
                  auto_voucher: pulumi.Input[Optional[_builtins.int]] = None,
                  cluster_name: pulumi.Input[Optional[_builtins.str]] = None,
+                 instance_version: pulumi.Input[Optional[_builtins.str]] = None,
                  product_name: pulumi.Input[Optional[_builtins.str]] = None,
                  storage_size: pulumi.Input[Optional[_builtins.int]] = None,
                  tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
@@ -337,28 +386,29 @@ class ProfessionalCluster(pulumi.CustomResource):
                  zone_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.int]]]] = None,
                  __props__=None):
         """
-        Provides a resource to create a tdmq professional_cluster
+        Provides a resource to create a TDMQ professional cluster
 
         ## Example Usage
 
-        ### single-zone Professional Cluster
+        ### Single-zone Professional Cluster
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        professional_cluster = tencentcloud.tdmq.ProfessionalCluster("professional_cluster",
+        example = tencentcloud.tdmq.ProfessionalCluster("example",
             auto_renew_flag=1,
-            cluster_name="single_zone_cluster",
-            product_name="PULSAR.P1.MINI2",
+            cluster_name="tf_example",
+            product_name="PULSAR.P2.SMALL4",
             storage_size=600,
-            tags={
-                "createby": "terrafrom",
-            },
-            zone_ids=[100004],
+            instance_version="2.9.2",
+            zone_ids=[100006],
             vpc={
-                "subnet_id": "subnet-xxxx",
-                "vpc_id": "vpc-xxxx",
+                "vpc_id": "vpc-i5yyodl9",
+                "subnet_id": "subnet-hhi88a58",
+            },
+            tags={
+                "createby": "Terrafrom",
             })
         ```
 
@@ -368,32 +418,48 @@ class ProfessionalCluster(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        professional_cluster = tencentcloud.tdmq.ProfessionalCluster("professional_cluster",
+        example = tencentcloud.tdmq.ProfessionalCluster("example",
             auto_renew_flag=1,
-            cluster_name="multi_zone_cluster",
-            product_name="PULSAR.P1.MINI2",
-            storage_size=200,
-            tags={
-                "key": "value1",
-                "key2": "value2",
-            },
+            cluster_name="tf_example",
+            product_name="PULSAR.P2.SMALL4",
+            storage_size=600,
+            instance_version="3.0.0",
             zone_ids=[
-                330001,
-                330002,
-                330003,
+                100006,
+                100007,
             ],
             vpc={
-                "subnet_id": "subnet-xxxx",
-                "vpc_id": "vpc-xxxx",
+                "vpc_id": "vpc-i5yyodl9",
+                "subnet_id": "subnet-hhi88a58",
+            },
+            tags={
+                "createby": "Terrafrom",
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateProCluster](https://www.tencentcloud.com/search/?wd=CreateProCluster&type=document&lang=en)
+          - [DescribePulsarProInstances](https://www.tencentcloud.com/search/?wd=DescribePulsarProInstances&type=document&lang=en)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribePulsarProInstanceDetail](https://www.tencentcloud.com/search/?wd=DescribePulsarProInstanceDetail&type=document&lang=en)
+          - [DescribePulsarProInstances](https://www.tencentcloud.com/search/?wd=DescribePulsarProInstances&type=document&lang=en)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [ModifyCluster](https://www.tencentcloud.com/search/?wd=ModifyCluster&type=document&lang=en)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Delete: [DeleteProCluster](https://www.tencentcloud.com/search/?wd=DeleteProCluster&type=document&lang=en)
+
         ## Import
 
-        tdmq professional_cluster can be imported using the id, e.g.
+        TDMQ professional cluster can be imported using the id, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Tdmq/professionalCluster:ProfessionalCluster professional_cluster professional_cluster_id
+        $ pulumi import tencentcloud:Tdmq/professionalCluster:ProfessionalCluster example pulsar-x4r939zkwmm2
         ```
 
 
@@ -402,6 +468,7 @@ class ProfessionalCluster(pulumi.CustomResource):
         :param pulumi.Input[_builtins.int] auto_renew_flag: Whether to turn on automatic monthly renewal. `1`: turn on, `0`: turn off.
         :param pulumi.Input[_builtins.int] auto_voucher: Whether to automatically select vouchers. `1`: Yes, `0`: No. Default is `0`.
         :param pulumi.Input[_builtins.str] cluster_name: Name of cluster. It does not support Chinese characters and special characters except dashes and underscores and cannot exceed 64 characters.
+        :param pulumi.Input[_builtins.str] instance_version: Cluster version information. User can specify a version when creating the cluster.
         :param pulumi.Input[_builtins.str] product_name: Cluster specification code. Reference[Professional Cluster Specifications](https://cloud.tencent.com/document/product/1179/83705).
         :param pulumi.Input[_builtins.int] storage_size: Storage specifications. Reference[Professional Cluster Specifications](https://cloud.tencent.com/document/product/1179/83705).
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: Tag description list.
@@ -416,28 +483,29 @@ class ProfessionalCluster(pulumi.CustomResource):
                  args: ProfessionalClusterArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Provides a resource to create a tdmq professional_cluster
+        Provides a resource to create a TDMQ professional cluster
 
         ## Example Usage
 
-        ### single-zone Professional Cluster
+        ### Single-zone Professional Cluster
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        professional_cluster = tencentcloud.tdmq.ProfessionalCluster("professional_cluster",
+        example = tencentcloud.tdmq.ProfessionalCluster("example",
             auto_renew_flag=1,
-            cluster_name="single_zone_cluster",
-            product_name="PULSAR.P1.MINI2",
+            cluster_name="tf_example",
+            product_name="PULSAR.P2.SMALL4",
             storage_size=600,
-            tags={
-                "createby": "terrafrom",
-            },
-            zone_ids=[100004],
+            instance_version="2.9.2",
+            zone_ids=[100006],
             vpc={
-                "subnet_id": "subnet-xxxx",
-                "vpc_id": "vpc-xxxx",
+                "vpc_id": "vpc-i5yyodl9",
+                "subnet_id": "subnet-hhi88a58",
+            },
+            tags={
+                "createby": "Terrafrom",
             })
         ```
 
@@ -447,32 +515,48 @@ class ProfessionalCluster(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        professional_cluster = tencentcloud.tdmq.ProfessionalCluster("professional_cluster",
+        example = tencentcloud.tdmq.ProfessionalCluster("example",
             auto_renew_flag=1,
-            cluster_name="multi_zone_cluster",
-            product_name="PULSAR.P1.MINI2",
-            storage_size=200,
-            tags={
-                "key": "value1",
-                "key2": "value2",
-            },
+            cluster_name="tf_example",
+            product_name="PULSAR.P2.SMALL4",
+            storage_size=600,
+            instance_version="3.0.0",
             zone_ids=[
-                330001,
-                330002,
-                330003,
+                100006,
+                100007,
             ],
             vpc={
-                "subnet_id": "subnet-xxxx",
-                "vpc_id": "vpc-xxxx",
+                "vpc_id": "vpc-i5yyodl9",
+                "subnet_id": "subnet-hhi88a58",
+            },
+            tags={
+                "createby": "Terrafrom",
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateProCluster](https://www.tencentcloud.com/search/?wd=CreateProCluster&type=document&lang=en)
+          - [DescribePulsarProInstances](https://www.tencentcloud.com/search/?wd=DescribePulsarProInstances&type=document&lang=en)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribePulsarProInstanceDetail](https://www.tencentcloud.com/search/?wd=DescribePulsarProInstanceDetail&type=document&lang=en)
+          - [DescribePulsarProInstances](https://www.tencentcloud.com/search/?wd=DescribePulsarProInstances&type=document&lang=en)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [ModifyCluster](https://www.tencentcloud.com/search/?wd=ModifyCluster&type=document&lang=en)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Delete: [DeleteProCluster](https://www.tencentcloud.com/search/?wd=DeleteProCluster&type=document&lang=en)
+
         ## Import
 
-        tdmq professional_cluster can be imported using the id, e.g.
+        TDMQ professional cluster can be imported using the id, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Tdmq/professionalCluster:ProfessionalCluster professional_cluster professional_cluster_id
+        $ pulumi import tencentcloud:Tdmq/professionalCluster:ProfessionalCluster example pulsar-x4r939zkwmm2
         ```
 
 
@@ -494,6 +578,7 @@ class ProfessionalCluster(pulumi.CustomResource):
                  auto_renew_flag: pulumi.Input[Optional[_builtins.int]] = None,
                  auto_voucher: pulumi.Input[Optional[_builtins.int]] = None,
                  cluster_name: pulumi.Input[Optional[_builtins.str]] = None,
+                 instance_version: pulumi.Input[Optional[_builtins.str]] = None,
                  product_name: pulumi.Input[Optional[_builtins.str]] = None,
                  storage_size: pulumi.Input[Optional[_builtins.int]] = None,
                  tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
@@ -516,6 +601,7 @@ class ProfessionalCluster(pulumi.CustomResource):
             if cluster_name is None and not opts.urn:
                 raise TypeError("Missing required property 'cluster_name'")
             __props__.__dict__["cluster_name"] = cluster_name
+            __props__.__dict__["instance_version"] = instance_version
             if product_name is None and not opts.urn:
                 raise TypeError("Missing required property 'product_name'")
             __props__.__dict__["product_name"] = product_name
@@ -528,6 +614,7 @@ class ProfessionalCluster(pulumi.CustomResource):
             if zone_ids is None and not opts.urn:
                 raise TypeError("Missing required property 'zone_ids'")
             __props__.__dict__["zone_ids"] = zone_ids
+            __props__.__dict__["cluster_id"] = None
         super(ProfessionalCluster, __self__).__init__(
             'tencentcloud:Tdmq/professionalCluster:ProfessionalCluster',
             resource_name,
@@ -540,7 +627,9 @@ class ProfessionalCluster(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             auto_renew_flag: pulumi.Input[Optional[_builtins.int]] = None,
             auto_voucher: pulumi.Input[Optional[_builtins.int]] = None,
+            cluster_id: pulumi.Input[Optional[_builtins.str]] = None,
             cluster_name: pulumi.Input[Optional[_builtins.str]] = None,
+            instance_version: pulumi.Input[Optional[_builtins.str]] = None,
             product_name: pulumi.Input[Optional[_builtins.str]] = None,
             storage_size: pulumi.Input[Optional[_builtins.int]] = None,
             tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
@@ -556,7 +645,9 @@ class ProfessionalCluster(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.int] auto_renew_flag: Whether to turn on automatic monthly renewal. `1`: turn on, `0`: turn off.
         :param pulumi.Input[_builtins.int] auto_voucher: Whether to automatically select vouchers. `1`: Yes, `0`: No. Default is `0`.
+        :param pulumi.Input[_builtins.str] cluster_id: Id of cluster.
         :param pulumi.Input[_builtins.str] cluster_name: Name of cluster. It does not support Chinese characters and special characters except dashes and underscores and cannot exceed 64 characters.
+        :param pulumi.Input[_builtins.str] instance_version: Cluster version information. User can specify a version when creating the cluster.
         :param pulumi.Input[_builtins.str] product_name: Cluster specification code. Reference[Professional Cluster Specifications](https://cloud.tencent.com/document/product/1179/83705).
         :param pulumi.Input[_builtins.int] storage_size: Storage specifications. Reference[Professional Cluster Specifications](https://cloud.tencent.com/document/product/1179/83705).
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: Tag description list.
@@ -570,7 +661,9 @@ class ProfessionalCluster(pulumi.CustomResource):
 
         __props__.__dict__["auto_renew_flag"] = auto_renew_flag
         __props__.__dict__["auto_voucher"] = auto_voucher
+        __props__.__dict__["cluster_id"] = cluster_id
         __props__.__dict__["cluster_name"] = cluster_name
+        __props__.__dict__["instance_version"] = instance_version
         __props__.__dict__["product_name"] = product_name
         __props__.__dict__["storage_size"] = storage_size
         __props__.__dict__["tags"] = tags
@@ -596,12 +689,28 @@ class ProfessionalCluster(pulumi.CustomResource):
         return pulumi.get(self, "auto_voucher")
 
     @_builtins.property
+    @pulumi.getter(name="clusterId")
+    def cluster_id(self) -> pulumi.Output[_builtins.str]:
+        """
+        Id of cluster.
+        """
+        return pulumi.get(self, "cluster_id")
+
+    @_builtins.property
     @pulumi.getter(name="clusterName")
     def cluster_name(self) -> pulumi.Output[_builtins.str]:
         """
         Name of cluster. It does not support Chinese characters and special characters except dashes and underscores and cannot exceed 64 characters.
         """
         return pulumi.get(self, "cluster_name")
+
+    @_builtins.property
+    @pulumi.getter(name="instanceVersion")
+    def instance_version(self) -> pulumi.Output[_builtins.str]:
+        """
+        Cluster version information. User can specify a version when creating the cluster.
+        """
+        return pulumi.get(self, "instance_version")
 
     @_builtins.property
     @pulumi.getter(name="productName")

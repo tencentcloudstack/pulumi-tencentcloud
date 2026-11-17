@@ -184,6 +184,14 @@ class SecurityGroupConfig(pulumi.CustomResource):
             read_only_group_id=group.id)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyDBInstanceSecurityGroups](https://www.tencentcloud.com/document/api/409/52647)
+        * Read: [DescribeDBInstanceSecurityGroups](https://www.tencentcloud.com/document/api/409/52648)
+        * Update: [ModifyDBInstanceSecurityGroups](https://www.tencentcloud.com/document/api/409/52647)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -240,6 +248,14 @@ class SecurityGroupConfig(pulumi.CustomResource):
             ],
             read_only_group_id=group.id)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyDBInstanceSecurityGroups](https://www.tencentcloud.com/document/api/409/52647)
+        * Read: [DescribeDBInstanceSecurityGroups](https://www.tencentcloud.com/document/api/409/52648)
+        * Update: [ModifyDBInstanceSecurityGroups](https://www.tencentcloud.com/document/api/409/52647)
 
 
         :param str resource_name: The name of the resource.

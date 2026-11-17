@@ -18,6 +18,12 @@ import * as utilities from "../utilities";
  *     groupId: 33711,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSecurityIPGroupContent](https://www.tencentcloud.com/document/api/1145/72283)
  */
 export function getSecurityIpGroupContent(args: GetSecurityIpGroupContentArgs, opts?: pulumi.InvokeOptions): Promise<GetSecurityIpGroupContentResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -80,6 +86,12 @@ export interface GetSecurityIpGroupContentResult {
  *     groupId: 33711,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSecurityIPGroupContent](https://www.tencentcloud.com/document/api/1145/72283)
  */
 export function getSecurityIpGroupContentOutput(args: GetSecurityIpGroupContentOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSecurityIpGroupContentResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

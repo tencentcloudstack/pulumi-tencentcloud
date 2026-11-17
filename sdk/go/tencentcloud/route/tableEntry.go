@@ -83,6 +83,22 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CreateRoutes](https://www.tencentcloud.com/document/api/215/16724)
+//   - [DescribeRouteTables](https://www.tencentcloud.com/document/api/215/15763)
+//   - [DisableRoutes](https://www.tencentcloud.com/document/api/215/68967)
+//
+// * Read: [DescribeRouteTables](https://www.tencentcloud.com/document/api/215/15763)
+// * Update:
+//   - [DisableRoutes](https://www.tencentcloud.com/document/api/215/68967)
+//   - [EnableRoutes](https://www.tencentcloud.com/document/api/215/68966)
+//
+// * Delete: [DeleteRoutes](https://www.tencentcloud.com/document/api/215/16725)
+//
 // ## Import
 //
 // Route table entry can be imported using the routeEntryId.routeTableId, e.g.

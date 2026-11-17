@@ -106,6 +106,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read:
+//   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+//   - [DescribeDBs](https://www.tencentcloud.com/document/api/238/32114)
 func GetDbs(ctx *pulumi.Context, args *GetDbsArgs, opts ...pulumi.InvokeOption) (*GetDbsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDbsResult

@@ -300,6 +300,21 @@ class Vip(pulumi.CustomResource):
             vip="10.0.4.16")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateHaVip](https://www.tencentcloud.com/document/api/215/34764)
+          - [DescribeHaVips](https://www.tencentcloud.com/document/api/215/34762)
+        * Read: [DescribeHaVips](https://www.tencentcloud.com/document/api/215/34762)
+        * Update:
+          - [DescribeHaVips](https://www.tencentcloud.com/document/api/215/34762)
+          - [ModifyHaVipAttribute](https://www.tencentcloud.com/document/api/215/34759)
+        * Delete:
+          - [DeleteHaVip](https://www.tencentcloud.com/document/api/215/34763)
+          - [DescribeHaVips](https://www.tencentcloud.com/document/api/215/34762)
+
         ## Import
 
         HA VIP can be imported using the id, e.g.
@@ -338,6 +353,21 @@ class Vip(pulumi.CustomResource):
             subnet_id="subnet-4d4m4cd4s",
             vip="10.0.4.16")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateHaVip](https://www.tencentcloud.com/document/api/215/34764)
+          - [DescribeHaVips](https://www.tencentcloud.com/document/api/215/34762)
+        * Read: [DescribeHaVips](https://www.tencentcloud.com/document/api/215/34762)
+        * Update:
+          - [DescribeHaVips](https://www.tencentcloud.com/document/api/215/34762)
+          - [ModifyHaVipAttribute](https://www.tencentcloud.com/document/api/215/34759)
+        * Delete:
+          - [DeleteHaVip](https://www.tencentcloud.com/document/api/215/34763)
+          - [DescribeHaVips](https://www.tencentcloud.com/document/api/215/34762)
 
         ## Import
 

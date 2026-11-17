@@ -20,6 +20,7 @@ __all__ = [
     'BatchSendEmailTemplate',
     'BatchSendEmailTimedParam',
     'DomainAttribute',
+    'DomainTagList',
     'GetBlackEmailAddressBlackListResult',
     'GetEmailIdentitiesEmailIdentityResult',
     'GetReceiversDataResult',
@@ -287,6 +288,54 @@ class DomainAttribute(dict):
         Record Type CNAME | A | TXT | MX.
         """
         return pulumi.get(self, "type")
+
+
+@pulumi.output_type
+class DomainTagList(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "tagKey":
+            suggest = "tag_key"
+        elif key == "tagValue":
+            suggest = "tag_value"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in DomainTagList. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        DomainTagList.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        DomainTagList.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 tag_key: _builtins.str,
+                 tag_value: _builtins.str):
+        """
+        :param _builtins.str tag_key: Tag key.
+        :param _builtins.str tag_value: Tag value.
+        """
+        pulumi.set(__self__, "tag_key", tag_key)
+        pulumi.set(__self__, "tag_value", tag_value)
+
+    @_builtins.property
+    @pulumi.getter(name="tagKey")
+    def tag_key(self) -> _builtins.str:
+        """
+        Tag key.
+        """
+        return pulumi.get(self, "tag_key")
+
+    @_builtins.property
+    @pulumi.getter(name="tagValue")
+    def tag_value(self) -> _builtins.str:
+        """
+        Tag value.
+        """
+        return pulumi.get(self, "tag_value")
 
 
 @pulumi.output_type

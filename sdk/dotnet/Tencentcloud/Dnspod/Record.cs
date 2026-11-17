@@ -41,6 +41,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateRecord](https://www.tencentcloud.com/document/api/1157/49041)
+    ///   - [DescribeRecord](https://www.tencentcloud.com/document/api/1157/49037)
+    /// * Read: [DescribeRecord](https://www.tencentcloud.com/document/api/1157/49037)
+    /// * Update:
+    ///   - [DescribeRecord](https://www.tencentcloud.com/document/api/1157/49037)
+    ///   - [ModifyRecord](https://www.tencentcloud.com/document/api/1157/49034)
+    /// * Delete: [DeleteRecord](https://www.tencentcloud.com/document/api/1157/49039)
+    /// 
     /// ## Import
     /// 
     /// DnsPod Domain record can be imported using the Domain#RecordId, e.g.

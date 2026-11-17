@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeCurrentOp](https://www.tencentcloud.com/document/api/240/74802)
 func GetInstanceCurrentOp(ctx *pulumi.Context, args *GetInstanceCurrentOpArgs, opts ...pulumi.InvokeOption) (*GetInstanceCurrentOpResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetInstanceCurrentOpResult

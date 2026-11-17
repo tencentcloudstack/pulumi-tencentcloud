@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeAddressTemplateGroups](https://www.tencentcloud.com/document/api/215/16716)
 func GetTemplateGroups(ctx *pulumi.Context, args *GetTemplateGroupsArgs, opts ...pulumi.InvokeOption) (*GetTemplateGroupsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetTemplateGroupsResult

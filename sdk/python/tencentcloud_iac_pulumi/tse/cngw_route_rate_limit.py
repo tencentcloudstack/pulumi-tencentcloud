@@ -235,6 +235,15 @@ class CngwRouteRateLimit(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateCloudNativeAPIGatewayRouteRateLimit](https://www.tencentcloud.com/document/api/1290/79291)
+        * Read: [DescribeCloudNativeAPIGatewayRouteRateLimit](https://www.tencentcloud.com/document/api/1290/79260)
+        * Update: [ModifyCloudNativeAPIGatewayRouteRateLimit](https://www.tencentcloud.com/document/api/1290/79240)
+        * Delete: [DeleteCloudNativeAPIGatewayRouteRateLimit](https://www.tencentcloud.com/document/api/1290/79277)
+
         ## Import
 
         tse cngw_route_rate_limit can be imported using the id, e.g.
@@ -351,6 +360,15 @@ class CngwRouteRateLimit(pulumi.CustomResource):
                 }],
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateCloudNativeAPIGatewayRouteRateLimit](https://www.tencentcloud.com/document/api/1290/79291)
+        * Read: [DescribeCloudNativeAPIGatewayRouteRateLimit](https://www.tencentcloud.com/document/api/1290/79260)
+        * Update: [ModifyCloudNativeAPIGatewayRouteRateLimit](https://www.tencentcloud.com/document/api/1290/79240)
+        * Delete: [DeleteCloudNativeAPIGatewayRouteRateLimit](https://www.tencentcloud.com/document/api/1290/79277)
 
         ## Import
 

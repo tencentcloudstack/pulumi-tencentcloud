@@ -567,6 +567,130 @@ func (o AdaptiveDynamicStreamingTemplateStreamInfoVideoOutput) Width() pulumi.In
 	return o.ApplyT(func(v AdaptiveDynamicStreamingTemplateStreamInfoVideo) *int { return v.Width }).(pulumi.IntPtrOutput)
 }
 
+type AigcQuotaModelQuota struct {
+	// Model name.
+	ModelName *string `pulumi:"modelName"`
+	// Model version.
+	ModelVersion *string `pulumi:"modelVersion"`
+	// Model quota limit value. Unit: when `quotaType` is `Image`, count by images; when `quotaType` is `Video`, count by seconds.
+	QuotaLimit *int `pulumi:"quotaLimit"`
+	// Current usage amount of the model quota. Unit: when `quotaType` is `Image`, count by images; when `quotaType` is `Video`, count by seconds.
+	Usage *int `pulumi:"usage"`
+}
+
+// AigcQuotaModelQuotaInput is an input type that accepts AigcQuotaModelQuotaArgs and AigcQuotaModelQuotaOutput values.
+// You can construct a concrete instance of `AigcQuotaModelQuotaInput` via:
+//
+//	AigcQuotaModelQuotaArgs{...}
+type AigcQuotaModelQuotaInput interface {
+	pulumi.Input
+
+	ToAigcQuotaModelQuotaOutput() AigcQuotaModelQuotaOutput
+	ToAigcQuotaModelQuotaOutputWithContext(context.Context) AigcQuotaModelQuotaOutput
+}
+
+type AigcQuotaModelQuotaArgs struct {
+	// Model name.
+	ModelName pulumi.StringPtrInput `pulumi:"modelName"`
+	// Model version.
+	ModelVersion pulumi.StringPtrInput `pulumi:"modelVersion"`
+	// Model quota limit value. Unit: when `quotaType` is `Image`, count by images; when `quotaType` is `Video`, count by seconds.
+	QuotaLimit pulumi.IntPtrInput `pulumi:"quotaLimit"`
+	// Current usage amount of the model quota. Unit: when `quotaType` is `Image`, count by images; when `quotaType` is `Video`, count by seconds.
+	Usage pulumi.IntPtrInput `pulumi:"usage"`
+}
+
+func (AigcQuotaModelQuotaArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*AigcQuotaModelQuota)(nil)).Elem()
+}
+
+func (i AigcQuotaModelQuotaArgs) ToAigcQuotaModelQuotaOutput() AigcQuotaModelQuotaOutput {
+	return i.ToAigcQuotaModelQuotaOutputWithContext(context.Background())
+}
+
+func (i AigcQuotaModelQuotaArgs) ToAigcQuotaModelQuotaOutputWithContext(ctx context.Context) AigcQuotaModelQuotaOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AigcQuotaModelQuotaOutput)
+}
+
+// AigcQuotaModelQuotaArrayInput is an input type that accepts AigcQuotaModelQuotaArray and AigcQuotaModelQuotaArrayOutput values.
+// You can construct a concrete instance of `AigcQuotaModelQuotaArrayInput` via:
+//
+//	AigcQuotaModelQuotaArray{ AigcQuotaModelQuotaArgs{...} }
+type AigcQuotaModelQuotaArrayInput interface {
+	pulumi.Input
+
+	ToAigcQuotaModelQuotaArrayOutput() AigcQuotaModelQuotaArrayOutput
+	ToAigcQuotaModelQuotaArrayOutputWithContext(context.Context) AigcQuotaModelQuotaArrayOutput
+}
+
+type AigcQuotaModelQuotaArray []AigcQuotaModelQuotaInput
+
+func (AigcQuotaModelQuotaArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AigcQuotaModelQuota)(nil)).Elem()
+}
+
+func (i AigcQuotaModelQuotaArray) ToAigcQuotaModelQuotaArrayOutput() AigcQuotaModelQuotaArrayOutput {
+	return i.ToAigcQuotaModelQuotaArrayOutputWithContext(context.Background())
+}
+
+func (i AigcQuotaModelQuotaArray) ToAigcQuotaModelQuotaArrayOutputWithContext(ctx context.Context) AigcQuotaModelQuotaArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(AigcQuotaModelQuotaArrayOutput)
+}
+
+type AigcQuotaModelQuotaOutput struct{ *pulumi.OutputState }
+
+func (AigcQuotaModelQuotaOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*AigcQuotaModelQuota)(nil)).Elem()
+}
+
+func (o AigcQuotaModelQuotaOutput) ToAigcQuotaModelQuotaOutput() AigcQuotaModelQuotaOutput {
+	return o
+}
+
+func (o AigcQuotaModelQuotaOutput) ToAigcQuotaModelQuotaOutputWithContext(ctx context.Context) AigcQuotaModelQuotaOutput {
+	return o
+}
+
+// Model name.
+func (o AigcQuotaModelQuotaOutput) ModelName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AigcQuotaModelQuota) *string { return v.ModelName }).(pulumi.StringPtrOutput)
+}
+
+// Model version.
+func (o AigcQuotaModelQuotaOutput) ModelVersion() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v AigcQuotaModelQuota) *string { return v.ModelVersion }).(pulumi.StringPtrOutput)
+}
+
+// Model quota limit value. Unit: when `quotaType` is `Image`, count by images; when `quotaType` is `Video`, count by seconds.
+func (o AigcQuotaModelQuotaOutput) QuotaLimit() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v AigcQuotaModelQuota) *int { return v.QuotaLimit }).(pulumi.IntPtrOutput)
+}
+
+// Current usage amount of the model quota. Unit: when `quotaType` is `Image`, count by images; when `quotaType` is `Video`, count by seconds.
+func (o AigcQuotaModelQuotaOutput) Usage() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v AigcQuotaModelQuota) *int { return v.Usage }).(pulumi.IntPtrOutput)
+}
+
+type AigcQuotaModelQuotaArrayOutput struct{ *pulumi.OutputState }
+
+func (AigcQuotaModelQuotaArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]AigcQuotaModelQuota)(nil)).Elem()
+}
+
+func (o AigcQuotaModelQuotaArrayOutput) ToAigcQuotaModelQuotaArrayOutput() AigcQuotaModelQuotaArrayOutput {
+	return o
+}
+
+func (o AigcQuotaModelQuotaArrayOutput) ToAigcQuotaModelQuotaArrayOutputWithContext(ctx context.Context) AigcQuotaModelQuotaArrayOutput {
+	return o
+}
+
+func (o AigcQuotaModelQuotaArrayOutput) Index(i pulumi.IntInput) AigcQuotaModelQuotaOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) AigcQuotaModelQuota {
+		return vs[0].([]AigcQuotaModelQuota)[vs[1].(int)]
+	}).(AigcQuotaModelQuotaOutput)
+}
+
 type ProcedureTemplateAiAnalysisTask struct {
 	// Video content analysis template ID.
 	Definition *string `pulumi:"definition"`
@@ -8419,6 +8543,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigInput)(nil)).Elem(), AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrInput)(nil)).Elem(), AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*AdaptiveDynamicStreamingTemplateStreamInfoVideoInput)(nil)).Elem(), AdaptiveDynamicStreamingTemplateStreamInfoVideoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AigcQuotaModelQuotaInput)(nil)).Elem(), AigcQuotaModelQuotaArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*AigcQuotaModelQuotaArrayInput)(nil)).Elem(), AigcQuotaModelQuotaArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProcedureTemplateAiAnalysisTaskInput)(nil)).Elem(), ProcedureTemplateAiAnalysisTaskArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProcedureTemplateAiAnalysisTaskPtrInput)(nil)).Elem(), ProcedureTemplateAiAnalysisTaskArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ProcedureTemplateAiRecognitionTaskInput)(nil)).Elem(), ProcedureTemplateAiRecognitionTaskArgs{})
@@ -8531,6 +8657,8 @@ func init() {
 	pulumi.RegisterOutputType(AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigOutput{})
 	pulumi.RegisterOutputType(AdaptiveDynamicStreamingTemplateStreamInfoTehdConfigPtrOutput{})
 	pulumi.RegisterOutputType(AdaptiveDynamicStreamingTemplateStreamInfoVideoOutput{})
+	pulumi.RegisterOutputType(AigcQuotaModelQuotaOutput{})
+	pulumi.RegisterOutputType(AigcQuotaModelQuotaArrayOutput{})
 	pulumi.RegisterOutputType(ProcedureTemplateAiAnalysisTaskOutput{})
 	pulumi.RegisterOutputType(ProcedureTemplateAiAnalysisTaskPtrOutput{})
 	pulumi.RegisterOutputType(ProcedureTemplateAiRecognitionTaskOutput{})

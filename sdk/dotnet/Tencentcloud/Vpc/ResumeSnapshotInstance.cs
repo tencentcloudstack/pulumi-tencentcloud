@@ -96,6 +96,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ResumeSnapshotInstance](https://www.tencentcloud.com/document/api/215/55049)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Vpc/resumeSnapshotInstance:ResumeSnapshotInstance")]
     public partial class ResumeSnapshotInstance : global::Pulumi.CustomResource

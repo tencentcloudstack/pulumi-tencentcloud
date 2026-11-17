@@ -558,6 +558,14 @@ class StorageSet(pulumi.CustomResource):
             encrypt=False)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateDisks](https://www.tencentcloud.com/document/api/362/16312)
+        * Read: [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+        * Delete: [TerminateDisks](https://www.tencentcloud.com/document/api/362/16321)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -655,6 +663,14 @@ class StorageSet(pulumi.CustomResource):
             project_id=0,
             encrypt=False)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateDisks](https://www.tencentcloud.com/document/api/362/16312)
+        * Read: [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+        * Delete: [TerminateDisks](https://www.tencentcloud.com/document/api/362/16321)
 
 
         :param str resource_name: The name of the resource.

@@ -40,6 +40,12 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CheckCertificateChain](https://www.tencentcloud.com/search/?wd=CheckCertificateChain&type=document&lang=en)
+//
 // ## Import
 //
 // ssl checkCertificateChain can be imported using the id, e.g.

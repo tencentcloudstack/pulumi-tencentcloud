@@ -66,6 +66,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
+    ///     var vpc = new Tencentcloud.Vpc.Instance("vpc", new()
+    ///     {
+    ///         Name = "vpc-example",
+    ///         CidrBlock = "10.0.0.0/16",
+    ///     });
+    /// 
     ///     var example = new Tencentcloud.PrivateDns.Zone("example", new()
     ///     {
     ///         Domain = "domain.com",
@@ -85,7 +91,6 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns
     ///                 Uin = "123456789",
     ///                 UniqVpcId = "vpc-adsebmya",
     ///                 Region = "ap-guangzhou",
-    ///                 VpcName = "vpc-name",
     ///             },
     ///         },
     ///         DnsForwardStatus = "DISABLED",
@@ -99,9 +104,29 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreatePrivateZone](https://www.tencentcloud.com/document/api/1097/42123)
+    ///   - [DescribePrivateZone](https://www.tencentcloud.com/document/api/1097/42117)
+    ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    /// * Read:
+    ///   - [DescribePrivateZone](https://www.tencentcloud.com/document/api/1097/42117)
+    ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+    /// * Update:
+    ///   - [DescribePrivateZone](https://www.tencentcloud.com/document/api/1097/42117)
+    ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+    ///   - [ModifyPrivateZone](https://www.tencentcloud.com/document/api/1097/42112)
+    ///   - [ModifyPrivateZoneVpc](https://www.tencentcloud.com/document/api/1097/42110)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    /// * Delete: [DeletePrivateZone](https://www.tencentcloud.com/document/api/1097/42121)
+    /// 
     /// ## Import
     /// 
-    /// Private Dns Zone can be imported, e.g.
+    /// Private Dns Zone can be imported by id, e.g.
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:PrivateDns/zone:Zone example zone-6xg5xgky

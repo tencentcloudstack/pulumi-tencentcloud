@@ -330,6 +330,14 @@ class Resource(pulumi.CustomResource):
             work_space_id="space-2idq8wbr")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateResource](https://www.tencentcloud.com/search/?wd=CreateResource&type=document&lang=en)
+        * Read: [DescribeResourceConfigs](https://www.tencentcloud.com/search/?wd=DescribeResourceConfigs&type=document&lang=en)
+        * Delete: [DeleteResources](https://www.tencentcloud.com/search/?wd=DeleteResources&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -372,6 +380,14 @@ class Resource(pulumi.CustomResource):
             folder_id="folder-7ctl246z",
             work_space_id="space-2idq8wbr")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateResource](https://www.tencentcloud.com/search/?wd=CreateResource&type=document&lang=en)
+        * Read: [DescribeResourceConfigs](https://www.tencentcloud.com/search/?wd=DescribeResourceConfigs&type=document&lang=en)
+        * Delete: [DeleteResources](https://www.tencentcloud.com/search/?wd=DeleteResources&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

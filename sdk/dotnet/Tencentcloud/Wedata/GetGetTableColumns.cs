@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetTableColumns](https://www.tencentcloud.com/document/api/1174/77951)
         /// </summary>
         public static Task<GetGetTableColumnsResult> InvokeAsync(GetGetTableColumnsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetGetTableColumnsResult>("tencentcloud:Wedata/getGetTableColumns:getGetTableColumns", args ?? new GetGetTableColumnsArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetTableColumns](https://www.tencentcloud.com/document/api/1174/77951)
         /// </summary>
         public static Output<GetGetTableColumnsResult> Invoke(GetGetTableColumnsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetGetTableColumnsResult>("tencentcloud:Wedata/getGetTableColumns:getGetTableColumns", args ?? new GetGetTableColumnsInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetTableColumns](https://www.tencentcloud.com/document/api/1174/77951)
         /// </summary>
         public static Output<GetGetTableColumnsResult> Invoke(GetGetTableColumnsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetGetTableColumnsResult>("tencentcloud:Wedata/getGetTableColumns:getGetTableColumns", args ?? new GetGetTableColumnsInvokeArgs(), options.WithDefaults());

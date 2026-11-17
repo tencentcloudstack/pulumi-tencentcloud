@@ -21,6 +21,14 @@ import * as utilities from "../utilities";
  *     ruleId: "loc-4xxr2cy7",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeListeners](https://www.tencentcloud.com/document/api/214/33831)
+ *   - [DescribeTargets](https://www.tencentcloud.com/document/api/214/33824)
  */
 export function getAttachments(args: GetAttachmentsArgs, opts?: pulumi.InvokeOptions): Promise<GetAttachmentsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -95,6 +103,14 @@ export interface GetAttachmentsResult {
  *     ruleId: "loc-4xxr2cy7",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeListeners](https://www.tencentcloud.com/document/api/214/33831)
+ *   - [DescribeTargets](https://www.tencentcloud.com/document/api/214/33824)
  */
 export function getAttachmentsOutput(args: GetAttachmentsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAttachmentsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

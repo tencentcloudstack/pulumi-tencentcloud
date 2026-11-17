@@ -15,6 +15,14 @@ import * as utilities from "../utilities";
  *
  * const restartKibanaOperation = new tencentcloud.elasticsearch.RestartKibanaOperation("restart_kibana_operation", {instanceId: "es-xxxxxx"});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeInstances](https://www.tencentcloud.com/document/api/845/32214)
+ *   - [RestartKibana](https://www.tencentcloud.com/document/api/845/38995)
  */
 export class RestartKibanaOperation extends pulumi.CustomResource {
     /**

@@ -41,6 +41,15 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [UpdateDiagnoseSettings](https://www.tencentcloud.com/search/?wd=UpdateDiagnoseSettings&type=document&lang=en)
+// * Read: [GetDiagnoseSettings](https://www.tencentcloud.com/search/?wd=GetDiagnoseSettings&type=document&lang=en)
+// * Update: [UpdateDiagnoseSettings](https://www.tencentcloud.com/search/?wd=UpdateDiagnoseSettings&type=document&lang=en)
+// * Delete: [UpdateDiagnoseSettings](https://www.tencentcloud.com/search/?wd=UpdateDiagnoseSettings&type=document&lang=en)
+//
 // ## Import
 //
 // es diagnose can be imported using the id, e.g.

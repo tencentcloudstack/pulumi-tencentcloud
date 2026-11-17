@@ -50,6 +50,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDomains](https://www.tencentcloud.com/document/api/627/64580)
         /// </summary>
         public static Task<GetDomainsResult> InvokeAsync(GetDomainsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDomainsResult>("tencentcloud:Waf/getDomains:getDomains", args ?? new GetDomainsArgs(), options.WithDefaults());
@@ -92,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDomains](https://www.tencentcloud.com/document/api/627/64580)
         /// </summary>
         public static Output<GetDomainsResult> Invoke(GetDomainsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDomainsResult>("tencentcloud:Waf/getDomains:getDomains", args ?? new GetDomainsInvokeArgs(), options.WithDefaults());
@@ -134,6 +146,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDomains](https://www.tencentcloud.com/document/api/627/64580)
         /// </summary>
         public static Output<GetDomainsResult> Invoke(GetDomainsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDomainsResult>("tencentcloud:Waf/getDomains:getDomains", args ?? new GetDomainsInvokeArgs(), options.WithDefaults());

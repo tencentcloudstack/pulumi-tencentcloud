@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetPlatformEventTemplate](https://www.tencentcloud.com/search/?wd=GetPlatformEventTemplate&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetPlateformEventTemplateResult> InvokeAsync(GetPlateformEventTemplateArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetPlateformEventTemplateResult>("tencentcloud:Eb/getPlateformEventTemplate:getPlateformEventTemplate", args ?? new GetPlateformEventTemplateArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetPlatformEventTemplate](https://www.tencentcloud.com/search/?wd=GetPlatformEventTemplate&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetPlateformEventTemplateResult> Invoke(GetPlateformEventTemplateInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetPlateformEventTemplateResult>("tencentcloud:Eb/getPlateformEventTemplate:getPlateformEventTemplate", args ?? new GetPlateformEventTemplateInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetPlatformEventTemplate](https://www.tencentcloud.com/search/?wd=GetPlatformEventTemplate&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetPlateformEventTemplateResult> Invoke(GetPlateformEventTemplateInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetPlateformEventTemplateResult>("tencentcloud:Eb/getPlateformEventTemplate:getPlateformEventTemplate", args ?? new GetPlateformEventTemplateInvokeArgs(), options.WithDefaults());

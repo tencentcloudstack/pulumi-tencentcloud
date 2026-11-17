@@ -128,6 +128,12 @@ def get_groups(group_id: Optional[_builtins.str] = None,
     bar = tencentcloud.cam.get_groups(name="cam-group-test")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListGroups](https://www.tencentcloud.com/document/api/598/32258)
+
 
     :param _builtins.str group_id: ID of CAM group to be queried.
     :param _builtins.str name: Name of the CAM group to be queried.
@@ -168,6 +174,12 @@ def get_groups_output(group_id: pulumi.Input[Optional[Optional[_builtins.str]]] 
     # query by name
     bar = tencentcloud.cam.get_groups(name="cam-group-test")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListGroups](https://www.tencentcloud.com/document/api/598/32258)
 
 
     :param _builtins.str group_id: ID of CAM group to be queried.

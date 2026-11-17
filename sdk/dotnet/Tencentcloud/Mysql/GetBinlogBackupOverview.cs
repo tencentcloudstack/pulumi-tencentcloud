@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBinlogBackupOverview](https://www.tencentcloud.com/document/api/236/35194)
         /// </summary>
         public static Task<GetBinlogBackupOverviewResult> InvokeAsync(GetBinlogBackupOverviewArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetBinlogBackupOverviewResult>("tencentcloud:Mysql/getBinlogBackupOverview:getBinlogBackupOverview", args ?? new GetBinlogBackupOverviewArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBinlogBackupOverview](https://www.tencentcloud.com/document/api/236/35194)
         /// </summary>
         public static Output<GetBinlogBackupOverviewResult> Invoke(GetBinlogBackupOverviewInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetBinlogBackupOverviewResult>("tencentcloud:Mysql/getBinlogBackupOverview:getBinlogBackupOverview", args ?? new GetBinlogBackupOverviewInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBinlogBackupOverview](https://www.tencentcloud.com/document/api/236/35194)
         /// </summary>
         public static Output<GetBinlogBackupOverviewResult> Invoke(GetBinlogBackupOverviewInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetBinlogBackupOverviewResult>("tencentcloud:Mysql/getBinlogBackupOverview:getBinlogBackupOverview", args ?? new GetBinlogBackupOverviewInvokeArgs(), options.WithDefaults());

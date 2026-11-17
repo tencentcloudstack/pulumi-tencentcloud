@@ -280,6 +280,15 @@ class WorkSpace(pulumi.CustomResource):
             description="example description.")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateWorkSpace](https://www.tencentcloud.com/search/?wd=CreateWorkSpace&type=document&lang=en)
+        * Read: [DescribeWorkSpaces](https://www.tencentcloud.com/search/?wd=DescribeWorkSpaces&type=document&lang=en)
+        * Update: [ModifyWorkSpace](https://www.tencentcloud.com/search/?wd=ModifyWorkSpace&type=document&lang=en)
+        * Delete: [DeleteWorkSpace](https://www.tencentcloud.com/search/?wd=DeleteWorkSpace&type=document&lang=en)
+
         ## Import
 
         oceanus work_space can be imported using the id, e.g.
@@ -313,6 +322,15 @@ class WorkSpace(pulumi.CustomResource):
             work_space_name="tf_example",
             description="example description.")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateWorkSpace](https://www.tencentcloud.com/search/?wd=CreateWorkSpace&type=document&lang=en)
+        * Read: [DescribeWorkSpaces](https://www.tencentcloud.com/search/?wd=DescribeWorkSpaces&type=document&lang=en)
+        * Update: [ModifyWorkSpace](https://www.tencentcloud.com/search/?wd=ModifyWorkSpace&type=document&lang=en)
+        * Delete: [DeleteWorkSpace](https://www.tencentcloud.com/search/?wd=DeleteWorkSpace&type=document&lang=en)
 
         ## Import
 

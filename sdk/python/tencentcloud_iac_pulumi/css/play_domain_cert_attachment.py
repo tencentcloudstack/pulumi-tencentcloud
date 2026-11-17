@@ -207,6 +207,14 @@ class PlayDomainCertAttachment(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyLiveDomainCertBindings](https://www.tencentcloud.com/document/api/267/49644)
+        * Read: [DescribeLiveDomainCertBindings](https://www.tencentcloud.com/document/api/267/49645)
+        * Delete: [UnBindLiveDomainCert](https://www.tencentcloud.com/document/api/267/30774)
+
         ## Import
 
         css play_domain_cert_attachment can be imported using the id, e.g.
@@ -245,6 +253,14 @@ class PlayDomainCertAttachment(pulumi.CustomResource):
                 "status": 1,
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyLiveDomainCertBindings](https://www.tencentcloud.com/document/api/267/49644)
+        * Read: [DescribeLiveDomainCertBindings](https://www.tencentcloud.com/document/api/267/49645)
+        * Delete: [UnBindLiveDomainCert](https://www.tencentcloud.com/document/api/267/30774)
 
         ## Import
 

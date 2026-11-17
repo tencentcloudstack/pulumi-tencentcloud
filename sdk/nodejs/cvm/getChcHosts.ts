@@ -23,6 +23,12 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeChcHosts](https://www.tencentcloud.com/document/api/213/48899)
  */
 export function getChcHosts(args?: GetChcHostsArgs, opts?: pulumi.InvokeOptions): Promise<GetChcHostsResult> {
     args = args || {};
@@ -90,6 +96,12 @@ export interface GetChcHostsResult {
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeChcHosts](https://www.tencentcloud.com/document/api/213/48899)
  */
 export function getChcHostsOutput(args?: GetChcHostsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetChcHostsResult> {
     args = args || {};

@@ -132,6 +132,15 @@ class CustomHeader(pulumi.CustomResource):
             ])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateCustomHeader](https://www.tencentcloud.com/document/api/608/41734)
+        * Read: [DescribeCustomHeader](https://www.tencentcloud.com/document/api/608/41732)
+        * Update: [CreateCustomHeader](https://www.tencentcloud.com/document/api/608/41734)
+        * Delete: [CreateCustomHeader](https://www.tencentcloud.com/document/api/608/41734)
+
         ## Import
 
         gaap custom_header can be imported using the id, e.g.
@@ -174,6 +183,15 @@ class CustomHeader(pulumi.CustomResource):
                 },
             ])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateCustomHeader](https://www.tencentcloud.com/document/api/608/41734)
+        * Read: [DescribeCustomHeader](https://www.tencentcloud.com/document/api/608/41732)
+        * Update: [CreateCustomHeader](https://www.tencentcloud.com/document/api/608/41734)
+        * Delete: [CreateCustomHeader](https://www.tencentcloud.com/document/api/608/41734)
 
         ## Import
 

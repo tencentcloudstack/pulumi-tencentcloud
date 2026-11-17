@@ -431,6 +431,23 @@ class Zone(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateZone](https://www.tencentcloud.com/document/api/1145/50487)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+          - [DescribeZones](https://www.tencentcloud.com/document/api/1145/50481)
+        * Update:
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+          - [ModifyZone](https://www.tencentcloud.com/document/api/1145/50477)
+          - [ModifyZoneStatus](https://www.tencentcloud.com/document/api/1145/50475)
+          - [ModifyZoneWorkMode](https://www.tencentcloud.com/document/api/1145/78821)
+        * Delete: [DeleteZone](https://www.tencentcloud.com/document/api/1145/50485)
+
         ## Import
 
         teo zone can be imported using the id, e.g.
@@ -509,6 +526,23 @@ class Zone(pulumi.CustomResource):
                 "createdBy": "terraform",
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateZone](https://www.tencentcloud.com/document/api/1145/50487)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+          - [DescribeZones](https://www.tencentcloud.com/document/api/1145/50481)
+        * Update:
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+          - [ModifyZone](https://www.tencentcloud.com/document/api/1145/50477)
+          - [ModifyZoneStatus](https://www.tencentcloud.com/document/api/1145/50475)
+          - [ModifyZoneWorkMode](https://www.tencentcloud.com/document/api/1145/78821)
+        * Delete: [DeleteZone](https://www.tencentcloud.com/document/api/1145/50485)
 
         ## Import
 

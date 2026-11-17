@@ -22,6 +22,12 @@ import * as utilities from "../utilities";
  *     ids: ["qaap_tunnel_l4_listeners"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAllNamespaces](https://www.tencentcloud.com/document/api/248/39319)
  */
 export function getAlarmAllNamespaces(args: GetAlarmAllNamespacesArgs, opts?: pulumi.InvokeOptions): Promise<GetAlarmAllNamespacesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -102,6 +108,12 @@ export interface GetAlarmAllNamespacesResult {
  *     ids: ["qaap_tunnel_l4_listeners"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAllNamespaces](https://www.tencentcloud.com/document/api/248/39319)
  */
 export function getAlarmAllNamespacesOutput(args: GetAlarmAllNamespacesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAlarmAllNamespacesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

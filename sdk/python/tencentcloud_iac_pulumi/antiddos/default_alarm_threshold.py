@@ -124,6 +124,14 @@ class DefaultAlarmThreshold(pulumi.CustomResource):
             instance_type="bgp")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateDefaultAlarmThreshold](https://www.tencentcloud.com/document/api/1213/61414)
+        * Read: [DescribeDefaultAlarmThreshold](https://www.tencentcloud.com/document/api/1213/61412)
+        * Update: [CreateDefaultAlarmThreshold](https://www.tencentcloud.com/document/api/1213/61414)
+
         ## Import
 
         antiddos default_alarm_threshold can be imported using the id, e.g.
@@ -160,6 +168,14 @@ class DefaultAlarmThreshold(pulumi.CustomResource):
             },
             instance_type="bgp")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateDefaultAlarmThreshold](https://www.tencentcloud.com/document/api/1213/61414)
+        * Read: [DescribeDefaultAlarmThreshold](https://www.tencentcloud.com/document/api/1213/61412)
+        * Update: [CreateDefaultAlarmThreshold](https://www.tencentcloud.com/document/api/1213/61414)
 
         ## Import
 

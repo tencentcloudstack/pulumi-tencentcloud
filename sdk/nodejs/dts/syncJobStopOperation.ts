@@ -15,6 +15,14 @@ import * as utilities from "../utilities";
  *
  * const syncJobStopOperation = new tencentcloud.dts.SyncJobStopOperation("sync_job_stop_operation", {jobId: "sync-werwfs23"});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeSyncJobs](https://www.tencentcloud.com/document/api/571/51793)
+ *   - [StopSyncJob](https://www.tencentcloud.com/document/api/571/51786)
  */
 export class SyncJobStopOperation extends pulumi.CustomResource {
     /**

@@ -531,6 +531,17 @@ class Command(pulumi.CustomResource):
             }])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateCommand](https://www.tencentcloud.com/document/api/1147/46702)
+        * Read: [DescribeCommands](https://www.tencentcloud.com/document/api/1147/46697)
+        * Update:
+          - [ModifyCommand](https://www.tencentcloud.com/document/api/1147/46689)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Delete: [DeleteCommand](https://www.tencentcloud.com/document/api/1147/46700)
+
         ## Import
 
         tat command can be imported using the id, e.g.
@@ -588,6 +599,17 @@ class Command(pulumi.CustomResource):
                 "value": "Terraform",
             }])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateCommand](https://www.tencentcloud.com/document/api/1147/46702)
+        * Read: [DescribeCommands](https://www.tencentcloud.com/document/api/1147/46697)
+        * Update:
+          - [ModifyCommand](https://www.tencentcloud.com/document/api/1147/46689)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Delete: [DeleteCommand](https://www.tencentcloud.com/document/api/1147/46700)
 
         ## Import
 

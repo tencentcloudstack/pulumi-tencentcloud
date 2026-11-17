@@ -128,6 +128,12 @@ def get_keys(category: Optional[_builtins.str] = None,
         category="All")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTagKeys](https://www.tencentcloud.com/document/api/651/33020)
+
 
     :param _builtins.str category: Tag type. Valid values: Custom: custom tag; System: system tag; All: all tags. Default value: All.
     :param _builtins.int create_uin: Creator `Uin`. If not specified, `Uin` is only used as the query condition.
@@ -178,6 +184,12 @@ def get_keys_output(category: pulumi.Input[Optional[Optional[_builtins.str]]] = 
         show_project=1,
         category="All")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTagKeys](https://www.tencentcloud.com/document/api/651/33020)
 
 
     :param _builtins.str category: Tag type. Valid values: Custom: custom tag; System: system tag; All: all tags. Default value: All.

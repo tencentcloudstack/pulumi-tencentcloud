@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeHostCdnInstanceList](https://www.tencentcloud.com/search/?wd=DescribeHostCdnInstanceList&type=document&lang=en)
 func GetDescribeHostCdnInstanceList(ctx *pulumi.Context, args *GetDescribeHostCdnInstanceListArgs, opts ...pulumi.InvokeOption) (*GetDescribeHostCdnInstanceListResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDescribeHostCdnInstanceListResult

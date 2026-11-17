@@ -52,6 +52,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribePublishers](https://www.tencentcloud.com/search/?wd=DescribePublishers&type=document&lang=en)
 func GetPublishers(ctx *pulumi.Context, args *GetPublishersArgs, opts ...pulumi.InvokeOption) (*GetPublishersResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetPublishersResult

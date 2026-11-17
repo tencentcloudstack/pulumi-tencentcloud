@@ -54,6 +54,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [RebalanceReadOnlyGroup](https://www.tencentcloud.com/document/api/409/39722)
 type RebalanceReadonlyGroupOperation struct {
 	pulumi.CustomResourceState
 

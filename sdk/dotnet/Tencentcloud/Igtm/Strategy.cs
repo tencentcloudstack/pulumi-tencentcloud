@@ -167,6 +167,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Igtm
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateStrategy](https://www.tencentcloud.com/search/?wd=CreateStrategy&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeStrategyDetail](https://www.tencentcloud.com/search/?wd=DescribeStrategyDetail&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyStrategy](https://www.tencentcloud.com/search/?wd=ModifyStrategy&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteStrategy](https://www.tencentcloud.com/search/?wd=DeleteStrategy&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// IGTM strategy can be imported using the instanceId#strategyId, e.g.

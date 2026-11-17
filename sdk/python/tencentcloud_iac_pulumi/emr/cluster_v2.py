@@ -39,6 +39,7 @@ class ClusterV2Args:
                  enable_remote_login_flag: pulumi.Input[Optional[_builtins.bool]] = None,
                  instance_charge_prepaid: pulumi.Input[Optional['ClusterV2InstanceChargePrepaidArgs']] = None,
                  load_balancer_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 meta_db_group_infos: pulumi.Input[Optional[Sequence[pulumi.Input['ClusterV2MetaDbGroupInfoArgs']]]] = None,
                  meta_db_info: pulumi.Input[Optional['ClusterV2MetaDbInfoArgs']] = None,
                  need_cdb_audit: pulumi.Input[Optional[_builtins.int]] = None,
                  need_master_wan: pulumi.Input[Optional[_builtins.str]] = None,
@@ -69,6 +70,7 @@ class ClusterV2Args:
         :param pulumi.Input[_builtins.bool] enable_remote_login_flag: Whether to enable external remote login. Invalid when `security_group_ids` is set. Default is false.
         :param pulumi.Input['ClusterV2InstanceChargePrepaidArgs'] instance_charge_prepaid: Prepaid (monthly/yearly) billing parameters. Required when `instance_charge_type` is `PREPAID`.
         :param pulumi.Input[_builtins.str] load_balancer_id: CLB instance ID, e.g., `lb-xxxxxxxx`.
+        :param pulumi.Input[Sequence[pulumi.Input['ClusterV2MetaDbGroupInfoArgs']]] meta_db_group_infos: Custom MetaDB group information of the cluster. It can only be set on create (CreateCluster) and cannot be changed afterwards. A component can belong to only one block. The query result (DescribeMetaDBInfo) is matched to the blocks by `components`, so the block order follows the configuration; fields that are not configured are filled in from the query result. When `meta_type` is `EMR_EXIST_META`, `unify_meta_instance_id` must be set; when `USER_CUSTOM_META`, `meta_data_jdbc_url`/`meta_data_user`/`meta_data_pass` must be set.
         :param pulumi.Input['ClusterV2MetaDbInfoArgs'] meta_db_info: Metadata database information. When `meta_type` is `EMR_NEW_META`/`EMR_DEFAULT_META`, no extra fields are required; when `EMR_EXIT_META`, `unify_meta_instance_id` must be set; when `USER_CUSTOM_META`, `meta_data_jdbc_url`/`meta_data_user`/`meta_data_pass` must be set.
         :param pulumi.Input[_builtins.int] need_cdb_audit: Whether to enable database auditing.
         :param pulumi.Input[_builtins.str] need_master_wan: Whether to enable master public network. Valid values: `NEED_MASTER_WAN` (default), `NOT_NEED_MASTER_WAN`.
@@ -108,6 +110,8 @@ class ClusterV2Args:
             pulumi.set(__self__, "instance_charge_prepaid", instance_charge_prepaid)
         if load_balancer_id is not None:
             pulumi.set(__self__, "load_balancer_id", load_balancer_id)
+        if meta_db_group_infos is not None:
+            pulumi.set(__self__, "meta_db_group_infos", meta_db_group_infos)
         if meta_db_info is not None:
             pulumi.set(__self__, "meta_db_info", meta_db_info)
         if need_cdb_audit is not None:
@@ -334,6 +338,18 @@ class ClusterV2Args:
         pulumi.set(self, "load_balancer_id", value)
 
     @_builtins.property
+    @pulumi.getter(name="metaDbGroupInfos")
+    def meta_db_group_infos(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['ClusterV2MetaDbGroupInfoArgs']]]]:
+        """
+        Custom MetaDB group information of the cluster. It can only be set on create (CreateCluster) and cannot be changed afterwards. A component can belong to only one block. The query result (DescribeMetaDBInfo) is matched to the blocks by `components`, so the block order follows the configuration; fields that are not configured are filled in from the query result. When `meta_type` is `EMR_EXIST_META`, `unify_meta_instance_id` must be set; when `USER_CUSTOM_META`, `meta_data_jdbc_url`/`meta_data_user`/`meta_data_pass` must be set.
+        """
+        return pulumi.get(self, "meta_db_group_infos")
+
+    @meta_db_group_infos.setter
+    def meta_db_group_infos(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['ClusterV2MetaDbGroupInfoArgs']]]]):
+        pulumi.set(self, "meta_db_group_infos", value)
+
+    @_builtins.property
     @pulumi.getter(name="metaDbInfo")
     def meta_db_info(self) -> pulumi.Input[Optional['ClusterV2MetaDbInfoArgs']]:
         """
@@ -473,6 +489,7 @@ class _ClusterV2State:
                  instance_name: pulumi.Input[Optional[_builtins.str]] = None,
                  load_balancer_id: pulumi.Input[Optional[_builtins.str]] = None,
                  login_settings: pulumi.Input[Optional['ClusterV2LoginSettingsArgs']] = None,
+                 meta_db_group_infos: pulumi.Input[Optional[Sequence[pulumi.Input['ClusterV2MetaDbGroupInfoArgs']]]] = None,
                  meta_db_info: pulumi.Input[Optional['ClusterV2MetaDbInfoArgs']] = None,
                  need_cdb_audit: pulumi.Input[Optional[_builtins.int]] = None,
                  need_master_wan: pulumi.Input[Optional[_builtins.str]] = None,
@@ -505,6 +522,7 @@ class _ClusterV2State:
         :param pulumi.Input[_builtins.str] instance_name: Instance name. Length 6-36 characters. Only Chinese, letters, numbers, `-`, `_` are allowed.
         :param pulumi.Input[_builtins.str] load_balancer_id: CLB instance ID, e.g., `lb-xxxxxxxx`.
         :param pulumi.Input['ClusterV2LoginSettingsArgs'] login_settings: Login settings for purchased nodes.
+        :param pulumi.Input[Sequence[pulumi.Input['ClusterV2MetaDbGroupInfoArgs']]] meta_db_group_infos: Custom MetaDB group information of the cluster. It can only be set on create (CreateCluster) and cannot be changed afterwards. A component can belong to only one block. The query result (DescribeMetaDBInfo) is matched to the blocks by `components`, so the block order follows the configuration; fields that are not configured are filled in from the query result. When `meta_type` is `EMR_EXIST_META`, `unify_meta_instance_id` must be set; when `USER_CUSTOM_META`, `meta_data_jdbc_url`/`meta_data_user`/`meta_data_pass` must be set.
         :param pulumi.Input['ClusterV2MetaDbInfoArgs'] meta_db_info: Metadata database information. When `meta_type` is `EMR_NEW_META`/`EMR_DEFAULT_META`, no extra fields are required; when `EMR_EXIT_META`, `unify_meta_instance_id` must be set; when `USER_CUSTOM_META`, `meta_data_jdbc_url`/`meta_data_user`/`meta_data_pass` must be set.
         :param pulumi.Input[_builtins.int] need_cdb_audit: Whether to enable database auditing.
         :param pulumi.Input[_builtins.str] need_master_wan: Whether to enable master public network. Valid values: `NEED_MASTER_WAN` (default), `NOT_NEED_MASTER_WAN`.
@@ -551,6 +569,8 @@ class _ClusterV2State:
             pulumi.set(__self__, "load_balancer_id", load_balancer_id)
         if login_settings is not None:
             pulumi.set(__self__, "login_settings", login_settings)
+        if meta_db_group_infos is not None:
+            pulumi.set(__self__, "meta_db_group_infos", meta_db_group_infos)
         if meta_db_info is not None:
             pulumi.set(__self__, "meta_db_info", meta_db_info)
         if need_cdb_audit is not None:
@@ -771,6 +791,18 @@ class _ClusterV2State:
         pulumi.set(self, "login_settings", value)
 
     @_builtins.property
+    @pulumi.getter(name="metaDbGroupInfos")
+    def meta_db_group_infos(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['ClusterV2MetaDbGroupInfoArgs']]]]:
+        """
+        Custom MetaDB group information of the cluster. It can only be set on create (CreateCluster) and cannot be changed afterwards. A component can belong to only one block. The query result (DescribeMetaDBInfo) is matched to the blocks by `components`, so the block order follows the configuration; fields that are not configured are filled in from the query result. When `meta_type` is `EMR_EXIST_META`, `unify_meta_instance_id` must be set; when `USER_CUSTOM_META`, `meta_data_jdbc_url`/`meta_data_user`/`meta_data_pass` must be set.
+        """
+        return pulumi.get(self, "meta_db_group_infos")
+
+    @meta_db_group_infos.setter
+    def meta_db_group_infos(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['ClusterV2MetaDbGroupInfoArgs']]]]):
+        pulumi.set(self, "meta_db_group_infos", value)
+
+    @_builtins.property
     @pulumi.getter(name="metaDbInfo")
     def meta_db_info(self) -> pulumi.Input[Optional['ClusterV2MetaDbInfoArgs']]:
         """
@@ -948,6 +980,7 @@ class ClusterV2(pulumi.CustomResource):
                  instance_name: pulumi.Input[Optional[_builtins.str]] = None,
                  load_balancer_id: pulumi.Input[Optional[_builtins.str]] = None,
                  login_settings: pulumi.Input[Optional[Union['ClusterV2LoginSettingsArgs', 'ClusterV2LoginSettingsArgsDict']]] = None,
+                 meta_db_group_infos: pulumi.Input[Optional[Sequence[pulumi.Input[Union['ClusterV2MetaDbGroupInfoArgs', 'ClusterV2MetaDbGroupInfoArgsDict']]]]] = None,
                  meta_db_info: pulumi.Input[Optional[Union['ClusterV2MetaDbInfoArgs', 'ClusterV2MetaDbInfoArgsDict']]] = None,
                  need_cdb_audit: pulumi.Input[Optional[_builtins.int]] = None,
                  need_master_wan: pulumi.Input[Optional[_builtins.str]] = None,
@@ -1401,6 +1434,528 @@ class ClusterV2(pulumi.CustomResource):
             }])
         ```
 
+        ### Create EMR cluster with meta database
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.emr.ClusterV2("example",
+            product_version="EMR-V3.7.0",
+            enable_support_ha_flag=True,
+            instance_name="tf-example",
+            instance_charge_type="POSTPAID_BY_HOUR",
+            need_master_wan="NEED_MASTER_WAN",
+            login_settings={
+                "password": "Password@123",
+            },
+            scene_software_config={
+                "scene_name": "Hadoop-Default",
+            },
+            meta_db_info={
+                "meta_type": "EMR_DEFAULT_META",
+            },
+            tags=[{
+                "tag_key": "createBy",
+                "tag_value": "Terraform",
+            }],
+            security_group_ids="sg-37tigqat",
+            sg_ip="10.0.0.0/8",
+            zone_resource_configurations=[{
+                "virtual_private_cloud": {
+                    "vpc_id": "vpc-i5yyodl9",
+                    "subnet_id": "subnet-hhi88a58",
+                },
+                "placement": {
+                    "zone": "ap-guangzhou-6",
+                },
+                "all_node_resource_spec": {
+                    "master_resource_specs": [
+                        {
+                            "_node_index": "master_node_1",
+                            "instance_type": "SA5.2XLARGE16",
+                            "system_disk": {
+                                "disk_size": 100,
+                                "disk_type": "CLOUD_HSSD",
+                            },
+                            "data_disks": [
+                                {
+                                    "_disk_index": "master_disk_1",
+                                    "disk_size": 100,
+                                    "disk_type": "CLOUD_SSD",
+                                },
+                                {
+                                    "_disk_index": "master_disk_2",
+                                    "disk_size": 200,
+                                    "disk_type": "CLOUD_SSD",
+                                },
+                            ],
+                            "softwares": [
+                                {
+                                    "services": "RUNTIME-1.0.0",
+                                    "roles": ["Sysctl"],
+                                },
+                                {
+                                    "services": "FILEBEAT-7.2.0",
+                                    "roles": ["Filebeat"],
+                                },
+                                {
+                                    "services": "HDFS-3.3.4",
+                                    "roles": [
+                                        "NameNode",
+                                        "ZKFailoverController",
+                                    ],
+                                },
+                                {
+                                    "services": "YARN-3.3.4",
+                                    "roles": [
+                                        "ResourceManager",
+                                        "JobHistoryServer",
+                                        "TimeLineServer",
+                                    ],
+                                },
+                                {
+                                    "services": "OPENLDAP-2.4.44",
+                                    "roles": ["slapd"],
+                                },
+                                {
+                                    "services": "KNOX-1.6.1",
+                                    "roles": [
+                                        "gateway",
+                                        "ldap",
+                                    ],
+                                },
+                                {
+                                    "services": "HIVE-3.1.3",
+                                    "roles": [
+                                        "HiveMetaStore",
+                                        "HiveServer2",
+                                        "HiveWebHcat",
+                                    ],
+                                },
+                                {
+                                    "services": "HUE-4.10.0",
+                                    "roles": ["Hue"],
+                                },
+                                {
+                                    "services": "RANGER-2.3.0",
+                                    "roles": [
+                                        "EmbeddedServer",
+                                        "EnableUnixAuth",
+                                        "Solr",
+                                    ],
+                                },
+                            ],
+                        },
+                        {
+                            "_node_index": "master_node_2",
+                            "instance_type": "SA5.2XLARGE16",
+                            "system_disk": {
+                                "disk_size": 100,
+                                "disk_type": "CLOUD_HSSD",
+                            },
+                            "data_disks": [
+                                {
+                                    "_disk_index": "master_disk_1",
+                                    "disk_size": 100,
+                                    "disk_type": "CLOUD_SSD",
+                                },
+                                {
+                                    "_disk_index": "master_disk_2",
+                                    "disk_size": 200,
+                                    "disk_type": "CLOUD_SSD",
+                                },
+                            ],
+                            "softwares": [
+                                {
+                                    "services": "RUNTIME-1.0.0",
+                                    "roles": ["Sysctl"],
+                                },
+                                {
+                                    "services": "FILEBEAT-7.2.0",
+                                    "roles": ["Filebeat"],
+                                },
+                                {
+                                    "services": "HDFS-3.3.4",
+                                    "roles": [
+                                        "NameNode",
+                                        "ZKFailoverController",
+                                    ],
+                                },
+                                {
+                                    "services": "YARN-3.3.4",
+                                    "roles": [
+                                        "ResourceManager",
+                                        "JobHistoryServer",
+                                        "TimeLineServer",
+                                    ],
+                                },
+                                {
+                                    "services": "OPENLDAP-2.4.44",
+                                    "roles": ["slapd"],
+                                },
+                                {
+                                    "services": "KNOX-1.6.1",
+                                    "roles": [
+                                        "gateway",
+                                        "ldap",
+                                    ],
+                                },
+                                {
+                                    "services": "HIVE-3.1.3",
+                                    "roles": [
+                                        "HiveMetaStore",
+                                        "HiveServer2",
+                                        "HiveWebHcat",
+                                    ],
+                                },
+                                {
+                                    "services": "HUE-4.10.0",
+                                    "roles": ["Hue"],
+                                },
+                                {
+                                    "services": "RANGER-2.3.0",
+                                    "roles": [
+                                        "EmbeddedServer",
+                                        "EnableUnixAuth",
+                                        "Solr",
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                    "core_resource_specs": [
+                        {
+                            "_node_index": "core_node_1",
+                            "instance_type": "SA5.LARGE8",
+                            "system_disk": {
+                                "disk_size": 100,
+                                "disk_type": "CLOUD_HSSD",
+                            },
+                            "data_disks": [
+                                {
+                                    "_disk_index": "core_disk_1",
+                                    "disk_size": 100,
+                                    "disk_type": "CLOUD_SSD",
+                                },
+                                {
+                                    "_disk_index": "core_disk_2",
+                                    "disk_size": 100,
+                                    "disk_type": "CLOUD_SSD",
+                                },
+                            ],
+                            "softwares": [
+                                {
+                                    "services": "RUNTIME-1.0.0",
+                                    "roles": ["Sysctl"],
+                                },
+                                {
+                                    "services": "FILEBEAT-7.2.0",
+                                    "roles": ["Filebeat"],
+                                },
+                                {
+                                    "services": "HDFS-3.3.4",
+                                    "roles": ["DataNode"],
+                                },
+                                {
+                                    "services": "YARN-3.3.4",
+                                    "roles": ["NodeManager"],
+                                },
+                            ],
+                        },
+                        {
+                            "_node_index": "core_node_2",
+                            "instance_type": "SA5.LARGE8",
+                            "system_disk": {
+                                "disk_size": 100,
+                                "disk_type": "CLOUD_HSSD",
+                            },
+                            "data_disks": [
+                                {
+                                    "_disk_index": "core_disk_1",
+                                    "disk_size": 100,
+                                    "disk_type": "CLOUD_SSD",
+                                },
+                                {
+                                    "_disk_index": "core_disk_2",
+                                    "disk_size": 100,
+                                    "disk_type": "CLOUD_SSD",
+                                },
+                            ],
+                            "softwares": [
+                                {
+                                    "services": "RUNTIME-1.0.0",
+                                    "roles": ["Sysctl"],
+                                },
+                                {
+                                    "services": "FILEBEAT-7.2.0",
+                                    "roles": ["Filebeat"],
+                                },
+                                {
+                                    "services": "HDFS-3.3.4",
+                                    "roles": ["DataNode"],
+                                },
+                                {
+                                    "services": "YARN-3.3.4",
+                                    "roles": ["NodeManager"],
+                                },
+                            ],
+                        },
+                        {
+                            "_node_index": "core_node_3",
+                            "instance_type": "SA5.LARGE8",
+                            "system_disk": {
+                                "disk_size": 100,
+                                "disk_type": "CLOUD_HSSD",
+                            },
+                            "data_disks": [
+                                {
+                                    "_disk_index": "core_disk_1",
+                                    "disk_size": 100,
+                                    "disk_type": "CLOUD_SSD",
+                                },
+                                {
+                                    "_disk_index": "core_disk_2",
+                                    "disk_size": 100,
+                                    "disk_type": "CLOUD_SSD",
+                                },
+                            ],
+                            "softwares": [
+                                {
+                                    "services": "RUNTIME-1.0.0",
+                                    "roles": ["Sysctl"],
+                                },
+                                {
+                                    "services": "FILEBEAT-7.2.0",
+                                    "roles": ["Filebeat"],
+                                },
+                                {
+                                    "services": "HDFS-3.3.4",
+                                    "roles": ["DataNode"],
+                                },
+                                {
+                                    "services": "YARN-3.3.4",
+                                    "roles": ["NodeManager"],
+                                },
+                            ],
+                        },
+                    ],
+                    "task_resource_specs": [
+                        {
+                            "_node_index": "task_node_1",
+                            "instance_type": "SA5.LARGE8",
+                            "system_disk": {
+                                "disk_size": 100,
+                                "disk_type": "CLOUD_HSSD",
+                            },
+                            "data_disks": [
+                                {
+                                    "_disk_index": "task_disk_1",
+                                    "disk_size": 100,
+                                    "disk_type": "CLOUD_SSD",
+                                },
+                                {
+                                    "_disk_index": "task_disk_2",
+                                    "disk_size": 100,
+                                    "disk_type": "CLOUD_SSD",
+                                },
+                            ],
+                            "softwares": [
+                                {
+                                    "services": "RUNTIME-1.0.0",
+                                    "roles": ["Sysctl"],
+                                },
+                                {
+                                    "services": "FILEBEAT-7.2.0",
+                                    "roles": ["Filebeat"],
+                                },
+                                {
+                                    "services": "YARN-3.3.4",
+                                    "roles": ["NodeManager"],
+                                },
+                            ],
+                        },
+                        {
+                            "_node_index": "task_node_2",
+                            "instance_type": "SA5.LARGE8",
+                            "system_disk": {
+                                "disk_size": 100,
+                                "disk_type": "CLOUD_HSSD",
+                            },
+                            "data_disks": [
+                                {
+                                    "_disk_index": "task_disk_1",
+                                    "disk_size": 100,
+                                    "disk_type": "CLOUD_SSD",
+                                },
+                                {
+                                    "_disk_index": "task_disk_2",
+                                    "disk_size": 100,
+                                    "disk_type": "CLOUD_SSD",
+                                },
+                            ],
+                            "softwares": [
+                                {
+                                    "services": "RUNTIME-1.0.0",
+                                    "roles": ["Sysctl"],
+                                },
+                                {
+                                    "services": "FILEBEAT-7.2.0",
+                                    "roles": ["Filebeat"],
+                                },
+                                {
+                                    "services": "YARN-3.3.4",
+                                    "roles": ["NodeManager"],
+                                },
+                            ],
+                        },
+                    ],
+                    "common_resource_specs": [
+                        {
+                            "_node_index": "common_node_1",
+                            "instance_type": "SA5.LARGE8",
+                            "system_disk": {
+                                "disk_size": 100,
+                                "disk_type": "CLOUD_HSSD",
+                            },
+                            "data_disks": [{
+                                "_disk_index": "common_disk_1",
+                                "disk_size": 100,
+                                "disk_type": "CLOUD_SSD",
+                            }],
+                            "softwares": [
+                                {
+                                    "services": "RUNTIME-1.0.0",
+                                    "roles": ["Sysctl"],
+                                },
+                                {
+                                    "services": "FILEBEAT-7.2.0",
+                                    "roles": ["Filebeat"],
+                                },
+                                {
+                                    "services": "HDFS-3.3.4",
+                                    "roles": ["JournalNode"],
+                                },
+                                {
+                                    "services": "ZOOKEEPER-3.8.4",
+                                    "roles": ["Zookeeper"],
+                                },
+                            ],
+                        },
+                        {
+                            "_node_index": "common_node_2",
+                            "instance_type": "SA5.LARGE8",
+                            "system_disk": {
+                                "disk_size": 100,
+                                "disk_type": "CLOUD_HSSD",
+                            },
+                            "data_disks": [{
+                                "_disk_index": "common_disk_1",
+                                "disk_size": 100,
+                                "disk_type": "CLOUD_SSD",
+                            }],
+                            "softwares": [
+                                {
+                                    "services": "RUNTIME-1.0.0",
+                                    "roles": ["Sysctl"],
+                                },
+                                {
+                                    "services": "FILEBEAT-7.2.0",
+                                    "roles": ["Filebeat"],
+                                },
+                                {
+                                    "services": "HDFS-3.3.4",
+                                    "roles": ["JournalNode"],
+                                },
+                                {
+                                    "services": "ZOOKEEPER-3.8.4",
+                                    "roles": ["Zookeeper"],
+                                },
+                            ],
+                        },
+                        {
+                            "_node_index": "common_node_3",
+                            "instance_type": "SA5.LARGE8",
+                            "system_disk": {
+                                "disk_size": 100,
+                                "disk_type": "CLOUD_HSSD",
+                            },
+                            "data_disks": [{
+                                "_disk_index": "common_disk_1",
+                                "disk_size": 100,
+                                "disk_type": "CLOUD_SSD",
+                            }],
+                            "softwares": [
+                                {
+                                    "services": "RUNTIME-1.0.0",
+                                    "roles": ["Sysctl"],
+                                },
+                                {
+                                    "services": "FILEBEAT-7.2.0",
+                                    "roles": ["Filebeat"],
+                                },
+                                {
+                                    "services": "HDFS-3.3.4",
+                                    "roles": ["JournalNode"],
+                                },
+                                {
+                                    "services": "ZOOKEEPER-3.8.4",
+                                    "roles": ["Zookeeper"],
+                                },
+                            ],
+                        },
+                    ],
+                },
+            }],
+            meta_db_group_infos=[
+                {
+                    "meta_type": "EMR_DEFAULT_META",
+                    "components": ["RANGER"],
+                    "default_meta_version": "mysql8",
+                },
+                {
+                    "meta_type": "USER_CUSTOM_META",
+                    "components": ["HIVE"],
+                    "meta_data_jdbc_url": "jdbc:mysql://10.0.30.13:3306/hivemetastore",
+                    "meta_data_user": "root",
+                    "meta_data_pass": "Password@123",
+                },
+                {
+                    "meta_type": "EMR_EXIST_META",
+                    "components": ["HUE"],
+                    "unify_meta_instance_id": "cdb-jg8rqjn0",
+                },
+            ])
+        ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateCluster](https://www.tencentcloud.com/document/api/1026/52522)
+          - [DescribeClusterFlowStatusDetail](https://www.tencentcloud.com/document/api/1026/73259)
+          - [DescribeInstances](https://www.tencentcloud.com/document/api/1026/31052)
+          - [ScaleOutCluster](https://www.tencentcloud.com/document/api/1026/52521)
+        * Read:
+          - [DescribeClusterNodes](https://www.tencentcloud.com/document/api/1026/35198)
+          - [DescribeInstances](https://www.tencentcloud.com/document/api/1026/31052)
+          - [DescribeMetaDBInfo](https://www.tencentcloud.com/document/api/1026/84709)
+          - [DescribeNodeDataDisks](https://www.tencentcloud.com/document/api/1026/73216)
+        * Update:
+          - [AttachDisks](https://www.tencentcloud.com/document/api/1026/73274)
+          - [DescribeClusterFlowStatusDetail](https://www.tencentcloud.com/document/api/1026/73259)
+          - [InstallSoftware](https://www.tencentcloud.com/document/api/1026/84708)
+          - [ModifyInstanceBasic](https://www.tencentcloud.com/document/api/1026/73226)
+          - [ModifyResource](https://www.tencentcloud.com/document/api/1026/73270)
+          - [ModifyResourcesTags](https://www.tencentcloud.com/document/api/1026/58392)
+          - [ResizeDataDisks](https://www.tencentcloud.com/document/api/1026/73268)
+          - [ScaleOutCluster](https://www.tencentcloud.com/document/api/1026/52521)
+          - [TerminateClusterNodes](https://www.tencentcloud.com/document/api/1026/54558)
+        * Delete:
+          - [DescribeInstances](https://www.tencentcloud.com/document/api/1026/31052)
+          - [TerminateInstance](https://www.tencentcloud.com/document/api/1026/31044)
+
         ## Import
 
         EMR cluster (v2) can be imported using the instance ID, e.g.
@@ -1427,6 +1982,7 @@ class ClusterV2(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] instance_name: Instance name. Length 6-36 characters. Only Chinese, letters, numbers, `-`, `_` are allowed.
         :param pulumi.Input[_builtins.str] load_balancer_id: CLB instance ID, e.g., `lb-xxxxxxxx`.
         :param pulumi.Input[Union['ClusterV2LoginSettingsArgs', 'ClusterV2LoginSettingsArgsDict']] login_settings: Login settings for purchased nodes.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['ClusterV2MetaDbGroupInfoArgs', 'ClusterV2MetaDbGroupInfoArgsDict']]]] meta_db_group_infos: Custom MetaDB group information of the cluster. It can only be set on create (CreateCluster) and cannot be changed afterwards. A component can belong to only one block. The query result (DescribeMetaDBInfo) is matched to the blocks by `components`, so the block order follows the configuration; fields that are not configured are filled in from the query result. When `meta_type` is `EMR_EXIST_META`, `unify_meta_instance_id` must be set; when `USER_CUSTOM_META`, `meta_data_jdbc_url`/`meta_data_user`/`meta_data_pass` must be set.
         :param pulumi.Input[Union['ClusterV2MetaDbInfoArgs', 'ClusterV2MetaDbInfoArgsDict']] meta_db_info: Metadata database information. When `meta_type` is `EMR_NEW_META`/`EMR_DEFAULT_META`, no extra fields are required; when `EMR_EXIT_META`, `unify_meta_instance_id` must be set; when `USER_CUSTOM_META`, `meta_data_jdbc_url`/`meta_data_user`/`meta_data_pass` must be set.
         :param pulumi.Input[_builtins.int] need_cdb_audit: Whether to enable database auditing.
         :param pulumi.Input[_builtins.str] need_master_wan: Whether to enable master public network. Valid values: `NEED_MASTER_WAN` (default), `NOT_NEED_MASTER_WAN`.
@@ -1886,6 +2442,528 @@ class ClusterV2(pulumi.CustomResource):
             }])
         ```
 
+        ### Create EMR cluster with meta database
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.emr.ClusterV2("example",
+            product_version="EMR-V3.7.0",
+            enable_support_ha_flag=True,
+            instance_name="tf-example",
+            instance_charge_type="POSTPAID_BY_HOUR",
+            need_master_wan="NEED_MASTER_WAN",
+            login_settings={
+                "password": "Password@123",
+            },
+            scene_software_config={
+                "scene_name": "Hadoop-Default",
+            },
+            meta_db_info={
+                "meta_type": "EMR_DEFAULT_META",
+            },
+            tags=[{
+                "tag_key": "createBy",
+                "tag_value": "Terraform",
+            }],
+            security_group_ids="sg-37tigqat",
+            sg_ip="10.0.0.0/8",
+            zone_resource_configurations=[{
+                "virtual_private_cloud": {
+                    "vpc_id": "vpc-i5yyodl9",
+                    "subnet_id": "subnet-hhi88a58",
+                },
+                "placement": {
+                    "zone": "ap-guangzhou-6",
+                },
+                "all_node_resource_spec": {
+                    "master_resource_specs": [
+                        {
+                            "_node_index": "master_node_1",
+                            "instance_type": "SA5.2XLARGE16",
+                            "system_disk": {
+                                "disk_size": 100,
+                                "disk_type": "CLOUD_HSSD",
+                            },
+                            "data_disks": [
+                                {
+                                    "_disk_index": "master_disk_1",
+                                    "disk_size": 100,
+                                    "disk_type": "CLOUD_SSD",
+                                },
+                                {
+                                    "_disk_index": "master_disk_2",
+                                    "disk_size": 200,
+                                    "disk_type": "CLOUD_SSD",
+                                },
+                            ],
+                            "softwares": [
+                                {
+                                    "services": "RUNTIME-1.0.0",
+                                    "roles": ["Sysctl"],
+                                },
+                                {
+                                    "services": "FILEBEAT-7.2.0",
+                                    "roles": ["Filebeat"],
+                                },
+                                {
+                                    "services": "HDFS-3.3.4",
+                                    "roles": [
+                                        "NameNode",
+                                        "ZKFailoverController",
+                                    ],
+                                },
+                                {
+                                    "services": "YARN-3.3.4",
+                                    "roles": [
+                                        "ResourceManager",
+                                        "JobHistoryServer",
+                                        "TimeLineServer",
+                                    ],
+                                },
+                                {
+                                    "services": "OPENLDAP-2.4.44",
+                                    "roles": ["slapd"],
+                                },
+                                {
+                                    "services": "KNOX-1.6.1",
+                                    "roles": [
+                                        "gateway",
+                                        "ldap",
+                                    ],
+                                },
+                                {
+                                    "services": "HIVE-3.1.3",
+                                    "roles": [
+                                        "HiveMetaStore",
+                                        "HiveServer2",
+                                        "HiveWebHcat",
+                                    ],
+                                },
+                                {
+                                    "services": "HUE-4.10.0",
+                                    "roles": ["Hue"],
+                                },
+                                {
+                                    "services": "RANGER-2.3.0",
+                                    "roles": [
+                                        "EmbeddedServer",
+                                        "EnableUnixAuth",
+                                        "Solr",
+                                    ],
+                                },
+                            ],
+                        },
+                        {
+                            "_node_index": "master_node_2",
+                            "instance_type": "SA5.2XLARGE16",
+                            "system_disk": {
+                                "disk_size": 100,
+                                "disk_type": "CLOUD_HSSD",
+                            },
+                            "data_disks": [
+                                {
+                                    "_disk_index": "master_disk_1",
+                                    "disk_size": 100,
+                                    "disk_type": "CLOUD_SSD",
+                                },
+                                {
+                                    "_disk_index": "master_disk_2",
+                                    "disk_size": 200,
+                                    "disk_type": "CLOUD_SSD",
+                                },
+                            ],
+                            "softwares": [
+                                {
+                                    "services": "RUNTIME-1.0.0",
+                                    "roles": ["Sysctl"],
+                                },
+                                {
+                                    "services": "FILEBEAT-7.2.0",
+                                    "roles": ["Filebeat"],
+                                },
+                                {
+                                    "services": "HDFS-3.3.4",
+                                    "roles": [
+                                        "NameNode",
+                                        "ZKFailoverController",
+                                    ],
+                                },
+                                {
+                                    "services": "YARN-3.3.4",
+                                    "roles": [
+                                        "ResourceManager",
+                                        "JobHistoryServer",
+                                        "TimeLineServer",
+                                    ],
+                                },
+                                {
+                                    "services": "OPENLDAP-2.4.44",
+                                    "roles": ["slapd"],
+                                },
+                                {
+                                    "services": "KNOX-1.6.1",
+                                    "roles": [
+                                        "gateway",
+                                        "ldap",
+                                    ],
+                                },
+                                {
+                                    "services": "HIVE-3.1.3",
+                                    "roles": [
+                                        "HiveMetaStore",
+                                        "HiveServer2",
+                                        "HiveWebHcat",
+                                    ],
+                                },
+                                {
+                                    "services": "HUE-4.10.0",
+                                    "roles": ["Hue"],
+                                },
+                                {
+                                    "services": "RANGER-2.3.0",
+                                    "roles": [
+                                        "EmbeddedServer",
+                                        "EnableUnixAuth",
+                                        "Solr",
+                                    ],
+                                },
+                            ],
+                        },
+                    ],
+                    "core_resource_specs": [
+                        {
+                            "_node_index": "core_node_1",
+                            "instance_type": "SA5.LARGE8",
+                            "system_disk": {
+                                "disk_size": 100,
+                                "disk_type": "CLOUD_HSSD",
+                            },
+                            "data_disks": [
+                                {
+                                    "_disk_index": "core_disk_1",
+                                    "disk_size": 100,
+                                    "disk_type": "CLOUD_SSD",
+                                },
+                                {
+                                    "_disk_index": "core_disk_2",
+                                    "disk_size": 100,
+                                    "disk_type": "CLOUD_SSD",
+                                },
+                            ],
+                            "softwares": [
+                                {
+                                    "services": "RUNTIME-1.0.0",
+                                    "roles": ["Sysctl"],
+                                },
+                                {
+                                    "services": "FILEBEAT-7.2.0",
+                                    "roles": ["Filebeat"],
+                                },
+                                {
+                                    "services": "HDFS-3.3.4",
+                                    "roles": ["DataNode"],
+                                },
+                                {
+                                    "services": "YARN-3.3.4",
+                                    "roles": ["NodeManager"],
+                                },
+                            ],
+                        },
+                        {
+                            "_node_index": "core_node_2",
+                            "instance_type": "SA5.LARGE8",
+                            "system_disk": {
+                                "disk_size": 100,
+                                "disk_type": "CLOUD_HSSD",
+                            },
+                            "data_disks": [
+                                {
+                                    "_disk_index": "core_disk_1",
+                                    "disk_size": 100,
+                                    "disk_type": "CLOUD_SSD",
+                                },
+                                {
+                                    "_disk_index": "core_disk_2",
+                                    "disk_size": 100,
+                                    "disk_type": "CLOUD_SSD",
+                                },
+                            ],
+                            "softwares": [
+                                {
+                                    "services": "RUNTIME-1.0.0",
+                                    "roles": ["Sysctl"],
+                                },
+                                {
+                                    "services": "FILEBEAT-7.2.0",
+                                    "roles": ["Filebeat"],
+                                },
+                                {
+                                    "services": "HDFS-3.3.4",
+                                    "roles": ["DataNode"],
+                                },
+                                {
+                                    "services": "YARN-3.3.4",
+                                    "roles": ["NodeManager"],
+                                },
+                            ],
+                        },
+                        {
+                            "_node_index": "core_node_3",
+                            "instance_type": "SA5.LARGE8",
+                            "system_disk": {
+                                "disk_size": 100,
+                                "disk_type": "CLOUD_HSSD",
+                            },
+                            "data_disks": [
+                                {
+                                    "_disk_index": "core_disk_1",
+                                    "disk_size": 100,
+                                    "disk_type": "CLOUD_SSD",
+                                },
+                                {
+                                    "_disk_index": "core_disk_2",
+                                    "disk_size": 100,
+                                    "disk_type": "CLOUD_SSD",
+                                },
+                            ],
+                            "softwares": [
+                                {
+                                    "services": "RUNTIME-1.0.0",
+                                    "roles": ["Sysctl"],
+                                },
+                                {
+                                    "services": "FILEBEAT-7.2.0",
+                                    "roles": ["Filebeat"],
+                                },
+                                {
+                                    "services": "HDFS-3.3.4",
+                                    "roles": ["DataNode"],
+                                },
+                                {
+                                    "services": "YARN-3.3.4",
+                                    "roles": ["NodeManager"],
+                                },
+                            ],
+                        },
+                    ],
+                    "task_resource_specs": [
+                        {
+                            "_node_index": "task_node_1",
+                            "instance_type": "SA5.LARGE8",
+                            "system_disk": {
+                                "disk_size": 100,
+                                "disk_type": "CLOUD_HSSD",
+                            },
+                            "data_disks": [
+                                {
+                                    "_disk_index": "task_disk_1",
+                                    "disk_size": 100,
+                                    "disk_type": "CLOUD_SSD",
+                                },
+                                {
+                                    "_disk_index": "task_disk_2",
+                                    "disk_size": 100,
+                                    "disk_type": "CLOUD_SSD",
+                                },
+                            ],
+                            "softwares": [
+                                {
+                                    "services": "RUNTIME-1.0.0",
+                                    "roles": ["Sysctl"],
+                                },
+                                {
+                                    "services": "FILEBEAT-7.2.0",
+                                    "roles": ["Filebeat"],
+                                },
+                                {
+                                    "services": "YARN-3.3.4",
+                                    "roles": ["NodeManager"],
+                                },
+                            ],
+                        },
+                        {
+                            "_node_index": "task_node_2",
+                            "instance_type": "SA5.LARGE8",
+                            "system_disk": {
+                                "disk_size": 100,
+                                "disk_type": "CLOUD_HSSD",
+                            },
+                            "data_disks": [
+                                {
+                                    "_disk_index": "task_disk_1",
+                                    "disk_size": 100,
+                                    "disk_type": "CLOUD_SSD",
+                                },
+                                {
+                                    "_disk_index": "task_disk_2",
+                                    "disk_size": 100,
+                                    "disk_type": "CLOUD_SSD",
+                                },
+                            ],
+                            "softwares": [
+                                {
+                                    "services": "RUNTIME-1.0.0",
+                                    "roles": ["Sysctl"],
+                                },
+                                {
+                                    "services": "FILEBEAT-7.2.0",
+                                    "roles": ["Filebeat"],
+                                },
+                                {
+                                    "services": "YARN-3.3.4",
+                                    "roles": ["NodeManager"],
+                                },
+                            ],
+                        },
+                    ],
+                    "common_resource_specs": [
+                        {
+                            "_node_index": "common_node_1",
+                            "instance_type": "SA5.LARGE8",
+                            "system_disk": {
+                                "disk_size": 100,
+                                "disk_type": "CLOUD_HSSD",
+                            },
+                            "data_disks": [{
+                                "_disk_index": "common_disk_1",
+                                "disk_size": 100,
+                                "disk_type": "CLOUD_SSD",
+                            }],
+                            "softwares": [
+                                {
+                                    "services": "RUNTIME-1.0.0",
+                                    "roles": ["Sysctl"],
+                                },
+                                {
+                                    "services": "FILEBEAT-7.2.0",
+                                    "roles": ["Filebeat"],
+                                },
+                                {
+                                    "services": "HDFS-3.3.4",
+                                    "roles": ["JournalNode"],
+                                },
+                                {
+                                    "services": "ZOOKEEPER-3.8.4",
+                                    "roles": ["Zookeeper"],
+                                },
+                            ],
+                        },
+                        {
+                            "_node_index": "common_node_2",
+                            "instance_type": "SA5.LARGE8",
+                            "system_disk": {
+                                "disk_size": 100,
+                                "disk_type": "CLOUD_HSSD",
+                            },
+                            "data_disks": [{
+                                "_disk_index": "common_disk_1",
+                                "disk_size": 100,
+                                "disk_type": "CLOUD_SSD",
+                            }],
+                            "softwares": [
+                                {
+                                    "services": "RUNTIME-1.0.0",
+                                    "roles": ["Sysctl"],
+                                },
+                                {
+                                    "services": "FILEBEAT-7.2.0",
+                                    "roles": ["Filebeat"],
+                                },
+                                {
+                                    "services": "HDFS-3.3.4",
+                                    "roles": ["JournalNode"],
+                                },
+                                {
+                                    "services": "ZOOKEEPER-3.8.4",
+                                    "roles": ["Zookeeper"],
+                                },
+                            ],
+                        },
+                        {
+                            "_node_index": "common_node_3",
+                            "instance_type": "SA5.LARGE8",
+                            "system_disk": {
+                                "disk_size": 100,
+                                "disk_type": "CLOUD_HSSD",
+                            },
+                            "data_disks": [{
+                                "_disk_index": "common_disk_1",
+                                "disk_size": 100,
+                                "disk_type": "CLOUD_SSD",
+                            }],
+                            "softwares": [
+                                {
+                                    "services": "RUNTIME-1.0.0",
+                                    "roles": ["Sysctl"],
+                                },
+                                {
+                                    "services": "FILEBEAT-7.2.0",
+                                    "roles": ["Filebeat"],
+                                },
+                                {
+                                    "services": "HDFS-3.3.4",
+                                    "roles": ["JournalNode"],
+                                },
+                                {
+                                    "services": "ZOOKEEPER-3.8.4",
+                                    "roles": ["Zookeeper"],
+                                },
+                            ],
+                        },
+                    ],
+                },
+            }],
+            meta_db_group_infos=[
+                {
+                    "meta_type": "EMR_DEFAULT_META",
+                    "components": ["RANGER"],
+                    "default_meta_version": "mysql8",
+                },
+                {
+                    "meta_type": "USER_CUSTOM_META",
+                    "components": ["HIVE"],
+                    "meta_data_jdbc_url": "jdbc:mysql://10.0.30.13:3306/hivemetastore",
+                    "meta_data_user": "root",
+                    "meta_data_pass": "Password@123",
+                },
+                {
+                    "meta_type": "EMR_EXIST_META",
+                    "components": ["HUE"],
+                    "unify_meta_instance_id": "cdb-jg8rqjn0",
+                },
+            ])
+        ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateCluster](https://www.tencentcloud.com/document/api/1026/52522)
+          - [DescribeClusterFlowStatusDetail](https://www.tencentcloud.com/document/api/1026/73259)
+          - [DescribeInstances](https://www.tencentcloud.com/document/api/1026/31052)
+          - [ScaleOutCluster](https://www.tencentcloud.com/document/api/1026/52521)
+        * Read:
+          - [DescribeClusterNodes](https://www.tencentcloud.com/document/api/1026/35198)
+          - [DescribeInstances](https://www.tencentcloud.com/document/api/1026/31052)
+          - [DescribeMetaDBInfo](https://www.tencentcloud.com/document/api/1026/84709)
+          - [DescribeNodeDataDisks](https://www.tencentcloud.com/document/api/1026/73216)
+        * Update:
+          - [AttachDisks](https://www.tencentcloud.com/document/api/1026/73274)
+          - [DescribeClusterFlowStatusDetail](https://www.tencentcloud.com/document/api/1026/73259)
+          - [InstallSoftware](https://www.tencentcloud.com/document/api/1026/84708)
+          - [ModifyInstanceBasic](https://www.tencentcloud.com/document/api/1026/73226)
+          - [ModifyResource](https://www.tencentcloud.com/document/api/1026/73270)
+          - [ModifyResourcesTags](https://www.tencentcloud.com/document/api/1026/58392)
+          - [ResizeDataDisks](https://www.tencentcloud.com/document/api/1026/73268)
+          - [ScaleOutCluster](https://www.tencentcloud.com/document/api/1026/52521)
+          - [TerminateClusterNodes](https://www.tencentcloud.com/document/api/1026/54558)
+        * Delete:
+          - [DescribeInstances](https://www.tencentcloud.com/document/api/1026/31052)
+          - [TerminateInstance](https://www.tencentcloud.com/document/api/1026/31044)
+
         ## Import
 
         EMR cluster (v2) can be imported using the instance ID, e.g.
@@ -1925,6 +3003,7 @@ class ClusterV2(pulumi.CustomResource):
                  instance_name: pulumi.Input[Optional[_builtins.str]] = None,
                  load_balancer_id: pulumi.Input[Optional[_builtins.str]] = None,
                  login_settings: pulumi.Input[Optional[Union['ClusterV2LoginSettingsArgs', 'ClusterV2LoginSettingsArgsDict']]] = None,
+                 meta_db_group_infos: pulumi.Input[Optional[Sequence[pulumi.Input[Union['ClusterV2MetaDbGroupInfoArgs', 'ClusterV2MetaDbGroupInfoArgsDict']]]]] = None,
                  meta_db_info: pulumi.Input[Optional[Union['ClusterV2MetaDbInfoArgs', 'ClusterV2MetaDbInfoArgsDict']]] = None,
                  need_cdb_audit: pulumi.Input[Optional[_builtins.int]] = None,
                  need_master_wan: pulumi.Input[Optional[_builtins.str]] = None,
@@ -1969,6 +3048,7 @@ class ClusterV2(pulumi.CustomResource):
             if login_settings is None and not opts.urn:
                 raise TypeError("Missing required property 'login_settings'")
             __props__.__dict__["login_settings"] = login_settings
+            __props__.__dict__["meta_db_group_infos"] = meta_db_group_infos
             __props__.__dict__["meta_db_info"] = meta_db_info
             __props__.__dict__["need_cdb_audit"] = need_cdb_audit
             __props__.__dict__["need_master_wan"] = need_master_wan
@@ -2013,6 +3093,7 @@ class ClusterV2(pulumi.CustomResource):
             instance_name: pulumi.Input[Optional[_builtins.str]] = None,
             load_balancer_id: pulumi.Input[Optional[_builtins.str]] = None,
             login_settings: pulumi.Input[Optional[Union['ClusterV2LoginSettingsArgs', 'ClusterV2LoginSettingsArgsDict']]] = None,
+            meta_db_group_infos: pulumi.Input[Optional[Sequence[pulumi.Input[Union['ClusterV2MetaDbGroupInfoArgs', 'ClusterV2MetaDbGroupInfoArgsDict']]]]] = None,
             meta_db_info: pulumi.Input[Optional[Union['ClusterV2MetaDbInfoArgs', 'ClusterV2MetaDbInfoArgsDict']]] = None,
             need_cdb_audit: pulumi.Input[Optional[_builtins.int]] = None,
             need_master_wan: pulumi.Input[Optional[_builtins.str]] = None,
@@ -2049,6 +3130,7 @@ class ClusterV2(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] instance_name: Instance name. Length 6-36 characters. Only Chinese, letters, numbers, `-`, `_` are allowed.
         :param pulumi.Input[_builtins.str] load_balancer_id: CLB instance ID, e.g., `lb-xxxxxxxx`.
         :param pulumi.Input[Union['ClusterV2LoginSettingsArgs', 'ClusterV2LoginSettingsArgsDict']] login_settings: Login settings for purchased nodes.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['ClusterV2MetaDbGroupInfoArgs', 'ClusterV2MetaDbGroupInfoArgsDict']]]] meta_db_group_infos: Custom MetaDB group information of the cluster. It can only be set on create (CreateCluster) and cannot be changed afterwards. A component can belong to only one block. The query result (DescribeMetaDBInfo) is matched to the blocks by `components`, so the block order follows the configuration; fields that are not configured are filled in from the query result. When `meta_type` is `EMR_EXIST_META`, `unify_meta_instance_id` must be set; when `USER_CUSTOM_META`, `meta_data_jdbc_url`/`meta_data_user`/`meta_data_pass` must be set.
         :param pulumi.Input[Union['ClusterV2MetaDbInfoArgs', 'ClusterV2MetaDbInfoArgsDict']] meta_db_info: Metadata database information. When `meta_type` is `EMR_NEW_META`/`EMR_DEFAULT_META`, no extra fields are required; when `EMR_EXIT_META`, `unify_meta_instance_id` must be set; when `USER_CUSTOM_META`, `meta_data_jdbc_url`/`meta_data_user`/`meta_data_pass` must be set.
         :param pulumi.Input[_builtins.int] need_cdb_audit: Whether to enable database auditing.
         :param pulumi.Input[_builtins.str] need_master_wan: Whether to enable master public network. Valid values: `NEED_MASTER_WAN` (default), `NOT_NEED_MASTER_WAN`.
@@ -2083,6 +3165,7 @@ class ClusterV2(pulumi.CustomResource):
         __props__.__dict__["instance_name"] = instance_name
         __props__.__dict__["load_balancer_id"] = load_balancer_id
         __props__.__dict__["login_settings"] = login_settings
+        __props__.__dict__["meta_db_group_infos"] = meta_db_group_infos
         __props__.__dict__["meta_db_info"] = meta_db_info
         __props__.__dict__["need_cdb_audit"] = need_cdb_audit
         __props__.__dict__["need_master_wan"] = need_master_wan
@@ -2225,6 +3308,14 @@ class ClusterV2(pulumi.CustomResource):
         Login settings for purchased nodes.
         """
         return pulumi.get(self, "login_settings")
+
+    @_builtins.property
+    @pulumi.getter(name="metaDbGroupInfos")
+    def meta_db_group_infos(self) -> pulumi.Output[Sequence['outputs.ClusterV2MetaDbGroupInfo']]:
+        """
+        Custom MetaDB group information of the cluster. It can only be set on create (CreateCluster) and cannot be changed afterwards. A component can belong to only one block. The query result (DescribeMetaDBInfo) is matched to the blocks by `components`, so the block order follows the configuration; fields that are not configured are filled in from the query result. When `meta_type` is `EMR_EXIST_META`, `unify_meta_instance_id` must be set; when `USER_CUSTOM_META`, `meta_data_jdbc_url`/`meta_data_user`/`meta_data_pass` must be set.
+        """
+        return pulumi.get(self, "meta_db_group_infos")
 
     @_builtins.property
     @pulumi.getter(name="metaDbInfo")

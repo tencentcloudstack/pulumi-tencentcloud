@@ -39,6 +39,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateLane](https://www.tencentcloud.com/search/?wd=CreateLane&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeLanes](https://www.tencentcloud.com/search/?wd=DescribeLanes&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyLane](https://www.tencentcloud.com/search/?wd=ModifyLane&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteLane](https://www.tencentcloud.com/search/?wd=DeleteLane&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tsf/lane:Lane")]
     public partial class Lane : global::Pulumi.CustomResource

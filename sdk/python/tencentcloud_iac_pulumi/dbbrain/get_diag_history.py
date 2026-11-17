@@ -138,6 +138,12 @@ def get_diag_history(end_time: Optional[_builtins.str] = None,
         product="mysql")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBDiagHistory](https://www.tencentcloud.com/document/api/1035/41210)
+
 
     :param _builtins.str end_time: End time, such as `2019-09-11 12:13:14`, the interval between the end time and the start time can be up to 2 days.
     :param _builtins.str instance_id: instance id.
@@ -182,6 +188,12 @@ def get_diag_history_output(end_time: pulumi.Input[Optional[_builtins.str]] = No
         end_time="%s",
         product="mysql")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBDiagHistory](https://www.tencentcloud.com/document/api/1035/41210)
 
 
     :param _builtins.str end_time: End time, such as `2019-09-11 12:13:14`, the interval between the end time and the start time can be up to 2 days.

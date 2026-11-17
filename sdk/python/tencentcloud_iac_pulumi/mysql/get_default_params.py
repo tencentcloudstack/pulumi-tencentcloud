@@ -96,6 +96,12 @@ def get_default_params(db_version: Optional[_builtins.str] = None,
     mysql57 = tencentcloud.MysqlDefaultParams("mysql_57", db_version=5.7)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDefaultParams](https://www.tencentcloud.com/document/api/236/34469)
+
 
     :param _builtins.str db_version: MySQL database version.
     :param _builtins.str result_output_file: Used for save results.
@@ -125,6 +131,12 @@ def get_default_params_output(db_version: pulumi.Input[Optional[Optional[_builti
 
     mysql57 = tencentcloud.MysqlDefaultParams("mysql_57", db_version=5.7)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDefaultParams](https://www.tencentcloud.com/document/api/236/34469)
 
 
     :param _builtins.str db_version: MySQL database version.

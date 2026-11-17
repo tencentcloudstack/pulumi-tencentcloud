@@ -61,6 +61,12 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [RepairTaskControl](https://www.tencentcloud.com/search/?wd=RepairTaskControl&type=document&lang=en)
+ *
  * ## Import
  *
  * This resource is an operation-style resource and does not support `pulumi import`. The cloud-side authorization is a one-shot side-effect with no `Describe` API to refresh state.

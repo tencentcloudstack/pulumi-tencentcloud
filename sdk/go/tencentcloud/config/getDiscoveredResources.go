@@ -111,6 +111,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [ListDiscoveredResources](https://www.tencentcloud.com/document/api/1164/66770)
 func GetDiscoveredResources(ctx *pulumi.Context, args *GetDiscoveredResourcesArgs, opts ...pulumi.InvokeOption) (*GetDiscoveredResourcesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDiscoveredResourcesResult

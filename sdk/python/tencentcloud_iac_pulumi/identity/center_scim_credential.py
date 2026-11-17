@@ -181,6 +181,14 @@ class CenterScimCredential(pulumi.CustomResource):
         identity_center_scim_credential = tencentcloud.identity.CenterScimCredential("identity_center_scim_credential", zone_id="z-xxxxxx")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateSCIMCredential](https://www.tencentcloud.com/document/api/1031/66423)
+        * Read: [ListSCIMCredentials](https://www.tencentcloud.com/document/api/1031/66420)
+        * Delete: [DeleteSCIMCredential](https://www.tencentcloud.com/document/api/1031/66422)
+
         ## Import
 
         organization identity_center_scim_credential can be imported using the id, e.g.
@@ -211,6 +219,14 @@ class CenterScimCredential(pulumi.CustomResource):
 
         identity_center_scim_credential = tencentcloud.identity.CenterScimCredential("identity_center_scim_credential", zone_id="z-xxxxxx")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateSCIMCredential](https://www.tencentcloud.com/document/api/1031/66423)
+        * Read: [ListSCIMCredentials](https://www.tencentcloud.com/document/api/1031/66420)
+        * Delete: [DeleteSCIMCredential](https://www.tencentcloud.com/document/api/1031/66422)
 
         ## Import
 

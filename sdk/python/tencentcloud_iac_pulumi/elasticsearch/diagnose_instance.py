@@ -155,6 +155,12 @@ class DiagnoseInstance(pulumi.CustomResource):
             diagnose_indices="*")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [DiagnoseInstance](https://www.tencentcloud.com/search/?wd=DiagnoseInstance&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -182,6 +188,12 @@ class DiagnoseInstance(pulumi.CustomResource):
             diagnose_jobs=["cluster_health"],
             diagnose_indices="*")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [DiagnoseInstance](https://www.tencentcloud.com/search/?wd=DiagnoseInstance&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

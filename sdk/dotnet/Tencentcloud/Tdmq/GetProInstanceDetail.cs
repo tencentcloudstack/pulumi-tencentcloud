@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePulsarProInstanceDetail](https://www.tencentcloud.com/search/?wd=DescribePulsarProInstanceDetail&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetProInstanceDetailResult> InvokeAsync(GetProInstanceDetailArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetProInstanceDetailResult>("tencentcloud:Tdmq/getProInstanceDetail:getProInstanceDetail", args ?? new GetProInstanceDetailArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePulsarProInstanceDetail](https://www.tencentcloud.com/search/?wd=DescribePulsarProInstanceDetail&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetProInstanceDetailResult> Invoke(GetProInstanceDetailInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetProInstanceDetailResult>("tencentcloud:Tdmq/getProInstanceDetail:getProInstanceDetail", args ?? new GetProInstanceDetailInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePulsarProInstanceDetail](https://www.tencentcloud.com/search/?wd=DescribePulsarProInstanceDetail&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetProInstanceDetailResult> Invoke(GetProInstanceDetailInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetProInstanceDetailResult>("tencentcloud:Tdmq/getProInstanceDetail:getProInstanceDetail", args ?? new GetProInstanceDetailInvokeArgs(), options.WithDefaults());

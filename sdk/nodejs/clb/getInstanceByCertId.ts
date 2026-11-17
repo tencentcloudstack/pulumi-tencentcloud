@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     certIds: ["3a6B5y8v"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeLoadBalancerListByCertId](https://www.tencentcloud.com/document/api/214/33800)
  */
 export function getInstanceByCertId(args: GetInstanceByCertIdArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceByCertIdResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetInstanceByCertIdResult {
  *     certIds: ["3a6B5y8v"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeLoadBalancerListByCertId](https://www.tencentcloud.com/document/api/214/33800)
  */
 export function getInstanceByCertIdOutput(args: GetInstanceByCertIdOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInstanceByCertIdResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

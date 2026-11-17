@@ -42,6 +42,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeBusinessLogConfigs](https://www.tencentcloud.com/search/?wd=DescribeBusinessLogConfigs&type=document&lang=en)
 func LookupBusinessLogConfigs(ctx *pulumi.Context, args *LookupBusinessLogConfigsArgs, opts ...pulumi.InvokeOption) (*LookupBusinessLogConfigsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupBusinessLogConfigsResult

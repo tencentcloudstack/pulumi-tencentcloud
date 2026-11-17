@@ -93,6 +93,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read:
+//   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+//   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
 func GetBasicInstances(ctx *pulumi.Context, args *GetBasicInstancesArgs, opts ...pulumi.InvokeOption) (*GetBasicInstancesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetBasicInstancesResult

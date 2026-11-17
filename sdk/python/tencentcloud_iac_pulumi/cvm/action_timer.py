@@ -163,6 +163,14 @@ class ActionTimer(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ImportInstancesActionTimer](https://www.tencentcloud.com/search/?wd=ImportInstancesActionTimer&type=document&lang=en)
+        * Read: [DescribeInstancesActionTimer](https://www.tencentcloud.com/search/?wd=DescribeInstancesActionTimer&type=document&lang=en)
+        * Delete: [DeleteInstancesActionTimer](https://www.tencentcloud.com/search/?wd=DeleteInstancesActionTimer&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -230,6 +238,14 @@ class ActionTimer(pulumi.CustomResource):
                 "action_time": "2024-11-11T11:26:40Z",
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ImportInstancesActionTimer](https://www.tencentcloud.com/search/?wd=ImportInstancesActionTimer&type=document&lang=en)
+        * Read: [DescribeInstancesActionTimer](https://www.tencentcloud.com/search/?wd=DescribeInstancesActionTimer&type=document&lang=en)
+        * Delete: [DeleteInstancesActionTimer](https://www.tencentcloud.com/search/?wd=DeleteInstancesActionTimer&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

@@ -57,6 +57,18 @@ import * as utilities from "../utilities";
  * const exampleRestartDbInstance = new tencentcloud.sqlserver.RestartDbInstance("example", {instanceId: example.id});
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+ *   - [RestartDBInstance](https://www.tencentcloud.com/document/api/238/32097)
+ * * Read: [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+ * * Update:
+ *   - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+ *   - [RestartDBInstance](https://www.tencentcloud.com/document/api/238/32097)
+ *
  * ## Import
  *
  * sqlserver restartDbInstance can be imported using the id, e.g.

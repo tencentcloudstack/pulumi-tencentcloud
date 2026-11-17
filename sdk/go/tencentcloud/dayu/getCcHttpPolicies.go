@@ -48,6 +48,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeCCSelfDefinePolicy](https://www.tencentcloud.com/search/?wd=DescribeCCSelfDefinePolicy&type=document&lang=en)
 func GetCcHttpPolicies(ctx *pulumi.Context, args *GetCcHttpPoliciesArgs, opts ...pulumi.InvokeOption) (*GetCcHttpPoliciesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetCcHttpPoliciesResult

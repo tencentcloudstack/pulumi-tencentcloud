@@ -32,6 +32,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateBackupDBInstance](https://www.tencentcloud.com/document/api/240/37922)
+    ///   - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/240/37921)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mongodb/instanceBackup:InstanceBackup")]
     public partial class InstanceBackup : global::Pulumi.CustomResource

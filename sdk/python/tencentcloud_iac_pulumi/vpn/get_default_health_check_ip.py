@@ -106,6 +106,12 @@ def get_default_health_check_ip(result_output_file: Optional[_builtins.str] = No
     default_health_check_ip = tencentcloud.vpn.get_default_health_check_ip(vpn_gateway_id="vpngw-gt8bianl")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GenerateVpnConnectionDefaultHealthCheckIp](https://www.tencentcloud.com/document/api/215/56575)
+
 
     :param _builtins.str result_output_file: Used to save results.
     :param _builtins.str vpn_gateway_id: vpn gateway id.
@@ -136,6 +142,12 @@ def get_default_health_check_ip_output(result_output_file: pulumi.Input[Optional
 
     default_health_check_ip = tencentcloud.vpn.get_default_health_check_ip(vpn_gateway_id="vpngw-gt8bianl")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GenerateVpnConnectionDefaultHealthCheckIp](https://www.tencentcloud.com/document/api/215/56575)
 
 
     :param _builtins.str result_output_file: Used to save results.

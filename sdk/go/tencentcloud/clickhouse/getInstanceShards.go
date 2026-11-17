@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeInstanceShards](https://www.tencentcloud.com/search/?wd=DescribeInstanceShards&type=document&lang=en)
 func GetInstanceShards(ctx *pulumi.Context, args *GetInstanceShardsArgs, opts ...pulumi.InvokeOption) (*GetInstanceShardsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetInstanceShardsResult

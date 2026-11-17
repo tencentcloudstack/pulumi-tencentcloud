@@ -36,6 +36,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeLivePadTemplates](https://www.tencentcloud.com/search/?wd=DescribeLivePadTemplates&type=document&lang=en)
 func GetPadTemplates(ctx *pulumi.Context, args *GetPadTemplatesArgs, opts ...pulumi.InvokeOption) (*GetPadTemplatesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetPadTemplatesResult

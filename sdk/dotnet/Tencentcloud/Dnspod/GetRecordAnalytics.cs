@@ -36,6 +36,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSubdomainAnalytics](https://www.tencentcloud.com/document/api/1157/53857)
         /// </summary>
         public static Task<GetRecordAnalyticsResult> InvokeAsync(GetRecordAnalyticsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetRecordAnalyticsResult>("tencentcloud:Dnspod/getRecordAnalytics:getRecordAnalytics", args ?? new GetRecordAnalyticsArgs(), options.WithDefaults());
@@ -64,6 +70,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSubdomainAnalytics](https://www.tencentcloud.com/document/api/1157/53857)
         /// </summary>
         public static Output<GetRecordAnalyticsResult> Invoke(GetRecordAnalyticsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetRecordAnalyticsResult>("tencentcloud:Dnspod/getRecordAnalytics:getRecordAnalytics", args ?? new GetRecordAnalyticsInvokeArgs(), options.WithDefaults());
@@ -92,6 +104,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSubdomainAnalytics](https://www.tencentcloud.com/document/api/1157/53857)
         /// </summary>
         public static Output<GetRecordAnalyticsResult> Invoke(GetRecordAnalyticsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetRecordAnalyticsResult>("tencentcloud:Dnspod/getRecordAnalytics:getRecordAnalytics", args ?? new GetRecordAnalyticsInvokeArgs(), options.WithDefaults());

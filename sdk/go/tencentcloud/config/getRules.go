@@ -98,6 +98,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [ListConfigRules](https://www.tencentcloud.com/document/api/1164/66767)
 func GetRules(ctx *pulumi.Context, args *GetRulesArgs, opts ...pulumi.InvokeOption) (*GetRulesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetRulesResult

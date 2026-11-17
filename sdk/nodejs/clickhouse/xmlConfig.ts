@@ -25,6 +25,18 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeInstanceState](https://www.tencentcloud.com/search/?wd=DescribeInstanceState&type=document&lang=en)
+ *   - [ModifyClusterConfigs](https://www.tencentcloud.com/search/?wd=ModifyClusterConfigs&type=document&lang=en)
+ * * Read: [DescribeClusterConfigs](https://www.tencentcloud.com/search/?wd=DescribeClusterConfigs&type=document&lang=en)
+ * * Update:
+ *   - [DescribeInstanceState](https://www.tencentcloud.com/search/?wd=DescribeInstanceState&type=document&lang=en)
+ *   - [ModifyClusterConfigs](https://www.tencentcloud.com/search/?wd=ModifyClusterConfigs&type=document&lang=en)
+ *
  * ## Import
  *
  * clickhouse xmlConfig can be imported using the id, e.g.

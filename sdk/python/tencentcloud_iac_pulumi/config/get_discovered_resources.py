@@ -151,6 +151,12 @@ def get_discovered_resources(filters: Optional[Sequence[Union['GetDiscoveredReso
         }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListDiscoveredResources](https://www.tencentcloud.com/document/api/1164/66770)
+
 
     :param Sequence[Union['GetDiscoveredResourcesFilterArgs', 'GetDiscoveredResourcesFilterArgsDict']] filters: Filter conditions. Supported filter names: resourceName (resource name), resourceId (resource ID).
     :param _builtins.str order_type: Sort type. Valid values: asc, desc.
@@ -219,6 +225,12 @@ def get_discovered_resources_output(filters: pulumi.Input[Optional[Optional[Sequ
             "tag_value": "prod",
         }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListDiscoveredResources](https://www.tencentcloud.com/document/api/1164/66770)
 
 
     :param Sequence[Union['GetDiscoveredResourcesFilterArgs', 'GetDiscoveredResourcesFilterArgsDict']] filters: Filter conditions. Supported filter names: resourceName (resource name), resourceId (resource ID).

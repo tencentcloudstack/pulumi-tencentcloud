@@ -207,6 +207,12 @@ class CustomerGatewayConfigurationDownload(pulumi.CustomResource):
             interface_name="test")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [DownloadCustomerGatewayConfiguration](https://www.tencentcloud.com/document/api/215/17513)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -240,6 +246,12 @@ class CustomerGatewayConfigurationDownload(pulumi.CustomResource):
             },
             interface_name="test")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [DownloadCustomerGatewayConfiguration](https://www.tencentcloud.com/document/api/215/17513)
 
 
         :param str resource_name: The name of the resource.

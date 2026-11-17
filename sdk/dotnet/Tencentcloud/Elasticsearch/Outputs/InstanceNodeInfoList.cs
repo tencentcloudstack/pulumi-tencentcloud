@@ -35,7 +35,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch.Outputs
         /// </summary>
         public readonly string NodeType;
         /// <summary>
-        /// Node type. Valid values are `hotData`, `warmData` and `dedicatedMaster`. The default value is 'hotData`.
+        /// Node type. Valid values are `hotData`, `warmData`, `dedicatedMaster`, `dedicatedCoordinating` and `dedicatedMl`. The default value is `hotData`.
         /// </summary>
         public readonly string? Type;
 

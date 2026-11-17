@@ -40,6 +40,21 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [DescribeGroupAttribute](https://www.tencentcloud.com/search/?wd=DescribeGroupAttribute&type=document&lang=en)
+//   - [StartGroup](https://www.tencentcloud.com/search/?wd=StartGroup&type=document&lang=en)
+//   - [StopGroup](https://www.tencentcloud.com/search/?wd=StopGroup&type=document&lang=en)
+//
+// * Read: [DescribeGroupAttribute](https://www.tencentcloud.com/search/?wd=DescribeGroupAttribute&type=document&lang=en)
+// * Update:
+//   - [DescribeGroupAttribute](https://www.tencentcloud.com/search/?wd=DescribeGroupAttribute&type=document&lang=en)
+//   - [StartGroup](https://www.tencentcloud.com/search/?wd=StartGroup&type=document&lang=en)
+//   - [StopGroup](https://www.tencentcloud.com/search/?wd=StopGroup&type=document&lang=en)
 type OperateGroup struct {
 	pulumi.CustomResourceState
 

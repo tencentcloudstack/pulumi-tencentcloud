@@ -41,6 +41,14 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [ModifyLoadBalancerSla](https://www.tencentcloud.com/document/api/214/43786)
+// * Read: [DescribeLoadBalancers](https://www.tencentcloud.com/document/api/214/33830)
+// * Update: [ModifyLoadBalancerSla](https://www.tencentcloud.com/document/api/214/43786)
+//
 // ## Import
 //
 // clb instanceSlaConfig can be imported using the id, e.g.

@@ -103,6 +103,14 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [AssociateSecurityGroups](https://www.tencentcloud.com/document/api/213/33265)
+// * Read: [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258)
+// * Delete: [DisassociateSecurityGroups](https://www.tencentcloud.com/document/api/213/33253)
+//
 // ## Import
 //
 // cvm securityGroupAttachment can be imported using the id, e.g.

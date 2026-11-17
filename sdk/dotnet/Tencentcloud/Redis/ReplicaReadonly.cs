@@ -94,6 +94,20 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
+    ///   - [DisableReplicaReadonly](https://www.tencentcloud.com/document/api/239/32061)
+    ///   - [EnableReplicaReadonly](https://www.tencentcloud.com/document/api/239/32060)
+    /// * Read: [DescribeInstances](https://www.tencentcloud.com/document/api/239/32065)
+    /// * Update:
+    ///   - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
+    ///   - [DisableReplicaReadonly](https://www.tencentcloud.com/document/api/239/32061)
+    ///   - [EnableReplicaReadonly](https://www.tencentcloud.com/document/api/239/32060)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Redis/replicaReadonly:ReplicaReadonly")]
     public partial class ReplicaReadonly : global::Pulumi.CustomResource

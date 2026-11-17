@@ -24,6 +24,12 @@ import * as utilities from "../utilities";
  * });
  * export const versionsIds = queryByIds.then(queryByIds => queryByIds.clusters);
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAvailableClusterVersion](https://www.tencentcloud.com/document/api/457/39569)
  */
 export function getAvailableClusterVersions(args?: GetAvailableClusterVersionsArgs, opts?: pulumi.InvokeOptions): Promise<GetAvailableClusterVersionsResult> {
     args = args || {};
@@ -94,6 +100,12 @@ export interface GetAvailableClusterVersionsResult {
  * });
  * export const versionsIds = queryByIds.then(queryByIds => queryByIds.clusters);
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAvailableClusterVersion](https://www.tencentcloud.com/document/api/457/39569)
  */
 export function getAvailableClusterVersionsOutput(args?: GetAvailableClusterVersionsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAvailableClusterVersionsResult> {
     args = args || {};

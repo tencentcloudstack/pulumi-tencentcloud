@@ -49,6 +49,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+    ///   - [ModifyRoGroupInfo](https://www.tencentcloud.com/document/api/236/35191)
+    /// * Read: [DescribeRoGroups](https://www.tencentcloud.com/document/api/236/35704)
+    /// * Update:
+    ///   - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+    ///   - [ModifyRoGroupInfo](https://www.tencentcloud.com/document/api/236/35191)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mysql/roGroup:RoGroup")]
     public partial class RoGroup : global::Pulumi.CustomResource

@@ -129,6 +129,12 @@ def get_topic_flow_ranking(begin_date: Optional[_builtins.str] = None,
         end_date="2021-05-29T23:59:59+08:00")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTopicFlowRanking](https://www.tencentcloud.com/search/?wd=DescribeTopicFlowRanking&type=document&lang=en)
+
 
     :param _builtins.str begin_date: BeginDate.
     :param _builtins.str end_date: EndDate.
@@ -173,6 +179,12 @@ def get_topic_flow_ranking_output(begin_date: pulumi.Input[Optional[Optional[_bu
         begin_date="2023-05-29T00:00:00+08:00",
         end_date="2021-05-29T23:59:59+08:00")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTopicFlowRanking](https://www.tencentcloud.com/search/?wd=DescribeTopicFlowRanking&type=document&lang=en)
 
 
     :param _builtins.str begin_date: BeginDate.

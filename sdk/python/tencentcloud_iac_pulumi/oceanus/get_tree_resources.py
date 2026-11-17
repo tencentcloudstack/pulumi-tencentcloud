@@ -96,6 +96,12 @@ def get_tree_resources(result_output_file: Optional[_builtins.str] = None,
     example = tencentcloud.oceanus.get_tree_resources(work_space_id="space-2idq8wbr")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTreeResources](https://www.tencentcloud.com/search/?wd=DescribeTreeResources&type=document&lang=en)
+
 
     :param _builtins.str result_output_file: Used to save results.
     :param _builtins.str work_space_id: Workspace SerialId.
@@ -125,6 +131,12 @@ def get_tree_resources_output(result_output_file: pulumi.Input[Optional[Optional
 
     example = tencentcloud.oceanus.get_tree_resources(work_space_id="space-2idq8wbr")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTreeResources](https://www.tencentcloud.com/search/?wd=DescribeTreeResources&type=document&lang=en)
 
 
     :param _builtins.str result_output_file: Used to save results.

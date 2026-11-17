@@ -20,7 +20,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf.Inputs
         public Input<int> Action { get; set; } = null!;
 
         /// <summary>
-        /// ID of the resource.
+        /// Id.
         /// </summary>
         [Input("id")]
         public Input<string>? Id { get; set; }

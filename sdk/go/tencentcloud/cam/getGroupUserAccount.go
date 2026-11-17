@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [ListGroupsForUser](https://www.tencentcloud.com/document/api/598/32257)
 func GetGroupUserAccount(ctx *pulumi.Context, args *GetGroupUserAccountArgs, opts ...pulumi.InvokeOption) (*GetGroupUserAccountResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetGroupUserAccountResult

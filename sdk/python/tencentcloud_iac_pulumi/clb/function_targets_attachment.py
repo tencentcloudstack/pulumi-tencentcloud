@@ -263,6 +263,15 @@ class FunctionTargetsAttachment(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [RegisterFunctionTargets](https://www.tencentcloud.com/document/api/214/54047)
+        * Read: [DescribeTargets](https://www.tencentcloud.com/document/api/214/33824)
+        * Update: [ModifyFunctionTargets](https://www.tencentcloud.com/document/api/214/54135)
+        * Delete: [DeregisterFunctionTargets](https://www.tencentcloud.com/document/api/214/54048)
+
         ## Import
 
         clb function_targets_attachment can be imported using the id, e.g.
@@ -311,6 +320,15 @@ class FunctionTargetsAttachment(pulumi.CustomResource):
                 },
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [RegisterFunctionTargets](https://www.tencentcloud.com/document/api/214/54047)
+        * Read: [DescribeTargets](https://www.tencentcloud.com/document/api/214/33824)
+        * Update: [ModifyFunctionTargets](https://www.tencentcloud.com/document/api/214/54135)
+        * Delete: [DeregisterFunctionTargets](https://www.tencentcloud.com/document/api/214/54048)
 
         ## Import
 

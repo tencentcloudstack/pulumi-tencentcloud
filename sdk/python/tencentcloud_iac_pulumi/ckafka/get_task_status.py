@@ -96,6 +96,12 @@ def get_task_status(flow_id: Optional[_builtins.int] = None,
     task_status = tencentcloud.ckafka.get_task_status(flow_id=123456)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTaskStatus](https://www.tencentcloud.com/document/api/597/55881)
+
 
     :param _builtins.int flow_id: FlowId.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_task_status_output(flow_id: pulumi.Input[Optional[_builtins.int]] = None
 
     task_status = tencentcloud.ckafka.get_task_status(flow_id=123456)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTaskStatus](https://www.tencentcloud.com/document/api/597/55881)
 
 
     :param _builtins.int flow_id: FlowId.

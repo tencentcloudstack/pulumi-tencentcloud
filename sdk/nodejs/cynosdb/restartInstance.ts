@@ -15,6 +15,17 @@ import * as utilities from "../utilities";
  *
  * const restartInstance = new tencentcloud.cynosdb.RestartInstance("restart_instance", {instanceId: "cynosdbmysql-ins-afqx1hy0"});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+ *   - [RestartInstance](https://www.tencentcloud.com/document/api/1098/53464)
+ * * Read:
+ *   - [DescribeInstanceDetail](https://www.tencentcloud.com/document/api/1098/40749)
+ *   - [DescribeInstances](https://www.tencentcloud.com/document/api/1098/40747)
  */
 export class RestartInstance extends pulumi.CustomResource {
     /**

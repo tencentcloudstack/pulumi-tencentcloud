@@ -119,6 +119,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAccountQuota](https://www.tencentcloud.com/search/?wd=DescribeAccountQuota&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetAccountQuotaResult> InvokeAsync(GetAccountQuotaArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetAccountQuotaResult>("tencentcloud:Cvm/getAccountQuota:getAccountQuota", args ?? new GetAccountQuotaArgs(), options.WithDefaults());
@@ -230,6 +236,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAccountQuota](https://www.tencentcloud.com/search/?wd=DescribeAccountQuota&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetAccountQuotaResult> Invoke(GetAccountQuotaInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetAccountQuotaResult>("tencentcloud:Cvm/getAccountQuota:getAccountQuota", args ?? new GetAccountQuotaInvokeArgs(), options.WithDefaults());
@@ -341,6 +353,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAccountQuota](https://www.tencentcloud.com/search/?wd=DescribeAccountQuota&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetAccountQuotaResult> Invoke(GetAccountQuotaInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetAccountQuotaResult>("tencentcloud:Cvm/getAccountQuota:getAccountQuota", args ?? new GetAccountQuotaInvokeArgs(), options.WithDefaults());

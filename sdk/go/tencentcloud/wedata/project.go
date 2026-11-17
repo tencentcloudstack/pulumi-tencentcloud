@@ -33,6 +33,7 @@ import (
 //					ProjectName:  pulumi.String("tf_example"),
 //					DisplayName:  pulumi.String("display_name"),
 //					ProjectModel: pulumi.String("SIMPLE"),
+//					ScheduleMode: pulumi.String("task"),
 //				},
 //				DlcInfo: &wedata.ProjectDlcInfoArgs{
 //					ComputeResources: pulumi.StringArray{
@@ -57,6 +58,22 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CreateProject](https://www.tencentcloud.com/document/api/1174/77876)
+//   - [DisableProject](https://www.tencentcloud.com/document/api/1174/77872)
+//
+// * Read: [GetProject](https://www.tencentcloud.com/document/api/1174/77868)
+// * Update:
+//   - [DisableProject](https://www.tencentcloud.com/document/api/1174/77872)
+//   - [EnableProject](https://www.tencentcloud.com/document/api/1174/77871)
+//   - [UpdateProject](https://www.tencentcloud.com/document/api/1174/77859)
+//
+// * Delete: [DeleteProject](https://www.tencentcloud.com/document/api/1174/77880)
 type Project struct {
 	pulumi.CustomResourceState
 

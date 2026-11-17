@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Classic
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeIp6Addresses](https://www.tencentcloud.com/document/api/215/68128)
         /// </summary>
         public static Task<GetElasticPublicIpv6sResult> InvokeAsync(GetElasticPublicIpv6sArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetElasticPublicIpv6sResult>("tencentcloud:Classic/getElasticPublicIpv6s:getElasticPublicIpv6s", args ?? new GetElasticPublicIpv6sArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Classic
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeIp6Addresses](https://www.tencentcloud.com/document/api/215/68128)
         /// </summary>
         public static Output<GetElasticPublicIpv6sResult> Invoke(GetElasticPublicIpv6sInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetElasticPublicIpv6sResult>("tencentcloud:Classic/getElasticPublicIpv6s:getElasticPublicIpv6s", args ?? new GetElasticPublicIpv6sInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Classic
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeIp6Addresses](https://www.tencentcloud.com/document/api/215/68128)
         /// </summary>
         public static Output<GetElasticPublicIpv6sResult> Invoke(GetElasticPublicIpv6sInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetElasticPublicIpv6sResult>("tencentcloud:Classic/getElasticPublicIpv6s:getElasticPublicIpv6s", args ?? new GetElasticPublicIpv6sInvokeArgs(), options.WithDefaults());

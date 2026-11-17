@@ -175,6 +175,12 @@ def get_domain_analytics(dns_format: Optional[_builtins.str] = None,
         dns_format="HOUR")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDomainAnalytics](https://www.tencentcloud.com/search/?wd=DescribeDomainAnalytics&type=document&lang=en)
+
 
     :param _builtins.str dns_format: DATE: Statistics by day dimension HOUR: Statistics by hour dimension.
     :param _builtins.str domain: The domain name to query for resolution volume.
@@ -225,6 +231,12 @@ def get_domain_analytics_output(dns_format: pulumi.Input[Optional[Optional[_buil
         end_date="2023-10-12",
         dns_format="HOUR")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDomainAnalytics](https://www.tencentcloud.com/search/?wd=DescribeDomainAnalytics&type=document&lang=en)
 
 
     :param _builtins.str dns_format: DATE: Statistics by day dimension HOUR: Statistics by hour dimension.

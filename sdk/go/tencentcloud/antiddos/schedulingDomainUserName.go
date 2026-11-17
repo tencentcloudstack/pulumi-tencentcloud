@@ -41,6 +41,14 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [ModifyDomainUsrName](https://www.tencentcloud.com/document/api/1213/61398)
+// * Read: [DescribeListSchedulingDomain](https://www.tencentcloud.com/document/api/1213/61399)
+// * Update: [ModifyDomainUsrName](https://www.tencentcloud.com/document/api/1213/61398)
+//
 // ## Import
 //
 // antiddos schedulingDomainUserName can be imported using the id, e.g.

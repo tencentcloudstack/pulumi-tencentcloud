@@ -25,6 +25,12 @@ import * as utilities from "../utilities";
  *     endTime: "2023-01-01 01:00:00",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCrossBorderFlowMonitor](https://www.tencentcloud.com/search/?wd=DescribeCrossBorderFlowMonitor&type=document&lang=en)
  */
 export function getCrossBorderFlowMonitor(args: GetCrossBorderFlowMonitorArgs, opts?: pulumi.InvokeOptions): Promise<GetCrossBorderFlowMonitorResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -118,6 +124,12 @@ export interface GetCrossBorderFlowMonitorResult {
  *     endTime: "2023-01-01 01:00:00",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCrossBorderFlowMonitor](https://www.tencentcloud.com/search/?wd=DescribeCrossBorderFlowMonitor&type=document&lang=en)
  */
 export function getCrossBorderFlowMonitorOutput(args: GetCrossBorderFlowMonitorOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetCrossBorderFlowMonitorResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

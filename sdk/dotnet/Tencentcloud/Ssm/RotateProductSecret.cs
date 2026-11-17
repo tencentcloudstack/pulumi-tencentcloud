@@ -30,6 +30,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/1078/41518)
+    ///   - [RotateProductSecret](https://www.tencentcloud.com/document/api/1078/41515)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ssm/rotateProductSecret:RotateProductSecret")]
     public partial class RotateProductSecret : global::Pulumi.CustomResource

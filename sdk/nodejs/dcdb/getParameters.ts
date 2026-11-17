@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     instanceId: "your_instance_id",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBParameters](https://www.tencentcloud.com/document/api/1042/34444)
  */
 export function getParameters(args: GetParametersArgs, opts?: pulumi.InvokeOptions): Promise<GetParametersResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetParametersResult {
  *     instanceId: "your_instance_id",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBParameters](https://www.tencentcloud.com/document/api/1042/34444)
  */
 export function getParametersOutput(args: GetParametersOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetParametersResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

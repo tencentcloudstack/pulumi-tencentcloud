@@ -46,6 +46,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeInvocationTasks](https://www.tencentcloud.com/document/api/1147/46696)
 func GetInvocationTask(ctx *pulumi.Context, args *GetInvocationTaskArgs, opts ...pulumi.InvokeOption) (*GetInvocationTaskResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetInvocationTaskResult

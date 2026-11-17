@@ -45,6 +45,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeCloudNativeAPIGateways](https://www.tencentcloud.com/document/api/1290/79254)
 func LookupGateways(ctx *pulumi.Context, args *LookupGatewaysArgs, opts ...pulumi.InvokeOption) (*LookupGatewaysResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupGatewaysResult

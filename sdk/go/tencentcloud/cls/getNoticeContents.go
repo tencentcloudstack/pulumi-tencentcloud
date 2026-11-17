@@ -104,6 +104,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeNoticeContents](https://www.tencentcloud.com/document/api/614/80575)
 func GetNoticeContents(ctx *pulumi.Context, args *GetNoticeContentsArgs, opts ...pulumi.InvokeOption) (*GetNoticeContentsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetNoticeContentsResult

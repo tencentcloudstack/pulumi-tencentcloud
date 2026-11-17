@@ -93,6 +93,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [GetSSHKeyPairValue](https://www.tencentcloud.com/document/api/1078/42261)
 func GetSshKeyPairValue(ctx *pulumi.Context, args *GetSshKeyPairValueArgs, opts ...pulumi.InvokeOption) (*GetSshKeyPairValueResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSshKeyPairValueResult

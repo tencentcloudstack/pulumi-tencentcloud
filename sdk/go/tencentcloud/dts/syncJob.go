@@ -54,6 +54,18 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateSyncJob](https://www.tencentcloud.com/document/api/571/51795)
+// * Read: [DescribeSyncJobs](https://www.tencentcloud.com/document/api/571/51793)
+// * Update: [ResizeSyncJob](https://www.tencentcloud.com/document/api/571/51789)
+// * Delete:
+//   - [DescribeSyncJobs](https://www.tencentcloud.com/document/api/571/51793)
+//   - [DestroySyncJob](https://www.tencentcloud.com/document/api/571/51792)
+//   - [IsolateSyncJob](https://www.tencentcloud.com/document/api/571/51791)
+//
 // ## Import
 //
 // DTS sync job can be imported using the id, e.g.
@@ -86,7 +98,7 @@ type SyncJob struct {
 	SrcDatabaseType pulumi.StringOutput `pulumi:"srcDatabaseType"`
 	// The region where the source database resides, such as `ap-guangzhou`.
 	SrcRegion pulumi.StringOutput `pulumi:"srcRegion"`
-	// Tag information.
+	// Tag information.Cannot be modified.
 	Tags SyncJobTagArrayOutput `pulumi:"tags"`
 }
 
@@ -157,7 +169,7 @@ type syncJobState struct {
 	SrcDatabaseType *string `pulumi:"srcDatabaseType"`
 	// The region where the source database resides, such as `ap-guangzhou`.
 	SrcRegion *string `pulumi:"srcRegion"`
-	// Tag information.
+	// Tag information.Cannot be modified.
 	Tags []SyncJobTag `pulumi:"tags"`
 }
 
@@ -184,7 +196,7 @@ type SyncJobState struct {
 	SrcDatabaseType pulumi.StringPtrInput
 	// The region where the source database resides, such as `ap-guangzhou`.
 	SrcRegion pulumi.StringPtrInput
-	// Tag information.
+	// Tag information.Cannot be modified.
 	Tags SyncJobTagArrayInput
 }
 
@@ -213,7 +225,7 @@ type syncJobArgs struct {
 	SrcDatabaseType string `pulumi:"srcDatabaseType"`
 	// The region where the source database resides, such as `ap-guangzhou`.
 	SrcRegion string `pulumi:"srcRegion"`
-	// Tag information.
+	// Tag information.Cannot be modified.
 	Tags []SyncJobTag `pulumi:"tags"`
 }
 
@@ -239,7 +251,7 @@ type SyncJobArgs struct {
 	SrcDatabaseType pulumi.StringInput
 	// The region where the source database resides, such as `ap-guangzhou`.
 	SrcRegion pulumi.StringInput
-	// Tag information.
+	// Tag information.Cannot be modified.
 	Tags SyncJobTagArrayInput
 }
 
@@ -385,7 +397,7 @@ func (o SyncJobOutput) SrcRegion() pulumi.StringOutput {
 	return o.ApplyT(func(v *SyncJob) pulumi.StringOutput { return v.SrcRegion }).(pulumi.StringOutput)
 }
 
-// Tag information.
+// Tag information.Cannot be modified.
 func (o SyncJobOutput) Tags() SyncJobTagArrayOutput {
 	return o.ApplyT(func(v *SyncJob) SyncJobTagArrayOutput { return v.Tags }).(SyncJobTagArrayOutput)
 }

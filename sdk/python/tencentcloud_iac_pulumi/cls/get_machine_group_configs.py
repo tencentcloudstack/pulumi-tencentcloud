@@ -110,6 +110,12 @@ def get_machine_group_configs(group_id: Optional[_builtins.str] = None,
     machine_group_configs = tencentcloud.cls.get_machine_group_configs_output(group_id=group.id)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeMachineGroupConfigs](https://www.tencentcloud.com/document/api/614/42808)
+
 
     :param _builtins.str group_id: group id.
     :param _builtins.str result_output_file: Used to save results.
@@ -153,6 +159,12 @@ def get_machine_group_configs_output(group_id: pulumi.Input[Optional[_builtins.s
         })
     machine_group_configs = tencentcloud.cls.get_machine_group_configs_output(group_id=group.id)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeMachineGroupConfigs](https://www.tencentcloud.com/document/api/614/42808)
 
 
     :param _builtins.str group_id: group id.

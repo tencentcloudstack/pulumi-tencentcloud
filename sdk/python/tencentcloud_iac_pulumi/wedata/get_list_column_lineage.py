@@ -133,6 +133,12 @@ def get_list_column_lineage(column_name: Optional[_builtins.str] = None,
         platform="WEDATA")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListColumnLineage](https://www.tencentcloud.com/document/api/1174/77949)
+
 
     :param _builtins.str column_name: Column name.
     :param _builtins.str direction: Lineage direction INPUT|OUTPUT.
@@ -177,6 +183,12 @@ def get_list_column_lineage_output(column_name: pulumi.Input[Optional[_builtins.
         column_name="example_column",
         platform="WEDATA")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListColumnLineage](https://www.tencentcloud.com/document/api/1174/77949)
 
 
     :param _builtins.str column_name: Column name.

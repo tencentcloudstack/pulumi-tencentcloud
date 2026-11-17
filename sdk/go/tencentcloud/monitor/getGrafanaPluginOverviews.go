@@ -36,6 +36,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribePluginOverviews](https://www.tencentcloud.com/search/?wd=DescribePluginOverviews&type=document&lang=en)
 func GetGrafanaPluginOverviews(ctx *pulumi.Context, args *GetGrafanaPluginOverviewsArgs, opts ...pulumi.InvokeOption) (*GetGrafanaPluginOverviewsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetGrafanaPluginOverviewsResult

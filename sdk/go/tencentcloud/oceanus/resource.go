@@ -52,6 +52,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateResource](https://www.tencentcloud.com/search/?wd=CreateResource&type=document&lang=en)
+// * Read: [DescribeResourceConfigs](https://www.tencentcloud.com/search/?wd=DescribeResourceConfigs&type=document&lang=en)
+// * Delete: [DeleteResources](https://www.tencentcloud.com/search/?wd=DeleteResources&type=document&lang=en)
 type Resource struct {
 	pulumi.CustomResourceState
 

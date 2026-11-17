@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const example = tencentcloud.kms.getServiceStatus({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GetServiceStatus](https://www.tencentcloud.com/document/api/1030/32186)
  */
 export function getServiceStatus(args?: GetServiceStatusArgs, opts?: pulumi.InvokeOptions): Promise<GetServiceStatusResult> {
     args = args || {};
@@ -111,6 +117,12 @@ export interface GetServiceStatusResult {
  *
  * const example = tencentcloud.kms.getServiceStatus({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GetServiceStatus](https://www.tencentcloud.com/document/api/1030/32186)
  */
 export function getServiceStatusOutput(args?: GetServiceStatusOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetServiceStatusResult> {
     args = args || {};

@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeBinlogBackupOverview](https://www.tencentcloud.com/document/api/236/35194)
 func GetBinlogBackupOverview(ctx *pulumi.Context, args *GetBinlogBackupOverviewArgs, opts ...pulumi.InvokeOption) (*GetBinlogBackupOverviewResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetBinlogBackupOverviewResult

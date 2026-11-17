@@ -121,6 +121,12 @@ def get_invocation_task(filters: Optional[Sequence[Union['GetInvocationTaskFilte
         hide_output=True)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInvocationTasks](https://www.tencentcloud.com/document/api/1147/46696)
+
 
     :param Sequence[Union['GetInvocationTaskFilterArgs', 'GetInvocationTaskFilterArgsDict']] filters: Filter conditions.invocation-id - String - Required: No - (Filter condition) Filter by the execution activity ID.invocation-task-id - String - Required: No - (Filter condition) Filter by the execution task ID.instance-id - String - Required: No - (Filter condition) Filter by the instance ID.command-id - String - Required: No - (Filter condition) Filter by the command ID.Up to 10 Filters are allowed for each request. Each filter can have up to five Filter.Values. InvocationTaskIds and Filters cannot be specified at the same time.
     :param _builtins.bool hide_output: Whether to hide the output. Valid values:True (default): Hide the outputFalse: Show the output.
@@ -162,6 +168,12 @@ def get_invocation_task_output(filters: pulumi.Input[Optional[Optional[Sequence[
         }],
         hide_output=True)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInvocationTasks](https://www.tencentcloud.com/document/api/1147/46696)
 
 
     :param Sequence[Union['GetInvocationTaskFilterArgs', 'GetInvocationTaskFilterArgsDict']] filters: Filter conditions.invocation-id - String - Required: No - (Filter condition) Filter by the execution activity ID.invocation-task-id - String - Required: No - (Filter condition) Filter by the execution task ID.instance-id - String - Required: No - (Filter condition) Filter by the instance ID.command-id - String - Required: No - (Filter condition) Filter by the command ID.Up to 10 Filters are allowed for each request. Each filter can have up to five Filter.Values. InvocationTaskIds and Filters cannot be specified at the same time.

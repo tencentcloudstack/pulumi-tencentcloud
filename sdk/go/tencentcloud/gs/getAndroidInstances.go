@@ -85,6 +85,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeAndroidInstances](https://www.tencentcloud.com/search/?wd=DescribeAndroidInstances&type=document&lang=en)
 func GetAndroidInstances(ctx *pulumi.Context, args *GetAndroidInstancesArgs, opts ...pulumi.InvokeOption) (*GetAndroidInstancesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetAndroidInstancesResult

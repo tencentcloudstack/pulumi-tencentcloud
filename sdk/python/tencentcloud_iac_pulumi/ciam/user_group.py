@@ -157,6 +157,15 @@ class UserGroup(pulumi.CustomResource):
             description="for terrafrom test")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateUserGroup](https://www.tencentcloud.com/search/?wd=CreateUserGroup&type=document&lang=en)
+        * Read: [ListUserGroups](https://www.tencentcloud.com/search/?wd=ListUserGroups&type=document&lang=en)
+        * Update: [UpdateUserGroup](https://www.tencentcloud.com/search/?wd=UpdateUserGroup&type=document&lang=en)
+        * Delete: [DeleteUserGroups](https://www.tencentcloud.com/search/?wd=DeleteUserGroups&type=document&lang=en)
+
         ## Import
 
         ciam user_group can be imported using the id, e.g.
@@ -196,6 +205,15 @@ class UserGroup(pulumi.CustomResource):
             user_store_id=user_store.id,
             description="for terrafrom test")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateUserGroup](https://www.tencentcloud.com/search/?wd=CreateUserGroup&type=document&lang=en)
+        * Read: [ListUserGroups](https://www.tencentcloud.com/search/?wd=ListUserGroups&type=document&lang=en)
+        * Update: [UpdateUserGroup](https://www.tencentcloud.com/search/?wd=UpdateUserGroup&type=document&lang=en)
+        * Delete: [DeleteUserGroups](https://www.tencentcloud.com/search/?wd=DeleteUserGroups&type=document&lang=en)
 
         ## Import
 

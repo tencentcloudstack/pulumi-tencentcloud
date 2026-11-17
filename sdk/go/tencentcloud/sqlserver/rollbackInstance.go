@@ -47,6 +47,23 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+//   - [RollbackInstance](https://www.tencentcloud.com/document/api/238/32095)
+//
+// * Read: [DescribeDBs](https://www.tencentcloud.com/document/api/238/32114)
+// * Update:
+//   - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+//   - [RollbackInstance](https://www.tencentcloud.com/document/api/238/32095)
+//
+// * Delete:
+//   - [DeleteDB](https://www.tencentcloud.com/document/api/238/32117)
+//   - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+//
 // ## Import
 //
 // sqlserver rollbackInstance can be imported using the id, e.g.

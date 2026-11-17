@@ -55,6 +55,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeEnvironmentAttributes](https://www.tencentcloud.com/search/?wd=DescribeEnvironmentAttributes&type=document&lang=en)
 func GetEnvironmentAttributes(ctx *pulumi.Context, args *GetEnvironmentAttributesArgs, opts ...pulumi.InvokeOption) (*GetEnvironmentAttributesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetEnvironmentAttributesResult

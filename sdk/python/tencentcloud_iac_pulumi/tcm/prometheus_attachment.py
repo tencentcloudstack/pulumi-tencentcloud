@@ -129,6 +129,16 @@ class PrometheusAttachment(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeMesh](https://www.tencentcloud.com/search/?wd=DescribeMesh&type=document&lang=en)
+          - [LinkPrometheus](https://www.tencentcloud.com/search/?wd=LinkPrometheus&type=document&lang=en)
+        * Read: [DescribeMesh](https://www.tencentcloud.com/search/?wd=DescribeMesh&type=document&lang=en)
+        * Delete: [UnlinkPrometheus](https://www.tencentcloud.com/search/?wd=UnlinkPrometheus&type=document&lang=en)
+
         ## Import
 
         tcm prometheus_attachment can be imported using the mesh_id, e.g.
@@ -169,6 +179,16 @@ class PrometheusAttachment(pulumi.CustomResource):
                 "instance_id": "",
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeMesh](https://www.tencentcloud.com/search/?wd=DescribeMesh&type=document&lang=en)
+          - [LinkPrometheus](https://www.tencentcloud.com/search/?wd=LinkPrometheus&type=document&lang=en)
+        * Read: [DescribeMesh](https://www.tencentcloud.com/search/?wd=DescribeMesh&type=document&lang=en)
+        * Delete: [UnlinkPrometheus](https://www.tencentcloud.com/search/?wd=UnlinkPrometheus&type=document&lang=en)
 
         ## Import
 

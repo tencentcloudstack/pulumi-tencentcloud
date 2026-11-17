@@ -49,6 +49,15 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateImageSpriteTemplate](https://www.tencentcloud.com/document/api/1041/33674)
+// * Read: [DescribeImageSpriteTemplates](https://www.tencentcloud.com/document/api/1041/33658)
+// * Update: [ModifyImageSpriteTemplate](https://www.tencentcloud.com/document/api/1041/33650)
+// * Delete: [DeleteImageSpriteTemplate](https://www.tencentcloud.com/document/api/1041/33666)
+//
 // ## Import
 //
 // mps imageSpriteTemplate can be imported using the id, e.g.

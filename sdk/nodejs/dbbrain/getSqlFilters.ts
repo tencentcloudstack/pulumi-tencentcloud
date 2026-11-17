@@ -31,6 +31,12 @@ import * as utilities from "../utilities";
  *     filterIds: [sqlFilter.filterId],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSqlFilters](https://www.tencentcloud.com/search/?wd=DescribeSqlFilters&type=document&lang=en)
  */
 export function getSqlFilters(args: GetSqlFiltersArgs, opts?: pulumi.InvokeOptions): Promise<GetSqlFiltersResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -106,6 +112,12 @@ export interface GetSqlFiltersResult {
  *     filterIds: [sqlFilter.filterId],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSqlFilters](https://www.tencentcloud.com/search/?wd=DescribeSqlFilters&type=document&lang=en)
  */
 export function getSqlFiltersOutput(args: GetSqlFiltersOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSqlFiltersResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

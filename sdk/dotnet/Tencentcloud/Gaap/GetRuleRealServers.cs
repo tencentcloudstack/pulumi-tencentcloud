@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRuleRealServers](https://www.tencentcloud.com/document/api/608/33042)
         /// </summary>
         public static Task<GetRuleRealServersResult> InvokeAsync(GetRuleRealServersArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetRuleRealServersResult>("tencentcloud:Gaap/getRuleRealServers:getRuleRealServers", args ?? new GetRuleRealServersArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRuleRealServers](https://www.tencentcloud.com/document/api/608/33042)
         /// </summary>
         public static Output<GetRuleRealServersResult> Invoke(GetRuleRealServersInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetRuleRealServersResult>("tencentcloud:Gaap/getRuleRealServers:getRuleRealServers", args ?? new GetRuleRealServersInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRuleRealServers](https://www.tencentcloud.com/document/api/608/33042)
         /// </summary>
         public static Output<GetRuleRealServersResult> Invoke(GetRuleRealServersInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetRuleRealServersResult>("tencentcloud:Gaap/getRuleRealServers:getRuleRealServers", args ?? new GetRuleRealServersInvokeArgs(), options.WithDefaults());

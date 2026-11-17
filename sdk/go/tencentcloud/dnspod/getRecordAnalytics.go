@@ -42,6 +42,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeSubdomainAnalytics](https://www.tencentcloud.com/document/api/1157/53857)
 func GetRecordAnalytics(ctx *pulumi.Context, args *GetRecordAnalyticsArgs, opts ...pulumi.InvokeOption) (*GetRecordAnalyticsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetRecordAnalyticsResult

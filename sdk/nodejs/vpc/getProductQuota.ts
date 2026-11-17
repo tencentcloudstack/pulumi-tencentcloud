@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     product: "vpc",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeProductQuota](https://www.tencentcloud.com/search/?wd=DescribeProductQuota&type=document&lang=en)
  */
 export function getProductQuota(args: GetProductQuotaArgs, opts?: pulumi.InvokeOptions): Promise<GetProductQuotaResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetProductQuotaResult {
  *     product: "vpc",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeProductQuota](https://www.tencentcloud.com/search/?wd=DescribeProductQuota&type=document&lang=en)
  */
 export function getProductQuotaOutput(args: GetProductQuotaOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetProductQuotaResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

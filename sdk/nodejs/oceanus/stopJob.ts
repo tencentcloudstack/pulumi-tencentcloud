@@ -23,6 +23,12 @@ import * as utilities from "../utilities";
  *     workSpaceId: "space-2idq8wbr",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [StopJobs](https://www.tencentcloud.com/search/?wd=StopJobs&type=document&lang=en)
  */
 export class StopJob extends pulumi.CustomResource {
     /**

@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeUserSqlAdvice](https://www.tencentcloud.com/document/api/1035/41181)
 func GetSlowLogUserSqlAdvice(ctx *pulumi.Context, args *GetSlowLogUserSqlAdviceArgs, opts ...pulumi.InvokeOption) (*GetSlowLogUserSqlAdviceResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSlowLogUserSqlAdviceResult

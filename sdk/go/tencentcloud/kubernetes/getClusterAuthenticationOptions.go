@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeClusterAuthenticationOptions](https://www.tencentcloud.com/document/api/457/42699)
 func GetClusterAuthenticationOptions(ctx *pulumi.Context, args *GetClusterAuthenticationOptionsArgs, opts ...pulumi.InvokeOption) (*GetClusterAuthenticationOptionsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetClusterAuthenticationOptionsResult

@@ -28,6 +28,15 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateUserGroup](https://www.tencentcloud.com/search/?wd=CreateUserGroup&type=document&lang=en)
+ * * Read: [DescribeUserGroups](https://www.tencentcloud.com/search/?wd=DescribeUserGroups&type=document&lang=en)
+ * * Update: [ModifyUserGroup](https://www.tencentcloud.com/search/?wd=ModifyUserGroup&type=document&lang=en)
+ * * Delete: [DeleteUserGroups](https://www.tencentcloud.com/search/?wd=DeleteUserGroups&type=document&lang=en)
+ *
  * ## Import
  *
  * dasb userGroup can be imported using the id, e.g.

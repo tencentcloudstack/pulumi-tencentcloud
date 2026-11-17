@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     frameworkType: "machine-learning",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSessionImageVersion](https://www.tencentcloud.com/document/api/1155/73638)
  */
 export function getSessionImageVersion(args: GetSessionImageVersionArgs, opts?: pulumi.InvokeOptions): Promise<GetSessionImageVersionResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -78,6 +84,12 @@ export interface GetSessionImageVersionResult {
  *     frameworkType: "machine-learning",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSessionImageVersion](https://www.tencentcloud.com/document/api/1155/73638)
  */
 export function getSessionImageVersionOutput(args: GetSessionImageVersionOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSessionImageVersionResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

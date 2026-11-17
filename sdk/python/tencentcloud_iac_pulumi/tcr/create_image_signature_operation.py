@@ -207,6 +207,12 @@ class CreateImageSignatureOperation(pulumi.CustomResource):
             image_version="v1")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateSignature](https://www.tencentcloud.com/document/api/1051/50727)
+
         ## Import
 
         tcr image_signature_operation can be imported using the id, e.g.
@@ -266,6 +272,12 @@ class CreateImageSignatureOperation(pulumi.CustomResource):
             repository_name=example_repository.name,
             image_version="v1")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateSignature](https://www.tencentcloud.com/document/api/1051/50727)
 
         ## Import
 

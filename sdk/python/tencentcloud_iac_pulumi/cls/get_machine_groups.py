@@ -117,6 +117,12 @@ def get_machine_groups(filters: Optional[Sequence[Union['GetMachineGroupsFilterA
     ])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeMachineGroups](https://www.tencentcloud.com/document/api/614/42818)
+
 
     :param Sequence[Union['GetMachineGroupsFilterArgs', 'GetMachineGroupsFilterArgsDict']] filters: Filter conditions. Maximum 10 filters, each with up to 5 values. Supported keys: `machineGroupName`, `machineGroupId`, `osType`, `tagKey`, `tag:tagKey`.
     :param _builtins.str result_output_file: Used to save results.
@@ -166,6 +172,12 @@ def get_machine_groups_output(filters: pulumi.Input[Optional[Optional[Sequence[U
         },
     ])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeMachineGroups](https://www.tencentcloud.com/document/api/614/42818)
 
 
     :param Sequence[Union['GetMachineGroupsFilterArgs', 'GetMachineGroupsFilterArgsDict']] filters: Filter conditions. Maximum 10 filters, each with up to 5 values. Supported keys: `machineGroupName`, `machineGroupId`, `osType`, `tagKey`, `tag:tagKey`.

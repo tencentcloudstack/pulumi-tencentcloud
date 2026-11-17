@@ -55,6 +55,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeAuditLogs](https://www.tencentcloud.com/document/api/1098/84940)
 func GetAuditLogs(ctx *pulumi.Context, args *GetAuditLogsArgs, opts ...pulumi.InvokeOption) (*GetAuditLogsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetAuditLogsResult

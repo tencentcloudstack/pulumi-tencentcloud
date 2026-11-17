@@ -156,6 +156,15 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreatePrometheusConfig](https://www.tencentcloud.com/document/api/248/53763)
+ * * Read: [DescribePrometheusConfig](https://www.tencentcloud.com/document/api/248/53332)
+ * * Update: [ModifyPrometheusConfig](https://www.tencentcloud.com/document/api/248/53761)
+ * * Delete: [DeletePrometheusConfig](https://www.tencentcloud.com/document/api/248/53762)
  */
 export class TmpTkeConfig extends pulumi.CustomResource {
     /**

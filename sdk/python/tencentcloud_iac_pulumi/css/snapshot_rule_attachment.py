@@ -187,6 +187,16 @@ class SnapshotRuleAttachment(pulumi.CustomResource):
             stream_name="ppp")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateLiveSnapshotRule](https://www.tencentcloud.com/document/api/267/30835)
+        * Read: [DescribeLiveSnapshotRules](https://www.tencentcloud.com/document/api/267/30831)
+        * Delete:
+          - [DeleteLiveSnapshotRule](https://www.tencentcloud.com/document/api/267/30833)
+          - [DescribeLiveSnapshotRules](https://www.tencentcloud.com/document/api/267/30831)
+
         ## Import
 
         css snapshot_rule can be imported using the id, e.g.
@@ -224,6 +234,16 @@ class SnapshotRuleAttachment(pulumi.CustomResource):
             app_name="qqq",
             stream_name="ppp")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateLiveSnapshotRule](https://www.tencentcloud.com/document/api/267/30835)
+        * Read: [DescribeLiveSnapshotRules](https://www.tencentcloud.com/document/api/267/30831)
+        * Delete:
+          - [DeleteLiveSnapshotRule](https://www.tencentcloud.com/document/api/267/30833)
+          - [DescribeLiveSnapshotRules](https://www.tencentcloud.com/document/api/267/30831)
 
         ## Import
 

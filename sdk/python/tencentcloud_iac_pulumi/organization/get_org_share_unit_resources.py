@@ -127,6 +127,12 @@ def get_org_share_unit_resources(area: Optional[_builtins.str] = None,
         unit_id="xxxxxx")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeShareUnitResources](https://www.tencentcloud.com/document/api/1031/68229)
+
 
     :param _builtins.str area: Shared unit area.
     :param _builtins.str result_output_file: Used to save results.
@@ -169,6 +175,12 @@ def get_org_share_unit_resources_output(area: pulumi.Input[Optional[_builtins.st
     organization_org_share_unit_resources = tencentcloud.organization.get_org_share_unit_resources(area="ap-guangzhou",
         unit_id="xxxxxx")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeShareUnitResources](https://www.tencentcloud.com/document/api/1031/68229)
 
 
     :param _builtins.str area: Shared unit area.

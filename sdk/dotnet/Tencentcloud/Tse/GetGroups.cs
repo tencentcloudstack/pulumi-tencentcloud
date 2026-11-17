@@ -43,6 +43,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeNativeGatewayServerGroups](https://www.tencentcloud.com/document/api/1290/79253)
         /// </summary>
         public static Task<GetGroupsResult> InvokeAsync(GetGroupsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetGroupsResult>("tencentcloud:Tse/getGroups:getGroups", args ?? new GetGroupsArgs(), options.WithDefaults());
@@ -78,6 +84,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeNativeGatewayServerGroups](https://www.tencentcloud.com/document/api/1290/79253)
         /// </summary>
         public static Output<GetGroupsResult> Invoke(GetGroupsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetGroupsResult>("tencentcloud:Tse/getGroups:getGroups", args ?? new GetGroupsInvokeArgs(), options.WithDefaults());
@@ -113,6 +125,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeNativeGatewayServerGroups](https://www.tencentcloud.com/document/api/1290/79253)
         /// </summary>
         public static Output<GetGroupsResult> Invoke(GetGroupsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetGroupsResult>("tencentcloud:Tse/getGroups:getGroups", args ?? new GetGroupsInvokeArgs(), options.WithDefaults());

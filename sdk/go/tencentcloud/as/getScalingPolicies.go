@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeScalingPolicies](https://www.tencentcloud.com/document/api/377/33208)
 func GetScalingPolicies(ctx *pulumi.Context, args *GetScalingPoliciesArgs, opts ...pulumi.InvokeOption) (*GetScalingPoliciesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetScalingPoliciesResult

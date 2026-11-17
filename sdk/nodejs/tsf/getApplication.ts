@@ -21,6 +21,12 @@ import * as utilities from "../utilities";
  *     applicationIdLists: ["application-a24x29xv"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeApplications](https://www.tencentcloud.com/search/?wd=DescribeApplications&type=document&lang=en)
  */
 export function getApplication(args?: GetApplicationArgs, opts?: pulumi.InvokeOptions): Promise<GetApplicationResult> {
     args = args || {};
@@ -99,6 +105,12 @@ export interface GetApplicationResult {
  *     applicationIdLists: ["application-a24x29xv"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeApplications](https://www.tencentcloud.com/search/?wd=DescribeApplications&type=document&lang=en)
  */
 export function getApplicationOutput(args?: GetApplicationOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetApplicationResult> {
     args = args || {};

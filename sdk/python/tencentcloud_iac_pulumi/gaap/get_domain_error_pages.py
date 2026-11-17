@@ -154,6 +154,12 @@ def get_domain_error_pages(domain: Optional[_builtins.str] = None,
         domain=foo_domain_error_page.domain)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDomainErrorPageInfo](https://www.tencentcloud.com/document/api/608/33135)
+
 
     :param _builtins.str domain: HTTP domain to be queried.
     :param Sequence[_builtins.str] ids: List of the error page info ID to be queried.
@@ -223,6 +229,12 @@ def get_domain_error_pages_output(domain: pulumi.Input[Optional[_builtins.str]] 
     foo = tencentcloud.gaap.get_domain_error_pages_output(listener_id=foo_domain_error_page.listener_id,
         domain=foo_domain_error_page.domain)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDomainErrorPageInfo](https://www.tencentcloud.com/document/api/608/33135)
 
 
     :param _builtins.str domain: HTTP domain to be queried.

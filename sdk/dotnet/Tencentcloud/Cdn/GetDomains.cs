@@ -36,6 +36,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeDomainsConfig](https://www.tencentcloud.com/document/api/228/34019)
+        ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
         /// </summary>
         public static Task<GetDomainsResult> InvokeAsync(GetDomainsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDomainsResult>("tencentcloud:Cdn/getDomains:getDomains", args ?? new GetDomainsArgs(), options.WithDefaults());
@@ -64,6 +72,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeDomainsConfig](https://www.tencentcloud.com/document/api/228/34019)
+        ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
         /// </summary>
         public static Output<GetDomainsResult> Invoke(GetDomainsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDomainsResult>("tencentcloud:Cdn/getDomains:getDomains", args ?? new GetDomainsInvokeArgs(), options.WithDefaults());
@@ -92,6 +108,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdn
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeDomainsConfig](https://www.tencentcloud.com/document/api/228/34019)
+        ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
         /// </summary>
         public static Output<GetDomainsResult> Invoke(GetDomainsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDomainsResult>("tencentcloud:Cdn/getDomains:getDomains", args ?? new GetDomainsInvokeArgs(), options.WithDefaults());

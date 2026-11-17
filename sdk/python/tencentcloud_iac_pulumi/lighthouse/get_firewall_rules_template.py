@@ -86,6 +86,12 @@ def get_firewall_rules_template(result_output_file: Optional[_builtins.str] = No
     firewall_rules_template = tencentcloud.lighthouse.get_firewall_rules_template()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeFirewallRulesTemplate](https://www.tencentcloud.com/document/api/1103/42510)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -111,6 +117,12 @@ def get_firewall_rules_template_output(result_output_file: pulumi.Input[Optional
 
     firewall_rules_template = tencentcloud.lighthouse.get_firewall_rules_template()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeFirewallRulesTemplate](https://www.tencentcloud.com/document/api/1103/42510)
 
 
     :param _builtins.str result_output_file: Used to save results.

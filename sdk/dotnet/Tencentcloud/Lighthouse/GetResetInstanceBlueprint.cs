@@ -34,6 +34,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeResetInstanceBlueprints](https://www.tencentcloud.com/document/api/1103/42493)
         /// </summary>
         public static Task<GetResetInstanceBlueprintResult> InvokeAsync(GetResetInstanceBlueprintArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetResetInstanceBlueprintResult>("tencentcloud:Lighthouse/getResetInstanceBlueprint:getResetInstanceBlueprint", args ?? new GetResetInstanceBlueprintArgs(), options.WithDefaults());
@@ -60,6 +66,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeResetInstanceBlueprints](https://www.tencentcloud.com/document/api/1103/42493)
         /// </summary>
         public static Output<GetResetInstanceBlueprintResult> Invoke(GetResetInstanceBlueprintInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetResetInstanceBlueprintResult>("tencentcloud:Lighthouse/getResetInstanceBlueprint:getResetInstanceBlueprint", args ?? new GetResetInstanceBlueprintInvokeArgs(), options.WithDefaults());
@@ -86,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeResetInstanceBlueprints](https://www.tencentcloud.com/document/api/1103/42493)
         /// </summary>
         public static Output<GetResetInstanceBlueprintResult> Invoke(GetResetInstanceBlueprintInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetResetInstanceBlueprintResult>("tencentcloud:Lighthouse/getResetInstanceBlueprint:getResetInstanceBlueprint", args ?? new GetResetInstanceBlueprintInvokeArgs(), options.WithDefaults());

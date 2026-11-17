@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         ///     };
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeClusterLevelAttribute](https://www.tencentcloud.com/document/api/457/46754)
         /// </summary>
         public static Task<GetClusterLevelsResult> InvokeAsync(GetClusterLevelsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetClusterLevelsResult>("tencentcloud:Kubernetes/getClusterLevels:getClusterLevels", args ?? new GetClusterLevelsArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         ///     };
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeClusterLevelAttribute](https://www.tencentcloud.com/document/api/457/46754)
         /// </summary>
         public static Output<GetClusterLevelsResult> Invoke(GetClusterLevelsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetClusterLevelsResult>("tencentcloud:Kubernetes/getClusterLevels:getClusterLevels", args ?? new GetClusterLevelsInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         ///     };
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeClusterLevelAttribute](https://www.tencentcloud.com/document/api/457/46754)
         /// </summary>
         public static Output<GetClusterLevelsResult> Invoke(GetClusterLevelsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetClusterLevelsResult>("tencentcloud:Kubernetes/getClusterLevels:getClusterLevels", args ?? new GetClusterLevelsInvokeArgs(), options.WithDefaults());

@@ -660,6 +660,15 @@ class ConfigExtra(pulumi.CustomResource):
             group_id=group.id)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateConfigExtra](https://www.tencentcloud.com/search/?wd=CreateConfigExtra&type=document&lang=en)
+        * Read: [DescribeConfigExtras](https://www.tencentcloud.com/search/?wd=DescribeConfigExtras&type=document&lang=en)
+        * Update: [ModifyConfigExtra](https://www.tencentcloud.com/search/?wd=ModifyConfigExtra&type=document&lang=en)
+        * Delete: [DeleteConfigExtra](https://www.tencentcloud.com/search/?wd=DeleteConfigExtra&type=document&lang=en)
+
         ## Import
 
         cls config_extra can be imported using the id, e.g.
@@ -756,6 +765,15 @@ class ConfigExtra(pulumi.CustomResource):
             },
             group_id=group.id)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateConfigExtra](https://www.tencentcloud.com/search/?wd=CreateConfigExtra&type=document&lang=en)
+        * Read: [DescribeConfigExtras](https://www.tencentcloud.com/search/?wd=DescribeConfigExtras&type=document&lang=en)
+        * Update: [ModifyConfigExtra](https://www.tencentcloud.com/search/?wd=ModifyConfigExtra&type=document&lang=en)
+        * Delete: [DeleteConfigExtra](https://www.tencentcloud.com/search/?wd=DeleteConfigExtra&type=document&lang=en)
 
         ## Import
 

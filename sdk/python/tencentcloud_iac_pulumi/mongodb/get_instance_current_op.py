@@ -180,6 +180,12 @@ def get_instance_current_op(instance_id: Optional[_builtins.str] = None,
         order_by_type="desc")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCurrentOp](https://www.tencentcloud.com/document/api/240/74802)
+
 
     :param _builtins.str instance_id: Instance ID, the format is: cmgo-9d0p6umb.Same as the instance ID displayed in the cloud database console page.
     :param _builtins.int millisecond_running: Filter condition, the time that the operation has been executed (unit: millisecond),the result will return the operation that exceeds the set time, the default value is 0,and the value range is [0, 3600000].
@@ -239,6 +245,12 @@ def get_instance_current_op_output(instance_id: pulumi.Input[Optional[_builtins.
         op="command",
         order_by_type="desc")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCurrentOp](https://www.tencentcloud.com/document/api/240/74802)
 
 
     :param _builtins.str instance_id: Instance ID, the format is: cmgo-9d0p6umb.Same as the instance ID displayed in the cloud database console page.

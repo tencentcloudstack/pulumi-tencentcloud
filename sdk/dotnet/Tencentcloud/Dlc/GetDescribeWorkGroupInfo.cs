@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeWorkGroupInfo](https://www.tencentcloud.com/document/api/1155/62667)
         /// </summary>
         public static Task<GetDescribeWorkGroupInfoResult> InvokeAsync(GetDescribeWorkGroupInfoArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDescribeWorkGroupInfoResult>("tencentcloud:Dlc/getDescribeWorkGroupInfo:getDescribeWorkGroupInfo", args ?? new GetDescribeWorkGroupInfoArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeWorkGroupInfo](https://www.tencentcloud.com/document/api/1155/62667)
         /// </summary>
         public static Output<GetDescribeWorkGroupInfoResult> Invoke(GetDescribeWorkGroupInfoInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDescribeWorkGroupInfoResult>("tencentcloud:Dlc/getDescribeWorkGroupInfo:getDescribeWorkGroupInfo", args ?? new GetDescribeWorkGroupInfoInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeWorkGroupInfo](https://www.tencentcloud.com/document/api/1155/62667)
         /// </summary>
         public static Output<GetDescribeWorkGroupInfoResult> Invoke(GetDescribeWorkGroupInfoInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDescribeWorkGroupInfoResult>("tencentcloud:Dlc/getDescribeWorkGroupInfo:getDescribeWorkGroupInfo", args ?? new GetDescribeWorkGroupInfoInvokeArgs(), options.WithDefaults());

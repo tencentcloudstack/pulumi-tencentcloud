@@ -66,6 +66,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeKeyPairs](https://www.tencentcloud.com/document/api/213/33229)
 func GetPairs(ctx *pulumi.Context, args *GetPairsArgs, opts ...pulumi.InvokeOption) (*GetPairsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetPairsResult

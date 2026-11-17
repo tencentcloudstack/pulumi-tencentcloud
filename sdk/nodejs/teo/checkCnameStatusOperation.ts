@@ -23,6 +23,12 @@ import * as utilities from "../utilities";
  *     ],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CheckCnameStatus](https://www.tencentcloud.com/document/api/1145/56175)
  */
 export class CheckCnameStatusOperation extends pulumi.CustomResource {
     /**

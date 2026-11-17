@@ -127,6 +127,12 @@ def get_usage_plan_environments(bind_type: Optional[_builtins.str] = None,
         bind_type="SERVICE")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeUsagePlanEnvironments](https://www.tencentcloud.com/search/?wd=DescribeUsagePlanEnvironments&type=document&lang=en)
+
 
     :param _builtins.str bind_type: Binding type. Valid values: `API`, `SERVICE`. Default value: `SERVICE`.
     :param _builtins.str result_output_file: Used to save results.
@@ -181,6 +187,12 @@ def get_usage_plan_environments_output(bind_type: pulumi.Input[Optional[Optional
     environment_test = tencentcloud.apigateway.get_usage_plan_environments_output(usage_plan_id=attach_service.usage_plan_id,
         bind_type="SERVICE")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeUsagePlanEnvironments](https://www.tencentcloud.com/search/?wd=DescribeUsagePlanEnvironments&type=document&lang=en)
 
 
     :param _builtins.str bind_type: Binding type. Valid values: `API`, `SERVICE`. Default value: `SERVICE`.

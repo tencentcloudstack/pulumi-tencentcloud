@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *     instanceId: "cdb-fitq5t9h",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBFeatures](https://www.tencentcloud.com/document/api/236/53575)
  */
 export function getDbFeatures(args: GetDbFeaturesArgs, opts?: pulumi.InvokeOptions): Promise<GetDbFeaturesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -100,6 +106,12 @@ export interface GetDbFeaturesResult {
  *     instanceId: "cdb-fitq5t9h",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBFeatures](https://www.tencentcloud.com/document/api/236/53575)
  */
 export function getDbFeaturesOutput(args: GetDbFeaturesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDbFeaturesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

@@ -36,6 +36,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeTlsVersion](https://www.tencentcloud.com/document/api/627/64563)
 func GetTlsVersions(ctx *pulumi.Context, args *GetTlsVersionsArgs, opts ...pulumi.InvokeOption) (*GetTlsVersionsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetTlsVersionsResult

@@ -129,6 +129,12 @@ def get_reset_instance_blueprint(filters: Optional[Sequence[Union['GetResetInsta
         limit=20)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeResetInstanceBlueprints](https://www.tencentcloud.com/document/api/1103/42493)
+
 
     :param Sequence[Union['GetResetInstanceBlueprintFilterArgs', 'GetResetInstanceBlueprintFilterArgsDict']] filters: Filter listblueprint-idFilter by image ID.Type: StringRequired: noblueprint-typeFilter by image type.Valid values: APP_OS: application image; PURE_OS: system image; PRIVATE: custom imageType: StringRequired: noplatform-typeFilter by image platform type.Valid values: LINUX_UNIX: Linux or Unix; WINDOWS: WindowsType: StringRequired: noblueprint-nameFilter by image name.Type: StringRequired: noblueprint-stateFilter by image status.Type: StringRequired: noEach request can contain up to 10 Filters and 5 Filter.Values. BlueprintIds and Filters cannot be specified at the same time.
     :param _builtins.str instance_id: Instance ID.
@@ -172,6 +178,12 @@ def get_reset_instance_blueprint_output(filters: pulumi.Input[Optional[Optional[
         offset=0,
         limit=20)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeResetInstanceBlueprints](https://www.tencentcloud.com/document/api/1103/42493)
 
 
     :param Sequence[Union['GetResetInstanceBlueprintFilterArgs', 'GetResetInstanceBlueprintFilterArgsDict']] filters: Filter listblueprint-idFilter by image ID.Type: StringRequired: noblueprint-typeFilter by image type.Valid values: APP_OS: application image; PURE_OS: system image; PRIVATE: custom imageType: StringRequired: noplatform-typeFilter by image platform type.Valid values: LINUX_UNIX: Linux or Unix; WINDOWS: WindowsType: StringRequired: noblueprint-nameFilter by image name.Type: StringRequired: noblueprint-stateFilter by image status.Type: StringRequired: noEach request can contain up to 10 Filters and 5 Filter.Values. BlueprintIds and Filters cannot be specified at the same time.

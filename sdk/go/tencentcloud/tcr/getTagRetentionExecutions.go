@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeTagRetentionExecution](https://www.tencentcloud.com/document/api/1051/50688)
 func GetTagRetentionExecutions(ctx *pulumi.Context, args *GetTagRetentionExecutionsArgs, opts ...pulumi.InvokeOption) (*GetTagRetentionExecutionsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetTagRetentionExecutionsResult

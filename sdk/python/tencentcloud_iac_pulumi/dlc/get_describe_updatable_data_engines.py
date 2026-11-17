@@ -105,6 +105,12 @@ def get_describe_updatable_data_engines(data_engine_config_command: Optional[_bu
     example = tencentcloud.dlc.get_describe_updatable_data_engines(data_engine_config_command="UpdateSparkSQLResultPath")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeUpdatableDataEngines](https://www.tencentcloud.com/document/api/1155/62691)
+
 
     :param _builtins.str data_engine_config_command: Operation commands of engine configuration. UpdateSparkSQLLakefsPath updates the path of managed tables, and UpdateSparkSQLResultPath updates the path of result buckets.
     :param _builtins.str result_output_file: Used to save results.
@@ -143,6 +149,12 @@ def get_describe_updatable_data_engines_output(data_engine_config_command: pulum
 
     example = tencentcloud.dlc.get_describe_updatable_data_engines(data_engine_config_command="UpdateSparkSQLResultPath")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeUpdatableDataEngines](https://www.tencentcloud.com/document/api/1155/62691)
 
 
     :param _builtins.str data_engine_config_command: Operation commands of engine configuration. UpdateSparkSQLLakefsPath updates the path of managed tables, and UpdateSparkSQLResultPath updates the path of result buckets.

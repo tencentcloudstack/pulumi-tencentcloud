@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataEventUrl](https://www.tencentcloud.com/document/api/1131/45331)
         /// </summary>
         public static Task<GetEventUrlResult> InvokeAsync(GetEventUrlArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetEventUrlResult>("tencentcloud:Rum/getEventUrl:getEventUrl", args ?? new GetEventUrlArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataEventUrl](https://www.tencentcloud.com/document/api/1131/45331)
         /// </summary>
         public static Output<GetEventUrlResult> Invoke(GetEventUrlInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetEventUrlResult>("tencentcloud:Rum/getEventUrl:getEventUrl", args ?? new GetEventUrlInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataEventUrl](https://www.tencentcloud.com/document/api/1131/45331)
         /// </summary>
         public static Output<GetEventUrlResult> Invoke(GetEventUrlInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetEventUrlResult>("tencentcloud:Rum/getEventUrl:getEventUrl", args ?? new GetEventUrlInvokeArgs(), options.WithDefaults());

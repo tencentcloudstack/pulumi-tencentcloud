@@ -23,6 +23,12 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeProxyGroupList](https://www.tencentcloud.com/document/api/608/33081)
  */
 export function getProxyGroups(args: GetProxyGroupsArgs, opts?: pulumi.InvokeOptions): Promise<GetProxyGroupsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -96,6 +102,12 @@ export interface GetProxyGroupsResult {
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeProxyGroupList](https://www.tencentcloud.com/document/api/608/33081)
  */
 export function getProxyGroupsOutput(args: GetProxyGroupsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetProxyGroupsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

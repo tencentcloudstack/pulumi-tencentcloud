@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBInstanceCharset](https://www.tencentcloud.com/document/api/236/15866)
         /// </summary>
         public static Task<GetInstanceCharsetResult> InvokeAsync(GetInstanceCharsetArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceCharsetResult>("tencentcloud:Mysql/getInstanceCharset:getInstanceCharset", args ?? new GetInstanceCharsetArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBInstanceCharset](https://www.tencentcloud.com/document/api/236/15866)
         /// </summary>
         public static Output<GetInstanceCharsetResult> Invoke(GetInstanceCharsetInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceCharsetResult>("tencentcloud:Mysql/getInstanceCharset:getInstanceCharset", args ?? new GetInstanceCharsetInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBInstanceCharset](https://www.tencentcloud.com/document/api/236/15866)
         /// </summary>
         public static Output<GetInstanceCharsetResult> Invoke(GetInstanceCharsetInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceCharsetResult>("tencentcloud:Mysql/getInstanceCharset:getInstanceCharset", args ?? new GetInstanceCharsetInvokeArgs(), options.WithDefaults());

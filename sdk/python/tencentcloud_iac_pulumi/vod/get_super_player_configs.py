@@ -144,6 +144,12 @@ def get_super_player_configs(name: Optional[_builtins.str] = None,
         name="tf-super-player")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSuperPlayerConfigs](https://www.tencentcloud.com/search/?wd=DescribeSuperPlayerConfigs&type=document&lang=en)
+
 
     :param _builtins.str name: Name of super player config.
     :param _builtins.str result_output_file: Used to save results.
@@ -203,6 +209,12 @@ def get_super_player_configs_output(name: pulumi.Input[Optional[Optional[_builti
     foo = tencentcloud.vod.get_super_player_configs(type="Custom",
         name="tf-super-player")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSuperPlayerConfigs](https://www.tencentcloud.com/search/?wd=DescribeSuperPlayerConfigs&type=document&lang=en)
 
 
     :param _builtins.str name: Name of super player config.

@@ -89,6 +89,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeServiceForApiApp](https://www.tencentcloud.com/search/?wd=DescribeServiceForApiApp&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetApiAppServiceResult> InvokeAsync(GetApiAppServiceArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetApiAppServiceResult>("tencentcloud:ApiGateway/getApiAppService:getApiAppService", args ?? new GetApiAppServiceArgs(), options.WithDefaults());
@@ -170,6 +176,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeServiceForApiApp](https://www.tencentcloud.com/search/?wd=DescribeServiceForApiApp&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetApiAppServiceResult> Invoke(GetApiAppServiceInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetApiAppServiceResult>("tencentcloud:ApiGateway/getApiAppService:getApiAppService", args ?? new GetApiAppServiceInvokeArgs(), options.WithDefaults());
@@ -251,6 +263,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeServiceForApiApp](https://www.tencentcloud.com/search/?wd=DescribeServiceForApiApp&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetApiAppServiceResult> Invoke(GetApiAppServiceInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetApiAppServiceResult>("tencentcloud:ApiGateway/getApiAppService:getApiAppService", args ?? new GetApiAppServiceInvokeArgs(), options.WithDefaults());

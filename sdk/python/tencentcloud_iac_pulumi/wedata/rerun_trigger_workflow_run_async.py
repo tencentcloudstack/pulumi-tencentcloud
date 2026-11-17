@@ -330,6 +330,14 @@ class RerunTriggerWorkflowRunAsync(pulumi.CustomResource):
             execute_type="1")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [GetOpsAsyncJob](https://www.tencentcloud.com/document/api/1174/73832)
+          - [RerunTriggerWorkflowRunAsync](https://www.tencentcloud.com/document/api/1174/77884)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -373,6 +381,14 @@ class RerunTriggerWorkflowRunAsync(pulumi.CustomResource):
             workflow_execution_id=trigger_workflow_runs.datas[0].items[0].execution_id,
             execute_type="1")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [GetOpsAsyncJob](https://www.tencentcloud.com/document/api/1174/73832)
+          - [RerunTriggerWorkflowRunAsync](https://www.tencentcloud.com/document/api/1174/77884)
 
 
         :param str resource_name: The name of the resource.

@@ -52,6 +52,15 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [AddAclRule](https://www.tencentcloud.com/document/api/1160/81981)
+ * * Read: [DescribeAclRule](https://www.tencentcloud.com/search/?wd=DescribeAclRule&type=document&lang=en)
+ * * Update: [ModifyAclRule](https://www.tencentcloud.com/search/?wd=ModifyAclRule&type=document&lang=en)
+ * * Delete: [RemoveAclRule](https://www.tencentcloud.com/search/?wd=RemoveAclRule&type=document&lang=en)
+ *
  * ## Import
  *
  * CFW edge policy can be imported using the id, e.g.

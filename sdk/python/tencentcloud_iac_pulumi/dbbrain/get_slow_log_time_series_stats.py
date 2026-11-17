@@ -153,6 +153,12 @@ def get_slow_log_time_series_stats(end_time: Optional[_builtins.str] = None,
         product="mysql")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSlowLogTimeSeriesStats](https://www.tencentcloud.com/document/api/1035/41184)
+
 
     :param _builtins.str end_time: End time, such as `2019-09-10 12:13:14`, the interval between the end time and the start time can be up to 7 days.
     :param _builtins.str instance_id: Instance ID.
@@ -199,6 +205,12 @@ def get_slow_log_time_series_stats_output(end_time: pulumi.Input[Optional[_built
         end_time="%s",
         product="mysql")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSlowLogTimeSeriesStats](https://www.tencentcloud.com/document/api/1035/41184)
 
 
     :param _builtins.str end_time: End time, such as `2019-09-10 12:13:14`, the interval between the end time and the start time can be up to 7 days.

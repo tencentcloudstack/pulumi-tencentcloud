@@ -220,6 +220,17 @@ class OrgManagePolicy(pulumi.CustomResource):
             description="Full access policy")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreatePolicy](https://www.tencentcloud.com/document/api/1031/78363)
+        * Read:
+          - [DescribePolicy](https://www.tencentcloud.com/document/api/1031/78360)
+          - [ListPolicies](https://www.tencentcloud.com/document/api/1031/78772)
+        * Update: [UpdatePolicy](https://www.tencentcloud.com/document/api/1031/78352)
+        * Delete: [DeletePolicy](https://www.tencentcloud.com/document/api/1031/78362)
+
         ## Import
 
         organization org_manage_policy can be imported using the id, e.g.
@@ -261,6 +272,17 @@ class OrgManagePolicy(pulumi.CustomResource):
             type="SERVICE_CONTROL_POLICY",
             description="Full access policy")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreatePolicy](https://www.tencentcloud.com/document/api/1031/78363)
+        * Read:
+          - [DescribePolicy](https://www.tencentcloud.com/document/api/1031/78360)
+          - [ListPolicies](https://www.tencentcloud.com/document/api/1031/78772)
+        * Update: [UpdatePolicy](https://www.tencentcloud.com/document/api/1031/78352)
+        * Delete: [DeletePolicy](https://www.tencentcloud.com/document/api/1031/78362)
 
         ## Import
 

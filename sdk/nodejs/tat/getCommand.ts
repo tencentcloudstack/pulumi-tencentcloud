@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     createdBy: "TAT",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCommands](https://www.tencentcloud.com/document/api/1147/46697)
  */
 export function getCommand(args?: GetCommandArgs, opts?: pulumi.InvokeOptions): Promise<GetCommandResult> {
     args = args || {};
@@ -103,6 +109,12 @@ export interface GetCommandResult {
  *     createdBy: "TAT",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCommands](https://www.tencentcloud.com/document/api/1147/46697)
  */
 export function getCommandOutput(args?: GetCommandOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetCommandResult> {
     args = args || {};

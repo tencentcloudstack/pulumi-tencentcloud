@@ -149,6 +149,12 @@ def get_group_log(end_time: Optional[_builtins.str] = None,
         group_field="level")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRumGroupLog](https://www.tencentcloud.com/document/api/1131/53260)
+
 
     :param _builtins.str end_time: End time but is represented using a timestamp in milliseconds.
     :param _builtins.str group_field: The field used for group.
@@ -203,6 +209,12 @@ def get_group_log_output(end_time: pulumi.Input[Optional[_builtins.str]] = None,
         project_id=1,
         group_field="level")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRumGroupLog](https://www.tencentcloud.com/document/api/1131/53260)
 
 
     :param _builtins.str end_time: End time but is represented using a timestamp in milliseconds.

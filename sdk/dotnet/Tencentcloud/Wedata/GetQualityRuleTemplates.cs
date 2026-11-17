@@ -52,6 +52,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListQualityRuleTemplates](https://www.tencentcloud.com/document/api/1174/77900)
         /// </summary>
         public static Task<GetQualityRuleTemplatesResult> InvokeAsync(GetQualityRuleTemplatesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetQualityRuleTemplatesResult>("tencentcloud:Wedata/getQualityRuleTemplates:getQualityRuleTemplates", args ?? new GetQualityRuleTemplatesArgs(), options.WithDefaults());
@@ -96,6 +102,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListQualityRuleTemplates](https://www.tencentcloud.com/document/api/1174/77900)
         /// </summary>
         public static Output<GetQualityRuleTemplatesResult> Invoke(GetQualityRuleTemplatesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetQualityRuleTemplatesResult>("tencentcloud:Wedata/getQualityRuleTemplates:getQualityRuleTemplates", args ?? new GetQualityRuleTemplatesInvokeArgs(), options.WithDefaults());
@@ -140,6 +152,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListQualityRuleTemplates](https://www.tencentcloud.com/document/api/1174/77900)
         /// </summary>
         public static Output<GetQualityRuleTemplatesResult> Invoke(GetQualityRuleTemplatesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetQualityRuleTemplatesResult>("tencentcloud:Wedata/getQualityRuleTemplates:getQualityRuleTemplates", args ?? new GetQualityRuleTemplatesInvokeArgs(), options.WithDefaults());

@@ -42,6 +42,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCloudNativeAPIGateways](https://www.tencentcloud.com/document/api/1290/79254)
         /// </summary>
         public static Task<GetGatewaysResult> InvokeAsync(GetGatewaysArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetGatewaysResult>("tencentcloud:Tse/getGateways:getGateways", args ?? new GetGatewaysArgs(), options.WithDefaults());
@@ -76,6 +82,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCloudNativeAPIGateways](https://www.tencentcloud.com/document/api/1290/79254)
         /// </summary>
         public static Output<GetGatewaysResult> Invoke(GetGatewaysInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetGatewaysResult>("tencentcloud:Tse/getGateways:getGateways", args ?? new GetGatewaysInvokeArgs(), options.WithDefaults());
@@ -110,6 +122,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCloudNativeAPIGateways](https://www.tencentcloud.com/document/api/1290/79254)
         /// </summary>
         public static Output<GetGatewaysResult> Invoke(GetGatewaysInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetGatewaysResult>("tencentcloud:Tse/getGateways:getGateways", args ?? new GetGatewaysInvokeArgs(), options.WithDefaults());

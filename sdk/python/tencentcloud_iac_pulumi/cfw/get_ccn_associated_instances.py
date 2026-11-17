@@ -96,6 +96,12 @@ def get_ccn_associated_instances(ccn_id: Optional[_builtins.str] = None,
     example = tencentcloud.cfw.get_ccn_associated_instances(ccn_id="ccn-fkb9bo2v")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCcnAssociatedInstances](https://www.tencentcloud.com/search/?wd=DescribeCcnAssociatedInstances&type=document&lang=en)
+
 
     :param _builtins.str ccn_id: CCN ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_ccn_associated_instances_output(ccn_id: pulumi.Input[Optional[_builtins.
 
     example = tencentcloud.cfw.get_ccn_associated_instances(ccn_id="ccn-fkb9bo2v")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCcnAssociatedInstances](https://www.tencentcloud.com/search/?wd=DescribeCcnAssociatedInstances&type=document&lang=en)
 
 
     :param _builtins.str ccn_id: CCN ID.

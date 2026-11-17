@@ -120,6 +120,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeAclRule](https://www.tencentcloud.com/search/?wd=DescribeAclRule&amp;type=document&amp;lang=en)
+    ///   - [ModifyAclRule](https://www.tencentcloud.com/search/?wd=ModifyAclRule&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeAclRule](https://www.tencentcloud.com/search/?wd=DescribeAclRule&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [DescribeAclRule](https://www.tencentcloud.com/search/?wd=DescribeAclRule&amp;type=document&amp;lang=en)
+    ///   - [ModifyAclRule](https://www.tencentcloud.com/search/?wd=ModifyAclRule&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// CFW edge policy order config can be imported using the customId(like uuid or base64 string), e.g.

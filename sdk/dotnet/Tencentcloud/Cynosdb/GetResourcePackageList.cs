@@ -56,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeResourcePackageList](https://www.tencentcloud.com/document/api/1098/55897)
         /// </summary>
         public static Task<GetResourcePackageListResult> InvokeAsync(GetResourcePackageListArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetResourcePackageListResult>("tencentcloud:Cynosdb/getResourcePackageList:getResourcePackageList", args ?? new GetResourcePackageListArgs(), options.WithDefaults());
@@ -104,6 +110,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeResourcePackageList](https://www.tencentcloud.com/document/api/1098/55897)
         /// </summary>
         public static Output<GetResourcePackageListResult> Invoke(GetResourcePackageListInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetResourcePackageListResult>("tencentcloud:Cynosdb/getResourcePackageList:getResourcePackageList", args ?? new GetResourcePackageListInvokeArgs(), options.WithDefaults());
@@ -152,6 +164,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeResourcePackageList](https://www.tencentcloud.com/document/api/1098/55897)
         /// </summary>
         public static Output<GetResourcePackageListResult> Invoke(GetResourcePackageListInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetResourcePackageListResult>("tencentcloud:Cynosdb/getResourcePackageList:getResourcePackageList", args ?? new GetResourcePackageListInvokeArgs(), options.WithDefaults());

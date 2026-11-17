@@ -85,6 +85,12 @@ class CompleteCertificateOperation(pulumi.CustomResource):
         complete_certificate = tencentcloud.ssl.CompleteCertificateOperation("complete_certificate", certificate_id="9Bfe1IBR")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CompleteCertificate](https://www.tencentcloud.com/search/?wd=CompleteCertificate&type=document&lang=en)
+
         ## Import
 
         ssl complete_certificate can be imported using the id, e.g.
@@ -115,6 +121,12 @@ class CompleteCertificateOperation(pulumi.CustomResource):
 
         complete_certificate = tencentcloud.ssl.CompleteCertificateOperation("complete_certificate", certificate_id="9Bfe1IBR")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CompleteCertificate](https://www.tencentcloud.com/search/?wd=CompleteCertificate&type=document&lang=en)
 
         ## Import
 

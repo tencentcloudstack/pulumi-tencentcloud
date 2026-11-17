@@ -42,6 +42,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [GetOpsAsyncJob](https://www.tencentcloud.com/document/api/1174/73832)
+//   - [SetSuccessTaskInstancesAsync](https://www.tencentcloud.com/document/api/1174/73812)
 type TaskSetSuccessInstanceAsync struct {
 	pulumi.CustomResourceState
 

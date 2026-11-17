@@ -15,6 +15,7 @@ else:
     pass
 
 __all__ = [
+    'GetInstanceNodesInstanceNodesListResult',
     'GetInstancesInstancesListCoreSummaryAttachCbsSpecResult',
     'GetInstancesInstancesListCoreSummaryResult',
     'GetInstancesInstancesListMasterSummaryAttachCbsSpecResult',
@@ -426,6 +427,178 @@ class WorkloadGroupWorkloadGroup(dict):
         Workload group name. Note: This field may return null, indicating that no valid value can be obtained.
         """
         return pulumi.get(self, "workload_group_name")
+
+
+@pulumi.output_type
+class GetInstanceNodesInstanceNodesListResult(dict):
+    def __init__(__self__, *,
+                 compute_group_id: _builtins.str,
+                 core: _builtins.int,
+                 create_time: _builtins.str,
+                 disk_size: _builtins.int,
+                 disk_type: _builtins.str,
+                 fe_role: _builtins.str,
+                 ip: _builtins.str,
+                 memory: _builtins.int,
+                 rip: _builtins.str,
+                 role: _builtins.str,
+                 spec: _builtins.str,
+                 status: _builtins.str,
+                 uuid: _builtins.str,
+                 virtual_zone: _builtins.str,
+                 zone: _builtins.str):
+        """
+        :param _builtins.str compute_group_id: Compute group ID. Note: This field may return null, indicating that no valid values can be obtained.
+        :param _builtins.int core: Number of CPU cores. Note: This field may return null, indicating that no valid values can be obtained.
+        :param _builtins.str create_time: Creation time. Note: This field may return null, indicating that no valid values can be obtained.
+        :param _builtins.int disk_size: Disk size. Note: This field may return null, indicating that no valid values can be obtained.
+        :param _builtins.str disk_type: Disk type. Note: This field may return null, indicating that no valid values can be obtained.
+        :param _builtins.str fe_role: FE node role. Note: This field may return null, indicating that no valid values can be obtained.
+        :param _builtins.str ip: IP address. Note: This field may return null, indicating that no valid values can be obtained.
+        :param _builtins.int memory: Memory size. Note: This field may return null, indicating that no valid values can be obtained.
+        :param _builtins.str rip: Rip. Note: This field may return null, indicating that no valid values can be obtained.
+        :param _builtins.str role: Name of the clickhouse cluster to which it belongs. Note: This field may return null, indicating that no valid values can be obtained.
+        :param _builtins.str spec: Model, such as S1. Note: This field may return null, indicating that no valid values can be obtained.
+        :param _builtins.str status: Status. Note: This field may return null, indicating that no valid values can be obtained.
+        :param _builtins.str uuid: UUID. Note: This field may return null, indicating that no valid values can be obtained.
+        :param _builtins.str virtual_zone: Virtual availability zone. Note: This field may return null, indicating that no valid values can be obtained.
+        :param _builtins.str zone: Availability zone. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        pulumi.set(__self__, "compute_group_id", compute_group_id)
+        pulumi.set(__self__, "core", core)
+        pulumi.set(__self__, "create_time", create_time)
+        pulumi.set(__self__, "disk_size", disk_size)
+        pulumi.set(__self__, "disk_type", disk_type)
+        pulumi.set(__self__, "fe_role", fe_role)
+        pulumi.set(__self__, "ip", ip)
+        pulumi.set(__self__, "memory", memory)
+        pulumi.set(__self__, "rip", rip)
+        pulumi.set(__self__, "role", role)
+        pulumi.set(__self__, "spec", spec)
+        pulumi.set(__self__, "status", status)
+        pulumi.set(__self__, "uuid", uuid)
+        pulumi.set(__self__, "virtual_zone", virtual_zone)
+        pulumi.set(__self__, "zone", zone)
+
+    @_builtins.property
+    @pulumi.getter(name="computeGroupId")
+    def compute_group_id(self) -> _builtins.str:
+        """
+        Compute group ID. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "compute_group_id")
+
+    @_builtins.property
+    @pulumi.getter
+    def core(self) -> _builtins.int:
+        """
+        Number of CPU cores. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "core")
+
+    @_builtins.property
+    @pulumi.getter(name="createTime")
+    def create_time(self) -> _builtins.str:
+        """
+        Creation time. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "create_time")
+
+    @_builtins.property
+    @pulumi.getter(name="diskSize")
+    def disk_size(self) -> _builtins.int:
+        """
+        Disk size. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "disk_size")
+
+    @_builtins.property
+    @pulumi.getter(name="diskType")
+    def disk_type(self) -> _builtins.str:
+        """
+        Disk type. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "disk_type")
+
+    @_builtins.property
+    @pulumi.getter(name="feRole")
+    def fe_role(self) -> _builtins.str:
+        """
+        FE node role. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "fe_role")
+
+    @_builtins.property
+    @pulumi.getter
+    def ip(self) -> _builtins.str:
+        """
+        IP address. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "ip")
+
+    @_builtins.property
+    @pulumi.getter
+    def memory(self) -> _builtins.int:
+        """
+        Memory size. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "memory")
+
+    @_builtins.property
+    @pulumi.getter
+    def rip(self) -> _builtins.str:
+        """
+        Rip. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "rip")
+
+    @_builtins.property
+    @pulumi.getter
+    def role(self) -> _builtins.str:
+        """
+        Name of the clickhouse cluster to which it belongs. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "role")
+
+    @_builtins.property
+    @pulumi.getter
+    def spec(self) -> _builtins.str:
+        """
+        Model, such as S1. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "spec")
+
+    @_builtins.property
+    @pulumi.getter
+    def status(self) -> _builtins.str:
+        """
+        Status. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "status")
+
+    @_builtins.property
+    @pulumi.getter
+    def uuid(self) -> _builtins.str:
+        """
+        UUID. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "uuid")
+
+    @_builtins.property
+    @pulumi.getter(name="virtualZone")
+    def virtual_zone(self) -> _builtins.str:
+        """
+        Virtual availability zone. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "virtual_zone")
+
+    @_builtins.property
+    @pulumi.getter
+    def zone(self) -> _builtins.str:
+        """
+        Availability zone. Note: This field may return null, indicating that no valid values can be obtained.
+        """
+        return pulumi.get(self, "zone")
 
 
 @pulumi.output_type

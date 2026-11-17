@@ -56,7 +56,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc.Inputs
         public Input<string>? Function { get; set; }
 
         /// <summary>
-        /// ID of the resource.
+        /// The policy ID.
         /// </summary>
         [Input("id")]
         public Input<int>? Id { get; set; }

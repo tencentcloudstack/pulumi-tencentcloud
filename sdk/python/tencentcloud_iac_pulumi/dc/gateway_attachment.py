@@ -152,6 +152,14 @@ class GatewayAttachment(pulumi.CustomResource):
             direct_connect_gateway_id="dcg-dmbhf7jf")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AssociateDirectConnectGatewayNatGateway](https://www.tencentcloud.com/document/api/215/38101)
+        * Read: [DescribeDirectConnectGateways](https://www.tencentcloud.com/document/api/215/36913)
+        * Delete: [DisassociateDirectConnectGatewayNatGateway](https://www.tencentcloud.com/document/api/215/38100)
+
         ## Import
 
         dc_gateway_attachment can be imported using the id, e.g.
@@ -187,6 +195,14 @@ class GatewayAttachment(pulumi.CustomResource):
             nat_gateway_id="nat-7kanjc6y",
             direct_connect_gateway_id="dcg-dmbhf7jf")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AssociateDirectConnectGatewayNatGateway](https://www.tencentcloud.com/document/api/215/38101)
+        * Read: [DescribeDirectConnectGateways](https://www.tencentcloud.com/document/api/215/36913)
+        * Delete: [DisassociateDirectConnectGatewayNatGateway](https://www.tencentcloud.com/document/api/215/38100)
 
         ## Import
 

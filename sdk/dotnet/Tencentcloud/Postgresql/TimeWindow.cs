@@ -43,6 +43,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ModifyMaintainTimeWindow](https://www.tencentcloud.com/document/api/409/78801)
+    /// * Read: [DescribeMaintainTimeWindow](https://www.tencentcloud.com/document/api/409/78803)
+    /// * Update: [ModifyMaintainTimeWindow](https://www.tencentcloud.com/document/api/409/78801)
+    /// 
     /// ## Import
     /// 
     /// postgres PostgresqlTimeWindow can be imported using the id, e.g.

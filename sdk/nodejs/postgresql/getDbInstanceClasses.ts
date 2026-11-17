@@ -22,6 +22,12 @@ import * as utilities from "../utilities";
  *     storageType: "CLOUD_HSSD",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeClasses](https://www.tencentcloud.com/document/api/409/54338)
  */
 export function getDbInstanceClasses(args: GetDbInstanceClassesArgs, opts?: pulumi.InvokeOptions): Promise<GetDbInstanceClassesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -94,6 +100,12 @@ export interface GetDbInstanceClassesResult {
  *     storageType: "CLOUD_HSSD",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeClasses](https://www.tencentcloud.com/document/api/409/54338)
  */
 export function getDbInstanceClassesOutput(args: GetDbInstanceClassesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDbInstanceClassesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

@@ -63,6 +63,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeProcedureTemplates](https://www.tencentcloud.com/document/api/266/34147)
 func GetProcedureTemplates(ctx *pulumi.Context, args *GetProcedureTemplatesArgs, opts ...pulumi.InvokeOption) (*GetProcedureTemplatesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetProcedureTemplatesResult

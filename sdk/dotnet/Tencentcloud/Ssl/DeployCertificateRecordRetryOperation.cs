@@ -31,6 +31,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [DeployCertificateRecordRetry](https://www.tencentcloud.com/search/?wd=DeployCertificateRecordRetry&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// ssl DeployCertificateRecordRetry can be imported using the id, e.g.

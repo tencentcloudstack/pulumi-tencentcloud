@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bh
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSourceTypes](https://www.tencentcloud.com/search/?wd=DescribeSourceTypes&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetSourceTypesResult> InvokeAsync(GetSourceTypesArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSourceTypesResult>("tencentcloud:Bh/getSourceTypes:getSourceTypes", args ?? new GetSourceTypesArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bh
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSourceTypes](https://www.tencentcloud.com/search/?wd=DescribeSourceTypes&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetSourceTypesResult> Invoke(GetSourceTypesInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSourceTypesResult>("tencentcloud:Bh/getSourceTypes:getSourceTypes", args ?? new GetSourceTypesInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bh
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSourceTypes](https://www.tencentcloud.com/search/?wd=DescribeSourceTypes&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetSourceTypesResult> Invoke(GetSourceTypesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetSourceTypesResult>("tencentcloud:Bh/getSourceTypes:getSourceTypes", args ?? new GetSourceTypesInvokeArgs(), options.WithDefaults());

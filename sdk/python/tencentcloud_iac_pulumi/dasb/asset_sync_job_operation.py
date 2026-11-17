@@ -85,6 +85,14 @@ class AssetSyncJobOperation(pulumi.CustomResource):
         example = tencentcloud.dasb.AssetSyncJobOperation("example", category=1)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateAssetSyncJob](https://www.tencentcloud.com/search/?wd=CreateAssetSyncJob&type=document&lang=en)
+          - [DescribeAssetSyncStatus](https://www.tencentcloud.com/search/?wd=DescribeAssetSyncStatus&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -107,6 +115,14 @@ class AssetSyncJobOperation(pulumi.CustomResource):
 
         example = tencentcloud.dasb.AssetSyncJobOperation("example", category=1)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateAssetSyncJob](https://www.tencentcloud.com/search/?wd=CreateAssetSyncJob&type=document&lang=en)
+          - [DescribeAssetSyncStatus](https://www.tencentcloud.com/search/?wd=DescribeAssetSyncStatus&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

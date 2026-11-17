@@ -38,6 +38,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeIPRegion](https://www.tencentcloud.com/document/api/1145/59030)
         /// </summary>
         public static Task<GetIpRegionResult> InvokeAsync(GetIpRegionArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetIpRegionResult>("tencentcloud:Teo/getIpRegion:getIpRegion", args ?? new GetIpRegionArgs(), options.WithDefaults());
@@ -68,6 +74,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeIPRegion](https://www.tencentcloud.com/document/api/1145/59030)
         /// </summary>
         public static Output<GetIpRegionResult> Invoke(GetIpRegionInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetIpRegionResult>("tencentcloud:Teo/getIpRegion:getIpRegion", args ?? new GetIpRegionInvokeArgs(), options.WithDefaults());
@@ -98,6 +110,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeIPRegion](https://www.tencentcloud.com/document/api/1145/59030)
         /// </summary>
         public static Output<GetIpRegionResult> Invoke(GetIpRegionInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetIpRegionResult>("tencentcloud:Teo/getIpRegion:getIpRegion", args ?? new GetIpRegionInvokeArgs(), options.WithDefaults());

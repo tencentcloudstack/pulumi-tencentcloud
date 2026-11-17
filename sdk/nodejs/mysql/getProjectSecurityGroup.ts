@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     projectId: 1250480,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeProjectSecurityGroups](https://www.tencentcloud.com/document/api/236/15850)
  */
 export function getProjectSecurityGroup(args?: GetProjectSecurityGroupArgs, opts?: pulumi.InvokeOptions): Promise<GetProjectSecurityGroupResult> {
     args = args || {};
@@ -74,6 +80,12 @@ export interface GetProjectSecurityGroupResult {
  *     projectId: 1250480,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeProjectSecurityGroups](https://www.tencentcloud.com/document/api/236/15850)
  */
 export function getProjectSecurityGroupOutput(args?: GetProjectSecurityGroupOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetProjectSecurityGroupResult> {
     args = args || {};

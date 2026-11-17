@@ -260,6 +260,15 @@ class TmpTkeAlertPolicy(pulumi.CustomResource):
             opts = pulumi.ResourceOptions(depends_on=[foo_tmp_tke_cluster_agent]))
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreatePrometheusAlertPolicy](https://www.tencentcloud.com/document/api/248/53775)
+        * Read: [DescribePrometheusAlertPolicy](https://www.tencentcloud.com/document/api/248/53323)
+        * Update: [ModifyPrometheusAlertPolicy](https://www.tencentcloud.com/document/api/248/53765)
+        * Delete: [DeletePrometheusAlertPolicy](https://www.tencentcloud.com/document/api/248/53772)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -424,6 +433,15 @@ class TmpTkeAlertPolicy(pulumi.CustomResource):
             },
             opts = pulumi.ResourceOptions(depends_on=[foo_tmp_tke_cluster_agent]))
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreatePrometheusAlertPolicy](https://www.tencentcloud.com/document/api/248/53775)
+        * Read: [DescribePrometheusAlertPolicy](https://www.tencentcloud.com/document/api/248/53323)
+        * Update: [ModifyPrometheusAlertPolicy](https://www.tencentcloud.com/document/api/248/53765)
+        * Delete: [DeletePrometheusAlertPolicy](https://www.tencentcloud.com/document/api/248/53772)
 
 
         :param str resource_name: The name of the resource.

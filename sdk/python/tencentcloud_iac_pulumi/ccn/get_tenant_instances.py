@@ -104,6 +104,12 @@ def get_tenant_instances(ccn_ids: Optional[Sequence[_builtins.str]] = None,
         is_security_locks=["true"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTenantCcns](https://www.tencentcloud.com/search/?wd=DescribeTenantCcns&type=document&lang=en)
+
 
     :param Sequence[_builtins.str] ccn_ids: filter by ccn ids, like: ['ccn-12345678'].
     :param Sequence[_builtins.str] is_security_locks: filter by locked, like ['true'].
@@ -141,6 +147,12 @@ def get_tenant_instances_output(ccn_ids: pulumi.Input[Optional[Optional[Sequence
     tenant_ccn = tencentcloud.ccn.get_tenant_instances(ccn_ids=["ccn-39lqkygf"],
         is_security_locks=["true"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTenantCcns](https://www.tencentcloud.com/search/?wd=DescribeTenantCcns&type=document&lang=en)
 
 
     :param Sequence[_builtins.str] ccn_ids: filter by ccn ids, like: ['ccn-12345678'].

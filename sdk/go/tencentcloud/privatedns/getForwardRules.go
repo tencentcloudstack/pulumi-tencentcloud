@@ -101,6 +101,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeForwardRuleList](https://www.tencentcloud.com/document/api/1097/65935)
 func GetForwardRules(ctx *pulumi.Context, args *GetForwardRulesArgs, opts ...pulumi.InvokeOption) (*GetForwardRulesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetForwardRulesResult

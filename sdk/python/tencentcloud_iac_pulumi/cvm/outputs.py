@@ -621,7 +621,7 @@ class LaunchTemplateDataDisk(dict):
         :param _builtins.int disk_size: The size of the data disk.
         :param _builtins.str cdc_id: Cloud Dedicated Cluster(CDC) ID.
         :param _builtins.bool delete_with_instance: Whether the data disk is destroyed along with the instance, true or false.
-        :param _builtins.str disk_id: Data disk ID.
+        :param _builtins.str disk_id: System disk ID.
         :param _builtins.str disk_type: The type of data disk.
         :param _builtins.bool encrypt: Whether the data disk is encrypted, TRUE or FALSE.
         :param _builtins.str kms_key_id: The id of custom CMK.
@@ -674,7 +674,7 @@ class LaunchTemplateDataDisk(dict):
     @pulumi.getter(name="diskId")
     def disk_id(self) -> Optional[_builtins.str]:
         """
-        Data disk ID.
+        System disk ID.
         """
         return pulumi.get(self, "disk_id")
 

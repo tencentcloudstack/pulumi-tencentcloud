@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeReplicationInstanceSyncStatus](https://www.tencentcloud.com/document/api/1051/42671)
         /// </summary>
         public static Task<GetReplicationInstanceSyncStatusResult> InvokeAsync(GetReplicationInstanceSyncStatusArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetReplicationInstanceSyncStatusResult>("tencentcloud:Tcr/getReplicationInstanceSyncStatus:getReplicationInstanceSyncStatus", args ?? new GetReplicationInstanceSyncStatusArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeReplicationInstanceSyncStatus](https://www.tencentcloud.com/document/api/1051/42671)
         /// </summary>
         public static Output<GetReplicationInstanceSyncStatusResult> Invoke(GetReplicationInstanceSyncStatusInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetReplicationInstanceSyncStatusResult>("tencentcloud:Tcr/getReplicationInstanceSyncStatus:getReplicationInstanceSyncStatus", args ?? new GetReplicationInstanceSyncStatusInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeReplicationInstanceSyncStatus](https://www.tencentcloud.com/document/api/1051/42671)
         /// </summary>
         public static Output<GetReplicationInstanceSyncStatusResult> Invoke(GetReplicationInstanceSyncStatusInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetReplicationInstanceSyncStatusResult>("tencentcloud:Tcr/getReplicationInstanceSyncStatus:getReplicationInstanceSyncStatus", args ?? new GetReplicationInstanceSyncStatusInvokeArgs(), options.WithDefaults());

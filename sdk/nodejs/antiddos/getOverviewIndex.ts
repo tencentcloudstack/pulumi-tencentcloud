@@ -18,6 +18,12 @@ import * as utilities from "../utilities";
  *     endTime: "2023-11-21 12:32:12",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeOverviewIndex](https://www.tencentcloud.com/search/?wd=DescribeOverviewIndex&type=document&lang=en)
  */
 export function getOverviewIndex(args: GetOverviewIndexArgs, opts?: pulumi.InvokeOptions): Promise<GetOverviewIndexResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -112,6 +118,12 @@ export interface GetOverviewIndexResult {
  *     endTime: "2023-11-21 12:32:12",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeOverviewIndex](https://www.tencentcloud.com/search/?wd=DescribeOverviewIndex&type=document&lang=en)
  */
 export function getOverviewIndexOutput(args: GetOverviewIndexOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetOverviewIndexResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

@@ -45,6 +45,12 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeMigrationJobs](https://www.tencentcloud.com/document/api/571/51812)
  */
 export function getMigrateJobs(args?: GetMigrateJobsArgs, opts?: pulumi.InvokeOptions): Promise<GetMigrateJobsResult> {
     args = args || {};
@@ -210,6 +216,12 @@ export interface GetMigrateJobsResult {
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeMigrationJobs](https://www.tencentcloud.com/document/api/571/51812)
  */
 export function getMigrateJobsOutput(args?: GetMigrateJobsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetMigrateJobsResult> {
     args = args || {};

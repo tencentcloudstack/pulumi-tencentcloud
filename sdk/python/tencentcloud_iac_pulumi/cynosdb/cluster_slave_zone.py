@@ -20,15 +20,23 @@ __all__ = ['ClusterSlaveZone', 'ClusterSlaveZoneArgs']
 class ClusterSlaveZoneArgs:
     def __init__(__self__, *,
                  cluster_id: pulumi.Input[_builtins.str],
-                 slave_zone: pulumi.Input[_builtins.str]):
+                 slave_zone: pulumi.Input[_builtins.str],
+                 binlog_sync_way: pulumi.Input[Optional[_builtins.str]] = None,
+                 semi_sync_timeout: pulumi.Input[Optional[_builtins.int]] = None):
         """
         The set of arguments for constructing a ClusterSlaveZone resource.
 
         :param pulumi.Input[_builtins.str] cluster_id: The ID of cluster.
         :param pulumi.Input[_builtins.str] slave_zone: Slave zone.
+        :param pulumi.Input[_builtins.str] binlog_sync_way: Binlog sync way. Default value: `async`. Valid values: `sync`, `semisync`, `async`.
+        :param pulumi.Input[_builtins.int] semi_sync_timeout: Semisync timeout in ms. The semisync replication degrades to async replication if the timeout is exceeded. Minimum: 1000, maximum: 4294967295, default: 10000.
         """
         pulumi.set(__self__, "cluster_id", cluster_id)
         pulumi.set(__self__, "slave_zone", slave_zone)
+        if binlog_sync_way is not None:
+            pulumi.set(__self__, "binlog_sync_way", binlog_sync_way)
+        if semi_sync_timeout is not None:
+            pulumi.set(__self__, "semi_sync_timeout", semi_sync_timeout)
 
     @_builtins.property
     @pulumi.getter(name="clusterId")
@@ -54,22 +62,66 @@ class ClusterSlaveZoneArgs:
     def slave_zone(self, value: pulumi.Input[_builtins.str]):
         pulumi.set(self, "slave_zone", value)
 
+    @_builtins.property
+    @pulumi.getter(name="binlogSyncWay")
+    def binlog_sync_way(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Binlog sync way. Default value: `async`. Valid values: `sync`, `semisync`, `async`.
+        """
+        return pulumi.get(self, "binlog_sync_way")
+
+    @binlog_sync_way.setter
+    def binlog_sync_way(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "binlog_sync_way", value)
+
+    @_builtins.property
+    @pulumi.getter(name="semiSyncTimeout")
+    def semi_sync_timeout(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Semisync timeout in ms. The semisync replication degrades to async replication if the timeout is exceeded. Minimum: 1000, maximum: 4294967295, default: 10000.
+        """
+        return pulumi.get(self, "semi_sync_timeout")
+
+    @semi_sync_timeout.setter
+    def semi_sync_timeout(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "semi_sync_timeout", value)
+
 
 @pulumi.input_type
 class _ClusterSlaveZoneState:
     def __init__(__self__, *,
+                 binlog_sync_way: pulumi.Input[Optional[_builtins.str]] = None,
                  cluster_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 semi_sync_timeout: pulumi.Input[Optional[_builtins.int]] = None,
                  slave_zone: pulumi.Input[Optional[_builtins.str]] = None):
         """
         Input properties used for looking up and filtering ClusterSlaveZone resources.
 
+        :param pulumi.Input[_builtins.str] binlog_sync_way: Binlog sync way. Default value: `async`. Valid values: `sync`, `semisync`, `async`.
         :param pulumi.Input[_builtins.str] cluster_id: The ID of cluster.
+        :param pulumi.Input[_builtins.int] semi_sync_timeout: Semisync timeout in ms. The semisync replication degrades to async replication if the timeout is exceeded. Minimum: 1000, maximum: 4294967295, default: 10000.
         :param pulumi.Input[_builtins.str] slave_zone: Slave zone.
         """
+        if binlog_sync_way is not None:
+            pulumi.set(__self__, "binlog_sync_way", binlog_sync_way)
         if cluster_id is not None:
             pulumi.set(__self__, "cluster_id", cluster_id)
+        if semi_sync_timeout is not None:
+            pulumi.set(__self__, "semi_sync_timeout", semi_sync_timeout)
         if slave_zone is not None:
             pulumi.set(__self__, "slave_zone", slave_zone)
+
+    @_builtins.property
+    @pulumi.getter(name="binlogSyncWay")
+    def binlog_sync_way(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Binlog sync way. Default value: `async`. Valid values: `sync`, `semisync`, `async`.
+        """
+        return pulumi.get(self, "binlog_sync_way")
+
+    @binlog_sync_way.setter
+    def binlog_sync_way(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "binlog_sync_way", value)
 
     @_builtins.property
     @pulumi.getter(name="clusterId")
@@ -82,6 +134,18 @@ class _ClusterSlaveZoneState:
     @cluster_id.setter
     def cluster_id(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "cluster_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="semiSyncTimeout")
+    def semi_sync_timeout(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Semisync timeout in ms. The semisync replication degrades to async replication if the timeout is exceeded. Minimum: 1000, maximum: 4294967295, default: 10000.
+        """
+        return pulumi.get(self, "semi_sync_timeout")
+
+    @semi_sync_timeout.setter
+    def semi_sync_timeout(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "semi_sync_timeout", value)
 
     @_builtins.property
     @pulumi.getter(name="slaveZone")
@@ -102,7 +166,9 @@ class ClusterSlaveZone(pulumi.CustomResource):
     def __init__(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 binlog_sync_way: pulumi.Input[Optional[_builtins.str]] = None,
                  cluster_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 semi_sync_timeout: pulumi.Input[Optional[_builtins.int]] = None,
                  slave_zone: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         """
@@ -157,8 +223,25 @@ class ClusterSlaveZone(pulumi.CustomResource):
             })
         example_cluster_slave_zone = tencentcloud.cynosdb.ClusterSlaveZone("example",
             cluster_id=example.id,
-            slave_zone="ap-guangzhou-7")
+            slave_zone="ap-guangzhou-7",
+            binlog_sync_way="async",
+            semi_sync_timeout=10000)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [AddClusterSlaveZone](https://www.tencentcloud.com/document/api/1098/50016)
+          - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+        * Read: [DescribeClusterDetail](https://www.tencentcloud.com/document/api/1098/40752)
+        * Update:
+          - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+          - [ModifyClusterSlaveZone](https://www.tencentcloud.com/document/api/1098/50015)
+        * Delete:
+          - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+          - [RemoveClusterSlaveZone](https://www.tencentcloud.com/document/api/1098/50014)
 
         ## Import
 
@@ -171,7 +254,9 @@ class ClusterSlaveZone(pulumi.CustomResource):
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[_builtins.str] binlog_sync_way: Binlog sync way. Default value: `async`. Valid values: `sync`, `semisync`, `async`.
         :param pulumi.Input[_builtins.str] cluster_id: The ID of cluster.
+        :param pulumi.Input[_builtins.int] semi_sync_timeout: Semisync timeout in ms. The semisync replication degrades to async replication if the timeout is exceeded. Minimum: 1000, maximum: 4294967295, default: 10000.
         :param pulumi.Input[_builtins.str] slave_zone: Slave zone.
         """
         ...
@@ -232,8 +317,25 @@ class ClusterSlaveZone(pulumi.CustomResource):
             })
         example_cluster_slave_zone = tencentcloud.cynosdb.ClusterSlaveZone("example",
             cluster_id=example.id,
-            slave_zone="ap-guangzhou-7")
+            slave_zone="ap-guangzhou-7",
+            binlog_sync_way="async",
+            semi_sync_timeout=10000)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [AddClusterSlaveZone](https://www.tencentcloud.com/document/api/1098/50016)
+          - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+        * Read: [DescribeClusterDetail](https://www.tencentcloud.com/document/api/1098/40752)
+        * Update:
+          - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+          - [ModifyClusterSlaveZone](https://www.tencentcloud.com/document/api/1098/50015)
+        * Delete:
+          - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+          - [RemoveClusterSlaveZone](https://www.tencentcloud.com/document/api/1098/50014)
 
         ## Import
 
@@ -259,7 +361,9 @@ class ClusterSlaveZone(pulumi.CustomResource):
     def _internal_init(__self__,
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
+                 binlog_sync_way: pulumi.Input[Optional[_builtins.str]] = None,
                  cluster_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 semi_sync_timeout: pulumi.Input[Optional[_builtins.int]] = None,
                  slave_zone: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -270,9 +374,11 @@ class ClusterSlaveZone(pulumi.CustomResource):
                 raise TypeError('__props__ is only valid when passed in combination with a valid opts.id to get an existing resource')
             __props__ = ClusterSlaveZoneArgs.__new__(ClusterSlaveZoneArgs)
 
+            __props__.__dict__["binlog_sync_way"] = binlog_sync_way
             if cluster_id is None and not opts.urn:
                 raise TypeError("Missing required property 'cluster_id'")
             __props__.__dict__["cluster_id"] = cluster_id
+            __props__.__dict__["semi_sync_timeout"] = semi_sync_timeout
             if slave_zone is None and not opts.urn:
                 raise TypeError("Missing required property 'slave_zone'")
             __props__.__dict__["slave_zone"] = slave_zone
@@ -286,7 +392,9 @@ class ClusterSlaveZone(pulumi.CustomResource):
     def get(resource_name: str,
             id: pulumi.Input[str],
             opts: Optional[pulumi.ResourceOptions] = None,
+            binlog_sync_way: pulumi.Input[Optional[_builtins.str]] = None,
             cluster_id: pulumi.Input[Optional[_builtins.str]] = None,
+            semi_sync_timeout: pulumi.Input[Optional[_builtins.int]] = None,
             slave_zone: pulumi.Input[Optional[_builtins.str]] = None) -> 'ClusterSlaveZone':
         """
         Get an existing ClusterSlaveZone resource's state with the given name, id, and optional extra
@@ -295,16 +403,28 @@ class ClusterSlaveZone(pulumi.CustomResource):
         :param str resource_name: The unique name of the resulting resource.
         :param pulumi.Input[str] id: The unique provider ID of the resource to lookup.
         :param pulumi.ResourceOptions opts: Options for the resource.
+        :param pulumi.Input[_builtins.str] binlog_sync_way: Binlog sync way. Default value: `async`. Valid values: `sync`, `semisync`, `async`.
         :param pulumi.Input[_builtins.str] cluster_id: The ID of cluster.
+        :param pulumi.Input[_builtins.int] semi_sync_timeout: Semisync timeout in ms. The semisync replication degrades to async replication if the timeout is exceeded. Minimum: 1000, maximum: 4294967295, default: 10000.
         :param pulumi.Input[_builtins.str] slave_zone: Slave zone.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
         __props__ = _ClusterSlaveZoneState.__new__(_ClusterSlaveZoneState)
 
+        __props__.__dict__["binlog_sync_way"] = binlog_sync_way
         __props__.__dict__["cluster_id"] = cluster_id
+        __props__.__dict__["semi_sync_timeout"] = semi_sync_timeout
         __props__.__dict__["slave_zone"] = slave_zone
         return ClusterSlaveZone(resource_name, opts=opts, __props__=__props__)
+
+    @_builtins.property
+    @pulumi.getter(name="binlogSyncWay")
+    def binlog_sync_way(self) -> pulumi.Output[_builtins.str]:
+        """
+        Binlog sync way. Default value: `async`. Valid values: `sync`, `semisync`, `async`.
+        """
+        return pulumi.get(self, "binlog_sync_way")
 
     @_builtins.property
     @pulumi.getter(name="clusterId")
@@ -313,6 +433,14 @@ class ClusterSlaveZone(pulumi.CustomResource):
         The ID of cluster.
         """
         return pulumi.get(self, "cluster_id")
+
+    @_builtins.property
+    @pulumi.getter(name="semiSyncTimeout")
+    def semi_sync_timeout(self) -> pulumi.Output[_builtins.int]:
+        """
+        Semisync timeout in ms. The semisync replication degrades to async replication if the timeout is exceeded. Minimum: 1000, maximum: 4294967295, default: 10000.
+        """
+        return pulumi.get(self, "semi_sync_timeout")
 
     @_builtins.property
     @pulumi.getter(name="slaveZone")

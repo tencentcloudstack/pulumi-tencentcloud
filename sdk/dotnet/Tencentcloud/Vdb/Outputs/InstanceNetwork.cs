@@ -19,6 +19,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vdb.Outputs
         /// </summary>
         public readonly string? ExpireTime;
         /// <summary>
+        /// Whether it is an SSL network.
+        /// </summary>
+        public readonly bool? IsSsl;
+        /// <summary>
         /// Internal port.
         /// </summary>
         public readonly int? Port;
@@ -43,6 +47,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vdb.Outputs
         private InstanceNetwork(
             string? expireTime,
 
+            bool? isSsl,
+
             int? port,
 
             int? preserveDuration,
@@ -54,6 +60,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vdb.Outputs
             string? vpcId)
         {
             ExpireTime = expireTime;
+            IsSsl = isSsl;
             Port = port;
             PreserveDuration = preserveDuration;
             SubnetId = subnetId;

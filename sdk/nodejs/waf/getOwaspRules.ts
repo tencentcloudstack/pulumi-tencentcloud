@@ -26,6 +26,12 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeOwaspRules](https://www.tencentcloud.com/document/api/627/73182)
  */
 export function getOwaspRules(args: GetOwaspRulesArgs, opts?: pulumi.InvokeOptions): Promise<GetOwaspRulesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -102,6 +108,12 @@ export interface GetOwaspRulesResult {
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeOwaspRules](https://www.tencentcloud.com/document/api/627/73182)
  */
 export function getOwaspRulesOutput(args: GetOwaspRulesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetOwaspRulesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

@@ -22,6 +22,14 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [EnableOptimalSwitching](https://www.tencentcloud.com/search/?wd=EnableOptimalSwitching&type=document&lang=en)
+ * * Read: [DescribeBackupStreamList](https://www.tencentcloud.com/search/?wd=DescribeBackupStreamList&type=document&lang=en)
+ * * Update: [EnableOptimalSwitching](https://www.tencentcloud.com/search/?wd=EnableOptimalSwitching&type=document&lang=en)
+ *
  * ## Import
  *
  * css domain can be imported using the id, e.g.

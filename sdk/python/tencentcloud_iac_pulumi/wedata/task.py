@@ -247,6 +247,15 @@ class Task(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateTask](https://www.tencentcloud.com/document/api/1174/60982)
+        * Read: [GetTask](https://www.tencentcloud.com/document/api/1174/73876)
+        * Update: [UpdateTask](https://www.tencentcloud.com/document/api/1174/73861)
+        * Delete: [DeleteTask](https://www.tencentcloud.com/document/api/1174/73880)
+
         ## Import
 
         wedata wedata_task can be imported using the id, e.g.
@@ -344,6 +353,15 @@ class Task(pulumi.CustomResource):
                 "cycle_type": "DAY_CYCLE",
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateTask](https://www.tencentcloud.com/document/api/1174/60982)
+        * Read: [GetTask](https://www.tencentcloud.com/document/api/1174/73876)
+        * Update: [UpdateTask](https://www.tencentcloud.com/document/api/1174/73861)
+        * Delete: [DeleteTask](https://www.tencentcloud.com/document/api/1174/73880)
 
         ## Import
 

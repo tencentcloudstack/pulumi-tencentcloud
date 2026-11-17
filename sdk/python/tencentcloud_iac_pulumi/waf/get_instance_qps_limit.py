@@ -106,6 +106,12 @@ def get_instance_qps_limit(instance_id: Optional[_builtins.str] = None,
     example = tencentcloud.waf.get_instance_qps_limit(instance_id="waf_2kxtlbky00b3b4qz")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetInstanceQpsLimit](https://www.tencentcloud.com/document/api/627/64765)
+
 
     :param _builtins.str instance_id: Unique ID of Instance.
     :param _builtins.str result_output_file: Used to save results.
@@ -139,6 +145,12 @@ def get_instance_qps_limit_output(instance_id: pulumi.Input[Optional[_builtins.s
 
     example = tencentcloud.waf.get_instance_qps_limit(instance_id="waf_2kxtlbky00b3b4qz")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetInstanceQpsLimit](https://www.tencentcloud.com/document/api/627/64765)
 
 
     :param _builtins.str instance_id: Unique ID of Instance.

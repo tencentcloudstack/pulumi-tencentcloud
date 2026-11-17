@@ -42,6 +42,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDiagDBInstances](https://www.tencentcloud.com/document/api/1035/41195)
 func GetDiagDbInstances(ctx *pulumi.Context, args *GetDiagDbInstancesArgs, opts ...pulumi.InvokeOption) (*GetDiagDbInstancesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDiagDbInstancesResult

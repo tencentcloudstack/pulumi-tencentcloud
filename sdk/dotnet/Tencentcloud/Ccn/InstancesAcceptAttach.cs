@@ -33,12 +33,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
     ///                 InstanceId = "vpc-j9yhbzpn",
     ///                 InstanceRegion = "ap-guangzhou",
     ///                 InstanceType = "VPC",
+    ///                 OrderType = "PayByCcnOwner",
     ///             },
     ///         },
     ///     });
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [AcceptAttachCcnInstances](https://www.tencentcloud.com/document/api/215/34793)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ccn/instancesAcceptAttach:InstancesAcceptAttach")]
     public partial class InstancesAcceptAttach : global::Pulumi.CustomResource

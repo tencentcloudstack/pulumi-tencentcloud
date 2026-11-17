@@ -286,6 +286,73 @@ import (
 //
 // ```
 //
+// ### Example Usage of CDN domain with origin path rewrite rules
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cdn"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := cdn.NewDomain(ctx, "example", &cdn.DomainArgs{
+//				Domain:      pulumi.String("example.com"),
+//				ServiceType: pulumi.String("web"),
+//				Area:        pulumi.String("mainland"),
+//				Origin: &cdn.DomainOriginArgs{
+//					OriginType: pulumi.String("ip"),
+//					OriginLists: pulumi.StringArray{
+//						pulumi.String("127.0.0.1"),
+//					},
+//					OriginPullProtocol: pulumi.String("follow"),
+//					PathRules: cdn.DomainOriginPathRuleArray{
+//						&cdn.DomainOriginPathRuleArgs{
+//							FullMatch:  pulumi.Bool(false),
+//							Path:       pulumi.String("/api/*"),
+//							ServerName: pulumi.String("origin.example.com"),
+//							ForwardUri: pulumi.String("/v2/$1"),
+//						},
+//					},
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [AddCdnDomain](https://www.tencentcloud.com/document/api/228/34015)
+//   - [DescribeDomainsConfig](https://www.tencentcloud.com/document/api/228/34019)
+//   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+//
+// * Read:
+//   - [DescribeDomainsConfig](https://www.tencentcloud.com/document/api/228/34019)
+//   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+//
+// * Update:
+//   - [DescribeDomainsConfig](https://www.tencentcloud.com/document/api/228/34019)
+//   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+//   - [UpdateDomainConfig](https://www.tencentcloud.com/document/api/228/34018)
+//
+// * Delete:
+//   - [DeleteCdnDomain](https://www.tencentcloud.com/document/api/228/34014)
+//   - [DescribeDomainsConfig](https://www.tencentcloud.com/document/api/228/34019)
+//   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+//   - [StopCdnDomain](https://www.tencentcloud.com/document/api/228/34012)
+//
 // ## Import
 //
 // CDN domain can be imported using the id, e.g.

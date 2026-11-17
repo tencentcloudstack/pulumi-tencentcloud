@@ -42,6 +42,21 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribePolicyGroupList](https://www.tencentcloud.com/document/api/248/35977)
+ *   - [ModifyAlarmReceivers](https://www.tencentcloud.com/document/api/248/35975)
+ * * Read: [DescribePolicyGroupList](https://www.tencentcloud.com/document/api/248/35977)
+ * * Update:
+ *   - [DescribePolicyGroupList](https://www.tencentcloud.com/document/api/248/35977)
+ *   - [ModifyAlarmReceivers](https://www.tencentcloud.com/document/api/248/35975)
+ * * Delete:
+ *   - [DescribePolicyGroupList](https://www.tencentcloud.com/document/api/248/35977)
+ *   - [ModifyAlarmReceivers](https://www.tencentcloud.com/document/api/248/35975)
  */
 export class BindingReceiver extends pulumi.CustomResource {
     /**

@@ -47,6 +47,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMeshList](https://www.tencentcloud.com/search/?wd=DescribeMeshList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetMeshResult> InvokeAsync(GetMeshArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetMeshResult>("tencentcloud:Tcm/getMesh:getMesh", args ?? new GetMeshArgs(), options.WithDefaults());
@@ -86,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMeshList](https://www.tencentcloud.com/search/?wd=DescribeMeshList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetMeshResult> Invoke(GetMeshInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetMeshResult>("tencentcloud:Tcm/getMesh:getMesh", args ?? new GetMeshInvokeArgs(), options.WithDefaults());
@@ -125,6 +137,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMeshList](https://www.tencentcloud.com/search/?wd=DescribeMeshList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetMeshResult> Invoke(GetMeshInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetMeshResult>("tencentcloud:Tcm/getMesh:getMesh", args ?? new GetMeshInvokeArgs(), options.WithDefaults());

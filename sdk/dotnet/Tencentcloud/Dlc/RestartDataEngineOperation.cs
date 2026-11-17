@@ -31,6 +31,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeDataEngine](https://www.tencentcloud.com/document/api/1155/62693)
+    ///   - [DescribeDataEngines](https://www.tencentcloud.com/search/?wd=DescribeDataEngines&amp;type=document&amp;lang=en)
+    ///   - [RestartDataEngine](https://www.tencentcloud.com/document/api/1155/62648)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dlc/restartDataEngineOperation:RestartDataEngineOperation")]
     public partial class RestartDataEngineOperation : global::Pulumi.CustomResource

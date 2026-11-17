@@ -38,6 +38,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [StopJobs](https://www.tencentcloud.com/search/?wd=StopJobs&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Oceanus/stopJob:StopJob")]
     public partial class StopJob : global::Pulumi.CustomResource

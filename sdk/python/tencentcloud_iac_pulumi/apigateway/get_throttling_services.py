@@ -112,6 +112,14 @@ def get_throttling_services(result_output_file: Optional[_builtins.str] = None,
     id = tencentcloud.apigateway.get_throttling_services_output(service_id=service.id)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeServiceEnvironmentStrategy](https://www.tencentcloud.com/search/?wd=DescribeServiceEnvironmentStrategy&type=document&lang=en)
+      - [DescribeServicesStatus](https://www.tencentcloud.com/search/?wd=DescribeServicesStatus&type=document&lang=en)
+
 
     :param _builtins.str result_output_file: Used to save results.
     :param _builtins.str service_id: Service ID for query.
@@ -154,6 +162,14 @@ def get_throttling_services_output(result_output_file: pulumi.Input[Optional[Opt
         test_limit=100)
     id = tencentcloud.apigateway.get_throttling_services_output(service_id=service.id)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeServiceEnvironmentStrategy](https://www.tencentcloud.com/search/?wd=DescribeServiceEnvironmentStrategy&type=document&lang=en)
+      - [DescribeServicesStatus](https://www.tencentcloud.com/search/?wd=DescribeServicesStatus&type=document&lang=en)
 
 
     :param _builtins.str result_output_file: Used to save results.

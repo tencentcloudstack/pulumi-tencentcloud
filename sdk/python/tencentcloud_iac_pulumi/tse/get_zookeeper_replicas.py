@@ -96,6 +96,12 @@ def get_zookeeper_replicas(instance_id: Optional[_builtins.str] = None,
     zookeeper_replicas = tencentcloud.tse.get_zookeeper_replicas(instance_id="ins-7eb7eea7")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeZookeeperReplicas](https://www.tencentcloud.com/search/?wd=DescribeZookeeperReplicas&type=document&lang=en)
+
 
     :param _builtins.str instance_id: engine instance ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_zookeeper_replicas_output(instance_id: pulumi.Input[Optional[_builtins.s
 
     zookeeper_replicas = tencentcloud.tse.get_zookeeper_replicas(instance_id="ins-7eb7eea7")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeZookeeperReplicas](https://www.tencentcloud.com/search/?wd=DescribeZookeeperReplicas&type=document&lang=en)
 
 
     :param _builtins.str instance_id: engine instance ID.

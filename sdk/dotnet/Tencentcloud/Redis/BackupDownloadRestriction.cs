@@ -51,6 +51,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ModifyBackupDownloadRestriction](https://www.tencentcloud.com/document/api/239/54068)
+    /// * Read: [DescribeBackupDownloadRestriction](https://www.tencentcloud.com/document/api/239/54069)
+    /// * Update: [ModifyBackupDownloadRestriction](https://www.tencentcloud.com/document/api/239/54068)
+    /// 
     /// ## Import
     /// 
     /// redis backup download restriction can be imported using the region, e.g.

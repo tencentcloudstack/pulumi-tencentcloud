@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSupportedPrivileges](https://www.tencentcloud.com/document/api/236/34488)
         /// </summary>
         public static Task<GetSupportedPrivilegesResult> InvokeAsync(GetSupportedPrivilegesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSupportedPrivilegesResult>("tencentcloud:Mysql/getSupportedPrivileges:getSupportedPrivileges", args ?? new GetSupportedPrivilegesArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSupportedPrivileges](https://www.tencentcloud.com/document/api/236/34488)
         /// </summary>
         public static Output<GetSupportedPrivilegesResult> Invoke(GetSupportedPrivilegesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSupportedPrivilegesResult>("tencentcloud:Mysql/getSupportedPrivileges:getSupportedPrivileges", args ?? new GetSupportedPrivilegesInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSupportedPrivileges](https://www.tencentcloud.com/document/api/236/34488)
         /// </summary>
         public static Output<GetSupportedPrivilegesResult> Invoke(GetSupportedPrivilegesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetSupportedPrivilegesResult>("tencentcloud:Mysql/getSupportedPrivileges:getSupportedPrivileges", args ?? new GetSupportedPrivilegesInvokeArgs(), options.WithDefaults());

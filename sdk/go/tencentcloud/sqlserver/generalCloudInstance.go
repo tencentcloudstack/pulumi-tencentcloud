@@ -105,6 +105,33 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CreateCloudDBInstances](https://www.tencentcloud.com/document/api/238/55674)
+//   - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+//   - [DescribeOrders](https://www.tencentcloud.com/document/api/238/32134)
+//   - [ModifyDBInstanceName](https://www.tencentcloud.com/document/api/238/32104)
+//
+// * Read:
+//   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+//   - [DescribeDBInstancesAttribute](https://www.tencentcloud.com/document/api/238/54811)
+//   - [DescribeDBSecurityGroups](https://www.tencentcloud.com/document/api/238/72730)
+//   - [DescribeMaintenanceSpan](https://www.tencentcloud.com/document/api/238/69303)
+//
+// * Update:
+//   - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+//   - [DescribeOrders](https://www.tencentcloud.com/document/api/238/32134)
+//   - [ModifyDBInstanceName](https://www.tencentcloud.com/document/api/238/32104)
+//   - [UpgradeDBInstance](https://www.tencentcloud.com/document/api/238/32094)
+//
+// * Delete:
+//   - [DeleteDBInstance](https://www.tencentcloud.com/document/api/238/72759)
+//   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+//   - [TerminateDBInstance](https://www.tencentcloud.com/document/api/238/34685)
+//
 // ## Import
 //
 // sqlserver generalCloudInstance can be imported using the id, e.g.
@@ -135,6 +162,8 @@ type GeneralCloudInstance struct {
 	HaType pulumi.StringPtrOutput `pulumi:"haType"`
 	// Payment mode, the value supports PREPAID (prepaid), POSTPAID (postpaid).
 	InstanceChargeType pulumi.StringPtrOutput `pulumi:"instanceChargeType"`
+	// Instance ID.
+	InstanceId pulumi.StringOutput `pulumi:"instanceId"`
 	// The host disk type of the purchased instance, CLOUD_HSSD-enhanced SSD cloud disk for virtual machines, CLOUD_TSSD-extremely fast SSD cloud disk for virtual machines, CLOUD_BSSD-universal SSD cloud disk for virtual machines.
 	MachineType pulumi.StringOutput `pulumi:"machineType"`
 	// Memory, unit: GB.
@@ -165,6 +194,8 @@ type GeneralCloudInstance struct {
 	TgwWanVport pulumi.IntOutput `pulumi:"tgwWanVport"`
 	// System time zone, default: China Standard Time.
 	TimeZone pulumi.StringPtrOutput `pulumi:"timeZone"`
+	// Unique UID of the instance.
+	Uid pulumi.StringOutput `pulumi:"uid"`
 	// VPC network ID, in the form of vpc-dsp338hz; SubnetId and VpcId need to be set at the same time or not set at the same time.
 	VpcId pulumi.StringPtrOutput `pulumi:"vpcId"`
 	// Maintainable time window configuration, in weeks, indicates the days of the week that allow maintenance, 1-7 represent Monday to weekend respectively.
@@ -238,6 +269,8 @@ type generalCloudInstanceState struct {
 	HaType *string `pulumi:"haType"`
 	// Payment mode, the value supports PREPAID (prepaid), POSTPAID (postpaid).
 	InstanceChargeType *string `pulumi:"instanceChargeType"`
+	// Instance ID.
+	InstanceId *string `pulumi:"instanceId"`
 	// The host disk type of the purchased instance, CLOUD_HSSD-enhanced SSD cloud disk for virtual machines, CLOUD_TSSD-extremely fast SSD cloud disk for virtual machines, CLOUD_BSSD-universal SSD cloud disk for virtual machines.
 	MachineType *string `pulumi:"machineType"`
 	// Memory, unit: GB.
@@ -268,6 +301,8 @@ type generalCloudInstanceState struct {
 	TgwWanVport *int `pulumi:"tgwWanVport"`
 	// System time zone, default: China Standard Time.
 	TimeZone *string `pulumi:"timeZone"`
+	// Unique UID of the instance.
+	Uid *string `pulumi:"uid"`
 	// VPC network ID, in the form of vpc-dsp338hz; SubnetId and VpcId need to be set at the same time or not set at the same time.
 	VpcId *string `pulumi:"vpcId"`
 	// Maintainable time window configuration, in weeks, indicates the days of the week that allow maintenance, 1-7 represent Monday to weekend respectively.
@@ -297,6 +332,8 @@ type GeneralCloudInstanceState struct {
 	HaType pulumi.StringPtrInput
 	// Payment mode, the value supports PREPAID (prepaid), POSTPAID (postpaid).
 	InstanceChargeType pulumi.StringPtrInput
+	// Instance ID.
+	InstanceId pulumi.StringPtrInput
 	// The host disk type of the purchased instance, CLOUD_HSSD-enhanced SSD cloud disk for virtual machines, CLOUD_TSSD-extremely fast SSD cloud disk for virtual machines, CLOUD_BSSD-universal SSD cloud disk for virtual machines.
 	MachineType pulumi.StringPtrInput
 	// Memory, unit: GB.
@@ -327,6 +364,8 @@ type GeneralCloudInstanceState struct {
 	TgwWanVport pulumi.IntPtrInput
 	// System time zone, default: China Standard Time.
 	TimeZone pulumi.StringPtrInput
+	// Unique UID of the instance.
+	Uid pulumi.StringPtrInput
 	// VPC network ID, in the form of vpc-dsp338hz; SubnetId and VpcId need to be set at the same time or not set at the same time.
 	VpcId pulumi.StringPtrInput
 	// Maintainable time window configuration, in weeks, indicates the days of the week that allow maintenance, 1-7 represent Monday to weekend respectively.
@@ -584,6 +623,11 @@ func (o GeneralCloudInstanceOutput) InstanceChargeType() pulumi.StringPtrOutput 
 	return o.ApplyT(func(v *GeneralCloudInstance) pulumi.StringPtrOutput { return v.InstanceChargeType }).(pulumi.StringPtrOutput)
 }
 
+// Instance ID.
+func (o GeneralCloudInstanceOutput) InstanceId() pulumi.StringOutput {
+	return o.ApplyT(func(v *GeneralCloudInstance) pulumi.StringOutput { return v.InstanceId }).(pulumi.StringOutput)
+}
+
 // The host disk type of the purchased instance, CLOUD_HSSD-enhanced SSD cloud disk for virtual machines, CLOUD_TSSD-extremely fast SSD cloud disk for virtual machines, CLOUD_BSSD-universal SSD cloud disk for virtual machines.
 func (o GeneralCloudInstanceOutput) MachineType() pulumi.StringOutput {
 	return o.ApplyT(func(v *GeneralCloudInstance) pulumi.StringOutput { return v.MachineType }).(pulumi.StringOutput)
@@ -657,6 +701,11 @@ func (o GeneralCloudInstanceOutput) TgwWanVport() pulumi.IntOutput {
 // System time zone, default: China Standard Time.
 func (o GeneralCloudInstanceOutput) TimeZone() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *GeneralCloudInstance) pulumi.StringPtrOutput { return v.TimeZone }).(pulumi.StringPtrOutput)
+}
+
+// Unique UID of the instance.
+func (o GeneralCloudInstanceOutput) Uid() pulumi.StringOutput {
+	return o.ApplyT(func(v *GeneralCloudInstance) pulumi.StringOutput { return v.Uid }).(pulumi.StringOutput)
 }
 
 // VPC network ID, in the form of vpc-dsp338hz; SubnetId and VpcId need to be set at the same time or not set at the same time.

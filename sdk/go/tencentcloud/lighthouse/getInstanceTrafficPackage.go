@@ -36,6 +36,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeInstancesTrafficPackages](https://www.tencentcloud.com/document/api/1103/42495)
 func GetInstanceTrafficPackage(ctx *pulumi.Context, args *GetInstanceTrafficPackageArgs, opts ...pulumi.InvokeOption) (*GetInstanceTrafficPackageResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetInstanceTrafficPackageResult

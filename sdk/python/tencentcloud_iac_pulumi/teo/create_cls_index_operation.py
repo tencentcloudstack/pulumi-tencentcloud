@@ -152,6 +152,12 @@ class CreateClsIndexOperation(pulumi.CustomResource):
             task_id=example.task_id)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateCLSIndex](https://www.tencentcloud.com/document/api/1145/59509)
+
         ## Import
 
         The resource can be imported by using the `zone_id`, e.g.
@@ -218,6 +224,12 @@ class CreateClsIndexOperation(pulumi.CustomResource):
             zone_id=example.zone_id,
             task_id=example.task_id)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateCLSIndex](https://www.tencentcloud.com/document/api/1145/59509)
 
         ## Import
 

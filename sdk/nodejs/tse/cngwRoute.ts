@@ -86,6 +86,17 @@ import * as utilities from "../utilities";
  *     stripPath: true,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateCloudNativeAPIGatewayRoute](https://www.tencentcloud.com/document/api/1290/79292)
+ * * Read: [DescribeCloudNativeAPIGatewayRoutes](https://www.tencentcloud.com/document/api/1290/79259)
+ * * Update:
+ *   - [DescribeCloudNativeAPIGatewayRoutes](https://www.tencentcloud.com/document/api/1290/79259)
+ *   - [ModifyCloudNativeAPIGatewayRoute](https://www.tencentcloud.com/document/api/1290/79241)
+ * * Delete: [DeleteCloudNativeAPIGatewayRoute](https://www.tencentcloud.com/document/api/1290/79278)
  */
 export class CngwRoute extends pulumi.CustomResource {
     /**

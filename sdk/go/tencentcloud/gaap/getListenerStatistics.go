@@ -48,6 +48,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeListenerStatistics](https://www.tencentcloud.com/document/api/608/33054)
 func GetListenerStatistics(ctx *pulumi.Context, args *GetListenerStatisticsArgs, opts ...pulumi.InvokeOption) (*GetListenerStatisticsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetListenerStatisticsResult

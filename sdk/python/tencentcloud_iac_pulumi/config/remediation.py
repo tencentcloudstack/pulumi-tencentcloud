@@ -267,6 +267,15 @@ class Remediation(pulumi.CustomResource):
             source_type="CUSTOM")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateRemediation](https://www.tencentcloud.com/document/api/1164/84973)
+        * Read: [ListRemediations](https://www.tencentcloud.com/document/api/1164/84963)
+        * Update: [UpdateRemediation](https://www.tencentcloud.com/document/api/1164/84954)
+        * Delete: [DeleteRemediations](https://www.tencentcloud.com/document/api/1164/84970)
+
         ## Import
 
         Config remediation can be imported using the id, e.g.
@@ -306,6 +315,15 @@ class Remediation(pulumi.CustomResource):
             invoke_type="MANUAL_EXECUTION",
             source_type="CUSTOM")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateRemediation](https://www.tencentcloud.com/document/api/1164/84973)
+        * Read: [ListRemediations](https://www.tencentcloud.com/document/api/1164/84963)
+        * Update: [UpdateRemediation](https://www.tencentcloud.com/document/api/1164/84954)
+        * Delete: [DeleteRemediations](https://www.tencentcloud.com/document/api/1164/84970)
 
         ## Import
 

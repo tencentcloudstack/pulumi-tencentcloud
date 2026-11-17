@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeCloudNativeAPIGatewayCanaryRules](https://www.tencentcloud.com/document/api/1290/79267)
 func LookupGatewayCanaryRules(ctx *pulumi.Context, args *LookupGatewayCanaryRulesArgs, opts ...pulumi.InvokeOption) (*LookupGatewayCanaryRulesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupGatewayCanaryRulesResult

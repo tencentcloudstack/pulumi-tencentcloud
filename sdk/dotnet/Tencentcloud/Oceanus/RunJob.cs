@@ -41,6 +41,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [RunJobs](https://www.tencentcloud.com/search/?wd=RunJobs&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Oceanus/runJob:RunJob")]
     public partial class RunJob : global::Pulumi.CustomResource

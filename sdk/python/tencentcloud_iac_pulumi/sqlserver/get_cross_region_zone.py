@@ -106,6 +106,12 @@ def get_cross_region_zone(instance_id: Optional[_builtins.str] = None,
     example = tencentcloud.sqlserver.get_cross_region_zone(instance_id="mssql-qelbzgwf")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCrossRegionZone](https://www.tencentcloud.com/document/api/238/72758)
+
 
     :param _builtins.str instance_id: Instance ID in the format of mssql-j8kv137v.
     :param _builtins.str result_output_file: Used to save results.
@@ -136,6 +142,12 @@ def get_cross_region_zone_output(instance_id: pulumi.Input[Optional[_builtins.st
 
     example = tencentcloud.sqlserver.get_cross_region_zone(instance_id="mssql-qelbzgwf")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCrossRegionZone](https://www.tencentcloud.com/document/api/238/72758)
 
 
     :param _builtins.str instance_id: Instance ID in the format of mssql-j8kv137v.

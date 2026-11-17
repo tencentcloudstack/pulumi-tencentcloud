@@ -156,6 +156,14 @@ def get_user_policy_attachments(create_mode: Optional[_builtins.int] = None,
         policy_id=foo_tencentcloud_cam_policy["id"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [GetUser](https://www.tencentcloud.com/document/api/598/32259)
+      - [ListAttachedUserPolicies](https://www.tencentcloud.com/document/api/598/32242)
+
 
     :param _builtins.int create_mode: Mode of Creation of the CAM user policy attachment. `1` means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.
     :param _builtins.str policy_id: ID of CAM policy to be queried.
@@ -205,6 +213,14 @@ def get_user_policy_attachments_output(create_mode: pulumi.Input[Optional[Option
     bar = tencentcloud.cam.get_user_policy_attachments(user_id=foo_tencentcloud_cam_user["id"],
         policy_id=foo_tencentcloud_cam_policy["id"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [GetUser](https://www.tencentcloud.com/document/api/598/32259)
+      - [ListAttachedUserPolicies](https://www.tencentcloud.com/document/api/598/32242)
 
 
     :param _builtins.int create_mode: Mode of Creation of the CAM user policy attachment. `1` means the CAM policy attachment is created by production, and the others indicate syntax strategy ways.

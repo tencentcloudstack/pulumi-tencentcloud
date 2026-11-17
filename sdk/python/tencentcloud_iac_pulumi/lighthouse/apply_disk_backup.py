@@ -119,6 +119,14 @@ class ApplyDiskBackup(pulumi.CustomResource):
             disk_backup_id="lhbak-xxxxxx")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [ApplyDiskBackup](https://www.tencentcloud.com/search/?wd=ApplyDiskBackup&type=document&lang=en)
+          - [DescribeDiskBackups](https://www.tencentcloud.com/search/?wd=DescribeDiskBackups&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -144,6 +152,14 @@ class ApplyDiskBackup(pulumi.CustomResource):
             disk_id="lhdisk-xxxxxx",
             disk_backup_id="lhbak-xxxxxx")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [ApplyDiskBackup](https://www.tencentcloud.com/search/?wd=ApplyDiskBackup&type=document&lang=en)
+          - [DescribeDiskBackups](https://www.tencentcloud.com/search/?wd=DescribeDiskBackups&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

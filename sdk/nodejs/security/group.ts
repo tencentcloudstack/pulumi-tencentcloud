@@ -37,6 +37,23 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateSecurityGroup](https://www.tencentcloud.com/document/api/215/15806)
+ *   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+ * * Read:
+ *   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+ *   - [DescribeSecurityGroups](https://www.tencentcloud.com/document/api/215/15808)
+ * * Update:
+ *   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+ *   - [ModifySecurityGroupAttribute](https://www.tencentcloud.com/document/api/215/15805)
+ * * Delete:
+ *   - [DeleteSecurityGroup](https://www.tencentcloud.com/document/api/215/15803)
+ *   - [DescribeSecurityGroupAssociationStatistics](https://www.tencentcloud.com/document/api/215/17799)
+ *
  * ## Import
  *
  * Security group can be imported using the id, e.g.

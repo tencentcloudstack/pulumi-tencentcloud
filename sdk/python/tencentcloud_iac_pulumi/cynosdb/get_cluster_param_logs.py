@@ -132,6 +132,12 @@ def get_cluster_param_logs(cluster_id: Optional[_builtins.str] = None,
         order_by_type="DESC")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeClusterParamLogs](https://www.tencentcloud.com/search/?wd=DescribeClusterParamLogs&type=document&lang=en)
+
 
     :param _builtins.str cluster_id: Cluster ID.
     :param Sequence[_builtins.str] instance_ids: Instance ID list, used to record specific instances of operations.
@@ -176,6 +182,12 @@ def get_cluster_param_logs_output(cluster_id: pulumi.Input[Optional[_builtins.st
         order_by="CreateTime",
         order_by_type="DESC")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeClusterParamLogs](https://www.tencentcloud.com/search/?wd=DescribeClusterParamLogs&type=document&lang=en)
 
 
     :param _builtins.str cluster_id: Cluster ID.

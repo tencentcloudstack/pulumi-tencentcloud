@@ -39,6 +39,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBSlowLogs](https://www.tencentcloud.com/document/api/1042/45491)
         /// </summary>
         public static Task<GetSlowLogsResult> InvokeAsync(GetSlowLogsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSlowLogsResult>("tencentcloud:Dcdb/getSlowLogs:getSlowLogs", args ?? new GetSlowLogsArgs(), options.WithDefaults());
@@ -70,6 +76,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBSlowLogs](https://www.tencentcloud.com/document/api/1042/45491)
         /// </summary>
         public static Output<GetSlowLogsResult> Invoke(GetSlowLogsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSlowLogsResult>("tencentcloud:Dcdb/getSlowLogs:getSlowLogs", args ?? new GetSlowLogsInvokeArgs(), options.WithDefaults());
@@ -101,6 +113,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBSlowLogs](https://www.tencentcloud.com/document/api/1042/45491)
         /// </summary>
         public static Output<GetSlowLogsResult> Invoke(GetSlowLogsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetSlowLogsResult>("tencentcloud:Dcdb/getSlowLogs:getSlowLogs", args ?? new GetSlowLogsInvokeArgs(), options.WithDefaults());

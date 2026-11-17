@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataEngineSessionParameters](https://www.tencentcloud.com/search/?wd=DescribeDataEngineSessionParameters&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetDataEngineSessionParametersResult> InvokeAsync(GetDataEngineSessionParametersArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDataEngineSessionParametersResult>("tencentcloud:Dlc/getDataEngineSessionParameters:getDataEngineSessionParameters", args ?? new GetDataEngineSessionParametersArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataEngineSessionParameters](https://www.tencentcloud.com/search/?wd=DescribeDataEngineSessionParameters&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDataEngineSessionParametersResult> Invoke(GetDataEngineSessionParametersInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDataEngineSessionParametersResult>("tencentcloud:Dlc/getDataEngineSessionParameters:getDataEngineSessionParameters", args ?? new GetDataEngineSessionParametersInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataEngineSessionParameters](https://www.tencentcloud.com/search/?wd=DescribeDataEngineSessionParameters&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDataEngineSessionParametersResult> Invoke(GetDataEngineSessionParametersInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDataEngineSessionParametersResult>("tencentcloud:Dlc/getDataEngineSessionParameters:getDataEngineSessionParameters", args ?? new GetDataEngineSessionParametersInvokeArgs(), options.WithDefaults());

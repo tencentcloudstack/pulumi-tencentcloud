@@ -385,6 +385,14 @@ class Instance(pulumi.CustomResource):
             resource_id="ins-lnpnnwvwxgs")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateInstance](https://www.tencentcloud.com/search/?wd=CreateInstance&type=document&lang=en)
+        * Read: [DescribeInstanceDetail](https://www.tencentcloud.com/search/?wd=DescribeInstanceDetail&type=document&lang=en)
+        * Update: [ModifyInstanceConfig](https://www.tencentcloud.com/search/?wd=ModifyInstanceConfig&type=document&lang=en)
+
         ## Import
 
         IGTM instance can be imported using the id, e.g.
@@ -438,6 +446,14 @@ class Instance(pulumi.CustomResource):
             remark="remark.",
             resource_id="ins-lnpnnwvwxgs")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateInstance](https://www.tencentcloud.com/search/?wd=CreateInstance&type=document&lang=en)
+        * Read: [DescribeInstanceDetail](https://www.tencentcloud.com/search/?wd=DescribeInstanceDetail&type=document&lang=en)
+        * Update: [ModifyInstanceConfig](https://www.tencentcloud.com/search/?wd=ModifyInstanceConfig&type=document&lang=en)
 
         ## Import
 

@@ -161,6 +161,12 @@ def get_upgrade_price(amount_unit: Optional[_builtins.str] = None,
         node_count=2)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeUpgradePrice](https://www.tencentcloud.com/search/?wd=DescribeUpgradePrice&type=document&lang=en)
+
 
     :param _builtins.str amount_unit: Price unit. Valid values: `* pent` (cent), `* microPent` (microcent).
     :param _builtins.str instance_id: Instance ID.
@@ -211,6 +217,12 @@ def get_upgrade_price_output(amount_unit: pulumi.Input[Optional[Optional[_builti
         storage=40,
         node_count=2)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeUpgradePrice](https://www.tencentcloud.com/search/?wd=DescribeUpgradePrice&type=document&lang=en)
 
 
     :param _builtins.str amount_unit: Price unit. Valid values: `* pent` (cent), `* microPent` (microcent).

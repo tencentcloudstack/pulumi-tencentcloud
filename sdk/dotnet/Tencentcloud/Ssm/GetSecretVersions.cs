@@ -50,6 +50,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeSecret](https://www.tencentcloud.com/document/api/1078/38653)
+        ///   - [GetSecretValue](https://www.tencentcloud.com/document/api/1078/38649)
+        ///   - [ListSecretVersionIds](https://www.tencentcloud.com/document/api/1078/38647)
         /// </summary>
         public static Task<GetSecretVersionsResult> InvokeAsync(GetSecretVersionsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSecretVersionsResult>("tencentcloud:Ssm/getSecretVersions:getSecretVersions", args ?? new GetSecretVersionsArgs(), options.WithDefaults());
@@ -92,6 +101,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeSecret](https://www.tencentcloud.com/document/api/1078/38653)
+        ///   - [GetSecretValue](https://www.tencentcloud.com/document/api/1078/38649)
+        ///   - [ListSecretVersionIds](https://www.tencentcloud.com/document/api/1078/38647)
         /// </summary>
         public static Output<GetSecretVersionsResult> Invoke(GetSecretVersionsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSecretVersionsResult>("tencentcloud:Ssm/getSecretVersions:getSecretVersions", args ?? new GetSecretVersionsInvokeArgs(), options.WithDefaults());
@@ -134,6 +152,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeSecret](https://www.tencentcloud.com/document/api/1078/38653)
+        ///   - [GetSecretValue](https://www.tencentcloud.com/document/api/1078/38649)
+        ///   - [ListSecretVersionIds](https://www.tencentcloud.com/document/api/1078/38647)
         /// </summary>
         public static Output<GetSecretVersionsResult> Invoke(GetSecretVersionsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetSecretVersionsResult>("tencentcloud:Ssm/getSecretVersions:getSecretVersions", args ?? new GetSecretVersionsInvokeArgs(), options.WithDefaults());

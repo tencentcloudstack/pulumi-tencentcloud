@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBInstanceRebootTime](https://www.tencentcloud.com/document/api/236/15874)
         /// </summary>
         public static Task<GetInstanceRebootTimeResult> InvokeAsync(GetInstanceRebootTimeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceRebootTimeResult>("tencentcloud:Mysql/getInstanceRebootTime:getInstanceRebootTime", args ?? new GetInstanceRebootTimeArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBInstanceRebootTime](https://www.tencentcloud.com/document/api/236/15874)
         /// </summary>
         public static Output<GetInstanceRebootTimeResult> Invoke(GetInstanceRebootTimeInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceRebootTimeResult>("tencentcloud:Mysql/getInstanceRebootTime:getInstanceRebootTime", args ?? new GetInstanceRebootTimeInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBInstanceRebootTime](https://www.tencentcloud.com/document/api/236/15874)
         /// </summary>
         public static Output<GetInstanceRebootTimeResult> Invoke(GetInstanceRebootTimeInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceRebootTimeResult>("tencentcloud:Mysql/getInstanceRebootTime:getInstanceRebootTime", args ?? new GetInstanceRebootTimeInvokeArgs(), options.WithDefaults());

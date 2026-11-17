@@ -91,6 +91,12 @@ import * as utilities from "../utilities";
  *     lifecycleActionResult: "CONTINUE",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CompleteLifecycleAction](https://www.tencentcloud.com/document/api/377/33200)
  */
 export class CompleteLifecycle extends pulumi.CustomResource {
     /**

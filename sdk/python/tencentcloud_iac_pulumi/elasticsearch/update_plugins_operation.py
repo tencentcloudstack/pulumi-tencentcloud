@@ -255,6 +255,14 @@ class UpdatePluginsOperation(pulumi.CustomResource):
             force_update=True)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeInstances](https://www.tencentcloud.com/document/api/845/32214)
+          - [UpdatePlugins](https://www.tencentcloud.com/document/api/845/37919)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -286,6 +294,14 @@ class UpdatePluginsOperation(pulumi.CustomResource):
             force_restart=False,
             force_update=True)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeInstances](https://www.tencentcloud.com/document/api/845/32214)
+          - [UpdatePlugins](https://www.tencentcloud.com/document/api/845/37919)
 
 
         :param str resource_name: The name of the resource.

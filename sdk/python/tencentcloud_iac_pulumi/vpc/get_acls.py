@@ -126,6 +126,12 @@ def get_acls(id: Optional[_builtins.str] = None,
         name="tf-example")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeNetworkAcls](https://www.tencentcloud.com/document/api/215/35620)
+
 
     :param _builtins.str id: ID of the network ACL instance.
     :param _builtins.str name: Name of the network ACL.
@@ -175,6 +181,12 @@ def get_acls_output(id: pulumi.Input[Optional[Optional[_builtins.str]]] = None,
         vpc_id="vpc-2l5kmsbx",
         name="tf-example")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeNetworkAcls](https://www.tencentcloud.com/document/api/215/35620)
 
 
     :param _builtins.str id: ID of the network ACL instance.

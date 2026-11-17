@@ -111,6 +111,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateAcl](https://www.tencentcloud.com/search/?wd=CreateAcl&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeAcls](https://www.tencentcloud.com/search/?wd=DescribeAcls&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyAcl](https://www.tencentcloud.com/search/?wd=ModifyAcl&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteAcls](https://www.tencentcloud.com/search/?wd=DeleteAcls&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// dasb acl can be imported using the id, e.g.

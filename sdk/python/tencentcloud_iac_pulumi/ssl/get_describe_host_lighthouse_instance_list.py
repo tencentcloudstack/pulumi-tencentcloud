@@ -128,6 +128,12 @@ def get_describe_host_lighthouse_instance_list(certificate_id: Optional[_builtin
         resource_type="lighthouse")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeHostLighthouseInstanceList](https://www.tencentcloud.com/search/?wd=DescribeHostLighthouseInstanceList&type=document&lang=en)
+
 
     :param _builtins.str certificate_id: Certificate ID to be deployed.
     :param Sequence[Union['GetDescribeHostLighthouseInstanceListFilterArgs', 'GetDescribeHostLighthouseInstanceListFilterArgsDict']] filters: List of filter parameters.
@@ -170,6 +176,12 @@ def get_describe_host_lighthouse_instance_list_output(certificate_id: pulumi.Inp
     describe_host_lighthouse_instance_list = tencentcloud.ssl.get_describe_host_lighthouse_instance_list(certificate_id="8tvMCvGF",
         resource_type="lighthouse")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeHostLighthouseInstanceList](https://www.tencentcloud.com/search/?wd=DescribeHostLighthouseInstanceList&type=document&lang=en)
 
 
     :param _builtins.str certificate_id: Certificate ID to be deployed.

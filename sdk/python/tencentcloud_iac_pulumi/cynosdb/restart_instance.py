@@ -101,6 +101,17 @@ class RestartInstance(pulumi.CustomResource):
         restart_instance = tencentcloud.cynosdb.RestartInstance("restart_instance", instance_id="cynosdbmysql-ins-afqx1hy0")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+          - [RestartInstance](https://www.tencentcloud.com/document/api/1098/53464)
+        * Read:
+          - [DescribeInstanceDetail](https://www.tencentcloud.com/document/api/1098/40749)
+          - [DescribeInstances](https://www.tencentcloud.com/document/api/1098/40747)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -123,6 +134,17 @@ class RestartInstance(pulumi.CustomResource):
 
         restart_instance = tencentcloud.cynosdb.RestartInstance("restart_instance", instance_id="cynosdbmysql-ins-afqx1hy0")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+          - [RestartInstance](https://www.tencentcloud.com/document/api/1098/53464)
+        * Read:
+          - [DescribeInstanceDetail](https://www.tencentcloud.com/document/api/1098/40749)
+          - [DescribeInstances](https://www.tencentcloud.com/document/api/1098/40747)
 
 
         :param str resource_name: The name of the resource.

@@ -22,6 +22,12 @@ import * as utilities from "../utilities";
  *     dnsFormat: "HOUR",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDomainAnalytics](https://www.tencentcloud.com/search/?wd=DescribeDomainAnalytics&type=document&lang=en)
  */
 export function getDomainAnalytics(args: GetDomainAnalyticsArgs, opts?: pulumi.InvokeOptions): Promise<GetDomainAnalyticsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -120,6 +126,12 @@ export interface GetDomainAnalyticsResult {
  *     dnsFormat: "HOUR",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDomainAnalytics](https://www.tencentcloud.com/search/?wd=DescribeDomainAnalytics&type=document&lang=en)
  */
 export function getDomainAnalyticsOutput(args: GetDomainAnalyticsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDomainAnalyticsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

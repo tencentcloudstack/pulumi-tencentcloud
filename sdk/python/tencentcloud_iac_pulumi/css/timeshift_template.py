@@ -290,6 +290,15 @@ class TimeshiftTemplate(pulumi.CustomResource):
             transcode_template_ids=[])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateLiveTimeShiftTemplate](https://www.tencentcloud.com/document/api/267/53725)
+        * Read: [DescribeLiveTimeShiftTemplates](https://www.tencentcloud.com/document/api/267/53721)
+        * Update: [ModifyLiveTimeShiftTemplate](https://www.tencentcloud.com/document/api/267/53718)
+        * Delete: [DeleteLiveTimeShiftTemplate](https://www.tencentcloud.com/document/api/267/53723)
+
         ## Import
 
         css timeshift_template can be imported using the id, e.g.
@@ -333,6 +342,15 @@ class TimeshiftTemplate(pulumi.CustomResource):
             template_name="tf-test",
             transcode_template_ids=[])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateLiveTimeShiftTemplate](https://www.tencentcloud.com/document/api/267/53725)
+        * Read: [DescribeLiveTimeShiftTemplates](https://www.tencentcloud.com/document/api/267/53721)
+        * Update: [ModifyLiveTimeShiftTemplate](https://www.tencentcloud.com/document/api/267/53718)
+        * Delete: [DeleteLiveTimeShiftTemplate](https://www.tencentcloud.com/document/api/267/53723)
 
         ## Import
 

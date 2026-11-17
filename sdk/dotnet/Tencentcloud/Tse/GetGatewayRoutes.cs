@@ -34,6 +34,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCloudNativeAPIGatewayRoutes](https://www.tencentcloud.com/document/api/1290/79259)
         /// </summary>
         public static Task<GetGatewayRoutesResult> InvokeAsync(GetGatewayRoutesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetGatewayRoutesResult>("tencentcloud:Tse/getGatewayRoutes:getGatewayRoutes", args ?? new GetGatewayRoutesArgs(), options.WithDefaults());
@@ -60,6 +66,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCloudNativeAPIGatewayRoutes](https://www.tencentcloud.com/document/api/1290/79259)
         /// </summary>
         public static Output<GetGatewayRoutesResult> Invoke(GetGatewayRoutesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetGatewayRoutesResult>("tencentcloud:Tse/getGatewayRoutes:getGatewayRoutes", args ?? new GetGatewayRoutesInvokeArgs(), options.WithDefaults());
@@ -86,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCloudNativeAPIGatewayRoutes](https://www.tencentcloud.com/document/api/1290/79259)
         /// </summary>
         public static Output<GetGatewayRoutesResult> Invoke(GetGatewayRoutesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetGatewayRoutesResult>("tencentcloud:Tse/getGatewayRoutes:getGatewayRoutes", args ?? new GetGatewayRoutesInvokeArgs(), options.WithDefaults());

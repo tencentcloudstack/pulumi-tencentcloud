@@ -21,6 +21,14 @@ __all__ = [
     'BackupBackupDbTableListArgsDict',
     'BackupDownloadRestrictionLimitVpcArgs',
     'BackupDownloadRestrictionLimitVpcArgsDict',
+    'CloneInstanceClusterTopologyArgs',
+    'CloneInstanceClusterTopologyArgsDict',
+    'CloneInstanceClusterTopologyReadOnlyNodeArgs',
+    'CloneInstanceClusterTopologyReadOnlyNodeArgsDict',
+    'CloneInstanceClusterTopologyReadWriteNodeArgs',
+    'CloneInstanceClusterTopologyReadWriteNodeArgsDict',
+    'CloneInstanceResourceTagArgs',
+    'CloneInstanceResourceTagArgsDict',
     'InstanceClusterTopologyArgs',
     'InstanceClusterTopologyArgsDict',
     'InstanceClusterTopologyReadOnlyNodeArgs',
@@ -383,6 +391,221 @@ class BackupDownloadRestrictionLimitVpcArgs:
     @vpc_lists.setter
     def vpc_lists(self, value: pulumi.Input[Sequence[pulumi.Input[_builtins.str]]]):
         pulumi.set(self, "vpc_lists", value)
+
+
+class CloneInstanceClusterTopologyArgsDict(TypedDict):
+    read_only_nodes: NotRequired[pulumi.Input[Optional[Sequence[pulumi.Input['CloneInstanceClusterTopologyReadOnlyNodeArgsDict']]]]]
+    """
+    RO node topology list.
+    """
+    read_write_node: NotRequired[pulumi.Input[Optional['CloneInstanceClusterTopologyReadWriteNodeArgsDict']]]
+    """
+    RW node topology.
+    """
+
+@pulumi.input_type
+class CloneInstanceClusterTopologyArgs:
+    def __init__(__self__, *,
+                 read_only_nodes: pulumi.Input[Optional[Sequence[pulumi.Input['CloneInstanceClusterTopologyReadOnlyNodeArgs']]]] = None,
+                 read_write_node: pulumi.Input[Optional['CloneInstanceClusterTopologyReadWriteNodeArgs']] = None):
+        """
+        :param pulumi.Input[Sequence[pulumi.Input['CloneInstanceClusterTopologyReadOnlyNodeArgs']]] read_only_nodes: RO node topology list.
+        :param pulumi.Input['CloneInstanceClusterTopologyReadWriteNodeArgs'] read_write_node: RW node topology.
+        """
+        if read_only_nodes is not None:
+            pulumi.set(__self__, "read_only_nodes", read_only_nodes)
+        if read_write_node is not None:
+            pulumi.set(__self__, "read_write_node", read_write_node)
+
+    @_builtins.property
+    @pulumi.getter(name="readOnlyNodes")
+    def read_only_nodes(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['CloneInstanceClusterTopologyReadOnlyNodeArgs']]]]:
+        """
+        RO node topology list.
+        """
+        return pulumi.get(self, "read_only_nodes")
+
+    @read_only_nodes.setter
+    def read_only_nodes(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['CloneInstanceClusterTopologyReadOnlyNodeArgs']]]]):
+        pulumi.set(self, "read_only_nodes", value)
+
+    @_builtins.property
+    @pulumi.getter(name="readWriteNode")
+    def read_write_node(self) -> pulumi.Input[Optional['CloneInstanceClusterTopologyReadWriteNodeArgs']]:
+        """
+        RW node topology.
+        """
+        return pulumi.get(self, "read_write_node")
+
+    @read_write_node.setter
+    def read_write_node(self, value: pulumi.Input[Optional['CloneInstanceClusterTopologyReadWriteNodeArgs']]):
+        pulumi.set(self, "read_write_node", value)
+
+
+class CloneInstanceClusterTopologyReadOnlyNodeArgsDict(TypedDict):
+    is_random_zone: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Whether distributed in a random zone. YES - random zone.
+    """
+    node_id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Node ID.
+    """
+    zone: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    RO node zone.
+    """
+
+@pulumi.input_type
+class CloneInstanceClusterTopologyReadOnlyNodeArgs:
+    def __init__(__self__, *,
+                 is_random_zone: pulumi.Input[Optional[_builtins.str]] = None,
+                 node_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 zone: pulumi.Input[Optional[_builtins.str]] = None):
+        """
+        :param pulumi.Input[_builtins.str] is_random_zone: Whether distributed in a random zone. YES - random zone.
+        :param pulumi.Input[_builtins.str] node_id: Node ID.
+        :param pulumi.Input[_builtins.str] zone: RO node zone.
+        """
+        if is_random_zone is not None:
+            pulumi.set(__self__, "is_random_zone", is_random_zone)
+        if node_id is not None:
+            pulumi.set(__self__, "node_id", node_id)
+        if zone is not None:
+            pulumi.set(__self__, "zone", zone)
+
+    @_builtins.property
+    @pulumi.getter(name="isRandomZone")
+    def is_random_zone(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Whether distributed in a random zone. YES - random zone.
+        """
+        return pulumi.get(self, "is_random_zone")
+
+    @is_random_zone.setter
+    def is_random_zone(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "is_random_zone", value)
+
+    @_builtins.property
+    @pulumi.getter(name="nodeId")
+    def node_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Node ID.
+        """
+        return pulumi.get(self, "node_id")
+
+    @node_id.setter
+    def node_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "node_id", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def zone(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        RO node zone.
+        """
+        return pulumi.get(self, "zone")
+
+    @zone.setter
+    def zone(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "zone", value)
+
+
+class CloneInstanceClusterTopologyReadWriteNodeArgsDict(TypedDict):
+    node_id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Node ID.
+    """
+    zone: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    RW node zone.
+    """
+
+@pulumi.input_type
+class CloneInstanceClusterTopologyReadWriteNodeArgs:
+    def __init__(__self__, *,
+                 node_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 zone: pulumi.Input[Optional[_builtins.str]] = None):
+        """
+        :param pulumi.Input[_builtins.str] node_id: Node ID.
+        :param pulumi.Input[_builtins.str] zone: RW node zone.
+        """
+        if node_id is not None:
+            pulumi.set(__self__, "node_id", node_id)
+        if zone is not None:
+            pulumi.set(__self__, "zone", zone)
+
+    @_builtins.property
+    @pulumi.getter(name="nodeId")
+    def node_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Node ID.
+        """
+        return pulumi.get(self, "node_id")
+
+    @node_id.setter
+    def node_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "node_id", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def zone(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        RW node zone.
+        """
+        return pulumi.get(self, "zone")
+
+    @zone.setter
+    def zone(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "zone", value)
+
+
+class CloneInstanceResourceTagArgsDict(TypedDict):
+    key: pulumi.Input[_builtins.str]
+    """
+    Tag key.
+    """
+    value: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Tag value.
+    """
+
+@pulumi.input_type
+class CloneInstanceResourceTagArgs:
+    def __init__(__self__, *,
+                 key: pulumi.Input[_builtins.str],
+                 value: pulumi.Input[Optional[_builtins.str]] = None):
+        """
+        :param pulumi.Input[_builtins.str] key: Tag key.
+        :param pulumi.Input[_builtins.str] value: Tag value.
+        """
+        pulumi.set(__self__, "key", key)
+        if value is not None:
+            pulumi.set(__self__, "value", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def key(self) -> pulumi.Input[_builtins.str]:
+        """
+        Tag key.
+        """
+        return pulumi.get(self, "key")
+
+    @key.setter
+    def key(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "key", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def value(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Tag value.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "value", value)
 
 
 class InstanceClusterTopologyArgsDict(TypedDict):

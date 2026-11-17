@@ -74,6 +74,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [UpdateGrafanaConfig](https://www.tencentcloud.com/document/api/248/49745)
+    /// * Read: [DescribeGrafanaConfig](https://www.tencentcloud.com/document/api/248/49761)
+    /// * Update: [UpdateGrafanaConfig](https://www.tencentcloud.com/document/api/248/49745)
+    /// 
     /// ## Import
     /// 
     /// monitor TmpGrafanaConfig can be imported using the id, e.g.

@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeGroupOffsets](https://www.tencentcloud.com/document/api/597/35359)
         /// </summary>
         public static Task<GetGroupOffsetsResult> InvokeAsync(GetGroupOffsetsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetGroupOffsetsResult>("tencentcloud:Ckafka/getGroupOffsets:getGroupOffsets", args ?? new GetGroupOffsetsArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeGroupOffsets](https://www.tencentcloud.com/document/api/597/35359)
         /// </summary>
         public static Output<GetGroupOffsetsResult> Invoke(GetGroupOffsetsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetGroupOffsetsResult>("tencentcloud:Ckafka/getGroupOffsets:getGroupOffsets", args ?? new GetGroupOffsetsInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeGroupOffsets](https://www.tencentcloud.com/document/api/597/35359)
         /// </summary>
         public static Output<GetGroupOffsetsResult> Invoke(GetGroupOffsetsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetGroupOffsetsResult>("tencentcloud:Ckafka/getGroupOffsets:getGroupOffsets", args ?? new GetGroupOffsetsInvokeArgs(), options.WithDefaults());

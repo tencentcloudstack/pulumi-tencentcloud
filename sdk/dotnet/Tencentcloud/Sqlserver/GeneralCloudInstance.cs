@@ -92,6 +92,30 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateCloudDBInstances](https://www.tencentcloud.com/document/api/238/55674)
+    ///   - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+    ///   - [DescribeOrders](https://www.tencentcloud.com/document/api/238/32134)
+    ///   - [ModifyDBInstanceName](https://www.tencentcloud.com/document/api/238/32104)
+    /// * Read:
+    ///   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+    ///   - [DescribeDBInstancesAttribute](https://www.tencentcloud.com/document/api/238/54811)
+    ///   - [DescribeDBSecurityGroups](https://www.tencentcloud.com/document/api/238/72730)
+    ///   - [DescribeMaintenanceSpan](https://www.tencentcloud.com/document/api/238/69303)
+    /// * Update:
+    ///   - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+    ///   - [DescribeOrders](https://www.tencentcloud.com/document/api/238/32134)
+    ///   - [ModifyDBInstanceName](https://www.tencentcloud.com/document/api/238/32104)
+    ///   - [UpgradeDBInstance](https://www.tencentcloud.com/document/api/238/32094)
+    /// * Delete:
+    ///   - [DeleteDBInstance](https://www.tencentcloud.com/document/api/238/72759)
+    ///   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+    ///   - [TerminateDBInstance](https://www.tencentcloud.com/document/api/238/34685)
+    /// 
     /// ## Import
     /// 
     /// sqlserver GeneralCloudInstance can be imported using the id, e.g.
@@ -156,6 +180,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// </summary>
         [Output("instanceChargeType")]
         public Output<string?> InstanceChargeType { get; private set; } = null!;
+
+        /// <summary>
+        /// Instance ID.
+        /// </summary>
+        [Output("instanceId")]
+        public Output<string> InstanceId { get; private set; } = null!;
 
         /// <summary>
         /// The host disk type of the purchased instance, CLOUD_HSSD-enhanced SSD cloud disk for virtual machines, CLOUD_TSSD-extremely fast SSD cloud disk for virtual machines, CLOUD_BSSD-universal SSD cloud disk for virtual machines.
@@ -246,6 +276,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// </summary>
         [Output("timeZone")]
         public Output<string?> TimeZone { get; private set; } = null!;
+
+        /// <summary>
+        /// Unique UID of the instance.
+        /// </summary>
+        [Output("uid")]
+        public Output<string> Uid { get; private set; } = null!;
 
         /// <summary>
         /// VPC network ID, in the form of vpc-dsp338hz; SubnetId and VpcId need to be set at the same time or not set at the same time.
@@ -555,6 +591,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         public Input<string>? InstanceChargeType { get; set; }
 
         /// <summary>
+        /// Instance ID.
+        /// </summary>
+        [Input("instanceId")]
+        public Input<string>? InstanceId { get; set; }
+
+        /// <summary>
         /// The host disk type of the purchased instance, CLOUD_HSSD-enhanced SSD cloud disk for virtual machines, CLOUD_TSSD-extremely fast SSD cloud disk for virtual machines, CLOUD_BSSD-universal SSD cloud disk for virtual machines.
         /// </summary>
         [Input("machineType")]
@@ -655,6 +697,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// </summary>
         [Input("timeZone")]
         public Input<string>? TimeZone { get; set; }
+
+        /// <summary>
+        /// Unique UID of the instance.
+        /// </summary>
+        [Input("uid")]
+        public Input<string>? Uid { get; set; }
 
         /// <summary>
         /// VPC network ID, in the form of vpc-dsp338hz; SubnetId and VpcId need to be set at the same time or not set at the same time.

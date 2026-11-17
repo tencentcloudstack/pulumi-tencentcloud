@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeCompanies](https://www.tencentcloud.com/document/api/1007/79833)
 func GetDescribeCompanies(ctx *pulumi.Context, args *GetDescribeCompaniesArgs, opts ...pulumi.InvokeOption) (*GetDescribeCompaniesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDescribeCompaniesResult

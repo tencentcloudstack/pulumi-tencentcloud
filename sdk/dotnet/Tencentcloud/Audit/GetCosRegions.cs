@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Audit
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListCosEnableRegion](https://www.tencentcloud.com/search/?wd=ListCosEnableRegion&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetCosRegionsResult> InvokeAsync(GetCosRegionsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetCosRegionsResult>("tencentcloud:Audit/getCosRegions:getCosRegions", args ?? new GetCosRegionsArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Audit
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListCosEnableRegion](https://www.tencentcloud.com/search/?wd=ListCosEnableRegion&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetCosRegionsResult> Invoke(GetCosRegionsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetCosRegionsResult>("tencentcloud:Audit/getCosRegions:getCosRegions", args ?? new GetCosRegionsInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Audit
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListCosEnableRegion](https://www.tencentcloud.com/search/?wd=ListCosEnableRegion&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetCosRegionsResult> Invoke(GetCosRegionsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetCosRegionsResult>("tencentcloud:Audit/getCosRegions:getCosRegions", args ?? new GetCosRegionsInvokeArgs(), options.WithDefaults());

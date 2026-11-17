@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const accountAttributes = tencentcloud.vpc.getAccountAttributes({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAccountAttributes](https://www.tencentcloud.com/document/api/215/17875)
  */
 export function getAccountAttributes(args?: GetAccountAttributesArgs, opts?: pulumi.InvokeOptions): Promise<GetAccountAttributesResult> {
     args = args || {};
@@ -61,6 +67,12 @@ export interface GetAccountAttributesResult {
  *
  * const accountAttributes = tencentcloud.vpc.getAccountAttributes({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAccountAttributes](https://www.tencentcloud.com/document/api/215/17875)
  */
 export function getAccountAttributesOutput(args?: GetAccountAttributesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAccountAttributesResult> {
     args = args || {};

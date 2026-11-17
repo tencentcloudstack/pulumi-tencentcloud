@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     engineRegion: "ap-guangzhou",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSREInstanceAccessAddress](https://www.tencentcloud.com/search/?wd=DescribeSREInstanceAccessAddress&type=document&lang=en)
  */
 export function getAccessAddress(args: GetAccessAddressArgs, opts?: pulumi.InvokeOptions): Promise<GetAccessAddressResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -124,6 +130,12 @@ export interface GetAccessAddressResult {
  *     engineRegion: "ap-guangzhou",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSREInstanceAccessAddress](https://www.tencentcloud.com/search/?wd=DescribeSREInstanceAccessAddress&type=document&lang=en)
  */
 export function getAccessAddressOutput(args: GetAccessAddressOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAccessAddressResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

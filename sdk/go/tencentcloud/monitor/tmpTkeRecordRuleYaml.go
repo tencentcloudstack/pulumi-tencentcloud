@@ -232,6 +232,15 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreatePrometheusRecordRuleYaml](https://www.tencentcloud.com/document/api/248/53334)
+// * Read: [DescribePrometheusRecordRules](https://www.tencentcloud.com/document/api/248/53319)
+// * Update: [ModifyPrometheusRecordRuleYaml](https://www.tencentcloud.com/document/api/248/53330)
+// * Delete: [DeletePrometheusRecordRuleYaml](https://www.tencentcloud.com/document/api/248/53333)
 type TmpTkeRecordRuleYaml struct {
 	pulumi.CustomResourceState
 

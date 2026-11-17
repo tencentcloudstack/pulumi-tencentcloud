@@ -99,6 +99,12 @@ def get_limits(limit_types: Optional[Sequence[_builtins.str]] = None,
     ])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeVpcLimits](https://www.tencentcloud.com/search/?wd=DescribeVpcLimits&type=document&lang=en)
+
 
     :param Sequence[_builtins.str] limit_types: Quota name. A maximum of 100 quota types can be queried each time.
     :param _builtins.str result_output_file: Used to save results.
@@ -131,6 +137,12 @@ def get_limits_output(limit_types: pulumi.Input[Optional[Sequence[_builtins.str]
         "vpc-max-subnets",
     ])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeVpcLimits](https://www.tencentcloud.com/search/?wd=DescribeVpcLimits&type=document&lang=en)
 
 
     :param Sequence[_builtins.str] limit_types: Quota name. A maximum of 100 quota types can be queried each time.

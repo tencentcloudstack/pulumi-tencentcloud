@@ -170,6 +170,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePublishSubscribe](https://www.tencentcloud.com/document/api/238/72746)
         /// </summary>
         public static Task<GetPublishSubscribesResult> InvokeAsync(GetPublishSubscribesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetPublishSubscribesResult>("tencentcloud:Sqlserver/getPublishSubscribes:getPublishSubscribes", args ?? new GetPublishSubscribesArgs(), options.WithDefaults());
@@ -332,6 +338,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePublishSubscribe](https://www.tencentcloud.com/document/api/238/72746)
         /// </summary>
         public static Output<GetPublishSubscribesResult> Invoke(GetPublishSubscribesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetPublishSubscribesResult>("tencentcloud:Sqlserver/getPublishSubscribes:getPublishSubscribes", args ?? new GetPublishSubscribesInvokeArgs(), options.WithDefaults());
@@ -494,6 +506,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePublishSubscribe](https://www.tencentcloud.com/document/api/238/72746)
         /// </summary>
         public static Output<GetPublishSubscribesResult> Invoke(GetPublishSubscribesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetPublishSubscribesResult>("tencentcloud:Sqlserver/getPublishSubscribes:getPublishSubscribes", args ?? new GetPublishSubscribesInvokeArgs(), options.WithDefaults());

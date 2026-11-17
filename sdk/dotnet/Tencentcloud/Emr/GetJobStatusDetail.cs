@@ -37,6 +37,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeClusterFlowStatusDetail](https://www.tencentcloud.com/document/api/1026/73259)
         /// </summary>
         public static Task<GetJobStatusDetailResult> InvokeAsync(GetJobStatusDetailArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetJobStatusDetailResult>("tencentcloud:Emr/getJobStatusDetail:getJobStatusDetail", args ?? new GetJobStatusDetailArgs(), options.WithDefaults());
@@ -66,6 +72,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeClusterFlowStatusDetail](https://www.tencentcloud.com/document/api/1026/73259)
         /// </summary>
         public static Output<GetJobStatusDetailResult> Invoke(GetJobStatusDetailInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetJobStatusDetailResult>("tencentcloud:Emr/getJobStatusDetail:getJobStatusDetail", args ?? new GetJobStatusDetailInvokeArgs(), options.WithDefaults());
@@ -95,6 +107,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeClusterFlowStatusDetail](https://www.tencentcloud.com/document/api/1026/73259)
         /// </summary>
         public static Output<GetJobStatusDetailResult> Invoke(GetJobStatusDetailInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetJobStatusDetailResult>("tencentcloud:Emr/getJobStatusDetail:getJobStatusDetail", args ?? new GetJobStatusDetailInvokeArgs(), options.WithDefaults());

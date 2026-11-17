@@ -26,7 +26,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         }
 
         /// <summary>
-        /// ID of the resource.
+        /// API resource ID, e.g. `apires-xxxxxxxx`.
         /// </summary>
         [Input("id")]
         public Input<string>? Id { get; set; }

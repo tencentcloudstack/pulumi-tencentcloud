@@ -32,6 +32,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateWafDomains](https://www.tencentcloud.com/document/api/1290/79285)
+    /// * Read: [DescribeWafDomains](https://www.tencentcloud.com/document/api/1290/79247)
+    /// * Delete: [DeleteWafDomains](https://www.tencentcloud.com/document/api/1290/79272)
+    /// 
     /// ## Import
     /// 
     /// tse WafDomains can be imported using the id, e.g.

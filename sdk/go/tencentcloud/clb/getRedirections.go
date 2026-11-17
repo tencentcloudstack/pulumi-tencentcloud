@@ -43,6 +43,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeRewrite](https://www.tencentcloud.com/document/api/214/33829)
 func GetRedirections(ctx *pulumi.Context, args *GetRedirectionsArgs, opts ...pulumi.InvokeOption) (*GetRedirectionsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetRedirectionsResult

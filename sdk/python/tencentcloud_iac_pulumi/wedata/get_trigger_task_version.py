@@ -118,6 +118,12 @@ def get_trigger_task_version(project_id: Optional[_builtins.str] = None,
         version_id="20241024174712123456_1")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetTriggerTaskVersion](https://www.tencentcloud.com/document/api/1174/77925)
+
 
     :param _builtins.str project_id: Project ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -157,6 +163,12 @@ def get_trigger_task_version_output(project_id: pulumi.Input[Optional[_builtins.
         task_id="20241024174712123456",
         version_id="20241024174712123456_1")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetTriggerTaskVersion](https://www.tencentcloud.com/document/api/1174/77925)
 
 
     :param _builtins.str project_id: Project ID.

@@ -140,6 +140,12 @@ def get_top_space_schemas(instance_id: Optional[_builtins.str] = None,
         product="mysql")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTopSpaceSchemas](https://www.tencentcloud.com/document/api/1035/41189)
+
 
     :param _builtins.str instance_id: instance id.
     :param _builtins.int limit: The number of Top libraries to return, the maximum value is 100, and the default is 20.
@@ -184,6 +190,12 @@ def get_top_space_schemas_output(instance_id: pulumi.Input[Optional[_builtins.st
         sort_by="DataLength",
         product="mysql")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTopSpaceSchemas](https://www.tencentcloud.com/document/api/1035/41189)
 
 
     :param _builtins.str instance_id: instance id.

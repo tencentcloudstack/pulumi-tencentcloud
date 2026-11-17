@@ -50,6 +50,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDetailedSingleProbeData](https://www.tencentcloud.com/search/?wd=DescribeDetailedSingleProbeData&type=document&lang=en)
 func GetProbeData(ctx *pulumi.Context, args *GetProbeDataArgs, opts ...pulumi.InvokeOption) (*GetProbeDataResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetProbeDataResult

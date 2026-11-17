@@ -41,6 +41,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeResourceRelatedJobs](https://www.tencentcloud.com/search/?wd=DescribeResourceRelatedJobs&type=document&lang=en)
 func GetResourceRelatedJob(ctx *pulumi.Context, args *GetResourceRelatedJobArgs, opts ...pulumi.InvokeOption) (*GetResourceRelatedJobResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetResourceRelatedJobResult

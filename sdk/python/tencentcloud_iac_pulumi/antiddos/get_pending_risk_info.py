@@ -132,6 +132,12 @@ def get_pending_risk_info(result_output_file: Optional[_builtins.str] = None,
     pending_risk_info = tencentcloud.antiddos.get_pending_risk_info()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribePendingRiskInfo](https://www.tencentcloud.com/document/api/1213/61337)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -161,6 +167,12 @@ def get_pending_risk_info_output(result_output_file: pulumi.Input[Optional[Optio
 
     pending_risk_info = tencentcloud.antiddos.get_pending_risk_info()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribePendingRiskInfo](https://www.tencentcloud.com/document/api/1213/61337)
 
 
     :param _builtins.str result_output_file: Used to save results.

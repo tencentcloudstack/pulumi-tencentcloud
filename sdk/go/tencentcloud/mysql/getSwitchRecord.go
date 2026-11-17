@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDBSwitchRecords](https://www.tencentcloud.com/document/api/236/17490)
 func GetSwitchRecord(ctx *pulumi.Context, args *GetSwitchRecordArgs, opts ...pulumi.InvokeOption) (*GetSwitchRecordResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSwitchRecordResult

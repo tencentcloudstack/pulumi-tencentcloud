@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeAutoSnapshotPolicies](https://www.tencentcloud.com/document/api/362/32165)
 func GetSnapshotPolicies(ctx *pulumi.Context, args *GetSnapshotPoliciesArgs, opts ...pulumi.InvokeOption) (*GetSnapshotPoliciesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSnapshotPoliciesResult

@@ -15,6 +15,14 @@ import * as utilities from "../utilities";
  *
  * const rebootInstance = new tencentcloud.lighthouse.RebootInstance("reboot_instance", {instanceId: "lhins-xxx"});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeInstances](https://www.tencentcloud.com/document/api/1103/42498)
+ *   - [RebootInstances](https://www.tencentcloud.com/document/api/1103/42491)
  */
 export class RebootInstance extends pulumi.CustomResource {
     /**

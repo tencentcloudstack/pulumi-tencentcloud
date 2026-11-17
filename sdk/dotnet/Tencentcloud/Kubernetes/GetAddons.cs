@@ -51,6 +51,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAddon](https://www.tencentcloud.com/document/api/457/56953)
         /// </summary>
         public static Task<GetAddonsResult> InvokeAsync(GetAddonsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetAddonsResult>("tencentcloud:Kubernetes/getAddons:getAddons", args ?? new GetAddonsArgs(), options.WithDefaults());
@@ -94,6 +100,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAddon](https://www.tencentcloud.com/document/api/457/56953)
         /// </summary>
         public static Output<GetAddonsResult> Invoke(GetAddonsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetAddonsResult>("tencentcloud:Kubernetes/getAddons:getAddons", args ?? new GetAddonsInvokeArgs(), options.WithDefaults());
@@ -137,6 +149,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAddon](https://www.tencentcloud.com/document/api/457/56953)
         /// </summary>
         public static Output<GetAddonsResult> Invoke(GetAddonsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetAddonsResult>("tencentcloud:Kubernetes/getAddons:getAddons", args ?? new GetAddonsInvokeArgs(), options.WithDefaults());

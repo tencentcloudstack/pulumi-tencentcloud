@@ -41,6 +41,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [RenewVideo](https://www.tencentcloud.com/search/?wd=RenewVideo&type=document&lang=en)
 type RenewVideoOperation struct {
 	pulumi.CustomResourceState
 

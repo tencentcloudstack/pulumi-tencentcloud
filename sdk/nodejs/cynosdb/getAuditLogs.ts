@@ -30,6 +30,12 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAuditLogs](https://www.tencentcloud.com/document/api/1098/84940)
  */
 export function getAuditLogs(args: GetAuditLogsArgs, opts?: pulumi.InvokeOptions): Promise<GetAuditLogsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -122,6 +128,12 @@ export interface GetAuditLogsResult {
  *     },
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAuditLogs](https://www.tencentcloud.com/document/api/1098/84940)
  */
 export function getAuditLogsOutput(args: GetAuditLogsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAuditLogsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

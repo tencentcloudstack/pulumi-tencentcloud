@@ -158,6 +158,14 @@ class CompleteExpansion(pulumi.CustomResource):
         example = tencentcloud.sqlserver.CompleteExpansion("example", instance_id=example_tencentcloud_sqlserver_instance["id"])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CompleteExpansion](https://www.tencentcloud.com/document/api/238/72761)
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -253,6 +261,14 @@ class CompleteExpansion(pulumi.CustomResource):
 
         example = tencentcloud.sqlserver.CompleteExpansion("example", instance_id=example_tencentcloud_sqlserver_instance["id"])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CompleteExpansion](https://www.tencentcloud.com/document/api/238/72761)
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
 
 
         :param str resource_name: The name of the resource.

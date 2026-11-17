@@ -21,6 +21,14 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [AddOrganizationMemberEmail](https://www.tencentcloud.com/document/api/1031/68344)
+ * * Read: [DescribeOrganizationMemberEmailBind](https://www.tencentcloud.com/document/api/1031/68343)
+ * * Update: [UpdateOrganizationMemberEmailBind](https://www.tencentcloud.com/document/api/1031/68341)
+ *
  * ## Import
  *
  * organization member email can be imported using the id, e.g.

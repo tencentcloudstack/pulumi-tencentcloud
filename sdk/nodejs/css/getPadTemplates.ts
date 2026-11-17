@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const padTemplates = tencentcloud.css.getPadTemplates({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeLivePadTemplates](https://www.tencentcloud.com/search/?wd=DescribeLivePadTemplates&type=document&lang=en)
  */
 export function getPadTemplates(args?: GetPadTemplatesArgs, opts?: pulumi.InvokeOptions): Promise<GetPadTemplatesResult> {
     args = args || {};
@@ -61,6 +67,12 @@ export interface GetPadTemplatesResult {
  *
  * const padTemplates = tencentcloud.css.getPadTemplates({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeLivePadTemplates](https://www.tencentcloud.com/search/?wd=DescribeLivePadTemplates&type=document&lang=en)
  */
 export function getPadTemplatesOutput(args?: GetPadTemplatesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetPadTemplatesResult> {
     args = args || {};

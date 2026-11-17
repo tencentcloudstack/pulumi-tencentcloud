@@ -74,6 +74,12 @@ import * as utilities from "../utilities";
  *     instanceType: "S1.SMALL1",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeImages](https://www.tencentcloud.com/document/api/213/33272)
  */
 export function getInstance(args?: GetInstanceArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceResult> {
     args = args || {};
@@ -214,6 +220,12 @@ export interface GetInstanceResult {
  *     instanceType: "S1.SMALL1",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeImages](https://www.tencentcloud.com/document/api/213/33272)
  */
 export function getInstanceOutput(args?: GetInstanceOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInstanceResult> {
     args = args || {};

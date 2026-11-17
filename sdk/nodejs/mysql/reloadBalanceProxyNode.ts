@@ -77,6 +77,12 @@ import * as utilities from "../utilities";
  *     proxyAddressId: exampleProxy.proxyAddressId,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [ReloadBalanceProxyNode](https://www.tencentcloud.com/document/api/236/45189)
  */
 export class ReloadBalanceProxyNode extends pulumi.CustomResource {
     /**

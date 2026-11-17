@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     ccnId: "ccn-fkb9bo2v",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCcnAssociatedInstances](https://www.tencentcloud.com/search/?wd=DescribeCcnAssociatedInstances&type=document&lang=en)
  */
 export function getCcnAssociatedInstances(args: GetCcnAssociatedInstancesArgs, opts?: pulumi.InvokeOptions): Promise<GetCcnAssociatedInstancesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetCcnAssociatedInstancesResult {
  *     ccnId: "ccn-fkb9bo2v",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCcnAssociatedInstances](https://www.tencentcloud.com/search/?wd=DescribeCcnAssociatedInstances&type=document&lang=en)
  */
 export function getCcnAssociatedInstancesOutput(args: GetCcnAssociatedInstancesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetCcnAssociatedInstancesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

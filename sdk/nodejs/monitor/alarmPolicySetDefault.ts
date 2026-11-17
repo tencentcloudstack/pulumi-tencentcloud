@@ -18,6 +18,12 @@ import * as utilities from "../utilities";
  *     policyId: "policy-u4iykjkt",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [SetDefaultAlarmPolicy](https://www.tencentcloud.com/document/api/248/39312)
  */
 export class AlarmPolicySetDefault extends pulumi.CustomResource {
     /**

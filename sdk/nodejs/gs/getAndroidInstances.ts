@@ -41,6 +41,12 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAndroidInstances](https://www.tencentcloud.com/search/?wd=DescribeAndroidInstances&type=document&lang=en)
  */
 export function getAndroidInstances(args?: GetAndroidInstancesArgs, opts?: pulumi.InvokeOptions): Promise<GetAndroidInstancesResult> {
     args = args || {};
@@ -145,6 +151,12 @@ export interface GetAndroidInstancesResult {
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAndroidInstances](https://www.tencentcloud.com/search/?wd=DescribeAndroidInstances&type=document&lang=en)
  */
 export function getAndroidInstancesOutput(args?: GetAndroidInstancesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAndroidInstancesResult> {
     args = args || {};

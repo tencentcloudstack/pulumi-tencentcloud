@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTreeResources](https://www.tencentcloud.com/search/?wd=DescribeTreeResources&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetTreeResourcesResult> InvokeAsync(GetTreeResourcesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetTreeResourcesResult>("tencentcloud:Oceanus/getTreeResources:getTreeResources", args ?? new GetTreeResourcesArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTreeResources](https://www.tencentcloud.com/search/?wd=DescribeTreeResources&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetTreeResourcesResult> Invoke(GetTreeResourcesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetTreeResourcesResult>("tencentcloud:Oceanus/getTreeResources:getTreeResources", args ?? new GetTreeResourcesInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTreeResources](https://www.tencentcloud.com/search/?wd=DescribeTreeResources&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetTreeResourcesResult> Invoke(GetTreeResourcesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetTreeResourcesResult>("tencentcloud:Oceanus/getTreeResources:getTreeResources", args ?? new GetTreeResourcesInvokeArgs(), options.WithDefaults());

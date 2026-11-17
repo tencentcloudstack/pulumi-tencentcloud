@@ -25,6 +25,12 @@ import * as utilities from "../utilities";
  *     policyId: fooTencentcloudCamPolicy.id,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListAttachedGroupPolicies](https://www.tencentcloud.com/document/api/598/32243)
  */
 export function getGroupPolicyAttachments(args: GetGroupPolicyAttachmentsArgs, opts?: pulumi.InvokeOptions): Promise<GetGroupPolicyAttachmentsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -112,6 +118,12 @@ export interface GetGroupPolicyAttachmentsResult {
  *     policyId: fooTencentcloudCamPolicy.id,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListAttachedGroupPolicies](https://www.tencentcloud.com/document/api/598/32243)
  */
 export function getGroupPolicyAttachmentsOutput(args: GetGroupPolicyAttachmentsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetGroupPolicyAttachmentsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

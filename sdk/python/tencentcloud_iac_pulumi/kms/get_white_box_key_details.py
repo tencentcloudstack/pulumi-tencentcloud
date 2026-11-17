@@ -96,6 +96,12 @@ def get_white_box_key_details(key_status: Optional[_builtins.int] = None,
     example = tencentcloud.kms.get_white_box_key_details(key_status=0)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeWhiteBoxKeyDetails](https://www.tencentcloud.com/search/?wd=DescribeWhiteBoxKeyDetails&type=document&lang=en)
+
 
     :param _builtins.int key_status: Filter condition: status of the key, 0: disabled, 1: enabled.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_white_box_key_details_output(key_status: pulumi.Input[Optional[Optional[
 
     example = tencentcloud.kms.get_white_box_key_details(key_status=0)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeWhiteBoxKeyDetails](https://www.tencentcloud.com/search/?wd=DescribeWhiteBoxKeyDetails&type=document&lang=en)
 
 
     :param _builtins.int key_status: Filter condition: status of the key, 0: disabled, 1: enabled.

@@ -35,6 +35,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [ActivateInstance](https://www.tencentcloud.com/document/api/1098/45568)
+    ///   - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+    ///   - [IsolateInstance](https://www.tencentcloud.com/document/api/1098/40744)
+    /// * Update:
+    ///   - [ActivateInstance](https://www.tencentcloud.com/document/api/1098/45568)
+    ///   - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+    ///   - [IsolateInstance](https://www.tencentcloud.com/document/api/1098/40744)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cynosdb/isolateInstance:IsolateInstance")]
     public partial class IsolateInstance : global::Pulumi.CustomResource

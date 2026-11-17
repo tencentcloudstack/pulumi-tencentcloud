@@ -25,6 +25,12 @@ import * as utilities from "../utilities";
  *     gatewayInstanceId: "gw-ins-lvdypq5k",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeApiGroups](https://www.tencentcloud.com/search/?wd=DescribeApiGroups&type=document&lang=en)
  */
 export function getApiGroup(args?: GetApiGroupArgs, opts?: pulumi.InvokeOptions): Promise<GetApiGroupResult> {
     args = args || {};
@@ -131,6 +137,12 @@ export interface GetApiGroupResult {
  *     gatewayInstanceId: "gw-ins-lvdypq5k",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeApiGroups](https://www.tencentcloud.com/search/?wd=DescribeApiGroups&type=document&lang=en)
  */
 export function getApiGroupOutput(args?: GetApiGroupOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetApiGroupResult> {
     args = args || {};

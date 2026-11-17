@@ -160,6 +160,12 @@ def get_alarm_conditions_template(group_id: Optional[_builtins.str] = None,
         policy_count_order="asc=ascending")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeConditionsTemplateList](https://www.tencentcloud.com/document/api/248/45940)
+
 
     :param _builtins.str group_id: Filter queries based on trigger condition template ID.
     :param _builtins.str group_name: Filter queries based on trigger condition template names.
@@ -214,6 +220,12 @@ def get_alarm_conditions_template_output(group_id: pulumi.Input[Optional[Optiona
         update_time_order="desc=descending",
         policy_count_order="asc=ascending")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeConditionsTemplateList](https://www.tencentcloud.com/document/api/248/45940)
 
 
     :param _builtins.str group_id: Filter queries based on trigger condition template ID.

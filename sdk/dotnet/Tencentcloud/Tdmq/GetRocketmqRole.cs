@@ -46,6 +46,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRoles](https://www.tencentcloud.com/search/?wd=DescribeRoles&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetRocketmqRoleResult> InvokeAsync(GetRocketmqRoleArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetRocketmqRoleResult>("tencentcloud:Tdmq/getRocketmqRole:getRocketmqRole", args ?? new GetRocketmqRoleArgs(), options.WithDefaults());
@@ -84,6 +90,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRoles](https://www.tencentcloud.com/search/?wd=DescribeRoles&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetRocketmqRoleResult> Invoke(GetRocketmqRoleInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetRocketmqRoleResult>("tencentcloud:Tdmq/getRocketmqRole:getRocketmqRole", args ?? new GetRocketmqRoleInvokeArgs(), options.WithDefaults());
@@ -122,6 +134,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRoles](https://www.tencentcloud.com/search/?wd=DescribeRoles&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetRocketmqRoleResult> Invoke(GetRocketmqRoleInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetRocketmqRoleResult>("tencentcloud:Tdmq/getRocketmqRole:getRocketmqRole", args ?? new GetRocketmqRoleInvokeArgs(), options.WithDefaults());

@@ -134,6 +134,12 @@ class RoGroupLoadOperation(pulumi.CustomResource):
         ro_group_load_operation = tencentcloud.mysql.RoGroupLoadOperation("ro_group_load_operation", ro_group_id=example.instance_lists[0].ro_groups[0].group_id)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [BalanceRoGroupLoad](https://www.tencentcloud.com/document/api/236/35192)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -205,6 +211,12 @@ class RoGroupLoadOperation(pulumi.CustomResource):
             })
         ro_group_load_operation = tencentcloud.mysql.RoGroupLoadOperation("ro_group_load_operation", ro_group_id=example.instance_lists[0].ro_groups[0].group_id)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [BalanceRoGroupLoad](https://www.tencentcloud.com/document/api/236/35192)
 
 
         :param str resource_name: The name of the resource.

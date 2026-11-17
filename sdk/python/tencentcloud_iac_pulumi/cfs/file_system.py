@@ -25,6 +25,7 @@ class FileSystemArgs:
                  capacity: pulumi.Input[Optional[_builtins.int]] = None,
                  ccn_id: pulumi.Input[Optional[_builtins.str]] = None,
                  cidr_block: pulumi.Input[Optional[_builtins.str]] = None,
+                 encrypted: pulumi.Input[Optional[_builtins.bool]] = None,
                  mount_ip: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  net_interface: pulumi.Input[Optional[_builtins.str]] = None,
@@ -41,6 +42,7 @@ class FileSystemArgs:
         :param pulumi.Input[_builtins.int] capacity: File system capacity, in GiB (required for the Turbo series). For Standard Turbo, the minimum purchase required is 40,960 GiB (40 TiB) and the expansion increment is 20,480 GiB (20 TiB). For High-Performance Turbo, the minimum purchase required is 20,480 GiB (20 TiB) and the expansion increment is 10,240 GiB (10 TiB).
         :param pulumi.Input[_builtins.str] ccn_id: CCN instance ID (required if the network type is CCN).
         :param pulumi.Input[_builtins.str] cidr_block: CCN IP range used by the CFS (required if the network type is CCN), which cannot conflict with other IP ranges bound in CCN.
+        :param pulumi.Input[_builtins.bool] encrypted: Indicates whether the cfs_file_system is encrypted. true means encrypted, false means not encrypted. Modifying this parameter will trigger a rebuild.
         :param pulumi.Input[_builtins.str] mount_ip: IP of mount point.
         :param pulumi.Input[_builtins.str] name: Name of a file system.
         :param pulumi.Input[_builtins.str] net_interface: Network type, Default `VPC`. Valid values: `VPC` and `CCN`. Select `VPC` for a Standard or High-Performance file system, and `CCN` for a Standard Turbo or High-Performance Turbo one.
@@ -58,6 +60,8 @@ class FileSystemArgs:
             pulumi.set(__self__, "ccn_id", ccn_id)
         if cidr_block is not None:
             pulumi.set(__self__, "cidr_block", cidr_block)
+        if encrypted is not None:
+            pulumi.set(__self__, "encrypted", encrypted)
         if mount_ip is not None:
             pulumi.set(__self__, "mount_ip", mount_ip)
         if name is not None:
@@ -134,6 +138,18 @@ class FileSystemArgs:
     @cidr_block.setter
     def cidr_block(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "cidr_block", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def encrypted(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Indicates whether the cfs_file_system is encrypted. true means encrypted, false means not encrypted. Modifying this parameter will trigger a rebuild.
+        """
+        return pulumi.get(self, "encrypted")
+
+    @encrypted.setter
+    def encrypted(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "encrypted", value)
 
     @_builtins.property
     @pulumi.getter(name="mountIp")
@@ -241,6 +257,7 @@ class _FileSystemState:
                  ccn_id: pulumi.Input[Optional[_builtins.str]] = None,
                  cidr_block: pulumi.Input[Optional[_builtins.str]] = None,
                  create_time: pulumi.Input[Optional[_builtins.str]] = None,
+                 encrypted: pulumi.Input[Optional[_builtins.bool]] = None,
                  fs_id: pulumi.Input[Optional[_builtins.str]] = None,
                  mount_ip: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
@@ -259,6 +276,7 @@ class _FileSystemState:
         :param pulumi.Input[_builtins.str] ccn_id: CCN instance ID (required if the network type is CCN).
         :param pulumi.Input[_builtins.str] cidr_block: CCN IP range used by the CFS (required if the network type is CCN), which cannot conflict with other IP ranges bound in CCN.
         :param pulumi.Input[_builtins.str] create_time: Create time of the file system.
+        :param pulumi.Input[_builtins.bool] encrypted: Indicates whether the cfs_file_system is encrypted. true means encrypted, false means not encrypted. Modifying this parameter will trigger a rebuild.
         :param pulumi.Input[_builtins.str] fs_id: Mount root-directory.
         :param pulumi.Input[_builtins.str] mount_ip: IP of mount point.
         :param pulumi.Input[_builtins.str] name: Name of a file system.
@@ -281,6 +299,8 @@ class _FileSystemState:
             pulumi.set(__self__, "cidr_block", cidr_block)
         if create_time is not None:
             pulumi.set(__self__, "create_time", create_time)
+        if encrypted is not None:
+            pulumi.set(__self__, "encrypted", encrypted)
         if fs_id is not None:
             pulumi.set(__self__, "fs_id", fs_id)
         if mount_ip is not None:
@@ -371,6 +391,18 @@ class _FileSystemState:
     @create_time.setter
     def create_time(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "create_time", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def encrypted(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Indicates whether the cfs_file_system is encrypted. true means encrypted, false means not encrypted. Modifying this parameter will trigger a rebuild.
+        """
+        return pulumi.get(self, "encrypted")
+
+    @encrypted.setter
+    def encrypted(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "encrypted", value)
 
     @_builtins.property
     @pulumi.getter(name="fsId")
@@ -492,6 +524,7 @@ class FileSystem(pulumi.CustomResource):
                  capacity: pulumi.Input[Optional[_builtins.int]] = None,
                  ccn_id: pulumi.Input[Optional[_builtins.str]] = None,
                  cidr_block: pulumi.Input[Optional[_builtins.str]] = None,
+                 encrypted: pulumi.Input[Optional[_builtins.bool]] = None,
                  mount_ip: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  net_interface: pulumi.Input[Optional[_builtins.str]] = None,
@@ -519,6 +552,22 @@ class FileSystem(pulumi.CustomResource):
             protocol="NFS",
             vpc_id="vpc-ah9fbkap",
             subnet_id="subnet-9mu2t9iw")
+        ```
+
+        ### Encrypted Nfs CFS
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        foo = tencentcloud.cfs.FileSystem("foo",
+            name="test_file_system",
+            availability_zone="ap-guangzhou-3",
+            access_group_id="pgroup-7nx89k7l",
+            protocol="NFS",
+            vpc_id="vpc-ah9fbkap",
+            subnet_id="subnet-9mu2t9iw",
+            encrypted=True)
         ```
 
         ### High-Performance Nfs CFS
@@ -573,6 +622,26 @@ class FileSystem(pulumi.CustomResource):
             cidr_block="11.0.0.0/24")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateCfsFileSystem](https://www.tencentcloud.com/document/api/582/34517)
+          - [DescribeCfsFileSystems](https://www.tencentcloud.com/document/api/582/34514)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribeCfsFileSystems](https://www.tencentcloud.com/document/api/582/34514)
+          - [DescribeMountTargets](https://www.tencentcloud.com/document/api/582/34513)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [DescribeCfsFileSystems](https://www.tencentcloud.com/document/api/582/34514)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+          - [ScaleUpFileSystem](https://www.tencentcloud.com/document/api/582/55870)
+          - [UpdateCfsFileSystemName](https://www.tencentcloud.com/document/api/582/35059)
+          - [UpdateCfsFileSystemPGroup](https://www.tencentcloud.com/document/api/582/34512)
+        * Delete: [DeleteCfsFileSystem](https://www.tencentcloud.com/document/api/582/34516)
+
         ## Import
 
         Cloud file system can be imported using the id, e.g.
@@ -589,6 +658,7 @@ class FileSystem(pulumi.CustomResource):
         :param pulumi.Input[_builtins.int] capacity: File system capacity, in GiB (required for the Turbo series). For Standard Turbo, the minimum purchase required is 40,960 GiB (40 TiB) and the expansion increment is 20,480 GiB (20 TiB). For High-Performance Turbo, the minimum purchase required is 20,480 GiB (20 TiB) and the expansion increment is 10,240 GiB (10 TiB).
         :param pulumi.Input[_builtins.str] ccn_id: CCN instance ID (required if the network type is CCN).
         :param pulumi.Input[_builtins.str] cidr_block: CCN IP range used by the CFS (required if the network type is CCN), which cannot conflict with other IP ranges bound in CCN.
+        :param pulumi.Input[_builtins.bool] encrypted: Indicates whether the cfs_file_system is encrypted. true means encrypted, false means not encrypted. Modifying this parameter will trigger a rebuild.
         :param pulumi.Input[_builtins.str] mount_ip: IP of mount point.
         :param pulumi.Input[_builtins.str] name: Name of a file system.
         :param pulumi.Input[_builtins.str] net_interface: Network type, Default `VPC`. Valid values: `VPC` and `CCN`. Select `VPC` for a Standard or High-Performance file system, and `CCN` for a Standard Turbo or High-Performance Turbo one.
@@ -624,6 +694,22 @@ class FileSystem(pulumi.CustomResource):
             subnet_id="subnet-9mu2t9iw")
         ```
 
+        ### Encrypted Nfs CFS
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        foo = tencentcloud.cfs.FileSystem("foo",
+            name="test_file_system",
+            availability_zone="ap-guangzhou-3",
+            access_group_id="pgroup-7nx89k7l",
+            protocol="NFS",
+            vpc_id="vpc-ah9fbkap",
+            subnet_id="subnet-9mu2t9iw",
+            encrypted=True)
+        ```
+
         ### High-Performance Nfs CFS
 
         ```python
@@ -676,6 +762,26 @@ class FileSystem(pulumi.CustomResource):
             cidr_block="11.0.0.0/24")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateCfsFileSystem](https://www.tencentcloud.com/document/api/582/34517)
+          - [DescribeCfsFileSystems](https://www.tencentcloud.com/document/api/582/34514)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribeCfsFileSystems](https://www.tencentcloud.com/document/api/582/34514)
+          - [DescribeMountTargets](https://www.tencentcloud.com/document/api/582/34513)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [DescribeCfsFileSystems](https://www.tencentcloud.com/document/api/582/34514)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+          - [ScaleUpFileSystem](https://www.tencentcloud.com/document/api/582/55870)
+          - [UpdateCfsFileSystemName](https://www.tencentcloud.com/document/api/582/35059)
+          - [UpdateCfsFileSystemPGroup](https://www.tencentcloud.com/document/api/582/34512)
+        * Delete: [DeleteCfsFileSystem](https://www.tencentcloud.com/document/api/582/34516)
+
         ## Import
 
         Cloud file system can be imported using the id, e.g.
@@ -705,6 +811,7 @@ class FileSystem(pulumi.CustomResource):
                  capacity: pulumi.Input[Optional[_builtins.int]] = None,
                  ccn_id: pulumi.Input[Optional[_builtins.str]] = None,
                  cidr_block: pulumi.Input[Optional[_builtins.str]] = None,
+                 encrypted: pulumi.Input[Optional[_builtins.bool]] = None,
                  mount_ip: pulumi.Input[Optional[_builtins.str]] = None,
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  net_interface: pulumi.Input[Optional[_builtins.str]] = None,
@@ -731,6 +838,7 @@ class FileSystem(pulumi.CustomResource):
             __props__.__dict__["capacity"] = capacity
             __props__.__dict__["ccn_id"] = ccn_id
             __props__.__dict__["cidr_block"] = cidr_block
+            __props__.__dict__["encrypted"] = encrypted
             __props__.__dict__["mount_ip"] = mount_ip
             __props__.__dict__["name"] = name
             __props__.__dict__["net_interface"] = net_interface
@@ -757,6 +865,7 @@ class FileSystem(pulumi.CustomResource):
             ccn_id: pulumi.Input[Optional[_builtins.str]] = None,
             cidr_block: pulumi.Input[Optional[_builtins.str]] = None,
             create_time: pulumi.Input[Optional[_builtins.str]] = None,
+            encrypted: pulumi.Input[Optional[_builtins.bool]] = None,
             fs_id: pulumi.Input[Optional[_builtins.str]] = None,
             mount_ip: pulumi.Input[Optional[_builtins.str]] = None,
             name: pulumi.Input[Optional[_builtins.str]] = None,
@@ -779,6 +888,7 @@ class FileSystem(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] ccn_id: CCN instance ID (required if the network type is CCN).
         :param pulumi.Input[_builtins.str] cidr_block: CCN IP range used by the CFS (required if the network type is CCN), which cannot conflict with other IP ranges bound in CCN.
         :param pulumi.Input[_builtins.str] create_time: Create time of the file system.
+        :param pulumi.Input[_builtins.bool] encrypted: Indicates whether the cfs_file_system is encrypted. true means encrypted, false means not encrypted. Modifying this parameter will trigger a rebuild.
         :param pulumi.Input[_builtins.str] fs_id: Mount root-directory.
         :param pulumi.Input[_builtins.str] mount_ip: IP of mount point.
         :param pulumi.Input[_builtins.str] name: Name of a file system.
@@ -799,6 +909,7 @@ class FileSystem(pulumi.CustomResource):
         __props__.__dict__["ccn_id"] = ccn_id
         __props__.__dict__["cidr_block"] = cidr_block
         __props__.__dict__["create_time"] = create_time
+        __props__.__dict__["encrypted"] = encrypted
         __props__.__dict__["fs_id"] = fs_id
         __props__.__dict__["mount_ip"] = mount_ip
         __props__.__dict__["name"] = name
@@ -857,6 +968,14 @@ class FileSystem(pulumi.CustomResource):
         Create time of the file system.
         """
         return pulumi.get(self, "create_time")
+
+    @_builtins.property
+    @pulumi.getter
+    def encrypted(self) -> pulumi.Output[_builtins.bool]:
+        """
+        Indicates whether the cfs_file_system is encrypted. true means encrypted, false means not encrypted. Modifying this parameter will trigger a rebuild.
+        """
+        return pulumi.get(self, "encrypted")
 
     @_builtins.property
     @pulumi.getter(name="fsId")

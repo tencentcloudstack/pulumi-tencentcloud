@@ -41,6 +41,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAllNamespaces](https://www.tencentcloud.com/document/api/248/39319)
         /// </summary>
         public static Task<GetAlarmAllNamespacesResult> InvokeAsync(GetAlarmAllNamespacesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetAlarmAllNamespacesResult>("tencentcloud:Monitor/getAlarmAllNamespaces:getAlarmAllNamespaces", args ?? new GetAlarmAllNamespacesArgs(), options.WithDefaults());
@@ -74,6 +80,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAllNamespaces](https://www.tencentcloud.com/document/api/248/39319)
         /// </summary>
         public static Output<GetAlarmAllNamespacesResult> Invoke(GetAlarmAllNamespacesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetAlarmAllNamespacesResult>("tencentcloud:Monitor/getAlarmAllNamespaces:getAlarmAllNamespaces", args ?? new GetAlarmAllNamespacesInvokeArgs(), options.WithDefaults());
@@ -107,6 +119,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAllNamespaces](https://www.tencentcloud.com/document/api/248/39319)
         /// </summary>
         public static Output<GetAlarmAllNamespacesResult> Invoke(GetAlarmAllNamespacesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetAlarmAllNamespacesResult>("tencentcloud:Monitor/getAlarmAllNamespaces:getAlarmAllNamespaces", args ?? new GetAlarmAllNamespacesInvokeArgs(), options.WithDefaults());

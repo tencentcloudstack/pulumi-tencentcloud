@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeChcDeniedActions](https://www.tencentcloud.com/document/api/213/49703)
         /// </summary>
         public static Task<GetChcDeniedActionsResult> InvokeAsync(GetChcDeniedActionsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetChcDeniedActionsResult>("tencentcloud:Cvm/getChcDeniedActions:getChcDeniedActions", args ?? new GetChcDeniedActionsArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeChcDeniedActions](https://www.tencentcloud.com/document/api/213/49703)
         /// </summary>
         public static Output<GetChcDeniedActionsResult> Invoke(GetChcDeniedActionsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetChcDeniedActionsResult>("tencentcloud:Cvm/getChcDeniedActions:getChcDeniedActions", args ?? new GetChcDeniedActionsInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeChcDeniedActions](https://www.tencentcloud.com/document/api/213/49703)
         /// </summary>
         public static Output<GetChcDeniedActionsResult> Invoke(GetChcDeniedActionsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetChcDeniedActionsResult>("tencentcloud:Cvm/getChcDeniedActions:getChcDeniedActions", args ?? new GetChcDeniedActionsInvokeArgs(), options.WithDefaults());

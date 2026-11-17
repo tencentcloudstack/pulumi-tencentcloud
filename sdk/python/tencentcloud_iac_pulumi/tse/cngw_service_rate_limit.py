@@ -217,6 +217,15 @@ class CngwServiceRateLimit(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateCloudNativeAPIGatewayServiceRateLimit](https://www.tencentcloud.com/document/api/1290/79289)
+        * Read: [DescribeCloudNativeAPIGatewayServiceRateLimit](https://www.tencentcloud.com/document/api/1290/79258)
+        * Update: [ModifyCloudNativeAPIGatewayServiceRateLimit](https://www.tencentcloud.com/document/api/1290/79238)
+        * Delete: [DeleteCloudNativeAPIGatewayServiceRateLimit](https://www.tencentcloud.com/document/api/1290/79275)
+
         ## Import
 
         tse cngw_service_rate_limit can be imported using the id, e.g.
@@ -314,6 +323,15 @@ class CngwServiceRateLimit(pulumi.CustomResource):
                 }],
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateCloudNativeAPIGatewayServiceRateLimit](https://www.tencentcloud.com/document/api/1290/79289)
+        * Read: [DescribeCloudNativeAPIGatewayServiceRateLimit](https://www.tencentcloud.com/document/api/1290/79258)
+        * Update: [ModifyCloudNativeAPIGatewayServiceRateLimit](https://www.tencentcloud.com/document/api/1290/79238)
+        * Delete: [DeleteCloudNativeAPIGatewayServiceRateLimit](https://www.tencentcloud.com/document/api/1290/79275)
 
         ## Import
 

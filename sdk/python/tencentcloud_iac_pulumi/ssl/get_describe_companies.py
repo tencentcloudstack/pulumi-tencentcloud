@@ -99,6 +99,12 @@ def get_describe_companies(company_id: Optional[_builtins.int] = None,
     describe_companies = tencentcloud.ssl.get_describe_companies(company_id=122)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCompanies](https://www.tencentcloud.com/document/api/1007/79833)
+
 
     :param _builtins.int company_id: Company ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -128,6 +134,12 @@ def get_describe_companies_output(company_id: pulumi.Input[Optional[Optional[_bu
 
     describe_companies = tencentcloud.ssl.get_describe_companies(company_id=122)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCompanies](https://www.tencentcloud.com/document/api/1007/79833)
 
 
     :param _builtins.int company_id: Company ID.

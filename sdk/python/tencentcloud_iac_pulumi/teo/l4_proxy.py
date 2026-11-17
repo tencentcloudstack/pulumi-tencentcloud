@@ -315,6 +315,18 @@ class L4Proxy(pulumi.CustomResource):
             zone_id="zone-2qtuhspy6cr7")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateL4Proxy](https://www.tencentcloud.com/document/api/1145/59028)
+        * Read: [DescribeL4Proxy](https://www.tencentcloud.com/document/api/1145/59024)
+        * Update: [ModifyL4Proxy](https://www.tencentcloud.com/document/api/1145/59022)
+        * Delete:
+          - [DeleteL4Proxy](https://www.tencentcloud.com/document/api/1145/59026)
+          - [DescribeL4Proxy](https://www.tencentcloud.com/document/api/1145/59024)
+          - [ModifyL4ProxyStatus](https://www.tencentcloud.com/document/api/1145/59019)
+
         ## Import
 
         TEO L4 proxy can be imported using the id, e.g.
@@ -357,6 +369,18 @@ class L4Proxy(pulumi.CustomResource):
             static_ip="off",
             zone_id="zone-2qtuhspy6cr7")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateL4Proxy](https://www.tencentcloud.com/document/api/1145/59028)
+        * Read: [DescribeL4Proxy](https://www.tencentcloud.com/document/api/1145/59024)
+        * Update: [ModifyL4Proxy](https://www.tencentcloud.com/document/api/1145/59022)
+        * Delete:
+          - [DeleteL4Proxy](https://www.tencentcloud.com/document/api/1145/59026)
+          - [DescribeL4Proxy](https://www.tencentcloud.com/document/api/1145/59024)
+          - [ModifyL4ProxyStatus](https://www.tencentcloud.com/document/api/1145/59019)
 
         ## Import
 

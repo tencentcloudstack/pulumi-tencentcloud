@@ -32,6 +32,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeInstances](https://www.tencentcloud.com/document/api/1051/50703)
+        ///   - [DescribeInternalEndpoints](https://www.tencentcloud.com/document/api/1051/50735)
         /// </summary>
         public static Task<GetVpcAttachmentsResult> InvokeAsync(GetVpcAttachmentsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetVpcAttachmentsResult>("tencentcloud:Tcr/getVpcAttachments:getVpcAttachments", args ?? new GetVpcAttachmentsArgs(), options.WithDefaults());
@@ -56,6 +64,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeInstances](https://www.tencentcloud.com/document/api/1051/50703)
+        ///   - [DescribeInternalEndpoints](https://www.tencentcloud.com/document/api/1051/50735)
         /// </summary>
         public static Output<GetVpcAttachmentsResult> Invoke(GetVpcAttachmentsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetVpcAttachmentsResult>("tencentcloud:Tcr/getVpcAttachments:getVpcAttachments", args ?? new GetVpcAttachmentsInvokeArgs(), options.WithDefaults());
@@ -80,6 +96,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeInstances](https://www.tencentcloud.com/document/api/1051/50703)
+        ///   - [DescribeInternalEndpoints](https://www.tencentcloud.com/document/api/1051/50735)
         /// </summary>
         public static Output<GetVpcAttachmentsResult> Invoke(GetVpcAttachmentsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetVpcAttachmentsResult>("tencentcloud:Tcr/getVpcAttachments:getVpcAttachments", args ?? new GetVpcAttachmentsInvokeArgs(), options.WithDefaults());

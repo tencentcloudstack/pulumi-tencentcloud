@@ -182,6 +182,12 @@ def get_async_event_management(function_name: Optional[_builtins.str] = None,
         orderby="StartTime")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListAsyncEvents](https://www.tencentcloud.com/document/api/583/39734)
+
 
     :param _builtins.str function_name: Function name.
     :param _builtins.str invoke_request_id: Filter (event invocation request ID).
@@ -243,6 +249,12 @@ def get_async_event_management_output(function_name: pulumi.Input[Optional[_buil
         order="ASC",
         orderby="StartTime")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListAsyncEvents](https://www.tencentcloud.com/document/api/583/39734)
 
 
     :param _builtins.str function_name: Function name.

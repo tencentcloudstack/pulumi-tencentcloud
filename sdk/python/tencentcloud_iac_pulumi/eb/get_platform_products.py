@@ -86,6 +86,12 @@ def get_platform_products(result_output_file: Optional[_builtins.str] = None,
     platform_products = tencentcloud.eb.get_platform_products()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListPlatformProducts](https://www.tencentcloud.com/search/?wd=ListPlatformProducts&type=document&lang=en)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -111,6 +117,12 @@ def get_platform_products_output(result_output_file: pulumi.Input[Optional[Optio
 
     platform_products = tencentcloud.eb.get_platform_products()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListPlatformProducts](https://www.tencentcloud.com/search/?wd=ListPlatformProducts&type=document&lang=en)
 
 
     :param _builtins.str result_output_file: Used to save results.

@@ -48,6 +48,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetCcnRegionBandwidthLimits](https://www.tencentcloud.com/document/api/215/37319)
         /// </summary>
         public static Task<GetBandwidthLimitsResult> InvokeAsync(GetBandwidthLimitsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetBandwidthLimitsResult>("tencentcloud:Ccn/getBandwidthLimits:getBandwidthLimits", args ?? new GetBandwidthLimitsArgs(), options.WithDefaults());
@@ -88,6 +94,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetCcnRegionBandwidthLimits](https://www.tencentcloud.com/document/api/215/37319)
         /// </summary>
         public static Output<GetBandwidthLimitsResult> Invoke(GetBandwidthLimitsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetBandwidthLimitsResult>("tencentcloud:Ccn/getBandwidthLimits:getBandwidthLimits", args ?? new GetBandwidthLimitsInvokeArgs(), options.WithDefaults());
@@ -128,6 +140,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetCcnRegionBandwidthLimits](https://www.tencentcloud.com/document/api/215/37319)
         /// </summary>
         public static Output<GetBandwidthLimitsResult> Invoke(GetBandwidthLimitsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetBandwidthLimitsResult>("tencentcloud:Ccn/getBandwidthLimits:getBandwidthLimits", args ?? new GetBandwidthLimitsInvokeArgs(), options.WithDefaults());

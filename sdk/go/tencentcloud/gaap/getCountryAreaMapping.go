@@ -36,6 +36,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeCountryAreaMapping](https://www.tencentcloud.com/document/api/608/33084)
 func GetCountryAreaMapping(ctx *pulumi.Context, args *GetCountryAreaMappingArgs, opts ...pulumi.InvokeOption) (*GetCountryAreaMappingResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetCountryAreaMappingResult

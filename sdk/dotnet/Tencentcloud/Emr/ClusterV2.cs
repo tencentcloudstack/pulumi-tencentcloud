@@ -695,6 +695,802 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
     /// });
     /// ```
     /// 
+    /// ### Create EMR cluster with meta database
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Emr.ClusterV2("example", new()
+    ///     {
+    ///         ProductVersion = "EMR-V3.7.0",
+    ///         EnableSupportHaFlag = true,
+    ///         InstanceName = "tf-example",
+    ///         InstanceChargeType = "POSTPAID_BY_HOUR",
+    ///         NeedMasterWan = "NEED_MASTER_WAN",
+    ///         LoginSettings = new Tencentcloud.Emr.Inputs.ClusterV2LoginSettingsArgs
+    ///         {
+    ///             Password = "Password@123",
+    ///         },
+    ///         SceneSoftwareConfig = new Tencentcloud.Emr.Inputs.ClusterV2SceneSoftwareConfigArgs
+    ///         {
+    ///             SceneName = "Hadoop-Default",
+    ///         },
+    ///         MetaDbInfo = new Tencentcloud.Emr.Inputs.ClusterV2MetaDbInfoArgs
+    ///         {
+    ///             MetaType = "EMR_DEFAULT_META",
+    ///         },
+    ///         Tags = new[]
+    ///         {
+    ///             new Tencentcloud.Emr.Inputs.ClusterV2TagArgs
+    ///             {
+    ///                 TagKey = "createBy",
+    ///                 TagValue = "Terraform",
+    ///             },
+    ///         },
+    ///         SecurityGroupIds = "sg-37tigqat",
+    ///         SgIp = "10.0.0.0/8",
+    ///         ZoneResourceConfigurations = new[]
+    ///         {
+    ///             new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationArgs
+    ///             {
+    ///                 VirtualPrivateCloud = new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationVirtualPrivateCloudArgs
+    ///                 {
+    ///                     VpcId = "vpc-i5yyodl9",
+    ///                     SubnetId = "subnet-hhi88a58",
+    ///                 },
+    ///                 Placement = new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationPlacementArgs
+    ///                 {
+    ///                     Zone = "ap-guangzhou-6",
+    ///                 },
+    ///                 AllNodeResourceSpec = new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecArgs
+    ///                 {
+    ///                     MasterResourceSpecs = new[]
+    ///                     {
+    ///                         new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArgs
+    ///                         {
+    ///                             _nodeIndex = "master_node_1",
+    ///                             InstanceType = "SA5.2XLARGE16",
+    ///                             SystemDisk = new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskArgs
+    ///                             {
+    ///                                 DiskSize = 100,
+    ///                                 DiskType = "CLOUD_HSSD",
+    ///                             },
+    ///                             DataDisks = new[]
+    ///                             {
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArgs
+    ///                                 {
+    ///                                     _diskIndex = "master_disk_1",
+    ///                                     DiskSize = 100,
+    ///                                     DiskType = "CLOUD_SSD",
+    ///                                 },
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArgs
+    ///                                 {
+    ///                                     _diskIndex = "master_disk_2",
+    ///                                     DiskSize = 200,
+    ///                                     DiskType = "CLOUD_SSD",
+    ///                                 },
+    ///                             },
+    ///                             Softwares = new[]
+    ///                             {
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArgs
+    ///                                 {
+    ///                                     Services = "RUNTIME-1.0.0",
+    ///                                     Roles = new[]
+    ///                                     {
+    ///                                         "Sysctl",
+    ///                                     },
+    ///                                 },
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArgs
+    ///                                 {
+    ///                                     Services = "FILEBEAT-7.2.0",
+    ///                                     Roles = new[]
+    ///                                     {
+    ///                                         "Filebeat",
+    ///                                     },
+    ///                                 },
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArgs
+    ///                                 {
+    ///                                     Services = "HDFS-3.3.4",
+    ///                                     Roles = new[]
+    ///                                     {
+    ///                                         "NameNode",
+    ///                                         "ZKFailoverController",
+    ///                                     },
+    ///                                 },
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArgs
+    ///                                 {
+    ///                                     Services = "YARN-3.3.4",
+    ///                                     Roles = new[]
+    ///                                     {
+    ///                                         "ResourceManager",
+    ///                                         "JobHistoryServer",
+    ///                                         "TimeLineServer",
+    ///                                     },
+    ///                                 },
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArgs
+    ///                                 {
+    ///                                     Services = "OPENLDAP-2.4.44",
+    ///                                     Roles = new[]
+    ///                                     {
+    ///                                         "slapd",
+    ///                                     },
+    ///                                 },
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArgs
+    ///                                 {
+    ///                                     Services = "KNOX-1.6.1",
+    ///                                     Roles = new[]
+    ///                                     {
+    ///                                         "gateway",
+    ///                                         "ldap",
+    ///                                     },
+    ///                                 },
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArgs
+    ///                                 {
+    ///                                     Services = "HIVE-3.1.3",
+    ///                                     Roles = new[]
+    ///                                     {
+    ///                                         "HiveMetaStore",
+    ///                                         "HiveServer2",
+    ///                                         "HiveWebHcat",
+    ///                                     },
+    ///                                 },
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArgs
+    ///                                 {
+    ///                                     Services = "HUE-4.10.0",
+    ///                                     Roles = new[]
+    ///                                     {
+    ///                                         "Hue",
+    ///                                     },
+    ///                                 },
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArgs
+    ///                                 {
+    ///                                     Services = "RANGER-2.3.0",
+    ///                                     Roles = new[]
+    ///                                     {
+    ///                                         "EmbeddedServer",
+    ///                                         "EnableUnixAuth",
+    ///                                         "Solr",
+    ///                                     },
+    ///                                 },
+    ///                             },
+    ///                         },
+    ///                         new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecArgs
+    ///                         {
+    ///                             _nodeIndex = "master_node_2",
+    ///                             InstanceType = "SA5.2XLARGE16",
+    ///                             SystemDisk = new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSystemDiskArgs
+    ///                             {
+    ///                                 DiskSize = 100,
+    ///                                 DiskType = "CLOUD_HSSD",
+    ///                             },
+    ///                             DataDisks = new[]
+    ///                             {
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArgs
+    ///                                 {
+    ///                                     _diskIndex = "master_disk_1",
+    ///                                     DiskSize = 100,
+    ///                                     DiskType = "CLOUD_SSD",
+    ///                                 },
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecDataDiskArgs
+    ///                                 {
+    ///                                     _diskIndex = "master_disk_2",
+    ///                                     DiskSize = 200,
+    ///                                     DiskType = "CLOUD_SSD",
+    ///                                 },
+    ///                             },
+    ///                             Softwares = new[]
+    ///                             {
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArgs
+    ///                                 {
+    ///                                     Services = "RUNTIME-1.0.0",
+    ///                                     Roles = new[]
+    ///                                     {
+    ///                                         "Sysctl",
+    ///                                     },
+    ///                                 },
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArgs
+    ///                                 {
+    ///                                     Services = "FILEBEAT-7.2.0",
+    ///                                     Roles = new[]
+    ///                                     {
+    ///                                         "Filebeat",
+    ///                                     },
+    ///                                 },
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArgs
+    ///                                 {
+    ///                                     Services = "HDFS-3.3.4",
+    ///                                     Roles = new[]
+    ///                                     {
+    ///                                         "NameNode",
+    ///                                         "ZKFailoverController",
+    ///                                     },
+    ///                                 },
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArgs
+    ///                                 {
+    ///                                     Services = "YARN-3.3.4",
+    ///                                     Roles = new[]
+    ///                                     {
+    ///                                         "ResourceManager",
+    ///                                         "JobHistoryServer",
+    ///                                         "TimeLineServer",
+    ///                                     },
+    ///                                 },
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArgs
+    ///                                 {
+    ///                                     Services = "OPENLDAP-2.4.44",
+    ///                                     Roles = new[]
+    ///                                     {
+    ///                                         "slapd",
+    ///                                     },
+    ///                                 },
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArgs
+    ///                                 {
+    ///                                     Services = "KNOX-1.6.1",
+    ///                                     Roles = new[]
+    ///                                     {
+    ///                                         "gateway",
+    ///                                         "ldap",
+    ///                                     },
+    ///                                 },
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArgs
+    ///                                 {
+    ///                                     Services = "HIVE-3.1.3",
+    ///                                     Roles = new[]
+    ///                                     {
+    ///                                         "HiveMetaStore",
+    ///                                         "HiveServer2",
+    ///                                         "HiveWebHcat",
+    ///                                     },
+    ///                                 },
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArgs
+    ///                                 {
+    ///                                     Services = "HUE-4.10.0",
+    ///                                     Roles = new[]
+    ///                                     {
+    ///                                         "Hue",
+    ///                                     },
+    ///                                 },
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecMasterResourceSpecSoftwareArgs
+    ///                                 {
+    ///                                     Services = "RANGER-2.3.0",
+    ///                                     Roles = new[]
+    ///                                     {
+    ///                                         "EmbeddedServer",
+    ///                                         "EnableUnixAuth",
+    ///                                         "Solr",
+    ///                                     },
+    ///                                 },
+    ///                             },
+    ///                         },
+    ///                     },
+    ///                     CoreResourceSpecs = new[]
+    ///                     {
+    ///                         new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArgs
+    ///                         {
+    ///                             _nodeIndex = "core_node_1",
+    ///                             InstanceType = "SA5.LARGE8",
+    ///                             SystemDisk = new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskArgs
+    ///                             {
+    ///                                 DiskSize = 100,
+    ///                                 DiskType = "CLOUD_HSSD",
+    ///                             },
+    ///                             DataDisks = new[]
+    ///                             {
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArgs
+    ///                                 {
+    ///                                     _diskIndex = "core_disk_1",
+    ///                                     DiskSize = 100,
+    ///                                     DiskType = "CLOUD_SSD",
+    ///                                 },
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArgs
+    ///                                 {
+    ///                                     _diskIndex = "core_disk_2",
+    ///                                     DiskSize = 100,
+    ///                                     DiskType = "CLOUD_SSD",
+    ///                                 },
+    ///                             },
+    ///                             Softwares = new[]
+    ///                             {
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArgs
+    ///                                 {
+    ///                                     Services = "RUNTIME-1.0.0",
+    ///                                     Roles = new[]
+    ///                                     {
+    ///                                         "Sysctl",
+    ///                                     },
+    ///                                 },
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArgs
+    ///                                 {
+    ///                                     Services = "FILEBEAT-7.2.0",
+    ///                                     Roles = new[]
+    ///                                     {
+    ///                                         "Filebeat",
+    ///                                     },
+    ///                                 },
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArgs
+    ///                                 {
+    ///                                     Services = "HDFS-3.3.4",
+    ///                                     Roles = new[]
+    ///                                     {
+    ///                                         "DataNode",
+    ///                                     },
+    ///                                 },
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArgs
+    ///                                 {
+    ///                                     Services = "YARN-3.3.4",
+    ///                                     Roles = new[]
+    ///                                     {
+    ///                                         "NodeManager",
+    ///                                     },
+    ///                                 },
+    ///                             },
+    ///                         },
+    ///                         new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArgs
+    ///                         {
+    ///                             _nodeIndex = "core_node_2",
+    ///                             InstanceType = "SA5.LARGE8",
+    ///                             SystemDisk = new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskArgs
+    ///                             {
+    ///                                 DiskSize = 100,
+    ///                                 DiskType = "CLOUD_HSSD",
+    ///                             },
+    ///                             DataDisks = new[]
+    ///                             {
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArgs
+    ///                                 {
+    ///                                     _diskIndex = "core_disk_1",
+    ///                                     DiskSize = 100,
+    ///                                     DiskType = "CLOUD_SSD",
+    ///                                 },
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArgs
+    ///                                 {
+    ///                                     _diskIndex = "core_disk_2",
+    ///                                     DiskSize = 100,
+    ///                                     DiskType = "CLOUD_SSD",
+    ///                                 },
+    ///                             },
+    ///                             Softwares = new[]
+    ///                             {
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArgs
+    ///                                 {
+    ///                                     Services = "RUNTIME-1.0.0",
+    ///                                     Roles = new[]
+    ///                                     {
+    ///                                         "Sysctl",
+    ///                                     },
+    ///                                 },
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArgs
+    ///                                 {
+    ///                                     Services = "FILEBEAT-7.2.0",
+    ///                                     Roles = new[]
+    ///                                     {
+    ///                                         "Filebeat",
+    ///                                     },
+    ///                                 },
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArgs
+    ///                                 {
+    ///                                     Services = "HDFS-3.3.4",
+    ///                                     Roles = new[]
+    ///                                     {
+    ///                                         "DataNode",
+    ///                                     },
+    ///                                 },
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArgs
+    ///                                 {
+    ///                                     Services = "YARN-3.3.4",
+    ///                                     Roles = new[]
+    ///                                     {
+    ///                                         "NodeManager",
+    ///                                     },
+    ///                                 },
+    ///                             },
+    ///                         },
+    ///                         new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecArgs
+    ///                         {
+    ///                             _nodeIndex = "core_node_3",
+    ///                             InstanceType = "SA5.LARGE8",
+    ///                             SystemDisk = new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSystemDiskArgs
+    ///                             {
+    ///                                 DiskSize = 100,
+    ///                                 DiskType = "CLOUD_HSSD",
+    ///                             },
+    ///                             DataDisks = new[]
+    ///                             {
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArgs
+    ///                                 {
+    ///                                     _diskIndex = "core_disk_1",
+    ///                                     DiskSize = 100,
+    ///                                     DiskType = "CLOUD_SSD",
+    ///                                 },
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecDataDiskArgs
+    ///                                 {
+    ///                                     _diskIndex = "core_disk_2",
+    ///                                     DiskSize = 100,
+    ///                                     DiskType = "CLOUD_SSD",
+    ///                                 },
+    ///                             },
+    ///                             Softwares = new[]
+    ///                             {
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArgs
+    ///                                 {
+    ///                                     Services = "RUNTIME-1.0.0",
+    ///                                     Roles = new[]
+    ///                                     {
+    ///                                         "Sysctl",
+    ///                                     },
+    ///                                 },
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArgs
+    ///                                 {
+    ///                                     Services = "FILEBEAT-7.2.0",
+    ///                                     Roles = new[]
+    ///                                     {
+    ///                                         "Filebeat",
+    ///                                     },
+    ///                                 },
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArgs
+    ///                                 {
+    ///                                     Services = "HDFS-3.3.4",
+    ///                                     Roles = new[]
+    ///                                     {
+    ///                                         "DataNode",
+    ///                                     },
+    ///                                 },
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCoreResourceSpecSoftwareArgs
+    ///                                 {
+    ///                                     Services = "YARN-3.3.4",
+    ///                                     Roles = new[]
+    ///                                     {
+    ///                                         "NodeManager",
+    ///                                     },
+    ///                                 },
+    ///                             },
+    ///                         },
+    ///                     },
+    ///                     TaskResourceSpecs = new[]
+    ///                     {
+    ///                         new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArgs
+    ///                         {
+    ///                             _nodeIndex = "task_node_1",
+    ///                             InstanceType = "SA5.LARGE8",
+    ///                             SystemDisk = new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskArgs
+    ///                             {
+    ///                                 DiskSize = 100,
+    ///                                 DiskType = "CLOUD_HSSD",
+    ///                             },
+    ///                             DataDisks = new[]
+    ///                             {
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArgs
+    ///                                 {
+    ///                                     _diskIndex = "task_disk_1",
+    ///                                     DiskSize = 100,
+    ///                                     DiskType = "CLOUD_SSD",
+    ///                                 },
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArgs
+    ///                                 {
+    ///                                     _diskIndex = "task_disk_2",
+    ///                                     DiskSize = 100,
+    ///                                     DiskType = "CLOUD_SSD",
+    ///                                 },
+    ///                             },
+    ///                             Softwares = new[]
+    ///                             {
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArgs
+    ///                                 {
+    ///                                     Services = "RUNTIME-1.0.0",
+    ///                                     Roles = new[]
+    ///                                     {
+    ///                                         "Sysctl",
+    ///                                     },
+    ///                                 },
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArgs
+    ///                                 {
+    ///                                     Services = "FILEBEAT-7.2.0",
+    ///                                     Roles = new[]
+    ///                                     {
+    ///                                         "Filebeat",
+    ///                                     },
+    ///                                 },
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArgs
+    ///                                 {
+    ///                                     Services = "YARN-3.3.4",
+    ///                                     Roles = new[]
+    ///                                     {
+    ///                                         "NodeManager",
+    ///                                     },
+    ///                                 },
+    ///                             },
+    ///                         },
+    ///                         new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecArgs
+    ///                         {
+    ///                             _nodeIndex = "task_node_2",
+    ///                             InstanceType = "SA5.LARGE8",
+    ///                             SystemDisk = new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSystemDiskArgs
+    ///                             {
+    ///                                 DiskSize = 100,
+    ///                                 DiskType = "CLOUD_HSSD",
+    ///                             },
+    ///                             DataDisks = new[]
+    ///                             {
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArgs
+    ///                                 {
+    ///                                     _diskIndex = "task_disk_1",
+    ///                                     DiskSize = 100,
+    ///                                     DiskType = "CLOUD_SSD",
+    ///                                 },
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecDataDiskArgs
+    ///                                 {
+    ///                                     _diskIndex = "task_disk_2",
+    ///                                     DiskSize = 100,
+    ///                                     DiskType = "CLOUD_SSD",
+    ///                                 },
+    ///                             },
+    ///                             Softwares = new[]
+    ///                             {
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArgs
+    ///                                 {
+    ///                                     Services = "RUNTIME-1.0.0",
+    ///                                     Roles = new[]
+    ///                                     {
+    ///                                         "Sysctl",
+    ///                                     },
+    ///                                 },
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArgs
+    ///                                 {
+    ///                                     Services = "FILEBEAT-7.2.0",
+    ///                                     Roles = new[]
+    ///                                     {
+    ///                                         "Filebeat",
+    ///                                     },
+    ///                                 },
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecTaskResourceSpecSoftwareArgs
+    ///                                 {
+    ///                                     Services = "YARN-3.3.4",
+    ///                                     Roles = new[]
+    ///                                     {
+    ///                                         "NodeManager",
+    ///                                     },
+    ///                                 },
+    ///                             },
+    ///                         },
+    ///                     },
+    ///                     CommonResourceSpecs = new[]
+    ///                     {
+    ///                         new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArgs
+    ///                         {
+    ///                             _nodeIndex = "common_node_1",
+    ///                             InstanceType = "SA5.LARGE8",
+    ///                             SystemDisk = new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskArgs
+    ///                             {
+    ///                                 DiskSize = 100,
+    ///                                 DiskType = "CLOUD_HSSD",
+    ///                             },
+    ///                             DataDisks = new[]
+    ///                             {
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArgs
+    ///                                 {
+    ///                                     _diskIndex = "common_disk_1",
+    ///                                     DiskSize = 100,
+    ///                                     DiskType = "CLOUD_SSD",
+    ///                                 },
+    ///                             },
+    ///                             Softwares = new[]
+    ///                             {
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArgs
+    ///                                 {
+    ///                                     Services = "RUNTIME-1.0.0",
+    ///                                     Roles = new[]
+    ///                                     {
+    ///                                         "Sysctl",
+    ///                                     },
+    ///                                 },
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArgs
+    ///                                 {
+    ///                                     Services = "FILEBEAT-7.2.0",
+    ///                                     Roles = new[]
+    ///                                     {
+    ///                                         "Filebeat",
+    ///                                     },
+    ///                                 },
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArgs
+    ///                                 {
+    ///                                     Services = "HDFS-3.3.4",
+    ///                                     Roles = new[]
+    ///                                     {
+    ///                                         "JournalNode",
+    ///                                     },
+    ///                                 },
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArgs
+    ///                                 {
+    ///                                     Services = "ZOOKEEPER-3.8.4",
+    ///                                     Roles = new[]
+    ///                                     {
+    ///                                         "Zookeeper",
+    ///                                     },
+    ///                                 },
+    ///                             },
+    ///                         },
+    ///                         new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArgs
+    ///                         {
+    ///                             _nodeIndex = "common_node_2",
+    ///                             InstanceType = "SA5.LARGE8",
+    ///                             SystemDisk = new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskArgs
+    ///                             {
+    ///                                 DiskSize = 100,
+    ///                                 DiskType = "CLOUD_HSSD",
+    ///                             },
+    ///                             DataDisks = new[]
+    ///                             {
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArgs
+    ///                                 {
+    ///                                     _diskIndex = "common_disk_1",
+    ///                                     DiskSize = 100,
+    ///                                     DiskType = "CLOUD_SSD",
+    ///                                 },
+    ///                             },
+    ///                             Softwares = new[]
+    ///                             {
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArgs
+    ///                                 {
+    ///                                     Services = "RUNTIME-1.0.0",
+    ///                                     Roles = new[]
+    ///                                     {
+    ///                                         "Sysctl",
+    ///                                     },
+    ///                                 },
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArgs
+    ///                                 {
+    ///                                     Services = "FILEBEAT-7.2.0",
+    ///                                     Roles = new[]
+    ///                                     {
+    ///                                         "Filebeat",
+    ///                                     },
+    ///                                 },
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArgs
+    ///                                 {
+    ///                                     Services = "HDFS-3.3.4",
+    ///                                     Roles = new[]
+    ///                                     {
+    ///                                         "JournalNode",
+    ///                                     },
+    ///                                 },
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArgs
+    ///                                 {
+    ///                                     Services = "ZOOKEEPER-3.8.4",
+    ///                                     Roles = new[]
+    ///                                     {
+    ///                                         "Zookeeper",
+    ///                                     },
+    ///                                 },
+    ///                             },
+    ///                         },
+    ///                         new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecArgs
+    ///                         {
+    ///                             _nodeIndex = "common_node_3",
+    ///                             InstanceType = "SA5.LARGE8",
+    ///                             SystemDisk = new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSystemDiskArgs
+    ///                             {
+    ///                                 DiskSize = 100,
+    ///                                 DiskType = "CLOUD_HSSD",
+    ///                             },
+    ///                             DataDisks = new[]
+    ///                             {
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecDataDiskArgs
+    ///                                 {
+    ///                                     _diskIndex = "common_disk_1",
+    ///                                     DiskSize = 100,
+    ///                                     DiskType = "CLOUD_SSD",
+    ///                                 },
+    ///                             },
+    ///                             Softwares = new[]
+    ///                             {
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArgs
+    ///                                 {
+    ///                                     Services = "RUNTIME-1.0.0",
+    ///                                     Roles = new[]
+    ///                                     {
+    ///                                         "Sysctl",
+    ///                                     },
+    ///                                 },
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArgs
+    ///                                 {
+    ///                                     Services = "FILEBEAT-7.2.0",
+    ///                                     Roles = new[]
+    ///                                     {
+    ///                                         "Filebeat",
+    ///                                     },
+    ///                                 },
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArgs
+    ///                                 {
+    ///                                     Services = "HDFS-3.3.4",
+    ///                                     Roles = new[]
+    ///                                     {
+    ///                                         "JournalNode",
+    ///                                     },
+    ///                                 },
+    ///                                 new Tencentcloud.Emr.Inputs.ClusterV2ZoneResourceConfigurationAllNodeResourceSpecCommonResourceSpecSoftwareArgs
+    ///                                 {
+    ///                                     Services = "ZOOKEEPER-3.8.4",
+    ///                                     Roles = new[]
+    ///                                     {
+    ///                                         "Zookeeper",
+    ///                                     },
+    ///                                 },
+    ///                             },
+    ///                         },
+    ///                     },
+    ///                 },
+    ///             },
+    ///         },
+    ///         MetaDbGroupInfos = new[]
+    ///         {
+    ///             new Tencentcloud.Emr.Inputs.ClusterV2MetaDbGroupInfoArgs
+    ///             {
+    ///                 MetaType = "EMR_DEFAULT_META",
+    ///                 Components = new[]
+    ///                 {
+    ///                     "RANGER",
+    ///                 },
+    ///                 DefaultMetaVersion = "mysql8",
+    ///             },
+    ///             new Tencentcloud.Emr.Inputs.ClusterV2MetaDbGroupInfoArgs
+    ///             {
+    ///                 MetaType = "USER_CUSTOM_META",
+    ///                 Components = new[]
+    ///                 {
+    ///                     "HIVE",
+    ///                 },
+    ///                 MetaDataJdbcUrl = "jdbc:mysql://10.0.30.13:3306/hivemetastore",
+    ///                 MetaDataUser = "root",
+    ///                 MetaDataPass = "Password@123",
+    ///             },
+    ///             new Tencentcloud.Emr.Inputs.ClusterV2MetaDbGroupInfoArgs
+    ///             {
+    ///                 MetaType = "EMR_EXIST_META",
+    ///                 Components = new[]
+    ///                 {
+    ///                     "HUE",
+    ///                 },
+    ///                 UnifyMetaInstanceId = "cdb-jg8rqjn0",
+    ///             },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateCluster](https://www.tencentcloud.com/document/api/1026/52522)
+    ///   - [DescribeClusterFlowStatusDetail](https://www.tencentcloud.com/document/api/1026/73259)
+    ///   - [DescribeInstances](https://www.tencentcloud.com/document/api/1026/31052)
+    ///   - [ScaleOutCluster](https://www.tencentcloud.com/document/api/1026/52521)
+    /// * Read:
+    ///   - [DescribeClusterNodes](https://www.tencentcloud.com/document/api/1026/35198)
+    ///   - [DescribeInstances](https://www.tencentcloud.com/document/api/1026/31052)
+    ///   - [DescribeMetaDBInfo](https://www.tencentcloud.com/document/api/1026/84709)
+    ///   - [DescribeNodeDataDisks](https://www.tencentcloud.com/document/api/1026/73216)
+    /// * Update:
+    ///   - [AttachDisks](https://www.tencentcloud.com/document/api/1026/73274)
+    ///   - [DescribeClusterFlowStatusDetail](https://www.tencentcloud.com/document/api/1026/73259)
+    ///   - [InstallSoftware](https://www.tencentcloud.com/document/api/1026/84708)
+    ///   - [ModifyInstanceBasic](https://www.tencentcloud.com/document/api/1026/73226)
+    ///   - [ModifyResource](https://www.tencentcloud.com/document/api/1026/73270)
+    ///   - [ModifyResourcesTags](https://www.tencentcloud.com/document/api/1026/58392)
+    ///   - [ResizeDataDisks](https://www.tencentcloud.com/document/api/1026/73268)
+    ///   - [ScaleOutCluster](https://www.tencentcloud.com/document/api/1026/52521)
+    ///   - [TerminateClusterNodes](https://www.tencentcloud.com/document/api/1026/54558)
+    /// * Delete:
+    ///   - [DescribeInstances](https://www.tencentcloud.com/document/api/1026/31052)
+    ///   - [TerminateInstance](https://www.tencentcloud.com/document/api/1026/31044)
+    /// 
     /// ## Import
     /// 
     /// EMR cluster (v2) can be imported using the instance ID, e.g.
@@ -801,6 +1597,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         /// </summary>
         [Output("loginSettings")]
         public Output<Outputs.ClusterV2LoginSettings> LoginSettings { get; private set; } = null!;
+
+        /// <summary>
+        /// Custom MetaDB group information of the cluster. It can only be set on create (CreateCluster) and cannot be changed afterwards. A component can belong to only one block. The query result (DescribeMetaDBInfo) is matched to the blocks by `Components`, so the block order follows the configuration; fields that are not configured are filled in from the query result. When `MetaType` is `EMR_EXIST_META`, `UnifyMetaInstanceId` must be set; when `USER_CUSTOM_META`, `MetaDataJdbcUrl`/`MetaDataUser`/`MetaDataPass` must be set.
+        /// </summary>
+        [Output("metaDbGroupInfos")]
+        public Output<ImmutableArray<Outputs.ClusterV2MetaDbGroupInfo>> MetaDbGroupInfos { get; private set; } = null!;
 
         /// <summary>
         /// Metadata database information. When `MetaType` is `EMR_NEW_META`/`EMR_DEFAULT_META`, no extra fields are required; when `EMR_EXIT_META`, `UnifyMetaInstanceId` must be set; when `USER_CUSTOM_META`, `MetaDataJdbcUrl`/`MetaDataUser`/`MetaDataPass` must be set.
@@ -1029,6 +1831,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         [Input("loginSettings", required: true)]
         public Input<Inputs.ClusterV2LoginSettingsArgs> LoginSettings { get; set; } = null!;
 
+        [Input("metaDbGroupInfos")]
+        private InputList<Inputs.ClusterV2MetaDbGroupInfoArgs>? _metaDbGroupInfos;
+
+        /// <summary>
+        /// Custom MetaDB group information of the cluster. It can only be set on create (CreateCluster) and cannot be changed afterwards. A component can belong to only one block. The query result (DescribeMetaDBInfo) is matched to the blocks by `Components`, so the block order follows the configuration; fields that are not configured are filled in from the query result. When `MetaType` is `EMR_EXIST_META`, `UnifyMetaInstanceId` must be set; when `USER_CUSTOM_META`, `MetaDataJdbcUrl`/`MetaDataUser`/`MetaDataPass` must be set.
+        /// </summary>
+        public InputList<Inputs.ClusterV2MetaDbGroupInfoArgs> MetaDbGroupInfos
+        {
+            get => _metaDbGroupInfos ?? (_metaDbGroupInfos = new InputList<Inputs.ClusterV2MetaDbGroupInfoArgs>());
+            set => _metaDbGroupInfos = value;
+        }
+
         /// <summary>
         /// Metadata database information. When `MetaType` is `EMR_NEW_META`/`EMR_DEFAULT_META`, no extra fields are required; when `EMR_EXIT_META`, `UnifyMetaInstanceId` must be set; when `USER_CUSTOM_META`, `MetaDataJdbcUrl`/`MetaDataUser`/`MetaDataPass` must be set.
         /// </summary>
@@ -1234,6 +2048,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         /// </summary>
         [Input("loginSettings")]
         public Input<Inputs.ClusterV2LoginSettingsGetArgs>? LoginSettings { get; set; }
+
+        [Input("metaDbGroupInfos")]
+        private InputList<Inputs.ClusterV2MetaDbGroupInfoGetArgs>? _metaDbGroupInfos;
+
+        /// <summary>
+        /// Custom MetaDB group information of the cluster. It can only be set on create (CreateCluster) and cannot be changed afterwards. A component can belong to only one block. The query result (DescribeMetaDBInfo) is matched to the blocks by `Components`, so the block order follows the configuration; fields that are not configured are filled in from the query result. When `MetaType` is `EMR_EXIST_META`, `UnifyMetaInstanceId` must be set; when `USER_CUSTOM_META`, `MetaDataJdbcUrl`/`MetaDataUser`/`MetaDataPass` must be set.
+        /// </summary>
+        public InputList<Inputs.ClusterV2MetaDbGroupInfoGetArgs> MetaDbGroupInfos
+        {
+            get => _metaDbGroupInfos ?? (_metaDbGroupInfos = new InputList<Inputs.ClusterV2MetaDbGroupInfoGetArgs>());
+            set => _metaDbGroupInfos = value;
+        }
 
         /// <summary>
         /// Metadata database information. When `MetaType` is `EMR_NEW_META`/`EMR_DEFAULT_META`, no extra fields are required; when `EMR_EXIT_META`, `UnifyMetaInstanceId` must be set; when `USER_CUSTOM_META`, `MetaDataJdbcUrl`/`MetaDataUser`/`MetaDataPass` must be set.

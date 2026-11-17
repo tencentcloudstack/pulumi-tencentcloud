@@ -119,6 +119,18 @@ class TableAssociation(pulumi.CustomResource):
             subnet_id="subnet-2y2omd4k")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ReplaceRouteTableAssociation](https://www.tencentcloud.com/document/api/215/15767)
+        * Read: [DescribeSubnets](https://www.tencentcloud.com/document/api/215/15784)
+        * Update: [ReplaceRouteTableAssociation](https://www.tencentcloud.com/document/api/215/15767)
+        * Delete:
+          - [DescribeRouteTables](https://www.tencentcloud.com/document/api/215/15763)
+          - [DescribeSubnets](https://www.tencentcloud.com/document/api/215/15784)
+          - [ReplaceRouteTableAssociation](https://www.tencentcloud.com/document/api/215/15767)
+
         ## Import
 
         vpc route_table can be imported using the id, e.g.
@@ -152,6 +164,18 @@ class TableAssociation(pulumi.CustomResource):
             route_table_id="rtb-5toos5sy",
             subnet_id="subnet-2y2omd4k")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ReplaceRouteTableAssociation](https://www.tencentcloud.com/document/api/215/15767)
+        * Read: [DescribeSubnets](https://www.tencentcloud.com/document/api/215/15784)
+        * Update: [ReplaceRouteTableAssociation](https://www.tencentcloud.com/document/api/215/15767)
+        * Delete:
+          - [DescribeRouteTables](https://www.tencentcloud.com/document/api/215/15763)
+          - [DescribeSubnets](https://www.tencentcloud.com/document/api/215/15784)
+          - [ReplaceRouteTableAssociation](https://www.tencentcloud.com/document/api/215/15767)
 
         ## Import
 

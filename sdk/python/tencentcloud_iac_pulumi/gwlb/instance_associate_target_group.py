@@ -154,6 +154,13 @@ class InstanceAssociateTargetGroup(pulumi.CustomResource):
             target_group_id=gwlb_target_group.id)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AssociateTargetGroups](https://www.tencentcloud.com/document/api/1245/66067)
+        * Delete: [DisassociateTargetGroups](https://www.tencentcloud.com/document/api/1245/66059)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -214,6 +221,13 @@ class InstanceAssociateTargetGroup(pulumi.CustomResource):
             load_balancer_id=gwlb_instance.id,
             target_group_id=gwlb_target_group.id)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AssociateTargetGroups](https://www.tencentcloud.com/document/api/1245/66067)
+        * Delete: [DisassociateTargetGroups](https://www.tencentcloud.com/document/api/1245/66059)
 
 
         :param str resource_name: The name of the resource.

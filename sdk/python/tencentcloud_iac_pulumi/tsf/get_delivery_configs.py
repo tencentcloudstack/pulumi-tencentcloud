@@ -96,6 +96,12 @@ def get_delivery_configs(result_output_file: Optional[_builtins.str] = None,
     delivery_configs = tencentcloud.tsf.get_delivery_configs(search_word="test")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDeliveryConfigs](https://www.tencentcloud.com/search/?wd=DescribeDeliveryConfigs&type=document&lang=en)
+
 
     :param _builtins.str result_output_file: Used to save results.
     :param _builtins.str search_word: search word.
@@ -125,6 +131,12 @@ def get_delivery_configs_output(result_output_file: pulumi.Input[Optional[Option
 
     delivery_configs = tencentcloud.tsf.get_delivery_configs(search_word="test")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDeliveryConfigs](https://www.tencentcloud.com/search/?wd=DescribeDeliveryConfigs&type=document&lang=en)
 
 
     :param _builtins.str result_output_file: Used to save results.

@@ -110,6 +110,12 @@ def get_zone_config(region: Optional[_builtins.str] = None,
         result_output_file="/temp/mytestpath")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeProductInfo](https://www.tencentcloud.com/document/api/239/32077)
+
 
     :param _builtins.str region: Name of a region. If this value is not set, the current region getting from provider's configuration will be used.
     :param _builtins.str result_output_file: Used to save results.
@@ -144,6 +150,12 @@ def get_zone_config_output(region: pulumi.Input[Optional[Optional[_builtins.str]
     redislab = tencentcloud.redis.get_zone_config(region="ap-hongkong",
         result_output_file="/temp/mytestpath")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeProductInfo](https://www.tencentcloud.com/document/api/239/32077)
 
 
     :param _builtins.str region: Name of a region. If this value is not set, the current region getting from provider's configuration will be used.

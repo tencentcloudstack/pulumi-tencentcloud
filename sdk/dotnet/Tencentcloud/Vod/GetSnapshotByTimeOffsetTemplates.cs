@@ -44,6 +44,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSnapshotByTimeOffsetTemplates](https://www.tencentcloud.com/document/api/266/34145)
         /// </summary>
         public static Task<GetSnapshotByTimeOffsetTemplatesResult> InvokeAsync(GetSnapshotByTimeOffsetTemplatesArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSnapshotByTimeOffsetTemplatesResult>("tencentcloud:Vod/getSnapshotByTimeOffsetTemplates:getSnapshotByTimeOffsetTemplates", args ?? new GetSnapshotByTimeOffsetTemplatesArgs(), options.WithDefaults());
@@ -80,6 +86,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSnapshotByTimeOffsetTemplates](https://www.tencentcloud.com/document/api/266/34145)
         /// </summary>
         public static Output<GetSnapshotByTimeOffsetTemplatesResult> Invoke(GetSnapshotByTimeOffsetTemplatesInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSnapshotByTimeOffsetTemplatesResult>("tencentcloud:Vod/getSnapshotByTimeOffsetTemplates:getSnapshotByTimeOffsetTemplates", args ?? new GetSnapshotByTimeOffsetTemplatesInvokeArgs(), options.WithDefaults());
@@ -116,6 +128,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSnapshotByTimeOffsetTemplates](https://www.tencentcloud.com/document/api/266/34145)
         /// </summary>
         public static Output<GetSnapshotByTimeOffsetTemplatesResult> Invoke(GetSnapshotByTimeOffsetTemplatesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetSnapshotByTimeOffsetTemplatesResult>("tencentcloud:Vod/getSnapshotByTimeOffsetTemplates:getSnapshotByTimeOffsetTemplates", args ?? new GetSnapshotByTimeOffsetTemplatesInvokeArgs(), options.WithDefaults());

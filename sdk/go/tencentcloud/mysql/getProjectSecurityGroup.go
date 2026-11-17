@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeProjectSecurityGroups](https://www.tencentcloud.com/document/api/236/15850)
 func GetProjectSecurityGroup(ctx *pulumi.Context, args *GetProjectSecurityGroupArgs, opts ...pulumi.InvokeOption) (*GetProjectSecurityGroupResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetProjectSecurityGroupResult

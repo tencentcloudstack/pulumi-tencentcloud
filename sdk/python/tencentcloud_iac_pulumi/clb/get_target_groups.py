@@ -148,6 +148,14 @@ def get_target_groups(result_output_file: Optional[_builtins.str] = None,
     target_group_info_id = tencentcloud.clb.get_target_groups_output(target_group_id=test.id)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeTargetGroupInstances](https://www.tencentcloud.com/document/api/214/33828)
+      - [DescribeTargetGroups](https://www.tencentcloud.com/document/api/214/33826)
+
 
     :param _builtins.str result_output_file: Used to save results.
     :param _builtins.str target_group_id: ID of Target group. Mutually exclusive with `vpc_id` and `target_group_name`. `target_group_id` is preferred.
@@ -208,6 +216,14 @@ def get_target_groups_output(result_output_file: pulumi.Input[Optional[Optional[
         targrt_group_id=test.id)
     target_group_info_id = tencentcloud.clb.get_target_groups_output(target_group_id=test.id)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeTargetGroupInstances](https://www.tencentcloud.com/document/api/214/33828)
+      - [DescribeTargetGroups](https://www.tencentcloud.com/document/api/214/33826)
 
 
     :param _builtins.str result_output_file: Used to save results.

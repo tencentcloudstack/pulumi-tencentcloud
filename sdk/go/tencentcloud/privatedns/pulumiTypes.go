@@ -453,8 +453,10 @@ type ZoneAccountVpcSet struct {
 	Uin string `pulumi:"uin"`
 	// VPC ID.
 	UniqVpcId string `pulumi:"uniqVpcId"`
-	// VPC NAME.
-	VpcName string `pulumi:"vpcName"`
+	// It has been deprecated from version 1.83.35. Please do not re-enter this field as entering a value will be ignored. VPC NAME.
+	//
+	// Deprecated: It has been deprecated from version 1.83.35. Please do not re-enter this field as entering a value will be ignored.
+	VpcName *string `pulumi:"vpcName"`
 }
 
 // ZoneAccountVpcSetInput is an input type that accepts ZoneAccountVpcSetArgs and ZoneAccountVpcSetOutput values.
@@ -475,8 +477,10 @@ type ZoneAccountVpcSetArgs struct {
 	Uin pulumi.StringInput `pulumi:"uin"`
 	// VPC ID.
 	UniqVpcId pulumi.StringInput `pulumi:"uniqVpcId"`
-	// VPC NAME.
-	VpcName pulumi.StringInput `pulumi:"vpcName"`
+	// It has been deprecated from version 1.83.35. Please do not re-enter this field as entering a value will be ignored. VPC NAME.
+	//
+	// Deprecated: It has been deprecated from version 1.83.35. Please do not re-enter this field as entering a value will be ignored.
+	VpcName pulumi.StringPtrInput `pulumi:"vpcName"`
 }
 
 func (ZoneAccountVpcSetArgs) ElementType() reflect.Type {
@@ -545,9 +549,11 @@ func (o ZoneAccountVpcSetOutput) UniqVpcId() pulumi.StringOutput {
 	return o.ApplyT(func(v ZoneAccountVpcSet) string { return v.UniqVpcId }).(pulumi.StringOutput)
 }
 
-// VPC NAME.
-func (o ZoneAccountVpcSetOutput) VpcName() pulumi.StringOutput {
-	return o.ApplyT(func(v ZoneAccountVpcSet) string { return v.VpcName }).(pulumi.StringOutput)
+// It has been deprecated from version 1.83.35. Please do not re-enter this field as entering a value will be ignored. VPC NAME.
+//
+// Deprecated: It has been deprecated from version 1.83.35. Please do not re-enter this field as entering a value will be ignored.
+func (o ZoneAccountVpcSetOutput) VpcName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ZoneAccountVpcSet) *string { return v.VpcName }).(pulumi.StringPtrOutput)
 }
 
 type ZoneAccountVpcSetArrayOutput struct{ *pulumi.OutputState }

@@ -36,6 +36,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListAsyncEvents](https://www.tencentcloud.com/document/api/583/39734)
         /// </summary>
         public static Task<GetAsyncEventManagementResult> InvokeAsync(GetAsyncEventManagementArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetAsyncEventManagementResult>("tencentcloud:Scf/getAsyncEventManagement:getAsyncEventManagement", args ?? new GetAsyncEventManagementArgs(), options.WithDefaults());
@@ -64,6 +70,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListAsyncEvents](https://www.tencentcloud.com/document/api/583/39734)
         /// </summary>
         public static Output<GetAsyncEventManagementResult> Invoke(GetAsyncEventManagementInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetAsyncEventManagementResult>("tencentcloud:Scf/getAsyncEventManagement:getAsyncEventManagement", args ?? new GetAsyncEventManagementInvokeArgs(), options.WithDefaults());
@@ -92,6 +104,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListAsyncEvents](https://www.tencentcloud.com/document/api/583/39734)
         /// </summary>
         public static Output<GetAsyncEventManagementResult> Invoke(GetAsyncEventManagementInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetAsyncEventManagementResult>("tencentcloud:Scf/getAsyncEventManagement:getAsyncEventManagement", args ?? new GetAsyncEventManagementInvokeArgs(), options.WithDefaults());

@@ -64,6 +64,12 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [StartInstanceXEvent](https://www.tencentcloud.com/document/api/238/54813)
  */
 export class StartXevent extends pulumi.CustomResource {
     /**

@@ -72,7 +72,7 @@ class ImmutableTagRuleRuleArgsDict(TypedDict):
     """
     id: NotRequired[pulumi.Input[Optional[_builtins.int]]]
     """
-    ID of the resource.
+    rule id.
     """
     ns_name: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
@@ -95,7 +95,7 @@ class ImmutableTagRuleRuleArgs:
         :param pulumi.Input[_builtins.str] tag_decoration: tag decoration type: matches or excludes.
         :param pulumi.Input[_builtins.str] tag_pattern: tag matching rules.
         :param pulumi.Input[_builtins.bool] disabled: disable rule.
-        :param pulumi.Input[_builtins.int] id: ID of the resource.
+        :param pulumi.Input[_builtins.int] id: rule id.
         :param pulumi.Input[_builtins.str] ns_name: namespace name.
         """
         pulumi.set(__self__, "repository_decoration", repository_decoration)
@@ -173,7 +173,7 @@ class ImmutableTagRuleRuleArgs:
     @pulumi.getter
     def id(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
-        ID of the resource.
+        rule id.
         """
         return pulumi.get(self, "id")
 
@@ -197,7 +197,7 @@ class ImmutableTagRuleRuleArgs:
 class InstanceReplicationArgsDict(TypedDict):
     id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
-    ID of the resource.
+    Replication registry ID (readonly).
     """
     region_id: NotRequired[pulumi.Input[Optional[_builtins.int]]]
     """
@@ -220,7 +220,7 @@ class InstanceReplicationArgs:
                  region_name: pulumi.Input[Optional[_builtins.str]] = None,
                  syn_tag: pulumi.Input[Optional[_builtins.bool]] = None):
         """
-        :param pulumi.Input[_builtins.str] id: ID of the resource.
+        :param pulumi.Input[_builtins.str] id: Replication registry ID (readonly).
         :param pulumi.Input[_builtins.int] region_id: Replication region ID, check the example at the top of page to find out id of region.
         :param pulumi.Input[_builtins.str] region_name: Replication region name.
         :param pulumi.Input[_builtins.bool] syn_tag: Specify whether to sync TCR cloud tags to COS Bucket. NOTE: You have to specify when adding, modifying will be ignored for now.
@@ -238,7 +238,7 @@ class InstanceReplicationArgs:
     @pulumi.getter
     def id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        ID of the resource.
+        Replication registry ID (readonly).
         """
         return pulumi.get(self, "id")
 
@@ -488,6 +488,10 @@ class ReplicationRuleArgsDict(TypedDict):
     """
     Whether synchronous deletion event.
     """
+    enabled: NotRequired[pulumi.Input[Optional[_builtins.bool]]]
+    """
+    Whether to enable the rule.
+    """
 
 @pulumi.input_type
 class ReplicationRuleArgs:
@@ -496,13 +500,15 @@ class ReplicationRuleArgs:
                  filters: pulumi.Input[Sequence[pulumi.Input['ReplicationRuleFilterArgs']]],
                  name: pulumi.Input[_builtins.str],
                  override: pulumi.Input[_builtins.bool],
-                 deletion: pulumi.Input[Optional[_builtins.bool]] = None):
+                 deletion: pulumi.Input[Optional[_builtins.bool]] = None,
+                 enabled: pulumi.Input[Optional[_builtins.bool]] = None):
         """
         :param pulumi.Input[_builtins.str] dest_namespace: Destination namespace.
         :param pulumi.Input[Sequence[pulumi.Input['ReplicationRuleFilterArgs']]] filters: Synchronization filters.
         :param pulumi.Input[_builtins.str] name: Name of synchronization rule.
         :param pulumi.Input[_builtins.bool] override: Whether to override.
         :param pulumi.Input[_builtins.bool] deletion: Whether synchronous deletion event.
+        :param pulumi.Input[_builtins.bool] enabled: Whether to enable the rule.
         """
         pulumi.set(__self__, "dest_namespace", dest_namespace)
         pulumi.set(__self__, "filters", filters)
@@ -510,6 +516,8 @@ class ReplicationRuleArgs:
         pulumi.set(__self__, "override", override)
         if deletion is not None:
             pulumi.set(__self__, "deletion", deletion)
+        if enabled is not None:
+            pulumi.set(__self__, "enabled", enabled)
 
     @_builtins.property
     @pulumi.getter(name="destNamespace")
@@ -570,6 +578,18 @@ class ReplicationRuleArgs:
     @deletion.setter
     def deletion(self, value: pulumi.Input[Optional[_builtins.bool]]):
         pulumi.set(self, "deletion", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def enabled(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Whether to enable the rule.
+        """
+        return pulumi.get(self, "enabled")
+
+    @enabled.setter
+    def enabled(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "enabled", value)
 
 
 class ReplicationRuleFilterArgsDict(TypedDict):
@@ -955,7 +975,7 @@ class WebhookTriggerTriggerArgsDict(TypedDict):
     """
     id: NotRequired[pulumi.Input[Optional[_builtins.int]]]
     """
-    ID of the resource.
+    trigger Id.
     """
     namespace_id: NotRequired[pulumi.Input[Optional[_builtins.int]]]
     """
@@ -980,7 +1000,7 @@ class WebhookTriggerTriggerArgs:
         :param pulumi.Input[_builtins.str] name: trigger name.
         :param pulumi.Input[Sequence[pulumi.Input['WebhookTriggerTriggerTargetArgs']]] targets: trigger target.
         :param pulumi.Input[_builtins.str] description: trigger description.
-        :param pulumi.Input[_builtins.int] id: ID of the resource.
+        :param pulumi.Input[_builtins.int] id: trigger Id.
         :param pulumi.Input[_builtins.int] namespace_id: the namespace Id to which the trigger belongs.
         """
         pulumi.set(__self__, "condition", condition)
@@ -1071,7 +1091,7 @@ class WebhookTriggerTriggerArgs:
     @pulumi.getter
     def id(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
-        ID of the resource.
+        trigger Id.
         """
         return pulumi.get(self, "id")
 

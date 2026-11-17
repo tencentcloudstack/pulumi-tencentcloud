@@ -44,6 +44,23 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CreatePrivateNatGateway](https://www.tencentcloud.com/search/?wd=CreatePrivateNatGateway&type=document&lang=en)
+//   - [DescribePrivateNatGateways](https://www.tencentcloud.com/search/?wd=DescribePrivateNatGateways&type=document&lang=en)
+//
+// * Read: [DescribePrivateNatGateways](https://www.tencentcloud.com/search/?wd=DescribePrivateNatGateways&type=document&lang=en)
+// * Update:
+//   - [DescribePrivateNatGateways](https://www.tencentcloud.com/search/?wd=DescribePrivateNatGateways&type=document&lang=en)
+//   - [ModifyPrivateNatGatewayAttribute](https://www.tencentcloud.com/search/?wd=ModifyPrivateNatGatewayAttribute&type=document&lang=en)
+//
+// * Delete:
+//   - [DeletePrivateNatGateway](https://www.tencentcloud.com/search/?wd=DeletePrivateNatGateway&type=document&lang=en)
+//   - [DescribePrivateNatGateways](https://www.tencentcloud.com/search/?wd=DescribePrivateNatGateways&type=document&lang=en)
+//
 // ## Import
 //
 // VPC private nat gateway can be imported using the id, e.g.

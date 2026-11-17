@@ -423,6 +423,21 @@ class CngwNetwork(pulumi.CustomResource):
             slave_zone_id="ap-guangzhou-4")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateCloudNativeAPIGatewayPublicNetwork](https://www.tencentcloud.com/document/api/1290/79293)
+          - [DescribePublicNetwork](https://www.tencentcloud.com/document/api/1290/79249)
+        * Read: [DescribePublicNetwork](https://www.tencentcloud.com/document/api/1290/79249)
+        * Update:
+          - [DescribePublicNetwork](https://www.tencentcloud.com/document/api/1290/79249)
+          - [ModifyNetworkBasicInfo](https://www.tencentcloud.com/document/api/1290/79233)
+        * Delete:
+          - [DeleteCloudNativeAPIGatewayPublicNetwork](https://www.tencentcloud.com/document/api/1290/79279)
+          - [DescribePublicNetwork](https://www.tencentcloud.com/document/api/1290/79249)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -464,6 +479,21 @@ class CngwNetwork(pulumi.CustomResource):
             sla_type="clb.c2.medium",
             slave_zone_id="ap-guangzhou-4")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateCloudNativeAPIGatewayPublicNetwork](https://www.tencentcloud.com/document/api/1290/79293)
+          - [DescribePublicNetwork](https://www.tencentcloud.com/document/api/1290/79249)
+        * Read: [DescribePublicNetwork](https://www.tencentcloud.com/document/api/1290/79249)
+        * Update:
+          - [DescribePublicNetwork](https://www.tencentcloud.com/document/api/1290/79249)
+          - [ModifyNetworkBasicInfo](https://www.tencentcloud.com/document/api/1290/79233)
+        * Delete:
+          - [DeleteCloudNativeAPIGatewayPublicNetwork](https://www.tencentcloud.com/document/api/1290/79279)
+          - [DescribePublicNetwork](https://www.tencentcloud.com/document/api/1290/79249)
 
 
         :param str resource_name: The name of the resource.

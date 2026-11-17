@@ -146,6 +146,14 @@ def get_functions(description: Optional[_builtins.str] = None,
     foo = tencentcloud.scf.get_functions_output(name=foo_function.name)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [GetFunction](https://www.tencentcloud.com/search/?wd=GetFunction&type=document&lang=en)
+      - [ListFunctions](https://www.tencentcloud.com/document/api/583/18582)
+
 
     :param _builtins.str description: Description of the SCF function to be queried.
     :param _builtins.str name: Name of the SCF function to be queried.
@@ -195,6 +203,14 @@ def get_functions_output(description: pulumi.Input[Optional[Optional[_builtins.s
         cos_bucket_region="ap-guangzhou")
     foo = tencentcloud.scf.get_functions_output(name=foo_function.name)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [GetFunction](https://www.tencentcloud.com/search/?wd=GetFunction&type=document&lang=en)
+      - [ListFunctions](https://www.tencentcloud.com/document/api/583/18582)
 
 
     :param _builtins.str description: Description of the SCF function to be queried.

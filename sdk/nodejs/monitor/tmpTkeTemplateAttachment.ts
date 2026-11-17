@@ -214,6 +214,14 @@ import * as utilities from "../utilities";
  *     dependsOn: [fooTmpTkeClusterAgent],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [SyncPrometheusTemp](https://www.tencentcloud.com/document/api/248/53314)
+ * * Read: [DescribePrometheusTempSync](https://www.tencentcloud.com/document/api/248/53317)
+ * * Delete: [DeletePrometheusTempSync](https://www.tencentcloud.com/document/api/248/53325)
  */
 export class TmpTkeTemplateAttachment extends pulumi.CustomResource {
     /**

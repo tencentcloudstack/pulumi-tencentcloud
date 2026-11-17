@@ -45,6 +45,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &Dashboard{}
 	case "tencentcloud:Cls/dataTransform:DataTransform":
 		r = &DataTransform{}
+	case "tencentcloud:Cls/deliverTask:DeliverTask":
+		r = &DeliverTask{}
 	case "tencentcloud:Cls/dlcDeliver:DlcDeliver":
 		r = &DlcDeliver{}
 	case "tencentcloud:Cls/export:Export":
@@ -65,8 +67,12 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &NoticeContent{}
 	case "tencentcloud:Cls/openServiceOperation:OpenServiceOperation":
 		r = &OpenServiceOperation{}
+	case "tencentcloud:Cls/remoteWriteTask:RemoteWriteTask":
+		r = &RemoteWriteTask{}
 	case "tencentcloud:Cls/scheduledSql:ScheduledSql":
 		r = &ScheduledSql{}
+	case "tencentcloud:Cls/splunkDeliver:SplunkDeliver":
+		r = &SplunkDeliver{}
 	case "tencentcloud:Cls/topic:Topic":
 		r = &Topic{}
 	case "tencentcloud:Cls/webCallback:WebCallback":
@@ -146,6 +152,11 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Cls/deliverTask",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Cls/dlcDeliver",
 		&module{version},
 	)
@@ -196,7 +207,17 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Cls/remoteWriteTask",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Cls/scheduledSql",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cls/splunkDeliver",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

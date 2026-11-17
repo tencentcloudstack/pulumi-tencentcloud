@@ -3,6 +3,7 @@
 
 # Export this package's modules as members:
 from ._inputs import *
+from .get_instance_nodes import *
 from .get_instances import *
 from .instance import *
 from .workload_group import *

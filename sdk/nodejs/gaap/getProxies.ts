@@ -26,6 +26,12 @@ import * as utilities from "../utilities";
  *     ids: [fooProxy.id],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeProxies](https://www.tencentcloud.com/document/api/608/33101)
  */
 export function getProxies(args?: GetProxiesArgs, opts?: pulumi.InvokeOptions): Promise<GetProxiesResult> {
     args = args || {};
@@ -121,6 +127,12 @@ export interface GetProxiesResult {
  *     ids: [fooProxy.id],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeProxies](https://www.tencentcloud.com/document/api/608/33101)
  */
 export function getProxiesOutput(args?: GetProxiesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetProxiesResult> {
     args = args || {};

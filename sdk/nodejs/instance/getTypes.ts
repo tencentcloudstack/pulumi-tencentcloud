@@ -117,6 +117,14 @@ import * as utilities from "../utilities";
  *     price: instance.price.length > 0 ? instance.price[0] : null,
  * })));
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeDiskConfigQuota](https://www.tencentcloud.com/document/api/362/16318)
+ *   - [DescribeZoneInstanceConfigInfos](https://www.tencentcloud.com/document/api/213/33254)
  */
 export function getTypes(args?: GetTypesArgs, opts?: pulumi.InvokeOptions): Promise<GetTypesResult> {
     args = args || {};
@@ -315,6 +323,14 @@ export interface GetTypesResult {
  *     price: instance.price.length > 0 ? instance.price[0] : null,
  * })));
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeDiskConfigQuota](https://www.tencentcloud.com/document/api/362/16318)
+ *   - [DescribeZoneInstanceConfigInfos](https://www.tencentcloud.com/document/api/213/33254)
  */
 export function getTypesOutput(args?: GetTypesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetTypesResult> {
     args = args || {};

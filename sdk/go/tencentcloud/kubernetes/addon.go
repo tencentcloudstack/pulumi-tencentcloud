@@ -65,6 +65,23 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [DescribeAddon](https://www.tencentcloud.com/document/api/457/56953)
+//   - [InstallAddon](https://www.tencentcloud.com/document/api/457/56951)
+//
+// * Read: [DescribeAddon](https://www.tencentcloud.com/document/api/457/56953)
+// * Update:
+//   - [DescribeAddon](https://www.tencentcloud.com/document/api/457/56953)
+//   - [UpdateAddon](https://www.tencentcloud.com/document/api/457/56950)
+//
+// * Delete:
+//   - [DeleteAddon](https://www.tencentcloud.com/document/api/457/56954)
+//   - [DescribeAddon](https://www.tencentcloud.com/document/api/457/56953)
+//
 // ## Import
 //
 // kubernetes cluster app addons can be imported using the id, e.g.

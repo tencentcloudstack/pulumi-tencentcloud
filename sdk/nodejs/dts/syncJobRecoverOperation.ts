@@ -15,6 +15,14 @@ import * as utilities from "../utilities";
  *
  * const syncJobRecoverOperation = new tencentcloud.dts.SyncJobRecoverOperation("sync_job_recover_operation", {jobId: "sync-werwfs23"});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeSyncJobs](https://www.tencentcloud.com/document/api/571/51793)
+ *   - [RecoverSyncJob](https://www.tencentcloud.com/document/api/571/51790)
  */
 export class SyncJobRecoverOperation extends pulumi.CustomResource {
     /**

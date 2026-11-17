@@ -32,6 +32,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateDiskBackup](https://www.tencentcloud.com/search/?wd=CreateDiskBackup&amp;type=document&amp;lang=en)
+    ///   - [DescribeDiskBackups](https://www.tencentcloud.com/search/?wd=DescribeDiskBackups&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeDiskBackups](https://www.tencentcloud.com/search/?wd=DescribeDiskBackups&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyDiskBackupsAttribute](https://www.tencentcloud.com/search/?wd=ModifyDiskBackupsAttribute&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteDiskBackups](https://www.tencentcloud.com/search/?wd=DeleteDiskBackups&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// lighthouse DiskBackup can be imported using the id, e.g.

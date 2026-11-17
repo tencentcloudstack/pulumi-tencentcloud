@@ -138,6 +138,12 @@ def get_describe_host_ddos_instance_list(certificate_id: Optional[_builtins.str]
         resource_type="ddos")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeHostDdosInstanceList](https://www.tencentcloud.com/search/?wd=DescribeHostDdosInstanceList&type=document&lang=en)
+
 
     :param _builtins.str certificate_id: Certificate ID to be deployed.
     :param Sequence[Union['GetDescribeHostDdosInstanceListFilterArgs', 'GetDescribeHostDdosInstanceListFilterArgsDict']] filters: List of filtering parameters; Filterkey: domainmatch.
@@ -184,6 +190,12 @@ def get_describe_host_ddos_instance_list_output(certificate_id: pulumi.Input[Opt
     describe_host_ddos_instance_list = tencentcloud.ssl.get_describe_host_ddos_instance_list(certificate_id="8u8DII0l",
         resource_type="ddos")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeHostDdosInstanceList](https://www.tencentcloud.com/search/?wd=DescribeHostDdosInstanceList&type=document&lang=en)
 
 
     :param _builtins.str certificate_id: Certificate ID to be deployed.

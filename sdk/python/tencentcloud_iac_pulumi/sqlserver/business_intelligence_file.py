@@ -223,6 +223,14 @@ class BusinessIntelligenceFile(pulumi.CustomResource):
             remark="desc.")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateBusinessIntelligenceFile](https://www.tencentcloud.com/document/api/238/50609)
+        * Read: [DescribeBusinessIntelligenceFile](https://www.tencentcloud.com/document/api/238/50607)
+        * Delete: [DeleteBusinessIntelligenceFile](https://www.tencentcloud.com/document/api/238/50608)
+
         ## Import
 
         sqlserver business_intelligence_file can be imported using the id, e.g.
@@ -297,6 +305,14 @@ class BusinessIntelligenceFile(pulumi.CustomResource):
             file_type="FLAT",
             remark="desc.")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateBusinessIntelligenceFile](https://www.tencentcloud.com/document/api/238/50609)
+        * Read: [DescribeBusinessIntelligenceFile](https://www.tencentcloud.com/document/api/238/50607)
+        * Delete: [DeleteBusinessIntelligenceFile](https://www.tencentcloud.com/document/api/238/50608)
 
         ## Import
 

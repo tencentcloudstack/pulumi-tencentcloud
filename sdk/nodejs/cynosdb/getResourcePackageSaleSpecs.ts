@@ -21,6 +21,12 @@ import * as utilities from "../utilities";
  *     packageType: "CCU",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeResourcePackageSaleSpec](https://www.tencentcloud.com/document/api/1098/55896)
  */
 export function getResourcePackageSaleSpecs(args: GetResourcePackageSaleSpecsArgs, opts?: pulumi.InvokeOptions): Promise<GetResourcePackageSaleSpecsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -92,6 +98,12 @@ export interface GetResourcePackageSaleSpecsResult {
  *     packageType: "CCU",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeResourcePackageSaleSpec](https://www.tencentcloud.com/document/api/1098/55896)
  */
 export function getResourcePackageSaleSpecsOutput(args: GetResourcePackageSaleSpecsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetResourcePackageSaleSpecsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

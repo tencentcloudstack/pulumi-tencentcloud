@@ -34,6 +34,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateLivePadRule](https://www.tencentcloud.com/document/api/267/71832)
+    /// * Read: [DescribeLivePadRules](https://www.tencentcloud.com/search/?wd=DescribeLivePadRules&amp;type=document&amp;lang=en)
+    /// * Delete:
+    ///   - [DeleteLivePadRule](https://www.tencentcloud.com/search/?wd=DeleteLivePadRule&amp;type=document&amp;lang=en)
+    ///   - [DescribeLivePadRules](https://www.tencentcloud.com/search/?wd=DescribeLivePadRules&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// css PadRuleAttachment can be imported using the id, e.g.

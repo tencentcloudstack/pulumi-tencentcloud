@@ -41,6 +41,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [DescribeDBInstanceAttribute](https://www.tencentcloud.com/document/api/409/16772)
+//   - [RenewInstance](https://www.tencentcloud.com/document/api/409/18098)
 type RenewDbInstanceOperation struct {
 	pulumi.CustomResourceState
 

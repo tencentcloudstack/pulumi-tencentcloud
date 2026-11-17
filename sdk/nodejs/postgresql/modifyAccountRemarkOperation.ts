@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     remark: "hello_world",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [ModifyAccountRemark](https://www.tencentcloud.com/document/api/409/18108)
  */
 export class ModifyAccountRemarkOperation extends pulumi.CustomResource {
     /**

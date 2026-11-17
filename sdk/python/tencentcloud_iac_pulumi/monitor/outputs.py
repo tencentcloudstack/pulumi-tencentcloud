@@ -90,6 +90,7 @@ __all__ = [
     'GetDataDimensionResult',
     'GetDataListResult',
     'GetGrafanaPluginOverviewsPluginSetResult',
+    'GetGrafanaVersionsVersionResult',
     'GetNoticeContentTmplsNoticeContentTmplListResult',
     'GetPolicyConditionsListEventMetricResult',
     'GetPolicyConditionsListMetricResult',
@@ -10056,6 +10057,35 @@ class GetGrafanaPluginOverviewsPluginSetResult(dict):
     def version(self) -> _builtins.str:
         """
         Grafana plugin version.
+        """
+        return pulumi.get(self, "version")
+
+
+@pulumi.output_type
+class GetGrafanaVersionsVersionResult(dict):
+    def __init__(__self__, *,
+                 alias: _builtins.str,
+                 version: _builtins.str):
+        """
+        :param _builtins.str alias: Grafana version alias.
+        :param _builtins.str version: Grafana version number.
+        """
+        pulumi.set(__self__, "alias", alias)
+        pulumi.set(__self__, "version", version)
+
+    @_builtins.property
+    @pulumi.getter
+    def alias(self) -> _builtins.str:
+        """
+        Grafana version alias.
+        """
+        return pulumi.get(self, "alias")
+
+    @_builtins.property
+    @pulumi.getter
+    def version(self) -> _builtins.str:
+        """
+        Grafana version number.
         """
         return pulumi.get(self, "version")
 

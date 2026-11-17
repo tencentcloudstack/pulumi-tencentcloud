@@ -24,6 +24,12 @@ import * as utilities from "../utilities";
  *     namespaceId: "namespace-aemrg36v",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeContainerGroups](https://www.tencentcloud.com/search/?wd=DescribeContainerGroups&type=document&lang=en)
  */
 export function getContainerGroup(args?: GetContainerGroupArgs, opts?: pulumi.InvokeOptions): Promise<GetContainerGroupResult> {
     args = args || {};
@@ -117,6 +123,12 @@ export interface GetContainerGroupResult {
  *     namespaceId: "namespace-aemrg36v",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeContainerGroups](https://www.tencentcloud.com/search/?wd=DescribeContainerGroups&type=document&lang=en)
  */
 export function getContainerGroupOutput(args?: GetContainerGroupOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetContainerGroupResult> {
     args = args || {};

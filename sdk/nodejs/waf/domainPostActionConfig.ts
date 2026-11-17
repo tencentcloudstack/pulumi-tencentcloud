@@ -20,6 +20,14 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [ModifyDomainPostAction](https://www.tencentcloud.com/document/api/627/66359)
+ * * Read: [DescribeDomains](https://www.tencentcloud.com/document/api/627/64580)
+ * * Update: [ModifyDomainPostAction](https://www.tencentcloud.com/document/api/627/66359)
+ *
  * ## Import
  *
  * WAF domain post action config can be imported using the id, e.g.

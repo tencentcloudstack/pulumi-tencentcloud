@@ -31,6 +31,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeLivePullStreamTaskStatus](https://www.tencentcloud.com/search/?wd=DescribeLivePullStreamTaskStatus&amp;type=document&amp;lang=en)
+    ///   - [RestartLivePullStreamTask](https://www.tencentcloud.com/document/api/267/56967)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Css/pullStreamTaskRestart:PullStreamTaskRestart")]
     public partial class PullStreamTaskRestart : global::Pulumi.CustomResource

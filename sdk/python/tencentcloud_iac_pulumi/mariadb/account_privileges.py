@@ -364,6 +364,18 @@ class AccountPrivileges(pulumi.CustomResource):
             ])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeFlow](https://www.tencentcloud.com/document/api/237/16177)
+          - [ModifyAccountPrivileges](https://www.tencentcloud.com/document/api/237/40959)
+        * Read: [DescribeAccountPrivileges](https://www.tencentcloud.com/document/api/237/16164)
+        * Update:
+          - [DescribeFlow](https://www.tencentcloud.com/document/api/237/16177)
+          - [ModifyAccountPrivileges](https://www.tencentcloud.com/document/api/237/40959)
+
         ## Import
 
         mariadb account_privileges can be imported using the id, e.g.
@@ -415,6 +427,18 @@ class AccountPrivileges(pulumi.CustomResource):
                 "DROP",
             ])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeFlow](https://www.tencentcloud.com/document/api/237/16177)
+          - [ModifyAccountPrivileges](https://www.tencentcloud.com/document/api/237/40959)
+        * Read: [DescribeAccountPrivileges](https://www.tencentcloud.com/document/api/237/16164)
+        * Update:
+          - [DescribeFlow](https://www.tencentcloud.com/document/api/237/16177)
+          - [ModifyAccountPrivileges](https://www.tencentcloud.com/document/api/237/40959)
 
         ## Import
 

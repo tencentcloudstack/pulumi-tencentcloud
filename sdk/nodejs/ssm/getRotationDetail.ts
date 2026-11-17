@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *     secretName: "tf_example",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRotationDetail](https://www.tencentcloud.com/document/api/1078/41517)
  */
 export function getRotationDetail(args: GetRotationDetailArgs, opts?: pulumi.InvokeOptions): Promise<GetRotationDetailResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -80,6 +86,12 @@ export interface GetRotationDetailResult {
  *     secretName: "tf_example",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRotationDetail](https://www.tencentcloud.com/document/api/1078/41517)
  */
 export function getRotationDetailOutput(args: GetRotationDetailOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRotationDetailResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

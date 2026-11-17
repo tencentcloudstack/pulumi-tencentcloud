@@ -86,6 +86,12 @@ def get_access_regions(result_output_file: Optional[_builtins.str] = None,
     access_regions = tencentcloud.gaap.get_access_regions()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAccessRegions](https://www.tencentcloud.com/document/api/608/33104)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -111,6 +117,12 @@ def get_access_regions_output(result_output_file: pulumi.Input[Optional[Optional
 
     access_regions = tencentcloud.gaap.get_access_regions()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAccessRegions](https://www.tencentcloud.com/document/api/608/33104)
 
 
     :param _builtins.str result_output_file: Used to save results.

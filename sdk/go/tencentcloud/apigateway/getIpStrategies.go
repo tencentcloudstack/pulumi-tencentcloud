@@ -61,6 +61,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read:
+//   - [DescribeIPStrategy](https://www.tencentcloud.com/search/?wd=DescribeIPStrategy&type=document&lang=en)
+//   - [DescribeIPStrategysStatus](https://www.tencentcloud.com/search/?wd=DescribeIPStrategysStatus&type=document&lang=en)
 func GetIpStrategies(ctx *pulumi.Context, args *GetIpStrategiesArgs, opts ...pulumi.InvokeOption) (*GetIpStrategiesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetIpStrategiesResult

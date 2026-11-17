@@ -55,6 +55,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [DescribeImages](https://www.tencentcloud.com/document/api/213/33272)
+//   - [SyncImages](https://www.tencentcloud.com/document/api/213/33267)
 type SyncImage struct {
 	pulumi.CustomResourceState
 

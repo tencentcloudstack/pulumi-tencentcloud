@@ -102,6 +102,18 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeTasks](https://www.tencentcloud.com/search/?wd=DescribeTasks&type=document&lang=en)
+ *   - [ModifyClusterSchedulerPolicy](https://www.tencentcloud.com/search/?wd=ModifyClusterSchedulerPolicy&type=document&lang=en)
+ * * Read: [DescribeClusterSchedulerPolicy](https://www.tencentcloud.com/search/?wd=DescribeClusterSchedulerPolicy&type=document&lang=en)
+ * * Update:
+ *   - [DescribeTasks](https://www.tencentcloud.com/search/?wd=DescribeTasks&type=document&lang=en)
+ *   - [ModifyClusterSchedulerPolicy](https://www.tencentcloud.com/search/?wd=ModifyClusterSchedulerPolicy&type=document&lang=en)
+ *
  * ## Import
  *
  * TKE cluster scheduler policy config can be imported using the cluster ID, e.g.

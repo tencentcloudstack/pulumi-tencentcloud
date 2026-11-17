@@ -87,6 +87,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeNoticeContents](https://www.tencentcloud.com/document/api/614/80575)
         /// </summary>
         public static Task<GetNoticeContentsResult> InvokeAsync(GetNoticeContentsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetNoticeContentsResult>("tencentcloud:Cls/getNoticeContents:getNoticeContents", args ?? new GetNoticeContentsArgs(), options.WithDefaults());
@@ -166,6 +172,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeNoticeContents](https://www.tencentcloud.com/document/api/614/80575)
         /// </summary>
         public static Output<GetNoticeContentsResult> Invoke(GetNoticeContentsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetNoticeContentsResult>("tencentcloud:Cls/getNoticeContents:getNoticeContents", args ?? new GetNoticeContentsInvokeArgs(), options.WithDefaults());
@@ -245,6 +257,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeNoticeContents](https://www.tencentcloud.com/document/api/614/80575)
         /// </summary>
         public static Output<GetNoticeContentsResult> Invoke(GetNoticeContentsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetNoticeContentsResult>("tencentcloud:Cls/getNoticeContents:getNoticeContents", args ?? new GetNoticeContentsInvokeArgs(), options.WithDefaults());

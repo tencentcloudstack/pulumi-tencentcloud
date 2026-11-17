@@ -189,6 +189,12 @@ def get_upload_backup_info(backup_migration_id: Optional[_builtins.str] = None,
         backup_migration_id="mssql-backup-migration-8a0f3eht")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeUploadBackupInfo](https://www.tencentcloud.com/document/api/238/39835)
+
 
     :param _builtins.str backup_migration_id: Backup import task ID, which is returned through the API CreateBackupMigration.
     :param _builtins.str instance_id: Instance ID.
@@ -230,6 +236,12 @@ def get_upload_backup_info_output(backup_migration_id: pulumi.Input[Optional[_bu
     example = tencentcloud.sqlserver.get_upload_backup_info(instance_id="mssql-qelbzgwf",
         backup_migration_id="mssql-backup-migration-8a0f3eht")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeUploadBackupInfo](https://www.tencentcloud.com/document/api/238/39835)
 
 
     :param _builtins.str backup_migration_id: Backup import task ID, which is returned through the API CreateBackupMigration.

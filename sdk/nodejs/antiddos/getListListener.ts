@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const listListener = tencentcloud.antiddos.getListListener({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeListListener](https://www.tencentcloud.com/document/api/1213/61346)
  */
 export function getListListener(args?: GetListListenerArgs, opts?: pulumi.InvokeOptions): Promise<GetListListenerResult> {
     args = args || {};
@@ -65,6 +71,12 @@ export interface GetListListenerResult {
  *
  * const listListener = tencentcloud.antiddos.getListListener({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeListListener](https://www.tencentcloud.com/document/api/1213/61346)
  */
 export function getListListenerOutput(args?: GetListListenerOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetListListenerResult> {
     args = args || {};

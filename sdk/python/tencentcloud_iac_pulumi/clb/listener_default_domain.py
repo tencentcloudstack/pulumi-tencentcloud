@@ -170,6 +170,14 @@ class ListenerDefaultDomain(pulumi.CustomResource):
             domain="3.com")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyDomainAttributes](https://www.tencentcloud.com/document/api/214/33819)
+        * Read: [DescribeListeners](https://www.tencentcloud.com/document/api/214/33831)
+        * Update: [ModifyDomainAttributes](https://www.tencentcloud.com/document/api/214/33819)
+
         ## Import
 
         CLB listener default domain can be imported using the id (version >= 1.47.0), e.g.
@@ -207,6 +215,14 @@ class ListenerDefaultDomain(pulumi.CustomResource):
             listener_id="lbl-duilx5qm",
             domain="3.com")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyDomainAttributes](https://www.tencentcloud.com/document/api/214/33819)
+        * Read: [DescribeListeners](https://www.tencentcloud.com/document/api/214/33831)
+        * Update: [ModifyDomainAttributes](https://www.tencentcloud.com/document/api/214/33819)
 
         ## Import
 

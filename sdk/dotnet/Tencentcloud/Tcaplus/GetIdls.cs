@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeIdlFileInfos](https://www.tencentcloud.com/document/api/1016/35037)
         /// </summary>
         public static Task<GetIdlsResult> InvokeAsync(GetIdlsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetIdlsResult>("tencentcloud:Tcaplus/getIdls:getIdls", args ?? new GetIdlsArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeIdlFileInfos](https://www.tencentcloud.com/document/api/1016/35037)
         /// </summary>
         public static Output<GetIdlsResult> Invoke(GetIdlsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetIdlsResult>("tencentcloud:Tcaplus/getIdls:getIdls", args ?? new GetIdlsInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcaplus
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeIdlFileInfos](https://www.tencentcloud.com/document/api/1016/35037)
         /// </summary>
         public static Output<GetIdlsResult> Invoke(GetIdlsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetIdlsResult>("tencentcloud:Tcaplus/getIdls:getIdls", args ?? new GetIdlsInvokeArgs(), options.WithDefaults());

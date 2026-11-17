@@ -34,6 +34,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeOriginACL](https://www.tencentcloud.com/document/api/1145/71118)
         /// </summary>
         public static Task<GetOriginAclResult> InvokeAsync(GetOriginAclArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetOriginAclResult>("tencentcloud:Teo/getOriginAcl:getOriginAcl", args ?? new GetOriginAclArgs(), options.WithDefaults());
@@ -60,6 +66,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeOriginACL](https://www.tencentcloud.com/document/api/1145/71118)
         /// </summary>
         public static Output<GetOriginAclResult> Invoke(GetOriginAclInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetOriginAclResult>("tencentcloud:Teo/getOriginAcl:getOriginAcl", args ?? new GetOriginAclInvokeArgs(), options.WithDefaults());
@@ -86,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeOriginACL](https://www.tencentcloud.com/document/api/1145/71118)
         /// </summary>
         public static Output<GetOriginAclResult> Invoke(GetOriginAclInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetOriginAclResult>("tencentcloud:Teo/getOriginAcl:getOriginAcl", args ?? new GetOriginAclInvokeArgs(), options.WithDefaults());

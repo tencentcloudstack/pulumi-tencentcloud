@@ -259,6 +259,14 @@ class AddonConfig(pulumi.CustomResource):
             }))
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [UpdateAddon](https://www.tencentcloud.com/document/api/457/56950)
+        * Read: [DescribeAddon](https://www.tencentcloud.com/document/api/457/56953)
+        * Update: [UpdateAddon](https://www.tencentcloud.com/document/api/457/56950)
+
         ## Import
 
         kubernetes cluster addon config can be imported using the clusterId#addonName, e.g.
@@ -335,6 +343,14 @@ class AddonConfig(pulumi.CustomResource):
                 },
             }))
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [UpdateAddon](https://www.tencentcloud.com/document/api/457/56950)
+        * Read: [DescribeAddon](https://www.tencentcloud.com/document/api/457/56953)
+        * Update: [UpdateAddon](https://www.tencentcloud.com/document/api/457/56950)
 
         ## Import
 

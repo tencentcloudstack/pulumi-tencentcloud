@@ -119,6 +119,12 @@ class AlarmPolicySetDefault(pulumi.CustomResource):
             policy_id="policy-u4iykjkt")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [SetDefaultAlarmPolicy](https://www.tencentcloud.com/document/api/248/39312)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -144,6 +150,12 @@ class AlarmPolicySetDefault(pulumi.CustomResource):
             module="monitor",
             policy_id="policy-u4iykjkt")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [SetDefaultAlarmPolicy](https://www.tencentcloud.com/document/api/248/39312)
 
 
         :param str resource_name: The name of the resource.

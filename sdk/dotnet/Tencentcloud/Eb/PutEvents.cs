@@ -61,6 +61,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [PutEvents](https://www.tencentcloud.com/search/?wd=PutEvents&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Eb/putEvents:PutEvents")]
     public partial class PutEvents : global::Pulumi.CustomResource

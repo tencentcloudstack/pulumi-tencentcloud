@@ -41,6 +41,14 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [ModifyWebshellStatus](https://www.tencentcloud.com/document/api/627/64536)
+// * Read: [DescribeWebshellStatus](https://www.tencentcloud.com/document/api/627/64543)
+// * Update: [ModifyWebshellStatus](https://www.tencentcloud.com/document/api/627/64536)
+//
 // ## Import
 //
 // waf webShell can be imported using the id, e.g.

@@ -37,6 +37,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [RollbackDataEngineImage](https://www.tencentcloud.com/document/api/1155/62647)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dlc/rollbackDataEngineImageOperation:RollbackDataEngineImageOperation")]
     public partial class RollbackDataEngineImageOperation : global::Pulumi.CustomResource

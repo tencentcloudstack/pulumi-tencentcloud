@@ -119,6 +119,14 @@ class InstanceSlaConfig(pulumi.CustomResource):
             sla_type="SLA")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyLoadBalancerSla](https://www.tencentcloud.com/document/api/214/43786)
+        * Read: [DescribeLoadBalancers](https://www.tencentcloud.com/document/api/214/33830)
+        * Update: [ModifyLoadBalancerSla](https://www.tencentcloud.com/document/api/214/43786)
+
         ## Import
 
         clb instance_sla_config can be imported using the id, e.g.
@@ -152,6 +160,14 @@ class InstanceSlaConfig(pulumi.CustomResource):
             load_balancer_id="lb-5dnrkgry",
             sla_type="SLA")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyLoadBalancerSla](https://www.tencentcloud.com/document/api/214/43786)
+        * Read: [DescribeLoadBalancers](https://www.tencentcloud.com/document/api/214/33830)
+        * Update: [ModifyLoadBalancerSla](https://www.tencentcloud.com/document/api/214/43786)
 
         ## Import
 

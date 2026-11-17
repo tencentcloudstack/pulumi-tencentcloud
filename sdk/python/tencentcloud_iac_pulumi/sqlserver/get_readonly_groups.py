@@ -99,6 +99,12 @@ def get_readonly_groups(master_instance_id: Optional[_builtins.str] = None,
     example = tencentcloud.sqlserver.get_dbs(instance_id="mssql-ds1xhnt9")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeReadOnlyGroupList](https://www.tencentcloud.com/document/api/238/72738)
+
 
     :param _builtins.str master_instance_id: Master SQL Server instance ID.
     :param _builtins.str result_output_file: Used to store results.
@@ -128,6 +134,12 @@ def get_readonly_groups_output(master_instance_id: pulumi.Input[Optional[Optiona
 
     example = tencentcloud.sqlserver.get_dbs(instance_id="mssql-ds1xhnt9")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeReadOnlyGroupList](https://www.tencentcloud.com/document/api/238/72738)
 
 
     :param _builtins.str master_instance_id: Master SQL Server instance ID.

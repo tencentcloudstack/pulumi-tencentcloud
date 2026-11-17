@@ -96,6 +96,12 @@ def get_nodes(instance_id: Optional[_builtins.str] = None,
     cdwpg_nodes = tencentcloud.cdwpg.get_nodes(instance_id="cdwpg-gexy9tue")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstanceNodes](https://www.tencentcloud.com/document/api/1138/69316)
+
 
     :param _builtins.str instance_id: Instance id.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_nodes_output(instance_id: pulumi.Input[Optional[_builtins.str]] = None,
 
     cdwpg_nodes = tencentcloud.cdwpg.get_nodes(instance_id="cdwpg-gexy9tue")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstanceNodes](https://www.tencentcloud.com/document/api/1138/69316)
 
 
     :param _builtins.str instance_id: Instance id.

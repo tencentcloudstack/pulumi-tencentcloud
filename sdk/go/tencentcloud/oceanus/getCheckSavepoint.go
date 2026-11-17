@@ -42,6 +42,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [CheckSavepoint](https://www.tencentcloud.com/search/?wd=CheckSavepoint&type=document&lang=en)
 func GetCheckSavepoint(ctx *pulumi.Context, args *GetCheckSavepointArgs, opts ...pulumi.InvokeOption) (*GetCheckSavepointResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetCheckSavepointResult

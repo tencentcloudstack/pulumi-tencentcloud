@@ -41,6 +41,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDataFetchUrl](https://www.tencentcloud.com/document/api/1131/45329)
 func GetFetchUrl(ctx *pulumi.Context, args *GetFetchUrlArgs, opts ...pulumi.InvokeOption) (*GetFetchUrlResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetFetchUrlResult

@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListWorkflows](https://www.tencentcloud.com/document/api/1174/73865)
         /// </summary>
         public static Task<GetWorkflowsResult> InvokeAsync(GetWorkflowsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetWorkflowsResult>("tencentcloud:Wedata/getWorkflows:getWorkflows", args ?? new GetWorkflowsArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListWorkflows](https://www.tencentcloud.com/document/api/1174/73865)
         /// </summary>
         public static Output<GetWorkflowsResult> Invoke(GetWorkflowsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetWorkflowsResult>("tencentcloud:Wedata/getWorkflows:getWorkflows", args ?? new GetWorkflowsInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListWorkflows](https://www.tencentcloud.com/document/api/1174/73865)
         /// </summary>
         public static Output<GetWorkflowsResult> Invoke(GetWorkflowsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetWorkflowsResult>("tencentcloud:Wedata/getWorkflows:getWorkflows", args ?? new GetWorkflowsInvokeArgs(), options.WithDefaults());

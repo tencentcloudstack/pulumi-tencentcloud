@@ -122,6 +122,15 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateAcl](https://www.tencentcloud.com/search/?wd=CreateAcl&type=document&lang=en)
+// * Read: [DescribeAcls](https://www.tencentcloud.com/search/?wd=DescribeAcls&type=document&lang=en)
+// * Update: [ModifyAcl](https://www.tencentcloud.com/search/?wd=ModifyAcl&type=document&lang=en)
+// * Delete: [DeleteAcls](https://www.tencentcloud.com/search/?wd=DeleteAcls&type=document&lang=en)
+//
 // ## Import
 //
 // dasb acl can be imported using the id, e.g.

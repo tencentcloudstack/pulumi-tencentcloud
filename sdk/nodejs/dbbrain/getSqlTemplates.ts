@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     product: "",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSqlTemplate](https://www.tencentcloud.com/search/?wd=DescribeSqlTemplate&type=document&lang=en)
  */
 export function getSqlTemplates(args: GetSqlTemplatesArgs, opts?: pulumi.InvokeOptions): Promise<GetSqlTemplatesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -100,6 +106,12 @@ export interface GetSqlTemplatesResult {
  *     product: "",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSqlTemplate](https://www.tencentcloud.com/search/?wd=DescribeSqlTemplate&type=document&lang=en)
  */
 export function getSqlTemplatesOutput(args: GetSqlTemplatesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSqlTemplatesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

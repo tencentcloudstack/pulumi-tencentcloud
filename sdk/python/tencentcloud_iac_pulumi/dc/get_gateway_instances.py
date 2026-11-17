@@ -124,6 +124,12 @@ def get_gateway_instances(dcg_id: Optional[_builtins.str] = None,
     id_select = tencentcloud.dc.get_gateway_instances_output(dcg_id=ccn_main.id)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDirectConnectGateways](https://www.tencentcloud.com/document/api/215/36913)
+
 
     :param _builtins.str dcg_id: ID of the DCG to be queried.
     :param _builtins.str name: Name of the DCG to be queried.
@@ -169,6 +175,12 @@ def get_gateway_instances_output(dcg_id: pulumi.Input[Optional[Optional[_builtin
     name_select = tencentcloud.dc.get_gateway_instances_output(name=ccn_main.name)
     id_select = tencentcloud.dc.get_gateway_instances_output(dcg_id=ccn_main.id)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDirectConnectGateways](https://www.tencentcloud.com/document/api/215/36913)
 
 
     :param _builtins.str dcg_id: ID of the DCG to be queried.

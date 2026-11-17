@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeListBGPIPInstances](https://www.tencentcloud.com/document/api/1213/61348)
 func LookupEip(ctx *pulumi.Context, args *LookupEipArgs, opts ...pulumi.InvokeOption) (*LookupEipResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupEipResult

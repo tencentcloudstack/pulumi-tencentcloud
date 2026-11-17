@@ -85,6 +85,12 @@ class ResetUser(pulumi.CustomResource):
         example = tencentcloud.dasb.ResetUser("example", user_id=16)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ResetUser](https://www.tencentcloud.com/search/?wd=ResetUser&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -107,6 +113,12 @@ class ResetUser(pulumi.CustomResource):
 
         example = tencentcloud.dasb.ResetUser("example", user_id=16)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ResetUser](https://www.tencentcloud.com/search/?wd=ResetUser&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

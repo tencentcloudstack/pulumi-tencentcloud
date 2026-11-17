@@ -38,6 +38,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         ///     };
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [AcquireClusterAdminRole](https://www.tencentcloud.com/document/api/457/38530)
         /// </summary>
         public static Task<GetClusterAdminRoleResult> InvokeAsync(GetClusterAdminRoleArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetClusterAdminRoleResult>("tencentcloud:Kubernetes/getClusterAdminRole:getClusterAdminRole", args ?? new GetClusterAdminRoleArgs(), options.WithDefaults());
@@ -68,6 +74,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         ///     };
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [AcquireClusterAdminRole](https://www.tencentcloud.com/document/api/457/38530)
         /// </summary>
         public static Output<GetClusterAdminRoleResult> Invoke(GetClusterAdminRoleInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetClusterAdminRoleResult>("tencentcloud:Kubernetes/getClusterAdminRole:getClusterAdminRole", args ?? new GetClusterAdminRoleInvokeArgs(), options.WithDefaults());
@@ -98,6 +110,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         ///     };
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [AcquireClusterAdminRole](https://www.tencentcloud.com/document/api/457/38530)
         /// </summary>
         public static Output<GetClusterAdminRoleResult> Invoke(GetClusterAdminRoleInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetClusterAdminRoleResult>("tencentcloud:Kubernetes/getClusterAdminRole:getClusterAdminRole", args ?? new GetClusterAdminRoleInvokeArgs(), options.WithDefaults());

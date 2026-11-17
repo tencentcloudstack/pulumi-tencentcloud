@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     mysqlId: "cdb-fitq5t9h",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872)
  */
 export function getInstance(args?: GetInstanceArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceResult> {
     args = args || {};
@@ -177,6 +183,12 @@ export interface GetInstanceResult {
  *     mysqlId: "cdb-fitq5t9h",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872)
  */
 export function getInstanceOutput(args?: GetInstanceOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInstanceResult> {
     args = args || {};

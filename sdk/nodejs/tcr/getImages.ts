@@ -24,6 +24,12 @@ import * as utilities from "../utilities";
  *     exactMatch: false,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeImages](https://www.tencentcloud.com/document/api/1051/50721)
  */
 export function getImages(args: GetImagesArgs, opts?: pulumi.InvokeOptions): Promise<GetImagesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -116,6 +122,12 @@ export interface GetImagesResult {
  *     exactMatch: false,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeImages](https://www.tencentcloud.com/document/api/1051/50721)
  */
 export function getImagesOutput(args: GetImagesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetImagesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

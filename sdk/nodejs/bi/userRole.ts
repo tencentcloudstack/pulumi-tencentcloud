@@ -23,6 +23,15 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateUserRole](https://www.tencentcloud.com/document/api/1270/72620)
+ * * Read: [DescribeUserRoleList](https://www.tencentcloud.com/document/api/1270/72615)
+ * * Update: [ModifyUserRole](https://www.tencentcloud.com/document/api/1270/72613)
+ * * Delete: [DeleteUserRole](https://www.tencentcloud.com/document/api/1270/72618)
+ *
  * ## Import
  *
  * bi userRole can be imported using the id, e.g.

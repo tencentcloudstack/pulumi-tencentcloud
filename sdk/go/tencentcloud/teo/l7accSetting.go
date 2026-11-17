@@ -148,6 +148,14 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [ModifyL7AccSetting](https://www.tencentcloud.com/document/api/1145/68147)
+// * Read: [DescribeL7AccSetting](https://www.tencentcloud.com/document/api/1145/68149)
+// * Update: [ModifyL7AccSetting](https://www.tencentcloud.com/document/api/1145/68147)
+//
 // ## Import
 //
 // teo l7AccSetting can be imported using the zone_id, e.g.

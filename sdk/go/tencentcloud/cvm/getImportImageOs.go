@@ -36,6 +36,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeImportImageOs](https://www.tencentcloud.com/document/api/213/33271)
 func GetImportImageOs(ctx *pulumi.Context, args *GetImportImageOsArgs, opts ...pulumi.InvokeOption) (*GetImportImageOsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetImportImageOsResult

@@ -90,6 +90,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [ModifyDBInstanceSecurityGroups](https://www.tencentcloud.com/document/api/409/52647)
+// * Read: [DescribeDBInstanceSecurityGroups](https://www.tencentcloud.com/document/api/409/52648)
+// * Update: [ModifyDBInstanceSecurityGroups](https://www.tencentcloud.com/document/api/409/52647)
 type SecurityGroupConfig struct {
 	pulumi.CustomResourceState
 

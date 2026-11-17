@@ -122,6 +122,12 @@ def get_instance_package_list(filters: Optional[Sequence[Union['GetInstancePacka
     }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstancePackageList](https://www.tencentcloud.com/search/?wd=DescribeInstancePackageList&type=document&lang=en)
+
 
     :param Sequence[Union['GetInstancePackageListFilterArgs', 'GetInstancePackageListFilterArgsDict']] filters: Filter conditions.
     :param _builtins.int is_used: Whether used: 0 not used 1 used.
@@ -170,6 +176,12 @@ def get_instance_package_list_output(filters: pulumi.Input[Optional[Optional[Seq
         "fuzzy": True,
     }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstancePackageList](https://www.tencentcloud.com/search/?wd=DescribeInstancePackageList&type=document&lang=en)
 
 
     :param Sequence[Union['GetInstancePackageListFilterArgs', 'GetInstancePackageListFilterArgsDict']] filters: Filter conditions.

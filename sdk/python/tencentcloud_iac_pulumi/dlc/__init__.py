@@ -35,6 +35,8 @@ from .get_native_spark_sessions import *
 from .get_session_image_version import *
 from .get_standard_engine_resource_group_config_information import *
 from .get_task_result import *
+from .get_tc_lake_meta_instance import *
+from .meta_database import *
 from .modify_data_engine_description_operation import *
 from .modify_user_typ_operation import *
 from .renew_data_engine_operation import *

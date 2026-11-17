@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCvmQuota](https://www.tencentcloud.com/search/?wd=DescribeCvmQuota&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetCvmQuotaResult> InvokeAsync(GetCvmQuotaArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetCvmQuotaResult>("tencentcloud:Emr/getCvmQuota:getCvmQuota", args ?? new GetCvmQuotaArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCvmQuota](https://www.tencentcloud.com/search/?wd=DescribeCvmQuota&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetCvmQuotaResult> Invoke(GetCvmQuotaInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetCvmQuotaResult>("tencentcloud:Emr/getCvmQuota:getCvmQuota", args ?? new GetCvmQuotaInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCvmQuota](https://www.tencentcloud.com/search/?wd=DescribeCvmQuota&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetCvmQuotaResult> Invoke(GetCvmQuotaInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetCvmQuotaResult>("tencentcloud:Emr/getCvmQuota:getCvmQuota", args ?? new GetCvmQuotaInvokeArgs(), options.WithDefaults());

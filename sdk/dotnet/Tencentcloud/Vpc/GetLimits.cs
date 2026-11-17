@@ -36,6 +36,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeVpcLimits](https://www.tencentcloud.com/search/?wd=DescribeVpcLimits&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetLimitsResult> InvokeAsync(GetLimitsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetLimitsResult>("tencentcloud:Vpc/getLimits:getLimits", args ?? new GetLimitsArgs(), options.WithDefaults());
@@ -64,6 +70,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeVpcLimits](https://www.tencentcloud.com/search/?wd=DescribeVpcLimits&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetLimitsResult> Invoke(GetLimitsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetLimitsResult>("tencentcloud:Vpc/getLimits:getLimits", args ?? new GetLimitsInvokeArgs(), options.WithDefaults());
@@ -92,6 +104,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeVpcLimits](https://www.tencentcloud.com/search/?wd=DescribeVpcLimits&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetLimitsResult> Invoke(GetLimitsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetLimitsResult>("tencentcloud:Vpc/getLimits:getLimits", args ?? new GetLimitsInvokeArgs(), options.WithDefaults());

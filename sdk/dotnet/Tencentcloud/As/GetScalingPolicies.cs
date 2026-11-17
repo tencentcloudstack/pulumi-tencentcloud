@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeScalingPolicies](https://www.tencentcloud.com/document/api/377/33208)
         /// </summary>
         public static Task<GetScalingPoliciesResult> InvokeAsync(GetScalingPoliciesArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetScalingPoliciesResult>("tencentcloud:As/getScalingPolicies:getScalingPolicies", args ?? new GetScalingPoliciesArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeScalingPolicies](https://www.tencentcloud.com/document/api/377/33208)
         /// </summary>
         public static Output<GetScalingPoliciesResult> Invoke(GetScalingPoliciesInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetScalingPoliciesResult>("tencentcloud:As/getScalingPolicies:getScalingPolicies", args ?? new GetScalingPoliciesInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeScalingPolicies](https://www.tencentcloud.com/document/api/377/33208)
         /// </summary>
         public static Output<GetScalingPoliciesResult> Invoke(GetScalingPoliciesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetScalingPoliciesResult>("tencentcloud:As/getScalingPolicies:getScalingPolicies", args ?? new GetScalingPoliciesInvokeArgs(), options.WithDefaults());

@@ -42,6 +42,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeVpcInstances](https://www.tencentcloud.com/document/api/215/36078)
         /// </summary>
         public static Task<GetCvmInstancesResult> InvokeAsync(GetCvmInstancesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetCvmInstancesResult>("tencentcloud:Vpc/getCvmInstances:getCvmInstances", args ?? new GetCvmInstancesArgs(), options.WithDefaults());
@@ -76,6 +82,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeVpcInstances](https://www.tencentcloud.com/document/api/215/36078)
         /// </summary>
         public static Output<GetCvmInstancesResult> Invoke(GetCvmInstancesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetCvmInstancesResult>("tencentcloud:Vpc/getCvmInstances:getCvmInstances", args ?? new GetCvmInstancesInvokeArgs(), options.WithDefaults());
@@ -110,6 +122,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeVpcInstances](https://www.tencentcloud.com/document/api/215/36078)
         /// </summary>
         public static Output<GetCvmInstancesResult> Invoke(GetCvmInstancesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetCvmInstancesResult>("tencentcloud:Vpc/getCvmInstances:getCvmInstances", args ?? new GetCvmInstancesInvokeArgs(), options.WithDefaults());

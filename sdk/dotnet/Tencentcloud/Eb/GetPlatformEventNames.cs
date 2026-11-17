@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListPlatformEventNames](https://www.tencentcloud.com/search/?wd=ListPlatformEventNames&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetPlatformEventNamesResult> InvokeAsync(GetPlatformEventNamesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetPlatformEventNamesResult>("tencentcloud:Eb/getPlatformEventNames:getPlatformEventNames", args ?? new GetPlatformEventNamesArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListPlatformEventNames](https://www.tencentcloud.com/search/?wd=ListPlatformEventNames&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetPlatformEventNamesResult> Invoke(GetPlatformEventNamesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetPlatformEventNamesResult>("tencentcloud:Eb/getPlatformEventNames:getPlatformEventNames", args ?? new GetPlatformEventNamesInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListPlatformEventNames](https://www.tencentcloud.com/search/?wd=ListPlatformEventNames&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetPlatformEventNamesResult> Invoke(GetPlatformEventNamesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetPlatformEventNamesResult>("tencentcloud:Eb/getPlatformEventNames:getPlatformEventNames", args ?? new GetPlatformEventNamesInvokeArgs(), options.WithDefaults());

@@ -42,6 +42,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [GetFunction](https://www.tencentcloud.com/search/?wd=GetFunction&amp;type=document&amp;lang=en)
+        ///   - [ListFunctions](https://www.tencentcloud.com/document/api/583/18582)
         /// </summary>
         public static Task<GetFunctionsResult> InvokeAsync(GetFunctionsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetFunctionsResult>("tencentcloud:Scf/getFunctions:getFunctions", args ?? new GetFunctionsArgs(), options.WithDefaults());
@@ -76,6 +84,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [GetFunction](https://www.tencentcloud.com/search/?wd=GetFunction&amp;type=document&amp;lang=en)
+        ///   - [ListFunctions](https://www.tencentcloud.com/document/api/583/18582)
         /// </summary>
         public static Output<GetFunctionsResult> Invoke(GetFunctionsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetFunctionsResult>("tencentcloud:Scf/getFunctions:getFunctions", args ?? new GetFunctionsInvokeArgs(), options.WithDefaults());
@@ -110,6 +126,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [GetFunction](https://www.tencentcloud.com/search/?wd=GetFunction&amp;type=document&amp;lang=en)
+        ///   - [ListFunctions](https://www.tencentcloud.com/document/api/583/18582)
         /// </summary>
         public static Output<GetFunctionsResult> Invoke(GetFunctionsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetFunctionsResult>("tencentcloud:Scf/getFunctions:getFunctions", args ?? new GetFunctionsInvokeArgs(), options.WithDefaults());

@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeRedisTopKeyPrefixList](https://www.tencentcloud.com/document/api/1035/50450)
 func GetRedisTopKeyPrefixList(ctx *pulumi.Context, args *GetRedisTopKeyPrefixListArgs, opts ...pulumi.InvokeOption) (*GetRedisTopKeyPrefixListResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetRedisTopKeyPrefixListResult

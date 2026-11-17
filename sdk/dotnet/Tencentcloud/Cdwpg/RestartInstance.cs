@@ -34,6 +34,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdwpg
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeInstanceState](https://www.tencentcloud.com/document/api/1138/68302)
+    ///   - [RestartInstance](https://www.tencentcloud.com/document/api/1138/69329)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cdwpg/restartInstance:RestartInstance")]
     public partial class RestartInstance : global::Pulumi.CustomResource

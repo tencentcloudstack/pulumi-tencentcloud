@@ -100,6 +100,11 @@ export const getGrafanaPluginOverviews: typeof import("./getGrafanaPluginOvervie
 export const getGrafanaPluginOverviewsOutput: typeof import("./getGrafanaPluginOverviews").getGrafanaPluginOverviewsOutput = null as any;
 utilities.lazyLoad(exports, ["getGrafanaPluginOverviews","getGrafanaPluginOverviewsOutput"], () => require("./getGrafanaPluginOverviews"));
 
+export { GetGrafanaVersionsArgs, GetGrafanaVersionsResult, GetGrafanaVersionsOutputArgs } from "./getGrafanaVersions";
+export const getGrafanaVersions: typeof import("./getGrafanaVersions").getGrafanaVersions = null as any;
+export const getGrafanaVersionsOutput: typeof import("./getGrafanaVersions").getGrafanaVersionsOutput = null as any;
+utilities.lazyLoad(exports, ["getGrafanaVersions","getGrafanaVersionsOutput"], () => require("./getGrafanaVersions"));
+
 export { GetNoticeContentTmplsArgs, GetNoticeContentTmplsResult, GetNoticeContentTmplsOutputArgs } from "./getNoticeContentTmpls";
 export const getNoticeContentTmpls: typeof import("./getNoticeContentTmpls").getNoticeContentTmpls = null as any;
 export const getNoticeContentTmplsOutput: typeof import("./getNoticeContentTmpls").getNoticeContentTmplsOutput = null as any;
@@ -250,11 +255,6 @@ export type TmpRecordingRule = import("./tmpRecordingRule").TmpRecordingRule;
 export const TmpRecordingRule: typeof import("./tmpRecordingRule").TmpRecordingRule = null as any;
 utilities.lazyLoad(exports, ["TmpRecordingRule"], () => require("./tmpRecordingRule"));
 
-export { TmpScrapeJobArgs, TmpScrapeJobState } from "./tmpScrapeJob";
-export type TmpScrapeJob = import("./tmpScrapeJob").TmpScrapeJob;
-export const TmpScrapeJob: typeof import("./tmpScrapeJob").TmpScrapeJob = null as any;
-utilities.lazyLoad(exports, ["TmpScrapeJob"], () => require("./tmpScrapeJob"));
-
 export { TmpTkeAlertPolicyArgs, TmpTkeAlertPolicyState } from "./tmpTkeAlertPolicy";
 export type TmpTkeAlertPolicy = import("./tmpTkeAlertPolicy").TmpTkeAlertPolicy;
 export const TmpTkeAlertPolicy: typeof import("./tmpTkeAlertPolicy").TmpTkeAlertPolicy = null as any;
@@ -354,8 +354,6 @@ const _module = {
                 return new TmpMultipleWritesList(name, <any>undefined, { urn })
             case "tencentcloud:Monitor/tmpRecordingRule:TmpRecordingRule":
                 return new TmpRecordingRule(name, <any>undefined, { urn })
-            case "tencentcloud:Monitor/tmpScrapeJob:TmpScrapeJob":
-                return new TmpScrapeJob(name, <any>undefined, { urn })
             case "tencentcloud:Monitor/tmpTkeAlertPolicy:TmpTkeAlertPolicy":
                 return new TmpTkeAlertPolicy(name, <any>undefined, { urn })
             case "tencentcloud:Monitor/tmpTkeBasicConfig:TmpTkeBasicConfig":
@@ -404,7 +402,6 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/tmpInstance", _mo
 pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/tmpManageGrafanaAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/tmpMultipleWritesList", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/tmpRecordingRule", _module)
-pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/tmpScrapeJob", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/tmpTkeAlertPolicy", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/tmpTkeBasicConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Monitor/tmpTkeClusterAgent", _module)

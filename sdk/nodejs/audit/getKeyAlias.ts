@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     region: "ap-hongkong",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListKeyAliasByRegion](https://www.tencentcloud.com/search/?wd=ListKeyAliasByRegion&type=document&lang=en)
  */
 export function getKeyAlias(args: GetKeyAliasArgs, opts?: pulumi.InvokeOptions): Promise<GetKeyAliasResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetKeyAliasResult {
  *     region: "ap-hongkong",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListKeyAliasByRegion](https://www.tencentcloud.com/search/?wd=ListKeyAliasByRegion&type=document&lang=en)
  */
 export function getKeyAliasOutput(args: GetKeyAliasOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetKeyAliasResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

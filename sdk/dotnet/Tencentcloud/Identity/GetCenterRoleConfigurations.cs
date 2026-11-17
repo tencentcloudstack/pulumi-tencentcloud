@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Identity
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListRoleConfigurations](https://www.tencentcloud.com/document/api/1031/63597)
         /// </summary>
         public static Task<GetCenterRoleConfigurationsResult> InvokeAsync(GetCenterRoleConfigurationsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetCenterRoleConfigurationsResult>("tencentcloud:Identity/getCenterRoleConfigurations:getCenterRoleConfigurations", args ?? new GetCenterRoleConfigurationsArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Identity
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListRoleConfigurations](https://www.tencentcloud.com/document/api/1031/63597)
         /// </summary>
         public static Output<GetCenterRoleConfigurationsResult> Invoke(GetCenterRoleConfigurationsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetCenterRoleConfigurationsResult>("tencentcloud:Identity/getCenterRoleConfigurations:getCenterRoleConfigurations", args ?? new GetCenterRoleConfigurationsInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Identity
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListRoleConfigurations](https://www.tencentcloud.com/document/api/1031/63597)
         /// </summary>
         public static Output<GetCenterRoleConfigurationsResult> Invoke(GetCenterRoleConfigurationsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetCenterRoleConfigurationsResult>("tencentcloud:Identity/getCenterRoleConfigurations:getCenterRoleConfigurations", args ?? new GetCenterRoleConfigurationsInvokeArgs(), options.WithDefaults());

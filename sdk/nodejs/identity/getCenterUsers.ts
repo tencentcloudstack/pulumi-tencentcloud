@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     zoneId: "z-xxxxxx",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListUsers](https://www.tencentcloud.com/document/api/1031/63560)
  */
 export function getCenterUsers(args: GetCenterUsersArgs, opts?: pulumi.InvokeOptions): Promise<GetCenterUsersResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -106,6 +112,12 @@ export interface GetCenterUsersResult {
  *     zoneId: "z-xxxxxx",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListUsers](https://www.tencentcloud.com/document/api/1031/63560)
  */
 export function getCenterUsersOutput(args: GetCenterUsersOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetCenterUsersResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

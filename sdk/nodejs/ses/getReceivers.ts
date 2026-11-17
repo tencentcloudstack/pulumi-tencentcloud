@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     keyWord: "keep",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListReceivers](https://www.tencentcloud.com/document/api/1084/44866)
  */
 export function getReceivers(args?: GetReceiversArgs, opts?: pulumi.InvokeOptions): Promise<GetReceiversResult> {
     args = args || {};
@@ -79,6 +85,12 @@ export interface GetReceiversResult {
  *     keyWord: "keep",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListReceivers](https://www.tencentcloud.com/document/api/1084/44866)
  */
 export function getReceiversOutput(args?: GetReceiversOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetReceiversResult> {
     args = args || {};

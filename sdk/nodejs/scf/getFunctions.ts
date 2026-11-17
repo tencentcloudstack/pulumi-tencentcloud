@@ -27,6 +27,14 @@ import * as utilities from "../utilities";
  *     name: fooFunction.name,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [GetFunction](https://www.tencentcloud.com/search/?wd=GetFunction&type=document&lang=en)
+ *   - [ListFunctions](https://www.tencentcloud.com/document/api/583/18582)
  */
 export function getFunctions(args?: GetFunctionsArgs, opts?: pulumi.InvokeOptions): Promise<GetFunctionsResult> {
     args = args || {};
@@ -117,6 +125,14 @@ export interface GetFunctionsResult {
  *     name: fooFunction.name,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [GetFunction](https://www.tencentcloud.com/search/?wd=GetFunction&type=document&lang=en)
+ *   - [ListFunctions](https://www.tencentcloud.com/document/api/583/18582)
  */
 export function getFunctionsOutput(args?: GetFunctionsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetFunctionsResult> {
     args = args || {};

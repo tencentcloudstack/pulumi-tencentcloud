@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     privateIpAddresses: ["10.0.0.1"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeVpcPrivateIpAddresses](https://www.tencentcloud.com/document/api/215/34804)
  */
 export function getPrivateIpAddresses(args: GetPrivateIpAddressesArgs, opts?: pulumi.InvokeOptions): Promise<GetPrivateIpAddressesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -78,6 +84,12 @@ export interface GetPrivateIpAddressesResult {
  *     privateIpAddresses: ["10.0.0.1"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeVpcPrivateIpAddresses](https://www.tencentcloud.com/document/api/215/34804)
  */
 export function getPrivateIpAddressesOutput(args: GetPrivateIpAddressesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetPrivateIpAddressesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

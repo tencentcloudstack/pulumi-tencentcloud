@@ -152,6 +152,12 @@ def get_api_usage_plans(result_output_file: Optional[_builtins.str] = None,
     example = tencentcloud.apigateway.get_api_usage_plans_output(service_id=example_usage_plan_attachment.service_id)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeApiUsagePlan](https://www.tencentcloud.com/search/?wd=DescribeApiUsagePlan&type=document&lang=en)
+
 
     :param _builtins.str result_output_file: Used to save results.
     :param _builtins.str service_id: The unique ID of the service to be queried.
@@ -234,6 +240,12 @@ def get_api_usage_plans_output(result_output_file: pulumi.Input[Optional[Optiona
         api_id=example_api.id)
     example = tencentcloud.apigateway.get_api_usage_plans_output(service_id=example_usage_plan_attachment.service_id)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeApiUsagePlan](https://www.tencentcloud.com/search/?wd=DescribeApiUsagePlan&type=document&lang=en)
 
 
     :param _builtins.str result_output_file: Used to save results.

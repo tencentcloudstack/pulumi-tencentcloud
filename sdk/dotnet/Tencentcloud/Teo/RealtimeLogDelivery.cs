@@ -74,6 +74,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateRealtimeLogDeliveryTask](https://www.tencentcloud.com/document/api/1145/59507)
+    /// * Read: [DescribeRealtimeLogDeliveryTasks](https://www.tencentcloud.com/document/api/1145/59503)
+    /// * Update: [ModifyRealtimeLogDeliveryTask](https://www.tencentcloud.com/document/api/1145/59501)
+    /// * Delete: [DeleteRealtimeLogDeliveryTask](https://www.tencentcloud.com/document/api/1145/59505)
+    /// 
     /// ## Import
     /// 
     /// teo TeoRealtimeLogDelivery can be imported using the id, e.g.

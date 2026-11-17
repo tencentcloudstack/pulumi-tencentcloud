@@ -22,6 +22,12 @@ import * as utilities from "../utilities";
  *     ],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeKeys](https://www.tencentcloud.com/document/api/1030/32196)
  */
 export function getDescribeKeys(args: GetDescribeKeysArgs, opts?: pulumi.InvokeOptions): Promise<GetDescribeKeysResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -76,6 +82,12 @@ export interface GetDescribeKeysResult {
  *     ],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeKeys](https://www.tencentcloud.com/document/api/1030/32196)
  */
 export function getDescribeKeysOutput(args: GetDescribeKeysOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDescribeKeysResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

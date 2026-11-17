@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetTaskCode](https://www.tencentcloud.com/document/api/1174/73875)
         /// </summary>
         public static Task<GetTaskCodeResult> InvokeAsync(GetTaskCodeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetTaskCodeResult>("tencentcloud:Wedata/getTaskCode:getTaskCode", args ?? new GetTaskCodeArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetTaskCode](https://www.tencentcloud.com/document/api/1174/73875)
         /// </summary>
         public static Output<GetTaskCodeResult> Invoke(GetTaskCodeInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetTaskCodeResult>("tencentcloud:Wedata/getTaskCode:getTaskCode", args ?? new GetTaskCodeInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetTaskCode](https://www.tencentcloud.com/document/api/1174/73875)
         /// </summary>
         public static Output<GetTaskCodeResult> Invoke(GetTaskCodeInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetTaskCodeResult>("tencentcloud:Wedata/getTaskCode:getTaskCode", args ?? new GetTaskCodeInvokeArgs(), options.WithDefaults());

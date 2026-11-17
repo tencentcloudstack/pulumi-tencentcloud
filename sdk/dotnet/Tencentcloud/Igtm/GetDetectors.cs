@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Igtm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDetectors](https://www.tencentcloud.com/search/?wd=DescribeDetectors&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetDetectorsResult> InvokeAsync(GetDetectorsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDetectorsResult>("tencentcloud:Igtm/getDetectors:getDetectors", args ?? new GetDetectorsArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Igtm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDetectors](https://www.tencentcloud.com/search/?wd=DescribeDetectors&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDetectorsResult> Invoke(GetDetectorsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDetectorsResult>("tencentcloud:Igtm/getDetectors:getDetectors", args ?? new GetDetectorsInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Igtm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDetectors](https://www.tencentcloud.com/search/?wd=DescribeDetectors&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDetectorsResult> Invoke(GetDetectorsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDetectorsResult>("tencentcloud:Igtm/getDetectors:getDetectors", args ?? new GetDetectorsInvokeArgs(), options.WithDefaults());

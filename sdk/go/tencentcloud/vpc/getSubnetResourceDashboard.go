@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeSubnetResourceDashboard](https://www.tencentcloud.com/document/api/215/55086)
 func GetSubnetResourceDashboard(ctx *pulumi.Context, args *GetSubnetResourceDashboardArgs, opts ...pulumi.InvokeOption) (*GetSubnetResourceDashboardResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSubnetResourceDashboardResult

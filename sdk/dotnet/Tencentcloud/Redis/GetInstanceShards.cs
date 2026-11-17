@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstanceShards](https://www.tencentcloud.com/document/api/239/32066)
         /// </summary>
         public static Task<GetInstanceShardsResult> InvokeAsync(GetInstanceShardsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceShardsResult>("tencentcloud:Redis/getInstanceShards:getInstanceShards", args ?? new GetInstanceShardsArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstanceShards](https://www.tencentcloud.com/document/api/239/32066)
         /// </summary>
         public static Output<GetInstanceShardsResult> Invoke(GetInstanceShardsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceShardsResult>("tencentcloud:Redis/getInstanceShards:getInstanceShards", args ?? new GetInstanceShardsInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstanceShards](https://www.tencentcloud.com/document/api/239/32066)
         /// </summary>
         public static Output<GetInstanceShardsResult> Invoke(GetInstanceShardsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceShardsResult>("tencentcloud:Redis/getInstanceShards:getInstanceShards", args ?? new GetInstanceShardsInvokeArgs(), options.WithDefaults());

@@ -37,6 +37,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeClusterLevelAttribute](https://www.tencentcloud.com/document/api/457/46754)
 func GetClusterLevels(ctx *pulumi.Context, args *GetClusterLevelsArgs, opts ...pulumi.InvokeOption) (*GetClusterLevelsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetClusterLevelsResult

@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeClientConnections](https://www.tencentcloud.com/document/api/240/34703)
 func GetInstanceConnections(ctx *pulumi.Context, args *GetInstanceConnectionsArgs, opts ...pulumi.InvokeOption) (*GetInstanceConnectionsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetInstanceConnectionsResult

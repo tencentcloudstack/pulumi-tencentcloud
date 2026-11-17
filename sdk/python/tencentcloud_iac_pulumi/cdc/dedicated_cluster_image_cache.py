@@ -119,6 +119,18 @@ class DedicatedClusterImageCache(pulumi.CustomResource):
             image_id="img-eb30mz89")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateDedicatedClusterImageCache](https://www.tencentcloud.com/search/?wd=CreateDedicatedClusterImageCache&type=document&lang=en)
+          - [DescribeImages](https://www.tencentcloud.com/document/api/213/33272)
+        * Read: [DescribeImages](https://www.tencentcloud.com/document/api/213/33272)
+        * Delete:
+          - [DeleteDedicatedClusterImageCache](https://www.tencentcloud.com/search/?wd=DeleteDedicatedClusterImageCache&type=document&lang=en)
+          - [DescribeImages](https://www.tencentcloud.com/document/api/213/33272)
+
         ## Import
 
         CDC dedicated cluster image cache can be imported using the id, e.g.
@@ -152,6 +164,18 @@ class DedicatedClusterImageCache(pulumi.CustomResource):
             dedicated_cluster_id="cluster-262n63e8",
             image_id="img-eb30mz89")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateDedicatedClusterImageCache](https://www.tencentcloud.com/search/?wd=CreateDedicatedClusterImageCache&type=document&lang=en)
+          - [DescribeImages](https://www.tencentcloud.com/document/api/213/33272)
+        * Read: [DescribeImages](https://www.tencentcloud.com/document/api/213/33272)
+        * Delete:
+          - [DeleteDedicatedClusterImageCache](https://www.tencentcloud.com/search/?wd=DeleteDedicatedClusterImageCache&type=document&lang=en)
+          - [DescribeImages](https://www.tencentcloud.com/document/api/213/33272)
 
         ## Import
 

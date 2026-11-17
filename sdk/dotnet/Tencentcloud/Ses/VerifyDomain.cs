@@ -32,6 +32,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [GetEmailIdentity](https://www.tencentcloud.com/document/api/1084/39412)
+    ///   - [UpdateEmailIdentity](https://www.tencentcloud.com/document/api/1084/39410)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ses/verifyDomain:VerifyDomain")]
     public partial class VerifyDomain : global::Pulumi.CustomResource

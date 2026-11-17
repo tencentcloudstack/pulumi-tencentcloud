@@ -88,6 +88,12 @@ import * as utilities from "../utilities";
  *     instanceIds: attachment.instanceIds,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [RemoveInstances](https://www.tencentcloud.com/document/api/377/31005)
  */
 export class RemoveInstances extends pulumi.CustomResource {
     /**

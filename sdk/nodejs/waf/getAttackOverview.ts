@@ -36,6 +36,12 @@ import * as utilities from "../utilities";
  *     instanceId: "waf_2kxtlbky00b2v1fn",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAttackOverview](https://www.tencentcloud.com/document/api/627/66357)
  */
 export function getAttackOverview(args: GetAttackOverviewArgs, opts?: pulumi.InvokeOptions): Promise<GetAttackOverviewResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -160,6 +166,12 @@ export interface GetAttackOverviewResult {
  *     instanceId: "waf_2kxtlbky00b2v1fn",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAttackOverview](https://www.tencentcloud.com/document/api/627/66357)
  */
 export function getAttackOverviewOutput(args: GetAttackOverviewOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAttackOverviewResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeRoMinScale](https://www.tencentcloud.com/document/api/236/37727)
 func GetRoMinScale(ctx *pulumi.Context, args *GetRoMinScaleArgs, opts ...pulumi.InvokeOption) (*GetRoMinScaleResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetRoMinScaleResult

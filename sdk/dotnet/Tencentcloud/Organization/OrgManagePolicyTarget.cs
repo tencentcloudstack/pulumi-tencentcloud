@@ -34,6 +34,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [AttachPolicy](https://www.tencentcloud.com/document/api/1031/78364)
+    /// * Read: [ListTargetsForPolicy](https://www.tencentcloud.com/document/api/1031/78353)
+    /// * Delete: [DetachPolicy](https://www.tencentcloud.com/document/api/1031/78358)
+    /// 
     /// ## Import
     /// 
     /// organization OrgManagePolicyTarget can be imported using the id, e.g.

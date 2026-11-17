@@ -119,6 +119,12 @@ def get_cluster_available_extra_args(cluster_type: Optional[_builtins.str] = Non
         cluster_type="INDEPENDENT_CLUSTER")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeClusterAvailableExtraArgs](https://www.tencentcloud.com/search/?wd=DescribeClusterAvailableExtraArgs&type=document&lang=en)
+
 
     :param _builtins.str cluster_type: Cluster type. Valid values: `MANAGED_CLUSTER`, `INDEPENDENT_CLUSTER`.
     :param _builtins.str cluster_version: Cluster version, e.g. `1.28.3`.
@@ -165,6 +171,12 @@ def get_cluster_available_extra_args_output(cluster_type: pulumi.Input[Optional[
     example = tencentcloud.kubernetes.get_cluster_available_extra_args(cluster_version="1.30.0",
         cluster_type="INDEPENDENT_CLUSTER")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeClusterAvailableExtraArgs](https://www.tencentcloud.com/search/?wd=DescribeClusterAvailableExtraArgs&type=document&lang=en)
 
 
     :param _builtins.str cluster_type: Cluster type. Valid values: `MANAGED_CLUSTER`, `INDEPENDENT_CLUSTER`.

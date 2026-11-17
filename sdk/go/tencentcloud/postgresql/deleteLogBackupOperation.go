@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [DeleteLogBackup](https://www.tencentcloud.com/document/api/409/54347)
 type DeleteLogBackupOperation struct {
 	pulumi.CustomResourceState
 

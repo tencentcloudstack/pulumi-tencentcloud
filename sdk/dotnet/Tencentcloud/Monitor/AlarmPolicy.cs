@@ -432,6 +432,75 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// });
     /// ```
     /// 
+    /// ### alarm policy binding all objects
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var foo = new Tencentcloud.Monitor.AlarmPolicy("foo", new()
+    ///     {
+    ///         PolicyName = "tf-policy-bind-all",
+    ///         MonitorType = "MT_QCE",
+    ///         Enable = 1,
+    ///         ProjectId = 0,
+    ///         Namespace = "cvm_device",
+    ///         IsBindAll = 1,
+    ///         Conditions = new Tencentcloud.Monitor.Inputs.AlarmPolicyConditionsArgs
+    ///         {
+    ///             IsUnionRule = 1,
+    ///             Rules = new[]
+    ///             {
+    ///                 new Tencentcloud.Monitor.Inputs.AlarmPolicyConditionsRuleArgs
+    ///                 {
+    ///                     MetricName = "CpuUsage",
+    ///                     Period = 60,
+    ///                     Operator = "ge",
+    ///                     Value = "89.9",
+    ///                     ContinuePeriod = 1,
+    ///                     NoticeFrequency = 3600,
+    ///                     IsPowerNotice = 0,
+    ///                 },
+    ///             },
+    ///         },
+    ///         EventConditions = new[]
+    ///         {
+    ///             new Tencentcloud.Monitor.Inputs.AlarmPolicyEventConditionArgs
+    ///             {
+    ///                 MetricName = "ping_unreachable",
+    ///             },
+    ///         },
+    ///         NoticeIds = new[]
+    ///         {
+    ///             fooTencentcloudMonitorAlarmNotice.Id,
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [BindingPolicyTag](https://www.tencentcloud.com/search/?wd=BindingPolicyTag&amp;type=document&amp;lang=en)
+    ///   - [CreateAlarmPolicy](https://www.tencentcloud.com/document/api/248/39326)
+    ///   - [DescribeAlarmPolicy](https://www.tencentcloud.com/document/api/248/39320)
+    /// * Read: [DescribeAlarmPolicy](https://www.tencentcloud.com/document/api/248/39320)
+    /// * Update:
+    ///   - [DescribeAlarmPolicy](https://www.tencentcloud.com/document/api/248/39320)
+    ///   - [ModifyAlarmPolicyCondition](https://www.tencentcloud.com/document/api/248/39317)
+    ///   - [ModifyAlarmPolicyInfo](https://www.tencentcloud.com/document/api/248/39316)
+    ///   - [ModifyAlarmPolicyNotice](https://www.tencentcloud.com/document/api/248/39315)
+    ///   - [ModifyAlarmPolicyStatus](https://www.tencentcloud.com/document/api/248/39314)
+    ///   - [ModifyAlarmPolicyTasks](https://www.tencentcloud.com/document/api/248/39313)
+    /// * Delete: [DeleteAlarmPolicy](https://www.tencentcloud.com/document/api/248/39325)
+    /// 
     /// ## Import
     /// 
     /// Alarm policy instance can be imported, e.g.
@@ -490,6 +559,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// </summary>
         [Output("hierarchicalNotices")]
         public Output<ImmutableArray<Outputs.AlarmPolicyHierarchicalNotice>> HierarchicalNotices { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to bind all objects. If yes, no need to pass `Filter` or call `BindPolicyObject`. Valid values: `0` (no, default), `1` (yes). Not all policy types support binding all objects. Immutable after creation.
+        /// </summary>
+        [Output("isBindAll")]
+        public Output<int> IsBindAll { get; private set; } = null!;
 
         /// <summary>
         /// The type of monitor.
@@ -659,6 +734,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         }
 
         /// <summary>
+        /// Whether to bind all objects. If yes, no need to pass `Filter` or call `BindPolicyObject`. Valid values: `0` (no, default), `1` (yes). Not all policy types support binding all objects. Immutable after creation.
+        /// </summary>
+        [Input("isBindAll")]
+        public Input<int>? IsBindAll { get; set; }
+
+        /// <summary>
         /// The type of monitor.
         /// </summary>
         [Input("monitorType", required: true)]
@@ -809,6 +890,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
             get => _hierarchicalNotices ?? (_hierarchicalNotices = new InputList<Inputs.AlarmPolicyHierarchicalNoticeGetArgs>());
             set => _hierarchicalNotices = value;
         }
+
+        /// <summary>
+        /// Whether to bind all objects. If yes, no need to pass `Filter` or call `BindPolicyObject`. Valid values: `0` (no, default), `1` (yes). Not all policy types support binding all objects. Immutable after creation.
+        /// </summary>
+        [Input("isBindAll")]
+        public Input<int>? IsBindAll { get; set; }
 
         /// <summary>
         /// The type of monitor.

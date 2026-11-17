@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDomainAnalytics](https://www.tencentcloud.com/search/?wd=DescribeDomainAnalytics&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetDomainAnalyticsResult> InvokeAsync(GetDomainAnalyticsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDomainAnalyticsResult>("tencentcloud:Dnspod/getDomainAnalytics:getDomainAnalytics", args ?? new GetDomainAnalyticsArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDomainAnalytics](https://www.tencentcloud.com/search/?wd=DescribeDomainAnalytics&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDomainAnalyticsResult> Invoke(GetDomainAnalyticsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDomainAnalyticsResult>("tencentcloud:Dnspod/getDomainAnalytics:getDomainAnalytics", args ?? new GetDomainAnalyticsInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDomainAnalytics](https://www.tencentcloud.com/search/?wd=DescribeDomainAnalytics&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDomainAnalyticsResult> Invoke(GetDomainAnalyticsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDomainAnalyticsResult>("tencentcloud:Dnspod/getDomainAnalytics:getDomainAnalytics", args ?? new GetDomainAnalyticsInvokeArgs(), options.WithDefaults());

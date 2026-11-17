@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListProjectRoles](https://www.tencentcloud.com/document/api/1174/77864)
         /// </summary>
         public static Task<GetProjectRolesResult> InvokeAsync(GetProjectRolesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetProjectRolesResult>("tencentcloud:Wedata/getProjectRoles:getProjectRoles", args ?? new GetProjectRolesArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListProjectRoles](https://www.tencentcloud.com/document/api/1174/77864)
         /// </summary>
         public static Output<GetProjectRolesResult> Invoke(GetProjectRolesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetProjectRolesResult>("tencentcloud:Wedata/getProjectRoles:getProjectRoles", args ?? new GetProjectRolesInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListProjectRoles](https://www.tencentcloud.com/document/api/1174/77864)
         /// </summary>
         public static Output<GetProjectRolesResult> Invoke(GetProjectRolesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetProjectRolesResult>("tencentcloud:Wedata/getProjectRoles:getProjectRoles", args ?? new GetProjectRolesInvokeArgs(), options.WithDefaults());

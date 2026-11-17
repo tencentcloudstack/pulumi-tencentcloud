@@ -366,6 +366,22 @@ class ChcConfig(pulumi.CustomResource):
             deploy_security_group_ids=["sg-xxxxxx"])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [ConfigureChcAssistVpc](https://www.tencentcloud.com/document/api/213/48901)
+          - [ConfigureChcDeployVpc](https://www.tencentcloud.com/document/api/213/48900)
+          - [DescribeChcHosts](https://www.tencentcloud.com/document/api/213/48899)
+          - [ModifyChcAttribute](https://www.tencentcloud.com/document/api/213/48898)
+        * Read: [DescribeChcHosts](https://www.tencentcloud.com/document/api/213/48899)
+        * Update: [ModifyChcAttribute](https://www.tencentcloud.com/document/api/213/48898)
+        * Delete:
+          - [DescribeChcHosts](https://www.tencentcloud.com/document/api/213/48899)
+          - [RemoveChcAssistVpc](https://www.tencentcloud.com/document/api/213/48897)
+          - [RemoveChcDeployVpc](https://www.tencentcloud.com/document/api/213/48896)
+
         ## Import
 
         cvm chc_config can be imported using the id, e.g.
@@ -418,6 +434,22 @@ class ChcConfig(pulumi.CustomResource):
             },
             deploy_security_group_ids=["sg-xxxxxx"])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [ConfigureChcAssistVpc](https://www.tencentcloud.com/document/api/213/48901)
+          - [ConfigureChcDeployVpc](https://www.tencentcloud.com/document/api/213/48900)
+          - [DescribeChcHosts](https://www.tencentcloud.com/document/api/213/48899)
+          - [ModifyChcAttribute](https://www.tencentcloud.com/document/api/213/48898)
+        * Read: [DescribeChcHosts](https://www.tencentcloud.com/document/api/213/48899)
+        * Update: [ModifyChcAttribute](https://www.tencentcloud.com/document/api/213/48898)
+        * Delete:
+          - [DescribeChcHosts](https://www.tencentcloud.com/document/api/213/48899)
+          - [RemoveChcAssistVpc](https://www.tencentcloud.com/document/api/213/48897)
+          - [RemoveChcDeployVpc](https://www.tencentcloud.com/document/api/213/48896)
 
         ## Import
 

@@ -40,6 +40,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [BindSubDomain](https://www.tencentcloud.com/search/?wd=BindSubDomain&amp;type=document&amp;lang=en)
+    /// * Read:
+    ///   - [DescribeServiceSubDomainMappings](https://www.tencentcloud.com/search/?wd=DescribeServiceSubDomainMappings&amp;type=document&amp;lang=en)
+    ///   - [DescribeServiceSubDomains](https://www.tencentcloud.com/search/?wd=DescribeServiceSubDomains&amp;type=document&amp;lang=en)
+    /// * Update: [ModifySubDomain](https://www.tencentcloud.com/search/?wd=ModifySubDomain&amp;type=document&amp;lang=en)
+    /// * Delete: [UnBindSubDomain](https://www.tencentcloud.com/search/?wd=UnBindSubDomain&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:ApiGateway/customDomain:CustomDomain")]
     public partial class CustomDomain : global::Pulumi.CustomResource

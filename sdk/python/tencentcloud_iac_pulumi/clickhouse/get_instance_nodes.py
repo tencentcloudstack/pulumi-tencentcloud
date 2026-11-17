@@ -129,6 +129,12 @@ def get_instance_nodes(display_policy: Optional[_builtins.str] = None,
         force_all=True)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstanceNodes](https://www.tencentcloud.com/search/?wd=DescribeInstanceNodes&type=document&lang=en)
+
 
     :param _builtins.str display_policy: Display strategy, display all when All.
     :param _builtins.bool force_all: When true, returns all nodes, that is, the Limit is infinitely large.
@@ -173,6 +179,12 @@ def get_instance_nodes_output(display_policy: pulumi.Input[Optional[Optional[_bu
         display_policy="all",
         force_all=True)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstanceNodes](https://www.tencentcloud.com/search/?wd=DescribeInstanceNodes&type=document&lang=en)
 
 
     :param _builtins.str display_policy: Display strategy, display all when All.

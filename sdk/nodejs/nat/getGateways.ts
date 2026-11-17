@@ -21,6 +21,12 @@ import * as utilities from "../utilities";
  *     id: "nat-xfaq1",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeNatGateways](https://www.tencentcloud.com/document/api/215/34752)
  */
 export function getGateways(args?: GetGatewaysArgs, opts?: pulumi.InvokeOptions): Promise<GetGatewaysResult> {
     args = args || {};
@@ -92,6 +98,12 @@ export interface GetGatewaysResult {
  *     id: "nat-xfaq1",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeNatGateways](https://www.tencentcloud.com/document/api/215/34752)
  */
 export function getGatewaysOutput(args?: GetGatewaysOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetGatewaysResult> {
     args = args || {};

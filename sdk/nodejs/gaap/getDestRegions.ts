@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const destRegions = tencentcloud.gaap.getDestRegions({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDestRegions](https://www.tencentcloud.com/document/api/608/33102)
  */
 export function getDestRegions(args?: GetDestRegionsArgs, opts?: pulumi.InvokeOptions): Promise<GetDestRegionsResult> {
     args = args || {};
@@ -61,6 +67,12 @@ export interface GetDestRegionsResult {
  *
  * const destRegions = tencentcloud.gaap.getDestRegions({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDestRegions](https://www.tencentcloud.com/document/api/608/33102)
  */
 export function getDestRegionsOutput(args?: GetDestRegionsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDestRegionsResult> {
     args = args || {};

@@ -140,6 +140,12 @@ def get_triggers(filters: Optional[Sequence[Union['GetTriggersFilterArgs', 'GetT
         order="DESC")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListTriggers](https://www.tencentcloud.com/document/api/583/36314)
+
 
     :param Sequence[Union['GetTriggersFilterArgs', 'GetTriggersFilterArgsDict']] filters: * Qualifier:Function version, alias.
     :param _builtins.str function_name: Function name.
@@ -188,6 +194,12 @@ def get_triggers_output(filters: pulumi.Input[Optional[Optional[Sequence[Union['
         order_by="add_time",
         order="DESC")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListTriggers](https://www.tencentcloud.com/document/api/583/36314)
 
 
     :param Sequence[Union['GetTriggersFilterArgs', 'GetTriggersFilterArgsDict']] filters: * Qualifier:Function version, alias.

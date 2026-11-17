@@ -86,6 +86,12 @@ def get_upgrade_tasks(result_output_file: Optional[_builtins.str] = None,
     example = tencentcloud.kubernetes.get_upgrade_tasks()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeUpgradeTasks](https://www.tencentcloud.com/search/?wd=DescribeUpgradeTasks&type=document&lang=en)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -111,6 +117,12 @@ def get_upgrade_tasks_output(result_output_file: pulumi.Input[Optional[Optional[
 
     example = tencentcloud.kubernetes.get_upgrade_tasks()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeUpgradeTasks](https://www.tencentcloud.com/search/?wd=DescribeUpgradeTasks&type=document&lang=en)
 
 
     :param _builtins.str result_output_file: Used to save results.

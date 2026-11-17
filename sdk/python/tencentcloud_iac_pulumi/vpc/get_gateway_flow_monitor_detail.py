@@ -159,6 +159,12 @@ def get_gateway_flow_monitor_detail(direct_connect_gateway_id: Optional[_builtin
         order_direction="DESC")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeGatewayFlowMonitorDetail](https://www.tencentcloud.com/document/api/215/34739)
+
 
     :param _builtins.str direct_connect_gateway_id: The instance ID of the Direct Connect gateway, such as `dcg-ltjahce6`.
     :param _builtins.str nat_id: The instance ID of the NAT gateway, such as `nat-ltjahce6`.
@@ -215,6 +221,12 @@ def get_gateway_flow_monitor_detail_output(direct_connect_gateway_id: pulumi.Inp
         order_field="OutTraffic",
         order_direction="DESC")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeGatewayFlowMonitorDetail](https://www.tencentcloud.com/document/api/215/34739)
 
 
     :param _builtins.str direct_connect_gateway_id: The instance ID of the Direct Connect gateway, such as `dcg-ltjahce6`.

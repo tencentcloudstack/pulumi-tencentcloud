@@ -88,6 +88,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [RenewDBInstance](https://www.tencentcloud.com/search/?wd=RenewDBInstance&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+    /// * Update: [RenewDBInstance](https://www.tencentcloud.com/search/?wd=RenewDBInstance&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// sqlserver RenewDbInstance can be imported using the id, e.g.

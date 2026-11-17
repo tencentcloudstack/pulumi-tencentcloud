@@ -49,6 +49,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Invite
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [InviteOrganizationMember](https://www.tencentcloud.com/document/api/1031/64469)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Invite/organizationMemberOperation:OrganizationMemberOperation")]
     public partial class OrganizationMemberOperation : global::Pulumi.CustomResource

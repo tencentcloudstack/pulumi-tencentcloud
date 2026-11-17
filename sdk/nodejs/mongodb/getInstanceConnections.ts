@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     instanceId: "cmgo-9d0p6umb",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeClientConnections](https://www.tencentcloud.com/document/api/240/34703)
  */
 export function getInstanceConnections(args: GetInstanceConnectionsArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceConnectionsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetInstanceConnectionsResult {
  *     instanceId: "cmgo-9d0p6umb",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeClientConnections](https://www.tencentcloud.com/document/api/240/34703)
  */
 export function getInstanceConnectionsOutput(args: GetInstanceConnectionsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInstanceConnectionsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

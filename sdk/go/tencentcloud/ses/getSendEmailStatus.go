@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [GetSendEmailStatus](https://www.tencentcloud.com/document/api/1084/39502)
 func GetSendEmailStatus(ctx *pulumi.Context, args *GetSendEmailStatusArgs, opts ...pulumi.InvokeOption) (*GetSendEmailStatusResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSendEmailStatusResult

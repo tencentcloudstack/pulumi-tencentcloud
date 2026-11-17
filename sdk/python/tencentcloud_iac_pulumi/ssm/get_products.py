@@ -85,6 +85,12 @@ def get_products(result_output_file: Optional[_builtins.str] = None,
     products = tencentcloud.ssm.get_products()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSupportedProducts](https://www.tencentcloud.com/document/api/1078/41513)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -110,6 +116,12 @@ def get_products_output(result_output_file: pulumi.Input[Optional[Optional[_buil
 
     products = tencentcloud.ssm.get_products()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSupportedProducts](https://www.tencentcloud.com/document/api/1078/41513)
 
 
     :param _builtins.str result_output_file: Used to save results.

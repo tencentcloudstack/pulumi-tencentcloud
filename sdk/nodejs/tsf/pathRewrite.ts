@@ -22,6 +22,15 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreatePathRewritesWithDetailResp](https://www.tencentcloud.com/search/?wd=CreatePathRewritesWithDetailResp&type=document&lang=en)
+ * * Read: [DescribePathRewrite](https://www.tencentcloud.com/search/?wd=DescribePathRewrite&type=document&lang=en)
+ * * Update: [ModifyPathRewrite](https://www.tencentcloud.com/search/?wd=ModifyPathRewrite&type=document&lang=en)
+ * * Delete: [DeletePathRewrites](https://www.tencentcloud.com/search/?wd=DeletePathRewrites&type=document&lang=en)
+ *
  * ## Import
  *
  * tsf pathRewrite can be imported using the id, e.g.

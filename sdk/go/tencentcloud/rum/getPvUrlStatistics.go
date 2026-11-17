@@ -41,6 +41,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDataPvUrlStatistics](https://www.tencentcloud.com/document/api/1131/45322)
 func GetPvUrlStatistics(ctx *pulumi.Context, args *GetPvUrlStatisticsArgs, opts ...pulumi.InvokeOption) (*GetPvUrlStatisticsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetPvUrlStatisticsResult

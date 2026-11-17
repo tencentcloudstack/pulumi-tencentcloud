@@ -120,6 +120,14 @@ class UpgradeMultiZoneOperation(pulumi.CustomResource):
             upgrade_proxy_and_redis_server=True)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
+          - [UpgradeVersionToMultiAvailabilityZones](https://www.tencentcloud.com/document/api/239/40162)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -145,6 +153,14 @@ class UpgradeMultiZoneOperation(pulumi.CustomResource):
             instance_id="crs-c1nl9rpv",
             upgrade_proxy_and_redis_server=True)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
+          - [UpgradeVersionToMultiAvailabilityZones](https://www.tencentcloud.com/document/api/239/40162)
 
 
         :param str resource_name: The name of the resource.

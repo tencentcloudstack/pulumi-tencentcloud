@@ -58,6 +58,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateL4HealthConfig](https://www.tencentcloud.com/search/?wd=CreateL4HealthConfig&amp;type=document&amp;lang=en)
+    ///   - [CreateL4Rules](https://www.tencentcloud.com/search/?wd=CreateL4Rules&amp;type=document&amp;lang=en)
+    ///   - [DescribleL4Rules](https://www.tencentcloud.com/search/?wd=DescribleL4Rules&amp;type=document&amp;lang=en)
+    ///   - [ModifyL4KeepTime](https://www.tencentcloud.com/search/?wd=ModifyL4KeepTime&amp;type=document&amp;lang=en)
+    /// * Read: [DescribleL4Rules](https://www.tencentcloud.com/search/?wd=DescribleL4Rules&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [CreateL4HealthConfig](https://www.tencentcloud.com/search/?wd=CreateL4HealthConfig&amp;type=document&amp;lang=en)
+    ///   - [ModifyL4KeepTime](https://www.tencentcloud.com/search/?wd=ModifyL4KeepTime&amp;type=document&amp;lang=en)
+    ///   - [ModifyL4Rules](https://www.tencentcloud.com/search/?wd=ModifyL4Rules&amp;type=document&amp;lang=en)
+    /// * Delete:
+    ///   - [DeleteL4Rules](https://www.tencentcloud.com/search/?wd=DeleteL4Rules&amp;type=document&amp;lang=en)
+    ///   - [DescribleL4Rules](https://www.tencentcloud.com/search/?wd=DescribleL4Rules&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dayu/l4Rule:L4Rule")]
     public partial class L4Rule : global::Pulumi.CustomResource

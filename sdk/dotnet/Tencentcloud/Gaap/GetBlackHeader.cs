@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBlackHeader](https://www.tencentcloud.com/document/api/608/41733)
         /// </summary>
         public static Task<GetBlackHeaderResult> InvokeAsync(GetBlackHeaderArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetBlackHeaderResult>("tencentcloud:Gaap/getBlackHeader:getBlackHeader", args ?? new GetBlackHeaderArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBlackHeader](https://www.tencentcloud.com/document/api/608/41733)
         /// </summary>
         public static Output<GetBlackHeaderResult> Invoke(GetBlackHeaderInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetBlackHeaderResult>("tencentcloud:Gaap/getBlackHeader:getBlackHeader", args ?? new GetBlackHeaderInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBlackHeader](https://www.tencentcloud.com/document/api/608/41733)
         /// </summary>
         public static Output<GetBlackHeaderResult> Invoke(GetBlackHeaderInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetBlackHeaderResult>("tencentcloud:Gaap/getBlackHeader:getBlackHeader", args ?? new GetBlackHeaderInvokeArgs(), options.WithDefaults());

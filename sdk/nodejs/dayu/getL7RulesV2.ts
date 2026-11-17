@@ -21,6 +21,12 @@ import * as utilities from "../utilities";
  *     protocol: "https",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribleNewL7Rules](https://www.tencentcloud.com/search/?wd=DescribleNewL7Rules&type=document&lang=en)
  */
 export function getL7RulesV2(args: GetL7RulesV2Args, opts?: pulumi.InvokeOptions): Promise<GetL7RulesV2Result> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -123,6 +129,12 @@ export interface GetL7RulesV2Result {
  *     protocol: "https",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribleNewL7Rules](https://www.tencentcloud.com/search/?wd=DescribleNewL7Rules&type=document&lang=en)
  */
 export function getL7RulesV2Output(args: GetL7RulesV2OutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetL7RulesV2Result> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

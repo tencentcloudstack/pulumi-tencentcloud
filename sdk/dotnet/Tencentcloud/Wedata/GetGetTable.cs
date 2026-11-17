@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetTable](https://www.tencentcloud.com/document/api/1174/77952)
         /// </summary>
         public static Task<GetGetTableResult> InvokeAsync(GetGetTableArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetGetTableResult>("tencentcloud:Wedata/getGetTable:getGetTable", args ?? new GetGetTableArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetTable](https://www.tencentcloud.com/document/api/1174/77952)
         /// </summary>
         public static Output<GetGetTableResult> Invoke(GetGetTableInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetGetTableResult>("tencentcloud:Wedata/getGetTable:getGetTable", args ?? new GetGetTableInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetTable](https://www.tencentcloud.com/document/api/1174/77952)
         /// </summary>
         public static Output<GetGetTableResult> Invoke(GetGetTableInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetGetTableResult>("tencentcloud:Wedata/getGetTable:getGetTable", args ?? new GetGetTableInvokeArgs(), options.WithDefaults());

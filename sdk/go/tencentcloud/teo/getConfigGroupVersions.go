@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeConfigGroupVersions](https://www.tencentcloud.com/document/api/1145/57974)
 func GetConfigGroupVersions(ctx *pulumi.Context, args *GetConfigGroupVersionsArgs, opts ...pulumi.InvokeOption) (*GetConfigGroupVersionsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetConfigGroupVersionsResult

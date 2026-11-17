@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     amountUnit: "pent",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDCDBRenewalPrice](https://www.tencentcloud.com/search/?wd=DescribeDCDBRenewalPrice&type=document&lang=en)
  */
 export function getRenewalPrice(args: GetRenewalPriceArgs, opts?: pulumi.InvokeOptions): Promise<GetRenewalPriceResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -88,6 +94,12 @@ export interface GetRenewalPriceResult {
  *     amountUnit: "pent",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDCDBRenewalPrice](https://www.tencentcloud.com/search/?wd=DescribeDCDBRenewalPrice&type=document&lang=en)
  */
 export function getRenewalPriceOutput(args: GetRenewalPriceOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRenewalPriceResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

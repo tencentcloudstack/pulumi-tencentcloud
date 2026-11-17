@@ -117,6 +117,12 @@ def get_task_instance_executions(instance_key: Optional[_builtins.str] = None,
         instance_key="20250731151633120_2025-10-13 17:00:00")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListTaskInstanceExecutions](https://www.tencentcloud.com/document/api/1174/73818)
+
 
     :param _builtins.str instance_key: Instance unique identifier, can be obtained via ListInstances.
     :param _builtins.str project_id: Project ID to which it belongs.
@@ -155,6 +161,12 @@ def get_task_instance_executions_output(instance_key: pulumi.Input[Optional[_bui
     wedata_task_instance_executions = tencentcloud.wedata.get_task_instance_executions(project_id="1859317240494305280",
         instance_key="20250731151633120_2025-10-13 17:00:00")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListTaskInstanceExecutions](https://www.tencentcloud.com/document/api/1174/73818)
 
 
     :param _builtins.str instance_key: Instance unique identifier, can be obtained via ListInstances.

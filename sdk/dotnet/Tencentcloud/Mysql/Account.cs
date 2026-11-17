@@ -91,6 +91,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateAccounts](https://www.tencentcloud.com/document/api/236/17502)
+    ///   - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+    /// * Read: [DescribeAccounts](https://www.tencentcloud.com/document/api/236/17499)
+    /// * Update:
+    ///   - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+    ///   - [ModifyAccountDescription](https://www.tencentcloud.com/document/api/236/17498)
+    ///   - [ModifyAccountHost](https://www.tencentcloud.com/search/?wd=ModifyAccountHost&amp;type=document&amp;lang=en)
+    ///   - [ModifyAccountMaxUserConnections](https://www.tencentcloud.com/document/api/236/40589)
+    ///   - [ModifyAccountPassword](https://www.tencentcloud.com/document/api/236/17497)
+    /// * Delete:
+    ///   - [DeleteAccounts](https://www.tencentcloud.com/document/api/236/17501)
+    ///   - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+    /// 
     /// ## Import
     /// 
     /// mysql account can be imported using the mysqlId#accountName, e.g.

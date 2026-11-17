@@ -139,6 +139,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CompleteLifecycleAction](https://www.tencentcloud.com/document/api/377/33200)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:As/completeLifecycle:CompleteLifecycle")]
     public partial class CompleteLifecycle : global::Pulumi.CustomResource

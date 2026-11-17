@@ -29,6 +29,12 @@ import * as utilities from "../utilities";
  *     redo: 1,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Read: [DescribePurgeTasks](https://www.tencentcloud.com/document/api/228/33604)
  */
 export class UrlPurge extends pulumi.CustomResource {
     /**

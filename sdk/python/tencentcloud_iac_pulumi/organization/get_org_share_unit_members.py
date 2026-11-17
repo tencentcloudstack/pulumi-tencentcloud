@@ -118,6 +118,12 @@ def get_org_share_unit_members(area: Optional[_builtins.str] = None,
         search_key="xxxxxx")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeShareUnitMembers](https://www.tencentcloud.com/document/api/1031/68230)
+
 
     :param _builtins.str area: Shared unit area.
     :param _builtins.str result_output_file: Used to save results.
@@ -157,6 +163,12 @@ def get_org_share_unit_members_output(area: pulumi.Input[Optional[_builtins.str]
         area="ap-guangzhou",
         search_key="xxxxxx")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeShareUnitMembers](https://www.tencentcloud.com/document/api/1031/68230)
 
 
     :param _builtins.str area: Shared unit area.

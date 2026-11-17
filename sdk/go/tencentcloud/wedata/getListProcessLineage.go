@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [ListProcessLineage](https://www.tencentcloud.com/document/api/1174/77946)
 func GetListProcessLineage(ctx *pulumi.Context, args *GetListProcessLineageArgs, opts ...pulumi.InvokeOption) (*GetListProcessLineageResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetListProcessLineageResult

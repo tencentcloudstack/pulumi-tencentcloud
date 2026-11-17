@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeVpcResourceDashboard](https://www.tencentcloud.com/document/api/215/36076)
         /// </summary>
         public static Task<GetResourceDashboardResult> InvokeAsync(GetResourceDashboardArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetResourceDashboardResult>("tencentcloud:Vpc/getResourceDashboard:getResourceDashboard", args ?? new GetResourceDashboardArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeVpcResourceDashboard](https://www.tencentcloud.com/document/api/215/36076)
         /// </summary>
         public static Output<GetResourceDashboardResult> Invoke(GetResourceDashboardInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetResourceDashboardResult>("tencentcloud:Vpc/getResourceDashboard:getResourceDashboard", args ?? new GetResourceDashboardInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeVpcResourceDashboard](https://www.tencentcloud.com/document/api/215/36076)
         /// </summary>
         public static Output<GetResourceDashboardResult> Invoke(GetResourceDashboardInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetResourceDashboardResult>("tencentcloud:Vpc/getResourceDashboard:getResourceDashboard", args ?? new GetResourceDashboardInvokeArgs(), options.WithDefaults());

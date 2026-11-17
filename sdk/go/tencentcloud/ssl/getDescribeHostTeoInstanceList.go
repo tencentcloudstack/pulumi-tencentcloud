@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeHostTeoInstanceList](https://www.tencentcloud.com/document/api/1007/57016)
 func GetDescribeHostTeoInstanceList(ctx *pulumi.Context, args *GetDescribeHostTeoInstanceListArgs, opts ...pulumi.InvokeOption) (*GetDescribeHostTeoInstanceListResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDescribeHostTeoInstanceListResult

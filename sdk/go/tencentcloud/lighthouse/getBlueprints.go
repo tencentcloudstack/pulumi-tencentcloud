@@ -136,6 +136,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeBlueprints](https://www.tencentcloud.com/document/api/1103/42503)
 func GetBlueprints(ctx *pulumi.Context, args *GetBlueprintsArgs, opts ...pulumi.InvokeOption) (*GetBlueprintsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetBlueprintsResult

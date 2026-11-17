@@ -36,6 +36,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeLiveXP2PDetailInfoList](https://www.tencentcloud.com/search/?wd=DescribeLiveXP2PDetailInfoList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetXp2pDetailInfoListResult> InvokeAsync(GetXp2pDetailInfoListArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetXp2pDetailInfoListResult>("tencentcloud:Css/getXp2pDetailInfoList:getXp2pDetailInfoList", args ?? new GetXp2pDetailInfoListArgs(), options.WithDefaults());
@@ -64,6 +70,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeLiveXP2PDetailInfoList](https://www.tencentcloud.com/search/?wd=DescribeLiveXP2PDetailInfoList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetXp2pDetailInfoListResult> Invoke(GetXp2pDetailInfoListInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetXp2pDetailInfoListResult>("tencentcloud:Css/getXp2pDetailInfoList:getXp2pDetailInfoList", args ?? new GetXp2pDetailInfoListInvokeArgs(), options.WithDefaults());
@@ -92,6 +104,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeLiveXP2PDetailInfoList](https://www.tencentcloud.com/search/?wd=DescribeLiveXP2PDetailInfoList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetXp2pDetailInfoListResult> Invoke(GetXp2pDetailInfoListInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetXp2pDetailInfoListResult>("tencentcloud:Css/getXp2pDetailInfoList:getXp2pDetailInfoList", args ?? new GetXp2pDetailInfoListInvokeArgs(), options.WithDefaults());

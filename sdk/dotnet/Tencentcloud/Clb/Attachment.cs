@@ -206,6 +206,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [RegisterTargets](https://www.tencentcloud.com/document/api/214/33809)
+    /// * Read:
+    ///   - [DescribeListeners](https://www.tencentcloud.com/document/api/214/33831)
+    ///   - [DescribeTargets](https://www.tencentcloud.com/document/api/214/33824)
+    /// * Update:
+    ///   - [ModifyTargetWeight](https://www.tencentcloud.com/document/api/214/33811)
+    ///   - [RegisterTargets](https://www.tencentcloud.com/document/api/214/33809)
+    /// * Delete: [DeregisterTargets](https://www.tencentcloud.com/document/api/214/33832)
+    /// 
     /// ## Import
     /// 
     /// CLB attachment can be imported using the id, e.g.

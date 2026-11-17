@@ -51,6 +51,7 @@ __all__ = [
     'DomainMaxAgeMaxAgeRule',
     'DomainOrigin',
     'DomainOriginCombine',
+    'DomainOriginPathRule',
     'DomainOriginPullOptimization',
     'DomainOriginPullTimeout',
     'DomainOssPrivateAccess',
@@ -2043,9 +2044,9 @@ class DomainHttpsConfigClientCertificateConfig(dict):
                  expire_time: Optional[_builtins.str] = None):
         """
         :param _builtins.str certificate_content: Client Certificate PEM format, requires Base64 encoding.
-        :param _builtins.str certificate_name: Client certificate name.
-        :param _builtins.str deploy_time: Deploy time of client certificate.
-        :param _builtins.str expire_time: Expire time of client certificate.
+        :param _builtins.str certificate_name: Server certificate name.
+        :param _builtins.str deploy_time: Deploy time of server certificate.
+        :param _builtins.str expire_time: Expire time of server certificate.
         """
         pulumi.set(__self__, "certificate_content", certificate_content)
         if certificate_name is not None:
@@ -2067,7 +2068,7 @@ class DomainHttpsConfigClientCertificateConfig(dict):
     @pulumi.getter(name="certificateName")
     def certificate_name(self) -> Optional[_builtins.str]:
         """
-        Client certificate name.
+        Server certificate name.
         """
         return pulumi.get(self, "certificate_name")
 
@@ -2075,7 +2076,7 @@ class DomainHttpsConfigClientCertificateConfig(dict):
     @pulumi.getter(name="deployTime")
     def deploy_time(self) -> Optional[_builtins.str]:
         """
-        Deploy time of client certificate.
+        Deploy time of server certificate.
         """
         return pulumi.get(self, "deploy_time")
 
@@ -2083,7 +2084,7 @@ class DomainHttpsConfigClientCertificateConfig(dict):
     @pulumi.getter(name="expireTime")
     def expire_time(self) -> Optional[_builtins.str]:
         """
-        Expire time of client certificate.
+        Expire time of server certificate.
         """
         return pulumi.get(self, "expire_time")
 
@@ -2748,6 +2749,8 @@ class DomainOrigin(dict):
             suggest = "origin_company"
         elif key == "originPullProtocol":
             suggest = "origin_pull_protocol"
+        elif key == "pathRules":
+            suggest = "path_rules"
         elif key == "serverName":
             suggest = "server_name"
 
@@ -2771,6 +2774,7 @@ class DomainOrigin(dict):
                  cos_private_access: Optional[_builtins.str] = None,
                  origin_company: Optional[_builtins.str] = None,
                  origin_pull_protocol: Optional[_builtins.str] = None,
+                 path_rules: Optional[Sequence['outputs.DomainOriginPathRule']] = None,
                  server_name: Optional[_builtins.str] = None):
         """
         :param Sequence[_builtins.str] origin_lists: Master origin server list. Valid values can be ip or domain name. When modifying the origin server, you need to enter the corresponding `origin_type`.
@@ -2781,7 +2785,8 @@ class DomainOrigin(dict):
         :param _builtins.str cos_private_access: When OriginType is COS, you can specify if access to private buckets is allowed. Valid values are `on` and `off`. and default value is `off`.
         :param _builtins.str origin_company: Object storage back to the source vendor. Required when the source station type is a third-party storage source station (third_party). Optional values include the following: `aws_s3`: AWS S3; `ali_oss`: Alibaba Cloud OSS; `hw_obs`: Huawei OBS; `qiniu_kodo`: Qiniu Cloud kodo; `others`: other vendors' object storage, only supports object storage compatible with AWS signature algorithm, such as Tencent Cloud Financial Zone COS. Example value: `hw_obs`.
         :param _builtins.str origin_pull_protocol: Origin-pull protocol configuration. `http`: forced HTTP origin-pull, `follow`: protocol follow origin-pull, `https`: forced HTTPS origin-pull. This only supports origin server port 443 for origin-pull.
-        :param _builtins.str server_name: Host header used when accessing the master origin server. If left empty, the acceleration domain name will be used by default.
+        :param Sequence['DomainOriginPathRuleArgs'] path_rules: Origin path rewrite rules. Each element configures a path-based origin routing rule.
+        :param _builtins.str server_name: Host header used when accessing the origin server on path match. If left empty, the default ServerName is used.
         """
         pulumi.set(__self__, "origin_lists", origin_lists)
         pulumi.set(__self__, "origin_type", origin_type)
@@ -2797,6 +2802,8 @@ class DomainOrigin(dict):
             pulumi.set(__self__, "origin_company", origin_company)
         if origin_pull_protocol is not None:
             pulumi.set(__self__, "origin_pull_protocol", origin_pull_protocol)
+        if path_rules is not None:
+            pulumi.set(__self__, "path_rules", path_rules)
         if server_name is not None:
             pulumi.set(__self__, "server_name", server_name)
 
@@ -2865,10 +2872,18 @@ class DomainOrigin(dict):
         return pulumi.get(self, "origin_pull_protocol")
 
     @_builtins.property
+    @pulumi.getter(name="pathRules")
+    def path_rules(self) -> Optional[Sequence['outputs.DomainOriginPathRule']]:
+        """
+        Origin path rewrite rules. Each element configures a path-based origin routing rule.
+        """
+        return pulumi.get(self, "path_rules")
+
+    @_builtins.property
     @pulumi.getter(name="serverName")
     def server_name(self) -> Optional[_builtins.str]:
         """
-        Host header used when accessing the master origin server. If left empty, the acceleration domain name will be used by default.
+        Host header used when accessing the origin server on path match. If left empty, the default ServerName is used.
         """
         return pulumi.get(self, "server_name")
 
@@ -2889,6 +2904,82 @@ class DomainOriginCombine(dict):
         Configuration switch, valid values are `on` and `off`.
         """
         return pulumi.get(self, "switch")
+
+
+@pulumi.output_type
+class DomainOriginPathRule(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "forwardUri":
+            suggest = "forward_uri"
+        elif key == "fullMatch":
+            suggest = "full_match"
+        elif key == "serverName":
+            suggest = "server_name"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in DomainOriginPathRule. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        DomainOriginPathRule.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        DomainOriginPathRule.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 forward_uri: Optional[_builtins.str] = None,
+                 full_match: Optional[_builtins.bool] = None,
+                 path: Optional[_builtins.str] = None,
+                 server_name: Optional[_builtins.str] = None):
+        """
+        :param _builtins.str forward_uri: URI path for origin on path match. Must start with `/` and does not include the parameter part. Maximum length is 1024 characters. `$1`-`$5` can be used to capture wildcard `*` in the matched path, up to 10 capture values.
+        :param _builtins.bool full_match: Whether to use full path match.
+        :param _builtins.str path: Matched URL path. Only URL path is supported, not parameters. Default is full match. When wildcard `*` matching is enabled, up to 5 wildcards are supported, with a maximum length of 1024 characters.
+        :param _builtins.str server_name: Host header used when accessing the origin server on path match. If left empty, the default ServerName is used.
+        """
+        if forward_uri is not None:
+            pulumi.set(__self__, "forward_uri", forward_uri)
+        if full_match is not None:
+            pulumi.set(__self__, "full_match", full_match)
+        if path is not None:
+            pulumi.set(__self__, "path", path)
+        if server_name is not None:
+            pulumi.set(__self__, "server_name", server_name)
+
+    @_builtins.property
+    @pulumi.getter(name="forwardUri")
+    def forward_uri(self) -> Optional[_builtins.str]:
+        """
+        URI path for origin on path match. Must start with `/` and does not include the parameter part. Maximum length is 1024 characters. `$1`-`$5` can be used to capture wildcard `*` in the matched path, up to 10 capture values.
+        """
+        return pulumi.get(self, "forward_uri")
+
+    @_builtins.property
+    @pulumi.getter(name="fullMatch")
+    def full_match(self) -> Optional[_builtins.bool]:
+        """
+        Whether to use full path match.
+        """
+        return pulumi.get(self, "full_match")
+
+    @_builtins.property
+    @pulumi.getter
+    def path(self) -> Optional[_builtins.str]:
+        """
+        Matched URL path. Only URL path is supported, not parameters. Default is full match. When wildcard `*` matching is enabled, up to 5 wildcards are supported, with a maximum length of 1024 characters.
+        """
+        return pulumi.get(self, "path")
+
+    @_builtins.property
+    @pulumi.getter(name="serverName")
+    def server_name(self) -> Optional[_builtins.str]:
+        """
+        Host header used when accessing the origin server on path match. If left empty, the default ServerName is used.
+        """
+        return pulumi.get(self, "server_name")
 
 
 @pulumi.output_type

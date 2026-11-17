@@ -32,6 +32,7 @@ class AlarmPolicyArgs:
                  filter: pulumi.Input[Optional['AlarmPolicyFilterArgs']] = None,
                  group_bies: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  hierarchical_notices: pulumi.Input[Optional[Sequence[pulumi.Input['AlarmPolicyHierarchicalNoticeArgs']]]] = None,
+                 is_bind_all: pulumi.Input[Optional[_builtins.int]] = None,
                  notice_content_tmpl_bind_infos: pulumi.Input[Optional[Sequence[pulumi.Input['AlarmPolicyNoticeContentTmplBindInfoArgs']]]] = None,
                  notice_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  policy_tags: pulumi.Input[Optional[Sequence[pulumi.Input['AlarmPolicyPolicyTagArgs']]]] = None,
@@ -51,6 +52,7 @@ class AlarmPolicyArgs:
         :param pulumi.Input['AlarmPolicyFilterArgs'] filter: Global filters.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] group_bies: Aggregate dimension list, specify which dimension keys to use for group by.
         :param pulumi.Input[Sequence[pulumi.Input['AlarmPolicyHierarchicalNoticeArgs']]] hierarchical_notices: Alarm hierarchical notice rules configuration.
+        :param pulumi.Input[_builtins.int] is_bind_all: Whether to bind all objects. If yes, no need to pass `filter` or call `BindPolicyObject`. Valid values: `0` (no, default), `1` (yes). Not all policy types support binding all objects. Immutable after creation.
         :param pulumi.Input[Sequence[pulumi.Input['AlarmPolicyNoticeContentTmplBindInfoArgs']]] notice_content_tmpl_bind_infos: Notice content template binding info.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] notice_ids: List of notification rule IDs.
         :param pulumi.Input[Sequence[pulumi.Input['AlarmPolicyPolicyTagArgs']]] policy_tags: Policy tag to bind object.
@@ -75,6 +77,8 @@ class AlarmPolicyArgs:
             pulumi.set(__self__, "group_bies", group_bies)
         if hierarchical_notices is not None:
             pulumi.set(__self__, "hierarchical_notices", hierarchical_notices)
+        if is_bind_all is not None:
+            pulumi.set(__self__, "is_bind_all", is_bind_all)
         if notice_content_tmpl_bind_infos is not None:
             pulumi.set(__self__, "notice_content_tmpl_bind_infos", notice_content_tmpl_bind_infos)
         if notice_ids is not None:
@@ -209,6 +213,18 @@ class AlarmPolicyArgs:
         pulumi.set(self, "hierarchical_notices", value)
 
     @_builtins.property
+    @pulumi.getter(name="isBindAll")
+    def is_bind_all(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Whether to bind all objects. If yes, no need to pass `filter` or call `BindPolicyObject`. Valid values: `0` (no, default), `1` (yes). Not all policy types support binding all objects. Immutable after creation.
+        """
+        return pulumi.get(self, "is_bind_all")
+
+    @is_bind_all.setter
+    def is_bind_all(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "is_bind_all", value)
+
+    @_builtins.property
     @pulumi.getter(name="noticeContentTmplBindInfos")
     def notice_content_tmpl_bind_infos(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['AlarmPolicyNoticeContentTmplBindInfoArgs']]]]:
         """
@@ -292,6 +308,7 @@ class _AlarmPolicyState:
                  filter: pulumi.Input[Optional['AlarmPolicyFilterArgs']] = None,
                  group_bies: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  hierarchical_notices: pulumi.Input[Optional[Sequence[pulumi.Input['AlarmPolicyHierarchicalNoticeArgs']]]] = None,
+                 is_bind_all: pulumi.Input[Optional[_builtins.int]] = None,
                  monitor_type: pulumi.Input[Optional[_builtins.str]] = None,
                  namespace: pulumi.Input[Optional[_builtins.str]] = None,
                  notice_content_tmpl_bind_infos: pulumi.Input[Optional[Sequence[pulumi.Input['AlarmPolicyNoticeContentTmplBindInfoArgs']]]] = None,
@@ -313,6 +330,7 @@ class _AlarmPolicyState:
         :param pulumi.Input['AlarmPolicyFilterArgs'] filter: Global filters.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] group_bies: Aggregate dimension list, specify which dimension keys to use for group by.
         :param pulumi.Input[Sequence[pulumi.Input['AlarmPolicyHierarchicalNoticeArgs']]] hierarchical_notices: Alarm hierarchical notice rules configuration.
+        :param pulumi.Input[_builtins.int] is_bind_all: Whether to bind all objects. If yes, no need to pass `filter` or call `BindPolicyObject`. Valid values: `0` (no, default), `1` (yes). Not all policy types support binding all objects. Immutable after creation.
         :param pulumi.Input[_builtins.str] monitor_type: The type of monitor.
         :param pulumi.Input[_builtins.str] namespace: The type of alarm.
         :param pulumi.Input[Sequence[pulumi.Input['AlarmPolicyNoticeContentTmplBindInfoArgs']]] notice_content_tmpl_bind_infos: Notice content template binding info.
@@ -340,6 +358,8 @@ class _AlarmPolicyState:
             pulumi.set(__self__, "group_bies", group_bies)
         if hierarchical_notices is not None:
             pulumi.set(__self__, "hierarchical_notices", hierarchical_notices)
+        if is_bind_all is not None:
+            pulumi.set(__self__, "is_bind_all", is_bind_all)
         if monitor_type is not None:
             pulumi.set(__self__, "monitor_type", monitor_type)
         if namespace is not None:
@@ -456,6 +476,18 @@ class _AlarmPolicyState:
     @hierarchical_notices.setter
     def hierarchical_notices(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['AlarmPolicyHierarchicalNoticeArgs']]]]):
         pulumi.set(self, "hierarchical_notices", value)
+
+    @_builtins.property
+    @pulumi.getter(name="isBindAll")
+    def is_bind_all(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Whether to bind all objects. If yes, no need to pass `filter` or call `BindPolicyObject`. Valid values: `0` (no, default), `1` (yes). Not all policy types support binding all objects. Immutable after creation.
+        """
+        return pulumi.get(self, "is_bind_all")
+
+    @is_bind_all.setter
+    def is_bind_all(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "is_bind_all", value)
 
     @_builtins.property
     @pulumi.getter(name="monitorType")
@@ -591,6 +623,7 @@ class AlarmPolicy(pulumi.CustomResource):
                  filter: pulumi.Input[Optional[Union['AlarmPolicyFilterArgs', 'AlarmPolicyFilterArgsDict']]] = None,
                  group_bies: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  hierarchical_notices: pulumi.Input[Optional[Sequence[pulumi.Input[Union['AlarmPolicyHierarchicalNoticeArgs', 'AlarmPolicyHierarchicalNoticeArgsDict']]]]] = None,
+                 is_bind_all: pulumi.Input[Optional[_builtins.int]] = None,
                  monitor_type: pulumi.Input[Optional[_builtins.str]] = None,
                  namespace: pulumi.Input[Optional[_builtins.str]] = None,
                  notice_content_tmpl_bind_infos: pulumi.Input[Optional[Sequence[pulumi.Input[Union['AlarmPolicyNoticeContentTmplBindInfoArgs', 'AlarmPolicyNoticeContentTmplBindInfoArgsDict']]]]] = None,
@@ -885,6 +918,55 @@ class AlarmPolicy(pulumi.CustomResource):
             }])
         ```
 
+        ### alarm policy binding all objects
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        foo = tencentcloud.monitor.AlarmPolicy("foo",
+            policy_name="tf-policy-bind-all",
+            monitor_type="MT_QCE",
+            enable=1,
+            project_id=0,
+            namespace="cvm_device",
+            is_bind_all=1,
+            conditions={
+                "is_union_rule": 1,
+                "rules": [{
+                    "metric_name": "CpuUsage",
+                    "period": 60,
+                    "operator": "ge",
+                    "value": "89.9",
+                    "continue_period": 1,
+                    "notice_frequency": 3600,
+                    "is_power_notice": 0,
+                }],
+            },
+            event_conditions=[{
+                "metric_name": "ping_unreachable",
+            }],
+            notice_ids=[foo_tencentcloud_monitor_alarm_notice["id"]])
+        ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [BindingPolicyTag](https://www.tencentcloud.com/search/?wd=BindingPolicyTag&type=document&lang=en)
+          - [CreateAlarmPolicy](https://www.tencentcloud.com/document/api/248/39326)
+          - [DescribeAlarmPolicy](https://www.tencentcloud.com/document/api/248/39320)
+        * Read: [DescribeAlarmPolicy](https://www.tencentcloud.com/document/api/248/39320)
+        * Update:
+          - [DescribeAlarmPolicy](https://www.tencentcloud.com/document/api/248/39320)
+          - [ModifyAlarmPolicyCondition](https://www.tencentcloud.com/document/api/248/39317)
+          - [ModifyAlarmPolicyInfo](https://www.tencentcloud.com/document/api/248/39316)
+          - [ModifyAlarmPolicyNotice](https://www.tencentcloud.com/document/api/248/39315)
+          - [ModifyAlarmPolicyStatus](https://www.tencentcloud.com/document/api/248/39314)
+          - [ModifyAlarmPolicyTasks](https://www.tencentcloud.com/document/api/248/39313)
+        * Delete: [DeleteAlarmPolicy](https://www.tencentcloud.com/document/api/248/39325)
+
         ## Import
 
         Alarm policy instance can be imported, e.g.
@@ -903,6 +985,7 @@ class AlarmPolicy(pulumi.CustomResource):
         :param pulumi.Input[Union['AlarmPolicyFilterArgs', 'AlarmPolicyFilterArgsDict']] filter: Global filters.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] group_bies: Aggregate dimension list, specify which dimension keys to use for group by.
         :param pulumi.Input[Sequence[pulumi.Input[Union['AlarmPolicyHierarchicalNoticeArgs', 'AlarmPolicyHierarchicalNoticeArgsDict']]]] hierarchical_notices: Alarm hierarchical notice rules configuration.
+        :param pulumi.Input[_builtins.int] is_bind_all: Whether to bind all objects. If yes, no need to pass `filter` or call `BindPolicyObject`. Valid values: `0` (no, default), `1` (yes). Not all policy types support binding all objects. Immutable after creation.
         :param pulumi.Input[_builtins.str] monitor_type: The type of monitor.
         :param pulumi.Input[_builtins.str] namespace: The type of alarm.
         :param pulumi.Input[Sequence[pulumi.Input[Union['AlarmPolicyNoticeContentTmplBindInfoArgs', 'AlarmPolicyNoticeContentTmplBindInfoArgsDict']]]] notice_content_tmpl_bind_infos: Notice content template binding info.
@@ -1203,6 +1286,55 @@ class AlarmPolicy(pulumi.CustomResource):
             }])
         ```
 
+        ### alarm policy binding all objects
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        foo = tencentcloud.monitor.AlarmPolicy("foo",
+            policy_name="tf-policy-bind-all",
+            monitor_type="MT_QCE",
+            enable=1,
+            project_id=0,
+            namespace="cvm_device",
+            is_bind_all=1,
+            conditions={
+                "is_union_rule": 1,
+                "rules": [{
+                    "metric_name": "CpuUsage",
+                    "period": 60,
+                    "operator": "ge",
+                    "value": "89.9",
+                    "continue_period": 1,
+                    "notice_frequency": 3600,
+                    "is_power_notice": 0,
+                }],
+            },
+            event_conditions=[{
+                "metric_name": "ping_unreachable",
+            }],
+            notice_ids=[foo_tencentcloud_monitor_alarm_notice["id"]])
+        ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [BindingPolicyTag](https://www.tencentcloud.com/search/?wd=BindingPolicyTag&type=document&lang=en)
+          - [CreateAlarmPolicy](https://www.tencentcloud.com/document/api/248/39326)
+          - [DescribeAlarmPolicy](https://www.tencentcloud.com/document/api/248/39320)
+        * Read: [DescribeAlarmPolicy](https://www.tencentcloud.com/document/api/248/39320)
+        * Update:
+          - [DescribeAlarmPolicy](https://www.tencentcloud.com/document/api/248/39320)
+          - [ModifyAlarmPolicyCondition](https://www.tencentcloud.com/document/api/248/39317)
+          - [ModifyAlarmPolicyInfo](https://www.tencentcloud.com/document/api/248/39316)
+          - [ModifyAlarmPolicyNotice](https://www.tencentcloud.com/document/api/248/39315)
+          - [ModifyAlarmPolicyStatus](https://www.tencentcloud.com/document/api/248/39314)
+          - [ModifyAlarmPolicyTasks](https://www.tencentcloud.com/document/api/248/39313)
+        * Delete: [DeleteAlarmPolicy](https://www.tencentcloud.com/document/api/248/39325)
+
         ## Import
 
         Alarm policy instance can be imported, e.g.
@@ -1234,6 +1366,7 @@ class AlarmPolicy(pulumi.CustomResource):
                  filter: pulumi.Input[Optional[Union['AlarmPolicyFilterArgs', 'AlarmPolicyFilterArgsDict']]] = None,
                  group_bies: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  hierarchical_notices: pulumi.Input[Optional[Sequence[pulumi.Input[Union['AlarmPolicyHierarchicalNoticeArgs', 'AlarmPolicyHierarchicalNoticeArgsDict']]]]] = None,
+                 is_bind_all: pulumi.Input[Optional[_builtins.int]] = None,
                  monitor_type: pulumi.Input[Optional[_builtins.str]] = None,
                  namespace: pulumi.Input[Optional[_builtins.str]] = None,
                  notice_content_tmpl_bind_infos: pulumi.Input[Optional[Sequence[pulumi.Input[Union['AlarmPolicyNoticeContentTmplBindInfoArgs', 'AlarmPolicyNoticeContentTmplBindInfoArgsDict']]]]] = None,
@@ -1259,6 +1392,7 @@ class AlarmPolicy(pulumi.CustomResource):
             __props__.__dict__["filter"] = filter
             __props__.__dict__["group_bies"] = group_bies
             __props__.__dict__["hierarchical_notices"] = hierarchical_notices
+            __props__.__dict__["is_bind_all"] = is_bind_all
             if monitor_type is None and not opts.urn:
                 raise TypeError("Missing required property 'monitor_type'")
             __props__.__dict__["monitor_type"] = monitor_type
@@ -1294,6 +1428,7 @@ class AlarmPolicy(pulumi.CustomResource):
             filter: pulumi.Input[Optional[Union['AlarmPolicyFilterArgs', 'AlarmPolicyFilterArgsDict']]] = None,
             group_bies: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
             hierarchical_notices: pulumi.Input[Optional[Sequence[pulumi.Input[Union['AlarmPolicyHierarchicalNoticeArgs', 'AlarmPolicyHierarchicalNoticeArgsDict']]]]] = None,
+            is_bind_all: pulumi.Input[Optional[_builtins.int]] = None,
             monitor_type: pulumi.Input[Optional[_builtins.str]] = None,
             namespace: pulumi.Input[Optional[_builtins.str]] = None,
             notice_content_tmpl_bind_infos: pulumi.Input[Optional[Sequence[pulumi.Input[Union['AlarmPolicyNoticeContentTmplBindInfoArgs', 'AlarmPolicyNoticeContentTmplBindInfoArgsDict']]]]] = None,
@@ -1319,6 +1454,7 @@ class AlarmPolicy(pulumi.CustomResource):
         :param pulumi.Input[Union['AlarmPolicyFilterArgs', 'AlarmPolicyFilterArgsDict']] filter: Global filters.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] group_bies: Aggregate dimension list, specify which dimension keys to use for group by.
         :param pulumi.Input[Sequence[pulumi.Input[Union['AlarmPolicyHierarchicalNoticeArgs', 'AlarmPolicyHierarchicalNoticeArgsDict']]]] hierarchical_notices: Alarm hierarchical notice rules configuration.
+        :param pulumi.Input[_builtins.int] is_bind_all: Whether to bind all objects. If yes, no need to pass `filter` or call `BindPolicyObject`. Valid values: `0` (no, default), `1` (yes). Not all policy types support binding all objects. Immutable after creation.
         :param pulumi.Input[_builtins.str] monitor_type: The type of monitor.
         :param pulumi.Input[_builtins.str] namespace: The type of alarm.
         :param pulumi.Input[Sequence[pulumi.Input[Union['AlarmPolicyNoticeContentTmplBindInfoArgs', 'AlarmPolicyNoticeContentTmplBindInfoArgsDict']]]] notice_content_tmpl_bind_infos: Notice content template binding info.
@@ -1342,6 +1478,7 @@ class AlarmPolicy(pulumi.CustomResource):
         __props__.__dict__["filter"] = filter
         __props__.__dict__["group_bies"] = group_bies
         __props__.__dict__["hierarchical_notices"] = hierarchical_notices
+        __props__.__dict__["is_bind_all"] = is_bind_all
         __props__.__dict__["monitor_type"] = monitor_type
         __props__.__dict__["namespace"] = namespace
         __props__.__dict__["notice_content_tmpl_bind_infos"] = notice_content_tmpl_bind_infos
@@ -1417,6 +1554,14 @@ class AlarmPolicy(pulumi.CustomResource):
         Alarm hierarchical notice rules configuration.
         """
         return pulumi.get(self, "hierarchical_notices")
+
+    @_builtins.property
+    @pulumi.getter(name="isBindAll")
+    def is_bind_all(self) -> pulumi.Output[_builtins.int]:
+        """
+        Whether to bind all objects. If yes, no need to pass `filter` or call `BindPolicyObject`. Valid values: `0` (no, default), `1` (yes). Not all policy types support binding all objects. Immutable after creation.
+        """
+        return pulumi.get(self, "is_bind_all")
 
     @_builtins.property
     @pulumi.getter(name="monitorType")

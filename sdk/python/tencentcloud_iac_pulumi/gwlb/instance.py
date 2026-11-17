@@ -368,6 +368,19 @@ class Instance(pulumi.CustomResource):
             }])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateGatewayLoadBalancer](https://www.tencentcloud.com/document/api/1245/66075)
+          - [DescribeTaskStatus](https://www.tencentcloud.com/document/api/1245/66069)
+        * Read: [DescribeGatewayLoadBalancers](https://www.tencentcloud.com/document/api/1245/66073)
+        * Update: [ModifyGatewayLoadBalancerAttribute](https://www.tencentcloud.com/document/api/1245/66071)
+        * Delete:
+          - [DeleteGatewayLoadBalancer](https://www.tencentcloud.com/document/api/1245/66074)
+          - [DescribeTaskStatus](https://www.tencentcloud.com/document/api/1245/66069)
+
         ## Import
 
         gwlb gwlb_instance can be imported using the id, e.g.
@@ -423,6 +436,19 @@ class Instance(pulumi.CustomResource):
                 "tag_value": "tag_value",
             }])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateGatewayLoadBalancer](https://www.tencentcloud.com/document/api/1245/66075)
+          - [DescribeTaskStatus](https://www.tencentcloud.com/document/api/1245/66069)
+        * Read: [DescribeGatewayLoadBalancers](https://www.tencentcloud.com/document/api/1245/66073)
+        * Update: [ModifyGatewayLoadBalancerAttribute](https://www.tencentcloud.com/document/api/1245/66071)
+        * Delete:
+          - [DeleteGatewayLoadBalancer](https://www.tencentcloud.com/document/api/1245/66074)
+          - [DescribeTaskStatus](https://www.tencentcloud.com/document/api/1245/66069)
 
         ## Import
 

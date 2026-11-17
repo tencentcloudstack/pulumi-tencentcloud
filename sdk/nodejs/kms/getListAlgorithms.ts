@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const example = tencentcloud.kms.getListAlgorithms({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListAlgorithms](https://www.tencentcloud.com/document/api/1030/35177)
  */
 export function getListAlgorithms(args?: GetListAlgorithmsArgs, opts?: pulumi.InvokeOptions): Promise<GetListAlgorithmsResult> {
     args = args || {};
@@ -69,6 +75,12 @@ export interface GetListAlgorithmsResult {
  *
  * const example = tencentcloud.kms.getListAlgorithms({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListAlgorithms](https://www.tencentcloud.com/document/api/1030/35177)
  */
 export function getListAlgorithmsOutput(args?: GetListAlgorithmsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetListAlgorithmsResult> {
     args = args || {};

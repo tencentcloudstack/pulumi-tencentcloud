@@ -107,6 +107,12 @@ def get_private_ip_addresses(private_ip_addresses: Optional[Sequence[_builtins.s
         private_ip_addresses=["10.0.0.1"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeVpcPrivateIpAddresses](https://www.tencentcloud.com/document/api/215/34804)
+
 
     :param Sequence[_builtins.str] private_ip_addresses: The private `IP` address list. Each request supports a maximum of `10` batch querying.
     :param _builtins.str result_output_file: Used to save results.
@@ -141,6 +147,12 @@ def get_private_ip_addresses_output(private_ip_addresses: pulumi.Input[Optional[
     private_ip_addresses = tencentcloud.vpc.get_private_ip_addresses(vpc_id="vpc-l0dw94uh",
         private_ip_addresses=["10.0.0.1"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeVpcPrivateIpAddresses](https://www.tencentcloud.com/document/api/215/34804)
 
 
     :param Sequence[_builtins.str] private_ip_addresses: The private `IP` address list. Each request supports a maximum of `10` batch querying.

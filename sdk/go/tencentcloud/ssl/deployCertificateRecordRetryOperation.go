@@ -39,6 +39,12 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [DeployCertificateRecordRetry](https://www.tencentcloud.com/search/?wd=DeployCertificateRecordRetry&type=document&lang=en)
+//
 // ## Import
 //
 // ssl deployCertificateRecordRetry can be imported using the id, e.g.

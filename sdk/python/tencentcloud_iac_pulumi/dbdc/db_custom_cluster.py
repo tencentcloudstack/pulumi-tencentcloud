@@ -26,6 +26,7 @@ class DbCustomClusterArgs:
                  cluster_name: pulumi.Input[_builtins.str],
                  container_network: pulumi.Input['DbCustomClusterContainerNetworkArgs'],
                  cluster_description: pulumi.Input[Optional[_builtins.str]] = None,
+                 deletion_protection: pulumi.Input[Optional[_builtins.bool]] = None,
                  tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None):
         """
         The set of arguments for constructing a DbCustomCluster resource.
@@ -34,6 +35,7 @@ class DbCustomClusterArgs:
         :param pulumi.Input[_builtins.str] cluster_name: Cluster name. Up to 128 characters, only Chinese, English and underscore are allowed.
         :param pulumi.Input['DbCustomClusterContainerNetworkArgs'] container_network: Container network. All pods in this cluster are connected to this network.
         :param pulumi.Input[_builtins.str] cluster_description: Cluster description.
+        :param pulumi.Input[_builtins.bool] deletion_protection: Whether to enable cluster deletion protection. Valid values: `true` (enabled, API default), `false` (disabled).
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: Cluster tags.
         """
         pulumi.set(__self__, "api_server_network", api_server_network)
@@ -41,6 +43,8 @@ class DbCustomClusterArgs:
         pulumi.set(__self__, "container_network", container_network)
         if cluster_description is not None:
             pulumi.set(__self__, "cluster_description", cluster_description)
+        if deletion_protection is not None:
+            pulumi.set(__self__, "deletion_protection", deletion_protection)
         if tags is not None:
             pulumi.set(__self__, "tags", tags)
 
@@ -93,6 +97,18 @@ class DbCustomClusterArgs:
         pulumi.set(self, "cluster_description", value)
 
     @_builtins.property
+    @pulumi.getter(name="deletionProtection")
+    def deletion_protection(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Whether to enable cluster deletion protection. Valid values: `true` (enabled, API default), `false` (disabled).
+        """
+        return pulumi.get(self, "deletion_protection")
+
+    @deletion_protection.setter
+    def deletion_protection(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "deletion_protection", value)
+
+    @_builtins.property
     @pulumi.getter
     def tags(self) -> pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]]:
         """
@@ -117,6 +133,7 @@ class _DbCustomClusterState:
                  cluster_version: pulumi.Input[Optional[_builtins.str]] = None,
                  container_network: pulumi.Input[Optional['DbCustomClusterContainerNetworkArgs']] = None,
                  created_time: pulumi.Input[Optional[_builtins.str]] = None,
+                 deletion_protection: pulumi.Input[Optional[_builtins.bool]] = None,
                  region: pulumi.Input[Optional[_builtins.str]] = None,
                  tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None):
         """
@@ -131,6 +148,7 @@ class _DbCustomClusterState:
         :param pulumi.Input[_builtins.str] cluster_version: Cluster version.
         :param pulumi.Input['DbCustomClusterContainerNetworkArgs'] container_network: Container network. All pods in this cluster are connected to this network.
         :param pulumi.Input[_builtins.str] created_time: Creation time.
+        :param pulumi.Input[_builtins.bool] deletion_protection: Whether to enable cluster deletion protection. Valid values: `true` (enabled, API default), `false` (disabled).
         :param pulumi.Input[_builtins.str] region: Region that the cluster belongs to.
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: Cluster tags.
         """
@@ -152,6 +170,8 @@ class _DbCustomClusterState:
             pulumi.set(__self__, "container_network", container_network)
         if created_time is not None:
             pulumi.set(__self__, "created_time", created_time)
+        if deletion_protection is not None:
+            pulumi.set(__self__, "deletion_protection", deletion_protection)
         if region is not None:
             pulumi.set(__self__, "region", region)
         if tags is not None:
@@ -266,6 +286,18 @@ class _DbCustomClusterState:
         pulumi.set(self, "created_time", value)
 
     @_builtins.property
+    @pulumi.getter(name="deletionProtection")
+    def deletion_protection(self) -> pulumi.Input[Optional[_builtins.bool]]:
+        """
+        Whether to enable cluster deletion protection. Valid values: `true` (enabled, API default), `false` (disabled).
+        """
+        return pulumi.get(self, "deletion_protection")
+
+    @deletion_protection.setter
+    def deletion_protection(self, value: pulumi.Input[Optional[_builtins.bool]]):
+        pulumi.set(self, "deletion_protection", value)
+
+    @_builtins.property
     @pulumi.getter
     def region(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
@@ -300,6 +332,7 @@ class DbCustomCluster(pulumi.CustomResource):
                  cluster_description: pulumi.Input[Optional[_builtins.str]] = None,
                  cluster_name: pulumi.Input[Optional[_builtins.str]] = None,
                  container_network: pulumi.Input[Optional[Union['DbCustomClusterContainerNetworkArgs', 'DbCustomClusterContainerNetworkArgsDict']]] = None,
+                 deletion_protection: pulumi.Input[Optional[_builtins.bool]] = None,
                  tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
                  __props__=None):
         """
@@ -314,6 +347,7 @@ class DbCustomCluster(pulumi.CustomResource):
         example = tencentcloud.dbdc.DbCustomCluster("example",
             cluster_name="tf-example",
             cluster_description="cluster description.",
+            deletion_protection=True,
             container_network={
                 "vpc_id": "vpc-py7mlxqm",
                 "subnet_ids": [
@@ -331,6 +365,17 @@ class DbCustomCluster(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateDBCustomCluster](https://www.tencentcloud.com/search/?wd=CreateDBCustomCluster&type=document&lang=en)
+        * Read: [DescribeDBCustomClusterDetail](https://www.tencentcloud.com/search/?wd=DescribeDBCustomClusterDetail&type=document&lang=en)
+        * Update:
+          - [ModifyDBCustomClusterAttributes](https://www.tencentcloud.com/search/?wd=ModifyDBCustomClusterAttributes&type=document&lang=en)
+          - [ModifyDBCustomClusterTags](https://www.tencentcloud.com/search/?wd=ModifyDBCustomClusterTags&type=document&lang=en)
+        * Delete: [DestroyDBCustomCluster](https://www.tencentcloud.com/search/?wd=DestroyDBCustomCluster&type=document&lang=en)
+
         ## Import
 
         DBDC db custom cluster can be imported using the id, e.g.
@@ -346,6 +391,7 @@ class DbCustomCluster(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] cluster_description: Cluster description.
         :param pulumi.Input[_builtins.str] cluster_name: Cluster name. Up to 128 characters, only Chinese, English and underscore are allowed.
         :param pulumi.Input[Union['DbCustomClusterContainerNetworkArgs', 'DbCustomClusterContainerNetworkArgsDict']] container_network: Container network. All pods in this cluster are connected to this network.
+        :param pulumi.Input[_builtins.bool] deletion_protection: Whether to enable cluster deletion protection. Valid values: `true` (enabled, API default), `false` (disabled).
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: Cluster tags.
         """
         ...
@@ -366,6 +412,7 @@ class DbCustomCluster(pulumi.CustomResource):
         example = tencentcloud.dbdc.DbCustomCluster("example",
             cluster_name="tf-example",
             cluster_description="cluster description.",
+            deletion_protection=True,
             container_network={
                 "vpc_id": "vpc-py7mlxqm",
                 "subnet_ids": [
@@ -382,6 +429,17 @@ class DbCustomCluster(pulumi.CustomResource):
                 "createBy": "Terraform",
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateDBCustomCluster](https://www.tencentcloud.com/search/?wd=CreateDBCustomCluster&type=document&lang=en)
+        * Read: [DescribeDBCustomClusterDetail](https://www.tencentcloud.com/search/?wd=DescribeDBCustomClusterDetail&type=document&lang=en)
+        * Update:
+          - [ModifyDBCustomClusterAttributes](https://www.tencentcloud.com/search/?wd=ModifyDBCustomClusterAttributes&type=document&lang=en)
+          - [ModifyDBCustomClusterTags](https://www.tencentcloud.com/search/?wd=ModifyDBCustomClusterTags&type=document&lang=en)
+        * Delete: [DestroyDBCustomCluster](https://www.tencentcloud.com/search/?wd=DestroyDBCustomCluster&type=document&lang=en)
 
         ## Import
 
@@ -411,6 +469,7 @@ class DbCustomCluster(pulumi.CustomResource):
                  cluster_description: pulumi.Input[Optional[_builtins.str]] = None,
                  cluster_name: pulumi.Input[Optional[_builtins.str]] = None,
                  container_network: pulumi.Input[Optional[Union['DbCustomClusterContainerNetworkArgs', 'DbCustomClusterContainerNetworkArgsDict']]] = None,
+                 deletion_protection: pulumi.Input[Optional[_builtins.bool]] = None,
                  tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -431,6 +490,7 @@ class DbCustomCluster(pulumi.CustomResource):
             if container_network is None and not opts.urn:
                 raise TypeError("Missing required property 'container_network'")
             __props__.__dict__["container_network"] = container_network
+            __props__.__dict__["deletion_protection"] = deletion_protection
             __props__.__dict__["tags"] = tags
             __props__.__dict__["cluster_level"] = None
             __props__.__dict__["cluster_node_num"] = None
@@ -457,6 +517,7 @@ class DbCustomCluster(pulumi.CustomResource):
             cluster_version: pulumi.Input[Optional[_builtins.str]] = None,
             container_network: pulumi.Input[Optional[Union['DbCustomClusterContainerNetworkArgs', 'DbCustomClusterContainerNetworkArgsDict']]] = None,
             created_time: pulumi.Input[Optional[_builtins.str]] = None,
+            deletion_protection: pulumi.Input[Optional[_builtins.bool]] = None,
             region: pulumi.Input[Optional[_builtins.str]] = None,
             tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None) -> 'DbCustomCluster':
         """
@@ -475,6 +536,7 @@ class DbCustomCluster(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] cluster_version: Cluster version.
         :param pulumi.Input[Union['DbCustomClusterContainerNetworkArgs', 'DbCustomClusterContainerNetworkArgsDict']] container_network: Container network. All pods in this cluster are connected to this network.
         :param pulumi.Input[_builtins.str] created_time: Creation time.
+        :param pulumi.Input[_builtins.bool] deletion_protection: Whether to enable cluster deletion protection. Valid values: `true` (enabled, API default), `false` (disabled).
         :param pulumi.Input[_builtins.str] region: Region that the cluster belongs to.
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: Cluster tags.
         """
@@ -491,6 +553,7 @@ class DbCustomCluster(pulumi.CustomResource):
         __props__.__dict__["cluster_version"] = cluster_version
         __props__.__dict__["container_network"] = container_network
         __props__.__dict__["created_time"] = created_time
+        __props__.__dict__["deletion_protection"] = deletion_protection
         __props__.__dict__["region"] = region
         __props__.__dict__["tags"] = tags
         return DbCustomCluster(resource_name, opts=opts, __props__=__props__)
@@ -566,6 +629,14 @@ class DbCustomCluster(pulumi.CustomResource):
         Creation time.
         """
         return pulumi.get(self, "created_time")
+
+    @_builtins.property
+    @pulumi.getter(name="deletionProtection")
+    def deletion_protection(self) -> pulumi.Output[_builtins.bool]:
+        """
+        Whether to enable cluster deletion protection. Valid values: `true` (enabled, API default), `false` (disabled).
+        """
+        return pulumi.get(self, "deletion_protection")
 
     @_builtins.property
     @pulumi.getter

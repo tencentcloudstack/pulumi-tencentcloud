@@ -19,18 +19,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// </summary>
         public readonly Outputs.SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsKnownBotCategoriesActionOverrideAction? Action;
         /// <summary>
-        /// Rule ID or category ID for action override.
+        /// It has been deprecated from version 1.83.31. Please use `RuleIds` instead. A single bot rule ID (or category ID) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids. Deprecated: use `RuleIds` to support one or more IDs.
         /// </summary>
-        public readonly string RuleId;
+        public readonly string? RuleId;
+        /// <summary>
+        /// One or more bot rule IDs (or category IDs) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids ([]*string). If both `RuleIds` and `RuleId` are set, `RuleIds` takes precedence.
+        /// </summary>
+        public readonly ImmutableArray<string> RuleIds;
 
         [OutputConstructor]
         private SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsKnownBotCategoriesActionOverride(
             Outputs.SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsKnownBotCategoriesActionOverrideAction? action,
 
-            string ruleId)
+            string? ruleId,
+
+            ImmutableArray<string> ruleIds)
         {
             Action = action;
             RuleId = ruleId;
+            RuleIds = ruleIds;
         }
     }
 }

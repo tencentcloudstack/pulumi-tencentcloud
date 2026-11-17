@@ -28,6 +28,12 @@ import * as utilities from "../utilities";
  *     triggerType: 1,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [SendEmail](https://www.tencentcloud.com/document/api/1084/39408)
  */
 export class SendEmail extends pulumi.CustomResource {
     /**

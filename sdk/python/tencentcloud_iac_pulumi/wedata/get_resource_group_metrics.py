@@ -136,6 +136,12 @@ def get_resource_group_metrics(end_time: Optional[_builtins.int] = None,
     example = tencentcloud.wedata.get_resource_group_metrics(resource_group_id="20250909193110713075")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetResourceGroupMetrics](https://www.tencentcloud.com/document/api/1174/77853)
+
 
     :param _builtins.int end_time: Usage trend end time (milliseconds), default to current time.
     :param _builtins.int granularity: Metric collection granularity, unit in minutes, default 1 minute.
@@ -185,6 +191,12 @@ def get_resource_group_metrics_output(end_time: pulumi.Input[Optional[Optional[_
 
     example = tencentcloud.wedata.get_resource_group_metrics(resource_group_id="20250909193110713075")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetResourceGroupMetrics](https://www.tencentcloud.com/document/api/1174/77853)
 
 
     :param _builtins.int end_time: Usage trend end time (milliseconds), default to current time.

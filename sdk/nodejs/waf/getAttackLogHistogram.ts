@@ -38,6 +38,12 @@ import * as utilities from "../utilities";
  *     queryString: "method:GET",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GetAttackHistogram](https://www.tencentcloud.com/document/api/627/66360)
  */
 export function getAttackLogHistogram(args: GetAttackLogHistogramArgs, opts?: pulumi.InvokeOptions): Promise<GetAttackLogHistogramResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -134,6 +140,12 @@ export interface GetAttackLogHistogramResult {
  *     queryString: "method:GET",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GetAttackHistogram](https://www.tencentcloud.com/document/api/627/66360)
  */
 export function getAttackLogHistogramOutput(args: GetAttackLogHistogramOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAttackLogHistogramResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

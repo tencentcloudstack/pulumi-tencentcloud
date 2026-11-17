@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeWhiteBoxDeviceFingerprints](https://www.tencentcloud.com/search/?wd=DescribeWhiteBoxDeviceFingerprints&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetWhiteBoxDeviceFingerprintsResult> InvokeAsync(GetWhiteBoxDeviceFingerprintsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetWhiteBoxDeviceFingerprintsResult>("tencentcloud:Kms/getWhiteBoxDeviceFingerprints:getWhiteBoxDeviceFingerprints", args ?? new GetWhiteBoxDeviceFingerprintsArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeWhiteBoxDeviceFingerprints](https://www.tencentcloud.com/search/?wd=DescribeWhiteBoxDeviceFingerprints&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetWhiteBoxDeviceFingerprintsResult> Invoke(GetWhiteBoxDeviceFingerprintsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetWhiteBoxDeviceFingerprintsResult>("tencentcloud:Kms/getWhiteBoxDeviceFingerprints:getWhiteBoxDeviceFingerprints", args ?? new GetWhiteBoxDeviceFingerprintsInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeWhiteBoxDeviceFingerprints](https://www.tencentcloud.com/search/?wd=DescribeWhiteBoxDeviceFingerprints&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetWhiteBoxDeviceFingerprintsResult> Invoke(GetWhiteBoxDeviceFingerprintsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetWhiteBoxDeviceFingerprintsResult>("tencentcloud:Kms/getWhiteBoxDeviceFingerprints:getWhiteBoxDeviceFingerprints", args ?? new GetWhiteBoxDeviceFingerprintsInvokeArgs(), options.WithDefaults());

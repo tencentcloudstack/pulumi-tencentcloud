@@ -150,6 +150,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateImmutableTagRules](https://www.tencentcloud.com/document/api/1051/41439)
+    ///   - [DescribeImmutableTagRules](https://www.tencentcloud.com/document/api/1051/41437)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    /// * Read:
+    ///   - [DescribeImmutableTagRules](https://www.tencentcloud.com/document/api/1051/41437)
+    ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+    /// * Update:
+    ///   - [ModifyImmutableTagRules](https://www.tencentcloud.com/document/api/1051/41436)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    /// * Delete: [DeleteImmutableTagRules](https://www.tencentcloud.com/document/api/1051/41438)
+    /// 
     /// ## Import
     /// 
     /// tcr ImmutableTagRule can be imported using the id, e.g.

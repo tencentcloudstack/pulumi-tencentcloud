@@ -38,6 +38,12 @@ import * as utilities from "../utilities";
  * });
  * export const result = record.then(record => record.results);
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRecordList](https://www.tencentcloud.com/document/api/1157/51290)
  */
 export function getRecords(args?: GetRecordsArgs, opts?: pulumi.InvokeOptions): Promise<GetRecordsResult> {
     args = args || {};
@@ -179,6 +185,12 @@ export interface GetRecordsResult {
  * });
  * export const result = record.then(record => record.results);
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRecordList](https://www.tencentcloud.com/document/api/1157/51290)
  */
 export function getRecordsOutput(args?: GetRecordsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRecordsResult> {
     args = args || {};

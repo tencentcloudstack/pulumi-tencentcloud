@@ -29,6 +29,7 @@ class RouteArgs:
                  caller_appid: pulumi.Input[Optional[_builtins.int]] = None,
                  ip: pulumi.Input[Optional[_builtins.str]] = None,
                  public_network: pulumi.Input[Optional[_builtins.int]] = None,
+                 security_group_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  subnet_id: pulumi.Input[Optional[_builtins.str]] = None,
                  vpc_id: pulumi.Input[Optional[_builtins.str]] = None):
         """
@@ -45,6 +46,7 @@ class RouteArgs:
         :param pulumi.Input[_builtins.int] caller_appid: Caller appid.
         :param pulumi.Input[_builtins.str] ip: Ip.
         :param pulumi.Input[_builtins.int] public_network: Public network.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] security_group_ids: List of associated security group IDs in order.
         :param pulumi.Input[_builtins.str] subnet_id: Subnet id.
         :param pulumi.Input[_builtins.str] vpc_id: Vpc id.
         """
@@ -60,6 +62,8 @@ class RouteArgs:
             pulumi.set(__self__, "ip", ip)
         if public_network is not None:
             pulumi.set(__self__, "public_network", public_network)
+        if security_group_ids is not None:
+            pulumi.set(__self__, "security_group_ids", security_group_ids)
         if subnet_id is not None:
             pulumi.set(__self__, "subnet_id", subnet_id)
         if vpc_id is not None:
@@ -154,6 +158,18 @@ class RouteArgs:
         pulumi.set(self, "public_network", value)
 
     @_builtins.property
+    @pulumi.getter(name="securityGroupIds")
+    def security_group_ids(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
+        """
+        List of associated security group IDs in order.
+        """
+        return pulumi.get(self, "security_group_ids")
+
+    @security_group_ids.setter
+    def security_group_ids(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "security_group_ids", value)
+
+    @_builtins.property
     @pulumi.getter(name="subnetId")
     def subnet_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
@@ -188,6 +204,8 @@ class _RouteState:
                  instance_id: pulumi.Input[Optional[_builtins.str]] = None,
                  ip: pulumi.Input[Optional[_builtins.str]] = None,
                  public_network: pulumi.Input[Optional[_builtins.int]] = None,
+                 route_id: pulumi.Input[Optional[_builtins.int]] = None,
+                 security_group_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  subnet_id: pulumi.Input[Optional[_builtins.str]] = None,
                  vip_lists: pulumi.Input[Optional[Sequence[pulumi.Input['RouteVipListArgs']]]] = None,
                  vip_type: pulumi.Input[Optional[_builtins.int]] = None,
@@ -206,6 +224,8 @@ class _RouteState:
         :param pulumi.Input[_builtins.str] instance_id: Instance id.
         :param pulumi.Input[_builtins.str] ip: Ip.
         :param pulumi.Input[_builtins.int] public_network: Public network.
+        :param pulumi.Input[_builtins.int] route_id: Route ID.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] security_group_ids: List of associated security group IDs in order.
         :param pulumi.Input[_builtins.str] subnet_id: Subnet id.
         :param pulumi.Input[Sequence[pulumi.Input['RouteVipListArgs']]] vip_lists: Virtual IP list.
         :param pulumi.Input[_builtins.int] vip_type: Routing network type (3:vpc routing; 4: standard support routing; 7: professional support routing).
@@ -225,6 +245,10 @@ class _RouteState:
             pulumi.set(__self__, "ip", ip)
         if public_network is not None:
             pulumi.set(__self__, "public_network", public_network)
+        if route_id is not None:
+            pulumi.set(__self__, "route_id", route_id)
+        if security_group_ids is not None:
+            pulumi.set(__self__, "security_group_ids", security_group_ids)
         if subnet_id is not None:
             pulumi.set(__self__, "subnet_id", subnet_id)
         if vip_lists is not None:
@@ -323,6 +347,30 @@ class _RouteState:
         pulumi.set(self, "public_network", value)
 
     @_builtins.property
+    @pulumi.getter(name="routeId")
+    def route_id(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Route ID.
+        """
+        return pulumi.get(self, "route_id")
+
+    @route_id.setter
+    def route_id(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "route_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="securityGroupIds")
+    def security_group_ids(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
+        """
+        List of associated security group IDs in order.
+        """
+        return pulumi.get(self, "security_group_ids")
+
+    @security_group_ids.setter
+    def security_group_ids(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "security_group_ids", value)
+
+    @_builtins.property
     @pulumi.getter(name="subnetId")
     def subnet_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
@@ -383,6 +431,7 @@ class Route(pulumi.CustomResource):
                  instance_id: pulumi.Input[Optional[_builtins.str]] = None,
                  ip: pulumi.Input[Optional[_builtins.str]] = None,
                  public_network: pulumi.Input[Optional[_builtins.int]] = None,
+                 security_group_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  subnet_id: pulumi.Input[Optional[_builtins.str]] = None,
                  vip_type: pulumi.Input[Optional[_builtins.int]] = None,
                  vpc_id: pulumi.Input[Optional[_builtins.str]] = None,
@@ -397,20 +446,38 @@ class Route(pulumi.CustomResource):
         import tencentcloud_iac_pulumi as tencentcloud
 
         example = tencentcloud.ckafka.Route("example",
-            instance_id="ckafka-8j4rodrr",
+            instance_id="ckafka-8j4ra928",
             vip_type=3,
-            vpc_id="vpc-axrsmmrv",
-            subnet_id="subnet-j5vja918",
+            vpc_id="vpc-i5yyodl9",
+            subnet_id="subnet-hhi88a58",
             access_type=0,
-            public_network=3)
+            public_network=3,
+            security_group_ids=[
+                "sg-8ztqghor",
+                "sg-rc9644tr",
+                "sg-n8zf5ry9",
+            ])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateRoute](https://www.tencentcloud.com/document/api/597/74258)
+          - [DescribeTaskStatus](https://www.tencentcloud.com/document/api/597/55881)
+        * Read:
+          - [DescribeRoute](https://www.tencentcloud.com/document/api/597/37090)
+          - [DescribeSecurityGroupRoutes](https://www.tencentcloud.com/document/api/597/74257)
+        * Update: [ModifyRouteSecurityGroups](https://www.tencentcloud.com/search/?wd=ModifyRouteSecurityGroups&type=document&lang=en)
+        * Delete: [DeleteRoute](https://www.tencentcloud.com/document/api/597/47140)
 
         ## Import
 
-        ckafka route can be imported using the id, e.g.
+        ckafka route can be imported using the instanceId#routeId, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Ckafka/route:Route example ckafka-8j4rodrr#135912
+        $ pulumi import tencentcloud:Ckafka/route:Route example ckafka-8j4ra928#135912
         ```
 
 
@@ -426,6 +493,7 @@ class Route(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] instance_id: Instance id.
         :param pulumi.Input[_builtins.str] ip: Ip.
         :param pulumi.Input[_builtins.int] public_network: Public network.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] security_group_ids: List of associated security group IDs in order.
         :param pulumi.Input[_builtins.str] subnet_id: Subnet id.
         :param pulumi.Input[_builtins.int] vip_type: Routing network type (3:vpc routing; 4: standard support routing; 7: professional support routing).
         :param pulumi.Input[_builtins.str] vpc_id: Vpc id.
@@ -446,20 +514,38 @@ class Route(pulumi.CustomResource):
         import tencentcloud_iac_pulumi as tencentcloud
 
         example = tencentcloud.ckafka.Route("example",
-            instance_id="ckafka-8j4rodrr",
+            instance_id="ckafka-8j4ra928",
             vip_type=3,
-            vpc_id="vpc-axrsmmrv",
-            subnet_id="subnet-j5vja918",
+            vpc_id="vpc-i5yyodl9",
+            subnet_id="subnet-hhi88a58",
             access_type=0,
-            public_network=3)
+            public_network=3,
+            security_group_ids=[
+                "sg-8ztqghor",
+                "sg-rc9644tr",
+                "sg-n8zf5ry9",
+            ])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateRoute](https://www.tencentcloud.com/document/api/597/74258)
+          - [DescribeTaskStatus](https://www.tencentcloud.com/document/api/597/55881)
+        * Read:
+          - [DescribeRoute](https://www.tencentcloud.com/document/api/597/37090)
+          - [DescribeSecurityGroupRoutes](https://www.tencentcloud.com/document/api/597/74257)
+        * Update: [ModifyRouteSecurityGroups](https://www.tencentcloud.com/search/?wd=ModifyRouteSecurityGroups&type=document&lang=en)
+        * Delete: [DeleteRoute](https://www.tencentcloud.com/document/api/597/47140)
 
         ## Import
 
-        ckafka route can be imported using the id, e.g.
+        ckafka route can be imported using the instanceId#routeId, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Ckafka/route:Route example ckafka-8j4rodrr#135912
+        $ pulumi import tencentcloud:Ckafka/route:Route example ckafka-8j4ra928#135912
         ```
 
 
@@ -484,6 +570,7 @@ class Route(pulumi.CustomResource):
                  instance_id: pulumi.Input[Optional[_builtins.str]] = None,
                  ip: pulumi.Input[Optional[_builtins.str]] = None,
                  public_network: pulumi.Input[Optional[_builtins.int]] = None,
+                 security_group_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  subnet_id: pulumi.Input[Optional[_builtins.str]] = None,
                  vip_type: pulumi.Input[Optional[_builtins.int]] = None,
                  vpc_id: pulumi.Input[Optional[_builtins.str]] = None,
@@ -504,12 +591,14 @@ class Route(pulumi.CustomResource):
             __props__.__dict__["instance_id"] = instance_id
             __props__.__dict__["ip"] = ip
             __props__.__dict__["public_network"] = public_network
+            __props__.__dict__["security_group_ids"] = security_group_ids
             __props__.__dict__["subnet_id"] = subnet_id
             if vip_type is None and not opts.urn:
                 raise TypeError("Missing required property 'vip_type'")
             __props__.__dict__["vip_type"] = vip_type
             __props__.__dict__["vpc_id"] = vpc_id
             __props__.__dict__["broker_vip_lists"] = None
+            __props__.__dict__["route_id"] = None
             __props__.__dict__["vip_lists"] = None
         super(Route, __self__).__init__(
             'tencentcloud:Ckafka/route:Route',
@@ -528,6 +617,8 @@ class Route(pulumi.CustomResource):
             instance_id: pulumi.Input[Optional[_builtins.str]] = None,
             ip: pulumi.Input[Optional[_builtins.str]] = None,
             public_network: pulumi.Input[Optional[_builtins.int]] = None,
+            route_id: pulumi.Input[Optional[_builtins.int]] = None,
+            security_group_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
             subnet_id: pulumi.Input[Optional[_builtins.str]] = None,
             vip_lists: pulumi.Input[Optional[Sequence[pulumi.Input[Union['RouteVipListArgs', 'RouteVipListArgsDict']]]]] = None,
             vip_type: pulumi.Input[Optional[_builtins.int]] = None,
@@ -550,6 +641,8 @@ class Route(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] instance_id: Instance id.
         :param pulumi.Input[_builtins.str] ip: Ip.
         :param pulumi.Input[_builtins.int] public_network: Public network.
+        :param pulumi.Input[_builtins.int] route_id: Route ID.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] security_group_ids: List of associated security group IDs in order.
         :param pulumi.Input[_builtins.str] subnet_id: Subnet id.
         :param pulumi.Input[Sequence[pulumi.Input[Union['RouteVipListArgs', 'RouteVipListArgsDict']]]] vip_lists: Virtual IP list.
         :param pulumi.Input[_builtins.int] vip_type: Routing network type (3:vpc routing; 4: standard support routing; 7: professional support routing).
@@ -566,6 +659,8 @@ class Route(pulumi.CustomResource):
         __props__.__dict__["instance_id"] = instance_id
         __props__.__dict__["ip"] = ip
         __props__.__dict__["public_network"] = public_network
+        __props__.__dict__["route_id"] = route_id
+        __props__.__dict__["security_group_ids"] = security_group_ids
         __props__.__dict__["subnet_id"] = subnet_id
         __props__.__dict__["vip_lists"] = vip_lists
         __props__.__dict__["vip_type"] = vip_type
@@ -631,6 +726,22 @@ class Route(pulumi.CustomResource):
         Public network.
         """
         return pulumi.get(self, "public_network")
+
+    @_builtins.property
+    @pulumi.getter(name="routeId")
+    def route_id(self) -> pulumi.Output[_builtins.int]:
+        """
+        Route ID.
+        """
+        return pulumi.get(self, "route_id")
+
+    @_builtins.property
+    @pulumi.getter(name="securityGroupIds")
+    def security_group_ids(self) -> pulumi.Output[Optional[Sequence[_builtins.str]]]:
+        """
+        List of associated security group IDs in order.
+        """
+        return pulumi.get(self, "security_group_ids")
 
     @_builtins.property
     @pulumi.getter(name="subnetId")

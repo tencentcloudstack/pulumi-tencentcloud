@@ -73,6 +73,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDedicatedClusterOrders](https://www.tencentcloud.com/document/api/1226/66391)
 func GetDedicatedClusterOrders(ctx *pulumi.Context, args *GetDedicatedClusterOrdersArgs, opts ...pulumi.InvokeOption) (*GetDedicatedClusterOrdersResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDedicatedClusterOrdersResult

@@ -51,6 +51,15 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateAIAnalysisTemplate](https://www.tencentcloud.com/document/api/1041/37470)
+// * Read: [DescribeAIAnalysisTemplates](https://www.tencentcloud.com/document/api/1041/37466)
+// * Update: [ModifyAIAnalysisTemplate](https://www.tencentcloud.com/document/api/1041/37464)
+// * Delete: [DeleteAIAnalysisTemplate](https://www.tencentcloud.com/document/api/1041/37468)
+//
 // ## Import
 //
 // mps aiAnalysisTemplate can be imported using the id, e.g.

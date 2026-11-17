@@ -358,6 +358,14 @@ class TriggerConfig(pulumi.CustomResource):
             custom_argument="Information")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [UpdateTrigger](https://www.tencentcloud.com/search/?wd=UpdateTrigger&type=document&lang=en)
+        * Read: [ListTriggers](https://www.tencentcloud.com/document/api/583/36314)
+        * Update: [UpdateTrigger](https://www.tencentcloud.com/search/?wd=UpdateTrigger&type=document&lang=en)
+
         ## Import
 
         scf trigger_config can be imported using the id, e.g.
@@ -407,6 +415,14 @@ class TriggerConfig(pulumi.CustomResource):
             description="func",
             custom_argument="Information")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [UpdateTrigger](https://www.tencentcloud.com/search/?wd=UpdateTrigger&type=document&lang=en)
+        * Read: [ListTriggers](https://www.tencentcloud.com/document/api/583/36314)
+        * Update: [UpdateTrigger](https://www.tencentcloud.com/search/?wd=UpdateTrigger&type=document&lang=en)
 
         ## Import
 

@@ -98,6 +98,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDirectConnectGatewayCcnRoutes](https://www.tencentcloud.com/document/api/215/34775)
 func GetGatewayCcnRoutes(ctx *pulumi.Context, args *GetGatewayCcnRoutesArgs, opts ...pulumi.InvokeOption) (*GetGatewayCcnRoutesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetGatewayCcnRoutesResult

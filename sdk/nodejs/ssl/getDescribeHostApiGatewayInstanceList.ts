@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     resourceType: "apiGateway",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeHostApiGatewayInstanceList](https://www.tencentcloud.com/search/?wd=DescribeHostApiGatewayInstanceList&type=document&lang=en)
  */
 export function getDescribeHostApiGatewayInstanceList(args: GetDescribeHostApiGatewayInstanceListArgs, opts?: pulumi.InvokeOptions): Promise<GetDescribeHostApiGatewayInstanceListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -96,6 +102,12 @@ export interface GetDescribeHostApiGatewayInstanceListResult {
  *     resourceType: "apiGateway",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeHostApiGatewayInstanceList](https://www.tencentcloud.com/search/?wd=DescribeHostApiGatewayInstanceList&type=document&lang=en)
  */
 export function getDescribeHostApiGatewayInstanceListOutput(args: GetDescribeHostApiGatewayInstanceListOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDescribeHostApiGatewayInstanceListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

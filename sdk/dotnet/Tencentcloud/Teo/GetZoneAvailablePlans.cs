@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAvailablePlans](https://www.tencentcloud.com/document/api/1145/50545)
         /// </summary>
         public static Task<GetZoneAvailablePlansResult> InvokeAsync(GetZoneAvailablePlansArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetZoneAvailablePlansResult>("tencentcloud:Teo/getZoneAvailablePlans:getZoneAvailablePlans", args ?? new GetZoneAvailablePlansArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAvailablePlans](https://www.tencentcloud.com/document/api/1145/50545)
         /// </summary>
         public static Output<GetZoneAvailablePlansResult> Invoke(GetZoneAvailablePlansInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetZoneAvailablePlansResult>("tencentcloud:Teo/getZoneAvailablePlans:getZoneAvailablePlans", args ?? new GetZoneAvailablePlansInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAvailablePlans](https://www.tencentcloud.com/document/api/1145/50545)
         /// </summary>
         public static Output<GetZoneAvailablePlansResult> Invoke(GetZoneAvailablePlansInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetZoneAvailablePlansResult>("tencentcloud:Teo/getZoneAvailablePlans:getZoneAvailablePlans", args ?? new GetZoneAvailablePlansInvokeArgs(), options.WithDefaults());

@@ -31,6 +31,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [StopSQLScriptRun](https://www.tencentcloud.com/document/api/1174/73843)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Wedata/stopSqlScriptRunOperation:StopSqlScriptRunOperation")]
     public partial class StopSqlScriptRunOperation : global::Pulumi.CustomResource

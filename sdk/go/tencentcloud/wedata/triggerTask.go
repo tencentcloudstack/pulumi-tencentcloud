@@ -128,6 +128,15 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateTriggerTask](https://www.tencentcloud.com/document/api/1174/77937)
+// * Read: [GetTriggerTask](https://www.tencentcloud.com/document/api/1174/77927)
+// * Update: [UpdateTriggerTask](https://www.tencentcloud.com/document/api/1174/77912)
+// * Delete: [DeleteTriggerTask](https://www.tencentcloud.com/document/api/1174/77933)
+//
 // ## Import
 //
 // wedata triggerTask can be imported using the id, e.g.

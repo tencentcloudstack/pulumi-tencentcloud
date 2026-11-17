@@ -100,6 +100,12 @@ def get_nodes(result_output_file: Optional[_builtins.str] = None,
     }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeOrganizationNodes](https://www.tencentcloud.com/document/api/1031/52061)
+
 
     :param _builtins.str result_output_file: Used to save results.
     :param Sequence[Union['GetNodesTagArgs', 'GetNodesTagArgsDict']] tags: Department tag search list, with a maximum of 10.
@@ -132,6 +138,12 @@ def get_nodes_output(result_output_file: pulumi.Input[Optional[Optional[_builtin
         "tag_value": "terraform",
     }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeOrganizationNodes](https://www.tencentcloud.com/document/api/1031/52061)
 
 
     :param _builtins.str result_output_file: Used to save results.

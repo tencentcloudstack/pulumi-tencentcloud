@@ -154,6 +154,12 @@ def get_network_interface_limit(instance_id: Optional[_builtins.str] = None,
     network_interface_limit = tencentcloud.vpc.get_network_interface_limit(instance_id="ins-cr2rfq78")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeNetworkInterfaceLimit](https://www.tencentcloud.com/document/api/215/34768)
+
 
     :param _builtins.str instance_id: ID of a CVM instance or ENI to query.
     :param _builtins.str result_output_file: Used to save results.
@@ -188,6 +194,12 @@ def get_network_interface_limit_output(instance_id: pulumi.Input[Optional[_built
 
     network_interface_limit = tencentcloud.vpc.get_network_interface_limit(instance_id="ins-cr2rfq78")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeNetworkInterfaceLimit](https://www.tencentcloud.com/document/api/215/34768)
 
 
     :param _builtins.str instance_id: ID of a CVM instance or ENI to query.

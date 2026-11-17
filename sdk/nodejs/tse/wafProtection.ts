@@ -20,6 +20,18 @@ import * as utilities from "../utilities";
  *     operate: "open",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CloseWafProtection](https://www.tencentcloud.com/document/api/1290/79298)
+ *   - [OpenWafProtection](https://www.tencentcloud.com/document/api/1290/79231)
+ * * Read: [DescribeWafProtection](https://www.tencentcloud.com/document/api/1290/79246)
+ * * Update:
+ *   - [CloseWafProtection](https://www.tencentcloud.com/document/api/1290/79298)
+ *   - [OpenWafProtection](https://www.tencentcloud.com/document/api/1290/79231)
  */
 export class WafProtection extends pulumi.CustomResource {
     /**

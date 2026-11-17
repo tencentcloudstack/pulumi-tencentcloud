@@ -41,6 +41,19 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [AcceptDirectConnectTunnel](https://www.tencentcloud.com/document/api/216/19822)
+//   - [RejectDirectConnectTunnel](https://www.tencentcloud.com/document/api/216/19817)
+//
+// * Read: [DescribeDirectConnectTunnels](https://www.tencentcloud.com/document/api/216/19819)
+// * Update:
+//   - [AcceptDirectConnectTunnel](https://www.tencentcloud.com/document/api/216/19822)
+//   - [RejectDirectConnectTunnel](https://www.tencentcloud.com/document/api/216/19817)
+//
 // ## Import
 //
 // dc share dcx config can be imported using the id, e.g.

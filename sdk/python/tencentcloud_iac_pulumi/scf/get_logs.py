@@ -203,6 +203,12 @@ def get_logs(end_time: Optional[_builtins.str] = None,
     foo = tencentcloud.scf.get_logs_output(function_name=foo_function.name)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetFunctionLogs](https://www.tencentcloud.com/document/api/583/18583)
+
 
     :param _builtins.str end_time: The end time of the query, the format is `2017-05-16 20:00:00`, which can only be within one day from `start_time`.
     :param _builtins.str function_name: Name of the SCF function to be queried.
@@ -276,6 +282,12 @@ def get_logs_output(end_time: pulumi.Input[Optional[Optional[_builtins.str]]] = 
         cos_bucket_region="ap-guangzhou")
     foo = tencentcloud.scf.get_logs_output(function_name=foo_function.name)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetFunctionLogs](https://www.tencentcloud.com/document/api/583/18583)
 
 
     :param _builtins.str end_time: The end time of the query, the format is `2017-05-16 20:00:00`, which can only be within one day from `start_time`.

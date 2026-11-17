@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     clusterId: "cls-kzilgv5m",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeClusterAuthenticationOptions](https://www.tencentcloud.com/document/api/457/42699)
  */
 export function getClusterAuthenticationOptions(args: GetClusterAuthenticationOptionsArgs, opts?: pulumi.InvokeOptions): Promise<GetClusterAuthenticationOptionsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -78,6 +84,12 @@ export interface GetClusterAuthenticationOptionsResult {
  *     clusterId: "cls-kzilgv5m",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeClusterAuthenticationOptions](https://www.tencentcloud.com/document/api/457/42699)
  */
 export function getClusterAuthenticationOptionsOutput(args: GetClusterAuthenticationOptionsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetClusterAuthenticationOptionsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

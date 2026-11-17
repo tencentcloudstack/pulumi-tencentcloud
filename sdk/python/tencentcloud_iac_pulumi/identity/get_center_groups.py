@@ -146,6 +146,12 @@ def get_center_groups(filter: Optional[_builtins.str] = None,
     identity_center_groups = tencentcloud.identity.get_center_groups(zone_id="z-xxxxxx")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListGroups](https://www.tencentcloud.com/document/api/1031/63568)
+
 
     :param _builtins.str filter: Filter criterion. Format: <Attribute> <Operator> <Value>, case-insensitive. Currently, <Attribute> supports only GroupName, and <Operator> supports only eq (Equals) and sw (Start With). For example, Filter = "GroupName sw test" indicates querying all user groups with names starting with test; Filter = "GroupName eq testgroup" indicates querying the user group with the name testgroup.
     :param Sequence[_builtins.str] filter_users: Filtered user. IsSelected=1 will be returned for the user group associated with this user.
@@ -195,6 +201,12 @@ def get_center_groups_output(filter: pulumi.Input[Optional[Optional[_builtins.st
 
     identity_center_groups = tencentcloud.identity.get_center_groups(zone_id="z-xxxxxx")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListGroups](https://www.tencentcloud.com/document/api/1031/63568)
 
 
     :param _builtins.str filter: Filter criterion. Format: <Attribute> <Operator> <Value>, case-insensitive. Currently, <Attribute> supports only GroupName, and <Operator> supports only eq (Equals) and sw (Start With). For example, Filter = "GroupName sw test" indicates querying all user groups with names starting with test; Filter = "GroupName eq testgroup" indicates querying the user group with the name testgroup.

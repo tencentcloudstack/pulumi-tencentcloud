@@ -41,6 +41,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeSnapshotFiles](https://www.tencentcloud.com/document/api/215/55055)
 func GetSnapshotFiles(ctx *pulumi.Context, args *GetSnapshotFilesArgs, opts ...pulumi.InvokeOption) (*GetSnapshotFilesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSnapshotFilesResult

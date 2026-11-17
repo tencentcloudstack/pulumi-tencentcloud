@@ -82,6 +82,12 @@ def get_parse_notification(content: Optional[_builtins.str] = None,
     parse_notification = tencentcloud.mps.get_parse_notification(content="your_content")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ParseNotification](https://www.tencentcloud.com/document/api/1041/33679)
+
 
     :param _builtins.str content: Event notification obtained from CMQ.
     :param _builtins.str result_output_file: Used to save results.
@@ -110,6 +116,12 @@ def get_parse_notification_output(content: pulumi.Input[Optional[_builtins.str]]
 
     parse_notification = tencentcloud.mps.get_parse_notification(content="your_content")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ParseNotification](https://www.tencentcloud.com/document/api/1041/33679)
 
 
     :param _builtins.str content: Event notification obtained from CMQ.

@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     memberUins: [100026517717],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeOrganizationFinancialByMonth](https://www.tencentcloud.com/search/?wd=DescribeOrganizationFinancialByMonth&type=document&lang=en)
  */
 export function getOrgFinancialByMonth(args?: GetOrgFinancialByMonthArgs, opts?: pulumi.InvokeOptions): Promise<GetOrgFinancialByMonthResult> {
     args = args || {};
@@ -85,6 +91,12 @@ export interface GetOrgFinancialByMonthResult {
  *     memberUins: [100026517717],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeOrganizationFinancialByMonth](https://www.tencentcloud.com/search/?wd=DescribeOrganizationFinancialByMonth&type=document&lang=en)
  */
 export function getOrgFinancialByMonthOutput(args?: GetOrgFinancialByMonthOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetOrgFinancialByMonthResult> {
     args = args || {};

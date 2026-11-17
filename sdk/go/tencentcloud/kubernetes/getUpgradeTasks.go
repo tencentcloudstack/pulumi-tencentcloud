@@ -36,6 +36,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeUpgradeTasks](https://www.tencentcloud.com/search/?wd=DescribeUpgradeTasks&type=document&lang=en)
 func GetUpgradeTasks(ctx *pulumi.Context, args *GetUpgradeTasksArgs, opts ...pulumi.InvokeOption) (*GetUpgradeTasksResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetUpgradeTasksResult

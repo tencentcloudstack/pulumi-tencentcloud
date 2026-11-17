@@ -182,6 +182,12 @@ def get_machines_simple(filters: Optional[Sequence[Union['GetMachinesSimpleFilte
         }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeMachinesSimple](https://www.tencentcloud.com/document/api/296/64036)
+
 
     :param Sequence[Union['GetMachinesSimpleFilterArgs', 'GetMachinesSimpleFilterArgsDict']] filters: filter list.
     :param _builtins.str machine_region: The area where the machine belongs,Such as: ap-guangzhou, ap-shanghai, all-regions: All server region types.
@@ -275,6 +281,12 @@ def get_machines_simple_output(filters: pulumi.Input[Optional[Optional[Sequence[
             "exact_match": True,
         }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeMachinesSimple](https://www.tencentcloud.com/document/api/296/64036)
 
 
     :param Sequence[Union['GetMachinesSimpleFilterArgs', 'GetMachinesSimpleFilterArgsDict']] filters: filter list.

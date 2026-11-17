@@ -96,6 +96,14 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateApplicationAndVideo](https://www.tencentcloud.com/search/?wd=CreateApplicationAndVideo&type=document&lang=en)
+// * Read: [DescribeVcubeApplicationAndPlayList](https://www.tencentcloud.com/search/?wd=DescribeVcubeApplicationAndPlayList&type=document&lang=en)
+// * Delete: [DeleteApplicationAndVideoLicense](https://www.tencentcloud.com/search/?wd=DeleteApplicationAndVideoLicense&type=document&lang=en)
+//
 // ## Import
 //
 // VCube application and video can be imported using the id, e.g.

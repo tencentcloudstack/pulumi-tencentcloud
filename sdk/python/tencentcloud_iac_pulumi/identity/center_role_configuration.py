@@ -267,6 +267,15 @@ class CenterRoleConfiguration(pulumi.CustomResource):
             description="test")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateRoleConfiguration](https://www.tencentcloud.com/document/api/1031/63602)
+        * Read: [GetRoleConfiguration](https://www.tencentcloud.com/document/api/1031/63600)
+        * Update: [UpdateRoleConfiguration](https://www.tencentcloud.com/document/api/1031/63595)
+        * Delete: [DeleteRoleConfiguration](https://www.tencentcloud.com/document/api/1031/63601)
+
         ## Import
 
         organization identity_center_role_configuration can be imported using the id, e.g.
@@ -304,6 +313,15 @@ class CenterRoleConfiguration(pulumi.CustomResource):
             role_configuration_name="tf-test",
             description="test")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateRoleConfiguration](https://www.tencentcloud.com/document/api/1031/63602)
+        * Read: [GetRoleConfiguration](https://www.tencentcloud.com/document/api/1031/63600)
+        * Update: [UpdateRoleConfiguration](https://www.tencentcloud.com/document/api/1031/63595)
+        * Delete: [DeleteRoleConfiguration](https://www.tencentcloud.com/document/api/1031/63601)
 
         ## Import
 

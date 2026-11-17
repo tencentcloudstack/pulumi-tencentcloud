@@ -31,7 +31,12 @@ class ReadonlyInstanceArgs:
                  volume: pulumi.Input[_builtins.int],
                  auto_renew_flag: pulumi.Input[Optional[_builtins.int]] = None,
                  charge_type: pulumi.Input[Optional[_builtins.str]] = None,
+                 cpu: pulumi.Input[Optional[_builtins.int]] = None,
+                 data_encryption: pulumi.Input[Optional[_builtins.str]] = None,
+                 encryption_key_source: pulumi.Input[Optional[_builtins.str]] = None,
                  in_maintenance: pulumi.Input[Optional[_builtins.int]] = None,
+                 key_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 kms_region: pulumi.Input[Optional[_builtins.str]] = None,
                  mongos_cpu: pulumi.Input[Optional[_builtins.int]] = None,
                  mongos_memory: pulumi.Input[Optional[_builtins.int]] = None,
                  mongos_node_num: pulumi.Input[Optional[_builtins.int]] = None,
@@ -65,10 +70,15 @@ class ReadonlyInstanceArgs:
         :param pulumi.Input[_builtins.int] volume: Disk size. The minimum value is 25, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
         :param pulumi.Input[_builtins.int] auto_renew_flag: Auto renew flag. Valid values are `0`(NOTIFY_AND_MANUAL_RENEW), `1`(NOTIFY_AND_AUTO_RENEW) and `2`(DISABLE_NOTIFY_AND_MANUAL_RENEW). Default value is `0`. Note: only works for PREPAID instance. Only supports`0` and `1` for creation.
         :param pulumi.Input[_builtins.str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
+        :param pulumi.Input[_builtins.int] cpu: The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.
+        :param pulumi.Input[_builtins.str] data_encryption: Database storage encryption setting. `No_Encryption`: Storage encryption is not used. `TDE`: Enables TDE storage encryption. Note: this field does not support update, please recreate the resource if you need to change it.
+        :param pulumi.Input[_builtins.str] encryption_key_source: If TDE storage encryption is selected, the key source must be specified. `auto`: Automatically generate the key. `manual`: Manually specify the key. Note: this field does not support update, please recreate the resource if you need to change it.
         :param pulumi.Input[_builtins.int] in_maintenance: Switch time for instance configuration changes.
                - 0: When the adjustment is completed, perform the configuration task immediately. Default is 0.
                - 1: Perform reconfiguration tasks within the maintenance time window.
                  Note: Adjusting the number of nodes and slices does not support changes within the maintenance window.
+        :param pulumi.Input[_builtins.str] key_id: Please note that this field is the CMK name, corresponding to the `alias` field in KMS. Key ID. If `manual` is selected as the key resource, you must enter the specified key ID. Note: this field does not support update, please recreate the resource if you need to change it.
+        :param pulumi.Input[_builtins.str] kms_region: Key ID. If `manual` is selected as the key resource, you must enter the specified key region. Note: this field does not support update, please recreate the resource if you need to change it.
         :param pulumi.Input[_builtins.int] mongos_cpu: Number of mongos cpu.
         :param pulumi.Input[_builtins.int] mongos_memory: Mongos memory size in GB.
         :param pulumi.Input[_builtins.int] mongos_node_num: Number of mongos.
@@ -95,8 +105,18 @@ class ReadonlyInstanceArgs:
             pulumi.set(__self__, "auto_renew_flag", auto_renew_flag)
         if charge_type is not None:
             pulumi.set(__self__, "charge_type", charge_type)
+        if cpu is not None:
+            pulumi.set(__self__, "cpu", cpu)
+        if data_encryption is not None:
+            pulumi.set(__self__, "data_encryption", data_encryption)
+        if encryption_key_source is not None:
+            pulumi.set(__self__, "encryption_key_source", encryption_key_source)
         if in_maintenance is not None:
             pulumi.set(__self__, "in_maintenance", in_maintenance)
+        if key_id is not None:
+            pulumi.set(__self__, "key_id", key_id)
+        if kms_region is not None:
+            pulumi.set(__self__, "kms_region", kms_region)
         if mongos_cpu is not None:
             pulumi.set(__self__, "mongos_cpu", mongos_cpu)
         if mongos_memory is not None:
@@ -262,6 +282,42 @@ class ReadonlyInstanceArgs:
         pulumi.set(self, "charge_type", value)
 
     @_builtins.property
+    @pulumi.getter
+    def cpu(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.
+        """
+        return pulumi.get(self, "cpu")
+
+    @cpu.setter
+    def cpu(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "cpu", value)
+
+    @_builtins.property
+    @pulumi.getter(name="dataEncryption")
+    def data_encryption(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Database storage encryption setting. `No_Encryption`: Storage encryption is not used. `TDE`: Enables TDE storage encryption. Note: this field does not support update, please recreate the resource if you need to change it.
+        """
+        return pulumi.get(self, "data_encryption")
+
+    @data_encryption.setter
+    def data_encryption(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "data_encryption", value)
+
+    @_builtins.property
+    @pulumi.getter(name="encryptionKeySource")
+    def encryption_key_source(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        If TDE storage encryption is selected, the key source must be specified. `auto`: Automatically generate the key. `manual`: Manually specify the key. Note: this field does not support update, please recreate the resource if you need to change it.
+        """
+        return pulumi.get(self, "encryption_key_source")
+
+    @encryption_key_source.setter
+    def encryption_key_source(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "encryption_key_source", value)
+
+    @_builtins.property
     @pulumi.getter(name="inMaintenance")
     def in_maintenance(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
@@ -275,6 +331,30 @@ class ReadonlyInstanceArgs:
     @in_maintenance.setter
     def in_maintenance(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "in_maintenance", value)
+
+    @_builtins.property
+    @pulumi.getter(name="keyId")
+    def key_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Please note that this field is the CMK name, corresponding to the `alias` field in KMS. Key ID. If `manual` is selected as the key resource, you must enter the specified key ID. Note: this field does not support update, please recreate the resource if you need to change it.
+        """
+        return pulumi.get(self, "key_id")
+
+    @key_id.setter
+    def key_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "key_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="kmsRegion")
+    def kms_region(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Key ID. If `manual` is selected as the key resource, you must enter the specified key region. Note: this field does not support update, please recreate the resource if you need to change it.
+        """
+        return pulumi.get(self, "kms_region")
+
+    @kms_region.setter
+    def kms_region(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "kms_region", value)
 
     @_builtins.property
     @pulumi.getter(name="mongosCpu")
@@ -428,12 +508,17 @@ class _ReadonlyInstanceState:
                  available_zone: pulumi.Input[Optional[_builtins.str]] = None,
                  charge_type: pulumi.Input[Optional[_builtins.str]] = None,
                  cluster_type: pulumi.Input[Optional[_builtins.str]] = None,
+                 cpu: pulumi.Input[Optional[_builtins.int]] = None,
                  create_time: pulumi.Input[Optional[_builtins.str]] = None,
+                 data_encryption: pulumi.Input[Optional[_builtins.str]] = None,
+                 encryption_key_source: pulumi.Input[Optional[_builtins.str]] = None,
                  engine_version: pulumi.Input[Optional[_builtins.str]] = None,
                  father_instance_id: pulumi.Input[Optional[_builtins.str]] = None,
                  father_instance_region: pulumi.Input[Optional[_builtins.str]] = None,
                  in_maintenance: pulumi.Input[Optional[_builtins.int]] = None,
                  instance_name: pulumi.Input[Optional[_builtins.str]] = None,
+                 key_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 kms_region: pulumi.Input[Optional[_builtins.str]] = None,
                  machine_type: pulumi.Input[Optional[_builtins.str]] = None,
                  memory: pulumi.Input[Optional[_builtins.int]] = None,
                  mongos_cpu: pulumi.Input[Optional[_builtins.int]] = None,
@@ -459,7 +544,10 @@ class _ReadonlyInstanceState:
         :param pulumi.Input[_builtins.str] available_zone: The available zone of the Mongodb.
         :param pulumi.Input[_builtins.str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
         :param pulumi.Input[_builtins.str] cluster_type: Instance schema type.	- REPLSET: Replset cluster;	- SHARD: Shard cluster.
+        :param pulumi.Input[_builtins.int] cpu: The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.
         :param pulumi.Input[_builtins.str] create_time: Creation time of the Mongodb instance.
+        :param pulumi.Input[_builtins.str] data_encryption: Database storage encryption setting. `No_Encryption`: Storage encryption is not used. `TDE`: Enables TDE storage encryption. Note: this field does not support update, please recreate the resource if you need to change it.
+        :param pulumi.Input[_builtins.str] encryption_key_source: If TDE storage encryption is selected, the key source must be specified. `auto`: Automatically generate the key. `manual`: Manually specify the key. Note: this field does not support update, please recreate the resource if you need to change it.
         :param pulumi.Input[_builtins.str] engine_version: Refers to version information. The DescribeSpecInfo API can be called to obtain detailed information about the supported versions.
                - MONGO_40_WT: version of the MongoDB 4.0 WiredTiger storage engine.
                - MONGO_42_WT: version of the MongoDB 4.2 WiredTiger storage engine.
@@ -475,6 +563,8 @@ class _ReadonlyInstanceState:
                - 1: Perform reconfiguration tasks within the maintenance time window.
                  Note: Adjusting the number of nodes and slices does not support changes within the maintenance window.
         :param pulumi.Input[_builtins.str] instance_name: Name of the Mongodb instance.
+        :param pulumi.Input[_builtins.str] key_id: Please note that this field is the CMK name, corresponding to the `alias` field in KMS. Key ID. If `manual` is selected as the key resource, you must enter the specified key ID. Note: this field does not support update, please recreate the resource if you need to change it.
+        :param pulumi.Input[_builtins.str] kms_region: Key ID. If `manual` is selected as the key resource, you must enter the specified key region. Note: this field does not support update, please recreate the resource if you need to change it.
         :param pulumi.Input[_builtins.str] machine_type: Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
         :param pulumi.Input[_builtins.int] memory: Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
         :param pulumi.Input[_builtins.int] mongos_cpu: Number of mongos cpu.
@@ -502,8 +592,14 @@ class _ReadonlyInstanceState:
             pulumi.set(__self__, "charge_type", charge_type)
         if cluster_type is not None:
             pulumi.set(__self__, "cluster_type", cluster_type)
+        if cpu is not None:
+            pulumi.set(__self__, "cpu", cpu)
         if create_time is not None:
             pulumi.set(__self__, "create_time", create_time)
+        if data_encryption is not None:
+            pulumi.set(__self__, "data_encryption", data_encryption)
+        if encryption_key_source is not None:
+            pulumi.set(__self__, "encryption_key_source", encryption_key_source)
         if engine_version is not None:
             pulumi.set(__self__, "engine_version", engine_version)
         if father_instance_id is not None:
@@ -514,6 +610,10 @@ class _ReadonlyInstanceState:
             pulumi.set(__self__, "in_maintenance", in_maintenance)
         if instance_name is not None:
             pulumi.set(__self__, "instance_name", instance_name)
+        if key_id is not None:
+            pulumi.set(__self__, "key_id", key_id)
+        if kms_region is not None:
+            pulumi.set(__self__, "kms_region", kms_region)
         if machine_type is not None:
             pulumi.set(__self__, "machine_type", machine_type)
         if memory is not None:
@@ -600,6 +700,18 @@ class _ReadonlyInstanceState:
         pulumi.set(self, "cluster_type", value)
 
     @_builtins.property
+    @pulumi.getter
+    def cpu(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.
+        """
+        return pulumi.get(self, "cpu")
+
+    @cpu.setter
+    def cpu(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "cpu", value)
+
+    @_builtins.property
     @pulumi.getter(name="createTime")
     def create_time(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
@@ -610,6 +722,30 @@ class _ReadonlyInstanceState:
     @create_time.setter
     def create_time(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "create_time", value)
+
+    @_builtins.property
+    @pulumi.getter(name="dataEncryption")
+    def data_encryption(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Database storage encryption setting. `No_Encryption`: Storage encryption is not used. `TDE`: Enables TDE storage encryption. Note: this field does not support update, please recreate the resource if you need to change it.
+        """
+        return pulumi.get(self, "data_encryption")
+
+    @data_encryption.setter
+    def data_encryption(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "data_encryption", value)
+
+    @_builtins.property
+    @pulumi.getter(name="encryptionKeySource")
+    def encryption_key_source(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        If TDE storage encryption is selected, the key source must be specified. `auto`: Automatically generate the key. `manual`: Manually specify the key. Note: this field does not support update, please recreate the resource if you need to change it.
+        """
+        return pulumi.get(self, "encryption_key_source")
+
+    @encryption_key_source.setter
+    def encryption_key_source(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "encryption_key_source", value)
 
     @_builtins.property
     @pulumi.getter(name="engineVersion")
@@ -680,6 +816,30 @@ class _ReadonlyInstanceState:
     @instance_name.setter
     def instance_name(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "instance_name", value)
+
+    @_builtins.property
+    @pulumi.getter(name="keyId")
+    def key_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Please note that this field is the CMK name, corresponding to the `alias` field in KMS. Key ID. If `manual` is selected as the key resource, you must enter the specified key ID. Note: this field does not support update, please recreate the resource if you need to change it.
+        """
+        return pulumi.get(self, "key_id")
+
+    @key_id.setter
+    def key_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "key_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="kmsRegion")
+    def kms_region(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Key ID. If `manual` is selected as the key resource, you must enter the specified key region. Note: this field does not support update, please recreate the resource if you need to change it.
+        """
+        return pulumi.get(self, "kms_region")
+
+    @kms_region.setter
+    def kms_region(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "kms_region", value)
 
     @_builtins.property
     @pulumi.getter(name="machineType")
@@ -908,11 +1068,16 @@ class ReadonlyInstance(pulumi.CustomResource):
                  available_zone: pulumi.Input[Optional[_builtins.str]] = None,
                  charge_type: pulumi.Input[Optional[_builtins.str]] = None,
                  cluster_type: pulumi.Input[Optional[_builtins.str]] = None,
+                 cpu: pulumi.Input[Optional[_builtins.int]] = None,
+                 data_encryption: pulumi.Input[Optional[_builtins.str]] = None,
+                 encryption_key_source: pulumi.Input[Optional[_builtins.str]] = None,
                  engine_version: pulumi.Input[Optional[_builtins.str]] = None,
                  father_instance_id: pulumi.Input[Optional[_builtins.str]] = None,
                  father_instance_region: pulumi.Input[Optional[_builtins.str]] = None,
                  in_maintenance: pulumi.Input[Optional[_builtins.int]] = None,
                  instance_name: pulumi.Input[Optional[_builtins.str]] = None,
+                 key_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 kms_region: pulumi.Input[Optional[_builtins.str]] = None,
                  machine_type: pulumi.Input[Optional[_builtins.str]] = None,
                  memory: pulumi.Input[Optional[_builtins.int]] = None,
                  mongos_cpu: pulumi.Input[Optional[_builtins.int]] = None,
@@ -930,7 +1095,7 @@ class ReadonlyInstance(pulumi.CustomResource):
                  vpc_id: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         """
-        Provide a resource to create a Readonly mongodb instance.
+        Provide a resource to create a Mongodb readonly instance.
 
         ## Example Usage
 
@@ -940,53 +1105,122 @@ class ReadonlyInstance(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        mongodb = tencentcloud.mongodb.ReadonlyInstance("mongodb",
-            instance_name="tf-mongodb-readonly-test",
+        example = tencentcloud.mongodb.Instance("example",
+            instance_name="tf-example",
+            cpu=2,
             memory=4,
             volume=100,
-            engine_version="MONGO_44_WT",
-            machine_type="HIO10G",
-            available_zone="ap-guangzhou-3",
+            engine_version="MONGO_80_WT",
+            machine_type="GE.LD.T1",
+            available_zone="ap-guangzhou-6",
+            vpc_id="vpc-i5yyodl9",
+            subnet_id="subnet-hhi88a58",
             project_id=0,
-            father_instance_id="cmgo-xxxxxx",
+            password="Password@2026",
+            data_encryption="TDE",
+            encryption_key_source="manual",
+            key_id="KMS-MONGODB",
+            kms_region="ap-guangzhou")
+        example_readonly_instance = tencentcloud.mongodb.ReadonlyInstance("example",
+            instance_name="tf-mongodb",
+            cpu=2,
+            memory=4,
+            volume=100,
+            engine_version="MONGO_80_WT",
+            machine_type="GE.LD.T1",
+            available_zone="ap-guangzhou-7",
+            project_id=0,
+            father_instance_id=example.id,
             father_instance_region="ap-guangzhou",
-            vpc_id="vpc-xxxxxx",
-            subnet_id="subnet-xxxxxx",
-            security_groups=["sg-xxxxxx"],
-            cluster_type="REPLSET")
+            vpc_id="vpc-i5yyodl9",
+            subnet_id="subnet-d4umunpy",
+            security_groups=["sg-n8zf5ry9"],
+            cluster_type="REPLSET",
+            data_encryption="No_Encryption")
         ```
 
-        ### Shard readonly instance
+        ### Sharding readonly instance
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        sharding_mongodb = tencentcloud.mongodb.ReadonlyInstance("sharding_mongodb",
-            instance_name="tf-mongodb-readonly-shard",
+        example = tencentcloud.mongodb.ShardingInstance("example",
+            instance_name="tf-example",
+            shard_quantity=2,
+            nodes_per_shard=3,
+            cpu=2,
             memory=4,
             volume=100,
-            engine_version="MONGO_44_WT",
-            machine_type="HIO10G",
-            available_zone="ap-guangzhou-3",
+            engine_version="MONGO_80_WT",
+            machine_type="GE.LD.T1",
+            available_zone="ap-guangzhou-6",
+            vpc_id="vpc-i5yyodl9",
+            subnet_id="subnet-hhi88a58",
             project_id=0,
-            father_instance_id="cmgo-xxxxxx",
+            password="Password@2026",
+            mongos_cpu=1,
+            mongos_memory=2,
+            mongos_node_num=3,
+            data_encryption="TDE",
+            encryption_key_source="auto")
+        example_readonly_instance = tencentcloud.mongodb.ReadonlyInstance("example",
+            instance_name="tf-mongodb",
+            cpu=2,
+            memory=4,
+            volume=100,
+            engine_version="MONGO_80_WT",
+            machine_type="GE.LD.T1",
+            available_zone="ap-guangzhou-7",
+            project_id=0,
+            father_instance_id=example.id,
             father_instance_region="ap-guangzhou",
-            vpc_id="vpc-xxxxxx",
-            subnet_id="subnet-xxxxxx",
-            security_groups=["sg-xxxxxx"],
+            vpc_id="vpc-i5yyodl9",
+            subnet_id="subnet-d4umunpy",
+            security_groups=["sg-n8zf5ry9"],
             cluster_type="SHARD",
             mongos_cpu=1,
             mongos_memory=2,
-            mongos_node_num=3)
+            mongos_node_num=3,
+            data_encryption="TDE",
+            encryption_key_source="manual",
+            key_id="KMS-MONGODB",
+            kms_region="ap-guangzhou")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateDBInstance](https://www.tencentcloud.com/search/?wd=CreateDBInstance&type=document&lang=en)
+          - [CreateDBInstanceHour](https://www.tencentcloud.com/document/api/240/34704)
+          - [DescribeDBInstances](https://www.tencentcloud.com/document/api/240/34702)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+          - [RenameInstance](https://www.tencentcloud.com/document/api/240/34697)
+        * Read:
+          - [DescribeDBInstances](https://www.tencentcloud.com/document/api/240/34702)
+          - [DescribeSecurityGroup](https://www.tencentcloud.com/document/api/240/40341)
+          - [DescribeTransparentDataEncryptionStatus](https://www.tencentcloud.com/search/?wd=DescribeTransparentDataEncryptionStatus&type=document&lang=en)
+        * Update:
+          - [AssignProject](https://www.tencentcloud.com/document/api/240/34705)
+          - [DescribeDBInstanceDeal](https://www.tencentcloud.com/document/api/240/37330)
+          - [ModifyDBInstanceSecurityGroup](https://www.tencentcloud.com/document/api/240/45894)
+          - [ModifyDBInstanceSpec](https://www.tencentcloud.com/document/api/240/34699)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+          - [RenameInstance](https://www.tencentcloud.com/document/api/240/34697)
+          - [RenewDBInstances](https://www.tencentcloud.com/document/api/240/37326)
+        * Delete:
+          - [DescribeDBInstances](https://www.tencentcloud.com/document/api/240/34702)
+          - [IsolateDBInstance](https://www.tencentcloud.com/document/api/240/34700)
+          - [OfflineIsolatedDBInstance](https://www.tencentcloud.com/document/api/240/34698)
 
         ## Import
 
-        Mongodb instance can be imported using the id, e.g.
+        Mongodb readonly instance can be imported using the id, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Mongodb/readonlyInstance:ReadonlyInstance mongodb cmgo-xxxxxx
+        $ pulumi import tencentcloud:Mongodb/readonlyInstance:ReadonlyInstance mongodb cmgo-7ohkcdu7
         ```
 
 
@@ -996,6 +1230,9 @@ class ReadonlyInstance(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] available_zone: The available zone of the Mongodb.
         :param pulumi.Input[_builtins.str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
         :param pulumi.Input[_builtins.str] cluster_type: Instance schema type.	- REPLSET: Replset cluster;	- SHARD: Shard cluster.
+        :param pulumi.Input[_builtins.int] cpu: The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.
+        :param pulumi.Input[_builtins.str] data_encryption: Database storage encryption setting. `No_Encryption`: Storage encryption is not used. `TDE`: Enables TDE storage encryption. Note: this field does not support update, please recreate the resource if you need to change it.
+        :param pulumi.Input[_builtins.str] encryption_key_source: If TDE storage encryption is selected, the key source must be specified. `auto`: Automatically generate the key. `manual`: Manually specify the key. Note: this field does not support update, please recreate the resource if you need to change it.
         :param pulumi.Input[_builtins.str] engine_version: Refers to version information. The DescribeSpecInfo API can be called to obtain detailed information about the supported versions.
                - MONGO_40_WT: version of the MongoDB 4.0 WiredTiger storage engine.
                - MONGO_42_WT: version of the MongoDB 4.2 WiredTiger storage engine.
@@ -1011,6 +1248,8 @@ class ReadonlyInstance(pulumi.CustomResource):
                - 1: Perform reconfiguration tasks within the maintenance time window.
                  Note: Adjusting the number of nodes and slices does not support changes within the maintenance window.
         :param pulumi.Input[_builtins.str] instance_name: Name of the Mongodb instance.
+        :param pulumi.Input[_builtins.str] key_id: Please note that this field is the CMK name, corresponding to the `alias` field in KMS. Key ID. If `manual` is selected as the key resource, you must enter the specified key ID. Note: this field does not support update, please recreate the resource if you need to change it.
+        :param pulumi.Input[_builtins.str] kms_region: Key ID. If `manual` is selected as the key resource, you must enter the specified key region. Note: this field does not support update, please recreate the resource if you need to change it.
         :param pulumi.Input[_builtins.str] machine_type: Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
         :param pulumi.Input[_builtins.int] memory: Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
         :param pulumi.Input[_builtins.int] mongos_cpu: Number of mongos cpu.
@@ -1034,7 +1273,7 @@ class ReadonlyInstance(pulumi.CustomResource):
                  args: ReadonlyInstanceArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Provide a resource to create a Readonly mongodb instance.
+        Provide a resource to create a Mongodb readonly instance.
 
         ## Example Usage
 
@@ -1044,53 +1283,122 @@ class ReadonlyInstance(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        mongodb = tencentcloud.mongodb.ReadonlyInstance("mongodb",
-            instance_name="tf-mongodb-readonly-test",
+        example = tencentcloud.mongodb.Instance("example",
+            instance_name="tf-example",
+            cpu=2,
             memory=4,
             volume=100,
-            engine_version="MONGO_44_WT",
-            machine_type="HIO10G",
-            available_zone="ap-guangzhou-3",
+            engine_version="MONGO_80_WT",
+            machine_type="GE.LD.T1",
+            available_zone="ap-guangzhou-6",
+            vpc_id="vpc-i5yyodl9",
+            subnet_id="subnet-hhi88a58",
             project_id=0,
-            father_instance_id="cmgo-xxxxxx",
+            password="Password@2026",
+            data_encryption="TDE",
+            encryption_key_source="manual",
+            key_id="KMS-MONGODB",
+            kms_region="ap-guangzhou")
+        example_readonly_instance = tencentcloud.mongodb.ReadonlyInstance("example",
+            instance_name="tf-mongodb",
+            cpu=2,
+            memory=4,
+            volume=100,
+            engine_version="MONGO_80_WT",
+            machine_type="GE.LD.T1",
+            available_zone="ap-guangzhou-7",
+            project_id=0,
+            father_instance_id=example.id,
             father_instance_region="ap-guangzhou",
-            vpc_id="vpc-xxxxxx",
-            subnet_id="subnet-xxxxxx",
-            security_groups=["sg-xxxxxx"],
-            cluster_type="REPLSET")
+            vpc_id="vpc-i5yyodl9",
+            subnet_id="subnet-d4umunpy",
+            security_groups=["sg-n8zf5ry9"],
+            cluster_type="REPLSET",
+            data_encryption="No_Encryption")
         ```
 
-        ### Shard readonly instance
+        ### Sharding readonly instance
 
         ```python
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        sharding_mongodb = tencentcloud.mongodb.ReadonlyInstance("sharding_mongodb",
-            instance_name="tf-mongodb-readonly-shard",
+        example = tencentcloud.mongodb.ShardingInstance("example",
+            instance_name="tf-example",
+            shard_quantity=2,
+            nodes_per_shard=3,
+            cpu=2,
             memory=4,
             volume=100,
-            engine_version="MONGO_44_WT",
-            machine_type="HIO10G",
-            available_zone="ap-guangzhou-3",
+            engine_version="MONGO_80_WT",
+            machine_type="GE.LD.T1",
+            available_zone="ap-guangzhou-6",
+            vpc_id="vpc-i5yyodl9",
+            subnet_id="subnet-hhi88a58",
             project_id=0,
-            father_instance_id="cmgo-xxxxxx",
+            password="Password@2026",
+            mongos_cpu=1,
+            mongos_memory=2,
+            mongos_node_num=3,
+            data_encryption="TDE",
+            encryption_key_source="auto")
+        example_readonly_instance = tencentcloud.mongodb.ReadonlyInstance("example",
+            instance_name="tf-mongodb",
+            cpu=2,
+            memory=4,
+            volume=100,
+            engine_version="MONGO_80_WT",
+            machine_type="GE.LD.T1",
+            available_zone="ap-guangzhou-7",
+            project_id=0,
+            father_instance_id=example.id,
             father_instance_region="ap-guangzhou",
-            vpc_id="vpc-xxxxxx",
-            subnet_id="subnet-xxxxxx",
-            security_groups=["sg-xxxxxx"],
+            vpc_id="vpc-i5yyodl9",
+            subnet_id="subnet-d4umunpy",
+            security_groups=["sg-n8zf5ry9"],
             cluster_type="SHARD",
             mongos_cpu=1,
             mongos_memory=2,
-            mongos_node_num=3)
+            mongos_node_num=3,
+            data_encryption="TDE",
+            encryption_key_source="manual",
+            key_id="KMS-MONGODB",
+            kms_region="ap-guangzhou")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateDBInstance](https://www.tencentcloud.com/search/?wd=CreateDBInstance&type=document&lang=en)
+          - [CreateDBInstanceHour](https://www.tencentcloud.com/document/api/240/34704)
+          - [DescribeDBInstances](https://www.tencentcloud.com/document/api/240/34702)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+          - [RenameInstance](https://www.tencentcloud.com/document/api/240/34697)
+        * Read:
+          - [DescribeDBInstances](https://www.tencentcloud.com/document/api/240/34702)
+          - [DescribeSecurityGroup](https://www.tencentcloud.com/document/api/240/40341)
+          - [DescribeTransparentDataEncryptionStatus](https://www.tencentcloud.com/search/?wd=DescribeTransparentDataEncryptionStatus&type=document&lang=en)
+        * Update:
+          - [AssignProject](https://www.tencentcloud.com/document/api/240/34705)
+          - [DescribeDBInstanceDeal](https://www.tencentcloud.com/document/api/240/37330)
+          - [ModifyDBInstanceSecurityGroup](https://www.tencentcloud.com/document/api/240/45894)
+          - [ModifyDBInstanceSpec](https://www.tencentcloud.com/document/api/240/34699)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+          - [RenameInstance](https://www.tencentcloud.com/document/api/240/34697)
+          - [RenewDBInstances](https://www.tencentcloud.com/document/api/240/37326)
+        * Delete:
+          - [DescribeDBInstances](https://www.tencentcloud.com/document/api/240/34702)
+          - [IsolateDBInstance](https://www.tencentcloud.com/document/api/240/34700)
+          - [OfflineIsolatedDBInstance](https://www.tencentcloud.com/document/api/240/34698)
 
         ## Import
 
-        Mongodb instance can be imported using the id, e.g.
+        Mongodb readonly instance can be imported using the id, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Mongodb/readonlyInstance:ReadonlyInstance mongodb cmgo-xxxxxx
+        $ pulumi import tencentcloud:Mongodb/readonlyInstance:ReadonlyInstance mongodb cmgo-7ohkcdu7
         ```
 
 
@@ -1113,11 +1421,16 @@ class ReadonlyInstance(pulumi.CustomResource):
                  available_zone: pulumi.Input[Optional[_builtins.str]] = None,
                  charge_type: pulumi.Input[Optional[_builtins.str]] = None,
                  cluster_type: pulumi.Input[Optional[_builtins.str]] = None,
+                 cpu: pulumi.Input[Optional[_builtins.int]] = None,
+                 data_encryption: pulumi.Input[Optional[_builtins.str]] = None,
+                 encryption_key_source: pulumi.Input[Optional[_builtins.str]] = None,
                  engine_version: pulumi.Input[Optional[_builtins.str]] = None,
                  father_instance_id: pulumi.Input[Optional[_builtins.str]] = None,
                  father_instance_region: pulumi.Input[Optional[_builtins.str]] = None,
                  in_maintenance: pulumi.Input[Optional[_builtins.int]] = None,
                  instance_name: pulumi.Input[Optional[_builtins.str]] = None,
+                 key_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 kms_region: pulumi.Input[Optional[_builtins.str]] = None,
                  machine_type: pulumi.Input[Optional[_builtins.str]] = None,
                  memory: pulumi.Input[Optional[_builtins.int]] = None,
                  mongos_cpu: pulumi.Input[Optional[_builtins.int]] = None,
@@ -1150,6 +1463,9 @@ class ReadonlyInstance(pulumi.CustomResource):
             if cluster_type is None and not opts.urn:
                 raise TypeError("Missing required property 'cluster_type'")
             __props__.__dict__["cluster_type"] = cluster_type
+            __props__.__dict__["cpu"] = cpu
+            __props__.__dict__["data_encryption"] = data_encryption
+            __props__.__dict__["encryption_key_source"] = encryption_key_source
             if engine_version is None and not opts.urn:
                 raise TypeError("Missing required property 'engine_version'")
             __props__.__dict__["engine_version"] = engine_version
@@ -1163,6 +1479,8 @@ class ReadonlyInstance(pulumi.CustomResource):
             if instance_name is None and not opts.urn:
                 raise TypeError("Missing required property 'instance_name'")
             __props__.__dict__["instance_name"] = instance_name
+            __props__.__dict__["key_id"] = key_id
+            __props__.__dict__["kms_region"] = kms_region
             if machine_type is None and not opts.urn:
                 raise TypeError("Missing required property 'machine_type'")
             __props__.__dict__["machine_type"] = machine_type
@@ -1202,12 +1520,17 @@ class ReadonlyInstance(pulumi.CustomResource):
             available_zone: pulumi.Input[Optional[_builtins.str]] = None,
             charge_type: pulumi.Input[Optional[_builtins.str]] = None,
             cluster_type: pulumi.Input[Optional[_builtins.str]] = None,
+            cpu: pulumi.Input[Optional[_builtins.int]] = None,
             create_time: pulumi.Input[Optional[_builtins.str]] = None,
+            data_encryption: pulumi.Input[Optional[_builtins.str]] = None,
+            encryption_key_source: pulumi.Input[Optional[_builtins.str]] = None,
             engine_version: pulumi.Input[Optional[_builtins.str]] = None,
             father_instance_id: pulumi.Input[Optional[_builtins.str]] = None,
             father_instance_region: pulumi.Input[Optional[_builtins.str]] = None,
             in_maintenance: pulumi.Input[Optional[_builtins.int]] = None,
             instance_name: pulumi.Input[Optional[_builtins.str]] = None,
+            key_id: pulumi.Input[Optional[_builtins.str]] = None,
+            kms_region: pulumi.Input[Optional[_builtins.str]] = None,
             machine_type: pulumi.Input[Optional[_builtins.str]] = None,
             memory: pulumi.Input[Optional[_builtins.int]] = None,
             mongos_cpu: pulumi.Input[Optional[_builtins.int]] = None,
@@ -1237,7 +1560,10 @@ class ReadonlyInstance(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] available_zone: The available zone of the Mongodb.
         :param pulumi.Input[_builtins.str] charge_type: The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
         :param pulumi.Input[_builtins.str] cluster_type: Instance schema type.	- REPLSET: Replset cluster;	- SHARD: Shard cluster.
+        :param pulumi.Input[_builtins.int] cpu: The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.
         :param pulumi.Input[_builtins.str] create_time: Creation time of the Mongodb instance.
+        :param pulumi.Input[_builtins.str] data_encryption: Database storage encryption setting. `No_Encryption`: Storage encryption is not used. `TDE`: Enables TDE storage encryption. Note: this field does not support update, please recreate the resource if you need to change it.
+        :param pulumi.Input[_builtins.str] encryption_key_source: If TDE storage encryption is selected, the key source must be specified. `auto`: Automatically generate the key. `manual`: Manually specify the key. Note: this field does not support update, please recreate the resource if you need to change it.
         :param pulumi.Input[_builtins.str] engine_version: Refers to version information. The DescribeSpecInfo API can be called to obtain detailed information about the supported versions.
                - MONGO_40_WT: version of the MongoDB 4.0 WiredTiger storage engine.
                - MONGO_42_WT: version of the MongoDB 4.2 WiredTiger storage engine.
@@ -1253,6 +1579,8 @@ class ReadonlyInstance(pulumi.CustomResource):
                - 1: Perform reconfiguration tasks within the maintenance time window.
                  Note: Adjusting the number of nodes and slices does not support changes within the maintenance window.
         :param pulumi.Input[_builtins.str] instance_name: Name of the Mongodb instance.
+        :param pulumi.Input[_builtins.str] key_id: Please note that this field is the CMK name, corresponding to the `alias` field in KMS. Key ID. If `manual` is selected as the key resource, you must enter the specified key ID. Note: this field does not support update, please recreate the resource if you need to change it.
+        :param pulumi.Input[_builtins.str] kms_region: Key ID. If `manual` is selected as the key resource, you must enter the specified key region. Note: this field does not support update, please recreate the resource if you need to change it.
         :param pulumi.Input[_builtins.str] machine_type: Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
         :param pulumi.Input[_builtins.int] memory: Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
         :param pulumi.Input[_builtins.int] mongos_cpu: Number of mongos cpu.
@@ -1280,12 +1608,17 @@ class ReadonlyInstance(pulumi.CustomResource):
         __props__.__dict__["available_zone"] = available_zone
         __props__.__dict__["charge_type"] = charge_type
         __props__.__dict__["cluster_type"] = cluster_type
+        __props__.__dict__["cpu"] = cpu
         __props__.__dict__["create_time"] = create_time
+        __props__.__dict__["data_encryption"] = data_encryption
+        __props__.__dict__["encryption_key_source"] = encryption_key_source
         __props__.__dict__["engine_version"] = engine_version
         __props__.__dict__["father_instance_id"] = father_instance_id
         __props__.__dict__["father_instance_region"] = father_instance_region
         __props__.__dict__["in_maintenance"] = in_maintenance
         __props__.__dict__["instance_name"] = instance_name
+        __props__.__dict__["key_id"] = key_id
+        __props__.__dict__["kms_region"] = kms_region
         __props__.__dict__["machine_type"] = machine_type
         __props__.__dict__["memory"] = memory
         __props__.__dict__["mongos_cpu"] = mongos_cpu
@@ -1339,12 +1672,36 @@ class ReadonlyInstance(pulumi.CustomResource):
         return pulumi.get(self, "cluster_type")
 
     @_builtins.property
+    @pulumi.getter
+    def cpu(self) -> pulumi.Output[_builtins.int]:
+        """
+        The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.
+        """
+        return pulumi.get(self, "cpu")
+
+    @_builtins.property
     @pulumi.getter(name="createTime")
     def create_time(self) -> pulumi.Output[_builtins.str]:
         """
         Creation time of the Mongodb instance.
         """
         return pulumi.get(self, "create_time")
+
+    @_builtins.property
+    @pulumi.getter(name="dataEncryption")
+    def data_encryption(self) -> pulumi.Output[_builtins.str]:
+        """
+        Database storage encryption setting. `No_Encryption`: Storage encryption is not used. `TDE`: Enables TDE storage encryption. Note: this field does not support update, please recreate the resource if you need to change it.
+        """
+        return pulumi.get(self, "data_encryption")
+
+    @_builtins.property
+    @pulumi.getter(name="encryptionKeySource")
+    def encryption_key_source(self) -> pulumi.Output[Optional[_builtins.str]]:
+        """
+        If TDE storage encryption is selected, the key source must be specified. `auto`: Automatically generate the key. `manual`: Manually specify the key. Note: this field does not support update, please recreate the resource if you need to change it.
+        """
+        return pulumi.get(self, "encryption_key_source")
 
     @_builtins.property
     @pulumi.getter(name="engineVersion")
@@ -1395,6 +1752,22 @@ class ReadonlyInstance(pulumi.CustomResource):
         Name of the Mongodb instance.
         """
         return pulumi.get(self, "instance_name")
+
+    @_builtins.property
+    @pulumi.getter(name="keyId")
+    def key_id(self) -> pulumi.Output[_builtins.str]:
+        """
+        Please note that this field is the CMK name, corresponding to the `alias` field in KMS. Key ID. If `manual` is selected as the key resource, you must enter the specified key ID. Note: this field does not support update, please recreate the resource if you need to change it.
+        """
+        return pulumi.get(self, "key_id")
+
+    @_builtins.property
+    @pulumi.getter(name="kmsRegion")
+    def kms_region(self) -> pulumi.Output[_builtins.str]:
+        """
+        Key ID. If `manual` is selected as the key resource, you must enter the specified key region. Note: this field does not support update, please recreate the resource if you need to change it.
+        """
+        return pulumi.get(self, "kms_region")
 
     @_builtins.property
     @pulumi.getter(name="machineType")

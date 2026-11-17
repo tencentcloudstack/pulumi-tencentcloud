@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataStaticResource](https://www.tencentcloud.com/document/api/1131/45318)
         /// </summary>
         public static Task<GetStaticResourceResult> InvokeAsync(GetStaticResourceArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetStaticResourceResult>("tencentcloud:Rum/getStaticResource:getStaticResource", args ?? new GetStaticResourceArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataStaticResource](https://www.tencentcloud.com/document/api/1131/45318)
         /// </summary>
         public static Output<GetStaticResourceResult> Invoke(GetStaticResourceInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetStaticResourceResult>("tencentcloud:Rum/getStaticResource:getStaticResource", args ?? new GetStaticResourceInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataStaticResource](https://www.tencentcloud.com/document/api/1131/45318)
         /// </summary>
         public static Output<GetStaticResourceResult> Invoke(GetStaticResourceInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetStaticResourceResult>("tencentcloud:Rum/getStaticResource:getStaticResource", args ?? new GetStaticResourceInvokeArgs(), options.WithDefaults());

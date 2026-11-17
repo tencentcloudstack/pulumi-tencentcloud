@@ -18,6 +18,12 @@ import * as utilities from "../utilities";
  *     planId: 39,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CancelUpgradePlan](https://www.tencentcloud.com/search/?wd=CancelUpgradePlan&type=document&lang=en)
  */
 export class CancelUpgradePlanOperation extends pulumi.CustomResource {
     /**

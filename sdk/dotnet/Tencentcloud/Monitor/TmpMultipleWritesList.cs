@@ -79,6 +79,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribePrometheusInstanceInitStatus](https://www.tencentcloud.com/document/api/248/53321)
+    ///   - [ModifyRemoteURLs](https://www.tencentcloud.com/search/?wd=ModifyRemoteURLs&amp;type=document&amp;lang=en)
+    ///   - [RunPrometheusInstance](https://www.tencentcloud.com/document/api/248/53315)
+    /// * Read: [DescribeRemoteURLs](https://www.tencentcloud.com/search/?wd=DescribeRemoteURLs&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyRemoteURLs](https://www.tencentcloud.com/search/?wd=ModifyRemoteURLs&amp;type=document&amp;lang=en)
+    /// * Delete: [ModifyRemoteURLs](https://www.tencentcloud.com/search/?wd=ModifyRemoteURLs&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// monitor multiple writes list can be imported using the id, e.g.

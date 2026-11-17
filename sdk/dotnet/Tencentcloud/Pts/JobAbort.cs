@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [AbortJob](https://www.tencentcloud.com/document/api/1249/68539)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Pts/jobAbort:JobAbort")]
     public partial class JobAbort : global::Pulumi.CustomResource

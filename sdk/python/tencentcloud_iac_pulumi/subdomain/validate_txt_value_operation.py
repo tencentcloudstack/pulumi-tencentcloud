@@ -149,6 +149,12 @@ class ValidateTxtValueOperation(pulumi.CustomResource):
         subdomain_validate_txt_value_operation = tencentcloud.subdomain.ValidateTxtValueOperation("subdomain_validate_txt_value_operation", domain_zone="www.iac-tf.cloud")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateSubdomainValidateTXTValue](https://www.tencentcloud.com/search/?wd=CreateSubdomainValidateTXTValue&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -171,6 +177,12 @@ class ValidateTxtValueOperation(pulumi.CustomResource):
 
         subdomain_validate_txt_value_operation = tencentcloud.subdomain.ValidateTxtValueOperation("subdomain_validate_txt_value_operation", domain_zone="www.iac-tf.cloud")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateSubdomainValidateTXTValue](https://www.tencentcloud.com/search/?wd=CreateSubdomainValidateTXTValue&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

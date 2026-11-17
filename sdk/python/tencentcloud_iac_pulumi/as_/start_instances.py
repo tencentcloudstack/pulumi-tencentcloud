@@ -178,6 +178,14 @@ class StartInstances(pulumi.CustomResource):
             instance_ids=attachment.instance_ids)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeAutoScalingActivities](https://www.tencentcloud.com/document/api/377/31014)
+          - [StartAutoScalingInstances](https://www.tencentcloud.com/document/api/377/37502)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -261,6 +269,14 @@ class StartInstances(pulumi.CustomResource):
             auto_scaling_group_id=example_scaling_group.id,
             instance_ids=attachment.instance_ids)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeAutoScalingActivities](https://www.tencentcloud.com/document/api/377/31014)
+          - [StartAutoScalingInstances](https://www.tencentcloud.com/document/api/377/37502)
 
 
         :param str resource_name: The name of the resource.

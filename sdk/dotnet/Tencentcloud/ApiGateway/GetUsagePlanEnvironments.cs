@@ -62,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeUsagePlanEnvironments](https://www.tencentcloud.com/search/?wd=DescribeUsagePlanEnvironments&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetUsagePlanEnvironmentsResult> InvokeAsync(GetUsagePlanEnvironmentsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetUsagePlanEnvironmentsResult>("tencentcloud:ApiGateway/getUsagePlanEnvironments:getUsagePlanEnvironments", args ?? new GetUsagePlanEnvironmentsArgs(), options.WithDefaults());
@@ -116,6 +122,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeUsagePlanEnvironments](https://www.tencentcloud.com/search/?wd=DescribeUsagePlanEnvironments&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetUsagePlanEnvironmentsResult> Invoke(GetUsagePlanEnvironmentsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetUsagePlanEnvironmentsResult>("tencentcloud:ApiGateway/getUsagePlanEnvironments:getUsagePlanEnvironments", args ?? new GetUsagePlanEnvironmentsInvokeArgs(), options.WithDefaults());
@@ -170,6 +182,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeUsagePlanEnvironments](https://www.tencentcloud.com/search/?wd=DescribeUsagePlanEnvironments&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetUsagePlanEnvironmentsResult> Invoke(GetUsagePlanEnvironmentsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetUsagePlanEnvironmentsResult>("tencentcloud:ApiGateway/getUsagePlanEnvironments:getUsagePlanEnvironments", args ?? new GetUsagePlanEnvironmentsInvokeArgs(), options.WithDefaults());

@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBInstanceURL](https://www.tencentcloud.com/search/?wd=DescribeDBInstanceURL&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetInstanceUrlsResult> InvokeAsync(GetInstanceUrlsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceUrlsResult>("tencentcloud:Mongodb/getInstanceUrls:getInstanceUrls", args ?? new GetInstanceUrlsArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBInstanceURL](https://www.tencentcloud.com/search/?wd=DescribeDBInstanceURL&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetInstanceUrlsResult> Invoke(GetInstanceUrlsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceUrlsResult>("tencentcloud:Mongodb/getInstanceUrls:getInstanceUrls", args ?? new GetInstanceUrlsInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBInstanceURL](https://www.tencentcloud.com/search/?wd=DescribeDBInstanceURL&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetInstanceUrlsResult> Invoke(GetInstanceUrlsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceUrlsResult>("tencentcloud:Mongodb/getInstanceUrls:getInstanceUrls", args ?? new GetInstanceUrlsInvokeArgs(), options.WithDefaults());

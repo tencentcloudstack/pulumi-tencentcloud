@@ -142,6 +142,12 @@ def get_log_files(instance_id: Optional[_builtins.str] = None,
         type=1)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBLogFiles](https://www.tencentcloud.com/document/api/1042/34445)
+
 
     :param _builtins.str instance_id: Instance ID in the format of `tdsqlshard-ow728lmc`.
     :param _builtins.str result_output_file: Used to save results.
@@ -183,6 +189,12 @@ def get_log_files_output(instance_id: pulumi.Input[Optional[_builtins.str]] = No
         shard_id="shard-1b5r04az",
         type=1)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBLogFiles](https://www.tencentcloud.com/document/api/1042/34445)
 
 
     :param _builtins.str instance_id: Instance ID in the format of `tdsqlshard-ow728lmc`.

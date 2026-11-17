@@ -69,6 +69,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read:
+//   - [DescribeCustomerGateways](https://www.tencentcloud.com/document/api/215/17516)
+//   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
 func GetCustomerGateways(ctx *pulumi.Context, args *GetCustomerGatewaysArgs, opts ...pulumi.InvokeOption) (*GetCustomerGatewaysResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetCustomerGatewaysResult

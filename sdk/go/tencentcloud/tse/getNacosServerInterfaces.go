@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeNacosServerInterfaces](https://www.tencentcloud.com/search/?wd=DescribeNacosServerInterfaces&type=document&lang=en)
 func GetNacosServerInterfaces(ctx *pulumi.Context, args *GetNacosServerInterfacesArgs, opts ...pulumi.InvokeOption) (*GetNacosServerInterfacesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetNacosServerInterfacesResult

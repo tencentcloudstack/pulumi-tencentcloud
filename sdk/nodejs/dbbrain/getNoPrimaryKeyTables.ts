@@ -21,6 +21,12 @@ import * as utilities from "../utilities";
  *     product: "",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeNoPrimaryKeyTables](https://www.tencentcloud.com/search/?wd=DescribeNoPrimaryKeyTables&type=document&lang=en)
  */
 export function getNoPrimaryKeyTables(args: GetNoPrimaryKeyTablesArgs, opts?: pulumi.InvokeOptions): Promise<GetNoPrimaryKeyTablesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -94,6 +100,12 @@ export interface GetNoPrimaryKeyTablesResult {
  *     product: "",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeNoPrimaryKeyTables](https://www.tencentcloud.com/search/?wd=DescribeNoPrimaryKeyTables&type=document&lang=en)
  */
 export function getNoPrimaryKeyTablesOutput(args: GetNoPrimaryKeyTablesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetNoPrimaryKeyTablesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

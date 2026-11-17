@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vcube
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [RenewVideo](https://www.tencentcloud.com/search/?wd=RenewVideo&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Vcube/renewVideoOperation:RenewVideoOperation")]
     public partial class RenewVideoOperation : global::Pulumi.CustomResource

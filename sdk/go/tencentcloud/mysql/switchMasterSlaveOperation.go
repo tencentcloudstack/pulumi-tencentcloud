@@ -105,6 +105,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+//   - [SwitchDBInstanceMasterSlave](https://www.tencentcloud.com/document/api/236/39628)
 type SwitchMasterSlaveOperation struct {
 	pulumi.CustomResourceState
 

@@ -15,6 +15,12 @@ import * as utilities from "../utilities";
  *
  * const example = new tencentcloud.subscribe.PrivateZoneService("example", {});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [SubscribePrivateZoneService](https://www.tencentcloud.com/document/api/1097/42109)
  */
 export class PrivateZoneService extends pulumi.CustomResource {
     /**

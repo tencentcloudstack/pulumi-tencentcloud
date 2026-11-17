@@ -131,6 +131,12 @@ def get_instances(filters: Optional[Sequence[Union['GetInstancesFilterArgs', 'Ge
     ])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstanceList](https://www.tencentcloud.com/document/api/1294/79711)
+
 
     :param Sequence[Union['GetInstancesFilterArgs', 'GetInstancesFilterArgsDict']] filters: Query criteria list, supporting the following fields: InstanceName: cluster name, fuzzy search, InstanceId: cluster ID, precise search, InstanceStatus: cluster status search (RUNNING - Running, CREATING - Creating, MODIFYING - Changing, DELETING - Deleting).
     :param _builtins.str result_output_file: Used to save results.
@@ -188,6 +194,12 @@ def get_instances_output(filters: pulumi.Input[Optional[Optional[Sequence[Union[
         },
     ])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstanceList](https://www.tencentcloud.com/document/api/1294/79711)
 
 
     :param Sequence[Union['GetInstancesFilterArgs', 'GetInstancesFilterArgsDict']] filters: Query criteria list, supporting the following fields: InstanceName: cluster name, fuzzy search, InstanceId: cluster ID, precise search, InstanceStatus: cluster status search (RUNNING - Running, CREATING - Creating, MODIFYING - Changing, DELETING - Deleting).

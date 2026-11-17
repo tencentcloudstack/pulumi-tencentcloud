@@ -92,6 +92,30 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateService](https://www.tencentcloud.com/search/?wd=CreateService&amp;type=document&amp;lang=en)
+    ///   - [DescribeService](https://www.tencentcloud.com/search/?wd=DescribeService&amp;type=document&amp;lang=en)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    ///   - [ModifyServiceEnvironmentStrategy](https://www.tencentcloud.com/search/?wd=ModifyServiceEnvironmentStrategy&amp;type=document&amp;lang=en)
+    /// * Read:
+    ///   - [DescribeApiUsagePlan](https://www.tencentcloud.com/search/?wd=DescribeApiUsagePlan&amp;type=document&amp;lang=en)
+    ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+    ///   - [DescribeService](https://www.tencentcloud.com/search/?wd=DescribeService&amp;type=document&amp;lang=en)
+    ///   - [DescribeServiceEnvironmentStrategy](https://www.tencentcloud.com/search/?wd=DescribeServiceEnvironmentStrategy&amp;type=document&amp;lang=en)
+    ///   - [DescribeServiceUsagePlan](https://www.tencentcloud.com/search/?wd=DescribeServiceUsagePlan&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    ///   - [ModifyService](https://www.tencentcloud.com/search/?wd=ModifyService&amp;type=document&amp;lang=en)
+    ///   - [ModifyServiceEnvironmentStrategy](https://www.tencentcloud.com/search/?wd=ModifyServiceEnvironmentStrategy&amp;type=document&amp;lang=en)
+    /// * Delete:
+    ///   - [DeleteService](https://www.tencentcloud.com/search/?wd=DeleteService&amp;type=document&amp;lang=en)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    ///   - [UnReleaseService](https://www.tencentcloud.com/search/?wd=UnReleaseService&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// API gateway service can be imported using the id, e.g.

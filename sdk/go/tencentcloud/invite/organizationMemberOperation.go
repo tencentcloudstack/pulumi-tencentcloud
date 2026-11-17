@@ -55,6 +55,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [InviteOrganizationMember](https://www.tencentcloud.com/document/api/1031/64469)
 type OrganizationMemberOperation struct {
 	pulumi.CustomResourceState
 

@@ -118,6 +118,12 @@ def get_proxy_version(cluster_id: Optional[_builtins.str] = None,
         proxy_group_id="cynosdbmysql-proxy-l6zf9t30")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSupportProxyVersion](https://www.tencentcloud.com/document/api/1098/56555)
+
 
     :param _builtins.str cluster_id: Cluster ID.
     :param _builtins.str proxy_group_id: Database Agent Group ID.
@@ -153,6 +159,12 @@ def get_proxy_version_output(cluster_id: pulumi.Input[Optional[_builtins.str]] =
     proxy_version = tencentcloud.cynosdb.get_proxy_version(cluster_id="cynosdbmysql-bws8h88b",
         proxy_group_id="cynosdbmysql-proxy-l6zf9t30")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSupportProxyVersion](https://www.tencentcloud.com/document/api/1098/56555)
 
 
     :param _builtins.str cluster_id: Cluster ID.

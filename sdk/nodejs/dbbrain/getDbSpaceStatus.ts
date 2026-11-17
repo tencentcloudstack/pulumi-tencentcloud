@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     product: "mysql",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBSpaceStatus](https://www.tencentcloud.com/document/api/1035/41196)
  */
 export function getDbSpaceStatus(args: GetDbSpaceStatusArgs, opts?: pulumi.InvokeOptions): Promise<GetDbSpaceStatusResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -96,6 +102,12 @@ export interface GetDbSpaceStatusResult {
  *     product: "mysql",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBSpaceStatus](https://www.tencentcloud.com/document/api/1035/41196)
  */
 export function getDbSpaceStatusOutput(args: GetDbSpaceStatusOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDbSpaceStatusResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

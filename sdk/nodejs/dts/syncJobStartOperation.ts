@@ -15,6 +15,14 @@ import * as utilities from "../utilities";
  *
  * const syncJobStartOperation = new tencentcloud.dts.SyncJobStartOperation("sync_job_start_operation", {jobId: "sync-werwfs23"});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeSyncJobs](https://www.tencentcloud.com/document/api/571/51793)
+ *   - [StartSyncJob](https://www.tencentcloud.com/document/api/571/51787)
  */
 export class SyncJobStartOperation extends pulumi.CustomResource {
     /**

@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListVersionByFunction](https://www.tencentcloud.com/document/api/583/34416)
         /// </summary>
         public static Task<GetFunctionVersionsResult> InvokeAsync(GetFunctionVersionsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetFunctionVersionsResult>("tencentcloud:Scf/getFunctionVersions:getFunctionVersions", args ?? new GetFunctionVersionsArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListVersionByFunction](https://www.tencentcloud.com/document/api/583/34416)
         /// </summary>
         public static Output<GetFunctionVersionsResult> Invoke(GetFunctionVersionsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetFunctionVersionsResult>("tencentcloud:Scf/getFunctionVersions:getFunctionVersions", args ?? new GetFunctionVersionsInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListVersionByFunction](https://www.tencentcloud.com/document/api/583/34416)
         /// </summary>
         public static Output<GetFunctionVersionsResult> Invoke(GetFunctionVersionsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetFunctionVersionsResult>("tencentcloud:Scf/getFunctionVersions:getFunctionVersions", args ?? new GetFunctionVersionsInvokeArgs(), options.WithDefaults());

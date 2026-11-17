@@ -122,6 +122,7 @@ import (
 //					KeyIds: pulumi.StringArray{
 //						pulumi.String("skey-9pcs2100"),
 //					},
+//					CustomImage: pulumi.String("img-j9tbqlc2"),
 //				},
 //				Annotations: kubernetes.NativeNodePoolAnnotationArray{
 //					&kubernetes.NativeNodePoolAnnotationArgs{
@@ -142,6 +143,21 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CreateNodePool](https://www.tencentcloud.com/document/api/457/66318)
+//   - [DescribeNodePools](https://www.tencentcloud.com/document/api/457/66311)
+//
+// * Read: [DescribeNodePools](https://www.tencentcloud.com/document/api/457/66311)
+// * Update: [ModifyNodePool](https://www.tencentcloud.com/document/api/457/66309)
+// * Delete:
+//   - [DeleteNodePool](https://www.tencentcloud.com/document/api/457/66316)
+//   - [DescribeClusterMachines](https://www.tencentcloud.com/search/?wd=DescribeClusterMachines&type=document&lang=en)
+//   - [DescribeNodePools](https://www.tencentcloud.com/document/api/457/66311)
 //
 // ## Import
 //

@@ -333,6 +333,14 @@ class RollBackCluster(pulumi.CustomResource):
             rollback_mode="full")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+          - [RollBackCluster](https://www.tencentcloud.com/document/api/1098/74208)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -378,6 +386,14 @@ class RollBackCluster(pulumi.CustomResource):
             }],
             rollback_mode="full")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+          - [RollBackCluster](https://www.tencentcloud.com/document/api/1098/74208)
 
 
         :param str resource_name: The name of the resource.

@@ -39,6 +39,18 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeInvocations](https://www.tencentcloud.com/document/api/1147/46695)
+ *   - [InvokeCommand](https://www.tencentcloud.com/document/api/1147/46690)
+ * * Read: [DescribeInvocations](https://www.tencentcloud.com/document/api/1147/46695)
+ * * Delete:
+ *   - [CancelInvocation](https://www.tencentcloud.com/document/api/1147/46703)
+ *   - [DescribeInvocations](https://www.tencentcloud.com/document/api/1147/46695)
+ *
  * ## Import
  *
  * tat invocation can be imported using the invocation_id#instance_id, e.g.

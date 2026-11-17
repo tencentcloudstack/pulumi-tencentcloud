@@ -20,7 +20,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr.Inputs
         public Input<string> _diskIndex { get; set; } = null!;
 
         /// <summary>
-        /// Disk ID (read-only, populated from API).
+        /// Disk ID.
         /// </summary>
         [Input("diskId")]
         public Input<string>? DiskId { get; set; }

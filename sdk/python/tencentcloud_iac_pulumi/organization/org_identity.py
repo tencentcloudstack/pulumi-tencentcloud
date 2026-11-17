@@ -160,6 +160,15 @@ class OrgIdentity(pulumi.CustomResource):
             description="iac-test")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateOrganizationIdentity](https://www.tencentcloud.com/document/api/1031/66412)
+        * Read: [ListOrganizationIdentity](https://www.tencentcloud.com/document/api/1031/52051)
+        * Update: [UpdateOrganizationIdentity](https://www.tencentcloud.com/document/api/1031/66406)
+        * Delete: [DeleteOrganizationIdentity](https://www.tencentcloud.com/document/api/1031/66409)
+
         ## Import
 
         organization org_identity can be imported using the id, e.g.
@@ -199,6 +208,15 @@ class OrgIdentity(pulumi.CustomResource):
             }],
             description="iac-test")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateOrganizationIdentity](https://www.tencentcloud.com/document/api/1031/66412)
+        * Read: [ListOrganizationIdentity](https://www.tencentcloud.com/document/api/1031/52051)
+        * Update: [UpdateOrganizationIdentity](https://www.tencentcloud.com/document/api/1031/66406)
+        * Delete: [DeleteOrganizationIdentity](https://www.tencentcloud.com/document/api/1031/66409)
 
         ## Import
 

@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const streamMonitorList = tencentcloud.css.getStreamMonitorList({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeLiveStreamMonitorList](https://www.tencentcloud.com/search/?wd=DescribeLiveStreamMonitorList&type=document&lang=en)
  */
 export function getStreamMonitorList(args?: GetStreamMonitorListArgs, opts?: pulumi.InvokeOptions): Promise<GetStreamMonitorListResult> {
     args = args || {};
@@ -61,6 +67,12 @@ export interface GetStreamMonitorListResult {
  *
  * const streamMonitorList = tencentcloud.css.getStreamMonitorList({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeLiveStreamMonitorList](https://www.tencentcloud.com/search/?wd=DescribeLiveStreamMonitorList&type=document&lang=en)
  */
 export function getStreamMonitorListOutput(args?: GetStreamMonitorListOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetStreamMonitorListResult> {
     args = args || {};

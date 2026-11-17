@@ -24,6 +24,12 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeStrategyList](https://www.tencentcloud.com/search/?wd=DescribeStrategyList&type=document&lang=en)
  */
 export function getStrategyList(args: GetStrategyListArgs, opts?: pulumi.InvokeOptions): Promise<GetStrategyListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -89,6 +95,12 @@ export interface GetStrategyListResult {
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeStrategyList](https://www.tencentcloud.com/search/?wd=DescribeStrategyList&type=document&lang=en)
  */
 export function getStrategyListOutput(args: GetStrategyListOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetStrategyListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

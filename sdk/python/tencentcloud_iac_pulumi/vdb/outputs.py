@@ -26,6 +26,8 @@ class InstanceNetwork(dict):
         suggest = None
         if key == "expireTime":
             suggest = "expire_time"
+        elif key == "isSsl":
+            suggest = "is_ssl"
         elif key == "preserveDuration":
             suggest = "preserve_duration"
         elif key == "subnetId":
@@ -46,6 +48,7 @@ class InstanceNetwork(dict):
 
     def __init__(__self__, *,
                  expire_time: Optional[_builtins.str] = None,
+                 is_ssl: Optional[_builtins.bool] = None,
                  port: Optional[_builtins.int] = None,
                  preserve_duration: Optional[_builtins.int] = None,
                  subnet_id: Optional[_builtins.str] = None,
@@ -53,6 +56,7 @@ class InstanceNetwork(dict):
                  vpc_id: Optional[_builtins.str] = None):
         """
         :param _builtins.str expire_time: Old IP expiration time.
+        :param _builtins.bool is_ssl: Whether it is an SSL network.
         :param _builtins.int port: Internal port.
         :param _builtins.int preserve_duration: Old IP preservation duration in days.
         :param _builtins.str subnet_id: Subnet ID.
@@ -61,6 +65,8 @@ class InstanceNetwork(dict):
         """
         if expire_time is not None:
             pulumi.set(__self__, "expire_time", expire_time)
+        if is_ssl is not None:
+            pulumi.set(__self__, "is_ssl", is_ssl)
         if port is not None:
             pulumi.set(__self__, "port", port)
         if preserve_duration is not None:
@@ -79,6 +85,14 @@ class InstanceNetwork(dict):
         Old IP expiration time.
         """
         return pulumi.get(self, "expire_time")
+
+    @_builtins.property
+    @pulumi.getter(name="isSsl")
+    def is_ssl(self) -> Optional[_builtins.bool]:
+        """
+        Whether it is an SSL network.
+        """
+        return pulumi.get(self, "is_ssl")
 
     @_builtins.property
     @pulumi.getter

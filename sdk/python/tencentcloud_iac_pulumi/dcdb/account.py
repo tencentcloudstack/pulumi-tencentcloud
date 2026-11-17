@@ -277,21 +277,52 @@ class Account(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        account = tencentcloud.dcdb.Account("account",
-            instance_id="tdsqlshard-kkpoxvnv",
+        example = tencentcloud.dcdb.HourdbInstance("example",
+            instance_name="tf-example",
+            zones=[
+                "ap-guangzhou-6",
+                "ap-guangzhou-7",
+            ],
+            shard_memory=4,
+            shard_storage=100,
+            shard_node_count=2,
+            shard_count=2,
+            vpc_id="vpc-i5yyodl9",
+            subnet_id="subnet-hhi88a58",
+            security_group_id="sg-4z20n68d",
+            db_version_id="8.0",
+            resource_tags=[{
+                "tag_key": "tagKey",
+                "tag_value": "tagValue",
+            }])
+        example_account = tencentcloud.dcdb.Account("example",
+            instance_id=example.id,
             user_name="mysql",
             host="127.0.0.1",
-            password="===password===",
+            password="Password@2026",
             read_only=0,
             description="this is a test account",
             max_user_connections=10)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateAccount](https://www.tencentcloud.com/document/api/1042/34449)
+        * Read: [DescribeAccounts](https://www.tencentcloud.com/document/api/1042/34446)
+        * Update:
+          - [ModifyAccountDescription](https://www.tencentcloud.com/document/api/1042/34435)
+          - [ResetAccountPassword](https://www.tencentcloud.com/document/api/1042/34430)
+        * Delete:
+          - [DeleteAccount](https://www.tencentcloud.com/document/api/1042/34448)
+          - [DescribeAccounts](https://www.tencentcloud.com/document/api/1042/34446)
+
         ## Import
 
-        dcdb account can be imported using the id, e.g.
+        dcdb account can be imported using the instanceId#userName, e.g.
         ```sh
-        $ pulumi import tencentcloud:Dcdb/account:Account account account_id
+        $ pulumi import tencentcloud:Dcdb/account:Account example tdsqlshard-0tyhkwkzj5#mysql
         ```
 
 
@@ -320,21 +351,52 @@ class Account(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        account = tencentcloud.dcdb.Account("account",
-            instance_id="tdsqlshard-kkpoxvnv",
+        example = tencentcloud.dcdb.HourdbInstance("example",
+            instance_name="tf-example",
+            zones=[
+                "ap-guangzhou-6",
+                "ap-guangzhou-7",
+            ],
+            shard_memory=4,
+            shard_storage=100,
+            shard_node_count=2,
+            shard_count=2,
+            vpc_id="vpc-i5yyodl9",
+            subnet_id="subnet-hhi88a58",
+            security_group_id="sg-4z20n68d",
+            db_version_id="8.0",
+            resource_tags=[{
+                "tag_key": "tagKey",
+                "tag_value": "tagValue",
+            }])
+        example_account = tencentcloud.dcdb.Account("example",
+            instance_id=example.id,
             user_name="mysql",
             host="127.0.0.1",
-            password="===password===",
+            password="Password@2026",
             read_only=0,
             description="this is a test account",
             max_user_connections=10)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateAccount](https://www.tencentcloud.com/document/api/1042/34449)
+        * Read: [DescribeAccounts](https://www.tencentcloud.com/document/api/1042/34446)
+        * Update:
+          - [ModifyAccountDescription](https://www.tencentcloud.com/document/api/1042/34435)
+          - [ResetAccountPassword](https://www.tencentcloud.com/document/api/1042/34430)
+        * Delete:
+          - [DeleteAccount](https://www.tencentcloud.com/document/api/1042/34448)
+          - [DescribeAccounts](https://www.tencentcloud.com/document/api/1042/34446)
+
         ## Import
 
-        dcdb account can be imported using the id, e.g.
+        dcdb account can be imported using the instanceId#userName, e.g.
         ```sh
-        $ pulumi import tencentcloud:Dcdb/account:Account account account_id
+        $ pulumi import tencentcloud:Dcdb/account:Account example tdsqlshard-0tyhkwkzj5#mysql
         ```
 
 

@@ -177,6 +177,12 @@ def get_resource_package_list(order_bies: Optional[Sequence[_builtins.str]] = No
         order_direction="DESC")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeResourcePackageList](https://www.tencentcloud.com/document/api/1098/55897)
+
 
     :param Sequence[_builtins.str] order_bies: Sorting conditions supported: startTime - effective time, expireTime - expiration time, packageUsedSpec - usage capacity, and packageTotalSpec - total storage capacity. Arrange in array order;.
     :param _builtins.str order_direction: Sort by, DESC Descending, ASC Ascending.
@@ -236,6 +242,12 @@ def get_resource_package_list_output(order_bies: pulumi.Input[Optional[Optional[
         order_bies=["startTime"],
         order_direction="DESC")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeResourcePackageList](https://www.tencentcloud.com/document/api/1098/55897)
 
 
     :param Sequence[_builtins.str] order_bies: Sorting conditions supported: startTime - effective time, expireTime - expiration time, packageUsedSpec - usage capacity, and packageTotalSpec - total storage capacity. Arrange in array order;.

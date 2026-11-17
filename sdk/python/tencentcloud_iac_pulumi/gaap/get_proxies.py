@@ -155,6 +155,12 @@ def get_proxies(access_region: Optional[_builtins.str] = None,
     foo = tencentcloud.gaap.get_proxies_output(ids=[foo_proxy.id])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeProxies](https://www.tencentcloud.com/document/api/608/33101)
+
 
     :param _builtins.str access_region: Access region of the GAAP proxy to be queried. Conflict with `ids`.
     :param Sequence[_builtins.str] ids: ID of the GAAP proxy to be queried. Conflict with `project_id`, `access_region` and `realserver_region`.
@@ -207,6 +213,12 @@ def get_proxies_output(access_region: pulumi.Input[Optional[Optional[_builtins.s
         realserver_region="NorthChina")
     foo = tencentcloud.gaap.get_proxies_output(ids=[foo_proxy.id])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeProxies](https://www.tencentcloud.com/document/api/608/33101)
 
 
     :param _builtins.str access_region: Access region of the GAAP proxy to be queried. Conflict with `ids`.

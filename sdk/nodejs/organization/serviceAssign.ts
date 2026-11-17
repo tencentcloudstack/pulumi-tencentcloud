@@ -45,6 +45,14 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateOrgServiceAssign](https://www.tencentcloud.com/document/api/1031/63262)
+ * * Read: [ListOrgServiceAssignMember](https://www.tencentcloud.com/document/api/1031/63260)
+ * * Delete: [DeleteOrgServiceAssign](https://www.tencentcloud.com/document/api/1031/63261)
+ *
  * ## Import
  *
  * organization service assign can be imported using the id, e.g.

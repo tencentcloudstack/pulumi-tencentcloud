@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTlsVersion](https://www.tencentcloud.com/document/api/627/64563)
         /// </summary>
         public static Task<GetTlsVersionsResult> InvokeAsync(GetTlsVersionsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetTlsVersionsResult>("tencentcloud:Waf/getTlsVersions:getTlsVersions", args ?? new GetTlsVersionsArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTlsVersion](https://www.tencentcloud.com/document/api/627/64563)
         /// </summary>
         public static Output<GetTlsVersionsResult> Invoke(GetTlsVersionsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetTlsVersionsResult>("tencentcloud:Waf/getTlsVersions:getTlsVersions", args ?? new GetTlsVersionsInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTlsVersion](https://www.tencentcloud.com/document/api/627/64563)
         /// </summary>
         public static Output<GetTlsVersionsResult> Invoke(GetTlsVersionsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetTlsVersionsResult>("tencentcloud:Waf/getTlsVersions:getTlsVersions", args ?? new GetTlsVersionsInvokeArgs(), options.WithDefaults());

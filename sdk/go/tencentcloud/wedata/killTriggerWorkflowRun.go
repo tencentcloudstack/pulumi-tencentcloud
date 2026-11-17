@@ -63,6 +63,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [KillTriggerWorkflowRuns](https://www.tencentcloud.com/document/api/1174/77887)
 type KillTriggerWorkflowRun struct {
 	pulumi.CustomResourceState
 

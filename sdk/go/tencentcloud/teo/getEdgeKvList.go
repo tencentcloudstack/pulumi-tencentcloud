@@ -97,6 +97,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [EdgeKVList](https://www.tencentcloud.com/document/api/1145/78825)
 func GetEdgeKvList(ctx *pulumi.Context, args *GetEdgeKvListArgs, opts ...pulumi.InvokeOption) (*GetEdgeKvListResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetEdgeKvListResult

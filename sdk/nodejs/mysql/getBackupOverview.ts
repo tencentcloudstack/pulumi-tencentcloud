@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *     product: "mysql",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeBackupOverview](https://www.tencentcloud.com/document/api/236/35196)
  */
 export function getBackupOverview(args: GetBackupOverviewArgs, opts?: pulumi.InvokeOptions): Promise<GetBackupOverviewResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -92,6 +98,12 @@ export interface GetBackupOverviewResult {
  *     product: "mysql",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeBackupOverview](https://www.tencentcloud.com/document/api/236/35196)
  */
 export function getBackupOverviewOutput(args: GetBackupOverviewOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetBackupOverviewResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

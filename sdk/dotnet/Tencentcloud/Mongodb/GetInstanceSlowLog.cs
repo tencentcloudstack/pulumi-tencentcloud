@@ -36,6 +36,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSlowLogs](https://www.tencentcloud.com/document/api/240/36929)
         /// </summary>
         public static Task<GetInstanceSlowLogResult> InvokeAsync(GetInstanceSlowLogArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceSlowLogResult>("tencentcloud:Mongodb/getInstanceSlowLog:getInstanceSlowLog", args ?? new GetInstanceSlowLogArgs(), options.WithDefaults());
@@ -64,6 +70,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSlowLogs](https://www.tencentcloud.com/document/api/240/36929)
         /// </summary>
         public static Output<GetInstanceSlowLogResult> Invoke(GetInstanceSlowLogInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceSlowLogResult>("tencentcloud:Mongodb/getInstanceSlowLog:getInstanceSlowLog", args ?? new GetInstanceSlowLogInvokeArgs(), options.WithDefaults());
@@ -92,6 +104,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSlowLogs](https://www.tencentcloud.com/document/api/240/36929)
         /// </summary>
         public static Output<GetInstanceSlowLogResult> Invoke(GetInstanceSlowLogInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceSlowLogResult>("tencentcloud:Mongodb/getInstanceSlowLog:getInstanceSlowLog", args ?? new GetInstanceSlowLogInvokeArgs(), options.WithDefaults());

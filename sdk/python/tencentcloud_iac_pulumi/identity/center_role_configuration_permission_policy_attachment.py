@@ -233,6 +233,14 @@ class CenterRoleConfigurationPermissionPolicyAttachment(pulumi.CustomResource):
             role_policy_id=int(xxxxxx))
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AddPermissionPolicyToRoleConfiguration](https://www.tencentcloud.com/document/api/1031/63603)
+        * Read: [ListPermissionPoliciesInRoleConfiguration](https://www.tencentcloud.com/document/api/1031/63599)
+        * Delete: [RemovePermissionPolicyFromRoleConfiguration](https://www.tencentcloud.com/document/api/1031/63596)
+
         ## Import
 
         organization identity_center_role_configuration_permission_policy_attachment can be imported using the id, e.g.
@@ -269,6 +277,14 @@ class CenterRoleConfigurationPermissionPolicyAttachment(pulumi.CustomResource):
             role_configuration_id="rc-xxxxxx",
             role_policy_id=int(xxxxxx))
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AddPermissionPolicyToRoleConfiguration](https://www.tencentcloud.com/document/api/1031/63603)
+        * Read: [ListPermissionPoliciesInRoleConfiguration](https://www.tencentcloud.com/document/api/1031/63599)
+        * Delete: [RemovePermissionPolicyFromRoleConfiguration](https://www.tencentcloud.com/document/api/1031/63596)
 
         ## Import
 

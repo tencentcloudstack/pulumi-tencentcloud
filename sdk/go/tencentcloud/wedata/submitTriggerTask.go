@@ -41,6 +41,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [SubmitTriggerTask](https://www.tencentcloud.com/document/api/1174/77915)
 type SubmitTriggerTask struct {
 	pulumi.CustomResourceState
 

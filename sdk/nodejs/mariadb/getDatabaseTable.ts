@@ -21,6 +21,12 @@ import * as utilities from "../utilities";
  *     table: "server_cost",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDatabaseTable](https://www.tencentcloud.com/document/api/237/45258)
  */
 export function getDatabaseTable(args: GetDatabaseTableArgs, opts?: pulumi.InvokeOptions): Promise<GetDatabaseTableResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -86,6 +92,12 @@ export interface GetDatabaseTableResult {
  *     table: "server_cost",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDatabaseTable](https://www.tencentcloud.com/document/api/237/45258)
  */
 export function getDatabaseTableOutput(args: GetDatabaseTableOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDatabaseTableResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

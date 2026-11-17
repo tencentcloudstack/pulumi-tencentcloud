@@ -22,6 +22,12 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeTargetGroupList](https://www.tencentcloud.com/document/api/214/33827)
  */
 export function getTargetGroupList(args?: GetTargetGroupListArgs, opts?: pulumi.InvokeOptions): Promise<GetTargetGroupListResult> {
     args = args || {};
@@ -83,6 +89,12 @@ export interface GetTargetGroupListResult {
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeTargetGroupList](https://www.tencentcloud.com/document/api/214/33827)
  */
 export function getTargetGroupListOutput(args?: GetTargetGroupListOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetTargetGroupListResult> {
     args = args || {};

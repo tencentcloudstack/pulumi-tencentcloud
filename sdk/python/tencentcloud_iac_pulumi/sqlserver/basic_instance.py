@@ -403,6 +403,7 @@ class _BasicInstanceState:
                  disk_encrypt_flag: pulumi.Input[Optional[_builtins.int]] = None,
                  dns_pod_domain: pulumi.Input[Optional[_builtins.str]] = None,
                  engine_version: pulumi.Input[Optional[_builtins.str]] = None,
+                 instance_id: pulumi.Input[Optional[_builtins.str]] = None,
                  machine_type: pulumi.Input[Optional[_builtins.str]] = None,
                  maintenance_start_time: pulumi.Input[Optional[_builtins.str]] = None,
                  maintenance_time_span: pulumi.Input[Optional[_builtins.int]] = None,
@@ -418,6 +419,7 @@ class _BasicInstanceState:
                  tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
                  tgw_wan_vport: pulumi.Input[Optional[_builtins.int]] = None,
                  time_zone: pulumi.Input[Optional[_builtins.str]] = None,
+                 uid: pulumi.Input[Optional[_builtins.str]] = None,
                  vip: pulumi.Input[Optional[_builtins.str]] = None,
                  voucher_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
                  vpc_id: pulumi.Input[Optional[_builtins.str]] = None,
@@ -435,6 +437,7 @@ class _BasicInstanceState:
         :param pulumi.Input[_builtins.int] disk_encrypt_flag: Disk encryption flag. `0` - Disabled (default), `1` - Enabled. Disk encryption cannot be changed after instance creation.
         :param pulumi.Input[_builtins.str] dns_pod_domain: Internet address domain name.
         :param pulumi.Input[_builtins.str] engine_version: Version of the SQL Server basic database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
+        :param pulumi.Input[_builtins.str] instance_id: Instance ID.
         :param pulumi.Input[_builtins.str] machine_type: The host type of the purchased instance, `CLOUD_PREMIUM` for virtual machine high-performance cloud disk, `CLOUD_SSD` for virtual machine SSD cloud disk, `CLOUD_HSSD` for virtual machine enhanced cloud disk, `CLOUD_BSSD` for virtual machine general purpose SSD cloud disk.
         :param pulumi.Input[_builtins.str] maintenance_start_time: Start time of the maintenance in one day, format like `HH:mm`.
         :param pulumi.Input[_builtins.int] maintenance_time_span: The timespan of maintenance in one day, unit is hour.
@@ -450,6 +453,7 @@ class _BasicInstanceState:
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: The tags of the SQL Server basic instance.
         :param pulumi.Input[_builtins.int] tgw_wan_vport: External port number.
         :param pulumi.Input[_builtins.str] time_zone: System timezone for the SQL Server instance. Default is `China Standard Time`. This setting cannot be changed after creation.
+        :param pulumi.Input[_builtins.str] uid: Unique UID of the instance.
         :param pulumi.Input[_builtins.str] vip: IP for private access.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] voucher_ids: An array of voucher IDs, currently only one can be used for a single order.
         :param pulumi.Input[_builtins.str] vpc_id: ID of VPC.
@@ -475,6 +479,8 @@ class _BasicInstanceState:
             pulumi.set(__self__, "dns_pod_domain", dns_pod_domain)
         if engine_version is not None:
             pulumi.set(__self__, "engine_version", engine_version)
+        if instance_id is not None:
+            pulumi.set(__self__, "instance_id", instance_id)
         if machine_type is not None:
             pulumi.set(__self__, "machine_type", machine_type)
         if maintenance_start_time is not None:
@@ -505,6 +511,8 @@ class _BasicInstanceState:
             pulumi.set(__self__, "tgw_wan_vport", tgw_wan_vport)
         if time_zone is not None:
             pulumi.set(__self__, "time_zone", time_zone)
+        if uid is not None:
+            pulumi.set(__self__, "uid", uid)
         if vip is not None:
             pulumi.set(__self__, "vip", vip)
         if voucher_ids is not None:
@@ -633,6 +641,18 @@ class _BasicInstanceState:
     @engine_version.setter
     def engine_version(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "engine_version", value)
+
+    @_builtins.property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Instance ID.
+        """
+        return pulumi.get(self, "instance_id")
+
+    @instance_id.setter
+    def instance_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "instance_id", value)
 
     @_builtins.property
     @pulumi.getter(name="machineType")
@@ -816,6 +836,18 @@ class _BasicInstanceState:
 
     @_builtins.property
     @pulumi.getter
+    def uid(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Unique UID of the instance.
+        """
+        return pulumi.get(self, "uid")
+
+    @uid.setter
+    def uid(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "uid", value)
+
+    @_builtins.property
+    @pulumi.getter
     def vip(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
         IP for private access.
@@ -979,6 +1011,37 @@ class BasicInstance(pulumi.CustomResource):
             time_zone="China Standard Time")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateBasicDBInstances](https://www.tencentcloud.com/document/api/238/66344)
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+          - [DescribeOrders](https://www.tencentcloud.com/document/api/238/32134)
+          - [ModifyDBInstanceName](https://www.tencentcloud.com/document/api/238/32104)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+          - [DescribeDBInstancesAttribute](https://www.tencentcloud.com/document/api/238/54811)
+          - [DescribeDBSecurityGroups](https://www.tencentcloud.com/document/api/238/72730)
+          - [DescribeMaintenanceSpan](https://www.tencentcloud.com/document/api/238/69303)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [AssociateSecurityGroups](https://www.tencentcloud.com/document/api/238/72731)
+          - [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+          - [DisassociateSecurityGroups](https://www.tencentcloud.com/document/api/238/72728)
+          - [ModifyDBInstanceName](https://www.tencentcloud.com/document/api/238/32104)
+          - [ModifyDBInstanceProject](https://www.tencentcloud.com/document/api/238/32103)
+          - [ModifyDBInstanceRenewFlag](https://www.tencentcloud.com/search/?wd=ModifyDBInstanceRenewFlag&type=document&lang=en)
+          - [ModifyMaintenanceSpan](https://www.tencentcloud.com/document/api/238/72749)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+          - [UpgradeDBInstance](https://www.tencentcloud.com/document/api/238/32094)
+        * Delete:
+          - [DeleteDBInstance](https://www.tencentcloud.com/document/api/238/72759)
+          - [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+          - [TerminateDBInstance](https://www.tencentcloud.com/document/api/238/34685)
+
         ## Import
 
         SQL Server basic instance can be imported using the id, e.g.
@@ -1106,6 +1169,37 @@ class BasicInstance(pulumi.CustomResource):
             time_zone="China Standard Time")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateBasicDBInstances](https://www.tencentcloud.com/document/api/238/66344)
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+          - [DescribeOrders](https://www.tencentcloud.com/document/api/238/32134)
+          - [ModifyDBInstanceName](https://www.tencentcloud.com/document/api/238/32104)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+          - [DescribeDBInstancesAttribute](https://www.tencentcloud.com/document/api/238/54811)
+          - [DescribeDBSecurityGroups](https://www.tencentcloud.com/document/api/238/72730)
+          - [DescribeMaintenanceSpan](https://www.tencentcloud.com/document/api/238/69303)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [AssociateSecurityGroups](https://www.tencentcloud.com/document/api/238/72731)
+          - [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+          - [DisassociateSecurityGroups](https://www.tencentcloud.com/document/api/238/72728)
+          - [ModifyDBInstanceName](https://www.tencentcloud.com/document/api/238/32104)
+          - [ModifyDBInstanceProject](https://www.tencentcloud.com/document/api/238/32103)
+          - [ModifyDBInstanceRenewFlag](https://www.tencentcloud.com/search/?wd=ModifyDBInstanceRenewFlag&type=document&lang=en)
+          - [ModifyMaintenanceSpan](https://www.tencentcloud.com/document/api/238/72749)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+          - [UpgradeDBInstance](https://www.tencentcloud.com/document/api/238/32094)
+        * Delete:
+          - [DeleteDBInstance](https://www.tencentcloud.com/document/api/238/72759)
+          - [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+          - [TerminateDBInstance](https://www.tencentcloud.com/document/api/238/34685)
+
         ## Import
 
         SQL Server basic instance can be imported using the id, e.g.
@@ -1195,8 +1289,10 @@ class BasicInstance(pulumi.CustomResource):
             __props__.__dict__["vpc_id"] = vpc_id
             __props__.__dict__["create_time"] = None
             __props__.__dict__["dns_pod_domain"] = None
+            __props__.__dict__["instance_id"] = None
             __props__.__dict__["status"] = None
             __props__.__dict__["tgw_wan_vport"] = None
+            __props__.__dict__["uid"] = None
             __props__.__dict__["vip"] = None
             __props__.__dict__["vport"] = None
         super(BasicInstance, __self__).__init__(
@@ -1219,6 +1315,7 @@ class BasicInstance(pulumi.CustomResource):
             disk_encrypt_flag: pulumi.Input[Optional[_builtins.int]] = None,
             dns_pod_domain: pulumi.Input[Optional[_builtins.str]] = None,
             engine_version: pulumi.Input[Optional[_builtins.str]] = None,
+            instance_id: pulumi.Input[Optional[_builtins.str]] = None,
             machine_type: pulumi.Input[Optional[_builtins.str]] = None,
             maintenance_start_time: pulumi.Input[Optional[_builtins.str]] = None,
             maintenance_time_span: pulumi.Input[Optional[_builtins.int]] = None,
@@ -1234,6 +1331,7 @@ class BasicInstance(pulumi.CustomResource):
             tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
             tgw_wan_vport: pulumi.Input[Optional[_builtins.int]] = None,
             time_zone: pulumi.Input[Optional[_builtins.str]] = None,
+            uid: pulumi.Input[Optional[_builtins.str]] = None,
             vip: pulumi.Input[Optional[_builtins.str]] = None,
             voucher_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
             vpc_id: pulumi.Input[Optional[_builtins.str]] = None,
@@ -1255,6 +1353,7 @@ class BasicInstance(pulumi.CustomResource):
         :param pulumi.Input[_builtins.int] disk_encrypt_flag: Disk encryption flag. `0` - Disabled (default), `1` - Enabled. Disk encryption cannot be changed after instance creation.
         :param pulumi.Input[_builtins.str] dns_pod_domain: Internet address domain name.
         :param pulumi.Input[_builtins.str] engine_version: Version of the SQL Server basic database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
+        :param pulumi.Input[_builtins.str] instance_id: Instance ID.
         :param pulumi.Input[_builtins.str] machine_type: The host type of the purchased instance, `CLOUD_PREMIUM` for virtual machine high-performance cloud disk, `CLOUD_SSD` for virtual machine SSD cloud disk, `CLOUD_HSSD` for virtual machine enhanced cloud disk, `CLOUD_BSSD` for virtual machine general purpose SSD cloud disk.
         :param pulumi.Input[_builtins.str] maintenance_start_time: Start time of the maintenance in one day, format like `HH:mm`.
         :param pulumi.Input[_builtins.int] maintenance_time_span: The timespan of maintenance in one day, unit is hour.
@@ -1270,6 +1369,7 @@ class BasicInstance(pulumi.CustomResource):
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: The tags of the SQL Server basic instance.
         :param pulumi.Input[_builtins.int] tgw_wan_vport: External port number.
         :param pulumi.Input[_builtins.str] time_zone: System timezone for the SQL Server instance. Default is `China Standard Time`. This setting cannot be changed after creation.
+        :param pulumi.Input[_builtins.str] uid: Unique UID of the instance.
         :param pulumi.Input[_builtins.str] vip: IP for private access.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] voucher_ids: An array of voucher IDs, currently only one can be used for a single order.
         :param pulumi.Input[_builtins.str] vpc_id: ID of VPC.
@@ -1289,6 +1389,7 @@ class BasicInstance(pulumi.CustomResource):
         __props__.__dict__["disk_encrypt_flag"] = disk_encrypt_flag
         __props__.__dict__["dns_pod_domain"] = dns_pod_domain
         __props__.__dict__["engine_version"] = engine_version
+        __props__.__dict__["instance_id"] = instance_id
         __props__.__dict__["machine_type"] = machine_type
         __props__.__dict__["maintenance_start_time"] = maintenance_start_time
         __props__.__dict__["maintenance_time_span"] = maintenance_time_span
@@ -1304,6 +1405,7 @@ class BasicInstance(pulumi.CustomResource):
         __props__.__dict__["tags"] = tags
         __props__.__dict__["tgw_wan_vport"] = tgw_wan_vport
         __props__.__dict__["time_zone"] = time_zone
+        __props__.__dict__["uid"] = uid
         __props__.__dict__["vip"] = vip
         __props__.__dict__["voucher_ids"] = voucher_ids
         __props__.__dict__["vpc_id"] = vpc_id
@@ -1389,6 +1491,14 @@ class BasicInstance(pulumi.CustomResource):
         Version of the SQL Server basic database engine. Allowed values are `2008R2`(SQL Server 2008 Enterprise), `2012SP3`(SQL Server 2012 Enterprise), `2016SP1` (SQL Server 2016 Enterprise), `201602`(SQL Server 2016 Standard) and `2017`(SQL Server 2017 Enterprise). Default is `2008R2`.
         """
         return pulumi.get(self, "engine_version")
+
+    @_builtins.property
+    @pulumi.getter(name="instanceId")
+    def instance_id(self) -> pulumi.Output[_builtins.str]:
+        """
+        Instance ID.
+        """
+        return pulumi.get(self, "instance_id")
 
     @_builtins.property
     @pulumi.getter(name="machineType")
@@ -1509,6 +1619,14 @@ class BasicInstance(pulumi.CustomResource):
         System timezone for the SQL Server instance. Default is `China Standard Time`. This setting cannot be changed after creation.
         """
         return pulumi.get(self, "time_zone")
+
+    @_builtins.property
+    @pulumi.getter
+    def uid(self) -> pulumi.Output[_builtins.str]:
+        """
+        Unique UID of the instance.
+        """
+        return pulumi.get(self, "uid")
 
     @_builtins.property
     @pulumi.getter

@@ -49,6 +49,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateInboundEndpoint](https://www.tencentcloud.com/search/?wd=CreateInboundEndpoint&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeInboundEndpointList](https://www.tencentcloud.com/search/?wd=DescribeInboundEndpointList&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyInboundEndpoint](https://www.tencentcloud.com/search/?wd=ModifyInboundEndpoint&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteInboundEndpoint](https://www.tencentcloud.com/search/?wd=DeleteInboundEndpoint&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:PrivateDns/inboundEndpoint:InboundEndpoint")]
     public partial class InboundEndpoint : global::Pulumi.CustomResource

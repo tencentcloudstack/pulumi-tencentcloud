@@ -168,6 +168,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Eb
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateConnection](https://www.tencentcloud.com/document/api/1108/45823)
+    /// * Read: [ListConnections](https://www.tencentcloud.com/document/api/1108/45821)
+    /// * Update: [UpdateConnection](https://www.tencentcloud.com/document/api/1108/45820)
+    /// * Delete: [DeleteConnection](https://www.tencentcloud.com/document/api/1108/45822)
+    /// 
     /// ## Import
     /// 
     /// eb EventConnector can be imported using the id, e.g.

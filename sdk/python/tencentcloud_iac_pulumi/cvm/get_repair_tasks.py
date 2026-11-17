@@ -225,6 +225,12 @@ def get_repair_tasks(aliases: Optional[Sequence[_builtins.str]] = None,
         order=1)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTaskInfo](https://www.tencentcloud.com/search/?wd=DescribeTaskInfo&type=document&lang=en)
+
 
     :param Sequence[_builtins.str] aliases: Instance name list (alias). Query tasks by instance names.
     :param _builtins.str end_date: Query end date, format: YYYY-MM-DD hh:mm:ss. Filter tasks created until this date.
@@ -312,6 +318,12 @@ def get_repair_tasks_output(aliases: pulumi.Input[Optional[Optional[Sequence[_bu
         order_field="CreateTime",
         order=1)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTaskInfo](https://www.tencentcloud.com/search/?wd=DescribeTaskInfo&type=document&lang=en)
 
 
     :param Sequence[_builtins.str] aliases: Instance name list (alias). Query tasks by instance names.

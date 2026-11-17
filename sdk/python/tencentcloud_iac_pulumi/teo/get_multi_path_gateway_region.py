@@ -98,6 +98,12 @@ def get_multi_path_gateway_region(result_output_file: Optional[_builtins.str] = 
     example = tencentcloud.teo.get_multi_path_gateway_region(zone_id="zone-2noqxz9b6klw")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeMultiPathGatewayRegions](https://www.tencentcloud.com/document/api/1145/72298)
+
 
     :param _builtins.str result_output_file: Used to save results.
     :param _builtins.str zone_id: Site ID.
@@ -129,6 +135,12 @@ def get_multi_path_gateway_region_output(result_output_file: pulumi.Input[Option
 
     example = tencentcloud.teo.get_multi_path_gateway_region(zone_id="zone-2noqxz9b6klw")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeMultiPathGatewayRegions](https://www.tencentcloud.com/document/api/1145/72298)
 
 
     :param _builtins.str result_output_file: Used to save results.

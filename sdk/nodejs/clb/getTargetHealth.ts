@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     loadBalancerIds: ["lb-5dnrkgry"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeTargetHealth](https://www.tencentcloud.com/document/api/214/33825)
  */
 export function getTargetHealth(args: GetTargetHealthArgs, opts?: pulumi.InvokeOptions): Promise<GetTargetHealthResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetTargetHealthResult {
  *     loadBalancerIds: ["lb-5dnrkgry"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeTargetHealth](https://www.tencentcloud.com/document/api/214/33825)
  */
 export function getTargetHealthOutput(args: GetTargetHealthOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetTargetHealthResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

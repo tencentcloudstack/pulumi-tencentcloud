@@ -114,6 +114,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
         /// </summary>
         public static Task<GetStoragesResult> InvokeAsync(GetStoragesArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetStoragesResult>("tencentcloud:Cbs/getStorages:getStorages", args ?? new GetStoragesArgs(), options.WithDefaults());
@@ -220,6 +226,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
         /// </summary>
         public static Output<GetStoragesResult> Invoke(GetStoragesInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetStoragesResult>("tencentcloud:Cbs/getStorages:getStorages", args ?? new GetStoragesInvokeArgs(), options.WithDefaults());
@@ -326,6 +338,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
         /// </summary>
         public static Output<GetStoragesResult> Invoke(GetStoragesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetStoragesResult>("tencentcloud:Cbs/getStorages:getStorages", args ?? new GetStoragesInvokeArgs(), options.WithDefaults());

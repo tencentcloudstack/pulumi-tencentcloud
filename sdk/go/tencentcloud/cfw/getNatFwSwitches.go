@@ -67,6 +67,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeNatFwSwitch](https://www.tencentcloud.com/search/?wd=DescribeNatFwSwitch&type=document&lang=en)
 func GetNatFwSwitches(ctx *pulumi.Context, args *GetNatFwSwitchesArgs, opts ...pulumi.InvokeOption) (*GetNatFwSwitchesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetNatFwSwitchesResult

@@ -171,6 +171,17 @@ class CustomizedConfigAttachment(pulumi.CustomResource):
             ])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AssociateCustomizedConfig](https://www.tencentcloud.com/document/api/214/74449)
+        * Read: [DescribeCustomizedConfigAssociateList](https://www.tencentcloud.com/document/api/214/42308)
+        * Update:
+          - [AssociateCustomizedConfig](https://www.tencentcloud.com/document/api/214/74449)
+          - [DisassociateCustomizedConfig](https://www.tencentcloud.com/document/api/214/74446)
+        * Delete: [DisassociateCustomizedConfig](https://www.tencentcloud.com/document/api/214/74446)
+
         ## Import
 
         CLB customized config attachment can be imported using the id, e.g.
@@ -253,6 +264,17 @@ class CustomizedConfigAttachment(pulumi.CustomResource):
                 },
             ])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AssociateCustomizedConfig](https://www.tencentcloud.com/document/api/214/74449)
+        * Read: [DescribeCustomizedConfigAssociateList](https://www.tencentcloud.com/document/api/214/42308)
+        * Update:
+          - [AssociateCustomizedConfig](https://www.tencentcloud.com/document/api/214/74449)
+          - [DisassociateCustomizedConfig](https://www.tencentcloud.com/document/api/214/74446)
+        * Delete: [DisassociateCustomizedConfig](https://www.tencentcloud.com/document/api/214/74446)
 
         ## Import
 

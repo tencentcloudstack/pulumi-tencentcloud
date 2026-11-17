@@ -20168,6 +20168,112 @@ func (o GetGrafanaPluginOverviewsPluginSetArrayOutput) Index(i pulumi.IntInput) 
 	}).(GetGrafanaPluginOverviewsPluginSetOutput)
 }
 
+type GetGrafanaVersionsVersion struct {
+	// Grafana version alias.
+	Alias string `pulumi:"alias"`
+	// Grafana version number.
+	Version string `pulumi:"version"`
+}
+
+// GetGrafanaVersionsVersionInput is an input type that accepts GetGrafanaVersionsVersionArgs and GetGrafanaVersionsVersionOutput values.
+// You can construct a concrete instance of `GetGrafanaVersionsVersionInput` via:
+//
+//	GetGrafanaVersionsVersionArgs{...}
+type GetGrafanaVersionsVersionInput interface {
+	pulumi.Input
+
+	ToGetGrafanaVersionsVersionOutput() GetGrafanaVersionsVersionOutput
+	ToGetGrafanaVersionsVersionOutputWithContext(context.Context) GetGrafanaVersionsVersionOutput
+}
+
+type GetGrafanaVersionsVersionArgs struct {
+	// Grafana version alias.
+	Alias pulumi.StringInput `pulumi:"alias"`
+	// Grafana version number.
+	Version pulumi.StringInput `pulumi:"version"`
+}
+
+func (GetGrafanaVersionsVersionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGrafanaVersionsVersion)(nil)).Elem()
+}
+
+func (i GetGrafanaVersionsVersionArgs) ToGetGrafanaVersionsVersionOutput() GetGrafanaVersionsVersionOutput {
+	return i.ToGetGrafanaVersionsVersionOutputWithContext(context.Background())
+}
+
+func (i GetGrafanaVersionsVersionArgs) ToGetGrafanaVersionsVersionOutputWithContext(ctx context.Context) GetGrafanaVersionsVersionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGrafanaVersionsVersionOutput)
+}
+
+// GetGrafanaVersionsVersionArrayInput is an input type that accepts GetGrafanaVersionsVersionArray and GetGrafanaVersionsVersionArrayOutput values.
+// You can construct a concrete instance of `GetGrafanaVersionsVersionArrayInput` via:
+//
+//	GetGrafanaVersionsVersionArray{ GetGrafanaVersionsVersionArgs{...} }
+type GetGrafanaVersionsVersionArrayInput interface {
+	pulumi.Input
+
+	ToGetGrafanaVersionsVersionArrayOutput() GetGrafanaVersionsVersionArrayOutput
+	ToGetGrafanaVersionsVersionArrayOutputWithContext(context.Context) GetGrafanaVersionsVersionArrayOutput
+}
+
+type GetGrafanaVersionsVersionArray []GetGrafanaVersionsVersionInput
+
+func (GetGrafanaVersionsVersionArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGrafanaVersionsVersion)(nil)).Elem()
+}
+
+func (i GetGrafanaVersionsVersionArray) ToGetGrafanaVersionsVersionArrayOutput() GetGrafanaVersionsVersionArrayOutput {
+	return i.ToGetGrafanaVersionsVersionArrayOutputWithContext(context.Background())
+}
+
+func (i GetGrafanaVersionsVersionArray) ToGetGrafanaVersionsVersionArrayOutputWithContext(ctx context.Context) GetGrafanaVersionsVersionArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetGrafanaVersionsVersionArrayOutput)
+}
+
+type GetGrafanaVersionsVersionOutput struct{ *pulumi.OutputState }
+
+func (GetGrafanaVersionsVersionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetGrafanaVersionsVersion)(nil)).Elem()
+}
+
+func (o GetGrafanaVersionsVersionOutput) ToGetGrafanaVersionsVersionOutput() GetGrafanaVersionsVersionOutput {
+	return o
+}
+
+func (o GetGrafanaVersionsVersionOutput) ToGetGrafanaVersionsVersionOutputWithContext(ctx context.Context) GetGrafanaVersionsVersionOutput {
+	return o
+}
+
+// Grafana version alias.
+func (o GetGrafanaVersionsVersionOutput) Alias() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGrafanaVersionsVersion) string { return v.Alias }).(pulumi.StringOutput)
+}
+
+// Grafana version number.
+func (o GetGrafanaVersionsVersionOutput) Version() pulumi.StringOutput {
+	return o.ApplyT(func(v GetGrafanaVersionsVersion) string { return v.Version }).(pulumi.StringOutput)
+}
+
+type GetGrafanaVersionsVersionArrayOutput struct{ *pulumi.OutputState }
+
+func (GetGrafanaVersionsVersionArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetGrafanaVersionsVersion)(nil)).Elem()
+}
+
+func (o GetGrafanaVersionsVersionArrayOutput) ToGetGrafanaVersionsVersionArrayOutput() GetGrafanaVersionsVersionArrayOutput {
+	return o
+}
+
+func (o GetGrafanaVersionsVersionArrayOutput) ToGetGrafanaVersionsVersionArrayOutputWithContext(ctx context.Context) GetGrafanaVersionsVersionArrayOutput {
+	return o
+}
+
+func (o GetGrafanaVersionsVersionArrayOutput) Index(i pulumi.IntInput) GetGrafanaVersionsVersionOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetGrafanaVersionsVersion {
+		return vs[0].([]GetGrafanaVersionsVersion)[vs[1].(int)]
+	}).(GetGrafanaVersionsVersionOutput)
+}
+
 type GetNoticeContentTmplsNoticeContentTmplList struct {
 	// Create time.
 	CreateTime int `pulumi:"createTime"`
@@ -24273,6 +24379,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetDataListArrayInput)(nil)).Elem(), GetDataListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetGrafanaPluginOverviewsPluginSetInput)(nil)).Elem(), GetGrafanaPluginOverviewsPluginSetArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetGrafanaPluginOverviewsPluginSetArrayInput)(nil)).Elem(), GetGrafanaPluginOverviewsPluginSetArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGrafanaVersionsVersionInput)(nil)).Elem(), GetGrafanaVersionsVersionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetGrafanaVersionsVersionArrayInput)(nil)).Elem(), GetGrafanaVersionsVersionArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetNoticeContentTmplsNoticeContentTmplListInput)(nil)).Elem(), GetNoticeContentTmplsNoticeContentTmplListArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetNoticeContentTmplsNoticeContentTmplListArrayInput)(nil)).Elem(), GetNoticeContentTmplsNoticeContentTmplListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetPolicyConditionsListInput)(nil)).Elem(), GetPolicyConditionsListArgs{})
@@ -24583,6 +24691,8 @@ func init() {
 	pulumi.RegisterOutputType(GetDataListArrayOutput{})
 	pulumi.RegisterOutputType(GetGrafanaPluginOverviewsPluginSetOutput{})
 	pulumi.RegisterOutputType(GetGrafanaPluginOverviewsPluginSetArrayOutput{})
+	pulumi.RegisterOutputType(GetGrafanaVersionsVersionOutput{})
+	pulumi.RegisterOutputType(GetGrafanaVersionsVersionArrayOutput{})
 	pulumi.RegisterOutputType(GetNoticeContentTmplsNoticeContentTmplListOutput{})
 	pulumi.RegisterOutputType(GetNoticeContentTmplsNoticeContentTmplListArrayOutput{})
 	pulumi.RegisterOutputType(GetPolicyConditionsListOutput{})

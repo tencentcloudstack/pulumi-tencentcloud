@@ -84,6 +84,12 @@ def get_network_account_type(result_output_file: Optional[_builtins.str] = None,
     network_account_type = tencentcloud.eip.get_network_account_type()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeNetworkAccountType](https://www.tencentcloud.com/search/?wd=DescribeNetworkAccountType&type=document&lang=en)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -109,6 +115,12 @@ def get_network_account_type_output(result_output_file: pulumi.Input[Optional[Op
 
     network_account_type = tencentcloud.eip.get_network_account_type()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeNetworkAccountType](https://www.tencentcloud.com/search/?wd=DescribeNetworkAccountType&type=document&lang=en)
 
 
     :param _builtins.str result_output_file: Used to save results.

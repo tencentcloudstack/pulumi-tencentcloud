@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Identity
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListGroups](https://www.tencentcloud.com/document/api/1031/63568)
         /// </summary>
         public static Task<GetCenterGroupsResult> InvokeAsync(GetCenterGroupsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetCenterGroupsResult>("tencentcloud:Identity/getCenterGroups:getCenterGroups", args ?? new GetCenterGroupsArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Identity
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListGroups](https://www.tencentcloud.com/document/api/1031/63568)
         /// </summary>
         public static Output<GetCenterGroupsResult> Invoke(GetCenterGroupsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetCenterGroupsResult>("tencentcloud:Identity/getCenterGroups:getCenterGroups", args ?? new GetCenterGroupsInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Identity
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListGroups](https://www.tencentcloud.com/document/api/1031/63568)
         /// </summary>
         public static Output<GetCenterGroupsResult> Invoke(GetCenterGroupsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetCenterGroupsResult>("tencentcloud:Identity/getCenterGroups:getCenterGroups", args ?? new GetCenterGroupsInvokeArgs(), options.WithDefaults());

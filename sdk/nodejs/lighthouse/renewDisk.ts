@@ -25,6 +25,14 @@ import * as utilities from "../utilities";
  *     autoVoucher: true,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeDisks](https://www.tencentcloud.com/document/api/1103/44573)
+ *   - [RenewDisks](https://www.tencentcloud.com/document/api/1103/57992)
  */
 export class RenewDisk extends pulumi.CustomResource {
     /**

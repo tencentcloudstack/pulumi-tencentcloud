@@ -225,6 +225,26 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateInstanceNew](https://www.tencentcloud.com/search/?wd=CreateInstanceNew&amp;type=document&amp;lang=en)
+    ///   - [DescribeInstance](https://www.tencentcloud.com/search/?wd=DescribeInstance&amp;type=document&amp;lang=en)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    /// * Read:
+    ///   - [DescribeInstancesNew](https://www.tencentcloud.com/search/?wd=DescribeInstancesNew&amp;type=document&amp;lang=en)
+    ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+    /// * Update:
+    ///   - [DescribeInstanceState](https://www.tencentcloud.com/search/?wd=DescribeInstanceState&amp;type=document&amp;lang=en)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    ///   - [ResizeDisk](https://www.tencentcloud.com/search/?wd=ResizeDisk&amp;type=document&amp;lang=en)
+    /// * Delete:
+    ///   - [DescribeInstance](https://www.tencentcloud.com/search/?wd=DescribeInstance&amp;type=document&amp;lang=en)
+    ///   - [DescribeInstancesNew](https://www.tencentcloud.com/search/?wd=DescribeInstancesNew&amp;type=document&amp;lang=en)
+    ///   - [DestroyInstance](https://www.tencentcloud.com/search/?wd=DestroyInstance&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// Clickhouse instance can be imported using the id, e.g.

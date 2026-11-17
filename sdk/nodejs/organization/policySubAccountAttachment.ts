@@ -20,6 +20,14 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [BindOrganizationMemberAuthAccount](https://www.tencentcloud.com/document/api/1031/52057)
+ * * Read: [DescribeOrganizationMemberAuthAccounts](https://www.tencentcloud.com/document/api/1031/52054)
+ * * Delete: [CancelOrganizationMemberAuthAccount](https://www.tencentcloud.com/document/api/1031/52056)
+ *
  * ## Import
  *
  * organization policySubAccountAttachment can be imported using the id, e.g.

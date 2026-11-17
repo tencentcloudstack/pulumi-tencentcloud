@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [ModifyDataEngineDescription](https://www.tencentcloud.com/document/api/1155/62650)
 type ModifyDataEngineDescriptionOperation struct {
 	pulumi.CustomResourceState
 

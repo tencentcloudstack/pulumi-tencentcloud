@@ -22,6 +22,12 @@ import * as utilities from "../utilities";
  *     clusterId: "cls-godovr32",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeClusters](https://www.tencentcloud.com/document/api/457/32025)
  */
 export function getClusters(args?: GetClustersArgs, opts?: pulumi.InvokeOptions): Promise<GetClustersResult> {
     args = args || {};
@@ -104,6 +110,12 @@ export interface GetClustersResult {
  *     clusterId: "cls-godovr32",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeClusters](https://www.tencentcloud.com/document/api/457/32025)
  */
 export function getClustersOutput(args?: GetClustersOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetClustersResult> {
     args = args || {};

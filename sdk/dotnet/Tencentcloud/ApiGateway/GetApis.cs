@@ -72,6 +72,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeApi](https://www.tencentcloud.com/search/?wd=DescribeApi&amp;type=document&amp;lang=en)
+        ///   - [DescribeApisStatus](https://www.tencentcloud.com/search/?wd=DescribeApisStatus&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetApisResult> InvokeAsync(GetApisArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetApisResult>("tencentcloud:ApiGateway/getApis:getApis", args ?? new GetApisArgs(), options.WithDefaults());
@@ -136,6 +144,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeApi](https://www.tencentcloud.com/search/?wd=DescribeApi&amp;type=document&amp;lang=en)
+        ///   - [DescribeApisStatus](https://www.tencentcloud.com/search/?wd=DescribeApisStatus&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetApisResult> Invoke(GetApisInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetApisResult>("tencentcloud:ApiGateway/getApis:getApis", args ?? new GetApisInvokeArgs(), options.WithDefaults());
@@ -200,6 +216,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeApi](https://www.tencentcloud.com/search/?wd=DescribeApi&amp;type=document&amp;lang=en)
+        ///   - [DescribeApisStatus](https://www.tencentcloud.com/search/?wd=DescribeApisStatus&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetApisResult> Invoke(GetApisInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetApisResult>("tencentcloud:ApiGateway/getApis:getApis", args ?? new GetApisInvokeArgs(), options.WithDefaults());

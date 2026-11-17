@@ -127,6 +127,12 @@ def get_task_result(is_transform_data_type: Optional[_builtins.bool] = None,
     example = tencentcloud.dlc.get_task_result(task_id="fdd9c5fa21ca11eca6fb5254006c64af")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTaskResult](https://www.tencentcloud.com/document/api/1155/49003)
+
 
     :param _builtins.bool is_transform_data_type: Whether to convert the data type.
     :param _builtins.int max_results: Maximum number of returned rows. Value range: 0-1,000. Default value: 1,000.
@@ -168,6 +174,12 @@ def get_task_result_output(is_transform_data_type: pulumi.Input[Optional[Optiona
 
     example = tencentcloud.dlc.get_task_result(task_id="fdd9c5fa21ca11eca6fb5254006c64af")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTaskResult](https://www.tencentcloud.com/document/api/1155/49003)
 
 
     :param _builtins.bool is_transform_data_type: Whether to convert the data type.

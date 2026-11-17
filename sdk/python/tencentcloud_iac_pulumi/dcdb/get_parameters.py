@@ -96,6 +96,12 @@ def get_parameters(instance_id: Optional[_builtins.str] = None,
     parameters = tencentcloud.dcdb.get_parameters(instance_id="your_instance_id")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBParameters](https://www.tencentcloud.com/document/api/1042/34444)
+
 
     :param _builtins.str instance_id: instance id.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_parameters_output(instance_id: pulumi.Input[Optional[_builtins.str]] = N
 
     parameters = tencentcloud.dcdb.get_parameters(instance_id="your_instance_id")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBParameters](https://www.tencentcloud.com/document/api/1042/34444)
 
 
     :param _builtins.str instance_id: instance id.

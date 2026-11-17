@@ -362,6 +362,17 @@ class Eip(pulumi.CustomResource):
             bind_resource_type="cvm")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [AssociateDDoSEipAddress](https://www.tencentcloud.com/document/api/1213/61409)
+          - [AssociateDDoSEipLoadBalancer](https://www.tencentcloud.com/document/api/1213/61408)
+          - [DescribeListBGPIPInstances](https://www.tencentcloud.com/document/api/1213/61348)
+        * Read: [DescribeListBGPIPInstances](https://www.tencentcloud.com/document/api/1213/61348)
+        * Delete: [DisassociateDDoSEipAddress](https://www.tencentcloud.com/document/api/1213/61407)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -393,6 +404,17 @@ class Eip(pulumi.CustomResource):
             bind_resource_region="hk",
             bind_resource_type="cvm")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [AssociateDDoSEipAddress](https://www.tencentcloud.com/document/api/1213/61409)
+          - [AssociateDDoSEipLoadBalancer](https://www.tencentcloud.com/document/api/1213/61408)
+          - [DescribeListBGPIPInstances](https://www.tencentcloud.com/document/api/1213/61348)
+        * Read: [DescribeListBGPIPInstances](https://www.tencentcloud.com/document/api/1213/61348)
+        * Delete: [DisassociateDDoSEipAddress](https://www.tencentcloud.com/document/api/1213/61407)
 
 
         :param str resource_name: The name of the resource.

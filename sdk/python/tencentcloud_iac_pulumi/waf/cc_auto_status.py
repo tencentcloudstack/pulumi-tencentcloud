@@ -135,6 +135,14 @@ class CcAutoStatus(pulumi.CustomResource):
             edition="sparta-waf")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [UpsertCCAutoStatus](https://www.tencentcloud.com/search/?wd=UpsertCCAutoStatus&type=document&lang=en)
+        * Read: [DescribeCCAutoStatus](https://www.tencentcloud.com/search/?wd=DescribeCCAutoStatus&type=document&lang=en)
+        * Delete: [UpsertCCAutoStatus](https://www.tencentcloud.com/search/?wd=UpsertCCAutoStatus&type=document&lang=en)
+
         ## Import
 
         waf cc_auto_status can be imported using the id, e.g.
@@ -168,6 +176,14 @@ class CcAutoStatus(pulumi.CustomResource):
             domain="www.demo.com",
             edition="sparta-waf")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [UpsertCCAutoStatus](https://www.tencentcloud.com/search/?wd=UpsertCCAutoStatus&type=document&lang=en)
+        * Read: [DescribeCCAutoStatus](https://www.tencentcloud.com/search/?wd=DescribeCCAutoStatus&type=document&lang=en)
+        * Delete: [UpsertCCAutoStatus](https://www.tencentcloud.com/search/?wd=UpsertCCAutoStatus&type=document&lang=en)
 
         ## Import
 

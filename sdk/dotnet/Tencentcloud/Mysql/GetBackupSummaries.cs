@@ -34,6 +34,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBackupSummaries](https://www.tencentcloud.com/document/api/236/35195)
         /// </summary>
         public static Task<GetBackupSummariesResult> InvokeAsync(GetBackupSummariesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetBackupSummariesResult>("tencentcloud:Mysql/getBackupSummaries:getBackupSummaries", args ?? new GetBackupSummariesArgs(), options.WithDefaults());
@@ -60,6 +66,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBackupSummaries](https://www.tencentcloud.com/document/api/236/35195)
         /// </summary>
         public static Output<GetBackupSummariesResult> Invoke(GetBackupSummariesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetBackupSummariesResult>("tencentcloud:Mysql/getBackupSummaries:getBackupSummaries", args ?? new GetBackupSummariesInvokeArgs(), options.WithDefaults());
@@ -86,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBackupSummaries](https://www.tencentcloud.com/document/api/236/35195)
         /// </summary>
         public static Output<GetBackupSummariesResult> Invoke(GetBackupSummariesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetBackupSummariesResult>("tencentcloud:Mysql/getBackupSummaries:getBackupSummaries", args ?? new GetBackupSummariesInvokeArgs(), options.WithDefaults());

@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeProductList](https://www.tencentcloud.com/search/?wd=DescribeProductList&type=document&lang=en)
 func GetProductNamespace(ctx *pulumi.Context, args *GetProductNamespaceArgs, opts ...pulumi.InvokeOption) (*GetProductNamespaceResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetProductNamespaceResult

@@ -46,6 +46,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeMultiPathGateways](https://www.tencentcloud.com/document/api/1145/72296)
 func GetMultiPathGateways(ctx *pulumi.Context, args *GetMultiPathGatewaysArgs, opts ...pulumi.InvokeOption) (*GetMultiPathGatewaysResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetMultiPathGatewaysResult

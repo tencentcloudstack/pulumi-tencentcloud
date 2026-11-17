@@ -15,6 +15,12 @@ import * as utilities from "../utilities";
  *
  * const flushOperation = new tencentcloud.dcdb.FlushBinlogOperation("flush_operation", {instanceId: dcdbId});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [FlushBinlog](https://www.tencentcloud.com/search/?wd=FlushBinlog&type=document&lang=en)
  */
 export class FlushBinlogOperation extends pulumi.CustomResource {
     /**

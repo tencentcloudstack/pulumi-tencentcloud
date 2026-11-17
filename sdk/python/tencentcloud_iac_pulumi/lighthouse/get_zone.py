@@ -107,6 +107,12 @@ def get_zone(order: Optional[_builtins.str] = None,
         order="ASC")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeZones](https://www.tencentcloud.com/document/api/1103/42467)
+
 
     :param _builtins.str order: Specifies how availability zones are listed. Valid values:
            - ASC: Ascending sort.
@@ -147,6 +153,12 @@ def get_zone_output(order: pulumi.Input[Optional[Optional[_builtins.str]]] = Non
     zone = tencentcloud.lighthouse.get_zone(order_field="ZONE",
         order="ASC")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeZones](https://www.tencentcloud.com/document/api/1103/42467)
 
 
     :param _builtins.str order: Specifies how availability zones are listed. Valid values:

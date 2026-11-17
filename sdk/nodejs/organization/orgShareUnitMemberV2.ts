@@ -39,6 +39,19 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [AddShareUnitMembers](https://www.tencentcloud.com/document/api/1031/68236)
+ * * Read: [DescribeShareUnitMembers](https://www.tencentcloud.com/document/api/1031/68230)
+ * * Update:
+ *   - [AddShareUnitMembers](https://www.tencentcloud.com/document/api/1031/68236)
+ *   - [DeleteShareUnitMembers](https://www.tencentcloud.com/document/api/1031/68233)
+ * * Delete:
+ *   - [DeleteShareUnitMembers](https://www.tencentcloud.com/document/api/1031/68233)
+ *   - [DescribeShareUnitMembers](https://www.tencentcloud.com/document/api/1031/68230)
+ *
  * ## Import
  *
  * Organization share unit member can be imported using the unitId#area, e.g.

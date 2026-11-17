@@ -86,6 +86,12 @@ def get_template_limits(result_output_file: Optional[_builtins.str] = None,
     template_limits = tencentcloud.vpc.get_template_limits()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTemplateLimits](https://www.tencentcloud.com/search/?wd=DescribeTemplateLimits&type=document&lang=en)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -111,6 +117,12 @@ def get_template_limits_output(result_output_file: pulumi.Input[Optional[Optiona
 
     template_limits = tencentcloud.vpc.get_template_limits()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTemplateLimits](https://www.tencentcloud.com/search/?wd=DescribeTemplateLimits&type=document&lang=en)
 
 
     :param _builtins.str result_output_file: Used to save results.

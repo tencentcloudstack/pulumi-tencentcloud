@@ -32,6 +32,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bh
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ModifyReconnectionSetting](https://www.tencentcloud.com/search/?wd=ModifyReconnectionSetting&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeSecuritySetting](https://www.tencentcloud.com/search/?wd=DescribeSecuritySetting&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyReconnectionSetting](https://www.tencentcloud.com/search/?wd=ModifyReconnectionSetting&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// BH reconnection setting config can be imported using the customId(like uuid or base64 string), e.g.

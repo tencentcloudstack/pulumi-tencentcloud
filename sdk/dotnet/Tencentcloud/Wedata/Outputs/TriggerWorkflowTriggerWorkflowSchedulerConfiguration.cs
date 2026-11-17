@@ -55,7 +55,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata.Outputs
         /// </summary>
         public readonly string? TriggerId;
         /// <summary>
-        /// Minimum trigger interval in file arrival mode (seconds).
+        /// This parameter is deprecated and will be removed in a future version. Minimum trigger interval in file arrival mode (seconds).
         /// </summary>
         public readonly int? TriggerMinimumIntervalSecond;
         /// <summary>
@@ -63,7 +63,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata.Outputs
         /// </summary>
         public readonly string TriggerMode;
         /// <summary>
-        /// Trigger wait time in file arrival mode (seconds).
+        /// This parameter is deprecated and will be removed in a future version. Trigger wait time in file arrival mode (seconds).
         /// </summary>
         public readonly int? TriggerWaitTimeSecond;
 

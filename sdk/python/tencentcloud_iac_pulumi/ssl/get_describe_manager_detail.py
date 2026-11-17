@@ -288,6 +288,12 @@ def get_describe_manager_detail(manager_id: Optional[_builtins.int] = None,
     describe_manager_detail = tencentcloud.ssl.get_describe_manager_detail(manager_id=int(""))
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeManagerDetail](https://www.tencentcloud.com/search/?wd=DescribeManagerDetail&type=document&lang=en)
+
 
     :param _builtins.int manager_id: Manager ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -333,6 +339,12 @@ def get_describe_manager_detail_output(manager_id: pulumi.Input[Optional[_builti
 
     describe_manager_detail = tencentcloud.ssl.get_describe_manager_detail(manager_id=int(""))
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeManagerDetail](https://www.tencentcloud.com/search/?wd=DescribeManagerDetail&type=document&lang=en)
 
 
     :param _builtins.int manager_id: Manager ID.

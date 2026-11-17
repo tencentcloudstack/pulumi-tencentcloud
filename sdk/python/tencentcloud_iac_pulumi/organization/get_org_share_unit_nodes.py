@@ -116,6 +116,12 @@ def get_org_share_unit_nodes(result_output_file: Optional[_builtins.str] = None,
         search_key="123456")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeShareUnitNodes](https://www.tencentcloud.com/document/api/1031/78347)
+
 
     :param _builtins.str result_output_file: Used to save results.
     :param _builtins.str search_key: Search key, supports searching by department ID.
@@ -159,6 +165,12 @@ def get_org_share_unit_nodes_output(result_output_file: pulumi.Input[Optional[Op
     example = tencentcloud.organization.get_org_share_unit_nodes(unit_id="us-xxxxx",
         search_key="123456")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeShareUnitNodes](https://www.tencentcloud.com/document/api/1031/78347)
 
 
     :param _builtins.str result_output_file: Used to save results.

@@ -21,6 +21,10 @@ func (m *module) Version() semver.Version {
 
 func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi.Resource, err error) {
 	switch typ {
+	case "tencentcloud:Config/aggregateCompliancePack:AggregateCompliancePack":
+		r = &AggregateCompliancePack{}
+	case "tencentcloud:Config/aggregator:Aggregator":
+		r = &Aggregator{}
 	case "tencentcloud:Config/alarmPolicy:AlarmPolicy":
 		r = &AlarmPolicy{}
 	case "tencentcloud:Config/compliancePack:CompliancePack":
@@ -35,6 +39,10 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &Rule{}
 	case "tencentcloud:Config/startConfigRuleEvaluationOperation:StartConfigRuleEvaluationOperation":
 		r = &StartConfigRuleEvaluationOperation{}
+	case "tencentcloud:Config/updateAggregateConfigDeliver:UpdateAggregateConfigDeliver":
+		r = &UpdateAggregateConfigDeliver{}
+	case "tencentcloud:Config/updateConfigDeliver:UpdateConfigDeliver":
+		r = &UpdateConfigDeliver{}
 	default:
 		return nil, fmt.Errorf("unknown resource type: %s", typ)
 	}
@@ -48,6 +56,16 @@ func init() {
 	if err != nil {
 		version = semver.Version{Major: 1}
 	}
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Config/aggregateCompliancePack",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Config/aggregator",
+		&module{version},
+	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Config/alarmPolicy",
@@ -81,6 +99,16 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Config/startConfigRuleEvaluationOperation",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Config/updateAggregateConfigDeliver",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Config/updateConfigDeliver",
 		&module{version},
 	)
 }

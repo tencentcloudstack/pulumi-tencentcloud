@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataPvUrlStatistics](https://www.tencentcloud.com/document/api/1131/45322)
         /// </summary>
         public static Task<GetPvUrlStatisticsResult> InvokeAsync(GetPvUrlStatisticsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetPvUrlStatisticsResult>("tencentcloud:Rum/getPvUrlStatistics:getPvUrlStatistics", args ?? new GetPvUrlStatisticsArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataPvUrlStatistics](https://www.tencentcloud.com/document/api/1131/45322)
         /// </summary>
         public static Output<GetPvUrlStatisticsResult> Invoke(GetPvUrlStatisticsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetPvUrlStatisticsResult>("tencentcloud:Rum/getPvUrlStatistics:getPvUrlStatistics", args ?? new GetPvUrlStatisticsInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataPvUrlStatistics](https://www.tencentcloud.com/document/api/1131/45322)
         /// </summary>
         public static Output<GetPvUrlStatisticsResult> Invoke(GetPvUrlStatisticsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetPvUrlStatisticsResult>("tencentcloud:Rum/getPvUrlStatistics:getPvUrlStatistics", args ?? new GetPvUrlStatisticsInvokeArgs(), options.WithDefaults());

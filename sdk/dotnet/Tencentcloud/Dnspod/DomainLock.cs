@@ -31,6 +31,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ModifyDomainLock](https://www.tencentcloud.com/document/api/1157/53850)
+    /// * Delete: [ModifyDomainUnlock](https://www.tencentcloud.com/document/api/1157/53848)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dnspod/domainLock:DomainLock")]
     public partial class DomainLock : global::Pulumi.CustomResource

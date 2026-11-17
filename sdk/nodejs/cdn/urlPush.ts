@@ -29,6 +29,12 @@ import * as utilities from "../utilities";
  *     redo: 1,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Read: [DescribePushTasks](https://www.tencentcloud.com/document/api/228/33603)
  */
 export class UrlPush extends pulumi.CustomResource {
     /**

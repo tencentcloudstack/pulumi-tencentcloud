@@ -174,6 +174,12 @@ def get_alarm_notices(group_ids: Optional[Sequence[_builtins.int]] = None,
         notice_ids=[])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAlarmNotices](https://www.tencentcloud.com/document/api/248/39300)
+
 
     :param Sequence[_builtins.int] group_ids: Receive group list.
     :param _builtins.str name: Alarm notification template name Used for fuzzy search.
@@ -233,6 +239,12 @@ def get_alarm_notices_output(group_ids: pulumi.Input[Optional[Optional[Sequence[
         group_ids=[],
         notice_ids=[])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAlarmNotices](https://www.tencentcloud.com/document/api/248/39300)
 
 
     :param Sequence[_builtins.int] group_ids: Receive group list.

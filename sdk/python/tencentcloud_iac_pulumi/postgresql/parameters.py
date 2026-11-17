@@ -150,6 +150,14 @@ class Parameters(pulumi.CustomResource):
             ])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyDBInstanceParameters](https://www.tencentcloud.com/document/api/409/43282)
+        * Read: [DescribeDBInstanceParameters](https://www.tencentcloud.com/document/api/409/43284)
+        * Update: [ModifyDBInstanceParameters](https://www.tencentcloud.com/document/api/409/43282)
+
         ## Import
 
         PostgreSQL parameters can be imported using the id, e.g.
@@ -211,6 +219,14 @@ class Parameters(pulumi.CustomResource):
                 },
             ])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyDBInstanceParameters](https://www.tencentcloud.com/document/api/409/43282)
+        * Read: [DescribeDBInstanceParameters](https://www.tencentcloud.com/document/api/409/43284)
+        * Update: [ModifyDBInstanceParameters](https://www.tencentcloud.com/document/api/409/43282)
 
         ## Import
 

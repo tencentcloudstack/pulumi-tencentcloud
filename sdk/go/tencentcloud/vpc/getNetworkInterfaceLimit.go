@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeNetworkInterfaceLimit](https://www.tencentcloud.com/document/api/215/34768)
 func GetNetworkInterfaceLimit(ctx *pulumi.Context, args *GetNetworkInterfaceLimitArgs, opts ...pulumi.InvokeOption) (*GetNetworkInterfaceLimitResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetNetworkInterfaceLimitResult

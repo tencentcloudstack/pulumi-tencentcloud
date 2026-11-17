@@ -21,6 +21,12 @@ import * as utilities from "../utilities";
  *     business: "bgpip",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeOverviewDDoSTrend](https://www.tencentcloud.com/search/?wd=DescribeOverviewDDoSTrend&type=document&lang=en)
  */
 export function getOverviewDdosTrend(args: GetOverviewDdosTrendArgs, opts?: pulumi.InvokeOptions): Promise<GetOverviewDdosTrendResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -106,6 +112,12 @@ export interface GetOverviewDdosTrendResult {
  *     business: "bgpip",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeOverviewDDoSTrend](https://www.tencentcloud.com/search/?wd=DescribeOverviewDDoSTrend&type=document&lang=en)
  */
 export function getOverviewDdosTrendOutput(args: GetOverviewDdosTrendOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetOverviewDdosTrendResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

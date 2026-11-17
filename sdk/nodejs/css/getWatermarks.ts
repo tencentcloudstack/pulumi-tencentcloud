@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const watermarks = tencentcloud.css.getWatermarks({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeLiveWatermarks](https://www.tencentcloud.com/document/api/267/30820)
  */
 export function getWatermarks(args?: GetWatermarksArgs, opts?: pulumi.InvokeOptions): Promise<GetWatermarksResult> {
     args = args || {};
@@ -61,6 +67,12 @@ export interface GetWatermarksResult {
  *
  * const watermarks = tencentcloud.css.getWatermarks({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeLiveWatermarks](https://www.tencentcloud.com/document/api/267/30820)
  */
 export function getWatermarksOutput(args?: GetWatermarksOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetWatermarksResult> {
     args = args || {};

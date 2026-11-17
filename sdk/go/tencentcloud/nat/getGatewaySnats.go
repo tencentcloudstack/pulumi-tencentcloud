@@ -44,6 +44,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeNatGatewaySourceIpTranslationNatRules](https://www.tencentcloud.com/document/api/215/39644)
 func GetGatewaySnats(ctx *pulumi.Context, args *GetGatewaySnatsArgs, opts ...pulumi.InvokeOption) (*GetGatewaySnatsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetGatewaySnatsResult

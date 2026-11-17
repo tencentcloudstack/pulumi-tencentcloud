@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     workSpaceId: "space-2idq8wbr",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [TriggerJobSavepoint](https://www.tencentcloud.com/search/?wd=TriggerJobSavepoint&type=document&lang=en)
  */
 export class TriggerJobSavepoint extends pulumi.CustomResource {
     /**

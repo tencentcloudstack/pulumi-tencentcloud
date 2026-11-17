@@ -14,13 +14,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
     public sealed class SecurityPolicyConfigSecurityConfigRateLimitConfigRateLimitTemplateRateLimitTemplateDetailGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Template action. Output-only.
+        /// Action. Valid values: `Skip`, `Scan`. Output-only.
         /// </summary>
         [Input("action")]
         public Input<string>? Action { get; set; }
 
         /// <summary>
-        /// ID of the resource.
+        /// Template ID. Output-only.
         /// </summary>
         [Input("id")]
         public Input<int>? Id { get; set; }

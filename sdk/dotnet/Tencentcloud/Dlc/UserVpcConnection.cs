@@ -55,6 +55,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateUserVpcConnection](https://www.tencentcloud.com/search/?wd=CreateUserVpcConnection&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeUserVpcConnection](https://www.tencentcloud.com/search/?wd=DescribeUserVpcConnection&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteUserVpcConnection](https://www.tencentcloud.com/search/?wd=DeleteUserVpcConnection&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dlc/userVpcConnection:UserVpcConnection")]
     public partial class UserVpcConnection : global::Pulumi.CustomResource

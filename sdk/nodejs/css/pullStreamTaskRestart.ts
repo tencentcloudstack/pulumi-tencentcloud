@@ -18,6 +18,14 @@ import * as utilities from "../utilities";
  *     operator: "tf-test",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeLivePullStreamTaskStatus](https://www.tencentcloud.com/search/?wd=DescribeLivePullStreamTaskStatus&type=document&lang=en)
+ *   - [RestartLivePullStreamTask](https://www.tencentcloud.com/document/api/267/56967)
  */
 export class PullStreamTaskRestart extends pulumi.CustomResource {
     /**

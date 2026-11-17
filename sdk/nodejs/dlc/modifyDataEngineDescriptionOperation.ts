@@ -18,6 +18,12 @@ import * as utilities from "../utilities";
  *     message: "message info.",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [ModifyDataEngineDescription](https://www.tencentcloud.com/document/api/1155/62650)
  */
 export class ModifyDataEngineDescriptionOperation extends pulumi.CustomResource {
     /**

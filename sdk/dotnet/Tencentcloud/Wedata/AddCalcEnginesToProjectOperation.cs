@@ -42,6 +42,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [AddCalcEnginesToProject](https://www.tencentcloud.com/document/api/1174/77878)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Wedata/addCalcEnginesToProjectOperation:AddCalcEnginesToProjectOperation")]
     public partial class AddCalcEnginesToProjectOperation : global::Pulumi.CustomResource

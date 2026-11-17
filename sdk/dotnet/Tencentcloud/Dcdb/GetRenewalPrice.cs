@@ -34,6 +34,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDCDBRenewalPrice](https://www.tencentcloud.com/search/?wd=DescribeDCDBRenewalPrice&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetRenewalPriceResult> InvokeAsync(GetRenewalPriceArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetRenewalPriceResult>("tencentcloud:Dcdb/getRenewalPrice:getRenewalPrice", args ?? new GetRenewalPriceArgs(), options.WithDefaults());
@@ -60,6 +66,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDCDBRenewalPrice](https://www.tencentcloud.com/search/?wd=DescribeDCDBRenewalPrice&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetRenewalPriceResult> Invoke(GetRenewalPriceInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetRenewalPriceResult>("tencentcloud:Dcdb/getRenewalPrice:getRenewalPrice", args ?? new GetRenewalPriceInvokeArgs(), options.WithDefaults());
@@ -86,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDCDBRenewalPrice](https://www.tencentcloud.com/search/?wd=DescribeDCDBRenewalPrice&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetRenewalPriceResult> Invoke(GetRenewalPriceInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetRenewalPriceResult>("tencentcloud:Dcdb/getRenewalPrice:getRenewalPrice", args ?? new GetRenewalPriceInvokeArgs(), options.WithDefaults());

@@ -282,6 +282,15 @@ class AutoSnapshotPolicy(pulumi.CustomResource):
             alive_days=7)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateAutoSnapshotPolicy](https://www.tencentcloud.com/document/api/582/50840)
+        * Read: [DescribeAutoSnapshotPolicies](https://www.tencentcloud.com/document/api/582/50838)
+        * Update: [UpdateAutoSnapshotPolicy](https://www.tencentcloud.com/document/api/582/50833)
+        * Delete: [DeleteAutoSnapshotPolicy](https://www.tencentcloud.com/document/api/582/50839)
+
         ## Import
 
         cfs auto snapshot policy can be imported using the id, e.g.
@@ -349,6 +358,15 @@ class AutoSnapshotPolicy(pulumi.CustomResource):
             hour="2,3",
             alive_days=7)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateAutoSnapshotPolicy](https://www.tencentcloud.com/document/api/582/50840)
+        * Read: [DescribeAutoSnapshotPolicies](https://www.tencentcloud.com/document/api/582/50838)
+        * Update: [UpdateAutoSnapshotPolicy](https://www.tencentcloud.com/document/api/582/50833)
+        * Delete: [DeleteAutoSnapshotPolicy](https://www.tencentcloud.com/document/api/582/50839)
 
         ## Import
 

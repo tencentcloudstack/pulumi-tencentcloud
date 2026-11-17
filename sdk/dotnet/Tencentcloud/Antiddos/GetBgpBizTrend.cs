@@ -37,6 +37,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBgpBizTrend](https://www.tencentcloud.com/document/api/1213/61343)
         /// </summary>
         public static Task<GetBgpBizTrendResult> InvokeAsync(GetBgpBizTrendArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetBgpBizTrendResult>("tencentcloud:Antiddos/getBgpBizTrend:getBgpBizTrend", args ?? new GetBgpBizTrendArgs(), options.WithDefaults());
@@ -66,6 +72,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBgpBizTrend](https://www.tencentcloud.com/document/api/1213/61343)
         /// </summary>
         public static Output<GetBgpBizTrendResult> Invoke(GetBgpBizTrendInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetBgpBizTrendResult>("tencentcloud:Antiddos/getBgpBizTrend:getBgpBizTrend", args ?? new GetBgpBizTrendInvokeArgs(), options.WithDefaults());
@@ -95,6 +107,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBgpBizTrend](https://www.tencentcloud.com/document/api/1213/61343)
         /// </summary>
         public static Output<GetBgpBizTrendResult> Invoke(GetBgpBizTrendInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetBgpBizTrendResult>("tencentcloud:Antiddos/getBgpBizTrend:getBgpBizTrend", args ?? new GetBgpBizTrendInvokeArgs(), options.WithDefaults());

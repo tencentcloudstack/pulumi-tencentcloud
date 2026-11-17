@@ -190,6 +190,12 @@ def get_slow_logs(dbs: Optional[Sequence[_builtins.str]] = None,
         end_time="%s")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSlowLogs](https://www.tencentcloud.com/document/api/1035/54781)
+
 
     :param Sequence[_builtins.str] dbs: database list.
     :param _builtins.str end_time: The deadline, such as 2019-09-11 10:13:14, the interval between the deadline and the start time is less than 7 days.
@@ -259,6 +265,12 @@ def get_slow_logs_output(dbs: pulumi.Input[Optional[Optional[Sequence[_builtins.
         start_time="%s",
         end_time="%s")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSlowLogs](https://www.tencentcloud.com/document/api/1035/54781)
 
 
     :param Sequence[_builtins.str] dbs: database list.

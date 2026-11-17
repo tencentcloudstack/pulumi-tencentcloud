@@ -45,6 +45,14 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [UpdateGrafanaWhiteList](https://www.tencentcloud.com/document/api/248/49741)
+// * Read: [DescribeGrafanaWhiteList](https://www.tencentcloud.com/document/api/248/49756)
+// * Update: [UpdateGrafanaWhiteList](https://www.tencentcloud.com/document/api/248/49741)
+//
 // ## Import
 //
 // monitor grafanaWhitelistConfig can be imported using the id, e.g.

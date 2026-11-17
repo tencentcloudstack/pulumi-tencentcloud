@@ -86,6 +86,12 @@ def get_instance(result_output_file: Optional[_builtins.str] = None,
     example = tencentcloud.products.get_instance()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeProducts](https://www.tencentcloud.com/document/api/1271/71926)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -111,6 +117,12 @@ def get_instance_output(result_output_file: pulumi.Input[Optional[Optional[_buil
 
     example = tencentcloud.products.get_instance()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeProducts](https://www.tencentcloud.com/document/api/1271/71926)
 
 
     :param _builtins.str result_output_file: Used to save results.

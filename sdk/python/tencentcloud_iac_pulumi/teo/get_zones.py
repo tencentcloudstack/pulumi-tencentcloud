@@ -130,6 +130,12 @@ def get_zones(direction: Optional[_builtins.str] = None,
     ])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeZones](https://www.tencentcloud.com/document/api/1145/50481)
+
 
     :param _builtins.str direction: Sort direction. If the field value is a number, sort by the numeric value. If the field value is text, sort by the ascill code. Values include: `asc`: From the smallest to largest; `desc`: From the largest to smallest. Default value: `desc`.
     :param Sequence[Union['GetZonesFilterArgs', 'GetZonesFilterArgsDict']] filters: Filter criteria. the maximum value of Filters.Values is 20. if this parameter is left empty, all site information authorized under the current appid will be returned. detailed filter criteria are as follows: zone-name: filter by site name; zone-id: filter by site id. the site id is in the format of zone-2noz78a8ev6k; status: filter by site status; tag-key: filter by tag key; tag-value: filter by tag value; alias-zone-name: filter by identical site identifier. when performing a fuzzy query, the fields that support filtering are named zone-name or alias-zone-name.
@@ -180,6 +186,12 @@ def get_zones_output(direction: pulumi.Input[Optional[Optional[_builtins.str]]] 
         },
     ])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeZones](https://www.tencentcloud.com/document/api/1145/50481)
 
 
     :param _builtins.str direction: Sort direction. If the field value is a number, sort by the numeric value. If the field value is text, sort by the ascill code. Values include: `asc`: From the smallest to largest; `desc`: From the largest to smallest. Default value: `desc`.

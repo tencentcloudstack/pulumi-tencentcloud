@@ -123,6 +123,12 @@ def get_scaling_policies(policy_name: Optional[_builtins.str] = None,
         result_output_file="mytestpath")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeScalingPolicies](https://www.tencentcloud.com/document/api/377/33208)
+
 
     :param _builtins.str policy_name: Scaling policy name.
     :param _builtins.str result_output_file: Used to save results.
@@ -161,6 +167,12 @@ def get_scaling_policies_output(policy_name: pulumi.Input[Optional[Optional[_bui
     as_scaling_policies = tencentcloud.as_.get_scaling_policies(scaling_policy_id="asg-mvyghxu7",
         result_output_file="mytestpath")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeScalingPolicies](https://www.tencentcloud.com/document/api/377/33208)
 
 
     :param _builtins.str policy_name: Scaling policy name.

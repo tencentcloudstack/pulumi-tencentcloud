@@ -18,6 +18,14 @@ import * as utilities from "../utilities";
  *     pipelineId: "xxxxxx",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeLogstashPipelines](https://www.tencentcloud.com/search/?wd=DescribeLogstashPipelines&type=document&lang=en)
+ *   - [StartLogstashPipelines](https://www.tencentcloud.com/search/?wd=StartLogstashPipelines&type=document&lang=en)
  */
 export class StartLogstashPipelineOperation extends pulumi.CustomResource {
     /**

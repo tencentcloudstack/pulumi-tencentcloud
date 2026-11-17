@@ -128,6 +128,12 @@ def get_group_user_account(result_output_file: Optional[_builtins.str] = None,
     group_user_account = tencentcloud.cam.get_group_user_account(sub_uin=int(100033690181))
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListGroupsForUser](https://www.tencentcloud.com/document/api/598/32257)
+
 
     :param _builtins.str result_output_file: Used to save results.
     :param _builtins.int rp: Number per page. The default is 20.
@@ -166,6 +172,12 @@ def get_group_user_account_output(result_output_file: pulumi.Input[Optional[Opti
 
     group_user_account = tencentcloud.cam.get_group_user_account(sub_uin=int(100033690181))
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListGroupsForUser](https://www.tencentcloud.com/document/api/598/32257)
 
 
     :param _builtins.str result_output_file: Used to save results.

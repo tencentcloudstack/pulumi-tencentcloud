@@ -45,6 +45,12 @@ import * as utilities from "../utilities";
  *     outputObjectPath: "/output",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [EditMedia](https://www.tencentcloud.com/document/api/1041/37460)
  */
 export class EditMediaOperation extends pulumi.CustomResource {
     /**

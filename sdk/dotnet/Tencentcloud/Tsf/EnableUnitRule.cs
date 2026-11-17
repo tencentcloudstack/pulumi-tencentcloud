@@ -32,6 +32,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DisableUnitRule](https://www.tencentcloud.com/search/?wd=DisableUnitRule&amp;type=document&amp;lang=en)
+    ///   - [EnableUnitRule](https://www.tencentcloud.com/search/?wd=EnableUnitRule&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeUnitRule](https://www.tencentcloud.com/search/?wd=DescribeUnitRule&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [DisableUnitRule](https://www.tencentcloud.com/search/?wd=DisableUnitRule&amp;type=document&amp;lang=en)
+    ///   - [EnableUnitRule](https://www.tencentcloud.com/search/?wd=EnableUnitRule&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// tsf EnableUnitRule can be imported using the id, e.g.

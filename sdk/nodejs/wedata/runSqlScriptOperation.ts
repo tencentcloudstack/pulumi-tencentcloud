@@ -31,6 +31,12 @@ import * as utilities from "../utilities";
  *     scriptContent: "SHOW DATABASES;",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [RunSQLScript](https://www.tencentcloud.com/document/api/1174/73844)
  */
 export class RunSqlScriptOperation extends pulumi.CustomResource {
     /**

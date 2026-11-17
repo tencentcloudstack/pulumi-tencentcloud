@@ -67,6 +67,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbdc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBCustomNodeTypes](https://www.tencentcloud.com/search/?wd=DescribeDBCustomNodeTypes&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetDbCustomNodeTypesResult> InvokeAsync(GetDbCustomNodeTypesArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDbCustomNodeTypesResult>("tencentcloud:Dbdc/getDbCustomNodeTypes:getDbCustomNodeTypes", args ?? new GetDbCustomNodeTypesArgs(), options.WithDefaults());
@@ -126,6 +132,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbdc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBCustomNodeTypes](https://www.tencentcloud.com/search/?wd=DescribeDBCustomNodeTypes&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDbCustomNodeTypesResult> Invoke(GetDbCustomNodeTypesInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDbCustomNodeTypesResult>("tencentcloud:Dbdc/getDbCustomNodeTypes:getDbCustomNodeTypes", args ?? new GetDbCustomNodeTypesInvokeArgs(), options.WithDefaults());
@@ -185,6 +197,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbdc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBCustomNodeTypes](https://www.tencentcloud.com/search/?wd=DescribeDBCustomNodeTypes&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDbCustomNodeTypesResult> Invoke(GetDbCustomNodeTypesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDbCustomNodeTypesResult>("tencentcloud:Dbdc/getDbCustomNodeTypes:getDbCustomNodeTypes", args ?? new GetDbCustomNodeTypesInvokeArgs(), options.WithDefaults());

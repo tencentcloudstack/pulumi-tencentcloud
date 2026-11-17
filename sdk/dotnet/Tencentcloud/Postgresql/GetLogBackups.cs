@@ -46,6 +46,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeLogBackups](https://www.tencentcloud.com/document/api/409/54342)
         /// </summary>
         public static Task<GetLogBackupsResult> InvokeAsync(GetLogBackupsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetLogBackupsResult>("tencentcloud:Postgresql/getLogBackups:getLogBackups", args ?? new GetLogBackupsArgs(), options.WithDefaults());
@@ -84,6 +90,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeLogBackups](https://www.tencentcloud.com/document/api/409/54342)
         /// </summary>
         public static Output<GetLogBackupsResult> Invoke(GetLogBackupsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetLogBackupsResult>("tencentcloud:Postgresql/getLogBackups:getLogBackups", args ?? new GetLogBackupsInvokeArgs(), options.WithDefaults());
@@ -122,6 +134,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeLogBackups](https://www.tencentcloud.com/document/api/409/54342)
         /// </summary>
         public static Output<GetLogBackupsResult> Invoke(GetLogBackupsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetLogBackupsResult>("tencentcloud:Postgresql/getLogBackups:getLogBackups", args ?? new GetLogBackupsInvokeArgs(), options.WithDefaults());

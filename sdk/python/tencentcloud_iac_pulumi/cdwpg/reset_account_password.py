@@ -152,6 +152,14 @@ class ResetAccountPassword(pulumi.CustomResource):
             new_password="testpassword")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ResetAccountPassword](https://www.tencentcloud.com/document/api/1138/69318)
+        * Read: [DescribeAccounts](https://www.tencentcloud.com/document/api/1138/69325)
+        * Update: [ResetAccountPassword](https://www.tencentcloud.com/document/api/1138/69318)
+
         ## Import
 
         cdwpg reset account password can be imported using the id, e.g.
@@ -187,6 +195,14 @@ class ResetAccountPassword(pulumi.CustomResource):
             user_name="dbadmin",
             new_password="testpassword")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ResetAccountPassword](https://www.tencentcloud.com/document/api/1138/69318)
+        * Read: [DescribeAccounts](https://www.tencentcloud.com/document/api/1138/69325)
+        * Update: [ResetAccountPassword](https://www.tencentcloud.com/document/api/1138/69318)
 
         ## Import
 

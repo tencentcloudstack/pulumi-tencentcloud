@@ -98,6 +98,12 @@ def get_account_info(result_output_file: Optional[_builtins.str] = None,
     account_info = tencentcloud.scf.get_account_info()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetAccount](https://www.tencentcloud.com/document/api/583/39873)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -124,6 +130,12 @@ def get_account_info_output(result_output_file: pulumi.Input[Optional[Optional[_
 
     account_info = tencentcloud.scf.get_account_info()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetAccount](https://www.tencentcloud.com/document/api/583/39873)
 
 
     :param _builtins.str result_output_file: Used to save results.

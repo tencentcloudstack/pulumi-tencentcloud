@@ -25,6 +25,11 @@ export type BackupDownloadRestriction = import("./backupDownloadRestriction").Ba
 export const BackupDownloadRestriction: typeof import("./backupDownloadRestriction").BackupDownloadRestriction = null as any;
 utilities.lazyLoad(exports, ["BackupDownloadRestriction"], () => require("./backupDownloadRestriction"));
 
+export { BackupEncryptArgs, BackupEncryptState } from "./backupEncrypt";
+export type BackupEncrypt = import("./backupEncrypt").BackupEncrypt;
+export const BackupEncrypt: typeof import("./backupEncrypt").BackupEncrypt = null as any;
+utilities.lazyLoad(exports, ["BackupEncrypt"], () => require("./backupEncrypt"));
+
 export { BackupOperationArgs, BackupOperationState } from "./backupOperation";
 export type BackupOperation = import("./backupOperation").BackupOperation;
 export const BackupOperation: typeof import("./backupOperation").BackupOperation = null as any;
@@ -94,6 +99,11 @@ export { InstanceArgs, InstanceState } from "./instance";
 export type Instance = import("./instance").Instance;
 export const Instance: typeof import("./instance").Instance = null as any;
 utilities.lazyLoad(exports, ["Instance"], () => require("./instance"));
+
+export { InstancePasswordPolicyConfigArgs, InstancePasswordPolicyConfigState } from "./instancePasswordPolicyConfig";
+export type InstancePasswordPolicyConfig = import("./instancePasswordPolicyConfig").InstancePasswordPolicyConfig;
+export const InstancePasswordPolicyConfig: typeof import("./instancePasswordPolicyConfig").InstancePasswordPolicyConfig = null as any;
+utilities.lazyLoad(exports, ["InstancePasswordPolicyConfig"], () => require("./instancePasswordPolicyConfig"));
 
 export { LogDeliveryArgs, LogDeliveryState } from "./logDelivery";
 export type LogDelivery = import("./logDelivery").LogDelivery;
@@ -183,6 +193,8 @@ const _module = {
                 return new BackupConfig(name, <any>undefined, { urn })
             case "tencentcloud:Redis/backupDownloadRestriction:BackupDownloadRestriction":
                 return new BackupDownloadRestriction(name, <any>undefined, { urn })
+            case "tencentcloud:Redis/backupEncrypt:BackupEncrypt":
+                return new BackupEncrypt(name, <any>undefined, { urn })
             case "tencentcloud:Redis/backupOperation:BackupOperation":
                 return new BackupOperation(name, <any>undefined, { urn })
             case "tencentcloud:Redis/clearInstanceOperation:ClearInstanceOperation":
@@ -191,6 +203,8 @@ const _module = {
                 return new ConnectionConfig(name, <any>undefined, { urn })
             case "tencentcloud:Redis/instance:Instance":
                 return new Instance(name, <any>undefined, { urn })
+            case "tencentcloud:Redis/instancePasswordPolicyConfig:InstancePasswordPolicyConfig":
+                return new InstancePasswordPolicyConfig(name, <any>undefined, { urn })
             case "tencentcloud:Redis/logDelivery:LogDelivery":
                 return new LogDelivery(name, <any>undefined, { urn })
             case "tencentcloud:Redis/maintenanceWindow:MaintenanceWindow":
@@ -230,10 +244,12 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Redis/account", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Redis/auditLog", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Redis/backupConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Redis/backupDownloadRestriction", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Redis/backupEncrypt", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Redis/backupOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Redis/clearInstanceOperation", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Redis/connectionConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Redis/instance", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Redis/instancePasswordPolicyConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Redis/logDelivery", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Redis/maintenanceWindow", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Redis/param", _module)

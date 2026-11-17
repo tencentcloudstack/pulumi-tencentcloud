@@ -47,6 +47,15 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateLogConfig](https://www.tencentcloud.com/document/api/1094/52761)
+// * Read: [DescribeLogConfig](https://www.tencentcloud.com/document/api/1094/52760)
+// * Update: [ModifyLogConfig](https://www.tencentcloud.com/document/api/1094/52757)
+// * Delete: [DestroyLogConfig](https://www.tencentcloud.com/document/api/1094/52758)
+//
 // ## Import
 //
 // tem logConfig can be imported using the id, e.g.

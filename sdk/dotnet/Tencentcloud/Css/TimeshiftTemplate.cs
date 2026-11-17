@@ -37,6 +37,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateLiveTimeShiftTemplate](https://www.tencentcloud.com/document/api/267/53725)
+    /// * Read: [DescribeLiveTimeShiftTemplates](https://www.tencentcloud.com/document/api/267/53721)
+    /// * Update: [ModifyLiveTimeShiftTemplate](https://www.tencentcloud.com/document/api/267/53718)
+    /// * Delete: [DeleteLiveTimeShiftTemplate](https://www.tencentcloud.com/document/api/267/53723)
+    /// 
     /// ## Import
     /// 
     /// css TimeshiftTemplate can be imported using the id, e.g.

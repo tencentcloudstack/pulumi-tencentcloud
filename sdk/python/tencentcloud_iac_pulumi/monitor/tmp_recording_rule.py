@@ -213,6 +213,15 @@ class TmpRecordingRule(pulumi.CustomResource):
         \"\"\")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateRecordingRule](https://www.tencentcloud.com/document/api/248/48762)
+        * Read: [DescribeRecordingRules](https://www.tencentcloud.com/document/api/248/48751)
+        * Update: [UpdateRecordingRule](https://www.tencentcloud.com/document/api/248/48738)
+        * Delete: [DeleteRecordingRules](https://www.tencentcloud.com/document/api/248/48757)
+
         ## Import
 
         monitor recordingRule can be imported using the id, e.g.
@@ -275,6 +284,15 @@ class TmpRecordingRule(pulumi.CustomResource):
             expr: sum by (job) (http_inprogress_requests)
         \"\"\")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateRecordingRule](https://www.tencentcloud.com/document/api/248/48762)
+        * Read: [DescribeRecordingRules](https://www.tencentcloud.com/document/api/248/48751)
+        * Update: [UpdateRecordingRule](https://www.tencentcloud.com/document/api/248/48738)
+        * Delete: [DeleteRecordingRules](https://www.tencentcloud.com/document/api/248/48757)
 
         ## Import
 

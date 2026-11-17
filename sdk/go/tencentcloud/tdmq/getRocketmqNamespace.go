@@ -51,6 +51,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeRocketMQNamespaces](https://www.tencentcloud.com/search/?wd=DescribeRocketMQNamespaces&type=document&lang=en)
 func LookupRocketmqNamespace(ctx *pulumi.Context, args *LookupRocketmqNamespaceArgs, opts ...pulumi.InvokeOption) (*LookupRocketmqNamespaceResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupRocketmqNamespaceResult

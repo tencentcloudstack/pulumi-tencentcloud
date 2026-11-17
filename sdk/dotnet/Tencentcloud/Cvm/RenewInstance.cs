@@ -86,6 +86,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [RenewInstances](https://www.tencentcloud.com/document/api/213/72769)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cvm/renewInstance:RenewInstance")]
     public partial class RenewInstance : global::Pulumi.CustomResource

@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeNatGatewayDirectConnectGatewayRoute](https://www.tencentcloud.com/document/api/215/48124)
         /// </summary>
         public static Task<GetDcRouteResult> InvokeAsync(GetDcRouteArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDcRouteResult>("tencentcloud:Nat/getDcRoute:getDcRoute", args ?? new GetDcRouteArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeNatGatewayDirectConnectGatewayRoute](https://www.tencentcloud.com/document/api/215/48124)
         /// </summary>
         public static Output<GetDcRouteResult> Invoke(GetDcRouteInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDcRouteResult>("tencentcloud:Nat/getDcRoute:getDcRoute", args ?? new GetDcRouteInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Nat
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeNatGatewayDirectConnectGatewayRoute](https://www.tencentcloud.com/document/api/215/48124)
         /// </summary>
         public static Output<GetDcRouteResult> Invoke(GetDcRouteInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDcRouteResult>("tencentcloud:Nat/getDcRoute:getDcRoute", args ?? new GetDcRouteInvokeArgs(), options.WithDefaults());

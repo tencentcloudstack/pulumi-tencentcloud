@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *     secretName: "keep_terraform",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRotationHistory](https://www.tencentcloud.com/document/api/1078/41516)
  */
 export function getRotationHistory(args: GetRotationHistoryArgs, opts?: pulumi.InvokeOptions): Promise<GetRotationHistoryResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -68,6 +74,12 @@ export interface GetRotationHistoryResult {
  *     secretName: "keep_terraform",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRotationHistory](https://www.tencentcloud.com/document/api/1078/41516)
  */
 export function getRotationHistoryOutput(args: GetRotationHistoryOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRotationHistoryResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

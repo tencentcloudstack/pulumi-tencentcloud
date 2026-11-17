@@ -105,6 +105,12 @@ def get_instances(dc_id: Optional[_builtins.str] = None,
 
     ## Example Usage
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDirectConnects](https://www.tencentcloud.com/document/api/216/35330)
+
 
     :param _builtins.str dc_id: ID of the DC to be queried.
     :param _builtins.str name: Name of the DC to be queried.
@@ -131,6 +137,12 @@ def get_instances_output(dc_id: pulumi.Input[Optional[Optional[_builtins.str]]] 
     Use this data source to query detailed information of DC instances.
 
     ## Example Usage
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDirectConnects](https://www.tencentcloud.com/document/api/216/35330)
 
 
     :param _builtins.str dc_id: ID of the DC to be queried.

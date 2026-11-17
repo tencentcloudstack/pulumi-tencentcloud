@@ -126,6 +126,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateVpnGatewaySslServer](https://www.tencentcloud.com/search/?wd=CreateVpnGatewaySslServer&amp;type=document&amp;lang=en)
+    ///   - [DescribeVpcTaskResult](https://www.tencentcloud.com/document/api/215/41567)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    /// * Read:
+    ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+    ///   - [DescribeVpnGatewaySslServers](https://www.tencentcloud.com/search/?wd=DescribeVpnGatewaySslServers&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [DescribeVpcTaskResult](https://www.tencentcloud.com/document/api/215/41567)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    ///   - [ModifyVpnGatewaySslServer](https://www.tencentcloud.com/search/?wd=ModifyVpnGatewaySslServer&amp;type=document&amp;lang=en)
+    /// * Delete:
+    ///   - [DeleteVpnGatewaySslServer](https://www.tencentcloud.com/search/?wd=DeleteVpnGatewaySslServer&amp;type=document&amp;lang=en)
+    ///   - [DescribeVpcTaskResult](https://www.tencentcloud.com/document/api/215/41567)
+    /// 
     /// ## Import
     /// 
     /// VPN SSL Server can be imported, e.g.

@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListOpsAlarmRules](https://www.tencentcloud.com/document/api/1174/73821)
         /// </summary>
         public static Task<GetOpsAlarmRulesResult> InvokeAsync(GetOpsAlarmRulesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetOpsAlarmRulesResult>("tencentcloud:Wedata/getOpsAlarmRules:getOpsAlarmRules", args ?? new GetOpsAlarmRulesArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListOpsAlarmRules](https://www.tencentcloud.com/document/api/1174/73821)
         /// </summary>
         public static Output<GetOpsAlarmRulesResult> Invoke(GetOpsAlarmRulesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetOpsAlarmRulesResult>("tencentcloud:Wedata/getOpsAlarmRules:getOpsAlarmRules", args ?? new GetOpsAlarmRulesInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListOpsAlarmRules](https://www.tencentcloud.com/document/api/1174/73821)
         /// </summary>
         public static Output<GetOpsAlarmRulesResult> Invoke(GetOpsAlarmRulesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetOpsAlarmRulesResult>("tencentcloud:Wedata/getOpsAlarmRules:getOpsAlarmRules", args ?? new GetOpsAlarmRulesInvokeArgs(), options.WithDefaults());

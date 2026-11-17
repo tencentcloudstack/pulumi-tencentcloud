@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     imageId: "img-0elsru2u",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeImageSharePermission](https://www.tencentcloud.com/document/api/213/33273)
  */
 export function getImageSharePermission(args: GetImageSharePermissionArgs, opts?: pulumi.InvokeOptions): Promise<GetImageSharePermissionResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetImageSharePermissionResult {
  *     imageId: "img-0elsru2u",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeImageSharePermission](https://www.tencentcloud.com/document/api/213/33273)
  */
 export function getImageSharePermissionOutput(args: GetImageSharePermissionOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetImageSharePermissionResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

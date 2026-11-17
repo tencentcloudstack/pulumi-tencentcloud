@@ -60,6 +60,14 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [AssociateSecurityGroups](https://www.tencentcloud.com/document/api/239/37324)
+ * * Read: [DescribeDBSecurityGroups](https://www.tencentcloud.com/document/api/239/37323)
+ * * Delete: [DisassociateSecurityGroups](https://www.tencentcloud.com/document/api/239/37321)
+ *
  * ## Import
  *
  * redis security group attachment can be imported using the id, e.g.

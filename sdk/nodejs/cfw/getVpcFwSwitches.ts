@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     vpcInsId: "cfwg-c8c2de41",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeVpcFwGroupSwitch](https://www.tencentcloud.com/search/?wd=DescribeVpcFwGroupSwitch&type=document&lang=en)
  */
 export function getVpcFwSwitches(args: GetVpcFwSwitchesArgs, opts?: pulumi.InvokeOptions): Promise<GetVpcFwSwitchesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetVpcFwSwitchesResult {
  *     vpcInsId: "cfwg-c8c2de41",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeVpcFwGroupSwitch](https://www.tencentcloud.com/search/?wd=DescribeVpcFwGroupSwitch&type=document&lang=en)
  */
 export function getVpcFwSwitchesOutput(args: GetVpcFwSwitchesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetVpcFwSwitchesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

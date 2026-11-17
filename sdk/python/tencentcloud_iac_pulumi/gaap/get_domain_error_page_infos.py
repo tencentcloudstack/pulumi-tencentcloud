@@ -96,6 +96,12 @@ def get_domain_error_page_infos(error_page_ids: Optional[Sequence[_builtins.str]
     domain_error_page_infos = tencentcloud.gaap.get_domain_error_page_infos(error_page_ids=["errorPage-xxxxxx"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDomainErrorPageInfoByIds](https://www.tencentcloud.com/document/api/608/37590)
+
 
     :param Sequence[_builtins.str] error_page_ids: Customized error ID list, supporting up to 10.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_domain_error_page_infos_output(error_page_ids: pulumi.Input[Optional[Seq
 
     domain_error_page_infos = tencentcloud.gaap.get_domain_error_page_infos(error_page_ids=["errorPage-xxxxxx"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDomainErrorPageInfoByIds](https://www.tencentcloud.com/document/api/608/37590)
 
 
     :param Sequence[_builtins.str] error_page_ids: Customized error ID list, supporting up to 10.

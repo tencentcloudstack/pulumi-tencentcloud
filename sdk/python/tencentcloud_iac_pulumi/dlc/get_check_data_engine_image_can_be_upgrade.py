@@ -106,6 +106,12 @@ def get_check_data_engine_image_can_be_upgrade(data_engine_id: Optional[_builtin
     example = tencentcloud.dlc.get_check_data_engine_image_can_be_upgrade(data_engine_id="DataEngine-80ibn1cj")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [CheckDataEngineImageCanBeUpgrade](https://www.tencentcloud.com/document/api/1155/62694)
+
 
     :param _builtins.str data_engine_id: Unique engine ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -136,6 +142,12 @@ def get_check_data_engine_image_can_be_upgrade_output(data_engine_id: pulumi.Inp
 
     example = tencentcloud.dlc.get_check_data_engine_image_can_be_upgrade(data_engine_id="DataEngine-80ibn1cj")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [CheckDataEngineImageCanBeUpgrade](https://www.tencentcloud.com/document/api/1155/62694)
 
 
     :param _builtins.str data_engine_id: Unique engine ID.

@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInternetAddressStatistics](https://www.tencentcloud.com/document/api/216/39496)
         /// </summary>
         public static Task<GetInternetAddressStatisticsResult> InvokeAsync(GetInternetAddressStatisticsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetInternetAddressStatisticsResult>("tencentcloud:Dc/getInternetAddressStatistics:getInternetAddressStatistics", args ?? new GetInternetAddressStatisticsArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInternetAddressStatistics](https://www.tencentcloud.com/document/api/216/39496)
         /// </summary>
         public static Output<GetInternetAddressStatisticsResult> Invoke(GetInternetAddressStatisticsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetInternetAddressStatisticsResult>("tencentcloud:Dc/getInternetAddressStatistics:getInternetAddressStatistics", args ?? new GetInternetAddressStatisticsInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInternetAddressStatistics](https://www.tencentcloud.com/document/api/216/39496)
         /// </summary>
         public static Output<GetInternetAddressStatisticsResult> Invoke(GetInternetAddressStatisticsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetInternetAddressStatisticsResult>("tencentcloud:Dc/getInternetAddressStatistics:getInternetAddressStatistics", args ?? new GetInternetAddressStatisticsInvokeArgs(), options.WithDefaults());

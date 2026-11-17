@@ -475,6 +475,18 @@ class Resource(pulumi.CustomResource):
             package_bandwidth=1)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateResource](https://www.tencentcloud.com/search/?wd=CreateResource&type=document&lang=en)
+          - [DeployResource](https://www.tencentcloud.com/search/?wd=DeployResource&type=document&lang=en)
+          - [DescribeResources](https://www.tencentcloud.com/search/?wd=DescribeResources&type=document&lang=en)
+          - [ModifyResource](https://www.tencentcloud.com/search/?wd=ModifyResource&type=document&lang=en)
+        * Read: [DescribeResources](https://www.tencentcloud.com/search/?wd=DescribeResources&type=document&lang=en)
+        * Update: [ModifyResource](https://www.tencentcloud.com/search/?wd=ModifyResource&type=document&lang=en)
+
         ## Import
 
         dasb resource can be imported using the id, e.g.
@@ -551,6 +563,18 @@ class Resource(pulumi.CustomResource):
             auto_renew_flag=1,
             package_bandwidth=1)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateResource](https://www.tencentcloud.com/search/?wd=CreateResource&type=document&lang=en)
+          - [DeployResource](https://www.tencentcloud.com/search/?wd=DeployResource&type=document&lang=en)
+          - [DescribeResources](https://www.tencentcloud.com/search/?wd=DescribeResources&type=document&lang=en)
+          - [ModifyResource](https://www.tencentcloud.com/search/?wd=ModifyResource&type=document&lang=en)
+        * Read: [DescribeResources](https://www.tencentcloud.com/search/?wd=DescribeResources&type=document&lang=en)
+        * Update: [ModifyResource](https://www.tencentcloud.com/search/?wd=ModifyResource&type=document&lang=en)
 
         ## Import
 

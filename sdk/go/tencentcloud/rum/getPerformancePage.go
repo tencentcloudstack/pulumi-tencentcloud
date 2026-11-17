@@ -42,6 +42,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDataPerformancePage](https://www.tencentcloud.com/document/api/1131/45325)
 func GetPerformancePage(ctx *pulumi.Context, args *GetPerformancePageArgs, opts ...pulumi.InvokeOption) (*GetPerformancePageResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetPerformancePageResult

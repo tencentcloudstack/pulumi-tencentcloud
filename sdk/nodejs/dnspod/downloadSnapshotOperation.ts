@@ -18,6 +18,12 @@ import * as utilities from "../utilities";
  *     snapshotId: "456",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [DownloadSnapshot](https://www.tencentcloud.com/search/?wd=DownloadSnapshot&type=document&lang=en)
  */
 export class DownloadSnapshotOperation extends pulumi.CustomResource {
     /**

@@ -41,6 +41,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreatePortAclConfig](https://www.tencentcloud.com/search/?wd=CreatePortAclConfig&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeListPortAclList](https://www.tencentcloud.com/search/?wd=DescribeListPortAclList&amp;type=document&amp;lang=en)
+    /// * Delete: [DeletePortAclConfig](https://www.tencentcloud.com/search/?wd=DeletePortAclConfig&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// antiddos PortAclConfig can be imported using the id, e.g.

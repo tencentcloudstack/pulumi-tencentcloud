@@ -119,6 +119,15 @@ class SwitchDataEngineImageOperation(pulumi.CustomResource):
             new_image_version_id="344ba1c6-b7a9-403a-a255-422fffed6d38")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeDataEngine](https://www.tencentcloud.com/document/api/1155/62693)
+          - [DescribeDataEngines](https://www.tencentcloud.com/search/?wd=DescribeDataEngines&type=document&lang=en)
+          - [SwitchDataEngineImage](https://www.tencentcloud.com/document/api/1155/62646)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -144,6 +153,15 @@ class SwitchDataEngineImageOperation(pulumi.CustomResource):
             data_engine_id="DataEngine-g5ds87d8",
             new_image_version_id="344ba1c6-b7a9-403a-a255-422fffed6d38")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeDataEngine](https://www.tencentcloud.com/document/api/1155/62693)
+          - [DescribeDataEngines](https://www.tencentcloud.com/search/?wd=DescribeDataEngines&type=document&lang=en)
+          - [SwitchDataEngineImage](https://www.tencentcloud.com/document/api/1155/62646)
 
 
         :param str resource_name: The name of the resource.

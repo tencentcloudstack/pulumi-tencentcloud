@@ -64,6 +64,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeUpdatableDataEngines](https://www.tencentcloud.com/document/api/1155/62691)
 func GetDescribeUpdatableDataEngines(ctx *pulumi.Context, args *GetDescribeUpdatableDataEnginesArgs, opts ...pulumi.InvokeOption) (*GetDescribeUpdatableDataEnginesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDescribeUpdatableDataEnginesResult

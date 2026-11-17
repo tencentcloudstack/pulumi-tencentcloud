@@ -21,6 +21,12 @@ import * as utilities from "../utilities";
  *     environmentName: "test",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribePluginsByApi](https://www.tencentcloud.com/search/?wd=DescribePluginsByApi&type=document&lang=en)
  */
 export function getApiPlugins(args: GetApiPluginsArgs, opts?: pulumi.InvokeOptions): Promise<GetApiPluginsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -86,6 +92,12 @@ export interface GetApiPluginsResult {
  *     environmentName: "test",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribePluginsByApi](https://www.tencentcloud.com/search/?wd=DescribePluginsByApi&type=document&lang=en)
  */
 export function getApiPluginsOutput(args: GetApiPluginsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetApiPluginsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

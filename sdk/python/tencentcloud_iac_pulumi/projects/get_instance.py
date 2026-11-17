@@ -96,6 +96,12 @@ def get_instance(all_list: Optional[_builtins.int] = None,
     project = tencentcloud.projects.get_instance(all_list=1)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeProjects](https://www.tencentcloud.com/document/api/651/54679)
+
 
     :param _builtins.int all_list: 1 means to list all project, 0 means to list visible project.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_instance_output(all_list: pulumi.Input[Optional[_builtins.int]] = None,
 
     project = tencentcloud.projects.get_instance(all_list=1)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeProjects](https://www.tencentcloud.com/document/api/651/54679)
 
 
     :param _builtins.int all_list: 1 means to list all project, 0 means to list visible project.

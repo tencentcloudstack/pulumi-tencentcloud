@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GenerateVpnConnectionDefaultHealthCheckIp](https://www.tencentcloud.com/document/api/215/56575)
         /// </summary>
         public static Task<GetDefaultHealthCheckIpResult> InvokeAsync(GetDefaultHealthCheckIpArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDefaultHealthCheckIpResult>("tencentcloud:Vpn/getDefaultHealthCheckIp:getDefaultHealthCheckIp", args ?? new GetDefaultHealthCheckIpArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GenerateVpnConnectionDefaultHealthCheckIp](https://www.tencentcloud.com/document/api/215/56575)
         /// </summary>
         public static Output<GetDefaultHealthCheckIpResult> Invoke(GetDefaultHealthCheckIpInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDefaultHealthCheckIpResult>("tencentcloud:Vpn/getDefaultHealthCheckIp:getDefaultHealthCheckIp", args ?? new GetDefaultHealthCheckIpInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GenerateVpnConnectionDefaultHealthCheckIp](https://www.tencentcloud.com/document/api/215/56575)
         /// </summary>
         public static Output<GetDefaultHealthCheckIpResult> Invoke(GetDefaultHealthCheckIpInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDefaultHealthCheckIpResult>("tencentcloud:Vpn/getDefaultHealthCheckIp:getDefaultHealthCheckIp", args ?? new GetDefaultHealthCheckIpInvokeArgs(), options.WithDefaults());

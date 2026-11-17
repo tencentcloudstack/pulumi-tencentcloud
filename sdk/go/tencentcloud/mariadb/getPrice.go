@@ -44,6 +44,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribePrice](https://www.tencentcloud.com/document/api/237/52233)
 func GetPrice(ctx *pulumi.Context, args *GetPriceArgs, opts ...pulumi.InvokeOption) (*GetPriceResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetPriceResult

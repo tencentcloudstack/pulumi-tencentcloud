@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListEntitiesForPolicy](https://www.tencentcloud.com/document/api/598/32241)
         /// </summary>
         public static Task<GetListEntitiesForPolicyResult> InvokeAsync(GetListEntitiesForPolicyArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetListEntitiesForPolicyResult>("tencentcloud:Cam/getListEntitiesForPolicy:getListEntitiesForPolicy", args ?? new GetListEntitiesForPolicyArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListEntitiesForPolicy](https://www.tencentcloud.com/document/api/598/32241)
         /// </summary>
         public static Output<GetListEntitiesForPolicyResult> Invoke(GetListEntitiesForPolicyInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetListEntitiesForPolicyResult>("tencentcloud:Cam/getListEntitiesForPolicy:getListEntitiesForPolicy", args ?? new GetListEntitiesForPolicyInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListEntitiesForPolicy](https://www.tencentcloud.com/document/api/598/32241)
         /// </summary>
         public static Output<GetListEntitiesForPolicyResult> Invoke(GetListEntitiesForPolicyInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetListEntitiesForPolicyResult>("tencentcloud:Cam/getListEntitiesForPolicy:getListEntitiesForPolicy", args ?? new GetListEntitiesForPolicyInvokeArgs(), options.WithDefaults());

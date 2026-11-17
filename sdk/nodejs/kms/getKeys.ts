@@ -23,6 +23,12 @@ import * as utilities from "../utilities";
  *     hsmClusterId: "cls-hsm-mwpd9cjm",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListKeyDetail](https://www.tencentcloud.com/document/api/1030/32185)
  */
 export function getKeys(args?: GetKeysArgs, opts?: pulumi.InvokeOptions): Promise<GetKeysResult> {
     args = args || {};
@@ -133,6 +139,12 @@ export interface GetKeysResult {
  *     hsmClusterId: "cls-hsm-mwpd9cjm",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListKeyDetail](https://www.tencentcloud.com/document/api/1030/32185)
  */
 export function getKeysOutput(args?: GetKeysOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetKeysResult> {
     args = args || {};

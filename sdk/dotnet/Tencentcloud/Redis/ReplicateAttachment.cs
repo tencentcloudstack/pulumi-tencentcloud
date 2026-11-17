@@ -114,6 +114,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [AddReplicationInstance](https://www.tencentcloud.com/document/api/239/59986)
+    ///   - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
+    /// * Read: [DescribeReplicationGroup](https://www.tencentcloud.com/document/api/239/46257)
+    /// * Update:
+    ///   - [AddReplicationInstance](https://www.tencentcloud.com/document/api/239/59986)
+    ///   - [ChangeMasterInstance](https://www.tencentcloud.com/document/api/239/49358)
+    ///   - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
+    ///   - [RemoveReplicationInstance](https://www.tencentcloud.com/document/api/239/54674)
+    /// * Delete:
+    ///   - [DescribeReplicationGroup](https://www.tencentcloud.com/document/api/239/46257)
+    ///   - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
+    ///   - [RemoveReplicationInstance](https://www.tencentcloud.com/document/api/239/54674)
+    /// 
     /// ## Import
     /// 
     /// redis replicate attachment can be imported using the id, e.g.

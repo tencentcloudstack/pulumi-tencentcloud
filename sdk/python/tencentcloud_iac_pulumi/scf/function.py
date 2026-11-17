@@ -78,7 +78,7 @@ class FunctionArgs:
         :param pulumi.Input[_builtins.str] name: Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
         :param pulumi.Input[_builtins.str] namespace: Namespace of the SCF function, default is `default`.
         :param pulumi.Input[_builtins.str] role: Role of the SCF function.
-        :param pulumi.Input[_builtins.str] runtime: Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, and `CustomRuntime`, default is `Python2.7`.
+        :param pulumi.Input[_builtins.str] runtime: Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, `CustomRuntime` and `CustomImage`, default is `Python2.7`. When deploying images using `image_comfig`, please explicitly specify the runtime as `CustomImage`. After creating a mirror function, it is not supported to modify the `runtime`.
         :param pulumi.Input[_builtins.str] subnet_id: Subnet ID of the SCF function.
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: Tags of the SCF function.
         :param pulumi.Input[_builtins.int] timeout: Timeout of the SCF function, unit is second. Default `3`. Available value is 1-900.
@@ -427,7 +427,7 @@ class FunctionArgs:
     @pulumi.getter
     def runtime(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, and `CustomRuntime`, default is `Python2.7`.
+        Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, `CustomRuntime` and `CustomImage`, default is `Python2.7`. When deploying images using `image_comfig`, please explicitly specify the runtime as `CustomImage`. After creating a mirror function, it is not supported to modify the `runtime`.
         """
         return pulumi.get(self, "runtime")
 
@@ -591,7 +591,7 @@ class _FunctionState:
         :param pulumi.Input[_builtins.str] name: Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
         :param pulumi.Input[_builtins.str] namespace: Namespace of the SCF function, default is `default`.
         :param pulumi.Input[_builtins.str] role: Role of the SCF function.
-        :param pulumi.Input[_builtins.str] runtime: Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, and `CustomRuntime`, default is `Python2.7`.
+        :param pulumi.Input[_builtins.str] runtime: Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, `CustomRuntime` and `CustomImage`, default is `Python2.7`. When deploying images using `image_comfig`, please explicitly specify the runtime as `CustomImage`. After creating a mirror function, it is not supported to modify the `runtime`.
         :param pulumi.Input[_builtins.str] status: SCF function status.
         :param pulumi.Input[_builtins.str] status_desc: SCF status description.
         :param pulumi.Input[_builtins.str] subnet_id: Subnet ID of the SCF function.
@@ -1092,7 +1092,7 @@ class _FunctionState:
     @pulumi.getter
     def runtime(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, and `CustomRuntime`, default is `Python2.7`.
+        Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, `CustomRuntime` and `CustomImage`, default is `Python2.7`. When deploying images using `image_comfig`, please explicitly specify the runtime as `CustomImage`. After creating a mirror function, it is not supported to modify the `runtime`.
         """
         return pulumi.get(self, "runtime")
 
@@ -1360,11 +1360,66 @@ class Function(pulumi.CustomResource):
             ])
         ```
 
+        ### If func_type is Event
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.scf.Function("example",
+            name="test",
+            namespace="default",
+            async_run_enable="FALSE",
+            description="terraform demo",
+            enable_public_net=True,
+            func_type="Event",
+            l5_enable=False,
+            mem_size=128,
+            runtime="CustomImage",
+            timeout=3,
+            image_configs=[{
+                "container_image_accelerate": False,
+                "image_port": -1,
+                "image_type": "personal",
+                "image_uri": "ccr.ccs.tencentyun.com/tsf_100023201586/quickstart-gateway-service:v1-20250313124040@sha256:b8821639168*********************d33aadee54d81c",
+            }],
+            instance_concurrency_config={
+                "dynamic_enabled": "FALSE",
+                "max_concurrency": 1,
+            },
+            intranet_config={
+                "ip_fixed": "DISABLE",
+            })
+        ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateFunction](https://www.tencentcloud.com/search/?wd=CreateFunction&type=document&lang=en)
+          - [CreateTrigger](https://www.tencentcloud.com/document/api/583/18589)
+          - [GetFunction](https://www.tencentcloud.com/search/?wd=GetFunction&type=document&lang=en)
+          - [GetSecretValue](https://www.tencentcloud.com/document/api/1078/38649)
+          - [UpdateFunctionConfiguration](https://www.tencentcloud.com/search/?wd=UpdateFunctionConfiguration&type=document&lang=en)
+        * Read: [GetFunction](https://www.tencentcloud.com/search/?wd=GetFunction&type=document&lang=en)
+        * Update:
+          - [CreateTrigger](https://www.tencentcloud.com/document/api/583/18589)
+          - [DeleteTrigger](https://www.tencentcloud.com/document/api/583/18588)
+          - [GetFunction](https://www.tencentcloud.com/search/?wd=GetFunction&type=document&lang=en)
+          - [GetSecretValue](https://www.tencentcloud.com/document/api/1078/38649)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+          - [UpdateFunctionCode](https://www.tencentcloud.com/document/api/583/18581)
+          - [UpdateFunctionConfiguration](https://www.tencentcloud.com/search/?wd=UpdateFunctionConfiguration&type=document&lang=en)
+        * Delete:
+          - [DeleteFunction](https://www.tencentcloud.com/document/api/583/18585)
+          - [GetFunction](https://www.tencentcloud.com/search/?wd=GetFunction&type=document&lang=en)
+
         ## Import
 
         SCF function can be imported, e.g.
 
-        > **NOTE:** function id is `<function namespace>+<function name>`
+        > **NOTE:** resource id is `<function namespace>+<function name>`
 
         ```sh
         $ pulumi import tencentcloud:Scf/function:Function example default+test
@@ -1396,7 +1451,7 @@ class Function(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] name: Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
         :param pulumi.Input[_builtins.str] namespace: Namespace of the SCF function, default is `default`.
         :param pulumi.Input[_builtins.str] role: Role of the SCF function.
-        :param pulumi.Input[_builtins.str] runtime: Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, and `CustomRuntime`, default is `Python2.7`.
+        :param pulumi.Input[_builtins.str] runtime: Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, `CustomRuntime` and `CustomImage`, default is `Python2.7`. When deploying images using `image_comfig`, please explicitly specify the runtime as `CustomImage`. After creating a mirror function, it is not supported to modify the `runtime`.
         :param pulumi.Input[_builtins.str] subnet_id: Subnet ID of the SCF function.
         :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: Tags of the SCF function.
         :param pulumi.Input[_builtins.int] timeout: Timeout of the SCF function, unit is second. Default `3`. Available value is 1-900.
@@ -1512,11 +1567,66 @@ class Function(pulumi.CustomResource):
             ])
         ```
 
+        ### If func_type is Event
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.scf.Function("example",
+            name="test",
+            namespace="default",
+            async_run_enable="FALSE",
+            description="terraform demo",
+            enable_public_net=True,
+            func_type="Event",
+            l5_enable=False,
+            mem_size=128,
+            runtime="CustomImage",
+            timeout=3,
+            image_configs=[{
+                "container_image_accelerate": False,
+                "image_port": -1,
+                "image_type": "personal",
+                "image_uri": "ccr.ccs.tencentyun.com/tsf_100023201586/quickstart-gateway-service:v1-20250313124040@sha256:b8821639168*********************d33aadee54d81c",
+            }],
+            instance_concurrency_config={
+                "dynamic_enabled": "FALSE",
+                "max_concurrency": 1,
+            },
+            intranet_config={
+                "ip_fixed": "DISABLE",
+            })
+        ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateFunction](https://www.tencentcloud.com/search/?wd=CreateFunction&type=document&lang=en)
+          - [CreateTrigger](https://www.tencentcloud.com/document/api/583/18589)
+          - [GetFunction](https://www.tencentcloud.com/search/?wd=GetFunction&type=document&lang=en)
+          - [GetSecretValue](https://www.tencentcloud.com/document/api/1078/38649)
+          - [UpdateFunctionConfiguration](https://www.tencentcloud.com/search/?wd=UpdateFunctionConfiguration&type=document&lang=en)
+        * Read: [GetFunction](https://www.tencentcloud.com/search/?wd=GetFunction&type=document&lang=en)
+        * Update:
+          - [CreateTrigger](https://www.tencentcloud.com/document/api/583/18589)
+          - [DeleteTrigger](https://www.tencentcloud.com/document/api/583/18588)
+          - [GetFunction](https://www.tencentcloud.com/search/?wd=GetFunction&type=document&lang=en)
+          - [GetSecretValue](https://www.tencentcloud.com/document/api/1078/38649)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+          - [UpdateFunctionCode](https://www.tencentcloud.com/document/api/583/18581)
+          - [UpdateFunctionConfiguration](https://www.tencentcloud.com/search/?wd=UpdateFunctionConfiguration&type=document&lang=en)
+        * Delete:
+          - [DeleteFunction](https://www.tencentcloud.com/document/api/583/18585)
+          - [GetFunction](https://www.tencentcloud.com/search/?wd=GetFunction&type=document&lang=en)
+
         ## Import
 
         SCF function can be imported, e.g.
 
-        > **NOTE:** function id is `<function namespace>+<function name>`
+        > **NOTE:** resource id is `<function namespace>+<function name>`
 
         ```sh
         $ pulumi import tencentcloud:Scf/function:Function example default+test
@@ -1715,7 +1825,7 @@ class Function(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] name: Name of the SCF function. Name supports 26 English letters, numbers, connectors, and underscores, it should start with a letter. The last character cannot be `-` or `_`. Available length is 2-60.
         :param pulumi.Input[_builtins.str] namespace: Namespace of the SCF function, default is `default`.
         :param pulumi.Input[_builtins.str] role: Role of the SCF function.
-        :param pulumi.Input[_builtins.str] runtime: Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, and `CustomRuntime`, default is `Python2.7`.
+        :param pulumi.Input[_builtins.str] runtime: Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, `CustomRuntime` and `CustomImage`, default is `Python2.7`. When deploying images using `image_comfig`, please explicitly specify the runtime as `CustomImage`. After creating a mirror function, it is not supported to modify the `runtime`.
         :param pulumi.Input[_builtins.str] status: SCF function status.
         :param pulumi.Input[_builtins.str] status_desc: SCF status description.
         :param pulumi.Input[_builtins.str] subnet_id: Subnet ID of the SCF function.
@@ -2045,7 +2155,7 @@ class Function(pulumi.CustomResource):
     @pulumi.getter
     def runtime(self) -> pulumi.Output[Optional[_builtins.str]]:
         """
-        Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, and `CustomRuntime`, default is `Python2.7`.
+        Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, `CustomRuntime` and `CustomImage`, default is `Python2.7`. When deploying images using `image_comfig`, please explicitly specify the runtime as `CustomImage`. After creating a mirror function, it is not supported to modify the `runtime`.
         """
         return pulumi.get(self, "runtime")
 

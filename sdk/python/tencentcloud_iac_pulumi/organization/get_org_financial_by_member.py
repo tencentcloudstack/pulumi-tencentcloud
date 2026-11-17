@@ -143,6 +143,12 @@ def get_org_financial_by_member(end_month: Optional[_builtins.str] = None,
         ])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeOrganizationFinancialByMember](https://www.tencentcloud.com/search/?wd=DescribeOrganizationFinancialByMember&type=document&lang=en)
+
 
     :param _builtins.str end_month: Query for the end month. Format:yyyy-mm, for example:2021-01.The default value is the `Month`.
     :param Sequence[_builtins.int] member_uins: Member uin list. Up to 100.
@@ -190,6 +196,12 @@ def get_org_financial_by_member_output(end_month: pulumi.Input[Optional[Optional
             int(100029796005),
         ])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeOrganizationFinancialByMember](https://www.tencentcloud.com/search/?wd=DescribeOrganizationFinancialByMember&type=document&lang=en)
 
 
     :param _builtins.str end_month: Query for the end month. Format:yyyy-mm, for example:2021-01.The default value is the `Month`.

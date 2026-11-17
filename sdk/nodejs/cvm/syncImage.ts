@@ -29,6 +29,14 @@ import * as utilities from "../utilities";
  *     kmsKeyId: "f063c18b-654b-11ef-9d9f-525400d3a886",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeImages](https://www.tencentcloud.com/document/api/213/33272)
+ *   - [SyncImages](https://www.tencentcloud.com/document/api/213/33267)
  */
 export class SyncImage extends pulumi.CustomResource {
     /**

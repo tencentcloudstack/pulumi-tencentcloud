@@ -58,6 +58,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetAttackTotalCount](https://www.tencentcloud.com/document/api/627/64555)
         /// </summary>
         public static Task<GetAttackTotalCountResult> InvokeAsync(GetAttackTotalCountArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetAttackTotalCountResult>("tencentcloud:Waf/getAttackTotalCount:getAttackTotalCount", args ?? new GetAttackTotalCountArgs(), options.WithDefaults());
@@ -108,6 +114,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetAttackTotalCount](https://www.tencentcloud.com/document/api/627/64555)
         /// </summary>
         public static Output<GetAttackTotalCountResult> Invoke(GetAttackTotalCountInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetAttackTotalCountResult>("tencentcloud:Waf/getAttackTotalCount:getAttackTotalCount", args ?? new GetAttackTotalCountInvokeArgs(), options.WithDefaults());
@@ -158,6 +170,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetAttackTotalCount](https://www.tencentcloud.com/document/api/627/64555)
         /// </summary>
         public static Output<GetAttackTotalCountResult> Invoke(GetAttackTotalCountInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetAttackTotalCountResult>("tencentcloud:Waf/getAttackTotalCount:getAttackTotalCount", args ?? new GetAttackTotalCountInvokeArgs(), options.WithDefaults());

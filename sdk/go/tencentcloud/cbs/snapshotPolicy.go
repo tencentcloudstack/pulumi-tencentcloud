@@ -12,9 +12,13 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provides a snapshot policy resource.
+// Provides a CBS snapshot policy resource.
+//
+// > **NOTE:** `repeatWeekdays`/`repeatMonths`/`intervalDays` are mutually exclusive rules, required and only one policy rule can be set. If mutually exclusive rules are passed in at the same time, only one will take effect, with priority in the order listed above: for example, if all three rules are set, only `repeatWeekdays` will take effect
 //
 // ## Example Usage
+//
+// ### Create policy by repeatWeekdays
 //
 // ```go
 // package main
@@ -28,15 +32,17 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := cbs.NewSnapshotPolicy(ctx, "snapshot_policy", &cbs.SnapshotPolicyArgs{
-//				SnapshotPolicyName: pulumi.String("mysnapshotpolicyname"),
+//			_, err := cbs.NewSnapshotPolicy(ctx, "example", &cbs.SnapshotPolicyArgs{
+//				SnapshotPolicyName: pulumi.String("tf-example"),
+//				RepeatHours: pulumi.IntArray{
+//					pulumi.Int(1),
+//				},
 //				RepeatWeekdays: pulumi.IntArray{
 //					pulumi.Int(1),
 //					pulumi.Int(4),
 //				},
-//				RepeatHours: pulumi.IntArray{
-//					pulumi.Int(1),
-//				},
+//				IsActivated:   pulumi.Bool(true),
+//				IsPermanent:   pulumi.Bool(false),
 //				RetentionDays: pulumi.Int(7),
 //			})
 //			if err != nil {
@@ -48,22 +54,72 @@ import (
 //
 // ```
 //
+// ### Create policy by intervalDays
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/cbs"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := cbs.NewSnapshotPolicy(ctx, "example", &cbs.SnapshotPolicyArgs{
+//				SnapshotPolicyName: pulumi.String("tf-example"),
+//				RepeatHours: pulumi.IntArray{
+//					pulumi.Int(1),
+//				},
+//				IntervalDays:  pulumi.Int(30),
+//				IsActivated:   pulumi.Bool(true),
+//				IsPermanent:   pulumi.Bool(false),
+//				RetentionDays: pulumi.Int(7),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateAutoSnapshotPolicy](https://www.tencentcloud.com/document/api/362/32167)
+// * Read: [DescribeAutoSnapshotPolicies](https://www.tencentcloud.com/document/api/362/32165)
+// * Update: [ModifyAutoSnapshotPolicyAttribute](https://www.tencentcloud.com/document/api/362/32162)
+// * Delete: [DeleteAutoSnapshotPolicies](https://www.tencentcloud.com/document/api/362/32166)
+//
 // ## Import
 //
 // CBS snapshot policy can be imported using the id, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Cbs/snapshotPolicy:SnapshotPolicy snapshot_policy asp-jliex1tn
+// $ pulumi import tencentcloud:Cbs/snapshotPolicy:SnapshotPolicy example asp-jliex1tn
 // ```
 type SnapshotPolicy struct {
 	pulumi.CustomResourceState
 
+	// Specifies the interval in days for creating scheduled snapshots. Valid value ranges: [1, 365]. For example, setting it to 5 means a scheduled snapshot is created every 5 days. Note: when backing up by days, theoretically the first backup is on the day the policy is created; if the policy creation time is later than the configured backup time on that day, the first backup will be in the next backup cycle.
+	IntervalDays pulumi.IntPtrOutput `pulumi:"intervalDays"`
+	// Whether the snapshot policy is activated. Default is true.
+	IsActivated pulumi.BoolOutput `pulumi:"isActivated"`
+	// Whether snapshots created by this policy are retained permanently. Default is false. Note: if this parameter is set to true, retentionDays must not be specified, otherwise a conflict error will be returned by the API.
+	IsPermanent pulumi.BoolOutput `pulumi:"isPermanent"`
 	// Trigger times of periodic snapshot. Valid value ranges: (0~23). The 0 means 00:00, and so on.
 	RepeatHours pulumi.IntArrayOutput `pulumi:"repeatHours"`
+	// Specifies the days of the month on which scheduled snapshots are triggered. Valid value ranges: [1, 31]. For example, 5 means triggering snapshots on the 5th day of each month. Note: if a date such as 29, 30 or 31 does not exist in some months, those months will be skipped.
+	RepeatMonths pulumi.IntArrayOutput `pulumi:"repeatMonths"`
 	// Periodic snapshot is enabled. Valid values: [0, 1, 2, 3, 4, 5, 6]. 0 means Sunday, 1-6 means Monday to Saturday.
 	RepeatWeekdays pulumi.IntArrayOutput `pulumi:"repeatWeekdays"`
 	// Retention days of the snapshot, and the default value is 7.
-	RetentionDays pulumi.IntPtrOutput `pulumi:"retentionDays"`
+	RetentionDays pulumi.IntOutput `pulumi:"retentionDays"`
 	// Name of snapshot policy. The maximum length can not exceed 60 bytes.
 	SnapshotPolicyName pulumi.StringOutput `pulumi:"snapshotPolicyName"`
 }
@@ -77,9 +133,6 @@ func NewSnapshotPolicy(ctx *pulumi.Context,
 
 	if args.RepeatHours == nil {
 		return nil, errors.New("invalid value for required argument 'RepeatHours'")
-	}
-	if args.RepeatWeekdays == nil {
-		return nil, errors.New("invalid value for required argument 'RepeatWeekdays'")
 	}
 	if args.SnapshotPolicyName == nil {
 		return nil, errors.New("invalid value for required argument 'SnapshotPolicyName'")
@@ -107,8 +160,16 @@ func GetSnapshotPolicy(ctx *pulumi.Context,
 
 // Input properties used for looking up and filtering SnapshotPolicy resources.
 type snapshotPolicyState struct {
+	// Specifies the interval in days for creating scheduled snapshots. Valid value ranges: [1, 365]. For example, setting it to 5 means a scheduled snapshot is created every 5 days. Note: when backing up by days, theoretically the first backup is on the day the policy is created; if the policy creation time is later than the configured backup time on that day, the first backup will be in the next backup cycle.
+	IntervalDays *int `pulumi:"intervalDays"`
+	// Whether the snapshot policy is activated. Default is true.
+	IsActivated *bool `pulumi:"isActivated"`
+	// Whether snapshots created by this policy are retained permanently. Default is false. Note: if this parameter is set to true, retentionDays must not be specified, otherwise a conflict error will be returned by the API.
+	IsPermanent *bool `pulumi:"isPermanent"`
 	// Trigger times of periodic snapshot. Valid value ranges: (0~23). The 0 means 00:00, and so on.
 	RepeatHours []int `pulumi:"repeatHours"`
+	// Specifies the days of the month on which scheduled snapshots are triggered. Valid value ranges: [1, 31]. For example, 5 means triggering snapshots on the 5th day of each month. Note: if a date such as 29, 30 or 31 does not exist in some months, those months will be skipped.
+	RepeatMonths []int `pulumi:"repeatMonths"`
 	// Periodic snapshot is enabled. Valid values: [0, 1, 2, 3, 4, 5, 6]. 0 means Sunday, 1-6 means Monday to Saturday.
 	RepeatWeekdays []int `pulumi:"repeatWeekdays"`
 	// Retention days of the snapshot, and the default value is 7.
@@ -118,8 +179,16 @@ type snapshotPolicyState struct {
 }
 
 type SnapshotPolicyState struct {
+	// Specifies the interval in days for creating scheduled snapshots. Valid value ranges: [1, 365]. For example, setting it to 5 means a scheduled snapshot is created every 5 days. Note: when backing up by days, theoretically the first backup is on the day the policy is created; if the policy creation time is later than the configured backup time on that day, the first backup will be in the next backup cycle.
+	IntervalDays pulumi.IntPtrInput
+	// Whether the snapshot policy is activated. Default is true.
+	IsActivated pulumi.BoolPtrInput
+	// Whether snapshots created by this policy are retained permanently. Default is false. Note: if this parameter is set to true, retentionDays must not be specified, otherwise a conflict error will be returned by the API.
+	IsPermanent pulumi.BoolPtrInput
 	// Trigger times of periodic snapshot. Valid value ranges: (0~23). The 0 means 00:00, and so on.
 	RepeatHours pulumi.IntArrayInput
+	// Specifies the days of the month on which scheduled snapshots are triggered. Valid value ranges: [1, 31]. For example, 5 means triggering snapshots on the 5th day of each month. Note: if a date such as 29, 30 or 31 does not exist in some months, those months will be skipped.
+	RepeatMonths pulumi.IntArrayInput
 	// Periodic snapshot is enabled. Valid values: [0, 1, 2, 3, 4, 5, 6]. 0 means Sunday, 1-6 means Monday to Saturday.
 	RepeatWeekdays pulumi.IntArrayInput
 	// Retention days of the snapshot, and the default value is 7.
@@ -133,8 +202,16 @@ func (SnapshotPolicyState) ElementType() reflect.Type {
 }
 
 type snapshotPolicyArgs struct {
+	// Specifies the interval in days for creating scheduled snapshots. Valid value ranges: [1, 365]. For example, setting it to 5 means a scheduled snapshot is created every 5 days. Note: when backing up by days, theoretically the first backup is on the day the policy is created; if the policy creation time is later than the configured backup time on that day, the first backup will be in the next backup cycle.
+	IntervalDays *int `pulumi:"intervalDays"`
+	// Whether the snapshot policy is activated. Default is true.
+	IsActivated *bool `pulumi:"isActivated"`
+	// Whether snapshots created by this policy are retained permanently. Default is false. Note: if this parameter is set to true, retentionDays must not be specified, otherwise a conflict error will be returned by the API.
+	IsPermanent *bool `pulumi:"isPermanent"`
 	// Trigger times of periodic snapshot. Valid value ranges: (0~23). The 0 means 00:00, and so on.
 	RepeatHours []int `pulumi:"repeatHours"`
+	// Specifies the days of the month on which scheduled snapshots are triggered. Valid value ranges: [1, 31]. For example, 5 means triggering snapshots on the 5th day of each month. Note: if a date such as 29, 30 or 31 does not exist in some months, those months will be skipped.
+	RepeatMonths []int `pulumi:"repeatMonths"`
 	// Periodic snapshot is enabled. Valid values: [0, 1, 2, 3, 4, 5, 6]. 0 means Sunday, 1-6 means Monday to Saturday.
 	RepeatWeekdays []int `pulumi:"repeatWeekdays"`
 	// Retention days of the snapshot, and the default value is 7.
@@ -145,8 +222,16 @@ type snapshotPolicyArgs struct {
 
 // The set of arguments for constructing a SnapshotPolicy resource.
 type SnapshotPolicyArgs struct {
+	// Specifies the interval in days for creating scheduled snapshots. Valid value ranges: [1, 365]. For example, setting it to 5 means a scheduled snapshot is created every 5 days. Note: when backing up by days, theoretically the first backup is on the day the policy is created; if the policy creation time is later than the configured backup time on that day, the first backup will be in the next backup cycle.
+	IntervalDays pulumi.IntPtrInput
+	// Whether the snapshot policy is activated. Default is true.
+	IsActivated pulumi.BoolPtrInput
+	// Whether snapshots created by this policy are retained permanently. Default is false. Note: if this parameter is set to true, retentionDays must not be specified, otherwise a conflict error will be returned by the API.
+	IsPermanent pulumi.BoolPtrInput
 	// Trigger times of periodic snapshot. Valid value ranges: (0~23). The 0 means 00:00, and so on.
 	RepeatHours pulumi.IntArrayInput
+	// Specifies the days of the month on which scheduled snapshots are triggered. Valid value ranges: [1, 31]. For example, 5 means triggering snapshots on the 5th day of each month. Note: if a date such as 29, 30 or 31 does not exist in some months, those months will be skipped.
+	RepeatMonths pulumi.IntArrayInput
 	// Periodic snapshot is enabled. Valid values: [0, 1, 2, 3, 4, 5, 6]. 0 means Sunday, 1-6 means Monday to Saturday.
 	RepeatWeekdays pulumi.IntArrayInput
 	// Retention days of the snapshot, and the default value is 7.
@@ -242,9 +327,29 @@ func (o SnapshotPolicyOutput) ToSnapshotPolicyOutputWithContext(ctx context.Cont
 	return o
 }
 
+// Specifies the interval in days for creating scheduled snapshots. Valid value ranges: [1, 365]. For example, setting it to 5 means a scheduled snapshot is created every 5 days. Note: when backing up by days, theoretically the first backup is on the day the policy is created; if the policy creation time is later than the configured backup time on that day, the first backup will be in the next backup cycle.
+func (o SnapshotPolicyOutput) IntervalDays() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *SnapshotPolicy) pulumi.IntPtrOutput { return v.IntervalDays }).(pulumi.IntPtrOutput)
+}
+
+// Whether the snapshot policy is activated. Default is true.
+func (o SnapshotPolicyOutput) IsActivated() pulumi.BoolOutput {
+	return o.ApplyT(func(v *SnapshotPolicy) pulumi.BoolOutput { return v.IsActivated }).(pulumi.BoolOutput)
+}
+
+// Whether snapshots created by this policy are retained permanently. Default is false. Note: if this parameter is set to true, retentionDays must not be specified, otherwise a conflict error will be returned by the API.
+func (o SnapshotPolicyOutput) IsPermanent() pulumi.BoolOutput {
+	return o.ApplyT(func(v *SnapshotPolicy) pulumi.BoolOutput { return v.IsPermanent }).(pulumi.BoolOutput)
+}
+
 // Trigger times of periodic snapshot. Valid value ranges: (0~23). The 0 means 00:00, and so on.
 func (o SnapshotPolicyOutput) RepeatHours() pulumi.IntArrayOutput {
 	return o.ApplyT(func(v *SnapshotPolicy) pulumi.IntArrayOutput { return v.RepeatHours }).(pulumi.IntArrayOutput)
+}
+
+// Specifies the days of the month on which scheduled snapshots are triggered. Valid value ranges: [1, 31]. For example, 5 means triggering snapshots on the 5th day of each month. Note: if a date such as 29, 30 or 31 does not exist in some months, those months will be skipped.
+func (o SnapshotPolicyOutput) RepeatMonths() pulumi.IntArrayOutput {
+	return o.ApplyT(func(v *SnapshotPolicy) pulumi.IntArrayOutput { return v.RepeatMonths }).(pulumi.IntArrayOutput)
 }
 
 // Periodic snapshot is enabled. Valid values: [0, 1, 2, 3, 4, 5, 6]. 0 means Sunday, 1-6 means Monday to Saturday.
@@ -253,8 +358,8 @@ func (o SnapshotPolicyOutput) RepeatWeekdays() pulumi.IntArrayOutput {
 }
 
 // Retention days of the snapshot, and the default value is 7.
-func (o SnapshotPolicyOutput) RetentionDays() pulumi.IntPtrOutput {
-	return o.ApplyT(func(v *SnapshotPolicy) pulumi.IntPtrOutput { return v.RetentionDays }).(pulumi.IntPtrOutput)
+func (o SnapshotPolicyOutput) RetentionDays() pulumi.IntOutput {
+	return o.ApplyT(func(v *SnapshotPolicy) pulumi.IntOutput { return v.RetentionDays }).(pulumi.IntOutput)
 }
 
 // Name of snapshot policy. The maximum length can not exceed 60 bytes.

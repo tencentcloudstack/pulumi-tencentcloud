@@ -86,6 +86,12 @@ def get_available_zone(result_output_file: Optional[_builtins.str] = None,
     available_zone = tencentcloud.cfs.get_available_zone()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAvailableZoneInfo](https://www.tencentcloud.com/document/api/582/34500)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -111,6 +117,12 @@ def get_available_zone_output(result_output_file: pulumi.Input[Optional[Optional
 
     available_zone = tencentcloud.cfs.get_available_zone()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAvailableZoneInfo](https://www.tencentcloud.com/document/api/582/34500)
 
 
     :param _builtins.str result_output_file: Used to save results.

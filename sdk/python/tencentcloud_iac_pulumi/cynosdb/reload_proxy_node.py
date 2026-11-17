@@ -119,6 +119,14 @@ class ReloadProxyNode(pulumi.CustomResource):
             proxy_group_id="cynosdbmysql-proxy-8lqtl8pk")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+          - [ReloadBalanceProxyNode](https://www.tencentcloud.com/document/api/1098/56552)
+
         ## Import
 
         cynosdb reload_proxy_node can be imported using the id, e.g.
@@ -152,6 +160,14 @@ class ReloadProxyNode(pulumi.CustomResource):
             cluster_id="cynosdbmysql-cgd2gpwr",
             proxy_group_id="cynosdbmysql-proxy-8lqtl8pk")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+          - [ReloadBalanceProxyNode](https://www.tencentcloud.com/document/api/1098/56552)
 
         ## Import
 

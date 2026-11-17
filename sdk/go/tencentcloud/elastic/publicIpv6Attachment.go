@@ -42,6 +42,14 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [AssociateIPv6Address](https://www.tencentcloud.com/document/api/215/68130)
+// * Read: [DescribeIPv6Addresses](https://www.tencentcloud.com/document/api/215/68129)
+// * Delete: [DisassociateIPv6Address](https://www.tencentcloud.com/document/api/215/68127)
+//
 // ## Import
 //
 // vpc elasticPublicIpv6Attachment can be imported using the id, e.g.

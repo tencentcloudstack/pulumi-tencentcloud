@@ -64,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ModifyDiagDBInstanceConf](https://www.tencentcloud.com/document/api/1035/41186)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dbbrain/modifyDiagDbInstanceOperation:ModifyDiagDbInstanceOperation")]
     public partial class ModifyDiagDbInstanceOperation : global::Pulumi.CustomResource

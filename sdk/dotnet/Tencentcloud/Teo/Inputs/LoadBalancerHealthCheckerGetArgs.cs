@@ -56,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public Input<int>? HealthThreshold { get; set; }
 
         /// <summary>
+        /// Probe request Host Header policy, valid when `Type` is `HTTP` or `HTTPS` and the instance type is HTTP-specific (V2). Valid values: `FollowCheckURL` (follow the Host specified by the probe URL, i.e., the Host part of `Path`); `FollowOriginGroup` (follow the origin group configured origin Host Header); `FollowOrigin` (follow the origin address). Default: `FollowCheckURL`.
+        /// </summary>
+        [Input("hostHeaderPolicy")]
+        public Input<string>? HostHeaderPolicy { get; set; }
+
+        /// <summary>
         /// Check interval in seconds. Valid values: `30`, `60`, `180`, `300`, `600`.
         /// </summary>
         [Input("interval")]
@@ -78,6 +84,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         /// </summary>
         [Input("port")]
         public Input<int>? Port { get; set; }
+
+        /// <summary>
+        /// Probe cluster region scope for health checks. Valid values: `Global`, `MainlandChina`, `Overseas`. Default: `Global`. Only supported when load balancer instance type is `HTTP_V2`.
+        /// </summary>
+        [Input("probeCluster")]
+        public Input<string>? ProbeCluster { get; set; }
 
         /// <summary>
         /// Expected response content from origin, valid when `Type` is `UDP`. Only ASCII visible characters allowed, max length 500.

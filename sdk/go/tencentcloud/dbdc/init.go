@@ -23,6 +23,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 	switch typ {
 	case "tencentcloud:Dbdc/dbCustomCluster:DbCustomCluster":
 		r = &DbCustomCluster{}
+	case "tencentcloud:Dbdc/dbCustomDisasterRecoverGroup:DbCustomDisasterRecoverGroup":
+		r = &DbCustomDisasterRecoverGroup{}
 	case "tencentcloud:Dbdc/dbCustomNode:DbCustomNode":
 		r = &DbCustomNode{}
 	case "tencentcloud:Dbdc/nodeToDbCustomClusterAttachment:NodeToDbCustomClusterAttachment":
@@ -43,6 +45,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Dbdc/dbCustomCluster",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Dbdc/dbCustomDisasterRecoverGroup",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

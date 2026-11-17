@@ -290,6 +290,12 @@ class RepairTaskControlOperation(pulumi.CustomResource):
             task_sub_method="LossyLocal")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [RepairTaskControl](https://www.tencentcloud.com/search/?wd=RepairTaskControl&type=document&lang=en)
+
         ## Import
 
         This resource is an operation-style resource and does not support `pulumi import`. The cloud-side authorization is a one-shot side-effect with no `Describe` API to refresh state.
@@ -363,6 +369,12 @@ class RepairTaskControlOperation(pulumi.CustomResource):
             operate="AuthorizeRepair",
             task_sub_method="LossyLocal")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [RepairTaskControl](https://www.tencentcloud.com/search/?wd=RepairTaskControl&type=document&lang=en)
 
         ## Import
 

@@ -257,6 +257,14 @@ def get_types(availability_zone: Optional[_builtins.str] = None,
     } for instance in with_pricing.instance_types])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeDiskConfigQuota](https://www.tencentcloud.com/document/api/362/16318)
+      - [DescribeZoneInstanceConfigInfos](https://www.tencentcloud.com/document/api/213/33254)
+
 
     :param _builtins.str availability_zone: The available zone that the CVM instance locates at. This field is conflict with `filter`.
     :param Union['GetTypesCbsFilterArgs', 'GetTypesCbsFilterArgsDict'] cbs_filter: Cbs filter.
@@ -398,6 +406,14 @@ def get_types_output(availability_zone: pulumi.Input[Optional[Optional[_builtins
         "price": instance.price[0] if len(instance.price) > 0 else None,
     } for instance in with_pricing.instance_types])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeDiskConfigQuota](https://www.tencentcloud.com/document/api/362/16318)
+      - [DescribeZoneInstanceConfigInfos](https://www.tencentcloud.com/document/api/213/33254)
 
 
     :param _builtins.str availability_zone: The available zone that the CVM instance locates at. This field is conflict with `filter`.

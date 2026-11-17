@@ -45,6 +45,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeClusterResources](https://www.tencentcloud.com/search/?wd=DescribeClusterResources&type=document&lang=en)
 func GetClusterResources(ctx *pulumi.Context, args *GetClusterResourcesArgs, opts ...pulumi.InvokeOption) (*GetClusterResourcesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetClusterResourcesResult

@@ -40,6 +40,22 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeInstances](https://www.tencentcloud.com/document/api/1051/50703)
+ *   - [DescribeInternalEndpoints](https://www.tencentcloud.com/document/api/1051/50735)
+ *   - [ManageInternalEndpoint](https://www.tencentcloud.com/document/api/1051/50732)
+ * * Read:
+ *   - [DescribeInstances](https://www.tencentcloud.com/document/api/1051/50703)
+ *   - [DescribeInternalEndpoints](https://www.tencentcloud.com/document/api/1051/50735)
+ * * Delete:
+ *   - [DescribeInstances](https://www.tencentcloud.com/document/api/1051/50703)
+ *   - [DescribeInternalEndpoints](https://www.tencentcloud.com/document/api/1051/50735)
+ *   - [ManageInternalEndpoint](https://www.tencentcloud.com/document/api/1051/50732)
+ *
  * ## Import
  *
  * tcr vpc attachment can be imported using the id, e.g.

@@ -76,6 +76,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdc
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateSite](https://www.tencentcloud.com/document/api/1226/66398)
+    /// * Read: [DescribeSitesDetail](https://www.tencentcloud.com/document/api/1226/66385)
+    /// * Update: [ModifySiteInfo](https://www.tencentcloud.com/document/api/1226/66381)
+    /// * Delete: [DeleteSites](https://www.tencentcloud.com/document/api/1226/66396)
+    /// 
     /// ## Import
     /// 
     /// CDC site can be imported using the id, e.g.

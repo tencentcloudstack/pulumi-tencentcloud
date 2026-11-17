@@ -621,6 +621,23 @@ class Certificate(pulumi.CustomResource):
         svr = tencentcloud.ssl.get_certificates_output(name=svr_certificate.name)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeCertificateDetail](https://www.tencentcloud.com/document/api/1007/36587)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+          - [UploadCertificate](https://www.tencentcloud.com/document/api/1007/36579)
+        * Read:
+          - [DescribeCertificateDetail](https://www.tencentcloud.com/document/api/1007/36587)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [ModifyCertificateAlias](https://www.tencentcloud.com/document/api/1007/36583)
+          - [ModifyCertificateProject](https://www.tencentcloud.com/document/api/1007/36582)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Delete: [DeleteCertificate](https://www.tencentcloud.com/document/api/1007/36589)
+
         ## Import
 
         ssl certificate can be imported using the id, e.g.
@@ -915,6 +932,23 @@ class Certificate(pulumi.CustomResource):
             key=key)
         svr = tencentcloud.ssl.get_certificates_output(name=svr_certificate.name)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeCertificateDetail](https://www.tencentcloud.com/document/api/1007/36587)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+          - [UploadCertificate](https://www.tencentcloud.com/document/api/1007/36579)
+        * Read:
+          - [DescribeCertificateDetail](https://www.tencentcloud.com/document/api/1007/36587)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [ModifyCertificateAlias](https://www.tencentcloud.com/document/api/1007/36583)
+          - [ModifyCertificateProject](https://www.tencentcloud.com/document/api/1007/36582)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Delete: [DeleteCertificate](https://www.tencentcloud.com/document/api/1007/36589)
 
         ## Import
 

@@ -291,6 +291,17 @@ class ParameterTemplate(pulumi.CustomResource):
             delete_param_sets=["lock_timeout"])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateParameterTemplate](https://www.tencentcloud.com/document/api/409/52655)
+          - [ModifyParameterTemplate](https://www.tencentcloud.com/document/api/409/52650)
+        * Read: [DescribeParameterTemplateAttributes](https://www.tencentcloud.com/document/api/409/52652)
+        * Update: [ModifyParameterTemplate](https://www.tencentcloud.com/document/api/409/52650)
+        * Delete: [DeleteParameterTemplate](https://www.tencentcloud.com/document/api/409/52654)
+
         ## Import
 
         PostgreSQL parameter template can be imported using the id, e.g.
@@ -368,6 +379,17 @@ class ParameterTemplate(pulumi.CustomResource):
             ],
             delete_param_sets=["lock_timeout"])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateParameterTemplate](https://www.tencentcloud.com/document/api/409/52655)
+          - [ModifyParameterTemplate](https://www.tencentcloud.com/document/api/409/52650)
+        * Read: [DescribeParameterTemplateAttributes](https://www.tencentcloud.com/document/api/409/52652)
+        * Update: [ModifyParameterTemplate](https://www.tencentcloud.com/document/api/409/52650)
+        * Delete: [DeleteParameterTemplate](https://www.tencentcloud.com/document/api/409/52654)
 
         ## Import
 

@@ -44,6 +44,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeErrorLogData](https://www.tencentcloud.com/document/api/236/35669)
 func GetErrorLog(ctx *pulumi.Context, args *GetErrorLogArgs, opts ...pulumi.InvokeOption) (*GetErrorLogResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetErrorLogResult

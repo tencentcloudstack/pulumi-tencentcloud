@@ -104,6 +104,14 @@ class AllocationTag(pulumi.CustomResource):
         example_allocation_tag = tencentcloud.billing.AllocationTag("example", tag_key=example.tag_key)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateAllocationTag](https://www.tencentcloud.com/search/?wd=CreateAllocationTag&type=document&lang=en)
+        * Read: [DescribeTagList](https://www.tencentcloud.com/search/?wd=DescribeTagList&type=document&lang=en)
+        * Delete: [DeleteAllocationTag](https://www.tencentcloud.com/search/?wd=DeleteAllocationTag&type=document&lang=en)
+
         ## Import
 
         Billing allocation tag can be imported using the id, e.g.
@@ -137,6 +145,14 @@ class AllocationTag(pulumi.CustomResource):
             tag_value="tagValue")
         example_allocation_tag = tencentcloud.billing.AllocationTag("example", tag_key=example.tag_key)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateAllocationTag](https://www.tencentcloud.com/search/?wd=CreateAllocationTag&type=document&lang=en)
+        * Read: [DescribeTagList](https://www.tencentcloud.com/search/?wd=DescribeTagList&type=document&lang=en)
+        * Delete: [DeleteAllocationTag](https://www.tencentcloud.com/search/?wd=DeleteAllocationTag&type=document&lang=en)
 
         ## Import
 

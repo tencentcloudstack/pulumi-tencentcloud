@@ -156,11 +156,80 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
     /// });
     /// ```
     /// 
+    /// ### If FuncType is Event
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Scf.Function("example", new()
+    ///     {
+    ///         Name = "test",
+    ///         Namespace = "default",
+    ///         AsyncRunEnable = "FALSE",
+    ///         Description = "terraform demo",
+    ///         EnablePublicNet = true,
+    ///         FuncType = "Event",
+    ///         L5Enable = false,
+    ///         MemSize = 128,
+    ///         Runtime = "CustomImage",
+    ///         Timeout = 3,
+    ///         ImageConfigs = new[]
+    ///         {
+    ///             new Tencentcloud.Scf.Inputs.FunctionImageConfigArgs
+    ///             {
+    ///                 ContainerImageAccelerate = false,
+    ///                 ImagePort = -1,
+    ///                 ImageType = "personal",
+    ///                 ImageUri = "ccr.ccs.tencentyun.com/tsf_100023201586/quickstart-gateway-service:v1-20250313124040@sha256:b8821639168*********************d33aadee54d81c",
+    ///             },
+    ///         },
+    ///         InstanceConcurrencyConfig = new Tencentcloud.Scf.Inputs.FunctionInstanceConcurrencyConfigArgs
+    ///         {
+    ///             DynamicEnabled = "FALSE",
+    ///             MaxConcurrency = 1,
+    ///         },
+    ///         IntranetConfig = new Tencentcloud.Scf.Inputs.FunctionIntranetConfigArgs
+    ///         {
+    ///             IpFixed = "DISABLE",
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateFunction](https://www.tencentcloud.com/search/?wd=CreateFunction&amp;type=document&amp;lang=en)
+    ///   - [CreateTrigger](https://www.tencentcloud.com/document/api/583/18589)
+    ///   - [GetFunction](https://www.tencentcloud.com/search/?wd=GetFunction&amp;type=document&amp;lang=en)
+    ///   - [GetSecretValue](https://www.tencentcloud.com/document/api/1078/38649)
+    ///   - [UpdateFunctionConfiguration](https://www.tencentcloud.com/search/?wd=UpdateFunctionConfiguration&amp;type=document&amp;lang=en)
+    /// * Read: [GetFunction](https://www.tencentcloud.com/search/?wd=GetFunction&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [CreateTrigger](https://www.tencentcloud.com/document/api/583/18589)
+    ///   - [DeleteTrigger](https://www.tencentcloud.com/document/api/583/18588)
+    ///   - [GetFunction](https://www.tencentcloud.com/search/?wd=GetFunction&amp;type=document&amp;lang=en)
+    ///   - [GetSecretValue](https://www.tencentcloud.com/document/api/1078/38649)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    ///   - [UpdateFunctionCode](https://www.tencentcloud.com/document/api/583/18581)
+    ///   - [UpdateFunctionConfiguration](https://www.tencentcloud.com/search/?wd=UpdateFunctionConfiguration&amp;type=document&amp;lang=en)
+    /// * Delete:
+    ///   - [DeleteFunction](https://www.tencentcloud.com/document/api/583/18585)
+    ///   - [GetFunction](https://www.tencentcloud.com/search/?wd=GetFunction&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// SCF function can be imported, e.g.
     /// 
-    /// &gt; **NOTE:** function id is `&lt;function namespace&gt;+&lt;function name&gt;`
+    /// &gt; **NOTE:** resource id is `&lt;function namespace&gt;+&lt;function name&gt;`
     /// 
     /// ```sh
     /// $ pulumi import tencentcloud:Scf/function:Function example default+test
@@ -368,7 +437,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public Output<string?> Role { get; private set; } = null!;
 
         /// <summary>
-        /// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, and `CustomRuntime`, default is `Python2.7`.
+        /// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, `CustomRuntime` and `CustomImage`, default is `Python2.7`. When deploying images using `ImageComfig`, please explicitly specify the runtime as `CustomImage`. After creating a mirror function, it is not supported to modify the `Runtime`.
         /// </summary>
         [Output("runtime")]
         public Output<string?> Runtime { get; private set; } = null!;
@@ -643,7 +712,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public Input<string>? Role { get; set; }
 
         /// <summary>
-        /// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, and `CustomRuntime`, default is `Python2.7`.
+        /// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, `CustomRuntime` and `CustomImage`, default is `Python2.7`. When deploying images using `ImageComfig`, please explicitly specify the runtime as `CustomImage`. After creating a mirror function, it is not supported to modify the `Runtime`.
         /// </summary>
         [Input("runtime")]
         public Input<string>? Runtime { get; set; }
@@ -933,7 +1002,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         public Input<string>? Role { get; set; }
 
         /// <summary>
-        /// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, and `CustomRuntime`, default is `Python2.7`.
+        /// Runtime of the SCF function, only supports `Python2.7`, `Python3.6`, `Nodejs6.10`, `Nodejs8.9`, `Nodejs10.15`, `Nodejs12.16`, `Php5.2`, `Php7.4`, `Go1`, `Java8`, `CustomRuntime` and `CustomImage`, default is `Python2.7`. When deploying images using `ImageComfig`, please explicitly specify the runtime as `CustomImage`. After creating a mirror function, it is not supported to modify the `Runtime`.
         /// </summary>
         [Input("runtime")]
         public Input<string>? Runtime { get; set; }

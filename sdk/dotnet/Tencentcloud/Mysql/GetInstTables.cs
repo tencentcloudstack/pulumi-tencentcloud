@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTables](https://www.tencentcloud.com/document/api/236/18727)
         /// </summary>
         public static Task<GetInstTablesResult> InvokeAsync(GetInstTablesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstTablesResult>("tencentcloud:Mysql/getInstTables:getInstTables", args ?? new GetInstTablesArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTables](https://www.tencentcloud.com/document/api/236/18727)
         /// </summary>
         public static Output<GetInstTablesResult> Invoke(GetInstTablesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstTablesResult>("tencentcloud:Mysql/getInstTables:getInstTables", args ?? new GetInstTablesInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTables](https://www.tencentcloud.com/document/api/236/18727)
         /// </summary>
         public static Output<GetInstTablesResult> Invoke(GetInstTablesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstTablesResult>("tencentcloud:Mysql/getInstTables:getInstTables", args ?? new GetInstTablesInvokeArgs(), options.WithDefaults());

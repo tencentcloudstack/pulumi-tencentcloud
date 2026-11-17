@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeHostWafInstanceList](https://www.tencentcloud.com/search/?wd=DescribeHostWafInstanceList&type=document&lang=en)
 func GetDescribeHostWafInstanceList(ctx *pulumi.Context, args *GetDescribeHostWafInstanceListArgs, opts ...pulumi.InvokeOption) (*GetDescribeHostWafInstanceListResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDescribeHostWafInstanceListResult

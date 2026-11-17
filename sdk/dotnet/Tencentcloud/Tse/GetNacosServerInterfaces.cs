@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeNacosServerInterfaces](https://www.tencentcloud.com/search/?wd=DescribeNacosServerInterfaces&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetNacosServerInterfacesResult> InvokeAsync(GetNacosServerInterfacesArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetNacosServerInterfacesResult>("tencentcloud:Tse/getNacosServerInterfaces:getNacosServerInterfaces", args ?? new GetNacosServerInterfacesArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeNacosServerInterfaces](https://www.tencentcloud.com/search/?wd=DescribeNacosServerInterfaces&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetNacosServerInterfacesResult> Invoke(GetNacosServerInterfacesInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetNacosServerInterfacesResult>("tencentcloud:Tse/getNacosServerInterfaces:getNacosServerInterfaces", args ?? new GetNacosServerInterfacesInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeNacosServerInterfaces](https://www.tencentcloud.com/search/?wd=DescribeNacosServerInterfaces&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetNacosServerInterfacesResult> Invoke(GetNacosServerInterfacesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetNacosServerInterfacesResult>("tencentcloud:Tse/getNacosServerInterfaces:getNacosServerInterfaces", args ?? new GetNacosServerInterfacesInvokeArgs(), options.WithDefaults());

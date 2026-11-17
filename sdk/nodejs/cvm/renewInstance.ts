@@ -63,6 +63,12 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [RenewInstances](https://www.tencentcloud.com/document/api/213/72769)
  */
 export class RenewInstance extends pulumi.CustomResource {
     /**

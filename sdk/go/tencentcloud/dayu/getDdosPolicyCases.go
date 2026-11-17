@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribePolicyCase](https://www.tencentcloud.com/search/?wd=DescribePolicyCase&type=document&lang=en)
 func GetDdosPolicyCases(ctx *pulumi.Context, args *GetDdosPolicyCasesArgs, opts ...pulumi.InvokeOption) (*GetDdosPolicyCasesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDdosPolicyCasesResult

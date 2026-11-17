@@ -121,6 +121,15 @@ class DeviceGroup(pulumi.CustomResource):
             department_id="1.2")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateDeviceGroup](https://www.tencentcloud.com/search/?wd=CreateDeviceGroup&type=document&lang=en)
+        * Read: [DescribeDeviceGroups](https://www.tencentcloud.com/search/?wd=DescribeDeviceGroups&type=document&lang=en)
+        * Update: [ModifyDeviceGroup](https://www.tencentcloud.com/search/?wd=ModifyDeviceGroup&type=document&lang=en)
+        * Delete: [DeleteDeviceGroups](https://www.tencentcloud.com/search/?wd=DeleteDeviceGroups&type=document&lang=en)
+
         ## Import
 
         dasb device_group can be imported using the id, e.g.
@@ -154,6 +163,15 @@ class DeviceGroup(pulumi.CustomResource):
             name="tf_example",
             department_id="1.2")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateDeviceGroup](https://www.tencentcloud.com/search/?wd=CreateDeviceGroup&type=document&lang=en)
+        * Read: [DescribeDeviceGroups](https://www.tencentcloud.com/search/?wd=DescribeDeviceGroups&type=document&lang=en)
+        * Update: [ModifyDeviceGroup](https://www.tencentcloud.com/search/?wd=ModifyDeviceGroup&type=document&lang=en)
+        * Delete: [DeleteDeviceGroups](https://www.tencentcloud.com/search/?wd=DeleteDeviceGroups&type=document&lang=en)
 
         ## Import
 

@@ -239,6 +239,14 @@ class PluginAttachment(pulumi.CustomResource):
             environment_name="release")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AttachPlugin](https://www.tencentcloud.com/search/?wd=AttachPlugin&type=document&lang=en)
+        * Read: [DescribePluginApis](https://www.tencentcloud.com/search/?wd=DescribePluginApis&type=document&lang=en)
+        * Delete: [DetachPlugin](https://www.tencentcloud.com/search/?wd=DetachPlugin&type=document&lang=en)
+
         ## Import
 
         apiGateway plugin_attachment can be imported using the id, e.g.
@@ -330,6 +338,14 @@ class PluginAttachment(pulumi.CustomResource):
             api_id=example_api.id,
             environment_name="release")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AttachPlugin](https://www.tencentcloud.com/search/?wd=AttachPlugin&type=document&lang=en)
+        * Read: [DescribePluginApis](https://www.tencentcloud.com/search/?wd=DescribePluginApis&type=document&lang=en)
+        * Delete: [DetachPlugin](https://www.tencentcloud.com/search/?wd=DetachPlugin&type=document&lang=en)
 
         ## Import
 

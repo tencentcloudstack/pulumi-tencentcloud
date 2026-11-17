@@ -107,6 +107,12 @@ def get_last_activity(auto_scaling_group_ids: Optional[Sequence[_builtins.str]] 
         exclude_cancelled_activity=True)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAutoScalingGroupLastActivities](https://www.tencentcloud.com/document/api/377/33204)
+
 
     :param Sequence[_builtins.str] auto_scaling_group_ids: ID list of an auto scaling group.
     :param _builtins.bool exclude_cancelled_activity: Exclude cancellation type activities when querying. The default value is false, indicating that cancellation type activities are not excluded.
@@ -141,6 +147,12 @@ def get_last_activity_output(auto_scaling_group_ids: pulumi.Input[Optional[Seque
     example = tencentcloud.as_.get_last_activity(auto_scaling_group_ids=["asg-3st9wq9m"],
         exclude_cancelled_activity=True)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAutoScalingGroupLastActivities](https://www.tencentcloud.com/document/api/377/33204)
 
 
     :param Sequence[_builtins.str] auto_scaling_group_ids: ID list of an auto scaling group.

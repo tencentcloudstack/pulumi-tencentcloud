@@ -48,6 +48,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateSQLScript](https://www.tencentcloud.com/document/api/1174/73854)
+    /// * Read: [GetSQLScript](https://www.tencentcloud.com/document/api/1174/73848)
+    /// * Update: [UpdateSQLScript](https://www.tencentcloud.com/document/api/1174/73839)
+    /// * Delete: [DeleteSQLScript](https://www.tencentcloud.com/document/api/1174/73850)
+    /// 
     /// ## Import
     /// 
     /// WeData sql script can be imported using the projectId#scriptId, e.g.

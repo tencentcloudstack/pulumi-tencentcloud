@@ -30,6 +30,12 @@ import * as utilities from "../utilities";
  *     searchKey: "KeyWord",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListOrganizationService](https://www.tencentcloud.com/document/api/1031/63259)
  */
 export function getServices(args?: GetServicesArgs, opts?: pulumi.InvokeOptions): Promise<GetServicesResult> {
     args = args || {};
@@ -93,6 +99,12 @@ export interface GetServicesResult {
  *     searchKey: "KeyWord",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListOrganizationService](https://www.tencentcloud.com/document/api/1031/63259)
  */
 export function getServicesOutput(args?: GetServicesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetServicesResult> {
     args = args || {};

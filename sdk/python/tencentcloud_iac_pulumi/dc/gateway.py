@@ -477,6 +477,21 @@ class Gateway(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateDirectConnectGateway](https://www.tencentcloud.com/document/api/215/36915)
+          - [ModifyDirectConnectGatewayAttribute](https://www.tencentcloud.com/document/api/215/36912)
+        * Read:
+          - [DescribeDirectConnectGateways](https://www.tencentcloud.com/document/api/215/36913)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [ModifyDirectConnectGatewayAttribute](https://www.tencentcloud.com/document/api/215/36912)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Delete: [DeleteDirectConnectGateway](https://www.tencentcloud.com/document/api/215/36914)
+
         ## Import
 
         Direct connect gateway instance can be imported, e.g. Tags will be imported automatically.
@@ -579,6 +594,21 @@ class Gateway(pulumi.CustomResource):
                 "CostCenter": "IT-001",
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateDirectConnectGateway](https://www.tencentcloud.com/document/api/215/36915)
+          - [ModifyDirectConnectGatewayAttribute](https://www.tencentcloud.com/document/api/215/36912)
+        * Read:
+          - [DescribeDirectConnectGateways](https://www.tencentcloud.com/document/api/215/36913)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [ModifyDirectConnectGatewayAttribute](https://www.tencentcloud.com/document/api/215/36912)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Delete: [DeleteDirectConnectGateway](https://www.tencentcloud.com/document/api/215/36914)
 
         ## Import
 

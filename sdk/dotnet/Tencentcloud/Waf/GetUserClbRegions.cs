@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeUserClbWafRegions](https://www.tencentcloud.com/document/api/627/64769)
         /// </summary>
         public static Task<GetUserClbRegionsResult> InvokeAsync(GetUserClbRegionsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetUserClbRegionsResult>("tencentcloud:Waf/getUserClbRegions:getUserClbRegions", args ?? new GetUserClbRegionsArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeUserClbWafRegions](https://www.tencentcloud.com/document/api/627/64769)
         /// </summary>
         public static Output<GetUserClbRegionsResult> Invoke(GetUserClbRegionsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetUserClbRegionsResult>("tencentcloud:Waf/getUserClbRegions:getUserClbRegions", args ?? new GetUserClbRegionsInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeUserClbWafRegions](https://www.tencentcloud.com/document/api/627/64769)
         /// </summary>
         public static Output<GetUserClbRegionsResult> Invoke(GetUserClbRegionsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetUserClbRegionsResult>("tencentcloud:Waf/getUserClbRegions:getUserClbRegions", args ?? new GetUserClbRegionsInvokeArgs(), options.WithDefaults());

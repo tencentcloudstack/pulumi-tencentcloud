@@ -59,6 +59,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeIPStrategy](https://www.tencentcloud.com/search/?wd=DescribeIPStrategy&amp;type=document&amp;lang=en)
+        ///   - [DescribeIPStrategysStatus](https://www.tencentcloud.com/search/?wd=DescribeIPStrategysStatus&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetIpStrategiesResult> InvokeAsync(GetIpStrategiesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetIpStrategiesResult>("tencentcloud:ApiGateway/getIpStrategies:getIpStrategies", args ?? new GetIpStrategiesArgs(), options.WithDefaults());
@@ -110,6 +118,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeIPStrategy](https://www.tencentcloud.com/search/?wd=DescribeIPStrategy&amp;type=document&amp;lang=en)
+        ///   - [DescribeIPStrategysStatus](https://www.tencentcloud.com/search/?wd=DescribeIPStrategysStatus&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetIpStrategiesResult> Invoke(GetIpStrategiesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetIpStrategiesResult>("tencentcloud:ApiGateway/getIpStrategies:getIpStrategies", args ?? new GetIpStrategiesInvokeArgs(), options.WithDefaults());
@@ -161,6 +177,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeIPStrategy](https://www.tencentcloud.com/search/?wd=DescribeIPStrategy&amp;type=document&amp;lang=en)
+        ///   - [DescribeIPStrategysStatus](https://www.tencentcloud.com/search/?wd=DescribeIPStrategysStatus&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetIpStrategiesResult> Invoke(GetIpStrategiesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetIpStrategiesResult>("tencentcloud:ApiGateway/getIpStrategies:getIpStrategies", args ?? new GetIpStrategiesInvokeArgs(), options.WithDefaults());

@@ -47,6 +47,20 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CreateDDoSGeoIPBlockConfig](https://www.tencentcloud.com/document/api/1213/61380)
+//   - [DescribeListDDoSGeoIPBlockConfig](https://www.tencentcloud.com/document/api/1213/61362)
+//
+// * Read: [DescribeListDDoSGeoIPBlockConfig](https://www.tencentcloud.com/document/api/1213/61362)
+// * Update: [ModifyDDoSGeoIPBlockConfig](https://www.tencentcloud.com/document/api/1213/61355)
+// * Delete:
+//   - [DeleteDDoSGeoIPBlockConfig](https://www.tencentcloud.com/document/api/1213/61372)
+//   - [DescribeListDDoSGeoIPBlockConfig](https://www.tencentcloud.com/document/api/1213/61362)
+//
 // ## Import
 //
 // antiddos ddosGeoIpBlockConfig can be imported using the id, e.g.

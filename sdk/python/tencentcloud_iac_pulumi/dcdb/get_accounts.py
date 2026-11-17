@@ -96,6 +96,12 @@ def get_accounts(instance_id: Optional[_builtins.str] = None,
     foo = tencentcloud.dcdb.get_accounts(instance_id=foo_tencentcloud_dcdb_account["instanceId"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAccounts](https://www.tencentcloud.com/document/api/1042/34446)
+
 
     :param _builtins.str instance_id: instance id.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_accounts_output(instance_id: pulumi.Input[Optional[_builtins.str]] = Non
 
     foo = tencentcloud.dcdb.get_accounts(instance_id=foo_tencentcloud_dcdb_account["instanceId"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAccounts](https://www.tencentcloud.com/document/api/1042/34446)
 
 
     :param _builtins.str instance_id: instance id.

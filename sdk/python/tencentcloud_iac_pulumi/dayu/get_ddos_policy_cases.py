@@ -113,6 +113,12 @@ def get_ddos_policy_cases(resource_type: Optional[_builtins.str] = None,
         scene_id=test_policy_case["sceneId"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribePolicyCase](https://www.tencentcloud.com/search/?wd=DescribePolicyCase&type=document&lang=en)
+
 
     :param _builtins.str resource_type: Type of the resource that the DDoS policy case works for, valid values are `bgpip`, `bgp`, `bgp-multip` and `net`.
     :param _builtins.str result_output_file: Used to save results.
@@ -147,6 +153,12 @@ def get_ddos_policy_cases_output(resource_type: pulumi.Input[Optional[_builtins.
     id_test = tencentcloud.dayu.get_ddos_policy_cases(resource_type=test_policy_case["resourceType"],
         scene_id=test_policy_case["sceneId"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribePolicyCase](https://www.tencentcloud.com/search/?wd=DescribePolicyCase&type=document&lang=en)
 
 
     :param _builtins.str resource_type: Type of the resource that the DDoS policy case works for, valid values are `bgpip`, `bgp`, `bgp-multip` and `net`.

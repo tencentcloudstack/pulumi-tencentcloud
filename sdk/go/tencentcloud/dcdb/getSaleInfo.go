@@ -36,6 +36,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDCDBSaleInfo](https://www.tencentcloud.com/search/?wd=DescribeDCDBSaleInfo&type=document&lang=en)
 func GetSaleInfo(ctx *pulumi.Context, args *GetSaleInfoArgs, opts ...pulumi.InvokeOption) (*GetSaleInfoResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSaleInfoResult

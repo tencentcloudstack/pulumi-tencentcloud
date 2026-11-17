@@ -85,6 +85,14 @@ class UserSyncTaskOperation(pulumi.CustomResource):
         example = tencentcloud.bh.UserSyncTaskOperation("example", user_kind=1)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateSyncUserTask](https://www.tencentcloud.com/search/?wd=CreateSyncUserTask&type=document&lang=en)
+          - [DescribeUserSyncStatus](https://www.tencentcloud.com/search/?wd=DescribeUserSyncStatus&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -107,6 +115,14 @@ class UserSyncTaskOperation(pulumi.CustomResource):
 
         example = tencentcloud.bh.UserSyncTaskOperation("example", user_kind=1)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateSyncUserTask](https://www.tencentcloud.com/search/?wd=CreateSyncUserTask&type=document&lang=en)
+          - [DescribeUserSyncStatus](https://www.tencentcloud.com/search/?wd=DescribeUserSyncStatus&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

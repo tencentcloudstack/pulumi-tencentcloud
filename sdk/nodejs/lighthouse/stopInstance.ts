@@ -15,6 +15,14 @@ import * as utilities from "../utilities";
  *
  * const stopInstance = new tencentcloud.lighthouse.StopInstance("stop_instance", {instanceId: "lhins-xxxxxx"});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeInstances](https://www.tencentcloud.com/document/api/1103/42498)
+ *   - [StopInstances](https://www.tencentcloud.com/document/api/1103/42487)
  */
 export class StopInstance extends pulumi.CustomResource {
     /**

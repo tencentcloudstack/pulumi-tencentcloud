@@ -42,6 +42,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTargetGroupList](https://www.tencentcloud.com/document/api/214/33827)
         /// </summary>
         public static Task<GetTargetGroupListResult> InvokeAsync(GetTargetGroupListArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetTargetGroupListResult>("tencentcloud:Clb/getTargetGroupList:getTargetGroupList", args ?? new GetTargetGroupListArgs(), options.WithDefaults());
@@ -76,6 +82,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTargetGroupList](https://www.tencentcloud.com/document/api/214/33827)
         /// </summary>
         public static Output<GetTargetGroupListResult> Invoke(GetTargetGroupListInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetTargetGroupListResult>("tencentcloud:Clb/getTargetGroupList:getTargetGroupList", args ?? new GetTargetGroupListInvokeArgs(), options.WithDefaults());
@@ -110,6 +122,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTargetGroupList](https://www.tencentcloud.com/document/api/214/33827)
         /// </summary>
         public static Output<GetTargetGroupListResult> Invoke(GetTargetGroupListInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetTargetGroupListResult>("tencentcloud:Clb/getTargetGroupList:getTargetGroupList", args ?? new GetTargetGroupListInvokeArgs(), options.WithDefaults());

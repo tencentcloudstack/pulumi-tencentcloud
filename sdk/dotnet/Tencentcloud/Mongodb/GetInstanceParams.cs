@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstanceParams](https://www.tencentcloud.com/document/api/240/44226)
         /// </summary>
         public static Task<GetInstanceParamsResult> InvokeAsync(GetInstanceParamsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceParamsResult>("tencentcloud:Mongodb/getInstanceParams:getInstanceParams", args ?? new GetInstanceParamsArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstanceParams](https://www.tencentcloud.com/document/api/240/44226)
         /// </summary>
         public static Output<GetInstanceParamsResult> Invoke(GetInstanceParamsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceParamsResult>("tencentcloud:Mongodb/getInstanceParams:getInstanceParams", args ?? new GetInstanceParamsInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstanceParams](https://www.tencentcloud.com/document/api/240/44226)
         /// </summary>
         public static Output<GetInstanceParamsResult> Invoke(GetInstanceParamsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceParamsResult>("tencentcloud:Mongodb/getInstanceParams:getInstanceParams", args ?? new GetInstanceParamsInvokeArgs(), options.WithDefaults());

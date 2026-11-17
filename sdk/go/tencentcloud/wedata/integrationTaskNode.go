@@ -100,6 +100,18 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CreateIntegrationNode](https://www.tencentcloud.com/document/api/1174/61069)
+//   - [ModifyIntegrationNode](https://www.tencentcloud.com/document/api/1174/61022)
+//
+// * Read: [DescribeIntegrationNode](https://www.tencentcloud.com/document/api/1174/61051)
+// * Update: [ModifyIntegrationNode](https://www.tencentcloud.com/document/api/1174/61022)
+// * Delete: [DeleteIntegrationNode](https://www.tencentcloud.com/document/api/1174/61065)
 type IntegrationTaskNode struct {
 	pulumi.CustomResourceState
 

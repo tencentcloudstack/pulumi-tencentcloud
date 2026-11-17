@@ -15,6 +15,12 @@ import * as utilities from "../utilities";
  *
  * const flushBinlog = new tencentcloud.mariadb.FlushBinlog("flush_binlog", {instanceId: "tdsql-9vqvls95"});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [FlushBinlog](https://www.tencentcloud.com/search/?wd=FlushBinlog&type=document&lang=en)
  */
 export class FlushBinlog extends pulumi.CustomResource {
     /**

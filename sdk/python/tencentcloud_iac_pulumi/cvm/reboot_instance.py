@@ -162,6 +162,12 @@ class RebootInstance(pulumi.CustomResource):
             stop_type="SOFT_FIRST")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [RebootInstances](https://www.tencentcloud.com/document/api/213/33243)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -188,6 +194,12 @@ class RebootInstance(pulumi.CustomResource):
             instance_id="ins-f9jr4bd2",
             stop_type="SOFT_FIRST")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [RebootInstances](https://www.tencentcloud.com/document/api/213/33243)
 
 
         :param str resource_name: The name of the resource.

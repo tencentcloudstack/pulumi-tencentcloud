@@ -99,6 +99,12 @@ def get_bin_log(instance_id: Optional[_builtins.str] = None,
     bin_log = tencentcloud.mysql.get_bin_log(instance_id="cdb-fitq5t9h")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBinlogs](https://www.tencentcloud.com/document/api/236/15843)
+
 
     :param _builtins.str instance_id: Instance ID, in the format: cdb-c1nl9rpv. Same instance ID as displayed in the ApsaraDB for Console page.
     :param _builtins.str result_output_file: Used to save results.
@@ -128,6 +134,12 @@ def get_bin_log_output(instance_id: pulumi.Input[Optional[_builtins.str]] = None
 
     bin_log = tencentcloud.mysql.get_bin_log(instance_id="cdb-fitq5t9h")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBinlogs](https://www.tencentcloud.com/document/api/236/15843)
 
 
     :param _builtins.str instance_id: Instance ID, in the format: cdb-c1nl9rpv. Same instance ID as displayed in the ApsaraDB for Console page.

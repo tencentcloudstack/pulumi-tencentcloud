@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [TriggerJobSavepoint](https://www.tencentcloud.com/search/?wd=TriggerJobSavepoint&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Oceanus/triggerJobSavepoint:TriggerJobSavepoint")]
     public partial class TriggerJobSavepoint : global::Pulumi.CustomResource

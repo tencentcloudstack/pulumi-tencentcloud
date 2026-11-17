@@ -23,6 +23,7 @@ class SecretArgs:
                  secret_name: pulumi.Input[_builtins.str],
                  additional_config: pulumi.Input[Optional[_builtins.str]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
+                 encrypt_type: pulumi.Input[Optional[_builtins.int]] = None,
                  is_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  kms_key_id: pulumi.Input[Optional[_builtins.str]] = None,
                  recovery_window_in_days: pulumi.Input[Optional[_builtins.int]] = None,
@@ -34,6 +35,7 @@ class SecretArgs:
         :param pulumi.Input[_builtins.str] secret_name: Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
         :param pulumi.Input[_builtins.str] additional_config: Additional config for specific secret types in JSON string format.
         :param pulumi.Input[_builtins.str] description: Description of secret. The maximum is 2048 bytes.
+        :param pulumi.Input[_builtins.int] encrypt_type: Encryption type of secret. `0`: KMS key encryption. `1`: soft key encryption. Default is `0`. Once created, it cannot be modified.
         :param pulumi.Input[_builtins.bool] is_enabled: Specify whether to enable secret. Default value is `true`.
         :param pulumi.Input[_builtins.str] kms_key_id: KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
         :param pulumi.Input[_builtins.int] recovery_window_in_days: Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.
@@ -45,6 +47,8 @@ class SecretArgs:
             pulumi.set(__self__, "additional_config", additional_config)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if encrypt_type is not None:
+            pulumi.set(__self__, "encrypt_type", encrypt_type)
         if is_enabled is not None:
             pulumi.set(__self__, "is_enabled", is_enabled)
         if kms_key_id is not None:
@@ -91,6 +95,18 @@ class SecretArgs:
     @description.setter
     def description(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "description", value)
+
+    @_builtins.property
+    @pulumi.getter(name="encryptType")
+    def encrypt_type(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Encryption type of secret. `0`: KMS key encryption. `1`: soft key encryption. Default is `0`. Once created, it cannot be modified.
+        """
+        return pulumi.get(self, "encrypt_type")
+
+    @encrypt_type.setter
+    def encrypt_type(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "encrypt_type", value)
 
     @_builtins.property
     @pulumi.getter(name="isEnabled")
@@ -158,6 +174,7 @@ class _SecretState:
     def __init__(__self__, *,
                  additional_config: pulumi.Input[Optional[_builtins.str]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
+                 encrypt_type: pulumi.Input[Optional[_builtins.int]] = None,
                  is_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  kms_key_id: pulumi.Input[Optional[_builtins.str]] = None,
                  recovery_window_in_days: pulumi.Input[Optional[_builtins.int]] = None,
@@ -170,6 +187,7 @@ class _SecretState:
 
         :param pulumi.Input[_builtins.str] additional_config: Additional config for specific secret types in JSON string format.
         :param pulumi.Input[_builtins.str] description: Description of secret. The maximum is 2048 bytes.
+        :param pulumi.Input[_builtins.int] encrypt_type: Encryption type of secret. `0`: KMS key encryption. `1`: soft key encryption. Default is `0`. Once created, it cannot be modified.
         :param pulumi.Input[_builtins.bool] is_enabled: Specify whether to enable secret. Default value is `true`.
         :param pulumi.Input[_builtins.str] kms_key_id: KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
         :param pulumi.Input[_builtins.int] recovery_window_in_days: Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.
@@ -182,6 +200,8 @@ class _SecretState:
             pulumi.set(__self__, "additional_config", additional_config)
         if description is not None:
             pulumi.set(__self__, "description", description)
+        if encrypt_type is not None:
+            pulumi.set(__self__, "encrypt_type", encrypt_type)
         if is_enabled is not None:
             pulumi.set(__self__, "is_enabled", is_enabled)
         if kms_key_id is not None:
@@ -220,6 +240,18 @@ class _SecretState:
     @description.setter
     def description(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "description", value)
+
+    @_builtins.property
+    @pulumi.getter(name="encryptType")
+    def encrypt_type(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Encryption type of secret. `0`: KMS key encryption. `1`: soft key encryption. Default is `0`. Once created, it cannot be modified.
+        """
+        return pulumi.get(self, "encrypt_type")
+
+    @encrypt_type.setter
+    def encrypt_type(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "encrypt_type", value)
 
     @_builtins.property
     @pulumi.getter(name="isEnabled")
@@ -314,6 +346,7 @@ class Secret(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  additional_config: pulumi.Input[Optional[_builtins.str]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
+                 encrypt_type: pulumi.Input[Optional[_builtins.int]] = None,
                  is_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  kms_key_id: pulumi.Input[Optional[_builtins.str]] = None,
                  recovery_window_in_days: pulumi.Input[Optional[_builtins.int]] = None,
@@ -336,6 +369,23 @@ class Secret(pulumi.CustomResource):
             secret_name="tf-example",
             description="desc.",
             is_enabled=True,
+            recovery_window_in_days=0,
+            tags={
+                "createBy": "terraform",
+            })
+        ```
+
+        ### Create user defined secret with soft key encryption
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.ssm.Secret("example",
+            secret_name="tf-example",
+            description="desc.",
+            is_enabled=True,
+            encrypt_type=1,
             recovery_window_in_days=0,
             tags={
                 "createBy": "terraform",
@@ -388,6 +438,28 @@ class Secret(pulumi.CustomResource):
             recovery_window_in_days=0)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateSecret](https://www.tencentcloud.com/document/api/1078/38656)
+          - [DeleteSecretVersion](https://www.tencentcloud.com/document/api/1078/38654)
+          - [DescribeSecret](https://www.tencentcloud.com/document/api/1078/38653)
+          - [DisableSecret](https://www.tencentcloud.com/document/api/1078/38652)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+          - [DescribeSecret](https://www.tencentcloud.com/document/api/1078/38653)
+        * Update:
+          - [DescribeSecret](https://www.tencentcloud.com/document/api/1078/38653)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+          - [UpdateDescription](https://www.tencentcloud.com/document/api/1078/38643)
+        * Delete:
+          - [DeleteSecret](https://www.tencentcloud.com/document/api/1078/38655)
+          - [DescribeSecret](https://www.tencentcloud.com/document/api/1078/38653)
+          - [DisableSecret](https://www.tencentcloud.com/document/api/1078/38652)
+
         ## Import
 
         SSM secret can be imported using the secretName, e.g.
@@ -395,11 +467,33 @@ class Secret(pulumi.CustomResource):
         $ pulumi import tencentcloud:Ssm/secret:Secret foo test
         ```
 
+        Argument Reference
+
+        The following arguments are supported:
+
+        * `secret_name` - (Required, ForceNew) Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+        * `description` - (Optional) Description of secret. The maximum is 2048 bytes.
+        * `kms_key_id` - (Optional, ForceNew, Computed) KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
+        * `secret_type` - (Optional, Computed) Type of secret. `0`: user-defined secret. `4`: redis secret. Default is `0`.
+        * `additional_config` - (Optional) Additional config for specific secret types in JSON string format.
+        * `encrypt_type` - (Optional, Computed) Encryption type of secret. `0`: KMS key encryption. `1`: soft key encryption. Default is `0`. Once created, it cannot be modified.
+        * `is_enabled` - (Optional) Specify whether to enable secret. Default value is `true`.
+        * `recovery_window_in_days` - (Optional) Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.
+        * `tags` - (Optional) Tags of secret.
+
+        Attributes Reference
+
+        The following attributes are exported:
+
+        * `status` - Status of secret.
+        * `id` - Secret name.
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] additional_config: Additional config for specific secret types in JSON string format.
         :param pulumi.Input[_builtins.str] description: Description of secret. The maximum is 2048 bytes.
+        :param pulumi.Input[_builtins.int] encrypt_type: Encryption type of secret. `0`: KMS key encryption. `1`: soft key encryption. Default is `0`. Once created, it cannot be modified.
         :param pulumi.Input[_builtins.bool] is_enabled: Specify whether to enable secret. Default value is `true`.
         :param pulumi.Input[_builtins.str] kms_key_id: KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
         :param pulumi.Input[_builtins.int] recovery_window_in_days: Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.
@@ -434,6 +528,23 @@ class Secret(pulumi.CustomResource):
             })
         ```
 
+        ### Create user defined secret with soft key encryption
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.ssm.Secret("example",
+            secret_name="tf-example",
+            description="desc.",
+            is_enabled=True,
+            encrypt_type=1,
+            recovery_window_in_days=0,
+            tags={
+                "createBy": "terraform",
+            })
+        ```
+
         ### Create redis secret
 
         ```python
@@ -480,12 +591,55 @@ class Secret(pulumi.CustomResource):
             recovery_window_in_days=0)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateSecret](https://www.tencentcloud.com/document/api/1078/38656)
+          - [DeleteSecretVersion](https://www.tencentcloud.com/document/api/1078/38654)
+          - [DescribeSecret](https://www.tencentcloud.com/document/api/1078/38653)
+          - [DisableSecret](https://www.tencentcloud.com/document/api/1078/38652)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+          - [DescribeSecret](https://www.tencentcloud.com/document/api/1078/38653)
+        * Update:
+          - [DescribeSecret](https://www.tencentcloud.com/document/api/1078/38653)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+          - [UpdateDescription](https://www.tencentcloud.com/document/api/1078/38643)
+        * Delete:
+          - [DeleteSecret](https://www.tencentcloud.com/document/api/1078/38655)
+          - [DescribeSecret](https://www.tencentcloud.com/document/api/1078/38653)
+          - [DisableSecret](https://www.tencentcloud.com/document/api/1078/38652)
+
         ## Import
 
         SSM secret can be imported using the secretName, e.g.
         ```sh
         $ pulumi import tencentcloud:Ssm/secret:Secret foo test
         ```
+
+        Argument Reference
+
+        The following arguments are supported:
+
+        * `secret_name` - (Required, ForceNew) Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+        * `description` - (Optional) Description of secret. The maximum is 2048 bytes.
+        * `kms_key_id` - (Optional, ForceNew, Computed) KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
+        * `secret_type` - (Optional, Computed) Type of secret. `0`: user-defined secret. `4`: redis secret. Default is `0`.
+        * `additional_config` - (Optional) Additional config for specific secret types in JSON string format.
+        * `encrypt_type` - (Optional, Computed) Encryption type of secret. `0`: KMS key encryption. `1`: soft key encryption. Default is `0`. Once created, it cannot be modified.
+        * `is_enabled` - (Optional) Specify whether to enable secret. Default value is `true`.
+        * `recovery_window_in_days` - (Optional) Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.
+        * `tags` - (Optional) Tags of secret.
+
+        Attributes Reference
+
+        The following attributes are exported:
+
+        * `status` - Status of secret.
+        * `id` - Secret name.
 
 
         :param str resource_name: The name of the resource.
@@ -505,6 +659,7 @@ class Secret(pulumi.CustomResource):
                  opts: Optional[pulumi.ResourceOptions] = None,
                  additional_config: pulumi.Input[Optional[_builtins.str]] = None,
                  description: pulumi.Input[Optional[_builtins.str]] = None,
+                 encrypt_type: pulumi.Input[Optional[_builtins.int]] = None,
                  is_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
                  kms_key_id: pulumi.Input[Optional[_builtins.str]] = None,
                  recovery_window_in_days: pulumi.Input[Optional[_builtins.int]] = None,
@@ -522,6 +677,7 @@ class Secret(pulumi.CustomResource):
 
             __props__.__dict__["additional_config"] = additional_config
             __props__.__dict__["description"] = description
+            __props__.__dict__["encrypt_type"] = encrypt_type
             __props__.__dict__["is_enabled"] = is_enabled
             __props__.__dict__["kms_key_id"] = kms_key_id
             __props__.__dict__["recovery_window_in_days"] = recovery_window_in_days
@@ -543,6 +699,7 @@ class Secret(pulumi.CustomResource):
             opts: Optional[pulumi.ResourceOptions] = None,
             additional_config: pulumi.Input[Optional[_builtins.str]] = None,
             description: pulumi.Input[Optional[_builtins.str]] = None,
+            encrypt_type: pulumi.Input[Optional[_builtins.int]] = None,
             is_enabled: pulumi.Input[Optional[_builtins.bool]] = None,
             kms_key_id: pulumi.Input[Optional[_builtins.str]] = None,
             recovery_window_in_days: pulumi.Input[Optional[_builtins.int]] = None,
@@ -559,6 +716,7 @@ class Secret(pulumi.CustomResource):
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] additional_config: Additional config for specific secret types in JSON string format.
         :param pulumi.Input[_builtins.str] description: Description of secret. The maximum is 2048 bytes.
+        :param pulumi.Input[_builtins.int] encrypt_type: Encryption type of secret. `0`: KMS key encryption. `1`: soft key encryption. Default is `0`. Once created, it cannot be modified.
         :param pulumi.Input[_builtins.bool] is_enabled: Specify whether to enable secret. Default value is `true`.
         :param pulumi.Input[_builtins.str] kms_key_id: KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
         :param pulumi.Input[_builtins.int] recovery_window_in_days: Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.
@@ -573,6 +731,7 @@ class Secret(pulumi.CustomResource):
 
         __props__.__dict__["additional_config"] = additional_config
         __props__.__dict__["description"] = description
+        __props__.__dict__["encrypt_type"] = encrypt_type
         __props__.__dict__["is_enabled"] = is_enabled
         __props__.__dict__["kms_key_id"] = kms_key_id
         __props__.__dict__["recovery_window_in_days"] = recovery_window_in_days
@@ -597,6 +756,14 @@ class Secret(pulumi.CustomResource):
         Description of secret. The maximum is 2048 bytes.
         """
         return pulumi.get(self, "description")
+
+    @_builtins.property
+    @pulumi.getter(name="encryptType")
+    def encrypt_type(self) -> pulumi.Output[_builtins.int]:
+        """
+        Encryption type of secret. `0`: KMS key encryption. `1`: soft key encryption. Default is `0`. Once created, it cannot be modified.
+        """
+        return pulumi.get(self, "encrypt_type")
 
     @_builtins.property
     @pulumi.getter(name="isEnabled")

@@ -99,6 +99,12 @@ def get_proxy_detail(proxy_id: Optional[_builtins.str] = None,
     proxy_detail = tencentcloud.gaap.get_proxy_detail(proxy_id="link-m9t4yho9")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeProxyDetail](https://www.tencentcloud.com/document/api/608/33098)
+
 
     :param _builtins.str proxy_id: Proxy Id.
     :param _builtins.str result_output_file: Used to save results.
@@ -128,6 +134,12 @@ def get_proxy_detail_output(proxy_id: pulumi.Input[Optional[_builtins.str]] = No
 
     proxy_detail = tencentcloud.gaap.get_proxy_detail(proxy_id="link-m9t4yho9")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeProxyDetail](https://www.tencentcloud.com/document/api/608/33098)
 
 
     :param _builtins.str proxy_id: Proxy Id.

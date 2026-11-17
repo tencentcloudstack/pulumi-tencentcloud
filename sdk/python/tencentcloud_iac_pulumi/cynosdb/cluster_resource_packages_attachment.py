@@ -120,6 +120,14 @@ class ClusterResourcePackagesAttachment(pulumi.CustomResource):
             package_ids=["package-hy4d2ppl"])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [BindClusterResourcePackages](https://www.tencentcloud.com/document/api/1098/55900)
+        * Read: [DescribeClusterDetail](https://www.tencentcloud.com/document/api/1098/40752)
+        * Delete: [UnbindClusterResourcePackages](https://www.tencentcloud.com/document/api/1098/55892)
+
         ## Import
 
         cynosdb cluster_resource_packages_attachment can be imported using the id, e.g.
@@ -153,6 +161,14 @@ class ClusterResourcePackagesAttachment(pulumi.CustomResource):
             cluster_id="cynosdbmysql-q1d8151n",
             package_ids=["package-hy4d2ppl"])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [BindClusterResourcePackages](https://www.tencentcloud.com/document/api/1098/55900)
+        * Read: [DescribeClusterDetail](https://www.tencentcloud.com/document/api/1098/40752)
+        * Delete: [UnbindClusterResourcePackages](https://www.tencentcloud.com/document/api/1098/55892)
 
         ## Import
 

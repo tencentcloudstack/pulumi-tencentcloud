@@ -53,6 +53,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAccounts](https://www.tencentcloud.com/document/api/238/32116)
         /// </summary>
         public static Task<GetAccountsResult> InvokeAsync(GetAccountsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetAccountsResult>("tencentcloud:Sqlserver/getAccounts:getAccounts", args ?? new GetAccountsArgs(), options.WithDefaults());
@@ -98,6 +104,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAccounts](https://www.tencentcloud.com/document/api/238/32116)
         /// </summary>
         public static Output<GetAccountsResult> Invoke(GetAccountsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetAccountsResult>("tencentcloud:Sqlserver/getAccounts:getAccounts", args ?? new GetAccountsInvokeArgs(), options.WithDefaults());
@@ -143,6 +155,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAccounts](https://www.tencentcloud.com/document/api/238/32116)
         /// </summary>
         public static Output<GetAccountsResult> Invoke(GetAccountsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetAccountsResult>("tencentcloud:Sqlserver/getAccounts:getAccounts", args ?? new GetAccountsInvokeArgs(), options.WithDefaults());

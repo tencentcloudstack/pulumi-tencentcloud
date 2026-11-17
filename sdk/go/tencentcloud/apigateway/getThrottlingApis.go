@@ -104,6 +104,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read:
+//   - [DescribeApiEnvironmentStrategy](https://www.tencentcloud.com/search/?wd=DescribeApiEnvironmentStrategy&type=document&lang=en)
+//   - [DescribeServicesStatus](https://www.tencentcloud.com/search/?wd=DescribeServicesStatus&type=document&lang=en)
 func GetThrottlingApis(ctx *pulumi.Context, args *GetThrottlingApisArgs, opts ...pulumi.InvokeOption) (*GetThrottlingApisResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetThrottlingApisResult

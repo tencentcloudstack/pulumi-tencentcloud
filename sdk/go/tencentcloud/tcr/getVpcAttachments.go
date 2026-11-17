@@ -38,6 +38,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read:
+//   - [DescribeInstances](https://www.tencentcloud.com/document/api/1051/50703)
+//   - [DescribeInternalEndpoints](https://www.tencentcloud.com/document/api/1051/50735)
 func GetVpcAttachments(ctx *pulumi.Context, args *GetVpcAttachmentsArgs, opts ...pulumi.InvokeOption) (*GetVpcAttachmentsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetVpcAttachmentsResult

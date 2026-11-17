@@ -67,6 +67,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAlarmNotices](https://www.tencentcloud.com/document/api/614/42826)
         /// </summary>
         public static Task<GetAlarmNoticesResult> InvokeAsync(GetAlarmNoticesArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetAlarmNoticesResult>("tencentcloud:Cls/getAlarmNotices:getAlarmNotices", args ?? new GetAlarmNoticesArgs(), options.WithDefaults());
@@ -126,6 +132,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAlarmNotices](https://www.tencentcloud.com/document/api/614/42826)
         /// </summary>
         public static Output<GetAlarmNoticesResult> Invoke(GetAlarmNoticesInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetAlarmNoticesResult>("tencentcloud:Cls/getAlarmNotices:getAlarmNotices", args ?? new GetAlarmNoticesInvokeArgs(), options.WithDefaults());
@@ -185,6 +197,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAlarmNotices](https://www.tencentcloud.com/document/api/614/42826)
         /// </summary>
         public static Output<GetAlarmNoticesResult> Invoke(GetAlarmNoticesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetAlarmNoticesResult>("tencentcloud:Cls/getAlarmNotices:getAlarmNotices", args ?? new GetAlarmNoticesInvokeArgs(), options.WithDefaults());

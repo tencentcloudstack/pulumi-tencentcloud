@@ -15,6 +15,11 @@ export const getAccountSummary: typeof import("./getAccountSummary").getAccountS
 export const getAccountSummaryOutput: typeof import("./getAccountSummary").getAccountSummaryOutput = null as any;
 utilities.lazyLoad(exports, ["getAccountSummary","getAccountSummaryOutput"], () => require("./getAccountSummary"));
 
+export { GetAccountsArgs, GetAccountsResult, GetAccountsOutputArgs } from "./getAccounts";
+export const getAccounts: typeof import("./getAccounts").getAccounts = null as any;
+export const getAccountsOutput: typeof import("./getAccounts").getAccountsOutput = null as any;
+utilities.lazyLoad(exports, ["getAccounts","getAccountsOutput"], () => require("./getAccounts"));
+
 export { GetGroupMembershipsArgs, GetGroupMembershipsResult, GetGroupMembershipsOutputArgs } from "./getGroupMemberships";
 export const getGroupMemberships: typeof import("./getGroupMemberships").getGroupMemberships = null as any;
 export const getGroupMembershipsOutput: typeof import("./getGroupMemberships").getGroupMembershipsOutput = null as any;
@@ -200,6 +205,11 @@ export type TagRoleAttachment = import("./tagRoleAttachment").TagRoleAttachment;
 export const TagRoleAttachment: typeof import("./tagRoleAttachment").TagRoleAttachment = null as any;
 utilities.lazyLoad(exports, ["TagRoleAttachment"], () => require("./tagRoleAttachment"));
 
+export { UpdatePasswordRuleConfigArgs, UpdatePasswordRuleConfigState } from "./updatePasswordRuleConfig";
+export type UpdatePasswordRuleConfig = import("./updatePasswordRuleConfig").UpdatePasswordRuleConfig;
+export const UpdatePasswordRuleConfig: typeof import("./updatePasswordRuleConfig").UpdatePasswordRuleConfig = null as any;
+utilities.lazyLoad(exports, ["UpdatePasswordRuleConfig"], () => require("./updatePasswordRuleConfig"));
+
 export { UserArgs, UserState } from "./user";
 export type User = import("./user").User;
 export const User: typeof import("./user").User = null as any;
@@ -265,6 +275,8 @@ const _module = {
                 return new SetPolicyVersionConfig(name, <any>undefined, { urn })
             case "tencentcloud:Cam/tagRoleAttachment:TagRoleAttachment":
                 return new TagRoleAttachment(name, <any>undefined, { urn })
+            case "tencentcloud:Cam/updatePasswordRuleConfig:UpdatePasswordRuleConfig":
+                return new UpdatePasswordRuleConfig(name, <any>undefined, { urn })
             case "tencentcloud:Cam/user:User":
                 return new User(name, <any>undefined, { urn })
             case "tencentcloud:Cam/userPermissionBoundaryAttachment:UserPermissionBoundaryAttachment":
@@ -298,6 +310,7 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Cam/samlProvider", _modul
 pulumi.runtime.registerResourceModule("tencentcloud", "Cam/serviceLinkedRole", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cam/setPolicyVersionConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cam/tagRoleAttachment", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cam/updatePasswordRuleConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cam/user", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cam/userPermissionBoundaryAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cam/userPolicyAttachment", _module)

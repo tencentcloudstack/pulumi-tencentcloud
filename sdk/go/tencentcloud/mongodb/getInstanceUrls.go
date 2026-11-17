@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDBInstanceURL](https://www.tencentcloud.com/search/?wd=DescribeDBInstanceURL&type=document&lang=en)
 func GetInstanceUrls(ctx *pulumi.Context, args *GetInstanceUrlsArgs, opts ...pulumi.InvokeOption) (*GetInstanceUrlsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetInstanceUrlsResult

@@ -18,6 +18,13 @@ import * as utilities from "../utilities";
  *     lockDays: 30,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [ModifyDomainLock](https://www.tencentcloud.com/document/api/1157/53850)
+ * * Delete: [ModifyDomainUnlock](https://www.tencentcloud.com/document/api/1157/53848)
  */
 export class DomainLock extends pulumi.CustomResource {
     /**

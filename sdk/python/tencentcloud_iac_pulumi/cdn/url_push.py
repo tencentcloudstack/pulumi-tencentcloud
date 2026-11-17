@@ -296,6 +296,12 @@ class UrlPush(pulumi.CustomResource):
             redo=1)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Read: [DescribePushTasks](https://www.tencentcloud.com/document/api/228/33603)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -334,6 +340,12 @@ class UrlPush(pulumi.CustomResource):
             urls=["https://www.example.com/a"],
             redo=1)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Read: [DescribePushTasks](https://www.tencentcloud.com/document/api/228/33603)
 
 
         :param str resource_name: The name of the resource.

@@ -156,6 +156,14 @@ class VerifyRootAccount(pulumi.CustomResource):
             password="Qwer@234")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+          - [VerifyRootAccount](https://www.tencentcloud.com/search/?wd=VerifyRootAccount&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -218,6 +226,14 @@ class VerifyRootAccount(pulumi.CustomResource):
             instance_id=example.id,
             password="Qwer@234")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+          - [VerifyRootAccount](https://www.tencentcloud.com/search/?wd=VerifyRootAccount&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

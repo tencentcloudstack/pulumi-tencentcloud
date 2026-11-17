@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const availableZone = tencentcloud.cfs.getAvailableZone({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAvailableZoneInfo](https://www.tencentcloud.com/document/api/582/34500)
  */
 export function getAvailableZone(args?: GetAvailableZoneArgs, opts?: pulumi.InvokeOptions): Promise<GetAvailableZoneResult> {
     args = args || {};
@@ -61,6 +67,12 @@ export interface GetAvailableZoneResult {
  *
  * const availableZone = tencentcloud.cfs.getAvailableZone({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAvailableZoneInfo](https://www.tencentcloud.com/document/api/582/34500)
  */
 export function getAvailableZoneOutput(args?: GetAvailableZoneOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAvailableZoneResult> {
     args = args || {};

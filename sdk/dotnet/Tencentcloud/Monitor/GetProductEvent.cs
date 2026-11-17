@@ -37,6 +37,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeProductEventList](https://www.tencentcloud.com/document/api/248/35976)
         /// </summary>
         public static Task<GetProductEventResult> InvokeAsync(GetProductEventArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetProductEventResult>("tencentcloud:Monitor/getProductEvent:getProductEvent", args ?? new GetProductEventArgs(), options.WithDefaults());
@@ -66,6 +72,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeProductEventList](https://www.tencentcloud.com/document/api/248/35976)
         /// </summary>
         public static Output<GetProductEventResult> Invoke(GetProductEventInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetProductEventResult>("tencentcloud:Monitor/getProductEvent:getProductEvent", args ?? new GetProductEventInvokeArgs(), options.WithDefaults());
@@ -95,6 +107,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeProductEventList](https://www.tencentcloud.com/document/api/248/35976)
         /// </summary>
         public static Output<GetProductEventResult> Invoke(GetProductEventInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetProductEventResult>("tencentcloud:Monitor/getProductEvent:getProductEvent", args ?? new GetProductEventInvokeArgs(), options.WithDefaults());

@@ -78,6 +78,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Trocket
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstanceList](https://www.tencentcloud.com/document/api/1113/74662)
         /// </summary>
         public static Task<GetRocketmqInstancesResult> InvokeAsync(GetRocketmqInstancesArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetRocketmqInstancesResult>("tencentcloud:Trocket/getRocketmqInstances:getRocketmqInstances", args ?? new GetRocketmqInstancesArgs(), options.WithDefaults());
@@ -148,6 +154,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Trocket
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstanceList](https://www.tencentcloud.com/document/api/1113/74662)
         /// </summary>
         public static Output<GetRocketmqInstancesResult> Invoke(GetRocketmqInstancesInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetRocketmqInstancesResult>("tencentcloud:Trocket/getRocketmqInstances:getRocketmqInstances", args ?? new GetRocketmqInstancesInvokeArgs(), options.WithDefaults());
@@ -218,6 +230,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Trocket
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstanceList](https://www.tencentcloud.com/document/api/1113/74662)
         /// </summary>
         public static Output<GetRocketmqInstancesResult> Invoke(GetRocketmqInstancesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetRocketmqInstancesResult>("tencentcloud:Trocket/getRocketmqInstances:getRocketmqInstances", args ?? new GetRocketmqInstancesInvokeArgs(), options.WithDefaults());

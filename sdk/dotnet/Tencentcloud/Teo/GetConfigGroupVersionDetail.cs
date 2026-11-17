@@ -25,7 +25,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var teoConfigGroupVersionDetail = Tencentcloud.Teo.GetConfigGroupVersionDetail.Invoke(new()
+        ///     var example = Tencentcloud.Teo.GetConfigGroupVersionDetail.Invoke(new()
         ///     {
         ///         ZoneId = "zone-2qtuhspy7cr6",
         ///         VersionId = "sv-2quhspyeq8r6",
@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeConfigGroupVersionDetail](https://www.tencentcloud.com/document/api/1145/57975)
         /// </summary>
         public static Task<GetConfigGroupVersionDetailResult> InvokeAsync(GetConfigGroupVersionDetailArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetConfigGroupVersionDetailResult>("tencentcloud:Teo/getConfigGroupVersionDetail:getConfigGroupVersionDetail", args ?? new GetConfigGroupVersionDetailArgs(), options.WithDefaults());
@@ -50,7 +56,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var teoConfigGroupVersionDetail = Tencentcloud.Teo.GetConfigGroupVersionDetail.Invoke(new()
+        ///     var example = Tencentcloud.Teo.GetConfigGroupVersionDetail.Invoke(new()
         ///     {
         ///         ZoneId = "zone-2qtuhspy7cr6",
         ///         VersionId = "sv-2quhspyeq8r6",
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeConfigGroupVersionDetail](https://www.tencentcloud.com/document/api/1145/57975)
         /// </summary>
         public static Output<GetConfigGroupVersionDetailResult> Invoke(GetConfigGroupVersionDetailInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetConfigGroupVersionDetailResult>("tencentcloud:Teo/getConfigGroupVersionDetail:getConfigGroupVersionDetail", args ?? new GetConfigGroupVersionDetailInvokeArgs(), options.WithDefaults());
@@ -75,7 +87,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// return await Deployment.RunAsync(() =&gt; 
         /// {
-        ///     var teoConfigGroupVersionDetail = Tencentcloud.Teo.GetConfigGroupVersionDetail.Invoke(new()
+        ///     var example = Tencentcloud.Teo.GetConfigGroupVersionDetail.Invoke(new()
         ///     {
         ///         ZoneId = "zone-2qtuhspy7cr6",
         ///         VersionId = "sv-2quhspyeq8r6",
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeConfigGroupVersionDetail](https://www.tencentcloud.com/document/api/1145/57975)
         /// </summary>
         public static Output<GetConfigGroupVersionDetailResult> Invoke(GetConfigGroupVersionDetailInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetConfigGroupVersionDetailResult>("tencentcloud:Teo/getConfigGroupVersionDetail:getConfigGroupVersionDetail", args ?? new GetConfigGroupVersionDetailInvokeArgs(), options.WithDefaults());
@@ -158,6 +176,9 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// </summary>
         public readonly string Id;
         public readonly string? ResultOutputFile;
+        /// <summary>
+        /// Version ID.
+        /// </summary>
         public readonly string VersionId;
         public readonly string ZoneId;
 

@@ -55,6 +55,12 @@ import * as utilities from "../utilities";
  *     ],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCertificateBindResourceTaskDetail](https://www.tencentcloud.com/document/api/1007/56822)
  */
 export function getCertificateBindResourceTaskDetail(args: GetCertificateBindResourceTaskDetailArgs, opts?: pulumi.InvokeOptions): Promise<GetCertificateBindResourceTaskDetailResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -222,6 +228,12 @@ export interface GetCertificateBindResourceTaskDetailResult {
  *     ],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCertificateBindResourceTaskDetail](https://www.tencentcloud.com/document/api/1007/56822)
  */
 export function getCertificateBindResourceTaskDetailOutput(args: GetCertificateBindResourceTaskDetailOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetCertificateBindResourceTaskDetailResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

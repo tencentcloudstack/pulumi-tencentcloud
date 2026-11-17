@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeZookeeperReplicas](https://www.tencentcloud.com/search/?wd=DescribeZookeeperReplicas&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetZookeeperReplicasResult> InvokeAsync(GetZookeeperReplicasArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetZookeeperReplicasResult>("tencentcloud:Tse/getZookeeperReplicas:getZookeeperReplicas", args ?? new GetZookeeperReplicasArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeZookeeperReplicas](https://www.tencentcloud.com/search/?wd=DescribeZookeeperReplicas&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetZookeeperReplicasResult> Invoke(GetZookeeperReplicasInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetZookeeperReplicasResult>("tencentcloud:Tse/getZookeeperReplicas:getZookeeperReplicas", args ?? new GetZookeeperReplicasInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeZookeeperReplicas](https://www.tencentcloud.com/search/?wd=DescribeZookeeperReplicas&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetZookeeperReplicasResult> Invoke(GetZookeeperReplicasInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetZookeeperReplicasResult>("tencentcloud:Tse/getZookeeperReplicas:getZookeeperReplicas", args ?? new GetZookeeperReplicasInvokeArgs(), options.WithDefaults());

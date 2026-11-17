@@ -121,6 +121,12 @@ def get_external_cluster_register_command(cluster_id: Optional[_builtins.str] = 
         cluster_id=example_external_cluster.cluster_id)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeExternalClusterRegisterCommand](https://www.tencentcloud.com/search/?wd=DescribeExternalClusterRegisterCommand&type=document&lang=en)
+
 
     :param _builtins.str cluster_id: External cluster ID.
     :param _builtins.str instance_id: TMP instance ID.
@@ -171,6 +177,12 @@ def get_external_cluster_register_command_output(cluster_id: pulumi.Input[Option
     example = tencentcloud.monitor.get_external_cluster_register_command_output(instance_id=example_external_cluster.instance_id,
         cluster_id=example_external_cluster.cluster_id)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeExternalClusterRegisterCommand](https://www.tencentcloud.com/search/?wd=DescribeExternalClusterRegisterCommand&type=document&lang=en)
 
 
     :param _builtins.str cluster_id: External cluster ID.

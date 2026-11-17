@@ -22,6 +22,12 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDiskConfigs](https://www.tencentcloud.com/document/api/1103/44575)
  */
 export function getDiskConfig(args?: GetDiskConfigArgs, opts?: pulumi.InvokeOptions): Promise<GetDiskConfigResult> {
     args = args || {};
@@ -77,6 +83,12 @@ export interface GetDiskConfigResult {
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDiskConfigs](https://www.tencentcloud.com/document/api/1103/44575)
  */
 export function getDiskConfigOutput(args?: GetDiskConfigOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDiskConfigResult> {
     args = args || {};

@@ -49,6 +49,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeMeshList](https://www.tencentcloud.com/search/?wd=DescribeMeshList&type=document&lang=en)
 func LookupMesh(ctx *pulumi.Context, args *LookupMeshArgs, opts ...pulumi.InvokeOption) (*LookupMeshResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupMeshResult

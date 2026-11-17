@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeMountTargets](https://www.tencentcloud.com/document/api/582/34513)
 func GetMountTargets(ctx *pulumi.Context, args *GetMountTargetsArgs, opts ...pulumi.InvokeOption) (*GetMountTargetsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetMountTargetsResult

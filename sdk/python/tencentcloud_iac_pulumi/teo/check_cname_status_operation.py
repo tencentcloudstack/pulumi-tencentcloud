@@ -141,6 +141,12 @@ class CheckCnameStatusOperation(pulumi.CustomResource):
             ])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CheckCnameStatus](https://www.tencentcloud.com/document/api/1145/56175)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -169,6 +175,12 @@ class CheckCnameStatusOperation(pulumi.CustomResource):
                 "www.example.com",
             ])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CheckCnameStatus](https://www.tencentcloud.com/document/api/1145/56175)
 
 
         :param str resource_name: The name of the resource.

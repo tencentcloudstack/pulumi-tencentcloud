@@ -170,6 +170,18 @@ class InstanceParams(pulumi.CustomResource):
             }])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeInstanceParams](https://www.tencentcloud.com/document/api/240/44226)
+          - [ModifyInstanceParams](https://www.tencentcloud.com/document/api/240/74799)
+        * Read: [DescribeInstanceParams](https://www.tencentcloud.com/document/api/240/44226)
+        * Update:
+          - [DescribeInstanceParams](https://www.tencentcloud.com/document/api/240/44226)
+          - [ModifyInstanceParams](https://www.tencentcloud.com/document/api/240/74799)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -202,6 +214,18 @@ class InstanceParams(pulumi.CustomResource):
                 "value": "on",
             }])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeInstanceParams](https://www.tencentcloud.com/document/api/240/44226)
+          - [ModifyInstanceParams](https://www.tencentcloud.com/document/api/240/74799)
+        * Read: [DescribeInstanceParams](https://www.tencentcloud.com/document/api/240/44226)
+        * Update:
+          - [DescribeInstanceParams](https://www.tencentcloud.com/document/api/240/44226)
+          - [ModifyInstanceParams](https://www.tencentcloud.com/document/api/240/74799)
 
 
         :param str resource_name: The name of the resource.

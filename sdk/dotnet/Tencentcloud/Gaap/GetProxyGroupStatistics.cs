@@ -42,6 +42,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeProxyGroupStatistics](https://www.tencentcloud.com/document/api/608/33053)
         /// </summary>
         public static Task<GetProxyGroupStatisticsResult> InvokeAsync(GetProxyGroupStatisticsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetProxyGroupStatisticsResult>("tencentcloud:Gaap/getProxyGroupStatistics:getProxyGroupStatistics", args ?? new GetProxyGroupStatisticsArgs(), options.WithDefaults());
@@ -76,6 +82,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeProxyGroupStatistics](https://www.tencentcloud.com/document/api/608/33053)
         /// </summary>
         public static Output<GetProxyGroupStatisticsResult> Invoke(GetProxyGroupStatisticsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetProxyGroupStatisticsResult>("tencentcloud:Gaap/getProxyGroupStatistics:getProxyGroupStatistics", args ?? new GetProxyGroupStatisticsInvokeArgs(), options.WithDefaults());
@@ -110,6 +122,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeProxyGroupStatistics](https://www.tencentcloud.com/document/api/608/33053)
         /// </summary>
         public static Output<GetProxyGroupStatisticsResult> Invoke(GetProxyGroupStatisticsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetProxyGroupStatisticsResult>("tencentcloud:Gaap/getProxyGroupStatistics:getProxyGroupStatistics", args ?? new GetProxyGroupStatisticsInvokeArgs(), options.WithDefaults());

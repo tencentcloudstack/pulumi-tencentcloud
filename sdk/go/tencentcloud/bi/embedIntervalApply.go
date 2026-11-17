@@ -41,6 +41,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [ApplyEmbedInterval](https://www.tencentcloud.com/document/api/1270/72253)
 type EmbedIntervalApply struct {
 	pulumi.CustomResourceState
 

@@ -343,6 +343,12 @@ class EditMediaOperation(pulumi.CustomResource):
             output_object_path="/output")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [EditMedia](https://www.tencentcloud.com/document/api/1041/37460)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -398,6 +404,12 @@ class EditMediaOperation(pulumi.CustomResource):
             },
             output_object_path="/output")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [EditMedia](https://www.tencentcloud.com/document/api/1041/37460)
 
 
         :param str resource_name: The name of the resource.

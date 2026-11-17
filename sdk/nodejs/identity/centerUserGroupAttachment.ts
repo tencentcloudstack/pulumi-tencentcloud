@@ -20,6 +20,14 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [AddUserToGroup](https://www.tencentcloud.com/document/api/1031/63573)
+ * * Read: [ListJoinedGroupsForUser](https://www.tencentcloud.com/document/api/1031/63567)
+ * * Delete: [RemoveUserFromGroup](https://www.tencentcloud.com/document/api/1031/63566)
+ *
  * ## Import
  *
  * organization identityCenterUserGroupAttachment can be imported using the id, e.g.

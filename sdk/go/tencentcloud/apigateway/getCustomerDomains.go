@@ -50,6 +50,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read:
+//   - [DescribeServiceSubDomainMappings](https://www.tencentcloud.com/search/?wd=DescribeServiceSubDomainMappings&type=document&lang=en)
+//   - [DescribeServiceSubDomains](https://www.tencentcloud.com/search/?wd=DescribeServiceSubDomains&type=document&lang=en)
 func GetCustomerDomains(ctx *pulumi.Context, args *GetCustomerDomainsArgs, opts ...pulumi.InvokeOption) (*GetCustomerDomainsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetCustomerDomainsResult

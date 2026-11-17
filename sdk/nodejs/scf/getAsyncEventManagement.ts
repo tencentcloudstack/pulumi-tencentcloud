@@ -23,6 +23,12 @@ import * as utilities from "../utilities";
  *     orderby: "StartTime",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListAsyncEvents](https://www.tencentcloud.com/document/api/583/39734)
  */
 export function getAsyncEventManagement(args: GetAsyncEventManagementArgs, opts?: pulumi.InvokeOptions): Promise<GetAsyncEventManagementResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -132,6 +138,12 @@ export interface GetAsyncEventManagementResult {
  *     orderby: "StartTime",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListAsyncEvents](https://www.tencentcloud.com/document/api/583/39734)
  */
 export function getAsyncEventManagementOutput(args: GetAsyncEventManagementOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAsyncEventManagementResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

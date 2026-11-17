@@ -234,6 +234,20 @@ class OpsTask(pulumi.CustomResource):
             action="START")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [GetOpsAsyncJob](https://www.tencentcloud.com/document/api/1174/73832)
+          - [PauseOpsTasksAsync](https://www.tencentcloud.com/document/api/1174/73814)
+          - [StartOpsTasks](https://www.tencentcloud.com/document/api/1174/77883)
+        * Read: [GetOpsTask](https://www.tencentcloud.com/document/api/1174/73831)
+        * Update:
+          - [GetOpsAsyncJob](https://www.tencentcloud.com/document/api/1174/73832)
+          - [PauseOpsTasksAsync](https://www.tencentcloud.com/document/api/1174/73814)
+          - [StartOpsTasks](https://www.tencentcloud.com/document/api/1174/77883)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -263,6 +277,20 @@ class OpsTask(pulumi.CustomResource):
             task_id="20251013154418424",
             action="START")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [GetOpsAsyncJob](https://www.tencentcloud.com/document/api/1174/73832)
+          - [PauseOpsTasksAsync](https://www.tencentcloud.com/document/api/1174/73814)
+          - [StartOpsTasks](https://www.tencentcloud.com/document/api/1174/77883)
+        * Read: [GetOpsTask](https://www.tencentcloud.com/document/api/1174/73831)
+        * Update:
+          - [GetOpsAsyncJob](https://www.tencentcloud.com/document/api/1174/73832)
+          - [PauseOpsTasksAsync](https://www.tencentcloud.com/document/api/1174/73814)
+          - [StartOpsTasks](https://www.tencentcloud.com/document/api/1174/77883)
 
 
         :param str resource_name: The name of the resource.

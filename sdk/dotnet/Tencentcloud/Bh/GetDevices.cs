@@ -92,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bh
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDevices](https://www.tencentcloud.com/search/?wd=DescribeDevices&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetDevicesResult> InvokeAsync(GetDevicesArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDevicesResult>("tencentcloud:Bh/getDevices:getDevices", args ?? new GetDevicesArgs(), options.WithDefaults());
@@ -176,6 +182,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bh
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDevices](https://www.tencentcloud.com/search/?wd=DescribeDevices&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDevicesResult> Invoke(GetDevicesInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDevicesResult>("tencentcloud:Bh/getDevices:getDevices", args ?? new GetDevicesInvokeArgs(), options.WithDefaults());
@@ -260,6 +272,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bh
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDevices](https://www.tencentcloud.com/search/?wd=DescribeDevices&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDevicesResult> Invoke(GetDevicesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDevicesResult>("tencentcloud:Bh/getDevices:getDevices", args ?? new GetDevicesInvokeArgs(), options.WithDefaults());

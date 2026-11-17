@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     searchKey: "自定义模版",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeProjectSecurityGroups](https://www.tencentcloud.com/document/api/1098/40736)
  */
 export function getProjectSecurityGroups(args?: GetProjectSecurityGroupsArgs, opts?: pulumi.InvokeOptions): Promise<GetProjectSecurityGroupsResult> {
     args = args || {};
@@ -82,6 +88,12 @@ export interface GetProjectSecurityGroupsResult {
  *     searchKey: "自定义模版",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeProjectSecurityGroups](https://www.tencentcloud.com/document/api/1098/40736)
  */
 export function getProjectSecurityGroupsOutput(args?: GetProjectSecurityGroupsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetProjectSecurityGroupsResult> {
     args = args || {};

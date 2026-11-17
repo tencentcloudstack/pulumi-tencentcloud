@@ -180,6 +180,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateIndex](https://www.tencentcloud.com/document/api/614/42805)
+    ///   - [DescribeIndex](https://www.tencentcloud.com/document/api/614/42803)
+    /// * Read: [DescribeIndex](https://www.tencentcloud.com/document/api/614/42803)
+    /// * Update:
+    ///   - [DescribeIndex](https://www.tencentcloud.com/document/api/614/42803)
+    ///   - [ModifyIndex](https://www.tencentcloud.com/document/api/614/42802)
+    /// * Delete: [DeleteIndex](https://www.tencentcloud.com/document/api/614/42804)
+    /// 
     /// ## Import
     /// 
     /// cls cos index can be imported using the id, e.g.

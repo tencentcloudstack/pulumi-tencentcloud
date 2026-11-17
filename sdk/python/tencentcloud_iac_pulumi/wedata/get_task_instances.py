@@ -276,6 +276,12 @@ def get_task_instances(cycle_type: Optional[_builtins.str] = None,
     wedata_task_instances = tencentcloud.wedata.get_task_instances(project_id="1859317240494305280")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListTaskInstances](https://www.tencentcloud.com/document/api/1174/73817)
+
 
     :param _builtins.str cycle_type: Task cycle type * ONEOFF_CYCLE: One-time * YEAR_CYCLE: Year * MONTH_CYCLE: Month * WEEK_CYCLE: Week * DAY_CYCLE: Day * HOUR_CYCLE: Hour * MINUTE_CYCLE: Minute * CRONTAB_CYCLE: Crontab expression type.
     :param _builtins.str executor_group_id: Executor resource group ID.
@@ -377,6 +383,12 @@ def get_task_instances_output(cycle_type: pulumi.Input[Optional[Optional[_builti
 
     wedata_task_instances = tencentcloud.wedata.get_task_instances(project_id="1859317240494305280")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListTaskInstances](https://www.tencentcloud.com/document/api/1174/73817)
 
 
     :param _builtins.str cycle_type: Task cycle type * ONEOFF_CYCLE: One-time * YEAR_CYCLE: Year * MONTH_CYCLE: Month * WEEK_CYCLE: Week * DAY_CYCLE: Day * HOUR_CYCLE: Hour * MINUTE_CYCLE: Minute * CRONTAB_CYCLE: Crontab expression type.

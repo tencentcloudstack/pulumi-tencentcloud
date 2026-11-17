@@ -21,9 +21,16 @@ import * as utilities from "../utilities";
  *         instanceId: "vpc-j9yhbzpn",
  *         instanceRegion: "ap-guangzhou",
  *         instanceType: "VPC",
+ *         orderType: "PayByCcnOwner",
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [AcceptAttachCcnInstances](https://www.tencentcloud.com/document/api/215/34793)
  */
 export class InstancesAcceptAttach extends pulumi.CustomResource {
     /**

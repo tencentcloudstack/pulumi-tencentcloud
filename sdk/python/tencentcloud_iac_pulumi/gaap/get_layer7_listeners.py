@@ -169,6 +169,14 @@ def get_layer7_listeners(group_id: Optional[_builtins.str] = None,
         listener_id=foo_layer7_listener.id)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeHTTPListeners](https://www.tencentcloud.com/document/api/608/33071)
+      - [DescribeHTTPSListeners](https://www.tencentcloud.com/document/api/608/33070)
+
 
     :param _builtins.str group_id: Group id.
     :param _builtins.str listener_id: ID of the layer7 listener to be queried.
@@ -232,6 +240,14 @@ def get_layer7_listeners_output(group_id: pulumi.Input[Optional[Optional[_builti
         proxy_id=foo.id,
         listener_id=foo_layer7_listener.id)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeHTTPListeners](https://www.tencentcloud.com/document/api/608/33071)
+      - [DescribeHTTPSListeners](https://www.tencentcloud.com/document/api/608/33070)
 
 
     :param _builtins.str group_id: Group id.

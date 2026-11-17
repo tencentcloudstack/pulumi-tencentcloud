@@ -27,6 +27,14 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [ModifyBackupDownloadRestriction](https://www.tencentcloud.com/document/api/236/43327)
+ * * Read: [DescribeBackupDownloadRestriction](https://www.tencentcloud.com/document/api/236/43328)
+ * * Update: [ModifyBackupDownloadRestriction](https://www.tencentcloud.com/document/api/236/43327)
+ *
  * ## Import
  *
  * mysql backupDownloadRestriction can be imported using the "BackupDownloadRestriction", as follows.

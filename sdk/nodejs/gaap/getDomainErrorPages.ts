@@ -54,6 +54,12 @@ import * as utilities from "../utilities";
  *     domain: fooDomainErrorPage.domain,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDomainErrorPageInfo](https://www.tencentcloud.com/document/api/608/33135)
  */
 export function getDomainErrorPages(args: GetDomainErrorPagesArgs, opts?: pulumi.InvokeOptions): Promise<GetDomainErrorPagesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -158,6 +164,12 @@ export interface GetDomainErrorPagesResult {
  *     domain: fooDomainErrorPage.domain,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDomainErrorPageInfo](https://www.tencentcloud.com/document/api/608/33135)
  */
 export function getDomainErrorPagesOutput(args: GetDomainErrorPagesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDomainErrorPagesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

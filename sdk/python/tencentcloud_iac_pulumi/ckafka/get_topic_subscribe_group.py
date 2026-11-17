@@ -107,6 +107,12 @@ def get_topic_subscribe_group(instance_id: Optional[_builtins.str] = None,
         topic_name="xxxxxx")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTopicSubscribeGroup](https://www.tencentcloud.com/document/api/597/42130)
+
 
     :param _builtins.str instance_id: InstanceId.
     :param _builtins.str result_output_file: Used to save results.
@@ -141,6 +147,12 @@ def get_topic_subscribe_group_output(instance_id: pulumi.Input[Optional[_builtin
     topic_subscribe_group = tencentcloud.ckafka.get_topic_subscribe_group(instance_id="ckafka-xxxxxx",
         topic_name="xxxxxx")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTopicSubscribeGroup](https://www.tencentcloud.com/document/api/597/42130)
 
 
     :param _builtins.str instance_id: InstanceId.

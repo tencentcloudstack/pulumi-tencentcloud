@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeWhitelists](https://www.tencentcloud.com/document/api/1131/45300)
         /// </summary>
         public static Task<GetWhitelistResult> InvokeAsync(GetWhitelistArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetWhitelistResult>("tencentcloud:Rum/getWhitelist:getWhitelist", args ?? new GetWhitelistArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeWhitelists](https://www.tencentcloud.com/document/api/1131/45300)
         /// </summary>
         public static Output<GetWhitelistResult> Invoke(GetWhitelistInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetWhitelistResult>("tencentcloud:Rum/getWhitelist:getWhitelist", args ?? new GetWhitelistInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeWhitelists](https://www.tencentcloud.com/document/api/1131/45300)
         /// </summary>
         public static Output<GetWhitelistResult> Invoke(GetWhitelistInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetWhitelistResult>("tencentcloud:Rum/getWhitelist:getWhitelist", args ?? new GetWhitelistInvokeArgs(), options.WithDefaults());

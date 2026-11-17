@@ -77,6 +77,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDBCustomImages](https://www.tencentcloud.com/search/?wd=DescribeDBCustomImages&type=document&lang=en)
 func GetDbCustomImages(ctx *pulumi.Context, args *GetDbCustomImagesArgs, opts ...pulumi.InvokeOption) (*GetDbCustomImagesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDbCustomImagesResult

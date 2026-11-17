@@ -720,6 +720,26 @@ class RocketmqInstance(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateInstance](https://www.tencentcloud.com/document/api/1113/74666)
+          - [DescribeInstance](https://www.tencentcloud.com/document/api/1113/74663)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribeInstance](https://www.tencentcloud.com/document/api/1113/74663)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [DescribeInstance](https://www.tencentcloud.com/document/api/1113/74663)
+          - [ModifyInstance](https://www.tencentcloud.com/document/api/1113/74660)
+          - [ModifyInstanceEndpoint](https://www.tencentcloud.com/document/api/1113/74659)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Delete:
+          - [DeleteInstance](https://www.tencentcloud.com/document/api/1113/74665)
+          - [DescribeInstance](https://www.tencentcloud.com/document/api/1113/74663)
+
         ## Import
 
         Trocket rocketmq instance can be imported using the id, e.g.
@@ -873,6 +893,26 @@ class RocketmqInstance(pulumi.CustomResource):
                 "tag_value": "5.x",
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateInstance](https://www.tencentcloud.com/document/api/1113/74666)
+          - [DescribeInstance](https://www.tencentcloud.com/document/api/1113/74663)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribeInstance](https://www.tencentcloud.com/document/api/1113/74663)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [DescribeInstance](https://www.tencentcloud.com/document/api/1113/74663)
+          - [ModifyInstance](https://www.tencentcloud.com/document/api/1113/74660)
+          - [ModifyInstanceEndpoint](https://www.tencentcloud.com/document/api/1113/74659)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Delete:
+          - [DeleteInstance](https://www.tencentcloud.com/document/api/1113/74665)
+          - [DescribeInstance](https://www.tencentcloud.com/document/api/1113/74663)
 
         ## Import
 

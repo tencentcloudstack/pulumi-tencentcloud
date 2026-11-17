@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     dbs: ["keep_pubsub_db"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRollbackTime](https://www.tencentcloud.com/document/api/238/32110)
  */
 export function getRollbackTime(args: GetRollbackTimeArgs, opts?: pulumi.InvokeOptions): Promise<GetRollbackTimeResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -78,6 +84,12 @@ export interface GetRollbackTimeResult {
  *     dbs: ["keep_pubsub_db"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRollbackTime](https://www.tencentcloud.com/document/api/238/32110)
  */
 export function getRollbackTimeOutput(args: GetRollbackTimeOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRollbackTimeResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

@@ -21,6 +21,14 @@ import * as utilities from "../utilities";
  *     isIpv6: false,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeNodes](https://www.tencentcloud.com/search/?wd=DescribeNodes&type=document&lang=en)
+ *   - [DescribeProbeNodes](https://www.tencentcloud.com/search/?wd=DescribeProbeNodes&type=document&lang=en)
  */
 export function getNode(args?: GetNodeArgs, opts?: pulumi.InvokeOptions): Promise<GetNodeResult> {
     args = args || {};
@@ -102,6 +110,14 @@ export interface GetNodeResult {
  *     isIpv6: false,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeNodes](https://www.tencentcloud.com/search/?wd=DescribeNodes&type=document&lang=en)
+ *   - [DescribeProbeNodes](https://www.tencentcloud.com/search/?wd=DescribeProbeNodes&type=document&lang=en)
  */
 export function getNodeOutput(args?: GetNodeOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetNodeResult> {
     args = args || {};

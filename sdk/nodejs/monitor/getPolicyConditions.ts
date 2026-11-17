@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     resultOutputFile: "./tencentcloud_monitor_policy_conditions.txt",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribePolicyConditionList](https://www.tencentcloud.com/document/api/248/35979)
  */
 export function getPolicyConditions(args?: GetPolicyConditionsArgs, opts?: pulumi.InvokeOptions): Promise<GetPolicyConditionsResult> {
     args = args || {};
@@ -76,6 +82,12 @@ export interface GetPolicyConditionsResult {
  *     resultOutputFile: "./tencentcloud_monitor_policy_conditions.txt",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribePolicyConditionList](https://www.tencentcloud.com/document/api/248/35979)
  */
 export function getPolicyConditionsOutput(args?: GetPolicyConditionsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetPolicyConditionsResult> {
     args = args || {};

@@ -24,6 +24,12 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeEngineNetworks](https://www.tencentcloud.com/search/?wd=DescribeEngineNetworks&type=document&lang=en)
  */
 export function getDataEngineNetwork(args?: GetDataEngineNetworkArgs, opts?: pulumi.InvokeOptions): Promise<GetDataEngineNetworkResult> {
     args = args || {};
@@ -93,6 +99,12 @@ export interface GetDataEngineNetworkResult {
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeEngineNetworks](https://www.tencentcloud.com/search/?wd=DescribeEngineNetworks&type=document&lang=en)
  */
 export function getDataEngineNetworkOutput(args?: GetDataEngineNetworkOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDataEngineNetworkResult> {
     args = args || {};

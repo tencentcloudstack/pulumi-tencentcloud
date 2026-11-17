@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     availabilityZone: "na-siliconvalley-1",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeReservedInstancesOfferings](https://www.tencentcloud.com/document/api/213/68356)
  */
 export function getInstanceConfigs(args?: GetInstanceConfigsArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceConfigsResult> {
     args = args || {};
@@ -107,6 +113,12 @@ export interface GetInstanceConfigsResult {
  *     availabilityZone: "na-siliconvalley-1",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeReservedInstancesOfferings](https://www.tencentcloud.com/document/api/213/68356)
  */
 export function getInstanceConfigsOutput(args?: GetInstanceConfigsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInstanceConfigsResult> {
     args = args || {};

@@ -142,6 +142,12 @@ def get_spec(is_elastic: Optional[_builtins.bool] = None,
         is_elastic=False)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSpec](https://www.tencentcloud.com/search/?wd=DescribeSpec&type=document&lang=en)
+
 
     :param _builtins.bool is_elastic: Is it elastic.
     :param _builtins.str pay_mode: Billing type, PREPAID means annual and monthly subscription, POSTPAID_BY_HOUR means pay-as-you-go billing.
@@ -183,6 +189,12 @@ def get_spec_output(is_elastic: pulumi.Input[Optional[Optional[_builtins.bool]]]
         pay_mode="PREPAID",
         is_elastic=False)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSpec](https://www.tencentcloud.com/search/?wd=DescribeSpec&type=document&lang=en)
 
 
     :param _builtins.bool is_elastic: Is it elastic.

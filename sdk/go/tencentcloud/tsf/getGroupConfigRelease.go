@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeGroupRelease](https://www.tencentcloud.com/search/?wd=DescribeGroupRelease&type=document&lang=en)
 func LookupGroupConfigRelease(ctx *pulumi.Context, args *LookupGroupConfigReleaseArgs, opts ...pulumi.InvokeOption) (*LookupGroupConfigReleaseResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupGroupConfigReleaseResult

@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const zoneAvailablePlans = tencentcloud.teo.getZoneAvailablePlans({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAvailablePlans](https://www.tencentcloud.com/document/api/1145/50545)
  */
 export function getZoneAvailablePlans(args?: GetZoneAvailablePlansArgs, opts?: pulumi.InvokeOptions): Promise<GetZoneAvailablePlansResult> {
     args = args || {};
@@ -61,6 +67,12 @@ export interface GetZoneAvailablePlansResult {
  *
  * const zoneAvailablePlans = tencentcloud.teo.getZoneAvailablePlans({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAvailablePlans](https://www.tencentcloud.com/document/api/1145/50545)
  */
 export function getZoneAvailablePlansOutput(args?: GetZoneAvailablePlansOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetZoneAvailablePlansResult> {
     args = args || {};

@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeHostUpdateRecord](https://www.tencentcloud.com/document/api/1007/57983)
         /// </summary>
         public static Task<GetDescribeHostUpdateRecordResult> InvokeAsync(GetDescribeHostUpdateRecordArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDescribeHostUpdateRecordResult>("tencentcloud:Ssl/getDescribeHostUpdateRecord:getDescribeHostUpdateRecord", args ?? new GetDescribeHostUpdateRecordArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeHostUpdateRecord](https://www.tencentcloud.com/document/api/1007/57983)
         /// </summary>
         public static Output<GetDescribeHostUpdateRecordResult> Invoke(GetDescribeHostUpdateRecordInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDescribeHostUpdateRecordResult>("tencentcloud:Ssl/getDescribeHostUpdateRecord:getDescribeHostUpdateRecord", args ?? new GetDescribeHostUpdateRecordInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeHostUpdateRecord](https://www.tencentcloud.com/document/api/1007/57983)
         /// </summary>
         public static Output<GetDescribeHostUpdateRecordResult> Invoke(GetDescribeHostUpdateRecordInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDescribeHostUpdateRecordResult>("tencentcloud:Ssl/getDescribeHostUpdateRecord:getDescribeHostUpdateRecord", args ?? new GetDescribeHostUpdateRecordInvokeArgs(), options.WithDefaults());

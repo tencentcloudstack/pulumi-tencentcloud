@@ -156,6 +156,14 @@ class ClsLogAttachment(pulumi.CustomResource):
             log_topic_id=example.id)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [SetLoadBalancerClsLog](https://www.tencentcloud.com/document/api/214/35734)
+        * Read: [DescribeLoadBalancers](https://www.tencentcloud.com/document/api/214/33830)
+        * Delete: [SetLoadBalancerClsLog](https://www.tencentcloud.com/document/api/214/35734)
+
         ## Import
 
         CLB cls log attachment can be imported using the loadBalancerId#logSetId#logTopicId, e.g.
@@ -195,6 +203,14 @@ class ClsLogAttachment(pulumi.CustomResource):
             log_set_id="2ed70190-bf06-4777-980d-2d8a327a2554",
             log_topic_id=example.id)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [SetLoadBalancerClsLog](https://www.tencentcloud.com/document/api/214/35734)
+        * Read: [DescribeLoadBalancers](https://www.tencentcloud.com/document/api/214/33830)
+        * Delete: [SetLoadBalancerClsLog](https://www.tencentcloud.com/document/api/214/35734)
 
         ## Import
 

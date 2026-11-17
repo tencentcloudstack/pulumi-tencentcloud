@@ -77,6 +77,12 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeMachinesSimple](https://www.tencentcloud.com/document/api/296/64036)
  */
 export function getMachinesSimple(args: GetMachinesSimpleArgs, opts?: pulumi.InvokeOptions): Promise<GetMachinesSimpleResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -207,6 +213,12 @@ export interface GetMachinesSimpleResult {
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeMachinesSimple](https://www.tencentcloud.com/document/api/296/64036)
  */
 export function getMachinesSimpleOutput(args: GetMachinesSimpleOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetMachinesSimpleResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

@@ -67,6 +67,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeProcedureTemplates](https://www.tencentcloud.com/document/api/266/34147)
         /// </summary>
         public static Task<GetProcedureTemplatesResult> InvokeAsync(GetProcedureTemplatesArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetProcedureTemplatesResult>("tencentcloud:Vod/getProcedureTemplates:getProcedureTemplates", args ?? new GetProcedureTemplatesArgs(), options.WithDefaults());
@@ -126,6 +132,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeProcedureTemplates](https://www.tencentcloud.com/document/api/266/34147)
         /// </summary>
         public static Output<GetProcedureTemplatesResult> Invoke(GetProcedureTemplatesInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetProcedureTemplatesResult>("tencentcloud:Vod/getProcedureTemplates:getProcedureTemplates", args ?? new GetProcedureTemplatesInvokeArgs(), options.WithDefaults());
@@ -185,6 +197,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeProcedureTemplates](https://www.tencentcloud.com/document/api/266/34147)
         /// </summary>
         public static Output<GetProcedureTemplatesResult> Invoke(GetProcedureTemplatesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetProcedureTemplatesResult>("tencentcloud:Vod/getProcedureTemplates:getProcedureTemplates", args ?? new GetProcedureTemplatesInvokeArgs(), options.WithDefaults());

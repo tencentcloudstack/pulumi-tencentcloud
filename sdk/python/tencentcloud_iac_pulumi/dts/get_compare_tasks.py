@@ -99,6 +99,12 @@ def get_compare_tasks(job_id: Optional[_builtins.str] = None,
     compare_tasks = tencentcloud.dts.get_compare_tasks(job_id="")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCompareTasks](https://www.tencentcloud.com/document/api/571/51816)
+
 
     :param _builtins.str job_id: job id.
     :param _builtins.str result_output_file: Used to save results.
@@ -128,6 +134,12 @@ def get_compare_tasks_output(job_id: pulumi.Input[Optional[_builtins.str]] = Non
 
     compare_tasks = tencentcloud.dts.get_compare_tasks(job_id="")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCompareTasks](https://www.tencentcloud.com/document/api/571/51816)
 
 
     :param _builtins.str job_id: job id.

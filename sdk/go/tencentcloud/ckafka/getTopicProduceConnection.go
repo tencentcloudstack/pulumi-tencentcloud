@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeTopicProduceConnection](https://www.tencentcloud.com/document/api/597/53303)
 func LookupTopicProduceConnection(ctx *pulumi.Context, args *LookupTopicProduceConnectionArgs, opts ...pulumi.InvokeOption) (*LookupTopicProduceConnectionResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupTopicProduceConnectionResult

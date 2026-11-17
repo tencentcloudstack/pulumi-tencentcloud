@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     instanceId: "ckafka-8j4raxv8",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCkafkaVersion](https://www.tencentcloud.com/document/api/597/74424)
  */
 export function getVersion(args: GetVersionArgs, opts?: pulumi.InvokeOptions): Promise<GetVersionResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -78,6 +84,12 @@ export interface GetVersionResult {
  *     instanceId: "ckafka-8j4raxv8",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCkafkaVersion](https://www.tencentcloud.com/document/api/597/74424)
  */
 export function getVersionOutput(args: GetVersionOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetVersionResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

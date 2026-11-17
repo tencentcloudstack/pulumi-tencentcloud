@@ -102,6 +102,23 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbdc
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [AddNodesToDBCustomCluster](https://www.tencentcloud.com/search/?wd=AddNodesToDBCustomCluster&amp;type=document&amp;lang=en)
+    ///   - [DescribeDBCustomClusterNodeConfig](https://www.tencentcloud.com/search/?wd=DescribeDBCustomClusterNodeConfig&amp;type=document&amp;lang=en)
+    ///   - [DescribeDBCustomClusterNodes](https://www.tencentcloud.com/search/?wd=DescribeDBCustomClusterNodes&amp;type=document&amp;lang=en)
+    /// * Read:
+    ///   - [DescribeDBCustomClusterNodeConfig](https://www.tencentcloud.com/search/?wd=DescribeDBCustomClusterNodeConfig&amp;type=document&amp;lang=en)
+    ///   - [DescribeDBCustomClusterNodes](https://www.tencentcloud.com/search/?wd=DescribeDBCustomClusterNodes&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [DescribeDBCustomClusterNodeConfig](https://www.tencentcloud.com/search/?wd=DescribeDBCustomClusterNodeConfig&amp;type=document&amp;lang=en)
+    ///   - [DescribeDBCustomClusterNodes](https://www.tencentcloud.com/search/?wd=DescribeDBCustomClusterNodes&amp;type=document&amp;lang=en)
+    ///   - [ModifyDBCustomClusterNodeConfig](https://www.tencentcloud.com/search/?wd=ModifyDBCustomClusterNodeConfig&amp;type=document&amp;lang=en)
+    /// * Delete: [RemoveNodesFromDBCustomCluster](https://www.tencentcloud.com/search/?wd=RemoveNodesFromDBCustomCluster&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// DBDC node to db custom cluster attachment can be imported using the clusterId#nodeId, e.g.

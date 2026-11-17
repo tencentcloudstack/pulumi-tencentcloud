@@ -273,6 +273,15 @@ class ConfigTemplate(pulumi.CustomResource):
             config_template_desc="terraform-test")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateConfigTemplateWithDetailResp](https://www.tencentcloud.com/search/?wd=CreateConfigTemplateWithDetailResp&type=document&lang=en)
+        * Read: [DescribeConfigTemplate](https://www.tencentcloud.com/search/?wd=DescribeConfigTemplate&type=document&lang=en)
+        * Update: [UpdateConfigTemplate](https://www.tencentcloud.com/search/?wd=UpdateConfigTemplate&type=document&lang=en)
+        * Delete: [DeleteConfigTemplate](https://www.tencentcloud.com/search/?wd=DeleteConfigTemplate&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -308,6 +317,15 @@ class ConfigTemplate(pulumi.CustomResource):
         \"\"\",
             config_template_desc="terraform-test")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateConfigTemplateWithDetailResp](https://www.tencentcloud.com/search/?wd=CreateConfigTemplateWithDetailResp&type=document&lang=en)
+        * Read: [DescribeConfigTemplate](https://www.tencentcloud.com/search/?wd=DescribeConfigTemplate&type=document&lang=en)
+        * Update: [UpdateConfigTemplate](https://www.tencentcloud.com/search/?wd=UpdateConfigTemplate&type=document&lang=en)
+        * Delete: [DeleteConfigTemplate](https://www.tencentcloud.com/search/?wd=DeleteConfigTemplate&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

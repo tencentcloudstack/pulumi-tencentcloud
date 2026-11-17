@@ -299,6 +299,14 @@ class BackupPlanConfig(pulumi.CustomResource):
             backup_method="physical")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyBackupPlan](https://www.tencentcloud.com/document/api/409/45149)
+        * Read: [DescribeBackupPlans](https://www.tencentcloud.com/document/api/409/45151)
+        * Update: [ModifyBackupPlan](https://www.tencentcloud.com/document/api/409/45149)
+
         ## Import
 
         postgres backup plan config can be imported using the id, e.g.
@@ -350,6 +358,14 @@ class BackupPlanConfig(pulumi.CustomResource):
             log_backup_retention_period=7,
             backup_method="physical")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyBackupPlan](https://www.tencentcloud.com/document/api/409/45149)
+        * Read: [DescribeBackupPlans](https://www.tencentcloud.com/document/api/409/45151)
+        * Update: [ModifyBackupPlan](https://www.tencentcloud.com/document/api/409/45149)
 
         ## Import
 

@@ -96,6 +96,12 @@ def get_instance_disk_num(instance_ids: Optional[Sequence[_builtins.str]] = None
     instance_disk_num = tencentcloud.lighthouse.get_instance_disk_num(instance_ids=["lhins-xxxxxx"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstancesDiskNum](https://www.tencentcloud.com/document/api/1103/44563)
+
 
     :param Sequence[_builtins.str] instance_ids: List of instance IDs.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_instance_disk_num_output(instance_ids: pulumi.Input[Optional[Sequence[_b
 
     instance_disk_num = tencentcloud.lighthouse.get_instance_disk_num(instance_ids=["lhins-xxxxxx"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstancesDiskNum](https://www.tencentcloud.com/document/api/1103/44563)
 
 
     :param Sequence[_builtins.str] instance_ids: List of instance IDs.

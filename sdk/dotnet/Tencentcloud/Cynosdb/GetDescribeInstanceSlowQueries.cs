@@ -34,6 +34,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBinlogs](https://www.tencentcloud.com/document/api/1098/48594)
         /// </summary>
         public static Task<GetDescribeInstanceSlowQueriesResult> InvokeAsync(GetDescribeInstanceSlowQueriesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDescribeInstanceSlowQueriesResult>("tencentcloud:Cynosdb/getDescribeInstanceSlowQueries:getDescribeInstanceSlowQueries", args ?? new GetDescribeInstanceSlowQueriesArgs(), options.WithDefaults());
@@ -60,6 +66,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBinlogs](https://www.tencentcloud.com/document/api/1098/48594)
         /// </summary>
         public static Output<GetDescribeInstanceSlowQueriesResult> Invoke(GetDescribeInstanceSlowQueriesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDescribeInstanceSlowQueriesResult>("tencentcloud:Cynosdb/getDescribeInstanceSlowQueries:getDescribeInstanceSlowQueries", args ?? new GetDescribeInstanceSlowQueriesInvokeArgs(), options.WithDefaults());
@@ -86,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBinlogs](https://www.tencentcloud.com/document/api/1098/48594)
         /// </summary>
         public static Output<GetDescribeInstanceSlowQueriesResult> Invoke(GetDescribeInstanceSlowQueriesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDescribeInstanceSlowQueriesResult>("tencentcloud:Cynosdb/getDescribeInstanceSlowQueries:getDescribeInstanceSlowQueries", args ?? new GetDescribeInstanceSlowQueriesInvokeArgs(), options.WithDefaults());

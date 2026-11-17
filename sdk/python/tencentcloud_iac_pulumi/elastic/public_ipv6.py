@@ -440,6 +440,22 @@ class PublicIpv6(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [AllocateIPv6Addresses](https://www.tencentcloud.com/document/api/215/68132)
+          - [DescribeTaskResult](https://www.tencentcloud.com/document/api/215/34772)
+        * Read:
+          - [DescribeIPv6Addresses](https://www.tencentcloud.com/document/api/215/68129)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [ModifyIPv6AddressesAttributes](https://www.tencentcloud.com/document/api/215/68126)
+          - [ModifyIPv6AddressesBandwidth](https://www.tencentcloud.com/document/api/215/68125)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Delete: [ReleaseIPv6Addresses](https://www.tencentcloud.com/document/api/215/68123)
+
         ## Import
 
         vpc elastic_public_ipv6 can be imported using the id, e.g.
@@ -504,6 +520,22 @@ class PublicIpv6(pulumi.CustomResource):
                 "test1key": "test1value",
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [AllocateIPv6Addresses](https://www.tencentcloud.com/document/api/215/68132)
+          - [DescribeTaskResult](https://www.tencentcloud.com/document/api/215/34772)
+        * Read:
+          - [DescribeIPv6Addresses](https://www.tencentcloud.com/document/api/215/68129)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [ModifyIPv6AddressesAttributes](https://www.tencentcloud.com/document/api/215/68126)
+          - [ModifyIPv6AddressesBandwidth](https://www.tencentcloud.com/document/api/215/68125)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Delete: [ReleaseIPv6Addresses](https://www.tencentcloud.com/document/api/215/68123)
 
         ## Import
 

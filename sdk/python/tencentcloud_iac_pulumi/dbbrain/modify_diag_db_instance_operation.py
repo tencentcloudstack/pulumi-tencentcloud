@@ -205,6 +205,12 @@ class ModifyDiagDbInstanceOperation(pulumi.CustomResource):
             instance_ids=["%s"])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyDiagDBInstanceConf](https://www.tencentcloud.com/document/api/1035/41186)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -249,6 +255,12 @@ class ModifyDiagDbInstanceOperation(pulumi.CustomResource):
             product="mysql",
             instance_ids=["%s"])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyDiagDBInstanceConf](https://www.tencentcloud.com/document/api/1035/41186)
 
 
         :param str resource_name: The name of the resource.

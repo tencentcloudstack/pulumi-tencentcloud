@@ -40,6 +40,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCloudNativeAPIGatewayCertificates](https://www.tencentcloud.com/document/api/1290/79265)
         /// </summary>
         public static Task<GetGatewayCertificatesResult> InvokeAsync(GetGatewayCertificatesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetGatewayCertificatesResult>("tencentcloud:Tse/getGatewayCertificates:getGatewayCertificates", args ?? new GetGatewayCertificatesArgs(), options.WithDefaults());
@@ -72,6 +78,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCloudNativeAPIGatewayCertificates](https://www.tencentcloud.com/document/api/1290/79265)
         /// </summary>
         public static Output<GetGatewayCertificatesResult> Invoke(GetGatewayCertificatesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetGatewayCertificatesResult>("tencentcloud:Tse/getGatewayCertificates:getGatewayCertificates", args ?? new GetGatewayCertificatesInvokeArgs(), options.WithDefaults());
@@ -104,6 +116,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCloudNativeAPIGatewayCertificates](https://www.tencentcloud.com/document/api/1290/79265)
         /// </summary>
         public static Output<GetGatewayCertificatesResult> Invoke(GetGatewayCertificatesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetGatewayCertificatesResult>("tencentcloud:Tse/getGatewayCertificates:getGatewayCertificates", args ?? new GetGatewayCertificatesInvokeArgs(), options.WithDefaults());

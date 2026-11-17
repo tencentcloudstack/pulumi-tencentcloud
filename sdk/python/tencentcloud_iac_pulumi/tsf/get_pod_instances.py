@@ -107,6 +107,12 @@ def get_pod_instances(group_id: Optional[_builtins.str] = None,
         pod_name_lists=["keep-terraform-6f8f977688-zvphm"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribePodInstances](https://www.tencentcloud.com/search/?wd=DescribePodInstances&type=document&lang=en)
+
 
     :param _builtins.str group_id: Instance&amp;#39;s group ID.
     :param Sequence[_builtins.str] pod_name_lists: Filter, pod name list.
@@ -141,6 +147,12 @@ def get_pod_instances_output(group_id: pulumi.Input[Optional[_builtins.str]] = N
     pod_instances = tencentcloud.tsf.get_pod_instances(group_id="group-ynd95rea",
         pod_name_lists=["keep-terraform-6f8f977688-zvphm"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribePodInstances](https://www.tencentcloud.com/search/?wd=DescribePodInstances&type=document&lang=en)
 
 
     :param _builtins.str group_id: Instance&amp;#39;s group ID.

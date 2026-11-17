@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [DownloadCertificate](https://www.tencentcloud.com/document/api/1007/36584)
+    /// 
     /// ## Import
     /// 
     /// ssl DownloadCertificate can be imported using the id, e.g.

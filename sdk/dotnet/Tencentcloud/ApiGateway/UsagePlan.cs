@@ -34,6 +34,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateUsagePlan](https://www.tencentcloud.com/search/?wd=CreateUsagePlan&amp;type=document&amp;lang=en)
+    ///   - [DescribeUsagePlan](https://www.tencentcloud.com/search/?wd=DescribeUsagePlan&amp;type=document&amp;lang=en)
+    /// * Read:
+    ///   - [DescribeUsagePlan](https://www.tencentcloud.com/search/?wd=DescribeUsagePlan&amp;type=document&amp;lang=en)
+    ///   - [DescribeUsagePlanEnvironments](https://www.tencentcloud.com/search/?wd=DescribeUsagePlanEnvironments&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyUsagePlan](https://www.tencentcloud.com/search/?wd=ModifyUsagePlan&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteUsagePlan](https://www.tencentcloud.com/search/?wd=DeleteUsagePlan&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// API gateway usage plan can be imported using the id, e.g.

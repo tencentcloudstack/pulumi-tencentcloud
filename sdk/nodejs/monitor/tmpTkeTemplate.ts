@@ -89,6 +89,15 @@ import * as utilities from "../utilities";
  *     ],
  * }});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreatePrometheusTemp](https://www.tencentcloud.com/document/api/248/53327)
+ * * Read: [DescribePrometheusTemp](https://www.tencentcloud.com/document/api/248/53318)
+ * * Update: [ModifyPrometheusTemp](https://www.tencentcloud.com/document/api/248/53316)
+ * * Delete: [DeletePrometheusTemp](https://www.tencentcloud.com/document/api/248/53326)
  */
 export class TmpTkeTemplate extends pulumi.CustomResource {
     /**

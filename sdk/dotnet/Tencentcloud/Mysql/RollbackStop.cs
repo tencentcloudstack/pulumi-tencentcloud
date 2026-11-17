@@ -32,6 +32,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+    ///   - [StopRollback](https://www.tencentcloud.com/document/api/236/38951)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mysql/rollbackStop:RollbackStop")]
     public partial class RollbackStop : global::Pulumi.CustomResource

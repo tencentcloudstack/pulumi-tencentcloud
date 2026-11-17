@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *     product: "mysql",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeBinlogBackupOverview](https://www.tencentcloud.com/document/api/236/35194)
  */
 export function getBinlogBackupOverview(args: GetBinlogBackupOverviewArgs, opts?: pulumi.InvokeOptions): Promise<GetBinlogBackupOverviewResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -96,6 +102,12 @@ export interface GetBinlogBackupOverviewResult {
  *     product: "mysql",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeBinlogBackupOverview](https://www.tencentcloud.com/document/api/236/35194)
  */
 export function getBinlogBackupOverviewOutput(args: GetBinlogBackupOverviewOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetBinlogBackupOverviewResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

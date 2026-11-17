@@ -109,6 +109,12 @@ def get_tokens(instance_id: Optional[_builtins.str] = None,
     name = tencentcloud.tcr.get_tokens(instance_id="cls-satg5125")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstanceToken](https://www.tencentcloud.com/document/api/1051/50704)
+
 
     :param _builtins.str instance_id: ID of the instance that the token belongs to.
     :param _builtins.str result_output_file: Used to save results.
@@ -142,6 +148,12 @@ def get_tokens_output(instance_id: pulumi.Input[Optional[_builtins.str]] = None,
 
     name = tencentcloud.tcr.get_tokens(instance_id="cls-satg5125")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstanceToken](https://www.tencentcloud.com/document/api/1051/50704)
 
 
     :param _builtins.str instance_id: ID of the instance that the token belongs to.

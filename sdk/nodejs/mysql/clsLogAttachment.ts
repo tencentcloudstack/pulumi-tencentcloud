@@ -86,6 +86,14 @@ import * as utilities from "../utilities";
  *     logTopic: "140d4d39-4307-45a8-9655-290f679b063d",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [ModifyDBInstanceLogToCLS](https://www.tencentcloud.com/document/api/236/57988)
+ * * Read: [DescribeDBInstanceLogToCLS](https://www.tencentcloud.com/document/api/236/57978)
+ * * Delete: [ModifyDBInstanceLogToCLS](https://www.tencentcloud.com/document/api/236/57988)
  */
 export class ClsLogAttachment extends pulumi.CustomResource {
     /**

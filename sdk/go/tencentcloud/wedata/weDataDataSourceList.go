@@ -77,6 +77,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDataSourceList](https://www.tencentcloud.com/document/api/1174/61092)
 func WeDataDataSourceList(ctx *pulumi.Context, args *WeDataDataSourceListArgs, opts ...pulumi.InvokeOption) (*WeDataDataSourceListResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv WeDataDataSourceListResult

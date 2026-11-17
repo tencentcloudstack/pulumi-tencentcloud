@@ -155,6 +155,14 @@ class SecurityGroupsAttachment(pulumi.CustomResource):
             instance_id=example.id)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AssociateSecurityGroups](https://www.tencentcloud.com/document/api/236/15852)
+        * Read: [DescribeDBSecurityGroups](https://www.tencentcloud.com/document/api/236/15854)
+        * Delete: [DisassociateSecurityGroups](https://www.tencentcloud.com/document/api/236/15851)
+
         ## Import
 
         mysql security_groups_attachment can be imported using the id, e.g.
@@ -224,6 +232,14 @@ class SecurityGroupsAttachment(pulumi.CustomResource):
             security_group_id=security_group.id,
             instance_id=example.id)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AssociateSecurityGroups](https://www.tencentcloud.com/document/api/236/15852)
+        * Read: [DescribeDBSecurityGroups](https://www.tencentcloud.com/document/api/236/15854)
+        * Delete: [DisassociateSecurityGroups](https://www.tencentcloud.com/document/api/236/15851)
 
         ## Import
 

@@ -141,6 +141,12 @@ def get_listeners(clb_id: Optional[_builtins.str] = None,
         port=80)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeListeners](https://www.tencentcloud.com/document/api/214/33831)
+
 
     :param _builtins.str clb_id: Id of the CLB to be queried.
     :param _builtins.str listener_id: Id of the listener to be queried.
@@ -185,6 +191,12 @@ def get_listeners_output(clb_id: pulumi.Input[Optional[_builtins.str]] = None,
         protocol="TCP",
         port=80)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeListeners](https://www.tencentcloud.com/document/api/214/33831)
 
 
     :param _builtins.str clb_id: Id of the CLB to be queried.

@@ -77,6 +77,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [ModifyDiagDBInstanceConf](https://www.tencentcloud.com/document/api/1035/41186)
 type ModifyDiagDbInstanceOperation struct {
 	pulumi.CustomResourceState
 

@@ -119,6 +119,12 @@ class RecoverBackupJob(pulumi.CustomResource):
             back_up_job_id=1234)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [RecoverBackUpJob](https://www.tencentcloud.com/search/?wd=RecoverBackUpJob&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -144,6 +150,12 @@ class RecoverBackupJob(pulumi.CustomResource):
             instance_id="cdwch-xxxxxx",
             back_up_job_id=1234)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [RecoverBackUpJob](https://www.tencentcloud.com/search/?wd=RecoverBackUpJob&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

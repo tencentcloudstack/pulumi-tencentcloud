@@ -124,6 +124,12 @@ def get_xlogs(end_time: Optional[_builtins.str] = None,
         end_time="2022-01-07 01:02:03")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBXlogs](https://www.tencentcloud.com/document/api/409/18091)
+
 
     :param _builtins.str end_time: Xlog end time, format `yyyy-MM-dd hh:mm:ss`.
     :param _builtins.str instance_id: PostgreSQL instance id.
@@ -163,6 +169,12 @@ def get_xlogs_output(end_time: pulumi.Input[Optional[Optional[_builtins.str]]] =
         start_time="2022-01-01 00:00:00",
         end_time="2022-01-07 01:02:03")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBXlogs](https://www.tencentcloud.com/document/api/409/18091)
 
 
     :param _builtins.str end_time: Xlog end time, format `yyyy-MM-dd hh:mm:ss`.

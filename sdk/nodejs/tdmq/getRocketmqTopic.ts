@@ -37,6 +37,12 @@ import * as utilities from "../utilities";
  *     filterName: exampleRocketmqTopic.topicName,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRocketMQTopics](https://www.tencentcloud.com/search/?wd=DescribeRocketMQTopics&type=document&lang=en)
  */
 export function getRocketmqTopic(args: GetRocketmqTopicArgs, opts?: pulumi.InvokeOptions): Promise<GetRocketmqTopicResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -124,6 +130,12 @@ export interface GetRocketmqTopicResult {
  *     filterName: exampleRocketmqTopic.topicName,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRocketMQTopics](https://www.tencentcloud.com/search/?wd=DescribeRocketMQTopics&type=document&lang=en)
  */
 export function getRocketmqTopicOutput(args: GetRocketmqTopicOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRocketmqTopicResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

@@ -36,6 +36,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
+    ///   - [ManualBackupInstance](https://www.tencentcloud.com/document/api/239/32073)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Redis/backupOperation:BackupOperation")]
     public partial class BackupOperation : global::Pulumi.CustomResource

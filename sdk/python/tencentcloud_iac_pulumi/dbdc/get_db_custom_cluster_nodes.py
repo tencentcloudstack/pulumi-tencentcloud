@@ -122,6 +122,12 @@ def get_db_custom_cluster_nodes(cluster_id: Optional[_builtins.str] = None,
         }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBCustomClusterNodes](https://www.tencentcloud.com/search/?wd=DescribeDBCustomClusterNodes&type=document&lang=en)
+
 
     :param _builtins.str cluster_id: DB Custom cluster ID.
     :param Sequence[Union['GetDbCustomClusterNodesFilterArgs', 'GetDbCustomClusterNodesFilterArgsDict']] filters: Filter conditions. Supported filter names: node-name (DB Custom node name).
@@ -170,6 +176,12 @@ def get_db_custom_cluster_nodes_output(cluster_id: pulumi.Input[Optional[_builti
             "values": ["tf-example"],
         }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBCustomClusterNodes](https://www.tencentcloud.com/search/?wd=DescribeDBCustomClusterNodes&type=document&lang=en)
 
 
     :param _builtins.str cluster_id: DB Custom cluster ID.

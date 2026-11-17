@@ -32,7 +32,7 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			_, err := teo.NewBindSecurityTemplate(ctx, "example", &teo.BindSecurityTemplateArgs{
+//			example, err := teo.NewBindSecurityTemplate(ctx, "example", &teo.BindSecurityTemplateArgs{
 //				ZoneId:     pulumi.String("zone-3skoch6ingbw"),
 //				TemplateId: pulumi.String("temp-3s1pzyam2nxp"),
 //				Entity:     pulumi.String("tf.example.com"),
@@ -41,11 +41,23 @@ import (
 //			if err != nil {
 //				return err
 //			}
+//			ctx.Export("bindMessage", example.Message)
 //			return nil
 //		})
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [BindSecurityTemplateToEntity](https://www.tencentcloud.com/document/api/1145/57572)
+// * Read:
+//   - [DescribeWebSecurityTemplates](https://www.tencentcloud.com/document/api/1145/71945)
+//   - [DescribeZones](https://www.tencentcloud.com/document/api/1145/50481)
+//
+// * Delete: [BindSecurityTemplateToEntity](https://www.tencentcloud.com/document/api/1145/57572)
 //
 // ## Import
 //
@@ -59,6 +71,8 @@ type BindSecurityTemplate struct {
 
 	// The domain name to be bound to the policy template (or unbound from the policy template).
 	Entity pulumi.StringOutput `pulumi:"entity"`
+	// Instance configuration delivery message. This field provides human-readable information about the delivery status (e.g., failure reasons).
+	Message pulumi.StringOutput `pulumi:"message"`
 	// Bind or unbind operation option. Valid values:
 	// <li>`unbind-keep-policy`: unbind the domain name from the policy template while retaining the current policy.</li>
 	// <li>`unbind-use-default`: unbind the domain name from the policy template and use the default blank policy.</li>
@@ -121,6 +135,8 @@ func GetBindSecurityTemplate(ctx *pulumi.Context,
 type bindSecurityTemplateState struct {
 	// The domain name to be bound to the policy template (or unbound from the policy template).
 	Entity *string `pulumi:"entity"`
+	// Instance configuration delivery message. This field provides human-readable information about the delivery status (e.g., failure reasons).
+	Message *string `pulumi:"message"`
 	// Bind or unbind operation option. Valid values:
 	// <li>`unbind-keep-policy`: unbind the domain name from the policy template while retaining the current policy.</li>
 	// <li>`unbind-use-default`: unbind the domain name from the policy template and use the default blank policy.</li>
@@ -145,6 +161,8 @@ type bindSecurityTemplateState struct {
 type BindSecurityTemplateState struct {
 	// The domain name to be bound to the policy template (or unbound from the policy template).
 	Entity pulumi.StringPtrInput
+	// Instance configuration delivery message. This field provides human-readable information about the delivery status (e.g., failure reasons).
+	Message pulumi.StringPtrInput
 	// Bind or unbind operation option. Valid values:
 	// <li>`unbind-keep-policy`: unbind the domain name from the policy template while retaining the current policy.</li>
 	// <li>`unbind-use-default`: unbind the domain name from the policy template and use the default blank policy.</li>
@@ -305,6 +323,11 @@ func (o BindSecurityTemplateOutput) ToBindSecurityTemplateOutputWithContext(ctx 
 // The domain name to be bound to the policy template (or unbound from the policy template).
 func (o BindSecurityTemplateOutput) Entity() pulumi.StringOutput {
 	return o.ApplyT(func(v *BindSecurityTemplate) pulumi.StringOutput { return v.Entity }).(pulumi.StringOutput)
+}
+
+// Instance configuration delivery message. This field provides human-readable information about the delivery status (e.g., failure reasons).
+func (o BindSecurityTemplateOutput) Message() pulumi.StringOutput {
+	return o.ApplyT(func(v *BindSecurityTemplate) pulumi.StringOutput { return v.Message }).(pulumi.StringOutput)
 }
 
 // Bind or unbind operation option. Valid values:

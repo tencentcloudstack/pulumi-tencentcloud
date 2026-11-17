@@ -234,6 +234,12 @@ def get_probe_data(ascending: Optional[_builtins.bool] = None,
         task_ids=["task-knare1mk"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDetailedSingleProbeData](https://www.tencentcloud.com/search/?wd=DescribeDetailedSingleProbeData&type=document&lang=en)
+
 
     :param _builtins.bool ascending: true is Ascending.
     :param _builtins.int begin_time: Start timestamp (in milliseconds).
@@ -323,6 +329,12 @@ def get_probe_data_output(ascending: pulumi.Input[Optional[_builtins.bool]] = No
         limit=20,
         task_ids=["task-knare1mk"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDetailedSingleProbeData](https://www.tencentcloud.com/search/?wd=DescribeDetailedSingleProbeData&type=document&lang=en)
 
 
     :param _builtins.bool ascending: true is Ascending.

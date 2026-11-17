@@ -15,6 +15,12 @@ import * as utilities from "../utilities";
  *
  * const callerIdentity = tencentcloud.sts.getCallerIdentity({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GetCallerIdentity](https://www.tencentcloud.com/document/api/1150/49453)
  */
 export function getCallerIdentity(args?: GetCallerIdentityArgs, opts?: pulumi.InvokeOptions): Promise<GetCallerIdentityResult> {
     args = args || {};
@@ -75,6 +81,12 @@ export interface GetCallerIdentityResult {
  *
  * const callerIdentity = tencentcloud.sts.getCallerIdentity({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GetCallerIdentity](https://www.tencentcloud.com/document/api/1150/49453)
  */
 export function getCallerIdentityOutput(args?: GetCallerIdentityOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetCallerIdentityResult> {
     args = args || {};

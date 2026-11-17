@@ -19,6 +19,14 @@ import * as utilities from "../utilities";
  *     autoVoucher: false,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeDBInstanceAttribute](https://www.tencentcloud.com/document/api/409/16772)
+ *   - [DisIsolateDBInstances](https://www.tencentcloud.com/document/api/409/40110)
  */
 export class DisisolateDbInstanceOperation extends pulumi.CustomResource {
     /**

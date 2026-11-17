@@ -56,6 +56,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeClusterNatCcnFwSwitchList](https://www.tencentcloud.com/search/?wd=DescribeClusterNatCcnFwSwitchList&amp;type=document&amp;lang=en)
+    ///   - [ModifyClusterFwBypass](https://www.tencentcloud.com/search/?wd=ModifyClusterFwBypass&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeClusterNatCcnFwSwitchList](https://www.tencentcloud.com/search/?wd=DescribeClusterNatCcnFwSwitchList&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [DescribeClusterNatCcnFwSwitchList](https://www.tencentcloud.com/search/?wd=DescribeClusterNatCcnFwSwitchList&amp;type=document&amp;lang=en)
+    ///   - [ModifyClusterFwBypass](https://www.tencentcloud.com/search/?wd=ModifyClusterFwBypass&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// CFW cluster firewall bypass config can be imported using the composite ID.

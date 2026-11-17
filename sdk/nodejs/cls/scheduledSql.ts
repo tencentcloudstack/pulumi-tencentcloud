@@ -7,7 +7,7 @@ import * as outputs from "../types/output";
 import * as utilities from "../utilities";
 
 /**
- * Provides a resource to create a cls scheduledSql
+ * Provides a resource to create a CLS scheduled sql
  *
  * ## Example Usage
  *
@@ -15,52 +15,69 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const logset = new tencentcloud.cls.Logset("logset", {
- *     logsetName: "tf-example-logset",
- *     tags: {
- *         createdBy: "terraform",
- *     },
- * });
- * const topic = new tencentcloud.cls.Topic("topic", {
- *     topicName: "tf-example-topic",
- *     logsetId: logset.id,
- *     autoSplit: false,
- *     maxSplitPartitions: 20,
- *     partitionCount: 1,
- *     period: 10,
- *     storageType: "hot",
- *     tags: {
- *         test: "test",
- *     },
- * });
- * const scheduledSql = new tencentcloud.cls.ScheduledSql("scheduled_sql", {
- *     srcTopicId: topic.id,
- *     name: "tf-example-task",
+ * const example = new tencentcloud.cls.ScheduledSql("example", {
+ *     srcTopicId: "2360e4a2-2b9e-4640-9829-72bc5052c9dd",
+ *     srcTopicRegion: "ap-guangzhou",
+ *     name: "tf-example",
  *     enableFlag: 1,
  *     dstResource: {
- *         topicId: topic.id,
+ *         topicId: "3f5cc19d-f601-48b6-9671-9019b7b09bd0",
  *         region: "ap-guangzhou",
- *         bizType: 0,
- *         metricName: "test",
+ *         bizType: 1,
+ *         metricNames: [
+ *             "name1",
+ *             "name2",
+ *             "name3",
+ *         ],
+ *         metricLabels: [
+ *             "lable1",
+ *             "lable2",
+ *             "lable3",
+ *         ],
+ *         customTime: "__WindowStartTime__",
+ *         customMetricLabels: [
+ *             {
+ *                 key: "cmlKey1",
+ *                 value: "cmlValue1",
+ *             },
+ *             {
+ *                 key: "cmlKey2",
+ *                 value: "cmlValue2",
+ *             },
+ *             {
+ *                 key: "cmlKey3",
+ *                 value: "cmlValue3",
+ *             },
+ *         ],
  *     },
- *     scheduledSqlContent: "xxx",
- *     processStartTime: 1690515360000,
+ *     scheduledSqlContent: `verb:get AND responseStatus.code>=400
+ * | select stageTimestamp, responseStatus.code, objectRef.resource, objectRef.name, objectRef.namespace, user.username, "annotations.authorization.k8s.io/decision" as auth_decision
+ *   order by stageTimestamp desc
+ *   limit 50`,
+ *     processStartTime: 1788417300000,
  *     processType: 1,
- *     processPeriod: 10,
- *     processTimeWindow: "@m-15m,@m",
- *     processDelay: 5,
- *     srcTopicRegion: "ap-guangzhou",
- *     processEndTime: 1690515360000,
- *     syntaxRule: 0,
+ *     processPeriod: 1,
+ *     processTimeWindow: "@m-1m,@m",
+ *     processDelay: 60,
+ *     syntaxRule: 1,
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateScheduledSql](https://www.tencentcloud.com/document/api/614/59901)
+ * * Read: [DescribeScheduledSqlInfo](https://www.tencentcloud.com/document/api/614/59899)
+ * * Update: [ModifyScheduledSql](https://www.tencentcloud.com/document/api/614/59898)
+ * * Delete: [DeleteScheduledSql](https://www.tencentcloud.com/document/api/614/59900)
+ *
  * ## Import
  *
- * cls scheduledSql can be imported using the id, e.g.
+ * CLS scheduled sql can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Cls/scheduledSql:ScheduledSql scheduled_sql scheduled_sql_id
+ * $ pulumi import tencentcloud:Cls/scheduledSql:ScheduledSql example aebbad1b-4228-4ccc-8d62-0333c9739452
  * ```
  */
 export class ScheduledSql extends pulumi.CustomResource {
@@ -143,6 +160,10 @@ export class ScheduledSql extends pulumi.CustomResource {
      * syntax rule.
      */
     declare public readonly syntaxRule: pulumi.Output<number | undefined>;
+    /**
+     * task id.
+     */
+    declare public /*out*/ readonly taskId: pulumi.Output<string>;
 
     /**
      * Create a ScheduledSql resource with the given unique name, arguments, and options.
@@ -170,6 +191,7 @@ export class ScheduledSql extends pulumi.CustomResource {
             resourceInputs["srcTopicId"] = state?.srcTopicId;
             resourceInputs["srcTopicRegion"] = state?.srcTopicRegion;
             resourceInputs["syntaxRule"] = state?.syntaxRule;
+            resourceInputs["taskId"] = state?.taskId;
         } else {
             const args = argsOrState as ScheduledSqlArgs | undefined;
             if (args?.dstResource === undefined && !opts.urn) {
@@ -215,6 +237,7 @@ export class ScheduledSql extends pulumi.CustomResource {
             resourceInputs["srcTopicId"] = args?.srcTopicId;
             resourceInputs["srcTopicRegion"] = args?.srcTopicRegion;
             resourceInputs["syntaxRule"] = args?.syntaxRule;
+            resourceInputs["taskId"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(ScheduledSql.__pulumiType, name, resourceInputs, opts);
@@ -277,6 +300,10 @@ export interface ScheduledSqlState {
      * syntax rule.
      */
     syntaxRule?: pulumi.Input<number | undefined>;
+    /**
+     * task id.
+     */
+    taskId?: pulumi.Input<string | undefined>;
 }
 
 /**

@@ -164,6 +164,12 @@ def get_adaptive_dynamic_streaming_templates(definition: Optional[_builtins.str]
         definition=foo_adaptive_dynamic_streaming_template.id)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAdaptiveDynamicStreamingTemplates](https://www.tencentcloud.com/document/api/266/34152)
+
 
     :param _builtins.str definition: Unique ID filter of adaptive dynamic streaming template.
     :param _builtins.str result_output_file: Used to save results.
@@ -243,6 +249,12 @@ def get_adaptive_dynamic_streaming_templates_output(definition: pulumi.Input[Opt
     foo = tencentcloud.vod.get_adaptive_dynamic_streaming_templates_output(type="Custom",
         definition=foo_adaptive_dynamic_streaming_template.id)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAdaptiveDynamicStreamingTemplates](https://www.tencentcloud.com/document/api/266/34152)
 
 
     :param _builtins.str definition: Unique ID filter of adaptive dynamic streaming template.

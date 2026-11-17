@@ -76,6 +76,15 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateNoticeContentTmpl](https://www.tencentcloud.com/search/?wd=CreateNoticeContentTmpl&type=document&lang=en)
+ * * Read: [DescribeNoticeContentTmpl](https://www.tencentcloud.com/search/?wd=DescribeNoticeContentTmpl&type=document&lang=en)
+ * * Update: [ModifyNoticeContentTmpl](https://www.tencentcloud.com/search/?wd=ModifyNoticeContentTmpl&type=document&lang=en)
+ * * Delete: [DeleteNoticeContentTmpls](https://www.tencentcloud.com/search/?wd=DeleteNoticeContentTmpls&type=document&lang=en)
+ *
  * ## Import
  *
  * Monitor notice content template can be imported using the id, e.g.

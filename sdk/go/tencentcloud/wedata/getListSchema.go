@@ -36,6 +36,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [ListSchema](https://www.tencentcloud.com/document/api/1174/77945)
 func GetListSchema(ctx *pulumi.Context, args *GetListSchemaArgs, opts ...pulumi.InvokeOption) (*GetListSchemaResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetListSchemaResult

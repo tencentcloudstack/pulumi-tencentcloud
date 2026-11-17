@@ -366,6 +366,18 @@ class Topic(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateTopic](https://www.tencentcloud.com/search/?wd=CreateTopic&type=document&lang=en)
+        * Read: [DescribeTopics](https://www.tencentcloud.com/search/?wd=DescribeTopics&type=document&lang=en)
+        * Update:
+          - [ModifyTopic](https://www.tencentcloud.com/search/?wd=ModifyTopic&type=document&lang=en)
+          - [TagResources](https://www.tencentcloud.com/document/api/651/46533)
+          - [UnTagResources](https://www.tencentcloud.com/document/api/651/46532)
+        * Delete: [DeleteTopics](https://www.tencentcloud.com/search/?wd=DeleteTopics&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -420,6 +432,18 @@ class Topic(pulumi.CustomResource):
                 "team": "backend",
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateTopic](https://www.tencentcloud.com/search/?wd=CreateTopic&type=document&lang=en)
+        * Read: [DescribeTopics](https://www.tencentcloud.com/search/?wd=DescribeTopics&type=document&lang=en)
+        * Update:
+          - [ModifyTopic](https://www.tencentcloud.com/search/?wd=ModifyTopic&type=document&lang=en)
+          - [TagResources](https://www.tencentcloud.com/document/api/651/46533)
+          - [UnTagResources](https://www.tencentcloud.com/document/api/651/46532)
+        * Delete: [DeleteTopics](https://www.tencentcloud.com/search/?wd=DeleteTopics&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

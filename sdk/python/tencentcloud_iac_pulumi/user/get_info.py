@@ -120,6 +120,14 @@ def get_info(result_output_file: Optional[_builtins.str] = None,
     foo = tencentcloud.user.get_info()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeSubAccounts](https://www.tencentcloud.com/document/api/598/39986)
+      - [GetUserAppId](https://www.tencentcloud.com/document/api/598/45982)
+
 
     :param _builtins.str result_output_file: Used for save results.
     """
@@ -148,6 +156,14 @@ def get_info_output(result_output_file: pulumi.Input[Optional[Optional[_builtins
 
     foo = tencentcloud.user.get_info()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeSubAccounts](https://www.tencentcloud.com/document/api/598/39986)
+      - [GetUserAppId](https://www.tencentcloud.com/document/api/598/45982)
 
 
     :param _builtins.str result_output_file: Used for save results.

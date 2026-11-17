@@ -61,6 +61,12 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribePrivateZoneList](https://www.tencentcloud.com/document/api/1097/42116)
  */
 export function getPrivateZoneList(args?: GetPrivateZoneListArgs, opts?: pulumi.InvokeOptions): Promise<GetPrivateZoneListResult> {
     args = args || {};
@@ -155,6 +161,12 @@ export interface GetPrivateZoneListResult {
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribePrivateZoneList](https://www.tencentcloud.com/document/api/1097/42116)
  */
 export function getPrivateZoneListOutput(args?: GetPrivateZoneListOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetPrivateZoneListResult> {
     args = args || {};

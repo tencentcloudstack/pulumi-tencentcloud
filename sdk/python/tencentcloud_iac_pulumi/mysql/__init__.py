@@ -10,6 +10,7 @@ from .backup import *
 from .backup_download_restriction import *
 from .backup_encryption_status import *
 from .backup_policy import *
+from .clone_instance import *
 from .cls_log_attachment import *
 from .database import *
 from .db_import_job_operation import *

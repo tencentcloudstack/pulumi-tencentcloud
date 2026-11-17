@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     groupLists: ["xxxxxx"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeGroupInfo](https://www.tencentcloud.com/document/api/597/35360)
  */
 export function getGroupInfo(args: GetGroupInfoArgs, opts?: pulumi.InvokeOptions): Promise<GetGroupInfoResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -78,6 +84,12 @@ export interface GetGroupInfoResult {
  *     groupLists: ["xxxxxx"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeGroupInfo](https://www.tencentcloud.com/document/api/597/35360)
  */
 export function getGroupInfoOutput(args: GetGroupInfoOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetGroupInfoResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     qualifier: "$LATEST",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GetFunctionAddress](https://www.tencentcloud.com/document/api/583/34409)
  */
 export function getFunctionAddress(args: GetFunctionAddressArgs, opts?: pulumi.InvokeOptions): Promise<GetFunctionAddressResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -88,6 +94,12 @@ export interface GetFunctionAddressResult {
  *     qualifier: "$LATEST",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GetFunctionAddress](https://www.tencentcloud.com/document/api/583/34409)
  */
 export function getFunctionAddressOutput(args: GetFunctionAddressOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetFunctionAddressResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

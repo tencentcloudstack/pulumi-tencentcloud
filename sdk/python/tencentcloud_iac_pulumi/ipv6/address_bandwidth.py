@@ -187,6 +187,19 @@ class AddressBandwidth(pulumi.CustomResource):
             internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [AllocateIp6AddressesBandwidth](https://www.tencentcloud.com/document/api/215/68131)
+          - [DescribeTaskResult](https://www.tencentcloud.com/document/api/215/34772)
+        * Read: [DescribeIp6Addresses](https://www.tencentcloud.com/document/api/215/68128)
+        * Update:
+          - [DescribeTaskResult](https://www.tencentcloud.com/document/api/215/34772)
+          - [ModifyIp6AddressesBandwidth](https://www.tencentcloud.com/document/api/215/68124)
+        * Delete: [ReleaseIp6AddressesBandwidth](https://www.tencentcloud.com/document/api/215/68122)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -215,6 +228,19 @@ class AddressBandwidth(pulumi.CustomResource):
             internet_max_bandwidth_out=6,
             internet_charge_type="TRAFFIC_POSTPAID_BY_HOUR")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [AllocateIp6AddressesBandwidth](https://www.tencentcloud.com/document/api/215/68131)
+          - [DescribeTaskResult](https://www.tencentcloud.com/document/api/215/34772)
+        * Read: [DescribeIp6Addresses](https://www.tencentcloud.com/document/api/215/68128)
+        * Update:
+          - [DescribeTaskResult](https://www.tencentcloud.com/document/api/215/34772)
+          - [ModifyIp6AddressesBandwidth](https://www.tencentcloud.com/document/api/215/68124)
+        * Delete: [ReleaseIp6AddressesBandwidth](https://www.tencentcloud.com/document/api/215/68122)
 
 
         :param str resource_name: The name of the resource.

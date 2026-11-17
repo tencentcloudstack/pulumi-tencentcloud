@@ -46,6 +46,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateCustomDomain](https://www.tencentcloud.com/search/?wd=CreateCustomDomain&amp;type=document&amp;lang=en)
+    /// * Read: [GetCustomDomain](https://www.tencentcloud.com/search/?wd=GetCustomDomain&amp;type=document&amp;lang=en)
+    /// * Update: [UpdateCustomDomain](https://www.tencentcloud.com/search/?wd=UpdateCustomDomain&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteCustomDomain](https://www.tencentcloud.com/search/?wd=DeleteCustomDomain&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// scf ScfCustomDomain can be imported using the id, e.g.

@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDBLogFiles](https://www.tencentcloud.com/document/api/1042/34445)
 func GetLogFiles(ctx *pulumi.Context, args *GetLogFilesArgs, opts ...pulumi.InvokeOption) (*GetLogFilesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetLogFilesResult

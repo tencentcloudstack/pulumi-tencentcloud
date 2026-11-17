@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     resourceType: "live",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeHostLiveInstanceList](https://www.tencentcloud.com/search/?wd=DescribeHostLiveInstanceList&type=document&lang=en)
  */
 export function getDescribeHostLiveInstanceList(args: GetDescribeHostLiveInstanceListArgs, opts?: pulumi.InvokeOptions): Promise<GetDescribeHostLiveInstanceListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -96,6 +102,12 @@ export interface GetDescribeHostLiveInstanceListResult {
  *     resourceType: "live",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeHostLiveInstanceList](https://www.tencentcloud.com/search/?wd=DescribeHostLiveInstanceList&type=document&lang=en)
  */
 export function getDescribeHostLiveInstanceListOutput(args: GetDescribeHostLiveInstanceListOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDescribeHostLiveInstanceListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

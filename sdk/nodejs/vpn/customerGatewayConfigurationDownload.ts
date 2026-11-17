@@ -26,6 +26,12 @@ import * as utilities from "../utilities";
  *     interfaceName: "test",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [DownloadCustomerGatewayConfiguration](https://www.tencentcloud.com/document/api/215/17513)
  */
 export class CustomerGatewayConfigurationDownload extends pulumi.CustomResource {
     /**

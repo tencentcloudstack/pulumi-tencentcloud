@@ -15,6 +15,14 @@ import * as utilities from "../utilities";
  *
  * const foo = tencentcloud.user.getInfo({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeSubAccounts](https://www.tencentcloud.com/document/api/598/39986)
+ *   - [GetUserAppId](https://www.tencentcloud.com/document/api/598/45982)
  */
 export function getInfo(args?: GetInfoArgs, opts?: pulumi.InvokeOptions): Promise<GetInfoResult> {
     args = args || {};
@@ -71,6 +79,14 @@ export interface GetInfoResult {
  *
  * const foo = tencentcloud.user.getInfo({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeSubAccounts](https://www.tencentcloud.com/document/api/598/39986)
+ *   - [GetUserAppId](https://www.tencentcloud.com/document/api/598/45982)
  */
 export function getInfoOutput(args?: GetInfoOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInfoResult> {
     args = args || {};

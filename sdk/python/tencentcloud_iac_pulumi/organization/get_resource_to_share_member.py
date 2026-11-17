@@ -132,6 +132,12 @@ def get_resource_to_share_member(area: Optional[_builtins.str] = None,
         ])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeResourceToShareMember](https://www.tencentcloud.com/document/api/1031/78348)
+
 
     :param _builtins.str area: Area.
     :param Sequence[_builtins.str] product_resource_ids: Business resource ID. Maximum 50.
@@ -179,6 +185,12 @@ def get_resource_to_share_member_output(area: pulumi.Input[Optional[_builtins.st
             "ins-0cxjwrog",
         ])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeResourceToShareMember](https://www.tencentcloud.com/document/api/1031/78348)
 
 
     :param _builtins.str area: Area.

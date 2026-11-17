@@ -128,6 +128,12 @@ def get_roles(description: Optional[_builtins.str] = None,
     bar = tencentcloud.cam.get_roles(name="cam-role-test")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRoleList](https://www.tencentcloud.com/document/api/598/33559)
+
 
     :param _builtins.str description: The description of the CAM role to be queried.
     :param _builtins.str name: Name of the CAM policy to be queried.
@@ -168,6 +174,12 @@ def get_roles_output(description: pulumi.Input[Optional[Optional[_builtins.str]]
     # query by name
     bar = tencentcloud.cam.get_roles(name="cam-role-test")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRoleList](https://www.tencentcloud.com/document/api/598/33559)
 
 
     :param _builtins.str description: The description of the CAM role to be queried.

@@ -60,6 +60,15 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateProject](https://www.tencentcloud.com/document/api/1131/45346)
+// * Read: [DescribeProjects](https://www.tencentcloud.com/document/api/1131/45308)
+// * Update: [ModifyProject](https://www.tencentcloud.com/document/api/1131/45298)
+// * Delete: [DeleteProject](https://www.tencentcloud.com/document/api/1131/45337)
+//
 // ## Import
 //
 // rum project can be imported using the id, e.g.

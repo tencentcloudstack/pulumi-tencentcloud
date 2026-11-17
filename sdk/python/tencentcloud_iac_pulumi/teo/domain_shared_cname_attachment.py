@@ -156,6 +156,19 @@ class DomainSharedCnameAttachment(pulumi.CustomResource):
             ])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [BindSharedCNAME](https://www.tencentcloud.com/document/api/1145/57469)
+          - [DescribeSharedCNAME](https://www.tencentcloud.com/document/api/1145/78836)
+        * Read: [DescribeSharedCNAME](https://www.tencentcloud.com/document/api/1145/78836)
+        * Update:
+          - [BindSharedCNAME](https://www.tencentcloud.com/document/api/1145/57469)
+          - [DescribeSharedCNAME](https://www.tencentcloud.com/document/api/1145/78836)
+        * Delete: [BindSharedCNAME](https://www.tencentcloud.com/document/api/1145/57469)
+
         ## Import
 
         teo domain_shared_cname_attachment can be imported using the zone_id#shared_cname, e.g.
@@ -193,6 +206,19 @@ class DomainSharedCnameAttachment(pulumi.CustomResource):
                 "domain2.example.com",
             ])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [BindSharedCNAME](https://www.tencentcloud.com/document/api/1145/57469)
+          - [DescribeSharedCNAME](https://www.tencentcloud.com/document/api/1145/78836)
+        * Read: [DescribeSharedCNAME](https://www.tencentcloud.com/document/api/1145/78836)
+        * Update:
+          - [BindSharedCNAME](https://www.tencentcloud.com/document/api/1145/57469)
+          - [DescribeSharedCNAME](https://www.tencentcloud.com/document/api/1145/78836)
+        * Delete: [BindSharedCNAME](https://www.tencentcloud.com/document/api/1145/57469)
 
         ## Import
 

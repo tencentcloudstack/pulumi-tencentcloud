@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [FlushBinlog](https://www.tencentcloud.com/search/?wd=FlushBinlog&type=document&lang=en)
 type FlushBinlogOperation struct {
 	pulumi.CustomResourceState
 

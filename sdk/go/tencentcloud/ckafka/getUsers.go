@@ -39,6 +39,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read:
+//   - [DescribeInstanceAttributes](https://www.tencentcloud.com/document/api/597/35358)
+//   - [DescribeUser](https://www.tencentcloud.com/document/api/597/35363)
 func GetUsers(ctx *pulumi.Context, args *GetUsersArgs, opts ...pulumi.InvokeOption) (*GetUsersResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetUsersResult

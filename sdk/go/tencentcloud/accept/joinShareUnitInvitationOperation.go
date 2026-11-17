@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [AcceptJoinShareUnitInvitation](https://www.tencentcloud.com/document/api/1031/68238)
 type JoinShareUnitInvitationOperation struct {
 	pulumi.CustomResourceState
 

@@ -65,6 +65,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeVpcFwGroupSwitch](https://www.tencentcloud.com/search/?wd=DescribeVpcFwGroupSwitch&amp;type=document&amp;lang=en)
+    ///   - [ModifyFwGroupSwitch](https://www.tencentcloud.com/search/?wd=ModifyFwGroupSwitch&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeVpcFwGroupSwitch](https://www.tencentcloud.com/search/?wd=DescribeVpcFwGroupSwitch&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [DescribeVpcFwGroupSwitch](https://www.tencentcloud.com/search/?wd=DescribeVpcFwGroupSwitch&amp;type=document&amp;lang=en)
+    ///   - [ModifyFwGroupSwitch](https://www.tencentcloud.com/search/?wd=ModifyFwGroupSwitch&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// cfw VpcFirewallSwitch can be imported using the id, e.g.

@@ -187,6 +187,14 @@ class BackupStream(pulumi.CustomResource):
             upstream_sequence="2209501773993286139")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [SwitchBackupStream](https://www.tencentcloud.com/search/?wd=SwitchBackupStream&type=document&lang=en)
+        * Read: [DescribeBackupStreamList](https://www.tencentcloud.com/search/?wd=DescribeBackupStreamList&type=document&lang=en)
+        * Update: [SwitchBackupStream](https://www.tencentcloud.com/search/?wd=SwitchBackupStream&type=document&lang=en)
+
         ## Import
 
         css backup_stream can be imported using the id, e.g.
@@ -226,6 +234,14 @@ class BackupStream(pulumi.CustomResource):
             stream_name="1308919341_test",
             upstream_sequence="2209501773993286139")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [SwitchBackupStream](https://www.tencentcloud.com/search/?wd=SwitchBackupStream&type=document&lang=en)
+        * Read: [DescribeBackupStreamList](https://www.tencentcloud.com/search/?wd=DescribeBackupStreamList&type=document&lang=en)
+        * Update: [SwitchBackupStream](https://www.tencentcloud.com/search/?wd=SwitchBackupStream&type=document&lang=en)
 
         ## Import
 

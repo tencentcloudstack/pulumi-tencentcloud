@@ -60,6 +60,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDefaultCertificates](https://www.tencentcloud.com/document/api/1145/50541)
         /// </summary>
         public static Task<GetDefaultCertificateResult> InvokeAsync(GetDefaultCertificateArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDefaultCertificateResult>("tencentcloud:Teo/getDefaultCertificate:getDefaultCertificate", args ?? new GetDefaultCertificateArgs(), options.WithDefaults());
@@ -112,6 +118,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDefaultCertificates](https://www.tencentcloud.com/document/api/1145/50541)
         /// </summary>
         public static Output<GetDefaultCertificateResult> Invoke(GetDefaultCertificateInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDefaultCertificateResult>("tencentcloud:Teo/getDefaultCertificate:getDefaultCertificate", args ?? new GetDefaultCertificateInvokeArgs(), options.WithDefaults());
@@ -164,6 +176,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDefaultCertificates](https://www.tencentcloud.com/document/api/1145/50541)
         /// </summary>
         public static Output<GetDefaultCertificateResult> Invoke(GetDefaultCertificateInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDefaultCertificateResult>("tencentcloud:Teo/getDefaultCertificate:getDefaultCertificate", args ?? new GetDefaultCertificateInvokeArgs(), options.WithDefaults());

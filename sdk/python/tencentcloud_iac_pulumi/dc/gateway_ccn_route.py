@@ -148,6 +148,26 @@ class GatewayCcnRoute(pulumi.CustomResource):
             cidr_block="192.1.1.0/32")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateDirectConnectGatewayCcnRoutes](https://www.tencentcloud.com/document/api/215/34777)
+          - [DescribeDirectConnectGatewayCcnRoutes](https://www.tencentcloud.com/document/api/215/34775)
+        * Read: [DescribeDirectConnectGatewayCcnRoutes](https://www.tencentcloud.com/document/api/215/34775)
+        * Delete:
+          - [DeleteDirectConnectGatewayCcnRoutes](https://www.tencentcloud.com/document/api/215/34776)
+          - [DescribeDirectConnectGatewayCcnRoutes](https://www.tencentcloud.com/document/api/215/34775)
+
+        ## Import
+
+        dc_gateway_ccn_route can be imported using the id, e.g.
+
+        ```sh
+        $ pulumi import tencentcloud:Dc/gatewayCcnRoute:GatewayCcnRoute example dcg-dr1y0hu7#192.1.1.0/32
+        ```
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -184,6 +204,26 @@ class GatewayCcnRoute(pulumi.CustomResource):
         route2 = tencentcloud.dc.GatewayCcnRoute("route2",
             dcg_id=ccn_main.id,
             cidr_block="192.1.1.0/32")
+        ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateDirectConnectGatewayCcnRoutes](https://www.tencentcloud.com/document/api/215/34777)
+          - [DescribeDirectConnectGatewayCcnRoutes](https://www.tencentcloud.com/document/api/215/34775)
+        * Read: [DescribeDirectConnectGatewayCcnRoutes](https://www.tencentcloud.com/document/api/215/34775)
+        * Delete:
+          - [DeleteDirectConnectGatewayCcnRoutes](https://www.tencentcloud.com/document/api/215/34776)
+          - [DescribeDirectConnectGatewayCcnRoutes](https://www.tencentcloud.com/document/api/215/34775)
+
+        ## Import
+
+        dc_gateway_ccn_route can be imported using the id, e.g.
+
+        ```sh
+        $ pulumi import tencentcloud:Dc/gatewayCcnRoute:GatewayCcnRoute example dcg-dr1y0hu7#192.1.1.0/32
         ```
 
 

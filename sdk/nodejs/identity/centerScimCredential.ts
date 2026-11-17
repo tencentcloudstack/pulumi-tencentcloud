@@ -16,6 +16,14 @@ import * as utilities from "../utilities";
  * const identityCenterScimCredential = new tencentcloud.identity.CenterScimCredential("identity_center_scim_credential", {zoneId: "z-xxxxxx"});
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateSCIMCredential](https://www.tencentcloud.com/document/api/1031/66423)
+ * * Read: [ListSCIMCredentials](https://www.tencentcloud.com/document/api/1031/66420)
+ * * Delete: [DeleteSCIMCredential](https://www.tencentcloud.com/document/api/1031/66422)
+ *
  * ## Import
  *
  * organization identityCenterScimCredential can be imported using the id, e.g.

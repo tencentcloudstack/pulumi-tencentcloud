@@ -552,6 +552,543 @@ func (o BackupDownloadRestrictionLimitVpcArrayOutput) Index(i pulumi.IntInput) B
 	}).(BackupDownloadRestrictionLimitVpcOutput)
 }
 
+type CloneInstanceClusterTopology struct {
+	// RO node topology list.
+	ReadOnlyNodes []CloneInstanceClusterTopologyReadOnlyNode `pulumi:"readOnlyNodes"`
+	// RW node topology.
+	ReadWriteNode *CloneInstanceClusterTopologyReadWriteNode `pulumi:"readWriteNode"`
+}
+
+// CloneInstanceClusterTopologyInput is an input type that accepts CloneInstanceClusterTopologyArgs and CloneInstanceClusterTopologyOutput values.
+// You can construct a concrete instance of `CloneInstanceClusterTopologyInput` via:
+//
+//	CloneInstanceClusterTopologyArgs{...}
+type CloneInstanceClusterTopologyInput interface {
+	pulumi.Input
+
+	ToCloneInstanceClusterTopologyOutput() CloneInstanceClusterTopologyOutput
+	ToCloneInstanceClusterTopologyOutputWithContext(context.Context) CloneInstanceClusterTopologyOutput
+}
+
+type CloneInstanceClusterTopologyArgs struct {
+	// RO node topology list.
+	ReadOnlyNodes CloneInstanceClusterTopologyReadOnlyNodeArrayInput `pulumi:"readOnlyNodes"`
+	// RW node topology.
+	ReadWriteNode CloneInstanceClusterTopologyReadWriteNodePtrInput `pulumi:"readWriteNode"`
+}
+
+func (CloneInstanceClusterTopologyArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CloneInstanceClusterTopology)(nil)).Elem()
+}
+
+func (i CloneInstanceClusterTopologyArgs) ToCloneInstanceClusterTopologyOutput() CloneInstanceClusterTopologyOutput {
+	return i.ToCloneInstanceClusterTopologyOutputWithContext(context.Background())
+}
+
+func (i CloneInstanceClusterTopologyArgs) ToCloneInstanceClusterTopologyOutputWithContext(ctx context.Context) CloneInstanceClusterTopologyOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CloneInstanceClusterTopologyOutput)
+}
+
+func (i CloneInstanceClusterTopologyArgs) ToCloneInstanceClusterTopologyPtrOutput() CloneInstanceClusterTopologyPtrOutput {
+	return i.ToCloneInstanceClusterTopologyPtrOutputWithContext(context.Background())
+}
+
+func (i CloneInstanceClusterTopologyArgs) ToCloneInstanceClusterTopologyPtrOutputWithContext(ctx context.Context) CloneInstanceClusterTopologyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CloneInstanceClusterTopologyOutput).ToCloneInstanceClusterTopologyPtrOutputWithContext(ctx)
+}
+
+// CloneInstanceClusterTopologyPtrInput is an input type that accepts CloneInstanceClusterTopologyArgs, CloneInstanceClusterTopologyPtr and CloneInstanceClusterTopologyPtrOutput values.
+// You can construct a concrete instance of `CloneInstanceClusterTopologyPtrInput` via:
+//
+//	        CloneInstanceClusterTopologyArgs{...}
+//
+//	or:
+//
+//	        nil
+type CloneInstanceClusterTopologyPtrInput interface {
+	pulumi.Input
+
+	ToCloneInstanceClusterTopologyPtrOutput() CloneInstanceClusterTopologyPtrOutput
+	ToCloneInstanceClusterTopologyPtrOutputWithContext(context.Context) CloneInstanceClusterTopologyPtrOutput
+}
+
+type cloneInstanceClusterTopologyPtrType CloneInstanceClusterTopologyArgs
+
+func CloneInstanceClusterTopologyPtr(v *CloneInstanceClusterTopologyArgs) CloneInstanceClusterTopologyPtrInput {
+	return (*cloneInstanceClusterTopologyPtrType)(v)
+}
+
+func (*cloneInstanceClusterTopologyPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**CloneInstanceClusterTopology)(nil)).Elem()
+}
+
+func (i *cloneInstanceClusterTopologyPtrType) ToCloneInstanceClusterTopologyPtrOutput() CloneInstanceClusterTopologyPtrOutput {
+	return i.ToCloneInstanceClusterTopologyPtrOutputWithContext(context.Background())
+}
+
+func (i *cloneInstanceClusterTopologyPtrType) ToCloneInstanceClusterTopologyPtrOutputWithContext(ctx context.Context) CloneInstanceClusterTopologyPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CloneInstanceClusterTopologyPtrOutput)
+}
+
+type CloneInstanceClusterTopologyOutput struct{ *pulumi.OutputState }
+
+func (CloneInstanceClusterTopologyOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CloneInstanceClusterTopology)(nil)).Elem()
+}
+
+func (o CloneInstanceClusterTopologyOutput) ToCloneInstanceClusterTopologyOutput() CloneInstanceClusterTopologyOutput {
+	return o
+}
+
+func (o CloneInstanceClusterTopologyOutput) ToCloneInstanceClusterTopologyOutputWithContext(ctx context.Context) CloneInstanceClusterTopologyOutput {
+	return o
+}
+
+func (o CloneInstanceClusterTopologyOutput) ToCloneInstanceClusterTopologyPtrOutput() CloneInstanceClusterTopologyPtrOutput {
+	return o.ToCloneInstanceClusterTopologyPtrOutputWithContext(context.Background())
+}
+
+func (o CloneInstanceClusterTopologyOutput) ToCloneInstanceClusterTopologyPtrOutputWithContext(ctx context.Context) CloneInstanceClusterTopologyPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v CloneInstanceClusterTopology) *CloneInstanceClusterTopology {
+		return &v
+	}).(CloneInstanceClusterTopologyPtrOutput)
+}
+
+// RO node topology list.
+func (o CloneInstanceClusterTopologyOutput) ReadOnlyNodes() CloneInstanceClusterTopologyReadOnlyNodeArrayOutput {
+	return o.ApplyT(func(v CloneInstanceClusterTopology) []CloneInstanceClusterTopologyReadOnlyNode {
+		return v.ReadOnlyNodes
+	}).(CloneInstanceClusterTopologyReadOnlyNodeArrayOutput)
+}
+
+// RW node topology.
+func (o CloneInstanceClusterTopologyOutput) ReadWriteNode() CloneInstanceClusterTopologyReadWriteNodePtrOutput {
+	return o.ApplyT(func(v CloneInstanceClusterTopology) *CloneInstanceClusterTopologyReadWriteNode {
+		return v.ReadWriteNode
+	}).(CloneInstanceClusterTopologyReadWriteNodePtrOutput)
+}
+
+type CloneInstanceClusterTopologyPtrOutput struct{ *pulumi.OutputState }
+
+func (CloneInstanceClusterTopologyPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**CloneInstanceClusterTopology)(nil)).Elem()
+}
+
+func (o CloneInstanceClusterTopologyPtrOutput) ToCloneInstanceClusterTopologyPtrOutput() CloneInstanceClusterTopologyPtrOutput {
+	return o
+}
+
+func (o CloneInstanceClusterTopologyPtrOutput) ToCloneInstanceClusterTopologyPtrOutputWithContext(ctx context.Context) CloneInstanceClusterTopologyPtrOutput {
+	return o
+}
+
+func (o CloneInstanceClusterTopologyPtrOutput) Elem() CloneInstanceClusterTopologyOutput {
+	return o.ApplyT(func(v *CloneInstanceClusterTopology) CloneInstanceClusterTopology {
+		if v != nil {
+			return *v
+		}
+		var ret CloneInstanceClusterTopology
+		return ret
+	}).(CloneInstanceClusterTopologyOutput)
+}
+
+// RO node topology list.
+func (o CloneInstanceClusterTopologyPtrOutput) ReadOnlyNodes() CloneInstanceClusterTopologyReadOnlyNodeArrayOutput {
+	return o.ApplyT(func(v *CloneInstanceClusterTopology) []CloneInstanceClusterTopologyReadOnlyNode {
+		if v == nil {
+			return nil
+		}
+		return v.ReadOnlyNodes
+	}).(CloneInstanceClusterTopologyReadOnlyNodeArrayOutput)
+}
+
+// RW node topology.
+func (o CloneInstanceClusterTopologyPtrOutput) ReadWriteNode() CloneInstanceClusterTopologyReadWriteNodePtrOutput {
+	return o.ApplyT(func(v *CloneInstanceClusterTopology) *CloneInstanceClusterTopologyReadWriteNode {
+		if v == nil {
+			return nil
+		}
+		return v.ReadWriteNode
+	}).(CloneInstanceClusterTopologyReadWriteNodePtrOutput)
+}
+
+type CloneInstanceClusterTopologyReadOnlyNode struct {
+	// Whether distributed in a random zone. YES - random zone.
+	IsRandomZone *string `pulumi:"isRandomZone"`
+	// Node ID.
+	NodeId *string `pulumi:"nodeId"`
+	// RO node zone.
+	Zone *string `pulumi:"zone"`
+}
+
+// CloneInstanceClusterTopologyReadOnlyNodeInput is an input type that accepts CloneInstanceClusterTopologyReadOnlyNodeArgs and CloneInstanceClusterTopologyReadOnlyNodeOutput values.
+// You can construct a concrete instance of `CloneInstanceClusterTopologyReadOnlyNodeInput` via:
+//
+//	CloneInstanceClusterTopologyReadOnlyNodeArgs{...}
+type CloneInstanceClusterTopologyReadOnlyNodeInput interface {
+	pulumi.Input
+
+	ToCloneInstanceClusterTopologyReadOnlyNodeOutput() CloneInstanceClusterTopologyReadOnlyNodeOutput
+	ToCloneInstanceClusterTopologyReadOnlyNodeOutputWithContext(context.Context) CloneInstanceClusterTopologyReadOnlyNodeOutput
+}
+
+type CloneInstanceClusterTopologyReadOnlyNodeArgs struct {
+	// Whether distributed in a random zone. YES - random zone.
+	IsRandomZone pulumi.StringPtrInput `pulumi:"isRandomZone"`
+	// Node ID.
+	NodeId pulumi.StringPtrInput `pulumi:"nodeId"`
+	// RO node zone.
+	Zone pulumi.StringPtrInput `pulumi:"zone"`
+}
+
+func (CloneInstanceClusterTopologyReadOnlyNodeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CloneInstanceClusterTopologyReadOnlyNode)(nil)).Elem()
+}
+
+func (i CloneInstanceClusterTopologyReadOnlyNodeArgs) ToCloneInstanceClusterTopologyReadOnlyNodeOutput() CloneInstanceClusterTopologyReadOnlyNodeOutput {
+	return i.ToCloneInstanceClusterTopologyReadOnlyNodeOutputWithContext(context.Background())
+}
+
+func (i CloneInstanceClusterTopologyReadOnlyNodeArgs) ToCloneInstanceClusterTopologyReadOnlyNodeOutputWithContext(ctx context.Context) CloneInstanceClusterTopologyReadOnlyNodeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CloneInstanceClusterTopologyReadOnlyNodeOutput)
+}
+
+// CloneInstanceClusterTopologyReadOnlyNodeArrayInput is an input type that accepts CloneInstanceClusterTopologyReadOnlyNodeArray and CloneInstanceClusterTopologyReadOnlyNodeArrayOutput values.
+// You can construct a concrete instance of `CloneInstanceClusterTopologyReadOnlyNodeArrayInput` via:
+//
+//	CloneInstanceClusterTopologyReadOnlyNodeArray{ CloneInstanceClusterTopologyReadOnlyNodeArgs{...} }
+type CloneInstanceClusterTopologyReadOnlyNodeArrayInput interface {
+	pulumi.Input
+
+	ToCloneInstanceClusterTopologyReadOnlyNodeArrayOutput() CloneInstanceClusterTopologyReadOnlyNodeArrayOutput
+	ToCloneInstanceClusterTopologyReadOnlyNodeArrayOutputWithContext(context.Context) CloneInstanceClusterTopologyReadOnlyNodeArrayOutput
+}
+
+type CloneInstanceClusterTopologyReadOnlyNodeArray []CloneInstanceClusterTopologyReadOnlyNodeInput
+
+func (CloneInstanceClusterTopologyReadOnlyNodeArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CloneInstanceClusterTopologyReadOnlyNode)(nil)).Elem()
+}
+
+func (i CloneInstanceClusterTopologyReadOnlyNodeArray) ToCloneInstanceClusterTopologyReadOnlyNodeArrayOutput() CloneInstanceClusterTopologyReadOnlyNodeArrayOutput {
+	return i.ToCloneInstanceClusterTopologyReadOnlyNodeArrayOutputWithContext(context.Background())
+}
+
+func (i CloneInstanceClusterTopologyReadOnlyNodeArray) ToCloneInstanceClusterTopologyReadOnlyNodeArrayOutputWithContext(ctx context.Context) CloneInstanceClusterTopologyReadOnlyNodeArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CloneInstanceClusterTopologyReadOnlyNodeArrayOutput)
+}
+
+type CloneInstanceClusterTopologyReadOnlyNodeOutput struct{ *pulumi.OutputState }
+
+func (CloneInstanceClusterTopologyReadOnlyNodeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CloneInstanceClusterTopologyReadOnlyNode)(nil)).Elem()
+}
+
+func (o CloneInstanceClusterTopologyReadOnlyNodeOutput) ToCloneInstanceClusterTopologyReadOnlyNodeOutput() CloneInstanceClusterTopologyReadOnlyNodeOutput {
+	return o
+}
+
+func (o CloneInstanceClusterTopologyReadOnlyNodeOutput) ToCloneInstanceClusterTopologyReadOnlyNodeOutputWithContext(ctx context.Context) CloneInstanceClusterTopologyReadOnlyNodeOutput {
+	return o
+}
+
+// Whether distributed in a random zone. YES - random zone.
+func (o CloneInstanceClusterTopologyReadOnlyNodeOutput) IsRandomZone() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CloneInstanceClusterTopologyReadOnlyNode) *string { return v.IsRandomZone }).(pulumi.StringPtrOutput)
+}
+
+// Node ID.
+func (o CloneInstanceClusterTopologyReadOnlyNodeOutput) NodeId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CloneInstanceClusterTopologyReadOnlyNode) *string { return v.NodeId }).(pulumi.StringPtrOutput)
+}
+
+// RO node zone.
+func (o CloneInstanceClusterTopologyReadOnlyNodeOutput) Zone() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CloneInstanceClusterTopologyReadOnlyNode) *string { return v.Zone }).(pulumi.StringPtrOutput)
+}
+
+type CloneInstanceClusterTopologyReadOnlyNodeArrayOutput struct{ *pulumi.OutputState }
+
+func (CloneInstanceClusterTopologyReadOnlyNodeArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CloneInstanceClusterTopologyReadOnlyNode)(nil)).Elem()
+}
+
+func (o CloneInstanceClusterTopologyReadOnlyNodeArrayOutput) ToCloneInstanceClusterTopologyReadOnlyNodeArrayOutput() CloneInstanceClusterTopologyReadOnlyNodeArrayOutput {
+	return o
+}
+
+func (o CloneInstanceClusterTopologyReadOnlyNodeArrayOutput) ToCloneInstanceClusterTopologyReadOnlyNodeArrayOutputWithContext(ctx context.Context) CloneInstanceClusterTopologyReadOnlyNodeArrayOutput {
+	return o
+}
+
+func (o CloneInstanceClusterTopologyReadOnlyNodeArrayOutput) Index(i pulumi.IntInput) CloneInstanceClusterTopologyReadOnlyNodeOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CloneInstanceClusterTopologyReadOnlyNode {
+		return vs[0].([]CloneInstanceClusterTopologyReadOnlyNode)[vs[1].(int)]
+	}).(CloneInstanceClusterTopologyReadOnlyNodeOutput)
+}
+
+type CloneInstanceClusterTopologyReadWriteNode struct {
+	// Node ID.
+	NodeId *string `pulumi:"nodeId"`
+	// RW node zone.
+	Zone *string `pulumi:"zone"`
+}
+
+// CloneInstanceClusterTopologyReadWriteNodeInput is an input type that accepts CloneInstanceClusterTopologyReadWriteNodeArgs and CloneInstanceClusterTopologyReadWriteNodeOutput values.
+// You can construct a concrete instance of `CloneInstanceClusterTopologyReadWriteNodeInput` via:
+//
+//	CloneInstanceClusterTopologyReadWriteNodeArgs{...}
+type CloneInstanceClusterTopologyReadWriteNodeInput interface {
+	pulumi.Input
+
+	ToCloneInstanceClusterTopologyReadWriteNodeOutput() CloneInstanceClusterTopologyReadWriteNodeOutput
+	ToCloneInstanceClusterTopologyReadWriteNodeOutputWithContext(context.Context) CloneInstanceClusterTopologyReadWriteNodeOutput
+}
+
+type CloneInstanceClusterTopologyReadWriteNodeArgs struct {
+	// Node ID.
+	NodeId pulumi.StringPtrInput `pulumi:"nodeId"`
+	// RW node zone.
+	Zone pulumi.StringPtrInput `pulumi:"zone"`
+}
+
+func (CloneInstanceClusterTopologyReadWriteNodeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CloneInstanceClusterTopologyReadWriteNode)(nil)).Elem()
+}
+
+func (i CloneInstanceClusterTopologyReadWriteNodeArgs) ToCloneInstanceClusterTopologyReadWriteNodeOutput() CloneInstanceClusterTopologyReadWriteNodeOutput {
+	return i.ToCloneInstanceClusterTopologyReadWriteNodeOutputWithContext(context.Background())
+}
+
+func (i CloneInstanceClusterTopologyReadWriteNodeArgs) ToCloneInstanceClusterTopologyReadWriteNodeOutputWithContext(ctx context.Context) CloneInstanceClusterTopologyReadWriteNodeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CloneInstanceClusterTopologyReadWriteNodeOutput)
+}
+
+func (i CloneInstanceClusterTopologyReadWriteNodeArgs) ToCloneInstanceClusterTopologyReadWriteNodePtrOutput() CloneInstanceClusterTopologyReadWriteNodePtrOutput {
+	return i.ToCloneInstanceClusterTopologyReadWriteNodePtrOutputWithContext(context.Background())
+}
+
+func (i CloneInstanceClusterTopologyReadWriteNodeArgs) ToCloneInstanceClusterTopologyReadWriteNodePtrOutputWithContext(ctx context.Context) CloneInstanceClusterTopologyReadWriteNodePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CloneInstanceClusterTopologyReadWriteNodeOutput).ToCloneInstanceClusterTopologyReadWriteNodePtrOutputWithContext(ctx)
+}
+
+// CloneInstanceClusterTopologyReadWriteNodePtrInput is an input type that accepts CloneInstanceClusterTopologyReadWriteNodeArgs, CloneInstanceClusterTopologyReadWriteNodePtr and CloneInstanceClusterTopologyReadWriteNodePtrOutput values.
+// You can construct a concrete instance of `CloneInstanceClusterTopologyReadWriteNodePtrInput` via:
+//
+//	        CloneInstanceClusterTopologyReadWriteNodeArgs{...}
+//
+//	or:
+//
+//	        nil
+type CloneInstanceClusterTopologyReadWriteNodePtrInput interface {
+	pulumi.Input
+
+	ToCloneInstanceClusterTopologyReadWriteNodePtrOutput() CloneInstanceClusterTopologyReadWriteNodePtrOutput
+	ToCloneInstanceClusterTopologyReadWriteNodePtrOutputWithContext(context.Context) CloneInstanceClusterTopologyReadWriteNodePtrOutput
+}
+
+type cloneInstanceClusterTopologyReadWriteNodePtrType CloneInstanceClusterTopologyReadWriteNodeArgs
+
+func CloneInstanceClusterTopologyReadWriteNodePtr(v *CloneInstanceClusterTopologyReadWriteNodeArgs) CloneInstanceClusterTopologyReadWriteNodePtrInput {
+	return (*cloneInstanceClusterTopologyReadWriteNodePtrType)(v)
+}
+
+func (*cloneInstanceClusterTopologyReadWriteNodePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**CloneInstanceClusterTopologyReadWriteNode)(nil)).Elem()
+}
+
+func (i *cloneInstanceClusterTopologyReadWriteNodePtrType) ToCloneInstanceClusterTopologyReadWriteNodePtrOutput() CloneInstanceClusterTopologyReadWriteNodePtrOutput {
+	return i.ToCloneInstanceClusterTopologyReadWriteNodePtrOutputWithContext(context.Background())
+}
+
+func (i *cloneInstanceClusterTopologyReadWriteNodePtrType) ToCloneInstanceClusterTopologyReadWriteNodePtrOutputWithContext(ctx context.Context) CloneInstanceClusterTopologyReadWriteNodePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CloneInstanceClusterTopologyReadWriteNodePtrOutput)
+}
+
+type CloneInstanceClusterTopologyReadWriteNodeOutput struct{ *pulumi.OutputState }
+
+func (CloneInstanceClusterTopologyReadWriteNodeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CloneInstanceClusterTopologyReadWriteNode)(nil)).Elem()
+}
+
+func (o CloneInstanceClusterTopologyReadWriteNodeOutput) ToCloneInstanceClusterTopologyReadWriteNodeOutput() CloneInstanceClusterTopologyReadWriteNodeOutput {
+	return o
+}
+
+func (o CloneInstanceClusterTopologyReadWriteNodeOutput) ToCloneInstanceClusterTopologyReadWriteNodeOutputWithContext(ctx context.Context) CloneInstanceClusterTopologyReadWriteNodeOutput {
+	return o
+}
+
+func (o CloneInstanceClusterTopologyReadWriteNodeOutput) ToCloneInstanceClusterTopologyReadWriteNodePtrOutput() CloneInstanceClusterTopologyReadWriteNodePtrOutput {
+	return o.ToCloneInstanceClusterTopologyReadWriteNodePtrOutputWithContext(context.Background())
+}
+
+func (o CloneInstanceClusterTopologyReadWriteNodeOutput) ToCloneInstanceClusterTopologyReadWriteNodePtrOutputWithContext(ctx context.Context) CloneInstanceClusterTopologyReadWriteNodePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v CloneInstanceClusterTopologyReadWriteNode) *CloneInstanceClusterTopologyReadWriteNode {
+		return &v
+	}).(CloneInstanceClusterTopologyReadWriteNodePtrOutput)
+}
+
+// Node ID.
+func (o CloneInstanceClusterTopologyReadWriteNodeOutput) NodeId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CloneInstanceClusterTopologyReadWriteNode) *string { return v.NodeId }).(pulumi.StringPtrOutput)
+}
+
+// RW node zone.
+func (o CloneInstanceClusterTopologyReadWriteNodeOutput) Zone() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CloneInstanceClusterTopologyReadWriteNode) *string { return v.Zone }).(pulumi.StringPtrOutput)
+}
+
+type CloneInstanceClusterTopologyReadWriteNodePtrOutput struct{ *pulumi.OutputState }
+
+func (CloneInstanceClusterTopologyReadWriteNodePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**CloneInstanceClusterTopologyReadWriteNode)(nil)).Elem()
+}
+
+func (o CloneInstanceClusterTopologyReadWriteNodePtrOutput) ToCloneInstanceClusterTopologyReadWriteNodePtrOutput() CloneInstanceClusterTopologyReadWriteNodePtrOutput {
+	return o
+}
+
+func (o CloneInstanceClusterTopologyReadWriteNodePtrOutput) ToCloneInstanceClusterTopologyReadWriteNodePtrOutputWithContext(ctx context.Context) CloneInstanceClusterTopologyReadWriteNodePtrOutput {
+	return o
+}
+
+func (o CloneInstanceClusterTopologyReadWriteNodePtrOutput) Elem() CloneInstanceClusterTopologyReadWriteNodeOutput {
+	return o.ApplyT(func(v *CloneInstanceClusterTopologyReadWriteNode) CloneInstanceClusterTopologyReadWriteNode {
+		if v != nil {
+			return *v
+		}
+		var ret CloneInstanceClusterTopologyReadWriteNode
+		return ret
+	}).(CloneInstanceClusterTopologyReadWriteNodeOutput)
+}
+
+// Node ID.
+func (o CloneInstanceClusterTopologyReadWriteNodePtrOutput) NodeId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CloneInstanceClusterTopologyReadWriteNode) *string {
+		if v == nil {
+			return nil
+		}
+		return v.NodeId
+	}).(pulumi.StringPtrOutput)
+}
+
+// RW node zone.
+func (o CloneInstanceClusterTopologyReadWriteNodePtrOutput) Zone() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *CloneInstanceClusterTopologyReadWriteNode) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Zone
+	}).(pulumi.StringPtrOutput)
+}
+
+type CloneInstanceResourceTag struct {
+	// Tag key.
+	Key string `pulumi:"key"`
+	// Tag value.
+	Value *string `pulumi:"value"`
+}
+
+// CloneInstanceResourceTagInput is an input type that accepts CloneInstanceResourceTagArgs and CloneInstanceResourceTagOutput values.
+// You can construct a concrete instance of `CloneInstanceResourceTagInput` via:
+//
+//	CloneInstanceResourceTagArgs{...}
+type CloneInstanceResourceTagInput interface {
+	pulumi.Input
+
+	ToCloneInstanceResourceTagOutput() CloneInstanceResourceTagOutput
+	ToCloneInstanceResourceTagOutputWithContext(context.Context) CloneInstanceResourceTagOutput
+}
+
+type CloneInstanceResourceTagArgs struct {
+	// Tag key.
+	Key pulumi.StringInput `pulumi:"key"`
+	// Tag value.
+	Value pulumi.StringPtrInput `pulumi:"value"`
+}
+
+func (CloneInstanceResourceTagArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*CloneInstanceResourceTag)(nil)).Elem()
+}
+
+func (i CloneInstanceResourceTagArgs) ToCloneInstanceResourceTagOutput() CloneInstanceResourceTagOutput {
+	return i.ToCloneInstanceResourceTagOutputWithContext(context.Background())
+}
+
+func (i CloneInstanceResourceTagArgs) ToCloneInstanceResourceTagOutputWithContext(ctx context.Context) CloneInstanceResourceTagOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CloneInstanceResourceTagOutput)
+}
+
+// CloneInstanceResourceTagArrayInput is an input type that accepts CloneInstanceResourceTagArray and CloneInstanceResourceTagArrayOutput values.
+// You can construct a concrete instance of `CloneInstanceResourceTagArrayInput` via:
+//
+//	CloneInstanceResourceTagArray{ CloneInstanceResourceTagArgs{...} }
+type CloneInstanceResourceTagArrayInput interface {
+	pulumi.Input
+
+	ToCloneInstanceResourceTagArrayOutput() CloneInstanceResourceTagArrayOutput
+	ToCloneInstanceResourceTagArrayOutputWithContext(context.Context) CloneInstanceResourceTagArrayOutput
+}
+
+type CloneInstanceResourceTagArray []CloneInstanceResourceTagInput
+
+func (CloneInstanceResourceTagArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CloneInstanceResourceTag)(nil)).Elem()
+}
+
+func (i CloneInstanceResourceTagArray) ToCloneInstanceResourceTagArrayOutput() CloneInstanceResourceTagArrayOutput {
+	return i.ToCloneInstanceResourceTagArrayOutputWithContext(context.Background())
+}
+
+func (i CloneInstanceResourceTagArray) ToCloneInstanceResourceTagArrayOutputWithContext(ctx context.Context) CloneInstanceResourceTagArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(CloneInstanceResourceTagArrayOutput)
+}
+
+type CloneInstanceResourceTagOutput struct{ *pulumi.OutputState }
+
+func (CloneInstanceResourceTagOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*CloneInstanceResourceTag)(nil)).Elem()
+}
+
+func (o CloneInstanceResourceTagOutput) ToCloneInstanceResourceTagOutput() CloneInstanceResourceTagOutput {
+	return o
+}
+
+func (o CloneInstanceResourceTagOutput) ToCloneInstanceResourceTagOutputWithContext(ctx context.Context) CloneInstanceResourceTagOutput {
+	return o
+}
+
+// Tag key.
+func (o CloneInstanceResourceTagOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v CloneInstanceResourceTag) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Tag value.
+func (o CloneInstanceResourceTagOutput) Value() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v CloneInstanceResourceTag) *string { return v.Value }).(pulumi.StringPtrOutput)
+}
+
+type CloneInstanceResourceTagArrayOutput struct{ *pulumi.OutputState }
+
+func (CloneInstanceResourceTagArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]CloneInstanceResourceTag)(nil)).Elem()
+}
+
+func (o CloneInstanceResourceTagArrayOutput) ToCloneInstanceResourceTagArrayOutput() CloneInstanceResourceTagArrayOutput {
+	return o
+}
+
+func (o CloneInstanceResourceTagArrayOutput) ToCloneInstanceResourceTagArrayOutputWithContext(ctx context.Context) CloneInstanceResourceTagArrayOutput {
+	return o
+}
+
+func (o CloneInstanceResourceTagArrayOutput) Index(i pulumi.IntInput) CloneInstanceResourceTagOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) CloneInstanceResourceTag {
+		return vs[0].([]CloneInstanceResourceTag)[vs[1].(int)]
+	}).(CloneInstanceResourceTagOutput)
+}
+
 type InstanceClusterTopology struct {
 	// RO Node Topology.
 	ReadOnlyNodes []InstanceClusterTopologyReadOnlyNode `pulumi:"readOnlyNodes"`
@@ -6987,6 +7524,14 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*BackupBackupDbTableListArrayInput)(nil)).Elem(), BackupBackupDbTableListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BackupDownloadRestrictionLimitVpcInput)(nil)).Elem(), BackupDownloadRestrictionLimitVpcArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*BackupDownloadRestrictionLimitVpcArrayInput)(nil)).Elem(), BackupDownloadRestrictionLimitVpcArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CloneInstanceClusterTopologyInput)(nil)).Elem(), CloneInstanceClusterTopologyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CloneInstanceClusterTopologyPtrInput)(nil)).Elem(), CloneInstanceClusterTopologyArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CloneInstanceClusterTopologyReadOnlyNodeInput)(nil)).Elem(), CloneInstanceClusterTopologyReadOnlyNodeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CloneInstanceClusterTopologyReadOnlyNodeArrayInput)(nil)).Elem(), CloneInstanceClusterTopologyReadOnlyNodeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CloneInstanceClusterTopologyReadWriteNodeInput)(nil)).Elem(), CloneInstanceClusterTopologyReadWriteNodeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CloneInstanceClusterTopologyReadWriteNodePtrInput)(nil)).Elem(), CloneInstanceClusterTopologyReadWriteNodeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CloneInstanceResourceTagInput)(nil)).Elem(), CloneInstanceResourceTagArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*CloneInstanceResourceTagArrayInput)(nil)).Elem(), CloneInstanceResourceTagArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceClusterTopologyInput)(nil)).Elem(), InstanceClusterTopologyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceClusterTopologyPtrInput)(nil)).Elem(), InstanceClusterTopologyArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*InstanceClusterTopologyReadOnlyNodeInput)(nil)).Elem(), InstanceClusterTopologyReadOnlyNodeArgs{})
@@ -7083,6 +7628,14 @@ func init() {
 	pulumi.RegisterOutputType(BackupBackupDbTableListArrayOutput{})
 	pulumi.RegisterOutputType(BackupDownloadRestrictionLimitVpcOutput{})
 	pulumi.RegisterOutputType(BackupDownloadRestrictionLimitVpcArrayOutput{})
+	pulumi.RegisterOutputType(CloneInstanceClusterTopologyOutput{})
+	pulumi.RegisterOutputType(CloneInstanceClusterTopologyPtrOutput{})
+	pulumi.RegisterOutputType(CloneInstanceClusterTopologyReadOnlyNodeOutput{})
+	pulumi.RegisterOutputType(CloneInstanceClusterTopologyReadOnlyNodeArrayOutput{})
+	pulumi.RegisterOutputType(CloneInstanceClusterTopologyReadWriteNodeOutput{})
+	pulumi.RegisterOutputType(CloneInstanceClusterTopologyReadWriteNodePtrOutput{})
+	pulumi.RegisterOutputType(CloneInstanceResourceTagOutput{})
+	pulumi.RegisterOutputType(CloneInstanceResourceTagArrayOutput{})
 	pulumi.RegisterOutputType(InstanceClusterTopologyOutput{})
 	pulumi.RegisterOutputType(InstanceClusterTopologyPtrOutput{})
 	pulumi.RegisterOutputType(InstanceClusterTopologyReadOnlyNodeOutput{})

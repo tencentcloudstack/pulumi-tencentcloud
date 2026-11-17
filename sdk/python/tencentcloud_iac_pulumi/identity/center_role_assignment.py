@@ -384,6 +384,19 @@ class CenterRoleAssignment(pulumi.CustomResource):
             role_configuration_id="rc-ihogrs0e6ceg")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateRoleAssignment](https://www.tencentcloud.com/document/api/1031/63611)
+          - [GetTaskStatus](https://www.tencentcloud.com/document/api/1031/63608)
+        * Read: [ListRoleAssignments](https://www.tencentcloud.com/document/api/1031/63607)
+        * Delete:
+          - [DeleteRoleAssignment](https://www.tencentcloud.com/document/api/1031/63610)
+          - [DismantleRoleConfiguration](https://www.tencentcloud.com/document/api/1031/63609)
+          - [GetTaskStatus](https://www.tencentcloud.com/document/api/1031/63608)
+
         ## Import
 
         Organization identity center role assignment can be imported using the {zoneId}#{roleConfigurationId}#{targetType}#{targetUinString}#{principalType}, e.g.
@@ -431,6 +444,19 @@ class CenterRoleAssignment(pulumi.CustomResource):
             target_type="MemberUin",
             role_configuration_id="rc-ihogrs0e6ceg")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateRoleAssignment](https://www.tencentcloud.com/document/api/1031/63611)
+          - [GetTaskStatus](https://www.tencentcloud.com/document/api/1031/63608)
+        * Read: [ListRoleAssignments](https://www.tencentcloud.com/document/api/1031/63607)
+        * Delete:
+          - [DeleteRoleAssignment](https://www.tencentcloud.com/document/api/1031/63610)
+          - [DismantleRoleConfiguration](https://www.tencentcloud.com/document/api/1031/63609)
+          - [GetTaskStatus](https://www.tencentcloud.com/document/api/1031/63608)
 
         ## Import
 

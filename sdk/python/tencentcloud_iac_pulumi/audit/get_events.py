@@ -154,6 +154,12 @@ def get_events(end_time: Optional[_builtins.int] = None,
         is_return_location=1)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeEvents](https://www.tencentcloud.com/search/?wd=DescribeEvents&type=document&lang=en)
+
 
     :param _builtins.int end_time: End timestamp in seconds (the time range for query is less than 30 days).
     :param _builtins.int is_return_location: Whether to return the IP location. `1`: yes, `0`: no.
@@ -216,6 +222,12 @@ def get_events_output(end_time: pulumi.Input[Optional[_builtins.int]] = None,
         ],
         is_return_location=1)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeEvents](https://www.tencentcloud.com/search/?wd=DescribeEvents&type=document&lang=en)
 
 
     :param _builtins.int end_time: End timestamp in seconds (the time range for query is less than 30 days).

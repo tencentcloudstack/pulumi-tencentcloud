@@ -126,6 +126,12 @@ def get_center_role_configurations(filter: Optional[_builtins.str] = None,
     identity_center_role_configurations = tencentcloud.identity.get_center_role_configurations(zone_id="z-xxxxxx")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListRoleConfigurations](https://www.tencentcloud.com/document/api/1031/63597)
+
 
     :param _builtins.str filter: Filter criteria, which are case insensitive. Currently, only RoleConfigurationName is supported and only eq (Equals) and sw (Start With) are supported. Example: Filter = "RoleConfigurationName, only sw test" means querying all permission configurations starting with test. Filter = "RoleConfigurationName, only eq TestRoleConfiguration" means querying the permission configuration named TestRoleConfiguration.
     :param Sequence[_builtins.int] filter_targets: Check whether the member account has been configured with permissions. If configured, return IsSelected: true; otherwise, return false.
@@ -167,6 +173,12 @@ def get_center_role_configurations_output(filter: pulumi.Input[Optional[Optional
 
     identity_center_role_configurations = tencentcloud.identity.get_center_role_configurations(zone_id="z-xxxxxx")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListRoleConfigurations](https://www.tencentcloud.com/document/api/1031/63597)
 
 
     :param _builtins.str filter: Filter criteria, which are case insensitive. Currently, only RoleConfigurationName is supported and only eq (Equals) and sw (Start With) are supported. Example: Filter = "RoleConfigurationName, only sw test" means querying all permission configurations starting with test. Filter = "RoleConfigurationName, only eq TestRoleConfiguration" means querying the permission configuration named TestRoleConfiguration.

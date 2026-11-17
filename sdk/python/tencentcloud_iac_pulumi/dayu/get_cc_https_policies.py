@@ -143,6 +143,12 @@ def get_cc_https_policies(name: Optional[_builtins.str] = None,
         policy_id=test_policy["policyId"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCCSelfDefinePolicy](https://www.tencentcloud.com/search/?wd=DescribeCCSelfDefinePolicy&type=document&lang=en)
+
 
     :param _builtins.str name: Name of the CC https policy to be queried.
     :param _builtins.str policy_id: Id of the CC https policy to be queried.
@@ -189,6 +195,12 @@ def get_cc_https_policies_output(name: pulumi.Input[Optional[Optional[_builtins.
         resource_id=test_policy["resourceId"],
         policy_id=test_policy["policyId"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCCSelfDefinePolicy](https://www.tencentcloud.com/search/?wd=DescribeCCSelfDefinePolicy&type=document&lang=en)
 
 
     :param _builtins.str name: Name of the CC https policy to be queried.

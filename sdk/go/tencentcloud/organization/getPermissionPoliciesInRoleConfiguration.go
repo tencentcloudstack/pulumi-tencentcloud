@@ -97,6 +97,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [ListPermissionPoliciesInRoleConfiguration](https://www.tencentcloud.com/document/api/1031/63599)
 func GetPermissionPoliciesInRoleConfiguration(ctx *pulumi.Context, args *GetPermissionPoliciesInRoleConfigurationArgs, opts ...pulumi.InvokeOption) (*GetPermissionPoliciesInRoleConfigurationResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetPermissionPoliciesInRoleConfigurationResult

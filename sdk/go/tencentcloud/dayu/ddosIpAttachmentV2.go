@@ -47,6 +47,19 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CreateBoundIP](https://www.tencentcloud.com/document/api/1213/61350)
+//   - [DescribeListBGPInstances](https://www.tencentcloud.com/document/api/1213/61347)
+//
+// * Read: [DescribeListBGPInstances](https://www.tencentcloud.com/document/api/1213/61347)
+// * Delete:
+//   - [CreateBoundIP](https://www.tencentcloud.com/document/api/1213/61350)
+//   - [DescribeListBGPInstances](https://www.tencentcloud.com/document/api/1213/61347)
 type DdosIpAttachmentV2 struct {
 	pulumi.CustomResourceState
 

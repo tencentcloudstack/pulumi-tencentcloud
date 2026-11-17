@@ -37,6 +37,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeDisks](https://www.tencentcloud.com/document/api/1103/44573)
+    ///   - [RenewDisks](https://www.tencentcloud.com/document/api/1103/57992)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Lighthouse/renewDisk:RenewDisk")]
     public partial class RenewDisk : global::Pulumi.CustomResource

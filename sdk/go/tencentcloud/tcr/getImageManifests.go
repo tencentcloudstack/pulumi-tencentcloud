@@ -41,6 +41,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeImageManifests](https://www.tencentcloud.com/document/api/1051/50722)
 func GetImageManifests(ctx *pulumi.Context, args *GetImageManifestsArgs, opts ...pulumi.InvokeOption) (*GetImageManifestsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetImageManifestsResult

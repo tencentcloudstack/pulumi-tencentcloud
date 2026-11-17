@@ -96,6 +96,12 @@ def get_zookeeper_server_interfaces(instance_id: Optional[_builtins.str] = None,
     zookeeper_server_interfaces = tencentcloud.tse.get_zookeeper_server_interfaces(instance_id="ins-7eb7eea7")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeZookeeperServerInterfaces](https://www.tencentcloud.com/search/?wd=DescribeZookeeperServerInterfaces&type=document&lang=en)
+
 
     :param _builtins.str instance_id: engine instance ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_zookeeper_server_interfaces_output(instance_id: pulumi.Input[Optional[_b
 
     zookeeper_server_interfaces = tencentcloud.tse.get_zookeeper_server_interfaces(instance_id="ins-7eb7eea7")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeZookeeperServerInterfaces](https://www.tencentcloud.com/search/?wd=DescribeZookeeperServerInterfaces&type=document&lang=en)
 
 
     :param _builtins.str instance_id: engine instance ID.

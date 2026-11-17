@@ -37,6 +37,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateAPIDoc](https://www.tencentcloud.com/search/?wd=CreateAPIDoc&amp;type=document&amp;lang=en)
+    ///   - [DescribeAPIDocDetail](https://www.tencentcloud.com/search/?wd=DescribeAPIDocDetail&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeAPIDocDetail](https://www.tencentcloud.com/search/?wd=DescribeAPIDocDetail&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [DescribeAPIDocDetail](https://www.tencentcloud.com/search/?wd=DescribeAPIDocDetail&amp;type=document&amp;lang=en)
+    ///   - [ModifyAPIDoc](https://www.tencentcloud.com/search/?wd=ModifyAPIDoc&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteAPIDoc](https://www.tencentcloud.com/search/?wd=DeleteAPIDoc&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:ApiGateway/apiDoc:ApiDoc")]
     public partial class ApiDoc : global::Pulumi.CustomResource

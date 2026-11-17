@@ -212,6 +212,14 @@ class StopInstances(pulumi.CustomResource):
             stopped_mode="STOP_CHARGING")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeAutoScalingActivities](https://www.tencentcloud.com/document/api/377/31014)
+          - [StopAutoScalingInstances](https://www.tencentcloud.com/document/api/377/37503)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -297,6 +305,14 @@ class StopInstances(pulumi.CustomResource):
             instance_ids=attachment.instance_ids,
             stopped_mode="STOP_CHARGING")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeAutoScalingActivities](https://www.tencentcloud.com/document/api/377/31014)
+          - [StopAutoScalingInstances](https://www.tencentcloud.com/document/api/377/37503)
 
 
         :param str resource_name: The name of the resource.

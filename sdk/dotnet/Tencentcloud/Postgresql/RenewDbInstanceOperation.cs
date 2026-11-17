@@ -32,6 +32,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeDBInstanceAttribute](https://www.tencentcloud.com/document/api/409/16772)
+    ///   - [RenewInstance](https://www.tencentcloud.com/document/api/409/18098)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Postgresql/renewDbInstanceOperation:RenewDbInstanceOperation")]
     public partial class RenewDbInstanceOperation : global::Pulumi.CustomResource

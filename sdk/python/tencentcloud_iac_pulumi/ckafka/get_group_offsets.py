@@ -127,6 +127,12 @@ def get_group_offsets(group: Optional[_builtins.str] = None,
         group="xxxxxx")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeGroupOffsets](https://www.tencentcloud.com/document/api/597/35359)
+
 
     :param _builtins.str group: Kafka consumer group name.
     :param _builtins.str instance_id: InstanceId.
@@ -169,6 +175,12 @@ def get_group_offsets_output(group: pulumi.Input[Optional[_builtins.str]] = None
     group_offsets = tencentcloud.ckafka.get_group_offsets(instance_id="ckafka-xxxxxx",
         group="xxxxxx")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeGroupOffsets](https://www.tencentcloud.com/document/api/597/35359)
 
 
     :param _builtins.str group: Kafka consumer group name.

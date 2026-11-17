@@ -60,6 +60,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Igtm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAddressPoolList](https://www.tencentcloud.com/search/?wd=DescribeAddressPoolList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetAddressPoolListResult> InvokeAsync(GetAddressPoolListArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetAddressPoolListResult>("tencentcloud:Igtm/getAddressPoolList:getAddressPoolList", args ?? new GetAddressPoolListArgs(), options.WithDefaults());
@@ -112,6 +118,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Igtm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAddressPoolList](https://www.tencentcloud.com/search/?wd=DescribeAddressPoolList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetAddressPoolListResult> Invoke(GetAddressPoolListInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetAddressPoolListResult>("tencentcloud:Igtm/getAddressPoolList:getAddressPoolList", args ?? new GetAddressPoolListInvokeArgs(), options.WithDefaults());
@@ -164,6 +176,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Igtm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAddressPoolList](https://www.tencentcloud.com/search/?wd=DescribeAddressPoolList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetAddressPoolListResult> Invoke(GetAddressPoolListInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetAddressPoolListResult>("tencentcloud:Igtm/getAddressPoolList:getAddressPoolList", args ?? new GetAddressPoolListInvokeArgs(), options.WithDefaults());

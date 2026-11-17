@@ -150,6 +150,12 @@ def get_edge_kv_list(cursor: Optional[_builtins.str] = None,
         cursor="next-page-cursor-from-previous-query")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [EdgeKVList](https://www.tencentcloud.com/document/api/1145/78825)
+
 
     :param _builtins.str cursor: Cursor position for traversal. Do not set this field for the first query; for subsequent queries, set it to the cursor returned by the previous query. After Read completes, this field is populated with the cursor from the last API response.
     :param _builtins.str namespace: EdgeKV namespace name.
@@ -216,6 +222,12 @@ def get_edge_kv_list_output(cursor: pulumi.Input[Optional[Optional[_builtins.str
         namespace="default",
         cursor="next-page-cursor-from-previous-query")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [EdgeKVList](https://www.tencentcloud.com/document/api/1145/78825)
 
 
     :param _builtins.str cursor: Cursor position for traversal. Do not set this field for the first query; for subsequent queries, set it to the cursor returned by the previous query. After Read completes, this field is populated with the cursor from the last API response.

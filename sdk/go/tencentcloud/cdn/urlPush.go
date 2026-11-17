@@ -70,6 +70,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Read: [DescribePushTasks](https://www.tencentcloud.com/document/api/228/33603)
 type UrlPush struct {
 	pulumi.CustomResourceState
 

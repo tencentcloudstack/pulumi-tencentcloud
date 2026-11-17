@@ -42,6 +42,15 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateUserStore](https://www.tencentcloud.com/search/?wd=CreateUserStore&type=document&lang=en)
+// * Read: [ListUserStore](https://www.tencentcloud.com/search/?wd=ListUserStore&type=document&lang=en)
+// * Update: [UpdateUserStore](https://www.tencentcloud.com/search/?wd=UpdateUserStore&type=document&lang=en)
+// * Delete: [DeleteUserStore](https://www.tencentcloud.com/search/?wd=DeleteUserStore&type=document&lang=en)
+//
 // ## Import
 //
 // ciam userStore can be imported using the id, e.g.

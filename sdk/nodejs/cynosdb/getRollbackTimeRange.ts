@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     clusterId: "cynosdbmysql-bws8h88b",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRollbackTimeRange](https://www.tencentcloud.com/document/api/1098/40758)
  */
 export function getRollbackTimeRange(args: GetRollbackTimeRangeArgs, opts?: pulumi.InvokeOptions): Promise<GetRollbackTimeRangeResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -78,6 +84,12 @@ export interface GetRollbackTimeRangeResult {
  *     clusterId: "cynosdbmysql-bws8h88b",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRollbackTimeRange](https://www.tencentcloud.com/document/api/1098/40758)
  */
 export function getRollbackTimeRangeOutput(args: GetRollbackTimeRangeOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRollbackTimeRangeResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

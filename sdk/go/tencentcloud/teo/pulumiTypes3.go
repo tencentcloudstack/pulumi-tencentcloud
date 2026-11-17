@@ -13,6 +13,3228 @@ import (
 
 var _ = internal.GetEnvOrDefault
 
+type WebSecurityTemplateSecurityPolicyBotManagement struct {
+	// Bot management basic configuration. takes effect on all domains associated with the policy. can be customized through CustomRules.
+	BasicBotSettings *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettings `pulumi:"basicBotSettings"`
+	// Configures browser spoofing identification rules (formerly active feature detection rule). sets the response page range for JavaScript injection, browser check options, and handling method for non-browser clients.
+	BrowserImpersonationDetection *WebSecurityTemplateSecurityPolicyBotManagementBrowserImpersonationDetection `pulumi:"browserImpersonationDetection"`
+	// Definition list of client authentication rules. this feature is in beta test. submit a ticket if you need to use it.
+	ClientAttestationRules *WebSecurityTemplateSecurityPolicyBotManagementClientAttestationRules `pulumi:"clientAttestationRules"`
+	// Bot management custom rule combines various crawlers and request behavior characteristics to accurately define bots and configure customized handling methods.
+	CustomRules *WebSecurityTemplateSecurityPolicyBotManagementCustomRules `pulumi:"customRules"`
+	// Whether Bot management is enabled. valid values: - on: enabled;- off: disabled.
+	Enabled *string `pulumi:"enabled"`
+}
+
+// WebSecurityTemplateSecurityPolicyBotManagementInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementArgs and WebSecurityTemplateSecurityPolicyBotManagementOutput values.
+// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementInput` via:
+//
+//	WebSecurityTemplateSecurityPolicyBotManagementArgs{...}
+type WebSecurityTemplateSecurityPolicyBotManagementInput interface {
+	pulumi.Input
+
+	ToWebSecurityTemplateSecurityPolicyBotManagementOutput() WebSecurityTemplateSecurityPolicyBotManagementOutput
+	ToWebSecurityTemplateSecurityPolicyBotManagementOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementOutput
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementArgs struct {
+	// Bot management basic configuration. takes effect on all domains associated with the policy. can be customized through CustomRules.
+	BasicBotSettings WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrInput `pulumi:"basicBotSettings"`
+	// Configures browser spoofing identification rules (formerly active feature detection rule). sets the response page range for JavaScript injection, browser check options, and handling method for non-browser clients.
+	BrowserImpersonationDetection WebSecurityTemplateSecurityPolicyBotManagementBrowserImpersonationDetectionPtrInput `pulumi:"browserImpersonationDetection"`
+	// Definition list of client authentication rules. this feature is in beta test. submit a ticket if you need to use it.
+	ClientAttestationRules WebSecurityTemplateSecurityPolicyBotManagementClientAttestationRulesPtrInput `pulumi:"clientAttestationRules"`
+	// Bot management custom rule combines various crawlers and request behavior characteristics to accurately define bots and configure customized handling methods.
+	CustomRules WebSecurityTemplateSecurityPolicyBotManagementCustomRulesPtrInput `pulumi:"customRules"`
+	// Whether Bot management is enabled. valid values: - on: enabled;- off: disabled.
+	Enabled pulumi.StringPtrInput `pulumi:"enabled"`
+}
+
+func (WebSecurityTemplateSecurityPolicyBotManagementArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagement)(nil)).Elem()
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementArgs) ToWebSecurityTemplateSecurityPolicyBotManagementOutput() WebSecurityTemplateSecurityPolicyBotManagementOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementOutputWithContext(context.Background())
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementArgs) ToWebSecurityTemplateSecurityPolicyBotManagementOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementOutput)
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementArgs) ToWebSecurityTemplateSecurityPolicyBotManagementPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementPtrOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementPtrOutputWithContext(context.Background())
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementArgs) ToWebSecurityTemplateSecurityPolicyBotManagementPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementOutput).ToWebSecurityTemplateSecurityPolicyBotManagementPtrOutputWithContext(ctx)
+}
+
+// WebSecurityTemplateSecurityPolicyBotManagementPtrInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementArgs, WebSecurityTemplateSecurityPolicyBotManagementPtr and WebSecurityTemplateSecurityPolicyBotManagementPtrOutput values.
+// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementPtrInput` via:
+//
+//	        WebSecurityTemplateSecurityPolicyBotManagementArgs{...}
+//
+//	or:
+//
+//	        nil
+type WebSecurityTemplateSecurityPolicyBotManagementPtrInput interface {
+	pulumi.Input
+
+	ToWebSecurityTemplateSecurityPolicyBotManagementPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementPtrOutput
+	ToWebSecurityTemplateSecurityPolicyBotManagementPtrOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementPtrOutput
+}
+
+type webSecurityTemplateSecurityPolicyBotManagementPtrType WebSecurityTemplateSecurityPolicyBotManagementArgs
+
+func WebSecurityTemplateSecurityPolicyBotManagementPtr(v *WebSecurityTemplateSecurityPolicyBotManagementArgs) WebSecurityTemplateSecurityPolicyBotManagementPtrInput {
+	return (*webSecurityTemplateSecurityPolicyBotManagementPtrType)(v)
+}
+
+func (*webSecurityTemplateSecurityPolicyBotManagementPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagement)(nil)).Elem()
+}
+
+func (i *webSecurityTemplateSecurityPolicyBotManagementPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementPtrOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementPtrOutputWithContext(context.Background())
+}
+
+func (i *webSecurityTemplateSecurityPolicyBotManagementPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementOutput struct{ *pulumi.OutputState }
+
+func (WebSecurityTemplateSecurityPolicyBotManagementOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagement)(nil)).Elem()
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementOutput) ToWebSecurityTemplateSecurityPolicyBotManagementOutput() WebSecurityTemplateSecurityPolicyBotManagementOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementOutput) ToWebSecurityTemplateSecurityPolicyBotManagementOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementOutput) ToWebSecurityTemplateSecurityPolicyBotManagementPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementPtrOutput {
+	return o.ToWebSecurityTemplateSecurityPolicyBotManagementPtrOutputWithContext(context.Background())
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementOutput) ToWebSecurityTemplateSecurityPolicyBotManagementPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v WebSecurityTemplateSecurityPolicyBotManagement) *WebSecurityTemplateSecurityPolicyBotManagement {
+		return &v
+	}).(WebSecurityTemplateSecurityPolicyBotManagementPtrOutput)
+}
+
+// Bot management basic configuration. takes effect on all domains associated with the policy. can be customized through CustomRules.
+func (o WebSecurityTemplateSecurityPolicyBotManagementOutput) BasicBotSettings() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagement) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettings {
+		return v.BasicBotSettings
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput)
+}
+
+// Configures browser spoofing identification rules (formerly active feature detection rule). sets the response page range for JavaScript injection, browser check options, and handling method for non-browser clients.
+func (o WebSecurityTemplateSecurityPolicyBotManagementOutput) BrowserImpersonationDetection() WebSecurityTemplateSecurityPolicyBotManagementBrowserImpersonationDetectionPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagement) *WebSecurityTemplateSecurityPolicyBotManagementBrowserImpersonationDetection {
+		return v.BrowserImpersonationDetection
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBrowserImpersonationDetectionPtrOutput)
+}
+
+// Definition list of client authentication rules. this feature is in beta test. submit a ticket if you need to use it.
+func (o WebSecurityTemplateSecurityPolicyBotManagementOutput) ClientAttestationRules() WebSecurityTemplateSecurityPolicyBotManagementClientAttestationRulesPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagement) *WebSecurityTemplateSecurityPolicyBotManagementClientAttestationRules {
+		return v.ClientAttestationRules
+	}).(WebSecurityTemplateSecurityPolicyBotManagementClientAttestationRulesPtrOutput)
+}
+
+// Bot management custom rule combines various crawlers and request behavior characteristics to accurately define bots and configure customized handling methods.
+func (o WebSecurityTemplateSecurityPolicyBotManagementOutput) CustomRules() WebSecurityTemplateSecurityPolicyBotManagementCustomRulesPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagement) *WebSecurityTemplateSecurityPolicyBotManagementCustomRules {
+		return v.CustomRules
+	}).(WebSecurityTemplateSecurityPolicyBotManagementCustomRulesPtrOutput)
+}
+
+// Whether Bot management is enabled. valid values: - on: enabled;- off: disabled.
+func (o WebSecurityTemplateSecurityPolicyBotManagementOutput) Enabled() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagement) *string { return v.Enabled }).(pulumi.StringPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementPtrOutput struct{ *pulumi.OutputState }
+
+func (WebSecurityTemplateSecurityPolicyBotManagementPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagement)(nil)).Elem()
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementPtrOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementPtrOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementPtrOutput) Elem() WebSecurityTemplateSecurityPolicyBotManagementOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagement) WebSecurityTemplateSecurityPolicyBotManagement {
+		if v != nil {
+			return *v
+		}
+		var ret WebSecurityTemplateSecurityPolicyBotManagement
+		return ret
+	}).(WebSecurityTemplateSecurityPolicyBotManagementOutput)
+}
+
+// Bot management basic configuration. takes effect on all domains associated with the policy. can be customized through CustomRules.
+func (o WebSecurityTemplateSecurityPolicyBotManagementPtrOutput) BasicBotSettings() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagement) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettings {
+		if v == nil {
+			return nil
+		}
+		return v.BasicBotSettings
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput)
+}
+
+// Configures browser spoofing identification rules (formerly active feature detection rule). sets the response page range for JavaScript injection, browser check options, and handling method for non-browser clients.
+func (o WebSecurityTemplateSecurityPolicyBotManagementPtrOutput) BrowserImpersonationDetection() WebSecurityTemplateSecurityPolicyBotManagementBrowserImpersonationDetectionPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagement) *WebSecurityTemplateSecurityPolicyBotManagementBrowserImpersonationDetection {
+		if v == nil {
+			return nil
+		}
+		return v.BrowserImpersonationDetection
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBrowserImpersonationDetectionPtrOutput)
+}
+
+// Definition list of client authentication rules. this feature is in beta test. submit a ticket if you need to use it.
+func (o WebSecurityTemplateSecurityPolicyBotManagementPtrOutput) ClientAttestationRules() WebSecurityTemplateSecurityPolicyBotManagementClientAttestationRulesPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagement) *WebSecurityTemplateSecurityPolicyBotManagementClientAttestationRules {
+		if v == nil {
+			return nil
+		}
+		return v.ClientAttestationRules
+	}).(WebSecurityTemplateSecurityPolicyBotManagementClientAttestationRulesPtrOutput)
+}
+
+// Bot management custom rule combines various crawlers and request behavior characteristics to accurately define bots and configure customized handling methods.
+func (o WebSecurityTemplateSecurityPolicyBotManagementPtrOutput) CustomRules() WebSecurityTemplateSecurityPolicyBotManagementCustomRulesPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagement) *WebSecurityTemplateSecurityPolicyBotManagementCustomRules {
+		if v == nil {
+			return nil
+		}
+		return v.CustomRules
+	}).(WebSecurityTemplateSecurityPolicyBotManagementCustomRulesPtrOutput)
+}
+
+// Whether Bot management is enabled. valid values: - on: enabled;- off: disabled.
+func (o WebSecurityTemplateSecurityPolicyBotManagementPtrOutput) Enabled() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagement) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Enabled
+	}).(pulumi.StringPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettings struct {
+	// Specifies the configuration for Bot intelligent analysis.
+	BotIntelligence *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligence `pulumi:"botIntelligence"`
+	// Threat intelligence database (originally client profile analysis) configuration, used for handling client ips with specific risk characteristics in recent access behavior.
+	IpReputation *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsIpReputation `pulumi:"ipReputation"`
+	// Commercial or open-source tool UA feature configuration (original UA feature rule), used to handle access requests from known commercial or open-source tools. the User-Agent header of such requests complies with known commercial or open-source tool features.
+	KnownBotCategories *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsKnownBotCategories `pulumi:"knownBotCategories"`
+	// Search engine crawler configuration, used to handle requests from search engine crawlers. the IP, User-Agent, or rDNS results of such requests match known search engine crawlers.
+	SearchEngineBots *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsSearchEngineBots `pulumi:"searchEngineBots"`
+	// Client IP source IDC configuration, used for handling access requests from client ips in idcs (data centers). such source requests are not directly accessed by mobile terminals or browser-side.
+	SourceIdc *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsSourceIdc `pulumi:"sourceIdc"`
+}
+
+// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsArgs and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput values.
+// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsInput` via:
+//
+//	WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsArgs{...}
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsInput interface {
+	pulumi.Input
+
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsArgs struct {
+	// Specifies the configuration for Bot intelligent analysis.
+	BotIntelligence WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrInput `pulumi:"botIntelligence"`
+	// Threat intelligence database (originally client profile analysis) configuration, used for handling client ips with specific risk characteristics in recent access behavior.
+	IpReputation WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsIpReputationPtrInput `pulumi:"ipReputation"`
+	// Commercial or open-source tool UA feature configuration (original UA feature rule), used to handle access requests from known commercial or open-source tools. the User-Agent header of such requests complies with known commercial or open-source tool features.
+	KnownBotCategories WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsKnownBotCategoriesPtrInput `pulumi:"knownBotCategories"`
+	// Search engine crawler configuration, used to handle requests from search engine crawlers. the IP, User-Agent, or rDNS results of such requests match known search engine crawlers.
+	SearchEngineBots WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsSearchEngineBotsPtrInput `pulumi:"searchEngineBots"`
+	// Client IP source IDC configuration, used for handling access requests from client ips in idcs (data centers). such source requests are not directly accessed by mobile terminals or browser-side.
+	SourceIdc WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsSourceIdcPtrInput `pulumi:"sourceIdc"`
+}
+
+func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettings)(nil)).Elem()
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutputWithContext(context.Background())
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput)
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput).ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutputWithContext(ctx)
+}
+
+// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsArgs, WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtr and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput values.
+// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrInput` via:
+//
+//	        WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsArgs{...}
+//
+//	or:
+//
+//	        nil
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrInput interface {
+	pulumi.Input
+
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput
+}
+
+type webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrType WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsArgs
+
+func WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtr(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsArgs) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrInput {
+	return (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrType)(v)
+}
+
+func (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettings)(nil)).Elem()
+}
+
+func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutputWithContext(context.Background())
+}
+
+func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput struct{ *pulumi.OutputState }
+
+func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettings)(nil)).Elem()
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput {
+	return o.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutputWithContext(context.Background())
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettings) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettings {
+		return &v
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput)
+}
+
+// Specifies the configuration for Bot intelligent analysis.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput) BotIntelligence() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettings) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligence {
+		return v.BotIntelligence
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput)
+}
+
+// Threat intelligence database (originally client profile analysis) configuration, used for handling client ips with specific risk characteristics in recent access behavior.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput) IpReputation() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsIpReputationPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettings) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsIpReputation {
+		return v.IpReputation
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsIpReputationPtrOutput)
+}
+
+// Commercial or open-source tool UA feature configuration (original UA feature rule), used to handle access requests from known commercial or open-source tools. the User-Agent header of such requests complies with known commercial or open-source tool features.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput) KnownBotCategories() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsKnownBotCategoriesPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettings) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsKnownBotCategories {
+		return v.KnownBotCategories
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsKnownBotCategoriesPtrOutput)
+}
+
+// Search engine crawler configuration, used to handle requests from search engine crawlers. the IP, User-Agent, or rDNS results of such requests match known search engine crawlers.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput) SearchEngineBots() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsSearchEngineBotsPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettings) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsSearchEngineBots {
+		return v.SearchEngineBots
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsSearchEngineBotsPtrOutput)
+}
+
+// Client IP source IDC configuration, used for handling access requests from client ips in idcs (data centers). such source requests are not directly accessed by mobile terminals or browser-side.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput) SourceIdc() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsSourceIdcPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettings) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsSourceIdc {
+		return v.SourceIdc
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsSourceIdcPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput struct{ *pulumi.OutputState }
+
+func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettings)(nil)).Elem()
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput) Elem() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettings) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettings {
+		if v != nil {
+			return *v
+		}
+		var ret WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettings
+		return ret
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput)
+}
+
+// Specifies the configuration for Bot intelligent analysis.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput) BotIntelligence() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettings) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligence {
+		if v == nil {
+			return nil
+		}
+		return v.BotIntelligence
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput)
+}
+
+// Threat intelligence database (originally client profile analysis) configuration, used for handling client ips with specific risk characteristics in recent access behavior.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput) IpReputation() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsIpReputationPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettings) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsIpReputation {
+		if v == nil {
+			return nil
+		}
+		return v.IpReputation
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsIpReputationPtrOutput)
+}
+
+// Commercial or open-source tool UA feature configuration (original UA feature rule), used to handle access requests from known commercial or open-source tools. the User-Agent header of such requests complies with known commercial or open-source tool features.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput) KnownBotCategories() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsKnownBotCategoriesPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettings) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsKnownBotCategories {
+		if v == nil {
+			return nil
+		}
+		return v.KnownBotCategories
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsKnownBotCategoriesPtrOutput)
+}
+
+// Search engine crawler configuration, used to handle requests from search engine crawlers. the IP, User-Agent, or rDNS results of such requests match known search engine crawlers.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput) SearchEngineBots() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsSearchEngineBotsPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettings) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsSearchEngineBots {
+		if v == nil {
+			return nil
+		}
+		return v.SearchEngineBots
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsSearchEngineBotsPtrOutput)
+}
+
+// Client IP source IDC configuration, used for handling access requests from client ips in idcs (data centers). such source requests are not directly accessed by mobile terminals or browser-side.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput) SourceIdc() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsSourceIdcPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettings) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsSourceIdc {
+		if v == nil {
+			return nil
+		}
+		return v.SourceIdc
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsSourceIdcPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligence struct {
+	// Based on client and request features, divides request sources into human requests, legitimate Bot requests, suspected Bot requests, and high-risk Bot requests, and provides request handling options.
+	BotRatings *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatings `pulumi:"botRatings"`
+	// Specifies the switch for Bot intelligent analysis configuration. valid values:.  on: enabled. off: disabled.
+	Enabled *string `pulumi:"enabled"`
+}
+
+// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceArgs and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutput values.
+// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceInput` via:
+//
+//	WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceArgs{...}
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceInput interface {
+	pulumi.Input
+
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutput
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutput
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceArgs struct {
+	// Based on client and request features, divides request sources into human requests, legitimate Bot requests, suspected Bot requests, and high-risk Bot requests, and provides request handling options.
+	BotRatings WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrInput `pulumi:"botRatings"`
+	// Specifies the switch for Bot intelligent analysis configuration. valid values:.  on: enabled. off: disabled.
+	Enabled pulumi.StringPtrInput `pulumi:"enabled"`
+}
+
+func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligence)(nil)).Elem()
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutputWithContext(context.Background())
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutput)
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutputWithContext(context.Background())
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutput).ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutputWithContext(ctx)
+}
+
+// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceArgs, WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtr and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput values.
+// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrInput` via:
+//
+//	        WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceArgs{...}
+//
+//	or:
+//
+//	        nil
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrInput interface {
+	pulumi.Input
+
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput
+}
+
+type webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrType WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceArgs
+
+func WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtr(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceArgs) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrInput {
+	return (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrType)(v)
+}
+
+func (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligence)(nil)).Elem()
+}
+
+func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutputWithContext(context.Background())
+}
+
+func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutput struct{ *pulumi.OutputState }
+
+func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligence)(nil)).Elem()
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput {
+	return o.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutputWithContext(context.Background())
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligence) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligence {
+		return &v
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput)
+}
+
+// Based on client and request features, divides request sources into human requests, legitimate Bot requests, suspected Bot requests, and high-risk Bot requests, and provides request handling options.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutput) BotRatings() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligence) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatings {
+		return v.BotRatings
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput)
+}
+
+// Specifies the switch for Bot intelligent analysis configuration. valid values:.  on: enabled. off: disabled.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutput) Enabled() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligence) *string {
+		return v.Enabled
+	}).(pulumi.StringPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput struct{ *pulumi.OutputState }
+
+func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligence)(nil)).Elem()
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput) Elem() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligence) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligence {
+		if v != nil {
+			return *v
+		}
+		var ret WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligence
+		return ret
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutput)
+}
+
+// Based on client and request features, divides request sources into human requests, legitimate Bot requests, suspected Bot requests, and high-risk Bot requests, and provides request handling options.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput) BotRatings() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligence) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatings {
+		if v == nil {
+			return nil
+		}
+		return v.BotRatings
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput)
+}
+
+// Specifies the switch for Bot intelligent analysis configuration. valid values:.  on: enabled. off: disabled.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput) Enabled() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligence) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Enabled
+	}).(pulumi.StringPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatings struct {
+	// Execution action for malicious Bot requests. valid values for the Name parameter in SecurityAction: - Deny: block; - Monitor: observe; - Allow: pass; - Challenge: Challenge, where ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge.
+	HighRiskBotRequestsAction *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction `pulumi:"highRiskBotRequestsAction"`
+	// Execution action for a normal Bot request. valid values for the Name parameter in SecurityAction: - Allow: pass.
+	HumanRequestsAction *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction `pulumi:"humanRequestsAction"`
+	// The execution action for suspected Bot requests. valid values for the Name parameter in SecurityAction: - Deny: block; - Monitor: observe; - Allow: pass; - Challenge: Challenge, where ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge.
+	LikelyBotRequestsAction *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsLikelyBotRequestsAction `pulumi:"likelyBotRequestsAction"`
+	// Execution action for friendly Bot request. SecurityAction Name parameter supports: - Deny: block;- Monitor: observe;- Allow: pass;- Challenge: Challenge, where ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge.
+	VerifiedBotRequestsAction *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsVerifiedBotRequestsAction `pulumi:"verifiedBotRequestsAction"`
+}
+
+// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsArgs and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput values.
+// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsInput` via:
+//
+//	WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsArgs{...}
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsInput interface {
+	pulumi.Input
+
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsArgs struct {
+	// Execution action for malicious Bot requests. valid values for the Name parameter in SecurityAction: - Deny: block; - Monitor: observe; - Allow: pass; - Challenge: Challenge, where ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge.
+	HighRiskBotRequestsAction WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrInput `pulumi:"highRiskBotRequestsAction"`
+	// Execution action for a normal Bot request. valid values for the Name parameter in SecurityAction: - Allow: pass.
+	HumanRequestsAction WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrInput `pulumi:"humanRequestsAction"`
+	// The execution action for suspected Bot requests. valid values for the Name parameter in SecurityAction: - Deny: block; - Monitor: observe; - Allow: pass; - Challenge: Challenge, where ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge.
+	LikelyBotRequestsAction WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsLikelyBotRequestsActionPtrInput `pulumi:"likelyBotRequestsAction"`
+	// Execution action for friendly Bot request. SecurityAction Name parameter supports: - Deny: block;- Monitor: observe;- Allow: pass;- Challenge: Challenge, where ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge.
+	VerifiedBotRequestsAction WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsVerifiedBotRequestsActionPtrInput `pulumi:"verifiedBotRequestsAction"`
+}
+
+func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatings)(nil)).Elem()
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutputWithContext(context.Background())
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput)
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutputWithContext(context.Background())
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput).ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutputWithContext(ctx)
+}
+
+// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsArgs, WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtr and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput values.
+// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrInput` via:
+//
+//	        WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsArgs{...}
+//
+//	or:
+//
+//	        nil
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrInput interface {
+	pulumi.Input
+
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput
+}
+
+type webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrType WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsArgs
+
+func WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtr(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsArgs) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrInput {
+	return (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrType)(v)
+}
+
+func (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatings)(nil)).Elem()
+}
+
+func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutputWithContext(context.Background())
+}
+
+func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput struct{ *pulumi.OutputState }
+
+func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatings)(nil)).Elem()
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput {
+	return o.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutputWithContext(context.Background())
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatings) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatings {
+		return &v
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput)
+}
+
+// Execution action for malicious Bot requests. valid values for the Name parameter in SecurityAction: - Deny: block; - Monitor: observe; - Allow: pass; - Challenge: Challenge, where ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput) HighRiskBotRequestsAction() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatings) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction {
+		return v.HighRiskBotRequestsAction
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput)
+}
+
+// Execution action for a normal Bot request. valid values for the Name parameter in SecurityAction: - Allow: pass.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput) HumanRequestsAction() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatings) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction {
+		return v.HumanRequestsAction
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput)
+}
+
+// The execution action for suspected Bot requests. valid values for the Name parameter in SecurityAction: - Deny: block; - Monitor: observe; - Allow: pass; - Challenge: Challenge, where ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput) LikelyBotRequestsAction() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsLikelyBotRequestsActionPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatings) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsLikelyBotRequestsAction {
+		return v.LikelyBotRequestsAction
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsLikelyBotRequestsActionPtrOutput)
+}
+
+// Execution action for friendly Bot request. SecurityAction Name parameter supports: - Deny: block;- Monitor: observe;- Allow: pass;- Challenge: Challenge, where ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput) VerifiedBotRequestsAction() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsVerifiedBotRequestsActionPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatings) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsVerifiedBotRequestsAction {
+		return v.VerifiedBotRequestsAction
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsVerifiedBotRequestsActionPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput struct{ *pulumi.OutputState }
+
+func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatings)(nil)).Elem()
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput) Elem() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatings) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatings {
+		if v != nil {
+			return *v
+		}
+		var ret WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatings
+		return ret
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput)
+}
+
+// Execution action for malicious Bot requests. valid values for the Name parameter in SecurityAction: - Deny: block; - Monitor: observe; - Allow: pass; - Challenge: Challenge, where ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput) HighRiskBotRequestsAction() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatings) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction {
+		if v == nil {
+			return nil
+		}
+		return v.HighRiskBotRequestsAction
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput)
+}
+
+// Execution action for a normal Bot request. valid values for the Name parameter in SecurityAction: - Allow: pass.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput) HumanRequestsAction() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatings) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction {
+		if v == nil {
+			return nil
+		}
+		return v.HumanRequestsAction
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput)
+}
+
+// The execution action for suspected Bot requests. valid values for the Name parameter in SecurityAction: - Deny: block; - Monitor: observe; - Allow: pass; - Challenge: Challenge, where ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput) LikelyBotRequestsAction() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsLikelyBotRequestsActionPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatings) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsLikelyBotRequestsAction {
+		if v == nil {
+			return nil
+		}
+		return v.LikelyBotRequestsAction
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsLikelyBotRequestsActionPtrOutput)
+}
+
+// Execution action for friendly Bot request. SecurityAction Name parameter supports: - Deny: block;- Monitor: observe;- Allow: pass;- Challenge: Challenge, where ChallengeOption in ChallengeActionParameters supports JSChallenge and ManagedChallenge.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput) VerifiedBotRequestsAction() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsVerifiedBotRequestsActionPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatings) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsVerifiedBotRequestsAction {
+		if v == nil {
+			return nil
+		}
+		return v.VerifiedBotRequestsAction
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsVerifiedBotRequestsActionPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction struct {
+	// Additional parameters when Name is Allow.
+	AllowActionParameters *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParameters `pulumi:"allowActionParameters"`
+	// To be deprecated, additional parameter when Name is BlockIP.
+	BlockIpActionParameters *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParameters `pulumi:"blockIpActionParameters"`
+	// Additional parameter when Name is Challenge.
+	ChallengeActionParameters *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParameters `pulumi:"challengeActionParameters"`
+	// Additional parameters when Name is Deny.
+	DenyActionParameters *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters `pulumi:"denyActionParameters"`
+	// Specifies the specific actions for safe execution. valid values:. - Deny. specifies to block requests from accessing site resources. - Monitor: observation, only record logs. - Redirect: Redirect to URL. - Disabled: specifies that the rule is not enabled. - Allow: specifies whether to allow access with delayed processing of requests. - Challenge: specifies the challenge content to respond to. - Trans: pass and allow requests to directly access site resources. - BlockIP: to be deprecated. ip block. - ReturnCustomPage: to be deprecated. use specified page for interception. - JSChallenge: to be deprecated, JavaScript challenge;. - ManagedChallenge: to be deprecated. managed challenge.
+	Name string `pulumi:"name"`
+	// Additional parameter when Name is Redirect.
+	RedirectActionParameters *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParameters `pulumi:"redirectActionParameters"`
+	// To be deprecated, additional parameter when Name is ReturnCustomPage.
+	ReturnCustomPageActionParameters *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParameters `pulumi:"returnCustomPageActionParameters"`
+}
+
+// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionArgs and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput values.
+// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionInput` via:
+//
+//	WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionArgs{...}
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionInput interface {
+	pulumi.Input
+
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionArgs struct {
+	// Additional parameters when Name is Allow.
+	AllowActionParameters WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrInput `pulumi:"allowActionParameters"`
+	// To be deprecated, additional parameter when Name is BlockIP.
+	BlockIpActionParameters WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrInput `pulumi:"blockIpActionParameters"`
+	// Additional parameter when Name is Challenge.
+	ChallengeActionParameters WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrInput `pulumi:"challengeActionParameters"`
+	// Additional parameters when Name is Deny.
+	DenyActionParameters WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrInput `pulumi:"denyActionParameters"`
+	// Specifies the specific actions for safe execution. valid values:. - Deny. specifies to block requests from accessing site resources. - Monitor: observation, only record logs. - Redirect: Redirect to URL. - Disabled: specifies that the rule is not enabled. - Allow: specifies whether to allow access with delayed processing of requests. - Challenge: specifies the challenge content to respond to. - Trans: pass and allow requests to directly access site resources. - BlockIP: to be deprecated. ip block. - ReturnCustomPage: to be deprecated. use specified page for interception. - JSChallenge: to be deprecated, JavaScript challenge;. - ManagedChallenge: to be deprecated. managed challenge.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Additional parameter when Name is Redirect.
+	RedirectActionParameters WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrInput `pulumi:"redirectActionParameters"`
+	// To be deprecated, additional parameter when Name is ReturnCustomPage.
+	ReturnCustomPageActionParameters WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrInput `pulumi:"returnCustomPageActionParameters"`
+}
+
+func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction)(nil)).Elem()
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutputWithContext(context.Background())
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput)
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutputWithContext(context.Background())
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput).ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutputWithContext(ctx)
+}
+
+// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionArgs, WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtr and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput values.
+// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrInput` via:
+//
+//	        WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionArgs{...}
+//
+//	or:
+//
+//	        nil
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrInput interface {
+	pulumi.Input
+
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput
+}
+
+type webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrType WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionArgs
+
+func WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtr(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionArgs) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrInput {
+	return (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrType)(v)
+}
+
+func (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction)(nil)).Elem()
+}
+
+func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutputWithContext(context.Background())
+}
+
+func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput struct{ *pulumi.OutputState }
+
+func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction)(nil)).Elem()
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput {
+	return o.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutputWithContext(context.Background())
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction {
+		return &v
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput)
+}
+
+// Additional parameters when Name is Allow.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput) AllowActionParameters() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParameters {
+		return v.AllowActionParameters
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput)
+}
+
+// To be deprecated, additional parameter when Name is BlockIP.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput) BlockIpActionParameters() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParameters {
+		return v.BlockIpActionParameters
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput)
+}
+
+// Additional parameter when Name is Challenge.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput) ChallengeActionParameters() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParameters {
+		return v.ChallengeActionParameters
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput)
+}
+
+// Additional parameters when Name is Deny.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput) DenyActionParameters() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters {
+		return v.DenyActionParameters
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput)
+}
+
+// Specifies the specific actions for safe execution. valid values:. - Deny. specifies to block requests from accessing site resources. - Monitor: observation, only record logs. - Redirect: Redirect to URL. - Disabled: specifies that the rule is not enabled. - Allow: specifies whether to allow access with delayed processing of requests. - Challenge: specifies the challenge content to respond to. - Trans: pass and allow requests to directly access site resources. - BlockIP: to be deprecated. ip block. - ReturnCustomPage: to be deprecated. use specified page for interception. - JSChallenge: to be deprecated, JavaScript challenge;. - ManagedChallenge: to be deprecated. managed challenge.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction) string {
+		return v.Name
+	}).(pulumi.StringOutput)
+}
+
+// Additional parameter when Name is Redirect.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput) RedirectActionParameters() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParameters {
+		return v.RedirectActionParameters
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput)
+}
+
+// To be deprecated, additional parameter when Name is ReturnCustomPage.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput) ReturnCustomPageActionParameters() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParameters {
+		return v.ReturnCustomPageActionParameters
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput struct{ *pulumi.OutputState }
+
+func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction)(nil)).Elem()
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput) Elem() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction {
+		if v != nil {
+			return *v
+		}
+		var ret WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction
+		return ret
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput)
+}
+
+// Additional parameters when Name is Allow.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput) AllowActionParameters() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParameters {
+		if v == nil {
+			return nil
+		}
+		return v.AllowActionParameters
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput)
+}
+
+// To be deprecated, additional parameter when Name is BlockIP.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput) BlockIpActionParameters() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParameters {
+		if v == nil {
+			return nil
+		}
+		return v.BlockIpActionParameters
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput)
+}
+
+// Additional parameter when Name is Challenge.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput) ChallengeActionParameters() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParameters {
+		if v == nil {
+			return nil
+		}
+		return v.ChallengeActionParameters
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput)
+}
+
+// Additional parameters when Name is Deny.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput) DenyActionParameters() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters {
+		if v == nil {
+			return nil
+		}
+		return v.DenyActionParameters
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput)
+}
+
+// Specifies the specific actions for safe execution. valid values:. - Deny. specifies to block requests from accessing site resources. - Monitor: observation, only record logs. - Redirect: Redirect to URL. - Disabled: specifies that the rule is not enabled. - Allow: specifies whether to allow access with delayed processing of requests. - Challenge: specifies the challenge content to respond to. - Trans: pass and allow requests to directly access site resources. - BlockIP: to be deprecated. ip block. - ReturnCustomPage: to be deprecated. use specified page for interception. - JSChallenge: to be deprecated, JavaScript challenge;. - ManagedChallenge: to be deprecated. managed challenge.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+// Additional parameter when Name is Redirect.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput) RedirectActionParameters() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParameters {
+		if v == nil {
+			return nil
+		}
+		return v.RedirectActionParameters
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput)
+}
+
+// To be deprecated, additional parameter when Name is ReturnCustomPage.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput) ReturnCustomPageActionParameters() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParameters {
+		if v == nil {
+			return nil
+		}
+		return v.ReturnCustomPageActionParameters
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParameters struct {
+	// Maximum delayed response time. supported units: - s: seconds, value ranges from 5 to 10.
+	MaxDelayTime *string `pulumi:"maxDelayTime"`
+	// Minimum latency response time. when configured as 0s, it means no delay for direct response. supported units: - s: seconds, value ranges from 0 to 5.
+	MinDelayTime *string `pulumi:"minDelayTime"`
+}
+
+// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersArgs and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutput values.
+// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersInput` via:
+//
+//	WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersArgs{...}
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersInput interface {
+	pulumi.Input
+
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutput
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutput
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersArgs struct {
+	// Maximum delayed response time. supported units: - s: seconds, value ranges from 5 to 10.
+	MaxDelayTime pulumi.StringPtrInput `pulumi:"maxDelayTime"`
+	// Minimum latency response time. when configured as 0s, it means no delay for direct response. supported units: - s: seconds, value ranges from 0 to 5.
+	MinDelayTime pulumi.StringPtrInput `pulumi:"minDelayTime"`
+}
+
+func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParameters)(nil)).Elem()
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutputWithContext(context.Background())
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutput)
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutput).ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutputWithContext(ctx)
+}
+
+// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersArgs, WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtr and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput values.
+// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrInput` via:
+//
+//	        WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersArgs{...}
+//
+//	or:
+//
+//	        nil
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrInput interface {
+	pulumi.Input
+
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput
+}
+
+type webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrType WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersArgs
+
+func WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtr(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersArgs) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrInput {
+	return (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrType)(v)
+}
+
+func (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParameters)(nil)).Elem()
+}
+
+func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutput struct{ *pulumi.OutputState }
+
+func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParameters)(nil)).Elem()
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput {
+	return o.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParameters) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParameters {
+		return &v
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput)
+}
+
+// Maximum delayed response time. supported units: - s: seconds, value ranges from 5 to 10.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutput) MaxDelayTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParameters) *string {
+		return v.MaxDelayTime
+	}).(pulumi.StringPtrOutput)
+}
+
+// Minimum latency response time. when configured as 0s, it means no delay for direct response. supported units: - s: seconds, value ranges from 0 to 5.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutput) MinDelayTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParameters) *string {
+		return v.MinDelayTime
+	}).(pulumi.StringPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput struct{ *pulumi.OutputState }
+
+func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParameters)(nil)).Elem()
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput) Elem() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParameters) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParameters {
+		if v != nil {
+			return *v
+		}
+		var ret WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParameters
+		return ret
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutput)
+}
+
+// Maximum delayed response time. supported units: - s: seconds, value ranges from 5 to 10.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput) MaxDelayTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.MaxDelayTime
+	}).(pulumi.StringPtrOutput)
+}
+
+// Minimum latency response time. when configured as 0s, it means no delay for direct response. supported units: - s: seconds, value ranges from 0 to 5.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput) MinDelayTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.MinDelayTime
+	}).(pulumi.StringPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParameters struct {
+	// Penalty duration for `BlockIP`. Units: - `s`: second, value range 1-120; - `m`: minute, value range 1-120; - `h`: hour, value range 1-48.
+	Duration string `pulumi:"duration"`
+}
+
+// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersArgs and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutput values.
+// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersInput` via:
+//
+//	WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersArgs{...}
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersInput interface {
+	pulumi.Input
+
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutput
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutput
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersArgs struct {
+	// Penalty duration for `BlockIP`. Units: - `s`: second, value range 1-120; - `m`: minute, value range 1-120; - `h`: hour, value range 1-48.
+	Duration pulumi.StringInput `pulumi:"duration"`
+}
+
+func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParameters)(nil)).Elem()
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutputWithContext(context.Background())
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutput)
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutput).ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutputWithContext(ctx)
+}
+
+// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersArgs, WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtr and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput values.
+// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrInput` via:
+//
+//	        WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersArgs{...}
+//
+//	or:
+//
+//	        nil
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrInput interface {
+	pulumi.Input
+
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput
+}
+
+type webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrType WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersArgs
+
+func WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtr(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersArgs) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrInput {
+	return (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrType)(v)
+}
+
+func (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParameters)(nil)).Elem()
+}
+
+func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutput struct{ *pulumi.OutputState }
+
+func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParameters)(nil)).Elem()
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput {
+	return o.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParameters) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParameters {
+		return &v
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput)
+}
+
+// Penalty duration for `BlockIP`. Units: - `s`: second, value range 1-120; - `m`: minute, value range 1-120; - `h`: hour, value range 1-48.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutput) Duration() pulumi.StringOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParameters) string {
+		return v.Duration
+	}).(pulumi.StringOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput struct{ *pulumi.OutputState }
+
+func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParameters)(nil)).Elem()
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput) Elem() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParameters) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParameters {
+		if v != nil {
+			return *v
+		}
+		var ret WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParameters
+		return ret
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutput)
+}
+
+// Penalty duration for `BlockIP`. Units: - `s`: second, value range 1-120; - `m`: minute, value range 1-120; - `h`: hour, value range 1-48.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput) Duration() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Duration
+	}).(pulumi.StringPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParameters struct {
+	// Client authentication method ID. this field is required when Name is InterstitialChallenge/InlineChallenge.
+	AttesterId *string `pulumi:"attesterId"`
+	// Safe execution challenge actions. valid values: -  InterstitialChallenge: interstitial challenge; -  InlineChallenge: embedded challenge; -  JSChallenge: JavaScript challenge; -  ManagedChallenge: managed challenge.
+	ChallengeOption string `pulumi:"challengeOption"`
+	// Specifies the time interval for challenge repetition. this field is required when Name is InterstitialChallenge/InlineChallenge. default value is 300s. supported units: - s: second, value ranges from 1 to 60;- m: minute, value ranges from 1 to 60;- h: hour, value ranges from 1 to 24.
+	Interval *string `pulumi:"interval"`
+}
+
+// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersArgs and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutput values.
+// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersInput` via:
+//
+//	WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersArgs{...}
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersInput interface {
+	pulumi.Input
+
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutput
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutput
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersArgs struct {
+	// Client authentication method ID. this field is required when Name is InterstitialChallenge/InlineChallenge.
+	AttesterId pulumi.StringPtrInput `pulumi:"attesterId"`
+	// Safe execution challenge actions. valid values: -  InterstitialChallenge: interstitial challenge; -  InlineChallenge: embedded challenge; -  JSChallenge: JavaScript challenge; -  ManagedChallenge: managed challenge.
+	ChallengeOption pulumi.StringInput `pulumi:"challengeOption"`
+	// Specifies the time interval for challenge repetition. this field is required when Name is InterstitialChallenge/InlineChallenge. default value is 300s. supported units: - s: second, value ranges from 1 to 60;- m: minute, value ranges from 1 to 60;- h: hour, value ranges from 1 to 24.
+	Interval pulumi.StringPtrInput `pulumi:"interval"`
+}
+
+func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParameters)(nil)).Elem()
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutputWithContext(context.Background())
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutput)
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutput).ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutputWithContext(ctx)
+}
+
+// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersArgs, WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtr and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput values.
+// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrInput` via:
+//
+//	        WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersArgs{...}
+//
+//	or:
+//
+//	        nil
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrInput interface {
+	pulumi.Input
+
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput
+}
+
+type webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrType WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersArgs
+
+func WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtr(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersArgs) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrInput {
+	return (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrType)(v)
+}
+
+func (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParameters)(nil)).Elem()
+}
+
+func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutput struct{ *pulumi.OutputState }
+
+func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParameters)(nil)).Elem()
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput {
+	return o.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParameters) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParameters {
+		return &v
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput)
+}
+
+// Client authentication method ID. this field is required when Name is InterstitialChallenge/InlineChallenge.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutput) AttesterId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParameters) *string {
+		return v.AttesterId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Safe execution challenge actions. valid values: -  InterstitialChallenge: interstitial challenge; -  InlineChallenge: embedded challenge; -  JSChallenge: JavaScript challenge; -  ManagedChallenge: managed challenge.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutput) ChallengeOption() pulumi.StringOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParameters) string {
+		return v.ChallengeOption
+	}).(pulumi.StringOutput)
+}
+
+// Specifies the time interval for challenge repetition. this field is required when Name is InterstitialChallenge/InlineChallenge. default value is 300s. supported units: - s: second, value ranges from 1 to 60;- m: minute, value ranges from 1 to 60;- h: hour, value ranges from 1 to 24.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutput) Interval() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParameters) *string {
+		return v.Interval
+	}).(pulumi.StringPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput struct{ *pulumi.OutputState }
+
+func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParameters)(nil)).Elem()
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput) Elem() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParameters) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParameters {
+		if v != nil {
+			return *v
+		}
+		var ret WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParameters
+		return ret
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutput)
+}
+
+// Client authentication method ID. this field is required when Name is InterstitialChallenge/InlineChallenge.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput) AttesterId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.AttesterId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Safe execution challenge actions. valid values: -  InterstitialChallenge: interstitial challenge; -  InlineChallenge: embedded challenge; -  JSChallenge: JavaScript challenge; -  ManagedChallenge: managed challenge.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput) ChallengeOption() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ChallengeOption
+	}).(pulumi.StringPtrOutput)
+}
+
+// Specifies the time interval for challenge repetition. this field is required when Name is InterstitialChallenge/InlineChallenge. default value is 300s. supported units: - s: second, value ranges from 1 to 60;- m: minute, value ranges from 1 to 60;- h: hour, value ranges from 1 to 24.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput) Interval() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Interval
+	}).(pulumi.StringPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters struct {
+	// Specifies whether to extend the ban on the source IP. valid values. - `on`: Enable;  - off: Disable.  After enabled, continuously blocks client ips that trigger the rule. when this option is enabled, the BlockIpDuration parameter must be simultaneously designated. Note: this option cannot intersect with ReturnCustomPage or Stall.
+	BlockIp *string `pulumi:"blockIp"`
+	// The ban duration when BlockIP is on.
+	BlockIpDuration *string `pulumi:"blockIpDuration"`
+	// Specifies the page id of the custom page.
+	ErrorPageId *string `pulumi:"errorPageId"`
+	// Status code of the custom page.
+	ResponseCode *string `pulumi:"responseCode"`
+	// Specifies whether to use a custom page. valid values:. - `on`: Enable;  - off: Disable.  Enabled, use custom page content to intercept requests. when this option is enabled, ResponseCode and ErrorPageId parameters must be specified simultaneously. Note: this option cannot intersect with the BlockIp or Stall option.
+	ReturnCustomPage *string `pulumi:"returnCustomPage"`
+	// Specifies whether to suspend the request source without processing. valid values:. - `on`: Enable;  - off: Disable.  Enabled, no longer responds to requests in the current connection session and does not actively disconnect. used for crawler combat to consume client connection resources. Note: this option cannot intersect with BlockIp or ReturnCustomPage options.
+	Stall *string `pulumi:"stall"`
+}
+
+// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersArgs and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput values.
+// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersInput` via:
+//
+//	WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersArgs{...}
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersInput interface {
+	pulumi.Input
+
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersArgs struct {
+	// Specifies whether to extend the ban on the source IP. valid values. - `on`: Enable;  - off: Disable.  After enabled, continuously blocks client ips that trigger the rule. when this option is enabled, the BlockIpDuration parameter must be simultaneously designated. Note: this option cannot intersect with ReturnCustomPage or Stall.
+	BlockIp pulumi.StringPtrInput `pulumi:"blockIp"`
+	// The ban duration when BlockIP is on.
+	BlockIpDuration pulumi.StringPtrInput `pulumi:"blockIpDuration"`
+	// Specifies the page id of the custom page.
+	ErrorPageId pulumi.StringPtrInput `pulumi:"errorPageId"`
+	// Status code of the custom page.
+	ResponseCode pulumi.StringPtrInput `pulumi:"responseCode"`
+	// Specifies whether to use a custom page. valid values:. - `on`: Enable;  - off: Disable.  Enabled, use custom page content to intercept requests. when this option is enabled, ResponseCode and ErrorPageId parameters must be specified simultaneously. Note: this option cannot intersect with the BlockIp or Stall option.
+	ReturnCustomPage pulumi.StringPtrInput `pulumi:"returnCustomPage"`
+	// Specifies whether to suspend the request source without processing. valid values:. - `on`: Enable;  - off: Disable.  Enabled, no longer responds to requests in the current connection session and does not actively disconnect. used for crawler combat to consume client connection resources. Note: this option cannot intersect with BlockIp or ReturnCustomPage options.
+	Stall pulumi.StringPtrInput `pulumi:"stall"`
+}
+
+func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters)(nil)).Elem()
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutputWithContext(context.Background())
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput)
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput).ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutputWithContext(ctx)
+}
+
+// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersArgs, WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtr and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput values.
+// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrInput` via:
+//
+//	        WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersArgs{...}
+//
+//	or:
+//
+//	        nil
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrInput interface {
+	pulumi.Input
+
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput
+}
+
+type webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrType WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersArgs
+
+func WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtr(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersArgs) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrInput {
+	return (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrType)(v)
+}
+
+func (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters)(nil)).Elem()
+}
+
+func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput struct{ *pulumi.OutputState }
+
+func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters)(nil)).Elem()
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput {
+	return o.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters {
+		return &v
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput)
+}
+
+// Specifies whether to extend the ban on the source IP. valid values. - `on`: Enable;  - off: Disable.  After enabled, continuously blocks client ips that trigger the rule. when this option is enabled, the BlockIpDuration parameter must be simultaneously designated. Note: this option cannot intersect with ReturnCustomPage or Stall.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput) BlockIp() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters) *string {
+		return v.BlockIp
+	}).(pulumi.StringPtrOutput)
+}
+
+// The ban duration when BlockIP is on.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput) BlockIpDuration() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters) *string {
+		return v.BlockIpDuration
+	}).(pulumi.StringPtrOutput)
+}
+
+// Specifies the page id of the custom page.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput) ErrorPageId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters) *string {
+		return v.ErrorPageId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Status code of the custom page.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput) ResponseCode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters) *string {
+		return v.ResponseCode
+	}).(pulumi.StringPtrOutput)
+}
+
+// Specifies whether to use a custom page. valid values:. - `on`: Enable;  - off: Disable.  Enabled, use custom page content to intercept requests. when this option is enabled, ResponseCode and ErrorPageId parameters must be specified simultaneously. Note: this option cannot intersect with the BlockIp or Stall option.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput) ReturnCustomPage() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters) *string {
+		return v.ReturnCustomPage
+	}).(pulumi.StringPtrOutput)
+}
+
+// Specifies whether to suspend the request source without processing. valid values:. - `on`: Enable;  - off: Disable.  Enabled, no longer responds to requests in the current connection session and does not actively disconnect. used for crawler combat to consume client connection resources. Note: this option cannot intersect with BlockIp or ReturnCustomPage options.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput) Stall() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters) *string {
+		return v.Stall
+	}).(pulumi.StringPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput struct{ *pulumi.OutputState }
+
+func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters)(nil)).Elem()
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput) Elem() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters {
+		if v != nil {
+			return *v
+		}
+		var ret WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters
+		return ret
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput)
+}
+
+// Specifies whether to extend the ban on the source IP. valid values. - `on`: Enable;  - off: Disable.  After enabled, continuously blocks client ips that trigger the rule. when this option is enabled, the BlockIpDuration parameter must be simultaneously designated. Note: this option cannot intersect with ReturnCustomPage or Stall.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput) BlockIp() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.BlockIp
+	}).(pulumi.StringPtrOutput)
+}
+
+// The ban duration when BlockIP is on.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput) BlockIpDuration() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.BlockIpDuration
+	}).(pulumi.StringPtrOutput)
+}
+
+// Specifies the page id of the custom page.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput) ErrorPageId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ErrorPageId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Status code of the custom page.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput) ResponseCode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ResponseCode
+	}).(pulumi.StringPtrOutput)
+}
+
+// Specifies whether to use a custom page. valid values:. - `on`: Enable;  - off: Disable.  Enabled, use custom page content to intercept requests. when this option is enabled, ResponseCode and ErrorPageId parameters must be specified simultaneously. Note: this option cannot intersect with the BlockIp or Stall option.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput) ReturnCustomPage() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ReturnCustomPage
+	}).(pulumi.StringPtrOutput)
+}
+
+// Specifies whether to suspend the request source without processing. valid values:. - `on`: Enable;  - off: Disable.  Enabled, no longer responds to requests in the current connection session and does not actively disconnect. used for crawler combat to consume client connection resources. Note: this option cannot intersect with BlockIp or ReturnCustomPage options.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput) Stall() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Stall
+	}).(pulumi.StringPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParameters struct {
+	// Redirect URL.
+	Url string `pulumi:"url"`
+}
+
+// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersArgs and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutput values.
+// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersInput` via:
+//
+//	WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersArgs{...}
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersInput interface {
+	pulumi.Input
+
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutput
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutput
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersArgs struct {
+	// Redirect URL.
+	Url pulumi.StringInput `pulumi:"url"`
+}
+
+func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParameters)(nil)).Elem()
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutputWithContext(context.Background())
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutput)
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutput).ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutputWithContext(ctx)
+}
+
+// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersArgs, WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtr and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput values.
+// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrInput` via:
+//
+//	        WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersArgs{...}
+//
+//	or:
+//
+//	        nil
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrInput interface {
+	pulumi.Input
+
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput
+}
+
+type webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrType WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersArgs
+
+func WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtr(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersArgs) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrInput {
+	return (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrType)(v)
+}
+
+func (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParameters)(nil)).Elem()
+}
+
+func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutput struct{ *pulumi.OutputState }
+
+func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParameters)(nil)).Elem()
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput {
+	return o.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParameters) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParameters {
+		return &v
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput)
+}
+
+// Redirect URL.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutput) Url() pulumi.StringOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParameters) string {
+		return v.Url
+	}).(pulumi.StringOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput struct{ *pulumi.OutputState }
+
+func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParameters)(nil)).Elem()
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput) Elem() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParameters) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParameters {
+		if v != nil {
+			return *v
+		}
+		var ret WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParameters
+		return ret
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutput)
+}
+
+// Redirect URL.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput) Url() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Url
+	}).(pulumi.StringPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParameters struct {
+	// Response custom page ID.
+	ErrorPageId string `pulumi:"errorPageId"`
+	// Response custom status code.
+	ResponseCode string `pulumi:"responseCode"`
+}
+
+// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersArgs and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutput values.
+// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersInput` via:
+//
+//	WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersArgs{...}
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersInput interface {
+	pulumi.Input
+
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutput
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutput
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersArgs struct {
+	// Response custom page ID.
+	ErrorPageId pulumi.StringInput `pulumi:"errorPageId"`
+	// Response custom status code.
+	ResponseCode pulumi.StringInput `pulumi:"responseCode"`
+}
+
+func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParameters)(nil)).Elem()
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutputWithContext(context.Background())
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutput)
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutput).ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutputWithContext(ctx)
+}
+
+// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersArgs, WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtr and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput values.
+// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrInput` via:
+//
+//	        WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersArgs{...}
+//
+//	or:
+//
+//	        nil
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrInput interface {
+	pulumi.Input
+
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput
+}
+
+type webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrType WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersArgs
+
+func WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtr(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersArgs) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrInput {
+	return (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrType)(v)
+}
+
+func (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParameters)(nil)).Elem()
+}
+
+func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutput struct{ *pulumi.OutputState }
+
+func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParameters)(nil)).Elem()
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput {
+	return o.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParameters) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParameters {
+		return &v
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput)
+}
+
+// Response custom page ID.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutput) ErrorPageId() pulumi.StringOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParameters) string {
+		return v.ErrorPageId
+	}).(pulumi.StringOutput)
+}
+
+// Response custom status code.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutput) ResponseCode() pulumi.StringOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParameters) string {
+		return v.ResponseCode
+	}).(pulumi.StringOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput struct{ *pulumi.OutputState }
+
+func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParameters)(nil)).Elem()
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput) Elem() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParameters) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParameters {
+		if v != nil {
+			return *v
+		}
+		var ret WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParameters
+		return ret
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutput)
+}
+
+// Response custom page ID.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput) ErrorPageId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ErrorPageId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Response custom status code.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput) ResponseCode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ResponseCode
+	}).(pulumi.StringPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction struct {
+	// Additional parameters when Name is Allow.
+	AllowActionParameters *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParameters `pulumi:"allowActionParameters"`
+	// To be deprecated, additional parameter when Name is BlockIP.
+	BlockIpActionParameters *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParameters `pulumi:"blockIpActionParameters"`
+	// Additional parameter when Name is Challenge.
+	ChallengeActionParameters *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParameters `pulumi:"challengeActionParameters"`
+	// Additional parameters when Name is Deny.
+	DenyActionParameters *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters `pulumi:"denyActionParameters"`
+	// Specifies the specific actions for safe execution. valid values:. - Deny. specifies to block requests from accessing site resources. - Monitor: observation, only record logs. - Redirect: Redirect to URL. - Disabled: specifies that the rule is not enabled. - Allow: specifies whether to allow access with delayed processing of requests. - Challenge: specifies the challenge content to respond to. - Trans: pass and allow requests to directly access site resources. - BlockIP: to be deprecated. ip block. - ReturnCustomPage: to be deprecated. use specified page for interception. - JSChallenge: to be deprecated, JavaScript challenge;. - ManagedChallenge: to be deprecated. managed challenge.
+	Name string `pulumi:"name"`
+	// Additional parameter when Name is Redirect.
+	RedirectActionParameters *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParameters `pulumi:"redirectActionParameters"`
+	// To be deprecated, additional parameter when Name is ReturnCustomPage.
+	ReturnCustomPageActionParameters *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionReturnCustomPageActionParameters `pulumi:"returnCustomPageActionParameters"`
+}
+
+// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionArgs and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput values.
+// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionInput` via:
+//
+//	WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionArgs{...}
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionInput interface {
+	pulumi.Input
+
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionArgs struct {
+	// Additional parameters when Name is Allow.
+	AllowActionParameters WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrInput `pulumi:"allowActionParameters"`
+	// To be deprecated, additional parameter when Name is BlockIP.
+	BlockIpActionParameters WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrInput `pulumi:"blockIpActionParameters"`
+	// Additional parameter when Name is Challenge.
+	ChallengeActionParameters WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrInput `pulumi:"challengeActionParameters"`
+	// Additional parameters when Name is Deny.
+	DenyActionParameters WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrInput `pulumi:"denyActionParameters"`
+	// Specifies the specific actions for safe execution. valid values:. - Deny. specifies to block requests from accessing site resources. - Monitor: observation, only record logs. - Redirect: Redirect to URL. - Disabled: specifies that the rule is not enabled. - Allow: specifies whether to allow access with delayed processing of requests. - Challenge: specifies the challenge content to respond to. - Trans: pass and allow requests to directly access site resources. - BlockIP: to be deprecated. ip block. - ReturnCustomPage: to be deprecated. use specified page for interception. - JSChallenge: to be deprecated, JavaScript challenge;. - ManagedChallenge: to be deprecated. managed challenge.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Additional parameter when Name is Redirect.
+	RedirectActionParameters WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrInput `pulumi:"redirectActionParameters"`
+	// To be deprecated, additional parameter when Name is ReturnCustomPage.
+	ReturnCustomPageActionParameters WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionReturnCustomPageActionParametersPtrInput `pulumi:"returnCustomPageActionParameters"`
+}
+
+func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction)(nil)).Elem()
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutputWithContext(context.Background())
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput)
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutputWithContext(context.Background())
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput).ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutputWithContext(ctx)
+}
+
+// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionArgs, WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtr and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput values.
+// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrInput` via:
+//
+//	        WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionArgs{...}
+//
+//	or:
+//
+//	        nil
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrInput interface {
+	pulumi.Input
+
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput
+}
+
+type webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrType WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionArgs
+
+func WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtr(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionArgs) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrInput {
+	return (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrType)(v)
+}
+
+func (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction)(nil)).Elem()
+}
+
+func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutputWithContext(context.Background())
+}
+
+func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput struct{ *pulumi.OutputState }
+
+func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction)(nil)).Elem()
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput {
+	return o.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutputWithContext(context.Background())
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction {
+		return &v
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput)
+}
+
+// Additional parameters when Name is Allow.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput) AllowActionParameters() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParameters {
+		return v.AllowActionParameters
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput)
+}
+
+// To be deprecated, additional parameter when Name is BlockIP.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput) BlockIpActionParameters() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParameters {
+		return v.BlockIpActionParameters
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput)
+}
+
+// Additional parameter when Name is Challenge.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput) ChallengeActionParameters() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParameters {
+		return v.ChallengeActionParameters
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput)
+}
+
+// Additional parameters when Name is Deny.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput) DenyActionParameters() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters {
+		return v.DenyActionParameters
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput)
+}
+
+// Specifies the specific actions for safe execution. valid values:. - Deny. specifies to block requests from accessing site resources. - Monitor: observation, only record logs. - Redirect: Redirect to URL. - Disabled: specifies that the rule is not enabled. - Allow: specifies whether to allow access with delayed processing of requests. - Challenge: specifies the challenge content to respond to. - Trans: pass and allow requests to directly access site resources. - BlockIP: to be deprecated. ip block. - ReturnCustomPage: to be deprecated. use specified page for interception. - JSChallenge: to be deprecated, JavaScript challenge;. - ManagedChallenge: to be deprecated. managed challenge.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction) string {
+		return v.Name
+	}).(pulumi.StringOutput)
+}
+
+// Additional parameter when Name is Redirect.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput) RedirectActionParameters() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParameters {
+		return v.RedirectActionParameters
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput)
+}
+
+// To be deprecated, additional parameter when Name is ReturnCustomPage.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput) ReturnCustomPageActionParameters() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionReturnCustomPageActionParametersPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionReturnCustomPageActionParameters {
+		return v.ReturnCustomPageActionParameters
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionReturnCustomPageActionParametersPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput struct{ *pulumi.OutputState }
+
+func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction)(nil)).Elem()
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput) Elem() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction {
+		if v != nil {
+			return *v
+		}
+		var ret WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction
+		return ret
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput)
+}
+
+// Additional parameters when Name is Allow.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput) AllowActionParameters() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParameters {
+		if v == nil {
+			return nil
+		}
+		return v.AllowActionParameters
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput)
+}
+
+// To be deprecated, additional parameter when Name is BlockIP.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput) BlockIpActionParameters() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParameters {
+		if v == nil {
+			return nil
+		}
+		return v.BlockIpActionParameters
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput)
+}
+
+// Additional parameter when Name is Challenge.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput) ChallengeActionParameters() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParameters {
+		if v == nil {
+			return nil
+		}
+		return v.ChallengeActionParameters
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput)
+}
+
+// Additional parameters when Name is Deny.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput) DenyActionParameters() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters {
+		if v == nil {
+			return nil
+		}
+		return v.DenyActionParameters
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput)
+}
+
+// Specifies the specific actions for safe execution. valid values:. - Deny. specifies to block requests from accessing site resources. - Monitor: observation, only record logs. - Redirect: Redirect to URL. - Disabled: specifies that the rule is not enabled. - Allow: specifies whether to allow access with delayed processing of requests. - Challenge: specifies the challenge content to respond to. - Trans: pass and allow requests to directly access site resources. - BlockIP: to be deprecated. ip block. - ReturnCustomPage: to be deprecated. use specified page for interception. - JSChallenge: to be deprecated, JavaScript challenge;. - ManagedChallenge: to be deprecated. managed challenge.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+// Additional parameter when Name is Redirect.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput) RedirectActionParameters() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParameters {
+		if v == nil {
+			return nil
+		}
+		return v.RedirectActionParameters
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput)
+}
+
+// To be deprecated, additional parameter when Name is ReturnCustomPage.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput) ReturnCustomPageActionParameters() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionReturnCustomPageActionParametersPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsAction) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionReturnCustomPageActionParameters {
+		if v == nil {
+			return nil
+		}
+		return v.ReturnCustomPageActionParameters
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionReturnCustomPageActionParametersPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParameters struct {
+	// Maximum delayed response time. supported units: - s: seconds, value ranges from 5 to 10.
+	MaxDelayTime *string `pulumi:"maxDelayTime"`
+	// Minimum latency response time. when configured as 0s, it means no delay for direct response. supported units: - s: seconds, value ranges from 0 to 5.
+	MinDelayTime *string `pulumi:"minDelayTime"`
+}
+
+// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersArgs and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutput values.
+// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersInput` via:
+//
+//	WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersArgs{...}
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersInput interface {
+	pulumi.Input
+
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutput
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutput
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersArgs struct {
+	// Maximum delayed response time. supported units: - s: seconds, value ranges from 5 to 10.
+	MaxDelayTime pulumi.StringPtrInput `pulumi:"maxDelayTime"`
+	// Minimum latency response time. when configured as 0s, it means no delay for direct response. supported units: - s: seconds, value ranges from 0 to 5.
+	MinDelayTime pulumi.StringPtrInput `pulumi:"minDelayTime"`
+}
+
+func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParameters)(nil)).Elem()
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutputWithContext(context.Background())
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutput)
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutput).ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutputWithContext(ctx)
+}
+
+// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersArgs, WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtr and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput values.
+// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrInput` via:
+//
+//	        WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersArgs{...}
+//
+//	or:
+//
+//	        nil
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrInput interface {
+	pulumi.Input
+
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput
+}
+
+type webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrType WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersArgs
+
+func WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtr(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersArgs) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrInput {
+	return (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrType)(v)
+}
+
+func (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParameters)(nil)).Elem()
+}
+
+func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutput struct{ *pulumi.OutputState }
+
+func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParameters)(nil)).Elem()
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput {
+	return o.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParameters) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParameters {
+		return &v
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput)
+}
+
+// Maximum delayed response time. supported units: - s: seconds, value ranges from 5 to 10.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutput) MaxDelayTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParameters) *string {
+		return v.MaxDelayTime
+	}).(pulumi.StringPtrOutput)
+}
+
+// Minimum latency response time. when configured as 0s, it means no delay for direct response. supported units: - s: seconds, value ranges from 0 to 5.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutput) MinDelayTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParameters) *string {
+		return v.MinDelayTime
+	}).(pulumi.StringPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput struct{ *pulumi.OutputState }
+
+func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParameters)(nil)).Elem()
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput) Elem() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParameters) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParameters {
+		if v != nil {
+			return *v
+		}
+		var ret WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParameters
+		return ret
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutput)
+}
+
+// Maximum delayed response time. supported units: - s: seconds, value ranges from 5 to 10.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput) MaxDelayTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.MaxDelayTime
+	}).(pulumi.StringPtrOutput)
+}
+
+// Minimum latency response time. when configured as 0s, it means no delay for direct response. supported units: - s: seconds, value ranges from 0 to 5.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput) MinDelayTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.MinDelayTime
+	}).(pulumi.StringPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParameters struct {
+	// Penalty duration for `BlockIP`. Units: - `s`: second, value range 1-120; - `m`: minute, value range 1-120; - `h`: hour, value range 1-48.
+	Duration string `pulumi:"duration"`
+}
+
+// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersArgs and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutput values.
+// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersInput` via:
+//
+//	WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersArgs{...}
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersInput interface {
+	pulumi.Input
+
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutput
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutput
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersArgs struct {
+	// Penalty duration for `BlockIP`. Units: - `s`: second, value range 1-120; - `m`: minute, value range 1-120; - `h`: hour, value range 1-48.
+	Duration pulumi.StringInput `pulumi:"duration"`
+}
+
+func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParameters)(nil)).Elem()
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutputWithContext(context.Background())
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutput)
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutput).ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutputWithContext(ctx)
+}
+
+// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersArgs, WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtr and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput values.
+// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrInput` via:
+//
+//	        WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersArgs{...}
+//
+//	or:
+//
+//	        nil
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrInput interface {
+	pulumi.Input
+
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput
+}
+
+type webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrType WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersArgs
+
+func WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtr(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersArgs) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrInput {
+	return (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrType)(v)
+}
+
+func (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParameters)(nil)).Elem()
+}
+
+func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutput struct{ *pulumi.OutputState }
+
+func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParameters)(nil)).Elem()
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput {
+	return o.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParameters) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParameters {
+		return &v
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput)
+}
+
+// Penalty duration for `BlockIP`. Units: - `s`: second, value range 1-120; - `m`: minute, value range 1-120; - `h`: hour, value range 1-48.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutput) Duration() pulumi.StringOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParameters) string {
+		return v.Duration
+	}).(pulumi.StringOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput struct{ *pulumi.OutputState }
+
+func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParameters)(nil)).Elem()
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput) Elem() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParameters) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParameters {
+		if v != nil {
+			return *v
+		}
+		var ret WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParameters
+		return ret
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutput)
+}
+
+// Penalty duration for `BlockIP`. Units: - `s`: second, value range 1-120; - `m`: minute, value range 1-120; - `h`: hour, value range 1-48.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput) Duration() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Duration
+	}).(pulumi.StringPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParameters struct {
+	// Client authentication method ID. this field is required when Name is InterstitialChallenge/InlineChallenge.
+	AttesterId *string `pulumi:"attesterId"`
+	// Safe execution challenge actions. valid values: -  InterstitialChallenge: interstitial challenge; -  InlineChallenge: embedded challenge; -  JSChallenge: JavaScript challenge; -  ManagedChallenge: managed challenge.
+	ChallengeOption string `pulumi:"challengeOption"`
+	// Specifies the time interval for challenge repetition. this field is required when Name is InterstitialChallenge/InlineChallenge. default value is 300s. supported units: - s: second, value ranges from 1 to 60;- m: minute, value ranges from 1 to 60;- h: hour, value ranges from 1 to 24.
+	Interval *string `pulumi:"interval"`
+}
+
+// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersArgs and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutput values.
+// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersInput` via:
+//
+//	WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersArgs{...}
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersInput interface {
+	pulumi.Input
+
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutput
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutput
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersArgs struct {
+	// Client authentication method ID. this field is required when Name is InterstitialChallenge/InlineChallenge.
+	AttesterId pulumi.StringPtrInput `pulumi:"attesterId"`
+	// Safe execution challenge actions. valid values: -  InterstitialChallenge: interstitial challenge; -  InlineChallenge: embedded challenge; -  JSChallenge: JavaScript challenge; -  ManagedChallenge: managed challenge.
+	ChallengeOption pulumi.StringInput `pulumi:"challengeOption"`
+	// Specifies the time interval for challenge repetition. this field is required when Name is InterstitialChallenge/InlineChallenge. default value is 300s. supported units: - s: second, value ranges from 1 to 60;- m: minute, value ranges from 1 to 60;- h: hour, value ranges from 1 to 24.
+	Interval pulumi.StringPtrInput `pulumi:"interval"`
+}
+
+func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParameters)(nil)).Elem()
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutputWithContext(context.Background())
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutput)
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutput).ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutputWithContext(ctx)
+}
+
+// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersArgs, WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtr and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput values.
+// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrInput` via:
+//
+//	        WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersArgs{...}
+//
+//	or:
+//
+//	        nil
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrInput interface {
+	pulumi.Input
+
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput
+}
+
+type webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrType WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersArgs
+
+func WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtr(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersArgs) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrInput {
+	return (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrType)(v)
+}
+
+func (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParameters)(nil)).Elem()
+}
+
+func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutput struct{ *pulumi.OutputState }
+
+func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParameters)(nil)).Elem()
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput {
+	return o.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParameters) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParameters {
+		return &v
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput)
+}
+
+// Client authentication method ID. this field is required when Name is InterstitialChallenge/InlineChallenge.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutput) AttesterId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParameters) *string {
+		return v.AttesterId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Safe execution challenge actions. valid values: -  InterstitialChallenge: interstitial challenge; -  InlineChallenge: embedded challenge; -  JSChallenge: JavaScript challenge; -  ManagedChallenge: managed challenge.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutput) ChallengeOption() pulumi.StringOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParameters) string {
+		return v.ChallengeOption
+	}).(pulumi.StringOutput)
+}
+
+// Specifies the time interval for challenge repetition. this field is required when Name is InterstitialChallenge/InlineChallenge. default value is 300s. supported units: - s: second, value ranges from 1 to 60;- m: minute, value ranges from 1 to 60;- h: hour, value ranges from 1 to 24.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutput) Interval() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParameters) *string {
+		return v.Interval
+	}).(pulumi.StringPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput struct{ *pulumi.OutputState }
+
+func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParameters)(nil)).Elem()
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput) Elem() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParameters) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParameters {
+		if v != nil {
+			return *v
+		}
+		var ret WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParameters
+		return ret
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutput)
+}
+
+// Client authentication method ID. this field is required when Name is InterstitialChallenge/InlineChallenge.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput) AttesterId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.AttesterId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Safe execution challenge actions. valid values: -  InterstitialChallenge: interstitial challenge; -  InlineChallenge: embedded challenge; -  JSChallenge: JavaScript challenge; -  ManagedChallenge: managed challenge.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput) ChallengeOption() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ChallengeOption
+	}).(pulumi.StringPtrOutput)
+}
+
+// Specifies the time interval for challenge repetition. this field is required when Name is InterstitialChallenge/InlineChallenge. default value is 300s. supported units: - s: second, value ranges from 1 to 60;- m: minute, value ranges from 1 to 60;- h: hour, value ranges from 1 to 24.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput) Interval() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Interval
+	}).(pulumi.StringPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters struct {
+	// Specifies whether to extend the ban on the source IP. valid values. - `on`: Enable;  - off: Disable.  After enabled, continuously blocks client ips that trigger the rule. when this option is enabled, the BlockIpDuration parameter must be simultaneously designated. Note: this option cannot intersect with ReturnCustomPage or Stall.
+	BlockIp *string `pulumi:"blockIp"`
+	// The ban duration when BlockIP is on.
+	BlockIpDuration *string `pulumi:"blockIpDuration"`
+	// Specifies the page id of the custom page.
+	ErrorPageId *string `pulumi:"errorPageId"`
+	// Status code of the custom page.
+	ResponseCode *string `pulumi:"responseCode"`
+	// Specifies whether to use a custom page. valid values:. - `on`: Enable;  - off: Disable.  Enabled, use custom page content to intercept requests. when this option is enabled, ResponseCode and ErrorPageId parameters must be specified simultaneously. Note: this option cannot intersect with the BlockIp or Stall option.
+	ReturnCustomPage *string `pulumi:"returnCustomPage"`
+	// Specifies whether to suspend the request source without processing. valid values:. - `on`: Enable;  - off: Disable.  Enabled, no longer responds to requests in the current connection session and does not actively disconnect. used for crawler combat to consume client connection resources. Note: this option cannot intersect with BlockIp or ReturnCustomPage options.
+	Stall *string `pulumi:"stall"`
+}
+
+// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersArgs and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput values.
+// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersInput` via:
+//
+//	WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersArgs{...}
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersInput interface {
+	pulumi.Input
+
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersArgs struct {
+	// Specifies whether to extend the ban on the source IP. valid values. - `on`: Enable;  - off: Disable.  After enabled, continuously blocks client ips that trigger the rule. when this option is enabled, the BlockIpDuration parameter must be simultaneously designated. Note: this option cannot intersect with ReturnCustomPage or Stall.
+	BlockIp pulumi.StringPtrInput `pulumi:"blockIp"`
+	// The ban duration when BlockIP is on.
+	BlockIpDuration pulumi.StringPtrInput `pulumi:"blockIpDuration"`
+	// Specifies the page id of the custom page.
+	ErrorPageId pulumi.StringPtrInput `pulumi:"errorPageId"`
+	// Status code of the custom page.
+	ResponseCode pulumi.StringPtrInput `pulumi:"responseCode"`
+	// Specifies whether to use a custom page. valid values:. - `on`: Enable;  - off: Disable.  Enabled, use custom page content to intercept requests. when this option is enabled, ResponseCode and ErrorPageId parameters must be specified simultaneously. Note: this option cannot intersect with the BlockIp or Stall option.
+	ReturnCustomPage pulumi.StringPtrInput `pulumi:"returnCustomPage"`
+	// Specifies whether to suspend the request source without processing. valid values:. - `on`: Enable;  - off: Disable.  Enabled, no longer responds to requests in the current connection session and does not actively disconnect. used for crawler combat to consume client connection resources. Note: this option cannot intersect with BlockIp or ReturnCustomPage options.
+	Stall pulumi.StringPtrInput `pulumi:"stall"`
+}
+
+func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters)(nil)).Elem()
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutputWithContext(context.Background())
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput)
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput).ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutputWithContext(ctx)
+}
+
+// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersArgs, WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtr and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput values.
+// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrInput` via:
+//
+//	        WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersArgs{...}
+//
+//	or:
+//
+//	        nil
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrInput interface {
+	pulumi.Input
+
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput
+}
+
+type webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrType WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersArgs
+
+func WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtr(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersArgs) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrInput {
+	return (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrType)(v)
+}
+
+func (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters)(nil)).Elem()
+}
+
+func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput struct{ *pulumi.OutputState }
+
+func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters)(nil)).Elem()
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput {
+	return o.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters {
+		return &v
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput)
+}
+
+// Specifies whether to extend the ban on the source IP. valid values. - `on`: Enable;  - off: Disable.  After enabled, continuously blocks client ips that trigger the rule. when this option is enabled, the BlockIpDuration parameter must be simultaneously designated. Note: this option cannot intersect with ReturnCustomPage or Stall.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput) BlockIp() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters) *string {
+		return v.BlockIp
+	}).(pulumi.StringPtrOutput)
+}
+
+// The ban duration when BlockIP is on.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput) BlockIpDuration() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters) *string {
+		return v.BlockIpDuration
+	}).(pulumi.StringPtrOutput)
+}
+
+// Specifies the page id of the custom page.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput) ErrorPageId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters) *string {
+		return v.ErrorPageId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Status code of the custom page.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput) ResponseCode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters) *string {
+		return v.ResponseCode
+	}).(pulumi.StringPtrOutput)
+}
+
+// Specifies whether to use a custom page. valid values:. - `on`: Enable;  - off: Disable.  Enabled, use custom page content to intercept requests. when this option is enabled, ResponseCode and ErrorPageId parameters must be specified simultaneously. Note: this option cannot intersect with the BlockIp or Stall option.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput) ReturnCustomPage() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters) *string {
+		return v.ReturnCustomPage
+	}).(pulumi.StringPtrOutput)
+}
+
+// Specifies whether to suspend the request source without processing. valid values:. - `on`: Enable;  - off: Disable.  Enabled, no longer responds to requests in the current connection session and does not actively disconnect. used for crawler combat to consume client connection resources. Note: this option cannot intersect with BlockIp or ReturnCustomPage options.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput) Stall() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters) *string {
+		return v.Stall
+	}).(pulumi.StringPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput struct{ *pulumi.OutputState }
+
+func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters)(nil)).Elem()
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput) Elem() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters {
+		if v != nil {
+			return *v
+		}
+		var ret WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters
+		return ret
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput)
+}
+
+// Specifies whether to extend the ban on the source IP. valid values. - `on`: Enable;  - off: Disable.  After enabled, continuously blocks client ips that trigger the rule. when this option is enabled, the BlockIpDuration parameter must be simultaneously designated. Note: this option cannot intersect with ReturnCustomPage or Stall.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput) BlockIp() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.BlockIp
+	}).(pulumi.StringPtrOutput)
+}
+
+// The ban duration when BlockIP is on.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput) BlockIpDuration() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.BlockIpDuration
+	}).(pulumi.StringPtrOutput)
+}
+
+// Specifies the page id of the custom page.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput) ErrorPageId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ErrorPageId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Status code of the custom page.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput) ResponseCode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ResponseCode
+	}).(pulumi.StringPtrOutput)
+}
+
+// Specifies whether to use a custom page. valid values:. - `on`: Enable;  - off: Disable.  Enabled, use custom page content to intercept requests. when this option is enabled, ResponseCode and ErrorPageId parameters must be specified simultaneously. Note: this option cannot intersect with the BlockIp or Stall option.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput) ReturnCustomPage() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ReturnCustomPage
+	}).(pulumi.StringPtrOutput)
+}
+
+// Specifies whether to suspend the request source without processing. valid values:. - `on`: Enable;  - off: Disable.  Enabled, no longer responds to requests in the current connection session and does not actively disconnect. used for crawler combat to consume client connection resources. Note: this option cannot intersect with BlockIp or ReturnCustomPage options.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput) Stall() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Stall
+	}).(pulumi.StringPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParameters struct {
+	// Redirect URL.
+	Url string `pulumi:"url"`
+}
+
+// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersArgs and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutput values.
+// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersInput` via:
+//
+//	WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersArgs{...}
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersInput interface {
+	pulumi.Input
+
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutput
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutput
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersArgs struct {
+	// Redirect URL.
+	Url pulumi.StringInput `pulumi:"url"`
+}
+
+func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParameters)(nil)).Elem()
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutputWithContext(context.Background())
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutput)
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutput).ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutputWithContext(ctx)
+}
+
+// WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersArgs, WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtr and WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput values.
+// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrInput` via:
+//
+//	        WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersArgs{...}
+//
+//	or:
+//
+//	        nil
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrInput interface {
+	pulumi.Input
+
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput
+	ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput
+}
+
+type webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrType WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersArgs
+
+func WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtr(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersArgs) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrInput {
+	return (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrType)(v)
+}
+
+func (*webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParameters)(nil)).Elem()
+}
+
+func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i *webSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutput struct{ *pulumi.OutputState }
+
+func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParameters)(nil)).Elem()
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput {
+	return o.ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParameters) *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParameters {
+		return &v
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput)
+}
+
+// Redirect URL.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutput) Url() pulumi.StringOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParameters) string {
+		return v.Url
+	}).(pulumi.StringOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput struct{ *pulumi.OutputState }
+
+func (WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParameters)(nil)).Elem()
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput) Elem() WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParameters) WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParameters {
+		if v != nil {
+			return *v
+		}
+		var ret WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParameters
+		return ret
+	}).(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutput)
+}
+
+// Redirect URL.
+func (o WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput) Url() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Url
+	}).(pulumi.StringPtrOutput)
+}
+
 type WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionReturnCustomPageActionParameters struct {
 	// Response custom page ID.
 	ErrorPageId string `pulumi:"errorPageId"`
@@ -14439,7 +17661,7 @@ type WebSecurityTemplateSecurityPolicyBotManagementBrowserImpersonationDetection
 	Condition *string `pulumi:"condition"`
 	// Whether the precise rate limiting rule is enabled. valid values: - on: enabled; - off: disabled(No other fields are required when closing).
 	Enabled *string `pulumi:"enabled"`
-	// ID of the resource.
+	// The ID of precise rate limiting. rule ID supports different rule configuration operations: - add a new rule: leave the ID empty or do not specify the ID parameter. - modify an existing rule: specify the rule ID that needs to be updated/modified. - delete an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.
 	Id *string `pulumi:"id"`
 	// Specifies the name of the precise rate limit.
 	Name *string `pulumi:"name"`
@@ -14463,7 +17685,7 @@ type WebSecurityTemplateSecurityPolicyBotManagementBrowserImpersonationDetection
 	Condition pulumi.StringPtrInput `pulumi:"condition"`
 	// Whether the precise rate limiting rule is enabled. valid values: - on: enabled; - off: disabled(No other fields are required when closing).
 	Enabled pulumi.StringPtrInput `pulumi:"enabled"`
-	// ID of the resource.
+	// The ID of precise rate limiting. rule ID supports different rule configuration operations: - add a new rule: leave the ID empty or do not specify the ID parameter. - modify an existing rule: specify the rule ID that needs to be updated/modified. - delete an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.
 	Id pulumi.StringPtrInput `pulumi:"id"`
 	// Specifies the name of the precise rate limit.
 	Name pulumi.StringPtrInput `pulumi:"name"`
@@ -14541,7 +17763,7 @@ func (o WebSecurityTemplateSecurityPolicyBotManagementBrowserImpersonationDetect
 	}).(pulumi.StringPtrOutput)
 }
 
-// ID of the resource.
+// The ID of precise rate limiting. rule ID supports different rule configuration operations: - add a new rule: leave the ID empty or do not specify the ID parameter. - modify an existing rule: specify the rule ID that needs to be updated/modified. - delete an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.
 func (o WebSecurityTemplateSecurityPolicyBotManagementBrowserImpersonationDetectionRuleOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementBrowserImpersonationDetectionRule) *string {
 		return v.Id
@@ -26037,7 +29259,7 @@ type WebSecurityTemplateSecurityPolicyBotManagementClientAttestationRulesRule st
 	DeviceProfiles []WebSecurityTemplateSecurityPolicyBotManagementClientAttestationRulesRuleDeviceProfile `pulumi:"deviceProfiles"`
 	// Whether the precise rate limiting rule is enabled. valid values: - on: enabled; - off: disabled(No other fields are required when closing).
 	Enabled *string `pulumi:"enabled"`
-	// ID of the resource.
+	// The ID of precise rate limiting. rule ID supports different rule configuration operations: - add a new rule: leave the ID empty or do not specify the ID parameter. - modify an existing rule: specify the rule ID that needs to be updated/modified. - delete an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.
 	Id *string `pulumi:"id"`
 	// Handling method for failed client authentication. valid values for SecurityAction Name: - Deny: block; - Monitor: observation; - Redirect: redirection; - Challenge: Challenge. default value: Monitor.
 	InvalidAttestationAction *WebSecurityTemplateSecurityPolicyBotManagementClientAttestationRulesRuleInvalidAttestationAction `pulumi:"invalidAttestationAction"`
@@ -26067,7 +29289,7 @@ type WebSecurityTemplateSecurityPolicyBotManagementClientAttestationRulesRuleArg
 	DeviceProfiles WebSecurityTemplateSecurityPolicyBotManagementClientAttestationRulesRuleDeviceProfileArrayInput `pulumi:"deviceProfiles"`
 	// Whether the precise rate limiting rule is enabled. valid values: - on: enabled; - off: disabled(No other fields are required when closing).
 	Enabled pulumi.StringPtrInput `pulumi:"enabled"`
-	// ID of the resource.
+	// The ID of precise rate limiting. rule ID supports different rule configuration operations: - add a new rule: leave the ID empty or do not specify the ID parameter. - modify an existing rule: specify the rule ID that needs to be updated/modified. - delete an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.
 	Id pulumi.StringPtrInput `pulumi:"id"`
 	// Handling method for failed client authentication. valid values for SecurityAction Name: - Deny: block; - Monitor: observation; - Redirect: redirection; - Challenge: Challenge. default value: Monitor.
 	InvalidAttestationAction WebSecurityTemplateSecurityPolicyBotManagementClientAttestationRulesRuleInvalidAttestationActionPtrInput `pulumi:"invalidAttestationAction"`
@@ -26156,7 +29378,7 @@ func (o WebSecurityTemplateSecurityPolicyBotManagementClientAttestationRulesRule
 	}).(pulumi.StringPtrOutput)
 }
 
-// ID of the resource.
+// The ID of precise rate limiting. rule ID supports different rule configuration operations: - add a new rule: leave the ID empty or do not specify the ID parameter. - modify an existing rule: specify the rule ID that needs to be updated/modified. - delete an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.
 func (o WebSecurityTemplateSecurityPolicyBotManagementClientAttestationRulesRuleOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementClientAttestationRulesRule) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
@@ -30355,7 +33577,7 @@ type WebSecurityTemplateSecurityPolicyBotManagementCustomRulesRule struct {
 	Condition *string `pulumi:"condition"`
 	// Whether the precise rate limiting rule is enabled. valid values: - on: enabled; - off: disabled(No other fields are required when closing).
 	Enabled *string `pulumi:"enabled"`
-	// ID of the resource.
+	// The ID of precise rate limiting. rule ID supports different rule configuration operations: - add a new rule: leave the ID empty or do not specify the ID parameter. - modify an existing rule: specify the rule ID that needs to be updated/modified. - delete an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.
 	Id *string `pulumi:"id"`
 	// Specifies the name of the precise rate limit.
 	Name *string `pulumi:"name"`
@@ -30381,7 +33603,7 @@ type WebSecurityTemplateSecurityPolicyBotManagementCustomRulesRuleArgs struct {
 	Condition pulumi.StringPtrInput `pulumi:"condition"`
 	// Whether the precise rate limiting rule is enabled. valid values: - on: enabled; - off: disabled(No other fields are required when closing).
 	Enabled pulumi.StringPtrInput `pulumi:"enabled"`
-	// ID of the resource.
+	// The ID of precise rate limiting. rule ID supports different rule configuration operations: - add a new rule: leave the ID empty or do not specify the ID parameter. - modify an existing rule: specify the rule ID that needs to be updated/modified. - delete an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.
 	Id pulumi.StringPtrInput `pulumi:"id"`
 	// Specifies the name of the precise rate limit.
 	Name pulumi.StringPtrInput `pulumi:"name"`
@@ -30457,7 +33679,7 @@ func (o WebSecurityTemplateSecurityPolicyBotManagementCustomRulesRuleOutput) Ena
 	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementCustomRulesRule) *string { return v.Enabled }).(pulumi.StringPtrOutput)
 }
 
-// ID of the resource.
+// The ID of precise rate limiting. rule ID supports different rule configuration operations: - add a new rule: leave the ID empty or do not specify the ID parameter. - modify an existing rule: specify the rule ID that needs to be updated/modified. - delete an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.
 func (o WebSecurityTemplateSecurityPolicyBotManagementCustomRulesRuleOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementCustomRulesRule) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
@@ -31888,6 +35110,1250 @@ func (o WebSecurityTemplateSecurityPolicyBotManagementCustomRulesRuleActionSecur
 	}).(pulumi.StringPtrOutput)
 }
 
+type WebSecurityTemplateSecurityPolicyBotManagementLite struct {
+	// AI crawler detection configuration.
+	AiCrawlerDetection *WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetection `pulumi:"aiCrawlerDetection"`
+	// CAPTCHA page challenge configuration.
+	CaptchaPageChallenge *WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallenge `pulumi:"captchaPageChallenge"`
+}
+
+// WebSecurityTemplateSecurityPolicyBotManagementLiteInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementLiteArgs and WebSecurityTemplateSecurityPolicyBotManagementLiteOutput values.
+// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementLiteInput` via:
+//
+//	WebSecurityTemplateSecurityPolicyBotManagementLiteArgs{...}
+type WebSecurityTemplateSecurityPolicyBotManagementLiteInput interface {
+	pulumi.Input
+
+	ToWebSecurityTemplateSecurityPolicyBotManagementLiteOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteOutput
+	ToWebSecurityTemplateSecurityPolicyBotManagementLiteOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteOutput
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementLiteArgs struct {
+	// AI crawler detection configuration.
+	AiCrawlerDetection WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrInput `pulumi:"aiCrawlerDetection"`
+	// CAPTCHA page challenge configuration.
+	CaptchaPageChallenge WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtrInput `pulumi:"captchaPageChallenge"`
+}
+
+func (WebSecurityTemplateSecurityPolicyBotManagementLiteArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementLite)(nil)).Elem()
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementLiteArgs) ToWebSecurityTemplateSecurityPolicyBotManagementLiteOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementLiteOutputWithContext(context.Background())
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementLiteArgs) ToWebSecurityTemplateSecurityPolicyBotManagementLiteOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementLiteOutput)
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementLiteArgs) ToWebSecurityTemplateSecurityPolicyBotManagementLitePtrOutput() WebSecurityTemplateSecurityPolicyBotManagementLitePtrOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementLitePtrOutputWithContext(context.Background())
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementLiteArgs) ToWebSecurityTemplateSecurityPolicyBotManagementLitePtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementLitePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementLiteOutput).ToWebSecurityTemplateSecurityPolicyBotManagementLitePtrOutputWithContext(ctx)
+}
+
+// WebSecurityTemplateSecurityPolicyBotManagementLitePtrInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementLiteArgs, WebSecurityTemplateSecurityPolicyBotManagementLitePtr and WebSecurityTemplateSecurityPolicyBotManagementLitePtrOutput values.
+// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementLitePtrInput` via:
+//
+//	        WebSecurityTemplateSecurityPolicyBotManagementLiteArgs{...}
+//
+//	or:
+//
+//	        nil
+type WebSecurityTemplateSecurityPolicyBotManagementLitePtrInput interface {
+	pulumi.Input
+
+	ToWebSecurityTemplateSecurityPolicyBotManagementLitePtrOutput() WebSecurityTemplateSecurityPolicyBotManagementLitePtrOutput
+	ToWebSecurityTemplateSecurityPolicyBotManagementLitePtrOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementLitePtrOutput
+}
+
+type webSecurityTemplateSecurityPolicyBotManagementLitePtrType WebSecurityTemplateSecurityPolicyBotManagementLiteArgs
+
+func WebSecurityTemplateSecurityPolicyBotManagementLitePtr(v *WebSecurityTemplateSecurityPolicyBotManagementLiteArgs) WebSecurityTemplateSecurityPolicyBotManagementLitePtrInput {
+	return (*webSecurityTemplateSecurityPolicyBotManagementLitePtrType)(v)
+}
+
+func (*webSecurityTemplateSecurityPolicyBotManagementLitePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementLite)(nil)).Elem()
+}
+
+func (i *webSecurityTemplateSecurityPolicyBotManagementLitePtrType) ToWebSecurityTemplateSecurityPolicyBotManagementLitePtrOutput() WebSecurityTemplateSecurityPolicyBotManagementLitePtrOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementLitePtrOutputWithContext(context.Background())
+}
+
+func (i *webSecurityTemplateSecurityPolicyBotManagementLitePtrType) ToWebSecurityTemplateSecurityPolicyBotManagementLitePtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementLitePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementLitePtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementLiteOutput struct{ *pulumi.OutputState }
+
+func (WebSecurityTemplateSecurityPolicyBotManagementLiteOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementLite)(nil)).Elem()
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteOutput) ToWebSecurityTemplateSecurityPolicyBotManagementLiteOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteOutput) ToWebSecurityTemplateSecurityPolicyBotManagementLiteOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteOutput) ToWebSecurityTemplateSecurityPolicyBotManagementLitePtrOutput() WebSecurityTemplateSecurityPolicyBotManagementLitePtrOutput {
+	return o.ToWebSecurityTemplateSecurityPolicyBotManagementLitePtrOutputWithContext(context.Background())
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteOutput) ToWebSecurityTemplateSecurityPolicyBotManagementLitePtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementLitePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v WebSecurityTemplateSecurityPolicyBotManagementLite) *WebSecurityTemplateSecurityPolicyBotManagementLite {
+		return &v
+	}).(WebSecurityTemplateSecurityPolicyBotManagementLitePtrOutput)
+}
+
+// AI crawler detection configuration.
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteOutput) AiCrawlerDetection() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementLite) *WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetection {
+		return v.AiCrawlerDetection
+	}).(WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrOutput)
+}
+
+// CAPTCHA page challenge configuration.
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteOutput) CaptchaPageChallenge() WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementLite) *WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallenge {
+		return v.CaptchaPageChallenge
+	}).(WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementLitePtrOutput struct{ *pulumi.OutputState }
+
+func (WebSecurityTemplateSecurityPolicyBotManagementLitePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementLite)(nil)).Elem()
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementLitePtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementLitePtrOutput() WebSecurityTemplateSecurityPolicyBotManagementLitePtrOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementLitePtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementLitePtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementLitePtrOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementLitePtrOutput) Elem() WebSecurityTemplateSecurityPolicyBotManagementLiteOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementLite) WebSecurityTemplateSecurityPolicyBotManagementLite {
+		if v != nil {
+			return *v
+		}
+		var ret WebSecurityTemplateSecurityPolicyBotManagementLite
+		return ret
+	}).(WebSecurityTemplateSecurityPolicyBotManagementLiteOutput)
+}
+
+// AI crawler detection configuration.
+func (o WebSecurityTemplateSecurityPolicyBotManagementLitePtrOutput) AiCrawlerDetection() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementLite) *WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetection {
+		if v == nil {
+			return nil
+		}
+		return v.AiCrawlerDetection
+	}).(WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrOutput)
+}
+
+// CAPTCHA page challenge configuration.
+func (o WebSecurityTemplateSecurityPolicyBotManagementLitePtrOutput) CaptchaPageChallenge() WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementLite) *WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallenge {
+		if v == nil {
+			return nil
+		}
+		return v.CaptchaPageChallenge
+	}).(WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetection struct {
+	// Execution action when Enabled is on. When Enabled is on, this field is required. SecurityAction Name value supports: Deny, Monitor, Allow, Challenge.
+	Action *WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionAction `pulumi:"action"`
+	// Whether AI crawler detection is enabled. Valid values: `on`, `off`.
+	Enabled string `pulumi:"enabled"`
+}
+
+// WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionArgs and WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionOutput values.
+// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionInput` via:
+//
+//	WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionArgs{...}
+type WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionInput interface {
+	pulumi.Input
+
+	ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionOutput
+	ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionOutput
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionArgs struct {
+	// Execution action when Enabled is on. When Enabled is on, this field is required. SecurityAction Name value supports: Deny, Monitor, Allow, Challenge.
+	Action WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrInput `pulumi:"action"`
+	// Whether AI crawler detection is enabled. Valid values: `on`, `off`.
+	Enabled pulumi.StringInput `pulumi:"enabled"`
+}
+
+func (WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetection)(nil)).Elem()
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionArgs) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionOutputWithContext(context.Background())
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionArgs) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionOutput)
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionArgs) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrOutputWithContext(context.Background())
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionArgs) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionOutput).ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrOutputWithContext(ctx)
+}
+
+// WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionArgs, WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtr and WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrOutput values.
+// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrInput` via:
+//
+//	        WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionArgs{...}
+//
+//	or:
+//
+//	        nil
+type WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrInput interface {
+	pulumi.Input
+
+	ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrOutput
+	ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrOutput
+}
+
+type webSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrType WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionArgs
+
+func WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtr(v *WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionArgs) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrInput {
+	return (*webSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrType)(v)
+}
+
+func (*webSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetection)(nil)).Elem()
+}
+
+func (i *webSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrOutputWithContext(context.Background())
+}
+
+func (i *webSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionOutput struct{ *pulumi.OutputState }
+
+func (WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetection)(nil)).Elem()
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionOutput) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionOutput) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionOutput) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrOutput {
+	return o.ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrOutputWithContext(context.Background())
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionOutput) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetection) *WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetection {
+		return &v
+	}).(WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrOutput)
+}
+
+// Execution action when Enabled is on. When Enabled is on, this field is required. SecurityAction Name value supports: Deny, Monitor, Allow, Challenge.
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionOutput) Action() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetection) *WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionAction {
+		return v.Action
+	}).(WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrOutput)
+}
+
+// Whether AI crawler detection is enabled. Valid values: `on`, `off`.
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionOutput) Enabled() pulumi.StringOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetection) string { return v.Enabled }).(pulumi.StringOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrOutput struct{ *pulumi.OutputState }
+
+func (WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetection)(nil)).Elem()
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrOutput) Elem() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetection) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetection {
+		if v != nil {
+			return *v
+		}
+		var ret WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetection
+		return ret
+	}).(WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionOutput)
+}
+
+// Execution action when Enabled is on. When Enabled is on, this field is required. SecurityAction Name value supports: Deny, Monitor, Allow, Challenge.
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrOutput) Action() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetection) *WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionAction {
+		if v == nil {
+			return nil
+		}
+		return v.Action
+	}).(WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrOutput)
+}
+
+// Whether AI crawler detection is enabled. Valid values: `on`, `off`.
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrOutput) Enabled() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetection) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Enabled
+	}).(pulumi.StringPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionAction struct {
+	// Additional parameters when Name is Allow.
+	AllowActionParameters *WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParameters `pulumi:"allowActionParameters"`
+	// Additional parameter when Name is Challenge.
+	ChallengeActionParameters *WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParameters `pulumi:"challengeActionParameters"`
+	// Additional parameters when Name is Deny.
+	DenyActionParameters *WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParameters `pulumi:"denyActionParameters"`
+	// Specifies the specific actions for safe execution. valid values:. - Deny. specifies to block requests from accessing site resources. - Monitor: observation, only record logs. - Redirect: Redirect to URL. - Disabled: specifies that the rule is not enabled. - Allow: specifies whether to allow access with delayed processing of requests. - Challenge: specifies the challenge content to respond to. - Trans: pass and allow requests to directly access site resources. - BlockIP: to be deprecated. ip block. - ReturnCustomPage: to be deprecated. use specified page for interception. - JSChallenge: to be deprecated, JavaScript challenge;. - ManagedChallenge: to be deprecated. managed challenge.
+	Name string `pulumi:"name"`
+}
+
+// WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionArgs and WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionOutput values.
+// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionInput` via:
+//
+//	WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionArgs{...}
+type WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionInput interface {
+	pulumi.Input
+
+	ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionOutput
+	ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionOutput
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionArgs struct {
+	// Additional parameters when Name is Allow.
+	AllowActionParameters WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrInput `pulumi:"allowActionParameters"`
+	// Additional parameter when Name is Challenge.
+	ChallengeActionParameters WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrInput `pulumi:"challengeActionParameters"`
+	// Additional parameters when Name is Deny.
+	DenyActionParameters WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrInput `pulumi:"denyActionParameters"`
+	// Specifies the specific actions for safe execution. valid values:. - Deny. specifies to block requests from accessing site resources. - Monitor: observation, only record logs. - Redirect: Redirect to URL. - Disabled: specifies that the rule is not enabled. - Allow: specifies whether to allow access with delayed processing of requests. - Challenge: specifies the challenge content to respond to. - Trans: pass and allow requests to directly access site resources. - BlockIP: to be deprecated. ip block. - ReturnCustomPage: to be deprecated. use specified page for interception. - JSChallenge: to be deprecated, JavaScript challenge;. - ManagedChallenge: to be deprecated. managed challenge.
+	Name pulumi.StringInput `pulumi:"name"`
+}
+
+func (WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionAction)(nil)).Elem()
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionArgs) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionOutputWithContext(context.Background())
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionArgs) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionOutput)
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionArgs) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrOutputWithContext(context.Background())
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionArgs) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionOutput).ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrOutputWithContext(ctx)
+}
+
+// WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionArgs, WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtr and WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrOutput values.
+// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrInput` via:
+//
+//	        WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionArgs{...}
+//
+//	or:
+//
+//	        nil
+type WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrInput interface {
+	pulumi.Input
+
+	ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrOutput
+	ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrOutput
+}
+
+type webSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrType WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionArgs
+
+func WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtr(v *WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionArgs) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrInput {
+	return (*webSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrType)(v)
+}
+
+func (*webSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionAction)(nil)).Elem()
+}
+
+func (i *webSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrOutputWithContext(context.Background())
+}
+
+func (i *webSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionOutput struct{ *pulumi.OutputState }
+
+func (WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionAction)(nil)).Elem()
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionOutput) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionOutput) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionOutput) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrOutput {
+	return o.ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrOutputWithContext(context.Background())
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionOutput) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionAction) *WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionAction {
+		return &v
+	}).(WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrOutput)
+}
+
+// Additional parameters when Name is Allow.
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionOutput) AllowActionParameters() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionAction) *WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParameters {
+		return v.AllowActionParameters
+	}).(WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrOutput)
+}
+
+// Additional parameter when Name is Challenge.
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionOutput) ChallengeActionParameters() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionAction) *WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParameters {
+		return v.ChallengeActionParameters
+	}).(WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrOutput)
+}
+
+// Additional parameters when Name is Deny.
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionOutput) DenyActionParameters() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionAction) *WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParameters {
+		return v.DenyActionParameters
+	}).(WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrOutput)
+}
+
+// Specifies the specific actions for safe execution. valid values:. - Deny. specifies to block requests from accessing site resources. - Monitor: observation, only record logs. - Redirect: Redirect to URL. - Disabled: specifies that the rule is not enabled. - Allow: specifies whether to allow access with delayed processing of requests. - Challenge: specifies the challenge content to respond to. - Trans: pass and allow requests to directly access site resources. - BlockIP: to be deprecated. ip block. - ReturnCustomPage: to be deprecated. use specified page for interception. - JSChallenge: to be deprecated, JavaScript challenge;. - ManagedChallenge: to be deprecated. managed challenge.
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionAction) string {
+		return v.Name
+	}).(pulumi.StringOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrOutput struct{ *pulumi.OutputState }
+
+func (WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionAction)(nil)).Elem()
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrOutput) Elem() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionAction) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionAction {
+		if v != nil {
+			return *v
+		}
+		var ret WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionAction
+		return ret
+	}).(WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionOutput)
+}
+
+// Additional parameters when Name is Allow.
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrOutput) AllowActionParameters() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionAction) *WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParameters {
+		if v == nil {
+			return nil
+		}
+		return v.AllowActionParameters
+	}).(WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrOutput)
+}
+
+// Additional parameter when Name is Challenge.
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrOutput) ChallengeActionParameters() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionAction) *WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParameters {
+		if v == nil {
+			return nil
+		}
+		return v.ChallengeActionParameters
+	}).(WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrOutput)
+}
+
+// Additional parameters when Name is Deny.
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrOutput) DenyActionParameters() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionAction) *WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParameters {
+		if v == nil {
+			return nil
+		}
+		return v.DenyActionParameters
+	}).(WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrOutput)
+}
+
+// Specifies the specific actions for safe execution. valid values:. - Deny. specifies to block requests from accessing site resources. - Monitor: observation, only record logs. - Redirect: Redirect to URL. - Disabled: specifies that the rule is not enabled. - Allow: specifies whether to allow access with delayed processing of requests. - Challenge: specifies the challenge content to respond to. - Trans: pass and allow requests to directly access site resources. - BlockIP: to be deprecated. ip block. - ReturnCustomPage: to be deprecated. use specified page for interception. - JSChallenge: to be deprecated, JavaScript challenge;. - ManagedChallenge: to be deprecated. managed challenge.
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrOutput) Name() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionAction) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Name
+	}).(pulumi.StringPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParameters struct {
+	// Maximum delayed response time. supported units: - s: seconds, value ranges from 5 to 10.
+	MaxDelayTime *string `pulumi:"maxDelayTime"`
+	// Minimum latency response time. when configured as 0s, it means no delay for direct response. supported units: - s: seconds, value ranges from 0 to 5.
+	MinDelayTime *string `pulumi:"minDelayTime"`
+}
+
+// WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersArgs and WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersOutput values.
+// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersInput` via:
+//
+//	WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersArgs{...}
+type WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersInput interface {
+	pulumi.Input
+
+	ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersOutput
+	ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersOutput
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersArgs struct {
+	// Maximum delayed response time. supported units: - s: seconds, value ranges from 5 to 10.
+	MaxDelayTime pulumi.StringPtrInput `pulumi:"maxDelayTime"`
+	// Minimum latency response time. when configured as 0s, it means no delay for direct response. supported units: - s: seconds, value ranges from 0 to 5.
+	MinDelayTime pulumi.StringPtrInput `pulumi:"minDelayTime"`
+}
+
+func (WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParameters)(nil)).Elem()
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersOutputWithContext(context.Background())
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersOutput)
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersOutput).ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrOutputWithContext(ctx)
+}
+
+// WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersArgs, WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtr and WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrOutput values.
+// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrInput` via:
+//
+//	        WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersArgs{...}
+//
+//	or:
+//
+//	        nil
+type WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrInput interface {
+	pulumi.Input
+
+	ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrOutput
+	ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrOutput
+}
+
+type webSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrType WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersArgs
+
+func WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtr(v *WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersArgs) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrInput {
+	return (*webSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrType)(v)
+}
+
+func (*webSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParameters)(nil)).Elem()
+}
+
+func (i *webSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i *webSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersOutput struct{ *pulumi.OutputState }
+
+func (WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParameters)(nil)).Elem()
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrOutput {
+	return o.ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParameters) *WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParameters {
+		return &v
+	}).(WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrOutput)
+}
+
+// Maximum delayed response time. supported units: - s: seconds, value ranges from 5 to 10.
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersOutput) MaxDelayTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParameters) *string {
+		return v.MaxDelayTime
+	}).(pulumi.StringPtrOutput)
+}
+
+// Minimum latency response time. when configured as 0s, it means no delay for direct response. supported units: - s: seconds, value ranges from 0 to 5.
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersOutput) MinDelayTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParameters) *string {
+		return v.MinDelayTime
+	}).(pulumi.StringPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrOutput struct{ *pulumi.OutputState }
+
+func (WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParameters)(nil)).Elem()
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrOutput) Elem() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParameters) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParameters {
+		if v != nil {
+			return *v
+		}
+		var ret WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParameters
+		return ret
+	}).(WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersOutput)
+}
+
+// Maximum delayed response time. supported units: - s: seconds, value ranges from 5 to 10.
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrOutput) MaxDelayTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.MaxDelayTime
+	}).(pulumi.StringPtrOutput)
+}
+
+// Minimum latency response time. when configured as 0s, it means no delay for direct response. supported units: - s: seconds, value ranges from 0 to 5.
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrOutput) MinDelayTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.MinDelayTime
+	}).(pulumi.StringPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParameters struct {
+	// Client authentication method ID. this field is required when Name is InterstitialChallenge/InlineChallenge.
+	AttesterId *string `pulumi:"attesterId"`
+	// Safe execution challenge actions. valid values: -  InterstitialChallenge: interstitial challenge; -  InlineChallenge: embedded challenge; -  JSChallenge: JavaScript challenge; -  ManagedChallenge: managed challenge.
+	ChallengeOption string `pulumi:"challengeOption"`
+	// Specifies the time interval for challenge repetition. this field is required when Name is InterstitialChallenge/InlineChallenge. default value is 300s. supported units: - s: second, value ranges from 1 to 60;- m: minute, value ranges from 1 to 60;- h: hour, value ranges from 1 to 24.
+	Interval *string `pulumi:"interval"`
+}
+
+// WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersArgs and WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersOutput values.
+// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersInput` via:
+//
+//	WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersArgs{...}
+type WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersInput interface {
+	pulumi.Input
+
+	ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersOutput
+	ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersOutput
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersArgs struct {
+	// Client authentication method ID. this field is required when Name is InterstitialChallenge/InlineChallenge.
+	AttesterId pulumi.StringPtrInput `pulumi:"attesterId"`
+	// Safe execution challenge actions. valid values: -  InterstitialChallenge: interstitial challenge; -  InlineChallenge: embedded challenge; -  JSChallenge: JavaScript challenge; -  ManagedChallenge: managed challenge.
+	ChallengeOption pulumi.StringInput `pulumi:"challengeOption"`
+	// Specifies the time interval for challenge repetition. this field is required when Name is InterstitialChallenge/InlineChallenge. default value is 300s. supported units: - s: second, value ranges from 1 to 60;- m: minute, value ranges from 1 to 60;- h: hour, value ranges from 1 to 24.
+	Interval pulumi.StringPtrInput `pulumi:"interval"`
+}
+
+func (WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParameters)(nil)).Elem()
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersOutputWithContext(context.Background())
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersOutput)
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersOutput).ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrOutputWithContext(ctx)
+}
+
+// WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersArgs, WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtr and WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrOutput values.
+// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrInput` via:
+//
+//	        WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersArgs{...}
+//
+//	or:
+//
+//	        nil
+type WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrInput interface {
+	pulumi.Input
+
+	ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrOutput
+	ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrOutput
+}
+
+type webSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrType WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersArgs
+
+func WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtr(v *WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersArgs) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrInput {
+	return (*webSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrType)(v)
+}
+
+func (*webSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParameters)(nil)).Elem()
+}
+
+func (i *webSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i *webSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersOutput struct{ *pulumi.OutputState }
+
+func (WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParameters)(nil)).Elem()
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrOutput {
+	return o.ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParameters) *WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParameters {
+		return &v
+	}).(WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrOutput)
+}
+
+// Client authentication method ID. this field is required when Name is InterstitialChallenge/InlineChallenge.
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersOutput) AttesterId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParameters) *string {
+		return v.AttesterId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Safe execution challenge actions. valid values: -  InterstitialChallenge: interstitial challenge; -  InlineChallenge: embedded challenge; -  JSChallenge: JavaScript challenge; -  ManagedChallenge: managed challenge.
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersOutput) ChallengeOption() pulumi.StringOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParameters) string {
+		return v.ChallengeOption
+	}).(pulumi.StringOutput)
+}
+
+// Specifies the time interval for challenge repetition. this field is required when Name is InterstitialChallenge/InlineChallenge. default value is 300s. supported units: - s: second, value ranges from 1 to 60;- m: minute, value ranges from 1 to 60;- h: hour, value ranges from 1 to 24.
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersOutput) Interval() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParameters) *string {
+		return v.Interval
+	}).(pulumi.StringPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrOutput struct{ *pulumi.OutputState }
+
+func (WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParameters)(nil)).Elem()
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrOutput) Elem() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParameters) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParameters {
+		if v != nil {
+			return *v
+		}
+		var ret WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParameters
+		return ret
+	}).(WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersOutput)
+}
+
+// Client authentication method ID. this field is required when Name is InterstitialChallenge/InlineChallenge.
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrOutput) AttesterId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.AttesterId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Safe execution challenge actions. valid values: -  InterstitialChallenge: interstitial challenge; -  InlineChallenge: embedded challenge; -  JSChallenge: JavaScript challenge; -  ManagedChallenge: managed challenge.
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrOutput) ChallengeOption() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ChallengeOption
+	}).(pulumi.StringPtrOutput)
+}
+
+// Specifies the time interval for challenge repetition. this field is required when Name is InterstitialChallenge/InlineChallenge. default value is 300s. supported units: - s: second, value ranges from 1 to 60;- m: minute, value ranges from 1 to 60;- h: hour, value ranges from 1 to 24.
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrOutput) Interval() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Interval
+	}).(pulumi.StringPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParameters struct {
+	// Specifies whether to extend the ban on the source IP. valid values. - `on`: Enable;  - off: Disable.  After enabled, continuously blocks client ips that trigger the rule. when this option is enabled, the BlockIpDuration parameter must be simultaneously designated. Note: this option cannot intersect with ReturnCustomPage or Stall.
+	BlockIp *string `pulumi:"blockIp"`
+	// The ban duration when BlockIP is on.
+	BlockIpDuration *string `pulumi:"blockIpDuration"`
+	// Specifies the page id of the custom page.
+	ErrorPageId *string `pulumi:"errorPageId"`
+	// Status code of the custom page.
+	ResponseCode *string `pulumi:"responseCode"`
+	// Specifies whether to use a custom page. valid values:. - `on`: Enable;  - off: Disable.  Enabled, use custom page content to intercept requests. when this option is enabled, ResponseCode and ErrorPageId parameters must be specified simultaneously. Note: this option cannot intersect with the BlockIp or Stall option.
+	ReturnCustomPage *string `pulumi:"returnCustomPage"`
+	// Specifies whether to suspend the request source without processing. valid values:. - `on`: Enable;  - off: Disable.  Enabled, no longer responds to requests in the current connection session and does not actively disconnect. used for crawler combat to consume client connection resources. Note: this option cannot intersect with BlockIp or ReturnCustomPage options.
+	Stall *string `pulumi:"stall"`
+}
+
+// WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersArgs and WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersOutput values.
+// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersInput` via:
+//
+//	WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersArgs{...}
+type WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersInput interface {
+	pulumi.Input
+
+	ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersOutput
+	ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersOutput
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersArgs struct {
+	// Specifies whether to extend the ban on the source IP. valid values. - `on`: Enable;  - off: Disable.  After enabled, continuously blocks client ips that trigger the rule. when this option is enabled, the BlockIpDuration parameter must be simultaneously designated. Note: this option cannot intersect with ReturnCustomPage or Stall.
+	BlockIp pulumi.StringPtrInput `pulumi:"blockIp"`
+	// The ban duration when BlockIP is on.
+	BlockIpDuration pulumi.StringPtrInput `pulumi:"blockIpDuration"`
+	// Specifies the page id of the custom page.
+	ErrorPageId pulumi.StringPtrInput `pulumi:"errorPageId"`
+	// Status code of the custom page.
+	ResponseCode pulumi.StringPtrInput `pulumi:"responseCode"`
+	// Specifies whether to use a custom page. valid values:. - `on`: Enable;  - off: Disable.  Enabled, use custom page content to intercept requests. when this option is enabled, ResponseCode and ErrorPageId parameters must be specified simultaneously. Note: this option cannot intersect with the BlockIp or Stall option.
+	ReturnCustomPage pulumi.StringPtrInput `pulumi:"returnCustomPage"`
+	// Specifies whether to suspend the request source without processing. valid values:. - `on`: Enable;  - off: Disable.  Enabled, no longer responds to requests in the current connection session and does not actively disconnect. used for crawler combat to consume client connection resources. Note: this option cannot intersect with BlockIp or ReturnCustomPage options.
+	Stall pulumi.StringPtrInput `pulumi:"stall"`
+}
+
+func (WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParameters)(nil)).Elem()
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersOutputWithContext(context.Background())
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersOutput)
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersArgs) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersOutput).ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrOutputWithContext(ctx)
+}
+
+// WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersArgs, WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtr and WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrOutput values.
+// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrInput` via:
+//
+//	        WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersArgs{...}
+//
+//	or:
+//
+//	        nil
+type WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrInput interface {
+	pulumi.Input
+
+	ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrOutput
+	ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrOutput
+}
+
+type webSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrType WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersArgs
+
+func WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtr(v *WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersArgs) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrInput {
+	return (*webSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrType)(v)
+}
+
+func (*webSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParameters)(nil)).Elem()
+}
+
+func (i *webSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (i *webSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrType) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersOutput struct{ *pulumi.OutputState }
+
+func (WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParameters)(nil)).Elem()
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrOutput {
+	return o.ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrOutputWithContext(context.Background())
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersOutput) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParameters) *WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParameters {
+		return &v
+	}).(WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrOutput)
+}
+
+// Specifies whether to extend the ban on the source IP. valid values. - `on`: Enable;  - off: Disable.  After enabled, continuously blocks client ips that trigger the rule. when this option is enabled, the BlockIpDuration parameter must be simultaneously designated. Note: this option cannot intersect with ReturnCustomPage or Stall.
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersOutput) BlockIp() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParameters) *string {
+		return v.BlockIp
+	}).(pulumi.StringPtrOutput)
+}
+
+// The ban duration when BlockIP is on.
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersOutput) BlockIpDuration() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParameters) *string {
+		return v.BlockIpDuration
+	}).(pulumi.StringPtrOutput)
+}
+
+// Specifies the page id of the custom page.
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersOutput) ErrorPageId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParameters) *string {
+		return v.ErrorPageId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Status code of the custom page.
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersOutput) ResponseCode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParameters) *string {
+		return v.ResponseCode
+	}).(pulumi.StringPtrOutput)
+}
+
+// Specifies whether to use a custom page. valid values:. - `on`: Enable;  - off: Disable.  Enabled, use custom page content to intercept requests. when this option is enabled, ResponseCode and ErrorPageId parameters must be specified simultaneously. Note: this option cannot intersect with the BlockIp or Stall option.
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersOutput) ReturnCustomPage() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParameters) *string {
+		return v.ReturnCustomPage
+	}).(pulumi.StringPtrOutput)
+}
+
+// Specifies whether to suspend the request source without processing. valid values:. - `on`: Enable;  - off: Disable.  Enabled, no longer responds to requests in the current connection session and does not actively disconnect. used for crawler combat to consume client connection resources. Note: this option cannot intersect with BlockIp or ReturnCustomPage options.
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersOutput) Stall() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParameters) *string {
+		return v.Stall
+	}).(pulumi.StringPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrOutput struct{ *pulumi.OutputState }
+
+func (WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParameters)(nil)).Elem()
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrOutput) Elem() WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParameters) WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParameters {
+		if v != nil {
+			return *v
+		}
+		var ret WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParameters
+		return ret
+	}).(WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersOutput)
+}
+
+// Specifies whether to extend the ban on the source IP. valid values. - `on`: Enable;  - off: Disable.  After enabled, continuously blocks client ips that trigger the rule. when this option is enabled, the BlockIpDuration parameter must be simultaneously designated. Note: this option cannot intersect with ReturnCustomPage or Stall.
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrOutput) BlockIp() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.BlockIp
+	}).(pulumi.StringPtrOutput)
+}
+
+// The ban duration when BlockIP is on.
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrOutput) BlockIpDuration() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.BlockIpDuration
+	}).(pulumi.StringPtrOutput)
+}
+
+// Specifies the page id of the custom page.
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrOutput) ErrorPageId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ErrorPageId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Status code of the custom page.
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrOutput) ResponseCode() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ResponseCode
+	}).(pulumi.StringPtrOutput)
+}
+
+// Specifies whether to use a custom page. valid values:. - `on`: Enable;  - off: Disable.  Enabled, use custom page content to intercept requests. when this option is enabled, ResponseCode and ErrorPageId parameters must be specified simultaneously. Note: this option cannot intersect with the BlockIp or Stall option.
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrOutput) ReturnCustomPage() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ReturnCustomPage
+	}).(pulumi.StringPtrOutput)
+}
+
+// Specifies whether to suspend the request source without processing. valid values:. - `on`: Enable;  - off: Disable.  Enabled, no longer responds to requests in the current connection session and does not actively disconnect. used for crawler combat to consume client connection resources. Note: this option cannot intersect with BlockIp or ReturnCustomPage options.
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrOutput) Stall() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParameters) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Stall
+	}).(pulumi.StringPtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallenge struct {
+	// Whether CAPTCHA page challenge is enabled. Valid values: `on`, `off`.
+	Enabled string `pulumi:"enabled"`
+}
+
+// WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeArgs and WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeOutput values.
+// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeInput` via:
+//
+//	WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeArgs{...}
+type WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeInput interface {
+	pulumi.Input
+
+	ToWebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeOutput
+	ToWebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeOutput
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeArgs struct {
+	// Whether CAPTCHA page challenge is enabled. Valid values: `on`, `off`.
+	Enabled pulumi.StringInput `pulumi:"enabled"`
+}
+
+func (WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallenge)(nil)).Elem()
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeArgs) ToWebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeOutputWithContext(context.Background())
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeArgs) ToWebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeOutput)
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeArgs) ToWebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtrOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtrOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtrOutputWithContext(context.Background())
+}
+
+func (i WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeArgs) ToWebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeOutput).ToWebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtrOutputWithContext(ctx)
+}
+
+// WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtrInput is an input type that accepts WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeArgs, WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtr and WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtrOutput values.
+// You can construct a concrete instance of `WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtrInput` via:
+//
+//	        WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeArgs{...}
+//
+//	or:
+//
+//	        nil
+type WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtrInput interface {
+	pulumi.Input
+
+	ToWebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtrOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtrOutput
+	ToWebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtrOutputWithContext(context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtrOutput
+}
+
+type webSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtrType WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeArgs
+
+func WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtr(v *WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeArgs) WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtrInput {
+	return (*webSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtrType)(v)
+}
+
+func (*webSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallenge)(nil)).Elem()
+}
+
+func (i *webSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtrType) ToWebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtrOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtrOutput {
+	return i.ToWebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtrOutputWithContext(context.Background())
+}
+
+func (i *webSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtrType) ToWebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtrOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeOutput struct{ *pulumi.OutputState }
+
+func (WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallenge)(nil)).Elem()
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeOutput) ToWebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeOutput) ToWebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeOutput) ToWebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtrOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtrOutput {
+	return o.ToWebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtrOutputWithContext(context.Background())
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeOutput) ToWebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallenge) *WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallenge {
+		return &v
+	}).(WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtrOutput)
+}
+
+// Whether CAPTCHA page challenge is enabled. Valid values: `on`, `off`.
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeOutput) Enabled() pulumi.StringOutput {
+	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallenge) string {
+		return v.Enabled
+	}).(pulumi.StringOutput)
+}
+
+type WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtrOutput struct{ *pulumi.OutputState }
+
+func (WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallenge)(nil)).Elem()
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtrOutput() WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtrOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtrOutput) ToWebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtrOutputWithContext(ctx context.Context) WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtrOutput {
+	return o
+}
+
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtrOutput) Elem() WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallenge) WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallenge {
+		if v != nil {
+			return *v
+		}
+		var ret WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallenge
+		return ret
+	}).(WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeOutput)
+}
+
+// Whether CAPTCHA page challenge is enabled. Valid values: `on`, `off`.
+func (o WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtrOutput) Enabled() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallenge) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Enabled
+	}).(pulumi.StringPtrOutput)
+}
+
 type WebSecurityTemplateSecurityPolicyCustomRules struct {
 	// The custom rule. When modifying the Web protection configuration using ModifySecurityPolicy: - if the Rules parameter is not specified or the parameter length of Rules is zero: clear all custom rule configurations; - if the Rules parameter is not specified: keep the existing custom rule configuration without modification.
 	Rules []WebSecurityTemplateSecurityPolicyCustomRulesRule `pulumi:"rules"`
@@ -32034,7 +36500,7 @@ type WebSecurityTemplateSecurityPolicyCustomRulesRule struct {
 	Condition string `pulumi:"condition"`
 	// Whether the precise rate limiting rule is enabled. valid values: - on: enabled; - off: disabled(No other fields are required when closing).
 	Enabled string `pulumi:"enabled"`
-	// ID of the resource.
+	// The ID of precise rate limiting. rule ID supports different rule configuration operations: - add a new rule: leave the ID empty or do not specify the ID parameter. - modify an existing rule: specify the rule ID that needs to be updated/modified. - delete an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.
 	Id *string `pulumi:"id"`
 	// Specifies the name of the precise rate limit.
 	Name string `pulumi:"name"`
@@ -32062,7 +36528,7 @@ type WebSecurityTemplateSecurityPolicyCustomRulesRuleArgs struct {
 	Condition pulumi.StringInput `pulumi:"condition"`
 	// Whether the precise rate limiting rule is enabled. valid values: - on: enabled; - off: disabled(No other fields are required when closing).
 	Enabled pulumi.StringInput `pulumi:"enabled"`
-	// ID of the resource.
+	// The ID of precise rate limiting. rule ID supports different rule configuration operations: - add a new rule: leave the ID empty or do not specify the ID parameter. - modify an existing rule: specify the rule ID that needs to be updated/modified. - delete an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.
 	Id pulumi.StringPtrInput `pulumi:"id"`
 	// Specifies the name of the precise rate limit.
 	Name pulumi.StringInput `pulumi:"name"`
@@ -32140,7 +36606,7 @@ func (o WebSecurityTemplateSecurityPolicyCustomRulesRuleOutput) Enabled() pulumi
 	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyCustomRulesRule) string { return v.Enabled }).(pulumi.StringOutput)
 }
 
-// ID of the resource.
+// The ID of precise rate limiting. rule ID supports different rule configuration operations: - add a new rule: leave the ID empty or do not specify the ID parameter. - modify an existing rule: specify the rule ID that needs to be updated/modified. - delete an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.
 func (o WebSecurityTemplateSecurityPolicyCustomRulesRuleOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyCustomRulesRule) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
@@ -34113,7 +38579,7 @@ type WebSecurityTemplateSecurityPolicyExceptionRulesRule struct {
 	Condition *string `pulumi:"condition"`
 	// Whether the precise rate limiting rule is enabled. valid values: - on: enabled; - off: disabled(No other fields are required when closing).
 	Enabled *string `pulumi:"enabled"`
-	// ID of the resource.
+	// The ID of precise rate limiting. rule ID supports different rule configuration operations: - add a new rule: leave the ID empty or do not specify the ID parameter. - modify an existing rule: specify the rule ID that needs to be updated/modified. - delete an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.
 	Id *string `pulumi:"id"`
 	// A managed rule group with designated exception rules is valid only when SkipScope is ManagedRules, and at this point you cannot specify ManagedRulesForException.
 	ManagedRuleGroupsForExceptions []string `pulumi:"managedRuleGroupsForExceptions"`
@@ -34147,7 +38613,7 @@ type WebSecurityTemplateSecurityPolicyExceptionRulesRuleArgs struct {
 	Condition pulumi.StringPtrInput `pulumi:"condition"`
 	// Whether the precise rate limiting rule is enabled. valid values: - on: enabled; - off: disabled(No other fields are required when closing).
 	Enabled pulumi.StringPtrInput `pulumi:"enabled"`
-	// ID of the resource.
+	// The ID of precise rate limiting. rule ID supports different rule configuration operations: - add a new rule: leave the ID empty or do not specify the ID parameter. - modify an existing rule: specify the rule ID that needs to be updated/modified. - delete an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.
 	Id pulumi.StringPtrInput `pulumi:"id"`
 	// A managed rule group with designated exception rules is valid only when SkipScope is ManagedRules, and at this point you cannot specify ManagedRulesForException.
 	ManagedRuleGroupsForExceptions pulumi.StringArrayInput `pulumi:"managedRuleGroupsForExceptions"`
@@ -34226,7 +38692,7 @@ func (o WebSecurityTemplateSecurityPolicyExceptionRulesRuleOutput) Enabled() pul
 	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyExceptionRulesRule) *string { return v.Enabled }).(pulumi.StringPtrOutput)
 }
 
-// ID of the resource.
+// The ID of precise rate limiting. rule ID supports different rule configuration operations: - add a new rule: leave the ID empty or do not specify the ID parameter. - modify an existing rule: specify the rule ID that needs to be updated/modified. - delete an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.
 func (o WebSecurityTemplateSecurityPolicyExceptionRulesRuleOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyExceptionRulesRule) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
@@ -42866,7 +47332,7 @@ type WebSecurityTemplateSecurityPolicyRateLimitingRulesRule struct {
 	CountingPeriod *string `pulumi:"countingPeriod"`
 	// Whether the precise rate limiting rule is enabled. valid values: - on: enabled; - off: disabled(No other fields are required when closing).
 	Enabled *string `pulumi:"enabled"`
-	// ID of the resource.
+	// The ID of precise rate limiting. rule ID supports different rule configuration operations: - add a new rule: leave the ID empty or do not specify the ID parameter. - modify an existing rule: specify the rule ID that needs to be updated/modified. - delete an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.
 	Id *string `pulumi:"id"`
 	// Precision rate limiting specifies the cumulative number of interceptions within the time range. value ranges from 1 to 100000.
 	MaxRequestThreshold *int `pulumi:"maxRequestThreshold"`
@@ -42900,7 +47366,7 @@ type WebSecurityTemplateSecurityPolicyRateLimitingRulesRuleArgs struct {
 	CountingPeriod pulumi.StringPtrInput `pulumi:"countingPeriod"`
 	// Whether the precise rate limiting rule is enabled. valid values: - on: enabled; - off: disabled(No other fields are required when closing).
 	Enabled pulumi.StringPtrInput `pulumi:"enabled"`
-	// ID of the resource.
+	// The ID of precise rate limiting. rule ID supports different rule configuration operations: - add a new rule: leave the ID empty or do not specify the ID parameter. - modify an existing rule: specify the rule ID that needs to be updated/modified. - delete an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.
 	Id pulumi.StringPtrInput `pulumi:"id"`
 	// Precision rate limiting specifies the cumulative number of interceptions within the time range. value ranges from 1 to 100000.
 	MaxRequestThreshold pulumi.IntPtrInput `pulumi:"maxRequestThreshold"`
@@ -42993,7 +47459,7 @@ func (o WebSecurityTemplateSecurityPolicyRateLimitingRulesRuleOutput) Enabled() 
 	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyRateLimitingRulesRule) *string { return v.Enabled }).(pulumi.StringPtrOutput)
 }
 
-// ID of the resource.
+// The ID of precise rate limiting. rule ID supports different rule configuration operations: - add a new rule: leave the ID empty or do not specify the ID parameter. - modify an existing rule: specify the rule ID that needs to be updated/modified. - delete an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.
 func (o WebSecurityTemplateSecurityPolicyRateLimitingRulesRuleOutput) Id() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v WebSecurityTemplateSecurityPolicyRateLimitingRulesRule) *string { return v.Id }).(pulumi.StringPtrOutput)
 }
@@ -44639,21 +49105,271 @@ func (o ZoneWorkModeInfoArrayOutput) Index(i pulumi.IntInput) ZoneWorkModeInfoOu
 	}).(ZoneWorkModeInfoOutput)
 }
 
+type GetBillingDataData struct {
+	// Domain name to which the data point belongs.
+	Host string `pulumi:"host"`
+	// Layer 4 proxy instance ID to which the data point belongs.
+	ProxyId string `pulumi:"proxyId"`
+	// Billing region ID to which the data point belongs.
+	RegionId string `pulumi:"regionId"`
+	// Data timestamp.
+	Time string `pulumi:"time"`
+	// Numeric value.
+	Value int `pulumi:"value"`
+	// Site ID to which the data point belongs.
+	ZoneId string `pulumi:"zoneId"`
+}
+
+// GetBillingDataDataInput is an input type that accepts GetBillingDataDataArgs and GetBillingDataDataOutput values.
+// You can construct a concrete instance of `GetBillingDataDataInput` via:
+//
+//	GetBillingDataDataArgs{...}
+type GetBillingDataDataInput interface {
+	pulumi.Input
+
+	ToGetBillingDataDataOutput() GetBillingDataDataOutput
+	ToGetBillingDataDataOutputWithContext(context.Context) GetBillingDataDataOutput
+}
+
+type GetBillingDataDataArgs struct {
+	// Domain name to which the data point belongs.
+	Host pulumi.StringInput `pulumi:"host"`
+	// Layer 4 proxy instance ID to which the data point belongs.
+	ProxyId pulumi.StringInput `pulumi:"proxyId"`
+	// Billing region ID to which the data point belongs.
+	RegionId pulumi.StringInput `pulumi:"regionId"`
+	// Data timestamp.
+	Time pulumi.StringInput `pulumi:"time"`
+	// Numeric value.
+	Value pulumi.IntInput `pulumi:"value"`
+	// Site ID to which the data point belongs.
+	ZoneId pulumi.StringInput `pulumi:"zoneId"`
+}
+
+func (GetBillingDataDataArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBillingDataData)(nil)).Elem()
+}
+
+func (i GetBillingDataDataArgs) ToGetBillingDataDataOutput() GetBillingDataDataOutput {
+	return i.ToGetBillingDataDataOutputWithContext(context.Background())
+}
+
+func (i GetBillingDataDataArgs) ToGetBillingDataDataOutputWithContext(ctx context.Context) GetBillingDataDataOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBillingDataDataOutput)
+}
+
+// GetBillingDataDataArrayInput is an input type that accepts GetBillingDataDataArray and GetBillingDataDataArrayOutput values.
+// You can construct a concrete instance of `GetBillingDataDataArrayInput` via:
+//
+//	GetBillingDataDataArray{ GetBillingDataDataArgs{...} }
+type GetBillingDataDataArrayInput interface {
+	pulumi.Input
+
+	ToGetBillingDataDataArrayOutput() GetBillingDataDataArrayOutput
+	ToGetBillingDataDataArrayOutputWithContext(context.Context) GetBillingDataDataArrayOutput
+}
+
+type GetBillingDataDataArray []GetBillingDataDataInput
+
+func (GetBillingDataDataArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBillingDataData)(nil)).Elem()
+}
+
+func (i GetBillingDataDataArray) ToGetBillingDataDataArrayOutput() GetBillingDataDataArrayOutput {
+	return i.ToGetBillingDataDataArrayOutputWithContext(context.Background())
+}
+
+func (i GetBillingDataDataArray) ToGetBillingDataDataArrayOutputWithContext(ctx context.Context) GetBillingDataDataArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBillingDataDataArrayOutput)
+}
+
+type GetBillingDataDataOutput struct{ *pulumi.OutputState }
+
+func (GetBillingDataDataOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBillingDataData)(nil)).Elem()
+}
+
+func (o GetBillingDataDataOutput) ToGetBillingDataDataOutput() GetBillingDataDataOutput {
+	return o
+}
+
+func (o GetBillingDataDataOutput) ToGetBillingDataDataOutputWithContext(ctx context.Context) GetBillingDataDataOutput {
+	return o
+}
+
+// Domain name to which the data point belongs.
+func (o GetBillingDataDataOutput) Host() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillingDataData) string { return v.Host }).(pulumi.StringOutput)
+}
+
+// Layer 4 proxy instance ID to which the data point belongs.
+func (o GetBillingDataDataOutput) ProxyId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillingDataData) string { return v.ProxyId }).(pulumi.StringOutput)
+}
+
+// Billing region ID to which the data point belongs.
+func (o GetBillingDataDataOutput) RegionId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillingDataData) string { return v.RegionId }).(pulumi.StringOutput)
+}
+
+// Data timestamp.
+func (o GetBillingDataDataOutput) Time() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillingDataData) string { return v.Time }).(pulumi.StringOutput)
+}
+
+// Numeric value.
+func (o GetBillingDataDataOutput) Value() pulumi.IntOutput {
+	return o.ApplyT(func(v GetBillingDataData) int { return v.Value }).(pulumi.IntOutput)
+}
+
+// Site ID to which the data point belongs.
+func (o GetBillingDataDataOutput) ZoneId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillingDataData) string { return v.ZoneId }).(pulumi.StringOutput)
+}
+
+type GetBillingDataDataArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBillingDataDataArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBillingDataData)(nil)).Elem()
+}
+
+func (o GetBillingDataDataArrayOutput) ToGetBillingDataDataArrayOutput() GetBillingDataDataArrayOutput {
+	return o
+}
+
+func (o GetBillingDataDataArrayOutput) ToGetBillingDataDataArrayOutputWithContext(ctx context.Context) GetBillingDataDataArrayOutput {
+	return o
+}
+
+func (o GetBillingDataDataArrayOutput) Index(i pulumi.IntInput) GetBillingDataDataOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBillingDataData {
+		return vs[0].([]GetBillingDataData)[vs[1].(int)]
+	}).(GetBillingDataDataOutput)
+}
+
+type GetBillingDataFilter struct {
+	// Parameter name. Valid values: `host`, `proxy-id`, `region-id`.
+	Type string `pulumi:"type"`
+	// Parameter value.
+	Value string `pulumi:"value"`
+}
+
+// GetBillingDataFilterInput is an input type that accepts GetBillingDataFilterArgs and GetBillingDataFilterOutput values.
+// You can construct a concrete instance of `GetBillingDataFilterInput` via:
+//
+//	GetBillingDataFilterArgs{...}
+type GetBillingDataFilterInput interface {
+	pulumi.Input
+
+	ToGetBillingDataFilterOutput() GetBillingDataFilterOutput
+	ToGetBillingDataFilterOutputWithContext(context.Context) GetBillingDataFilterOutput
+}
+
+type GetBillingDataFilterArgs struct {
+	// Parameter name. Valid values: `host`, `proxy-id`, `region-id`.
+	Type pulumi.StringInput `pulumi:"type"`
+	// Parameter value.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (GetBillingDataFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBillingDataFilter)(nil)).Elem()
+}
+
+func (i GetBillingDataFilterArgs) ToGetBillingDataFilterOutput() GetBillingDataFilterOutput {
+	return i.ToGetBillingDataFilterOutputWithContext(context.Background())
+}
+
+func (i GetBillingDataFilterArgs) ToGetBillingDataFilterOutputWithContext(ctx context.Context) GetBillingDataFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBillingDataFilterOutput)
+}
+
+// GetBillingDataFilterArrayInput is an input type that accepts GetBillingDataFilterArray and GetBillingDataFilterArrayOutput values.
+// You can construct a concrete instance of `GetBillingDataFilterArrayInput` via:
+//
+//	GetBillingDataFilterArray{ GetBillingDataFilterArgs{...} }
+type GetBillingDataFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetBillingDataFilterArrayOutput() GetBillingDataFilterArrayOutput
+	ToGetBillingDataFilterArrayOutputWithContext(context.Context) GetBillingDataFilterArrayOutput
+}
+
+type GetBillingDataFilterArray []GetBillingDataFilterInput
+
+func (GetBillingDataFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBillingDataFilter)(nil)).Elem()
+}
+
+func (i GetBillingDataFilterArray) ToGetBillingDataFilterArrayOutput() GetBillingDataFilterArrayOutput {
+	return i.ToGetBillingDataFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetBillingDataFilterArray) ToGetBillingDataFilterArrayOutputWithContext(ctx context.Context) GetBillingDataFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetBillingDataFilterArrayOutput)
+}
+
+type GetBillingDataFilterOutput struct{ *pulumi.OutputState }
+
+func (GetBillingDataFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetBillingDataFilter)(nil)).Elem()
+}
+
+func (o GetBillingDataFilterOutput) ToGetBillingDataFilterOutput() GetBillingDataFilterOutput {
+	return o
+}
+
+func (o GetBillingDataFilterOutput) ToGetBillingDataFilterOutputWithContext(ctx context.Context) GetBillingDataFilterOutput {
+	return o
+}
+
+// Parameter name. Valid values: `host`, `proxy-id`, `region-id`.
+func (o GetBillingDataFilterOutput) Type() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillingDataFilter) string { return v.Type }).(pulumi.StringOutput)
+}
+
+// Parameter value.
+func (o GetBillingDataFilterOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v GetBillingDataFilter) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type GetBillingDataFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetBillingDataFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetBillingDataFilter)(nil)).Elem()
+}
+
+func (o GetBillingDataFilterArrayOutput) ToGetBillingDataFilterArrayOutput() GetBillingDataFilterArrayOutput {
+	return o
+}
+
+func (o GetBillingDataFilterArrayOutput) ToGetBillingDataFilterArrayOutputWithContext(ctx context.Context) GetBillingDataFilterArrayOutput {
+	return o
+}
+
+func (o GetBillingDataFilterArrayOutput) Index(i pulumi.IntInput) GetBillingDataFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetBillingDataFilter {
+		return vs[0].([]GetBillingDataFilter)[vs[1].(int)]
+	}).(GetBillingDataFilterOutput)
+}
+
 type GetConfigGroupVersionDetailConfigGroupVersionInfo struct {
 	// Version creation time. The time format follows the ISO 8601 standard and is represented in Coordinated Universal Time (UTC).
-	CreateTime *string `pulumi:"createTime"`
+	CreateTime string `pulumi:"createTime"`
 	// Version description.
-	Description *string `pulumi:"description"`
+	Description string `pulumi:"description"`
 	// Configuraration group ID.
-	GroupId *string `pulumi:"groupId"`
+	GroupId string `pulumi:"groupId"`
 	// Configuration group type. Valid values: l7_acceleration: L7 acceleration configuration group. edge_functions: Edge function configuration group.
-	GroupType *string `pulumi:"groupType"`
+	GroupType string `pulumi:"groupType"`
+	// The source version ID that the config group version was derived from.
+	SourceVersion string `pulumi:"sourceVersion"`
 	// Version status. Valid values: creating: Being created.inactive: Not effective.active: Effective.
-	Status *string `pulumi:"status"`
+	Status string `pulumi:"status"`
 	// Version ID.
 	VersionId string `pulumi:"versionId"`
 	// Version No.
-	VersionNumber *string `pulumi:"versionNumber"`
+	VersionNumber string `pulumi:"versionNumber"`
 }
 
 // GetConfigGroupVersionDetailConfigGroupVersionInfoInput is an input type that accepts GetConfigGroupVersionDetailConfigGroupVersionInfoArgs and GetConfigGroupVersionDetailConfigGroupVersionInfoOutput values.
@@ -44669,19 +49385,21 @@ type GetConfigGroupVersionDetailConfigGroupVersionInfoInput interface {
 
 type GetConfigGroupVersionDetailConfigGroupVersionInfoArgs struct {
 	// Version creation time. The time format follows the ISO 8601 standard and is represented in Coordinated Universal Time (UTC).
-	CreateTime pulumi.StringPtrInput `pulumi:"createTime"`
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
 	// Version description.
-	Description pulumi.StringPtrInput `pulumi:"description"`
+	Description pulumi.StringInput `pulumi:"description"`
 	// Configuraration group ID.
-	GroupId pulumi.StringPtrInput `pulumi:"groupId"`
+	GroupId pulumi.StringInput `pulumi:"groupId"`
 	// Configuration group type. Valid values: l7_acceleration: L7 acceleration configuration group. edge_functions: Edge function configuration group.
-	GroupType pulumi.StringPtrInput `pulumi:"groupType"`
+	GroupType pulumi.StringInput `pulumi:"groupType"`
+	// The source version ID that the config group version was derived from.
+	SourceVersion pulumi.StringInput `pulumi:"sourceVersion"`
 	// Version status. Valid values: creating: Being created.inactive: Not effective.active: Effective.
-	Status pulumi.StringPtrInput `pulumi:"status"`
+	Status pulumi.StringInput `pulumi:"status"`
 	// Version ID.
 	VersionId pulumi.StringInput `pulumi:"versionId"`
 	// Version No.
-	VersionNumber pulumi.StringPtrInput `pulumi:"versionNumber"`
+	VersionNumber pulumi.StringInput `pulumi:"versionNumber"`
 }
 
 func (GetConfigGroupVersionDetailConfigGroupVersionInfoArgs) ElementType() reflect.Type {
@@ -44736,28 +49454,33 @@ func (o GetConfigGroupVersionDetailConfigGroupVersionInfoOutput) ToGetConfigGrou
 }
 
 // Version creation time. The time format follows the ISO 8601 standard and is represented in Coordinated Universal Time (UTC).
-func (o GetConfigGroupVersionDetailConfigGroupVersionInfoOutput) CreateTime() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v GetConfigGroupVersionDetailConfigGroupVersionInfo) *string { return v.CreateTime }).(pulumi.StringPtrOutput)
+func (o GetConfigGroupVersionDetailConfigGroupVersionInfoOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConfigGroupVersionDetailConfigGroupVersionInfo) string { return v.CreateTime }).(pulumi.StringOutput)
 }
 
 // Version description.
-func (o GetConfigGroupVersionDetailConfigGroupVersionInfoOutput) Description() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v GetConfigGroupVersionDetailConfigGroupVersionInfo) *string { return v.Description }).(pulumi.StringPtrOutput)
+func (o GetConfigGroupVersionDetailConfigGroupVersionInfoOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConfigGroupVersionDetailConfigGroupVersionInfo) string { return v.Description }).(pulumi.StringOutput)
 }
 
 // Configuraration group ID.
-func (o GetConfigGroupVersionDetailConfigGroupVersionInfoOutput) GroupId() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v GetConfigGroupVersionDetailConfigGroupVersionInfo) *string { return v.GroupId }).(pulumi.StringPtrOutput)
+func (o GetConfigGroupVersionDetailConfigGroupVersionInfoOutput) GroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConfigGroupVersionDetailConfigGroupVersionInfo) string { return v.GroupId }).(pulumi.StringOutput)
 }
 
 // Configuration group type. Valid values: l7_acceleration: L7 acceleration configuration group. edge_functions: Edge function configuration group.
-func (o GetConfigGroupVersionDetailConfigGroupVersionInfoOutput) GroupType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v GetConfigGroupVersionDetailConfigGroupVersionInfo) *string { return v.GroupType }).(pulumi.StringPtrOutput)
+func (o GetConfigGroupVersionDetailConfigGroupVersionInfoOutput) GroupType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConfigGroupVersionDetailConfigGroupVersionInfo) string { return v.GroupType }).(pulumi.StringOutput)
+}
+
+// The source version ID that the config group version was derived from.
+func (o GetConfigGroupVersionDetailConfigGroupVersionInfoOutput) SourceVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConfigGroupVersionDetailConfigGroupVersionInfo) string { return v.SourceVersion }).(pulumi.StringOutput)
 }
 
 // Version status. Valid values: creating: Being created.inactive: Not effective.active: Effective.
-func (o GetConfigGroupVersionDetailConfigGroupVersionInfoOutput) Status() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v GetConfigGroupVersionDetailConfigGroupVersionInfo) *string { return v.Status }).(pulumi.StringPtrOutput)
+func (o GetConfigGroupVersionDetailConfigGroupVersionInfoOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConfigGroupVersionDetailConfigGroupVersionInfo) string { return v.Status }).(pulumi.StringOutput)
 }
 
 // Version ID.
@@ -44766,8 +49489,8 @@ func (o GetConfigGroupVersionDetailConfigGroupVersionInfoOutput) VersionId() pul
 }
 
 // Version No.
-func (o GetConfigGroupVersionDetailConfigGroupVersionInfoOutput) VersionNumber() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v GetConfigGroupVersionDetailConfigGroupVersionInfo) *string { return v.VersionNumber }).(pulumi.StringPtrOutput)
+func (o GetConfigGroupVersionDetailConfigGroupVersionInfoOutput) VersionNumber() pulumi.StringOutput {
+	return o.ApplyT(func(v GetConfigGroupVersionDetailConfigGroupVersionInfo) string { return v.VersionNumber }).(pulumi.StringOutput)
 }
 
 type GetConfigGroupVersionDetailConfigGroupVersionInfoArrayOutput struct{ *pulumi.OutputState }
@@ -46008,7 +50731,7 @@ func (o GetDeployConfigVersionHistoryRecordConfigGroupVersionInfoArrayOutput) In
 }
 
 type GetEnvironmentsEnvInfo struct {
-	// Creation time. The time format follows the ISO 8601 standard and is represented in Coordinated Universal Time (UTC).
+	// Version creation time. The time format follows the ISO 8601 standard and is represented in Coordinated Universal Time (UTC).
 	CreateTime string `pulumi:"createTime"`
 	// For the effective versions of each configuration group in the current environment, there are two possible scenarios based on the value of Status: When Status is set to version_deploying, the returned value of this field represents the previously effective version. In other words, during the deployment of the new version, the effective version is the one that was in effect before any changes were made. When Status is set to running, the value returned by this field is the currently effective version.
 	CurrentConfigGroupVersionInfos []GetEnvironmentsEnvInfoCurrentConfigGroupVersionInfo `pulumi:"currentConfigGroupVersionInfos"`
@@ -46036,7 +50759,7 @@ type GetEnvironmentsEnvInfoInput interface {
 }
 
 type GetEnvironmentsEnvInfoArgs struct {
-	// Creation time. The time format follows the ISO 8601 standard and is represented in Coordinated Universal Time (UTC).
+	// Version creation time. The time format follows the ISO 8601 standard and is represented in Coordinated Universal Time (UTC).
 	CreateTime pulumi.StringInput `pulumi:"createTime"`
 	// For the effective versions of each configuration group in the current environment, there are two possible scenarios based on the value of Status: When Status is set to version_deploying, the returned value of this field represents the previously effective version. In other words, during the deployment of the new version, the effective version is the one that was in effect before any changes were made. When Status is set to running, the value returned by this field is the currently effective version.
 	CurrentConfigGroupVersionInfos GetEnvironmentsEnvInfoCurrentConfigGroupVersionInfoArrayInput `pulumi:"currentConfigGroupVersionInfos"`
@@ -46103,7 +50826,7 @@ func (o GetEnvironmentsEnvInfoOutput) ToGetEnvironmentsEnvInfoOutputWithContext(
 	return o
 }
 
-// Creation time. The time format follows the ISO 8601 standard and is represented in Coordinated Universal Time (UTC).
+// Version creation time. The time format follows the ISO 8601 standard and is represented in Coordinated Universal Time (UTC).
 func (o GetEnvironmentsEnvInfoOutput) CreateTime() pulumi.StringOutput {
 	return o.ApplyT(func(v GetEnvironmentsEnvInfo) string { return v.CreateTime }).(pulumi.StringOutput)
 }
@@ -46162,19 +50885,21 @@ func (o GetEnvironmentsEnvInfoArrayOutput) Index(i pulumi.IntInput) GetEnvironme
 
 type GetEnvironmentsEnvInfoCurrentConfigGroupVersionInfo struct {
 	// Version creation time. The time format follows the ISO 8601 standard and is represented in Coordinated Universal Time (UTC).
-	CreateTime *string `pulumi:"createTime"`
+	CreateTime string `pulumi:"createTime"`
 	// Version description.
-	Description *string `pulumi:"description"`
+	Description string `pulumi:"description"`
 	// Configuraration group ID.
-	GroupId *string `pulumi:"groupId"`
+	GroupId string `pulumi:"groupId"`
 	// Configuration group type. Valid values: l7Acceleration (L7 acceleration configuration group), edgeFunctions (Edge function configuration group).
-	GroupType *string `pulumi:"groupType"`
-	// Version status. Valid values: creating (Being created), inactive (Not effective), active (Effective).
-	Status *string `pulumi:"status"`
+	GroupType string `pulumi:"groupType"`
+	// The source version ID that the config group version was derived from.
+	SourceVersion string `pulumi:"sourceVersion"`
+	// Environment status. Valid values: creating (Being created), running (The environment is stable, with version changes allowed), versionDeploying (The version is currently being deployed, with no more changes allowed).
+	Status string `pulumi:"status"`
 	// Version ID.
 	VersionId string `pulumi:"versionId"`
 	// Version No.
-	VersionNumber *string `pulumi:"versionNumber"`
+	VersionNumber string `pulumi:"versionNumber"`
 }
 
 // GetEnvironmentsEnvInfoCurrentConfigGroupVersionInfoInput is an input type that accepts GetEnvironmentsEnvInfoCurrentConfigGroupVersionInfoArgs and GetEnvironmentsEnvInfoCurrentConfigGroupVersionInfoOutput values.
@@ -46190,19 +50915,21 @@ type GetEnvironmentsEnvInfoCurrentConfigGroupVersionInfoInput interface {
 
 type GetEnvironmentsEnvInfoCurrentConfigGroupVersionInfoArgs struct {
 	// Version creation time. The time format follows the ISO 8601 standard and is represented in Coordinated Universal Time (UTC).
-	CreateTime pulumi.StringPtrInput `pulumi:"createTime"`
+	CreateTime pulumi.StringInput `pulumi:"createTime"`
 	// Version description.
-	Description pulumi.StringPtrInput `pulumi:"description"`
+	Description pulumi.StringInput `pulumi:"description"`
 	// Configuraration group ID.
-	GroupId pulumi.StringPtrInput `pulumi:"groupId"`
+	GroupId pulumi.StringInput `pulumi:"groupId"`
 	// Configuration group type. Valid values: l7Acceleration (L7 acceleration configuration group), edgeFunctions (Edge function configuration group).
-	GroupType pulumi.StringPtrInput `pulumi:"groupType"`
-	// Version status. Valid values: creating (Being created), inactive (Not effective), active (Effective).
-	Status pulumi.StringPtrInput `pulumi:"status"`
+	GroupType pulumi.StringInput `pulumi:"groupType"`
+	// The source version ID that the config group version was derived from.
+	SourceVersion pulumi.StringInput `pulumi:"sourceVersion"`
+	// Environment status. Valid values: creating (Being created), running (The environment is stable, with version changes allowed), versionDeploying (The version is currently being deployed, with no more changes allowed).
+	Status pulumi.StringInput `pulumi:"status"`
 	// Version ID.
 	VersionId pulumi.StringInput `pulumi:"versionId"`
 	// Version No.
-	VersionNumber pulumi.StringPtrInput `pulumi:"versionNumber"`
+	VersionNumber pulumi.StringInput `pulumi:"versionNumber"`
 }
 
 func (GetEnvironmentsEnvInfoCurrentConfigGroupVersionInfoArgs) ElementType() reflect.Type {
@@ -46257,28 +50984,33 @@ func (o GetEnvironmentsEnvInfoCurrentConfigGroupVersionInfoOutput) ToGetEnvironm
 }
 
 // Version creation time. The time format follows the ISO 8601 standard and is represented in Coordinated Universal Time (UTC).
-func (o GetEnvironmentsEnvInfoCurrentConfigGroupVersionInfoOutput) CreateTime() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v GetEnvironmentsEnvInfoCurrentConfigGroupVersionInfo) *string { return v.CreateTime }).(pulumi.StringPtrOutput)
+func (o GetEnvironmentsEnvInfoCurrentConfigGroupVersionInfoOutput) CreateTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEnvironmentsEnvInfoCurrentConfigGroupVersionInfo) string { return v.CreateTime }).(pulumi.StringOutput)
 }
 
 // Version description.
-func (o GetEnvironmentsEnvInfoCurrentConfigGroupVersionInfoOutput) Description() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v GetEnvironmentsEnvInfoCurrentConfigGroupVersionInfo) *string { return v.Description }).(pulumi.StringPtrOutput)
+func (o GetEnvironmentsEnvInfoCurrentConfigGroupVersionInfoOutput) Description() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEnvironmentsEnvInfoCurrentConfigGroupVersionInfo) string { return v.Description }).(pulumi.StringOutput)
 }
 
 // Configuraration group ID.
-func (o GetEnvironmentsEnvInfoCurrentConfigGroupVersionInfoOutput) GroupId() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v GetEnvironmentsEnvInfoCurrentConfigGroupVersionInfo) *string { return v.GroupId }).(pulumi.StringPtrOutput)
+func (o GetEnvironmentsEnvInfoCurrentConfigGroupVersionInfoOutput) GroupId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEnvironmentsEnvInfoCurrentConfigGroupVersionInfo) string { return v.GroupId }).(pulumi.StringOutput)
 }
 
 // Configuration group type. Valid values: l7Acceleration (L7 acceleration configuration group), edgeFunctions (Edge function configuration group).
-func (o GetEnvironmentsEnvInfoCurrentConfigGroupVersionInfoOutput) GroupType() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v GetEnvironmentsEnvInfoCurrentConfigGroupVersionInfo) *string { return v.GroupType }).(pulumi.StringPtrOutput)
+func (o GetEnvironmentsEnvInfoCurrentConfigGroupVersionInfoOutput) GroupType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEnvironmentsEnvInfoCurrentConfigGroupVersionInfo) string { return v.GroupType }).(pulumi.StringOutput)
 }
 
-// Version status. Valid values: creating (Being created), inactive (Not effective), active (Effective).
-func (o GetEnvironmentsEnvInfoCurrentConfigGroupVersionInfoOutput) Status() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v GetEnvironmentsEnvInfoCurrentConfigGroupVersionInfo) *string { return v.Status }).(pulumi.StringPtrOutput)
+// The source version ID that the config group version was derived from.
+func (o GetEnvironmentsEnvInfoCurrentConfigGroupVersionInfoOutput) SourceVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEnvironmentsEnvInfoCurrentConfigGroupVersionInfo) string { return v.SourceVersion }).(pulumi.StringOutput)
+}
+
+// Environment status. Valid values: creating (Being created), running (The environment is stable, with version changes allowed), versionDeploying (The version is currently being deployed, with no more changes allowed).
+func (o GetEnvironmentsEnvInfoCurrentConfigGroupVersionInfoOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEnvironmentsEnvInfoCurrentConfigGroupVersionInfo) string { return v.Status }).(pulumi.StringOutput)
 }
 
 // Version ID.
@@ -46287,8 +51019,8 @@ func (o GetEnvironmentsEnvInfoCurrentConfigGroupVersionInfoOutput) VersionId() p
 }
 
 // Version No.
-func (o GetEnvironmentsEnvInfoCurrentConfigGroupVersionInfoOutput) VersionNumber() pulumi.StringPtrOutput {
-	return o.ApplyT(func(v GetEnvironmentsEnvInfoCurrentConfigGroupVersionInfo) *string { return v.VersionNumber }).(pulumi.StringPtrOutput)
+func (o GetEnvironmentsEnvInfoCurrentConfigGroupVersionInfoOutput) VersionNumber() pulumi.StringOutput {
+	return o.ApplyT(func(v GetEnvironmentsEnvInfoCurrentConfigGroupVersionInfo) string { return v.VersionNumber }).(pulumi.StringOutput)
 }
 
 type GetEnvironmentsEnvInfoCurrentConfigGroupVersionInfoArrayOutput struct{ *pulumi.OutputState }
@@ -46309,6 +51041,157 @@ func (o GetEnvironmentsEnvInfoCurrentConfigGroupVersionInfoArrayOutput) Index(i 
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetEnvironmentsEnvInfoCurrentConfigGroupVersionInfo {
 		return vs[0].([]GetEnvironmentsEnvInfoCurrentConfigGroupVersionInfo)[vs[1].(int)]
 	}).(GetEnvironmentsEnvInfoCurrentConfigGroupVersionInfoOutput)
+}
+
+type GetIpGroupReferencesReference struct {
+	// Entity ID.
+	EntityId string `pulumi:"entityId"`
+	// Entity name.
+	EntityName string `pulumi:"entityName"`
+	// Entity type.
+	EntityType string `pulumi:"entityType"`
+	// Sub entity ID.
+	SubEntityId string `pulumi:"subEntityId"`
+	// Sub entity name.
+	SubEntityName string `pulumi:"subEntityName"`
+	// Sub entity type.
+	SubEntityType string `pulumi:"subEntityType"`
+	// Site ID.
+	ZoneId string `pulumi:"zoneId"`
+}
+
+// GetIpGroupReferencesReferenceInput is an input type that accepts GetIpGroupReferencesReferenceArgs and GetIpGroupReferencesReferenceOutput values.
+// You can construct a concrete instance of `GetIpGroupReferencesReferenceInput` via:
+//
+//	GetIpGroupReferencesReferenceArgs{...}
+type GetIpGroupReferencesReferenceInput interface {
+	pulumi.Input
+
+	ToGetIpGroupReferencesReferenceOutput() GetIpGroupReferencesReferenceOutput
+	ToGetIpGroupReferencesReferenceOutputWithContext(context.Context) GetIpGroupReferencesReferenceOutput
+}
+
+type GetIpGroupReferencesReferenceArgs struct {
+	// Entity ID.
+	EntityId pulumi.StringInput `pulumi:"entityId"`
+	// Entity name.
+	EntityName pulumi.StringInput `pulumi:"entityName"`
+	// Entity type.
+	EntityType pulumi.StringInput `pulumi:"entityType"`
+	// Sub entity ID.
+	SubEntityId pulumi.StringInput `pulumi:"subEntityId"`
+	// Sub entity name.
+	SubEntityName pulumi.StringInput `pulumi:"subEntityName"`
+	// Sub entity type.
+	SubEntityType pulumi.StringInput `pulumi:"subEntityType"`
+	// Site ID.
+	ZoneId pulumi.StringInput `pulumi:"zoneId"`
+}
+
+func (GetIpGroupReferencesReferenceArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetIpGroupReferencesReference)(nil)).Elem()
+}
+
+func (i GetIpGroupReferencesReferenceArgs) ToGetIpGroupReferencesReferenceOutput() GetIpGroupReferencesReferenceOutput {
+	return i.ToGetIpGroupReferencesReferenceOutputWithContext(context.Background())
+}
+
+func (i GetIpGroupReferencesReferenceArgs) ToGetIpGroupReferencesReferenceOutputWithContext(ctx context.Context) GetIpGroupReferencesReferenceOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetIpGroupReferencesReferenceOutput)
+}
+
+// GetIpGroupReferencesReferenceArrayInput is an input type that accepts GetIpGroupReferencesReferenceArray and GetIpGroupReferencesReferenceArrayOutput values.
+// You can construct a concrete instance of `GetIpGroupReferencesReferenceArrayInput` via:
+//
+//	GetIpGroupReferencesReferenceArray{ GetIpGroupReferencesReferenceArgs{...} }
+type GetIpGroupReferencesReferenceArrayInput interface {
+	pulumi.Input
+
+	ToGetIpGroupReferencesReferenceArrayOutput() GetIpGroupReferencesReferenceArrayOutput
+	ToGetIpGroupReferencesReferenceArrayOutputWithContext(context.Context) GetIpGroupReferencesReferenceArrayOutput
+}
+
+type GetIpGroupReferencesReferenceArray []GetIpGroupReferencesReferenceInput
+
+func (GetIpGroupReferencesReferenceArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetIpGroupReferencesReference)(nil)).Elem()
+}
+
+func (i GetIpGroupReferencesReferenceArray) ToGetIpGroupReferencesReferenceArrayOutput() GetIpGroupReferencesReferenceArrayOutput {
+	return i.ToGetIpGroupReferencesReferenceArrayOutputWithContext(context.Background())
+}
+
+func (i GetIpGroupReferencesReferenceArray) ToGetIpGroupReferencesReferenceArrayOutputWithContext(ctx context.Context) GetIpGroupReferencesReferenceArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetIpGroupReferencesReferenceArrayOutput)
+}
+
+type GetIpGroupReferencesReferenceOutput struct{ *pulumi.OutputState }
+
+func (GetIpGroupReferencesReferenceOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetIpGroupReferencesReference)(nil)).Elem()
+}
+
+func (o GetIpGroupReferencesReferenceOutput) ToGetIpGroupReferencesReferenceOutput() GetIpGroupReferencesReferenceOutput {
+	return o
+}
+
+func (o GetIpGroupReferencesReferenceOutput) ToGetIpGroupReferencesReferenceOutputWithContext(ctx context.Context) GetIpGroupReferencesReferenceOutput {
+	return o
+}
+
+// Entity ID.
+func (o GetIpGroupReferencesReferenceOutput) EntityId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetIpGroupReferencesReference) string { return v.EntityId }).(pulumi.StringOutput)
+}
+
+// Entity name.
+func (o GetIpGroupReferencesReferenceOutput) EntityName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetIpGroupReferencesReference) string { return v.EntityName }).(pulumi.StringOutput)
+}
+
+// Entity type.
+func (o GetIpGroupReferencesReferenceOutput) EntityType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetIpGroupReferencesReference) string { return v.EntityType }).(pulumi.StringOutput)
+}
+
+// Sub entity ID.
+func (o GetIpGroupReferencesReferenceOutput) SubEntityId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetIpGroupReferencesReference) string { return v.SubEntityId }).(pulumi.StringOutput)
+}
+
+// Sub entity name.
+func (o GetIpGroupReferencesReferenceOutput) SubEntityName() pulumi.StringOutput {
+	return o.ApplyT(func(v GetIpGroupReferencesReference) string { return v.SubEntityName }).(pulumi.StringOutput)
+}
+
+// Sub entity type.
+func (o GetIpGroupReferencesReferenceOutput) SubEntityType() pulumi.StringOutput {
+	return o.ApplyT(func(v GetIpGroupReferencesReference) string { return v.SubEntityType }).(pulumi.StringOutput)
+}
+
+// Site ID.
+func (o GetIpGroupReferencesReferenceOutput) ZoneId() pulumi.StringOutput {
+	return o.ApplyT(func(v GetIpGroupReferencesReference) string { return v.ZoneId }).(pulumi.StringOutput)
+}
+
+type GetIpGroupReferencesReferenceArrayOutput struct{ *pulumi.OutputState }
+
+func (GetIpGroupReferencesReferenceArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetIpGroupReferencesReference)(nil)).Elem()
+}
+
+func (o GetIpGroupReferencesReferenceArrayOutput) ToGetIpGroupReferencesReferenceArrayOutput() GetIpGroupReferencesReferenceArrayOutput {
+	return o
+}
+
+func (o GetIpGroupReferencesReferenceArrayOutput) ToGetIpGroupReferencesReferenceArrayOutputWithContext(ctx context.Context) GetIpGroupReferencesReferenceArrayOutput {
+	return o
+}
+
+func (o GetIpGroupReferencesReferenceArrayOutput) Index(i pulumi.IntInput) GetIpGroupReferencesReferenceOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetIpGroupReferencesReference {
+		return vs[0].([]GetIpGroupReferencesReference)[vs[1].(int)]
+	}).(GetIpGroupReferencesReferenceOutput)
 }
 
 type GetIpRegionIpRegionInfo struct {
@@ -52158,6 +57041,40 @@ func (o GetZonesZoneWorkModeInfoArrayOutput) Index(i pulumi.IntInput) GetZonesZo
 }
 
 func init() {
+	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementPtrInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionReturnCustomPageActionParametersInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionReturnCustomPageActionParametersArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionReturnCustomPageActionParametersPtrInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionReturnCustomPageActionParametersArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsLikelyBotRequestsActionInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsLikelyBotRequestsActionArgs{})
@@ -52512,6 +57429,20 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementCustomRulesRuleActionSecurityActionRedirectActionParametersPtrInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementCustomRulesRuleActionSecurityActionRedirectActionParametersArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementCustomRulesRuleActionSecurityActionReturnCustomPageActionParametersInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementCustomRulesRuleActionSecurityActionReturnCustomPageActionParametersArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementCustomRulesRuleActionSecurityActionReturnCustomPageActionParametersPtrInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementCustomRulesRuleActionSecurityActionReturnCustomPageActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementLiteInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementLiteArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementLitePtrInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementLiteArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtrInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyCustomRulesInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyCustomRulesArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyCustomRulesPtrInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyCustomRulesArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*WebSecurityTemplateSecurityPolicyCustomRulesRuleInput)(nil)).Elem(), WebSecurityTemplateSecurityPolicyCustomRulesRuleArgs{})
@@ -52655,6 +57586,10 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*ZoneOwnershipVerificationDnsVerificationArrayInput)(nil)).Elem(), ZoneOwnershipVerificationDnsVerificationArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ZoneWorkModeInfoInput)(nil)).Elem(), ZoneWorkModeInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ZoneWorkModeInfoArrayInput)(nil)).Elem(), ZoneWorkModeInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBillingDataDataInput)(nil)).Elem(), GetBillingDataDataArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBillingDataDataArrayInput)(nil)).Elem(), GetBillingDataDataArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBillingDataFilterInput)(nil)).Elem(), GetBillingDataFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetBillingDataFilterArrayInput)(nil)).Elem(), GetBillingDataFilterArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetConfigGroupVersionDetailConfigGroupVersionInfoInput)(nil)).Elem(), GetConfigGroupVersionDetailConfigGroupVersionInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetConfigGroupVersionDetailConfigGroupVersionInfoArrayInput)(nil)).Elem(), GetConfigGroupVersionDetailConfigGroupVersionInfoArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetConfigGroupVersionsConfigGroupVersionInfoInput)(nil)).Elem(), GetConfigGroupVersionsConfigGroupVersionInfoArgs{})
@@ -52679,6 +57614,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetEnvironmentsEnvInfoArrayInput)(nil)).Elem(), GetEnvironmentsEnvInfoArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetEnvironmentsEnvInfoCurrentConfigGroupVersionInfoInput)(nil)).Elem(), GetEnvironmentsEnvInfoCurrentConfigGroupVersionInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetEnvironmentsEnvInfoCurrentConfigGroupVersionInfoArrayInput)(nil)).Elem(), GetEnvironmentsEnvInfoCurrentConfigGroupVersionInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetIpGroupReferencesReferenceInput)(nil)).Elem(), GetIpGroupReferencesReferenceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetIpGroupReferencesReferenceArrayInput)(nil)).Elem(), GetIpGroupReferencesReferenceArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetIpRegionIpRegionInfoInput)(nil)).Elem(), GetIpRegionIpRegionInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetIpRegionIpRegionInfoArrayInput)(nil)).Elem(), GetIpRegionIpRegionInfoArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetMultiPathGatewayOriginAclMultiPathGatewayOriginAclInfoInput)(nil)).Elem(), GetMultiPathGatewayOriginAclMultiPathGatewayOriginAclInfoArgs{})
@@ -52767,6 +57704,40 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetZonesZoneVanityNameServersIpArrayInput)(nil)).Elem(), GetZonesZoneVanityNameServersIpArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetZonesZoneWorkModeInfoInput)(nil)).Elem(), GetZonesZoneWorkModeInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetZonesZoneWorkModeInfoArrayInput)(nil)).Elem(), GetZonesZoneWorkModeInfoArray{})
+	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementOutput{})
+	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementPtrOutput{})
+	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsOutput{})
+	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsPtrOutput{})
+	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceOutput{})
+	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligencePtrOutput{})
+	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsOutput{})
+	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsPtrOutput{})
+	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionOutput{})
+	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionPtrOutput{})
+	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersOutput{})
+	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionAllowActionParametersPtrOutput{})
+	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersOutput{})
+	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionBlockIpActionParametersPtrOutput{})
+	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersOutput{})
+	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionChallengeActionParametersPtrOutput{})
+	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersOutput{})
+	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionDenyActionParametersPtrOutput{})
+	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersOutput{})
+	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionRedirectActionParametersPtrOutput{})
+	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersOutput{})
+	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHighRiskBotRequestsActionReturnCustomPageActionParametersPtrOutput{})
+	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionOutput{})
+	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionPtrOutput{})
+	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersOutput{})
+	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionAllowActionParametersPtrOutput{})
+	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersOutput{})
+	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionBlockIpActionParametersPtrOutput{})
+	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersOutput{})
+	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionChallengeActionParametersPtrOutput{})
+	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersOutput{})
+	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionDenyActionParametersPtrOutput{})
+	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersOutput{})
+	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionRedirectActionParametersPtrOutput{})
 	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionReturnCustomPageActionParametersOutput{})
 	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsHumanRequestsActionReturnCustomPageActionParametersPtrOutput{})
 	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsLikelyBotRequestsActionOutput{})
@@ -53121,6 +58092,20 @@ func init() {
 	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementCustomRulesRuleActionSecurityActionRedirectActionParametersPtrOutput{})
 	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementCustomRulesRuleActionSecurityActionReturnCustomPageActionParametersOutput{})
 	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementCustomRulesRuleActionSecurityActionReturnCustomPageActionParametersPtrOutput{})
+	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementLiteOutput{})
+	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementLitePtrOutput{})
+	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionOutput{})
+	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionPtrOutput{})
+	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionOutput{})
+	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionPtrOutput{})
+	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersOutput{})
+	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersPtrOutput{})
+	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersOutput{})
+	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersPtrOutput{})
+	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersOutput{})
+	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersPtrOutput{})
+	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeOutput{})
+	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengePtrOutput{})
 	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyCustomRulesOutput{})
 	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyCustomRulesPtrOutput{})
 	pulumi.RegisterOutputType(WebSecurityTemplateSecurityPolicyCustomRulesRuleOutput{})
@@ -53264,6 +58249,10 @@ func init() {
 	pulumi.RegisterOutputType(ZoneOwnershipVerificationDnsVerificationArrayOutput{})
 	pulumi.RegisterOutputType(ZoneWorkModeInfoOutput{})
 	pulumi.RegisterOutputType(ZoneWorkModeInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetBillingDataDataOutput{})
+	pulumi.RegisterOutputType(GetBillingDataDataArrayOutput{})
+	pulumi.RegisterOutputType(GetBillingDataFilterOutput{})
+	pulumi.RegisterOutputType(GetBillingDataFilterArrayOutput{})
 	pulumi.RegisterOutputType(GetConfigGroupVersionDetailConfigGroupVersionInfoOutput{})
 	pulumi.RegisterOutputType(GetConfigGroupVersionDetailConfigGroupVersionInfoArrayOutput{})
 	pulumi.RegisterOutputType(GetConfigGroupVersionsConfigGroupVersionInfoOutput{})
@@ -53288,6 +58277,8 @@ func init() {
 	pulumi.RegisterOutputType(GetEnvironmentsEnvInfoArrayOutput{})
 	pulumi.RegisterOutputType(GetEnvironmentsEnvInfoCurrentConfigGroupVersionInfoOutput{})
 	pulumi.RegisterOutputType(GetEnvironmentsEnvInfoCurrentConfigGroupVersionInfoArrayOutput{})
+	pulumi.RegisterOutputType(GetIpGroupReferencesReferenceOutput{})
+	pulumi.RegisterOutputType(GetIpGroupReferencesReferenceArrayOutput{})
 	pulumi.RegisterOutputType(GetIpRegionIpRegionInfoOutput{})
 	pulumi.RegisterOutputType(GetIpRegionIpRegionInfoArrayOutput{})
 	pulumi.RegisterOutputType(GetMultiPathGatewayOriginAclMultiPathGatewayOriginAclInfoOutput{})

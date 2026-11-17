@@ -108,6 +108,14 @@ def get_customer_domains(result_output_file: Optional[_builtins.str] = None,
     id = tencentcloud.apigateway.get_customer_domains_output(service_id=foo.service_id)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeServiceSubDomainMappings](https://www.tencentcloud.com/search/?wd=DescribeServiceSubDomainMappings&type=document&lang=en)
+      - [DescribeServiceSubDomains](https://www.tencentcloud.com/search/?wd=DescribeServiceSubDomains&type=document&lang=en)
+
 
     :param _builtins.str result_output_file: Used to save results.
     :param _builtins.str service_id: The service ID.
@@ -149,6 +157,14 @@ def get_customer_domains_output(result_output_file: pulumi.Input[Optional[Option
         ])
     id = tencentcloud.apigateway.get_customer_domains_output(service_id=foo.service_id)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeServiceSubDomainMappings](https://www.tencentcloud.com/search/?wd=DescribeServiceSubDomainMappings&type=document&lang=en)
+      - [DescribeServiceSubDomains](https://www.tencentcloud.com/search/?wd=DescribeServiceSubDomains&type=document&lang=en)
 
 
     :param _builtins.str result_output_file: Used to save results.

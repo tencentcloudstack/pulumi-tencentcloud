@@ -148,6 +148,12 @@ def get_instance_configs(availability_zone: Optional[_builtins.str] = None,
     config = tencentcloud.reserved.get_instance_configs(availability_zone="na-siliconvalley-1")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeReservedInstancesOfferings](https://www.tencentcloud.com/document/api/213/68356)
+
 
     :param _builtins.str availability_zone: The available zone that the reserved instance locates at.
     :param _builtins.int duration: Validity period of the reserved instance. Valid values are `31536000`(1 year) and `94608000`(3 years).
@@ -193,6 +199,12 @@ def get_instance_configs_output(availability_zone: pulumi.Input[Optional[Optiona
 
     config = tencentcloud.reserved.get_instance_configs(availability_zone="na-siliconvalley-1")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeReservedInstancesOfferings](https://www.tencentcloud.com/document/api/213/68356)
 
 
     :param _builtins.str availability_zone: The available zone that the reserved instance locates at.

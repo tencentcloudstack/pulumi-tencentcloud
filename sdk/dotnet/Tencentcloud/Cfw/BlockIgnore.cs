@@ -63,6 +63,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateBlockIgnoreRuleList](https://www.tencentcloud.com/search/?wd=CreateBlockIgnoreRuleList&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeBlockIgnoreList](https://www.tencentcloud.com/document/api/1160/54826)
+    /// * Update: [ModifyBlockIgnoreRule](https://www.tencentcloud.com/search/?wd=ModifyBlockIgnoreRule&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteBlockIgnoreRuleList](https://www.tencentcloud.com/search/?wd=DeleteBlockIgnoreRuleList&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// cfw BlockIgnoreList can be imported using the id, e.g.

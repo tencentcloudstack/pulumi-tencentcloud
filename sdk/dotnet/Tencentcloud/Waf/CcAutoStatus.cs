@@ -32,6 +32,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [UpsertCCAutoStatus](https://www.tencentcloud.com/search/?wd=UpsertCCAutoStatus&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeCCAutoStatus](https://www.tencentcloud.com/search/?wd=DescribeCCAutoStatus&amp;type=document&amp;lang=en)
+    /// * Delete: [UpsertCCAutoStatus](https://www.tencentcloud.com/search/?wd=UpsertCCAutoStatus&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// waf CcAutoStatus can be imported using the id, e.g.

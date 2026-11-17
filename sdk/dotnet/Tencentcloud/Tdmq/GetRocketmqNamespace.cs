@@ -46,6 +46,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRocketMQNamespaces](https://www.tencentcloud.com/search/?wd=DescribeRocketMQNamespaces&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetRocketmqNamespaceResult> InvokeAsync(GetRocketmqNamespaceArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetRocketmqNamespaceResult>("tencentcloud:Tdmq/getRocketmqNamespace:getRocketmqNamespace", args ?? new GetRocketmqNamespaceArgs(), options.WithDefaults());
@@ -84,6 +90,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRocketMQNamespaces](https://www.tencentcloud.com/search/?wd=DescribeRocketMQNamespaces&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetRocketmqNamespaceResult> Invoke(GetRocketmqNamespaceInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetRocketmqNamespaceResult>("tencentcloud:Tdmq/getRocketmqNamespace:getRocketmqNamespace", args ?? new GetRocketmqNamespaceInvokeArgs(), options.WithDefaults());
@@ -122,6 +134,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRocketMQNamespaces](https://www.tencentcloud.com/search/?wd=DescribeRocketMQNamespaces&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetRocketmqNamespaceResult> Invoke(GetRocketmqNamespaceInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetRocketmqNamespaceResult>("tencentcloud:Tdmq/getRocketmqNamespace:getRocketmqNamespace", args ?? new GetRocketmqNamespaceInvokeArgs(), options.WithDefaults());

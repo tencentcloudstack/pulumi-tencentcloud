@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataFetchUrlInfo](https://www.tencentcloud.com/document/api/1131/45328)
         /// </summary>
         public static Task<GetFetchUrlInfoResult> InvokeAsync(GetFetchUrlInfoArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetFetchUrlInfoResult>("tencentcloud:Rum/getFetchUrlInfo:getFetchUrlInfo", args ?? new GetFetchUrlInfoArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataFetchUrlInfo](https://www.tencentcloud.com/document/api/1131/45328)
         /// </summary>
         public static Output<GetFetchUrlInfoResult> Invoke(GetFetchUrlInfoInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetFetchUrlInfoResult>("tencentcloud:Rum/getFetchUrlInfo:getFetchUrlInfo", args ?? new GetFetchUrlInfoInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataFetchUrlInfo](https://www.tencentcloud.com/document/api/1131/45328)
         /// </summary>
         public static Output<GetFetchUrlInfoResult> Invoke(GetFetchUrlInfoInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetFetchUrlInfoResult>("tencentcloud:Rum/getFetchUrlInfo:getFetchUrlInfo", args ?? new GetFetchUrlInfoInvokeArgs(), options.WithDefaults());

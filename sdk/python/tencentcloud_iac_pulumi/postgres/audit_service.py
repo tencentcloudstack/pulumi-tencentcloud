@@ -249,6 +249,19 @@ class AuditService(pulumi.CustomResource):
             audit_type="complex")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeAuditInstanceList](https://www.tencentcloud.com/document/api/409/79967)
+          - [OpenAuditService](https://www.tencentcloud.com/document/api/409/79963)
+        * Read: [DescribeAuditInstanceList](https://www.tencentcloud.com/document/api/409/79967)
+        * Update: [ModifyAuditService](https://www.tencentcloud.com/document/api/409/79964)
+        * Delete:
+          - [CloseAuditService](https://www.tencentcloud.com/document/api/409/79970)
+          - [DescribeAuditInstanceList](https://www.tencentcloud.com/document/api/409/79967)
+
         ## Import
 
         PostgreSQL audit service can be imported using the instance_id, e.g.
@@ -286,6 +299,19 @@ class AuditService(pulumi.CustomResource):
             hot_log_expire_day=7,
             audit_type="complex")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeAuditInstanceList](https://www.tencentcloud.com/document/api/409/79967)
+          - [OpenAuditService](https://www.tencentcloud.com/document/api/409/79963)
+        * Read: [DescribeAuditInstanceList](https://www.tencentcloud.com/document/api/409/79967)
+        * Update: [ModifyAuditService](https://www.tencentcloud.com/document/api/409/79964)
+        * Delete:
+          - [CloseAuditService](https://www.tencentcloud.com/document/api/409/79970)
+          - [DescribeAuditInstanceList](https://www.tencentcloud.com/document/api/409/79967)
 
         ## Import
 

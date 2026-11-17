@@ -43,6 +43,12 @@ import * as utilities from "../utilities";
  *     order: "DESC",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListRules](https://www.tencentcloud.com/document/api/1108/45814)
  */
 export function getEventRules(args: GetEventRulesArgs, opts?: pulumi.InvokeOptions): Promise<GetEventRulesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -133,6 +139,12 @@ export interface GetEventRulesResult {
  *     order: "DESC",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListRules](https://www.tencentcloud.com/document/api/1108/45814)
  */
 export function getEventRulesOutput(args: GetEventRulesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetEventRulesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

@@ -152,6 +152,18 @@ class Routes(pulumi.CustomResource):
             switch="off")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DisableCcnRoutes](https://www.tencentcloud.com/document/api/215/34785)
+          - [EnableCcnRoutes](https://www.tencentcloud.com/document/api/215/34784)
+        * Read: [DescribeCcnRoutes](https://www.tencentcloud.com/document/api/215/34788)
+        * Update:
+          - [DisableCcnRoutes](https://www.tencentcloud.com/document/api/215/34785)
+          - [EnableCcnRoutes](https://www.tencentcloud.com/document/api/215/34784)
+
         ## Import
 
         vpc ccn_routes can be imported using the id, e.g.
@@ -187,6 +199,18 @@ class Routes(pulumi.CustomResource):
             route_id="ccnr-5uhewx1s",
             switch="off")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DisableCcnRoutes](https://www.tencentcloud.com/document/api/215/34785)
+          - [EnableCcnRoutes](https://www.tencentcloud.com/document/api/215/34784)
+        * Read: [DescribeCcnRoutes](https://www.tencentcloud.com/document/api/215/34788)
+        * Update:
+          - [DisableCcnRoutes](https://www.tencentcloud.com/document/api/215/34785)
+          - [EnableCcnRoutes](https://www.tencentcloud.com/document/api/215/34784)
 
         ## Import
 

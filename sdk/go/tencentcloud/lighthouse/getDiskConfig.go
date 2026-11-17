@@ -45,6 +45,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDiskConfigs](https://www.tencentcloud.com/document/api/1103/44575)
 func GetDiskConfig(ctx *pulumi.Context, args *GetDiskConfigArgs, opts ...pulumi.InvokeOption) (*GetDiskConfigResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDiskConfigResult

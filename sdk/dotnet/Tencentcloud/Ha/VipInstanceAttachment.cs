@@ -33,6 +33,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ha
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [AssociateHaVipInstance](https://www.tencentcloud.com/search/?wd=AssociateHaVipInstance&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeHaVips](https://www.tencentcloud.com/document/api/215/34762)
+    /// * Delete: [DisassociateHaVipInstance](https://www.tencentcloud.com/search/?wd=DisassociateHaVipInstance&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// vpc HaVipInstanceAttachment can be imported using the id(${haVipId}#${instanceType}#${instanceId}), e.g.

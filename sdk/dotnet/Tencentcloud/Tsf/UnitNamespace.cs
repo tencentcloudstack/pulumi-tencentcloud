@@ -33,6 +33,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateUnitNamespaces](https://www.tencentcloud.com/search/?wd=CreateUnitNamespaces&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeUnitNamespaces](https://www.tencentcloud.com/search/?wd=DescribeUnitNamespaces&amp;type=document&amp;lang=en)
+    /// * Delete:
+    ///   - [DeleteUnitNamespaces](https://www.tencentcloud.com/search/?wd=DeleteUnitNamespaces&amp;type=document&amp;lang=en)
+    ///   - [DescribeUnitNamespaces](https://www.tencentcloud.com/search/?wd=DescribeUnitNamespaces&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// tsf UnitNamespace can be imported using the id, e.g.

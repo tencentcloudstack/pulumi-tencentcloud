@@ -99,6 +99,12 @@ def get_project_security_groups(project_id: Optional[_builtins.int] = None,
     example = tencentcloud.sqlserver.get_project_security_groups(project_id=0)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeProjectSecurityGroups](https://www.tencentcloud.com/document/api/238/72729)
+
 
     :param _builtins.int project_id: Project ID, which can be viewed through the console project management.
     :param _builtins.str result_output_file: Used to save results.
@@ -128,6 +134,12 @@ def get_project_security_groups_output(project_id: pulumi.Input[Optional[_builti
 
     example = tencentcloud.sqlserver.get_project_security_groups(project_id=0)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeProjectSecurityGroups](https://www.tencentcloud.com/document/api/238/72729)
 
 
     :param _builtins.int project_id: Project ID, which can be viewed through the console project management.

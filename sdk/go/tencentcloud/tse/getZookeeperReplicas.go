@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeZookeeperReplicas](https://www.tencentcloud.com/search/?wd=DescribeZookeeperReplicas&type=document&lang=en)
 func GetZookeeperReplicas(ctx *pulumi.Context, args *GetZookeeperReplicasArgs, opts ...pulumi.InvokeOption) (*GetZookeeperReplicasResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetZookeeperReplicasResult

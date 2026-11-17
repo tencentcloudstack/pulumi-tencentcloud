@@ -358,6 +358,12 @@ def get_instance_detail(instance_id: Optional[_builtins.str] = None,
     example = tencentcloud.mqtt.get_instance_detail(instance_id="mqtt-kngmpg9p")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstance](https://www.tencentcloud.com/document/api/1294/76523)
+
 
     :param _builtins.str instance_id: Instance ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -409,6 +415,12 @@ def get_instance_detail_output(instance_id: pulumi.Input[Optional[_builtins.str]
 
     example = tencentcloud.mqtt.get_instance_detail(instance_id="mqtt-kngmpg9p")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstance](https://www.tencentcloud.com/document/api/1294/76523)
 
 
     :param _builtins.str instance_id: Instance ID.

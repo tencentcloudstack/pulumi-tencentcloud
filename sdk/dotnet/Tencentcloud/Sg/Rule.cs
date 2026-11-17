@@ -43,6 +43,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sg
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [AddEnterpriseSecurityGroupRules](https://www.tencentcloud.com/document/api/1160/51373)
+    ///   - [DescribeEnterpriseSGRuleProgress](https://www.tencentcloud.com/search/?wd=DescribeEnterpriseSGRuleProgress&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeEnterpriseSecurityGroupRuleList](https://www.tencentcloud.com/search/?wd=DescribeEnterpriseSecurityGroupRuleList&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [DescribeEnterpriseSGRuleProgress](https://www.tencentcloud.com/search/?wd=DescribeEnterpriseSGRuleProgress&amp;type=document&amp;lang=en)
+    ///   - [ModifyEnterpriseSecurityGroupRule](https://www.tencentcloud.com/document/api/1160/54828)
+    /// * Delete:
+    ///   - [DescribeEnterpriseSGRuleProgress](https://www.tencentcloud.com/search/?wd=DescribeEnterpriseSGRuleProgress&amp;type=document&amp;lang=en)
+    ///   - [RemoveEnterpriseSecurityGroupRule](https://www.tencentcloud.com/document/api/1160/51365)
+    /// 
     /// ## Import
     /// 
     /// cfw SgRule can be imported using the id, e.g.

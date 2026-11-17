@@ -100,10 +100,10 @@ class GetGatewaySnatsSnatListResult(dict):
         :param _builtins.str description: Description.
         :param _builtins.str nat_gateway_id: NAT gateway ID.
         :param Sequence[_builtins.str] public_ip_addrs: Elastic IP address pool.
-        :param _builtins.str resource_type: Resource type. Valid values: SUBNET, NETWORKINTERFACE.
+        :param _builtins.str resource_type: Resource type. Valid values: SUBNET, NETWORKINTERFACE, USERDEFINED.
         :param _builtins.str snat_id: SNAT rule ID.
         :param _builtins.str instance_id: Instance ID.
-        :param _builtins.str instance_private_ip_addr: Private IPs of the instance's primary ENI, required when `resource_type` is NETWORKINTERFACE.
+        :param _builtins.str instance_private_ip_addr: Private IPs of the instance's primary ENI, required when `resource_type` is NETWORKINTERFACE or USERDEFINED.
         :param _builtins.str subnet_cidr_block: The IPv4 CIDR of the subnet, required when `resource_type` is SUBNET.
         :param _builtins.str subnet_id: Subnet instance ID.
         """
@@ -158,7 +158,7 @@ class GetGatewaySnatsSnatListResult(dict):
     @pulumi.getter(name="resourceType")
     def resource_type(self) -> _builtins.str:
         """
-        Resource type. Valid values: SUBNET, NETWORKINTERFACE.
+        Resource type. Valid values: SUBNET, NETWORKINTERFACE, USERDEFINED.
         """
         return pulumi.get(self, "resource_type")
 
@@ -182,7 +182,7 @@ class GetGatewaySnatsSnatListResult(dict):
     @pulumi.getter(name="instancePrivateIpAddr")
     def instance_private_ip_addr(self) -> Optional[_builtins.str]:
         """
-        Private IPs of the instance's primary ENI, required when `resource_type` is NETWORKINTERFACE.
+        Private IPs of the instance's primary ENI, required when `resource_type` is NETWORKINTERFACE or USERDEFINED.
         """
         return pulumi.get(self, "instance_private_ip_addr")
 

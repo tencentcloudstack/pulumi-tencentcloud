@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     resourceType: "lighthouse",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeHostLighthouseInstanceList](https://www.tencentcloud.com/search/?wd=DescribeHostLighthouseInstanceList&type=document&lang=en)
  */
 export function getDescribeHostLighthouseInstanceList(args: GetDescribeHostLighthouseInstanceListArgs, opts?: pulumi.InvokeOptions): Promise<GetDescribeHostLighthouseInstanceListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -90,6 +96,12 @@ export interface GetDescribeHostLighthouseInstanceListResult {
  *     resourceType: "lighthouse",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeHostLighthouseInstanceList](https://www.tencentcloud.com/search/?wd=DescribeHostLighthouseInstanceList&type=document&lang=en)
  */
 export function getDescribeHostLighthouseInstanceListOutput(args: GetDescribeHostLighthouseInstanceListOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDescribeHostLighthouseInstanceListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

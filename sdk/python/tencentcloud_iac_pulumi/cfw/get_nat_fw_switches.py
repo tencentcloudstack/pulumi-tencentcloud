@@ -138,6 +138,12 @@ def get_nat_fw_switches(enable: Optional[_builtins.int] = None,
         enable=1)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeNatFwSwitch](https://www.tencentcloud.com/search/?wd=DescribeNatFwSwitch&type=document&lang=en)
+
 
     :param _builtins.int enable: Switch enable status, 1 open; 0 close.
     :param _builtins.str nat_ins_id: Filter the NAT firewall instance to which the NAT firewall subnet switch belongs.
@@ -187,6 +193,12 @@ def get_nat_fw_switches_output(enable: pulumi.Input[Optional[Optional[_builtins.
     example = tencentcloud.cfw.get_nat_fw_switches(nat_ins_id="cfwnat-18d2ba18",
         enable=1)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeNatFwSwitch](https://www.tencentcloud.com/search/?wd=DescribeNatFwSwitch&type=document&lang=en)
 
 
     :param _builtins.int enable: Switch enable status, 1 open; 0 close.

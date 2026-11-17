@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     searchWord: "echo",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeMsApiList](https://www.tencentcloud.com/search/?wd=DescribeMsApiList&type=document&lang=en)
  */
 export function getMsApiList(args: GetMsApiListArgs, opts?: pulumi.InvokeOptions): Promise<GetMsApiListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -78,6 +84,12 @@ export interface GetMsApiListResult {
  *     searchWord: "echo",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeMsApiList](https://www.tencentcloud.com/search/?wd=DescribeMsApiList&type=document&lang=en)
  */
 export function getMsApiListOutput(args: GetMsApiListOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetMsApiListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

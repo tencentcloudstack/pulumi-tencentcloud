@@ -148,6 +148,12 @@ def get_blueprints(blueprint_ids: Optional[Sequence[_builtins.str]] = None,
     ])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBlueprints](https://www.tencentcloud.com/document/api/1103/42503)
+
 
     :param Sequence[_builtins.str] blueprint_ids: Blueprint ID list.
     :param Sequence[Union['GetBlueprintsFilterArgs', 'GetBlueprintsFilterArgsDict']] filters: Filter list.
@@ -229,6 +235,12 @@ def get_blueprints_output(blueprint_ids: pulumi.Input[Optional[Optional[Sequence
         "lhbp-yyy",
     ])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBlueprints](https://www.tencentcloud.com/document/api/1103/42503)
 
 
     :param Sequence[_builtins.str] blueprint_ids: Blueprint ID list.

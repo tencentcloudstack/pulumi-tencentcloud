@@ -47,6 +47,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [AssociateDatasourceHouse](https://www.tencentcloud.com/search/?wd=AssociateDatasourceHouse&amp;type=document&amp;lang=en)
+    ///   - [DescribeNetworkConnections](https://www.tencentcloud.com/search/?wd=DescribeNetworkConnections&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeNetworkConnections](https://www.tencentcloud.com/search/?wd=DescribeNetworkConnections&amp;type=document&amp;lang=en)
+    /// * Update: [UpdateNetworkConnection](https://www.tencentcloud.com/search/?wd=UpdateNetworkConnection&amp;type=document&amp;lang=en)
+    /// * Delete: [UnboundDatasourceHouse](https://www.tencentcloud.com/search/?wd=UnboundDatasourceHouse&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dlc/datasourceHouseAttachment:DatasourceHouseAttachment")]
     public partial class DatasourceHouseAttachment : global::Pulumi.CustomResource

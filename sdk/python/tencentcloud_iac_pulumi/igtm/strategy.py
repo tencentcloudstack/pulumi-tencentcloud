@@ -394,6 +394,15 @@ class Strategy(pulumi.CustomResource):
             switch_pool_type="AUTO")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateStrategy](https://www.tencentcloud.com/search/?wd=CreateStrategy&type=document&lang=en)
+        * Read: [DescribeStrategyDetail](https://www.tencentcloud.com/search/?wd=DescribeStrategyDetail&type=document&lang=en)
+        * Update: [ModifyStrategy](https://www.tencentcloud.com/search/?wd=ModifyStrategy&type=document&lang=en)
+        * Delete: [DeleteStrategy](https://www.tencentcloud.com/search/?wd=DeleteStrategy&type=document&lang=en)
+
         ## Import
 
         IGTM strategy can be imported using the instanceId#strategyId, e.g.
@@ -526,6 +535,15 @@ class Strategy(pulumi.CustomResource):
             keep_domain_records="DISABLED",
             switch_pool_type="AUTO")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateStrategy](https://www.tencentcloud.com/search/?wd=CreateStrategy&type=document&lang=en)
+        * Read: [DescribeStrategyDetail](https://www.tencentcloud.com/search/?wd=DescribeStrategyDetail&type=document&lang=en)
+        * Update: [ModifyStrategy](https://www.tencentcloud.com/search/?wd=ModifyStrategy&type=document&lang=en)
+        * Delete: [DeleteStrategy](https://www.tencentcloud.com/search/?wd=DeleteStrategy&type=document&lang=en)
 
         ## Import
 

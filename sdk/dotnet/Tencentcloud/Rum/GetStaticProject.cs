@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataStaticProject](https://www.tencentcloud.com/document/api/1131/45319)
         /// </summary>
         public static Task<GetStaticProjectResult> InvokeAsync(GetStaticProjectArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetStaticProjectResult>("tencentcloud:Rum/getStaticProject:getStaticProject", args ?? new GetStaticProjectArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataStaticProject](https://www.tencentcloud.com/document/api/1131/45319)
         /// </summary>
         public static Output<GetStaticProjectResult> Invoke(GetStaticProjectInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetStaticProjectResult>("tencentcloud:Rum/getStaticProject:getStaticProject", args ?? new GetStaticProjectInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataStaticProject](https://www.tencentcloud.com/document/api/1131/45319)
         /// </summary>
         public static Output<GetStaticProjectResult> Invoke(GetStaticProjectInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetStaticProjectResult>("tencentcloud:Rum/getStaticProject:getStaticProject", args ?? new GetStaticProjectInvokeArgs(), options.WithDefaults());

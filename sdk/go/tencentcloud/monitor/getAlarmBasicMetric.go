@@ -42,6 +42,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeBaseMetrics](https://www.tencentcloud.com/document/api/248/33882)
 func GetAlarmBasicMetric(ctx *pulumi.Context, args *GetAlarmBasicMetricArgs, opts ...pulumi.InvokeOption) (*GetAlarmBasicMetricResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetAlarmBasicMetricResult

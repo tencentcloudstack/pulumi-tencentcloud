@@ -58,6 +58,10 @@ class InstancesAcceptAttachInstanceArgsDict(TypedDict):
     """
     InstanceType: `VPC`, `DIRECTCONNECT`, `BMVPC`, `VPNGW`.
     """
+    order_type: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Instance billing method. Valid values: `PayByCcnOwner` (CCN owner pays), `PayByInstanceOwner` (instance owner pays).
+    """
     route_table_id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
     ID of the routing table associated with the instance. Note: This field may return null, indicating that no valid value can be obtained.
@@ -70,12 +74,14 @@ class InstancesAcceptAttachInstanceArgs:
                  instance_region: pulumi.Input[_builtins.str],
                  description: pulumi.Input[Optional[_builtins.str]] = None,
                  instance_type: pulumi.Input[Optional[_builtins.str]] = None,
+                 order_type: pulumi.Input[Optional[_builtins.str]] = None,
                  route_table_id: pulumi.Input[Optional[_builtins.str]] = None):
         """
         :param pulumi.Input[_builtins.str] instance_id: Attachment Instance ID.
         :param pulumi.Input[_builtins.str] instance_region: Instance Region.
         :param pulumi.Input[_builtins.str] description: Description.
         :param pulumi.Input[_builtins.str] instance_type: InstanceType: `VPC`, `DIRECTCONNECT`, `BMVPC`, `VPNGW`.
+        :param pulumi.Input[_builtins.str] order_type: Instance billing method. Valid values: `PayByCcnOwner` (CCN owner pays), `PayByInstanceOwner` (instance owner pays).
         :param pulumi.Input[_builtins.str] route_table_id: ID of the routing table associated with the instance. Note: This field may return null, indicating that no valid value can be obtained.
         """
         pulumi.set(__self__, "instance_id", instance_id)
@@ -84,6 +90,8 @@ class InstancesAcceptAttachInstanceArgs:
             pulumi.set(__self__, "description", description)
         if instance_type is not None:
             pulumi.set(__self__, "instance_type", instance_type)
+        if order_type is not None:
+            pulumi.set(__self__, "order_type", order_type)
         if route_table_id is not None:
             pulumi.set(__self__, "route_table_id", route_table_id)
 
@@ -134,6 +142,18 @@ class InstancesAcceptAttachInstanceArgs:
     @instance_type.setter
     def instance_type(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "instance_type", value)
+
+    @_builtins.property
+    @pulumi.getter(name="orderType")
+    def order_type(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Instance billing method. Valid values: `PayByCcnOwner` (CCN owner pays), `PayByInstanceOwner` (instance owner pays).
+        """
+        return pulumi.get(self, "order_type")
+
+    @order_type.setter
+    def order_type(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "order_type", value)
 
     @_builtins.property
     @pulumi.getter(name="routeTableId")

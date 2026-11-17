@@ -35,6 +35,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateUser](https://www.tencentcloud.com/document/api/597/35367)
+    /// * Read:
+    ///   - [DescribeInstanceAttributes](https://www.tencentcloud.com/document/api/597/35358)
+    ///   - [DescribeUser](https://www.tencentcloud.com/document/api/597/35363)
+    /// * Update: [ModifyPassword](https://www.tencentcloud.com/document/api/597/35362)
+    /// * Delete: [DeleteUser](https://www.tencentcloud.com/document/api/597/35365)
+    /// 
     /// ## Import
     /// 
     /// Ckafka user can be imported using the instance_id#account_name, e.g.

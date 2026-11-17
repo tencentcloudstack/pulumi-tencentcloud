@@ -21,6 +21,12 @@ import * as utilities from "../utilities";
  *     routeName: "keep-routes",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCloudNativeAPIGatewayRoutes](https://www.tencentcloud.com/document/api/1290/79259)
  */
 export function getGatewayRoutes(args: GetGatewayRoutesArgs, opts?: pulumi.InvokeOptions): Promise<GetGatewayRoutesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -89,6 +95,12 @@ export interface GetGatewayRoutesResult {
  *     routeName: "keep-routes",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCloudNativeAPIGatewayRoutes](https://www.tencentcloud.com/document/api/1290/79259)
  */
 export function getGatewayRoutesOutput(args: GetGatewayRoutesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetGatewayRoutesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

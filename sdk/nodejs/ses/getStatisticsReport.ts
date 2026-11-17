@@ -22,6 +22,12 @@ import * as utilities from "../utilities";
  *     receivingMailboxType: "gmail.com",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GetStatisticsReport](https://www.tencentcloud.com/document/api/1084/39402)
  */
 export function getStatisticsReport(args: GetStatisticsReportArgs, opts?: pulumi.InvokeOptions): Promise<GetStatisticsReportResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -98,6 +104,12 @@ export interface GetStatisticsReportResult {
  *     receivingMailboxType: "gmail.com",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GetStatisticsReport](https://www.tencentcloud.com/document/api/1084/39402)
  */
 export function getStatisticsReportOutput(args: GetStatisticsReportOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetStatisticsReportResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

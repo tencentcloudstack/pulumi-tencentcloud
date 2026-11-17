@@ -187,6 +187,14 @@ class PublicIpv6Attachment(pulumi.CustomResource):
             private_ipv6_address="xxxxxx")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AssociateIPv6Address](https://www.tencentcloud.com/document/api/215/68130)
+        * Read: [DescribeIPv6Addresses](https://www.tencentcloud.com/document/api/215/68129)
+        * Delete: [DisassociateIPv6Address](https://www.tencentcloud.com/document/api/215/68127)
+
         ## Import
 
         vpc elastic_public_ipv6_attachment can be imported using the id, e.g.
@@ -223,6 +231,14 @@ class PublicIpv6Attachment(pulumi.CustomResource):
             network_interface_id="eni-xxxxxx",
             private_ipv6_address="xxxxxx")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AssociateIPv6Address](https://www.tencentcloud.com/document/api/215/68130)
+        * Read: [DescribeIPv6Addresses](https://www.tencentcloud.com/document/api/215/68129)
+        * Delete: [DisassociateIPv6Address](https://www.tencentcloud.com/document/api/215/68127)
 
         ## Import
 

@@ -42,6 +42,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeClassicLinkInstances](https://www.tencentcloud.com/document/api/215/15776)
         /// </summary>
         public static Task<GetClassicLinkInstancesResult> InvokeAsync(GetClassicLinkInstancesArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetClassicLinkInstancesResult>("tencentcloud:Vpc/getClassicLinkInstances:getClassicLinkInstances", args ?? new GetClassicLinkInstancesArgs(), options.WithDefaults());
@@ -76,6 +82,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeClassicLinkInstances](https://www.tencentcloud.com/document/api/215/15776)
         /// </summary>
         public static Output<GetClassicLinkInstancesResult> Invoke(GetClassicLinkInstancesInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetClassicLinkInstancesResult>("tencentcloud:Vpc/getClassicLinkInstances:getClassicLinkInstances", args ?? new GetClassicLinkInstancesInvokeArgs(), options.WithDefaults());
@@ -110,6 +122,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeClassicLinkInstances](https://www.tencentcloud.com/document/api/215/15776)
         /// </summary>
         public static Output<GetClassicLinkInstancesResult> Invoke(GetClassicLinkInstancesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetClassicLinkInstancesResult>("tencentcloud:Vpc/getClassicLinkInstances:getClassicLinkInstances", args ?? new GetClassicLinkInstancesInvokeArgs(), options.WithDefaults());

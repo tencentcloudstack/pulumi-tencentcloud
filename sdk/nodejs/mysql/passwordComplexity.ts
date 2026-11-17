@@ -78,6 +78,18 @@ import * as utilities from "../utilities";
  *     ],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+ *   - [ModifyInstancePasswordComplexity](https://www.tencentcloud.com/document/api/236/49500)
+ * * Read: [DescribeInstanceParams](https://www.tencentcloud.com/document/api/236/34467)
+ * * Update:
+ *   - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+ *   - [ModifyInstancePasswordComplexity](https://www.tencentcloud.com/document/api/236/49500)
  */
 export class PasswordComplexity extends pulumi.CustomResource {
     /**

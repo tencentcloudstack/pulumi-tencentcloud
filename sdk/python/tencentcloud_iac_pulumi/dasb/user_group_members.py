@@ -127,6 +127,14 @@ class UserGroupMembers(pulumi.CustomResource):
             member_id_sets=[example.id.apply(lambda x: int(x))])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AddUserGroupMembers](https://www.tencentcloud.com/search/?wd=AddUserGroupMembers&type=document&lang=en)
+        * Read: [DescribeUserGroupMembers](https://www.tencentcloud.com/search/?wd=DescribeUserGroupMembers&type=document&lang=en)
+        * Delete: [DeleteUserGroupMembers](https://www.tencentcloud.com/search/?wd=DeleteUserGroupMembers&type=document&lang=en)
+
         ## Import
 
         dasb user_group_members can be imported using the id, e.g.
@@ -167,6 +175,14 @@ class UserGroupMembers(pulumi.CustomResource):
             user_group_id=example_user_group.id.apply(lambda x: int(x)),
             member_id_sets=[example.id.apply(lambda x: int(x))])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AddUserGroupMembers](https://www.tencentcloud.com/search/?wd=AddUserGroupMembers&type=document&lang=en)
+        * Read: [DescribeUserGroupMembers](https://www.tencentcloud.com/search/?wd=DescribeUserGroupMembers&type=document&lang=en)
+        * Delete: [DeleteUserGroupMembers](https://www.tencentcloud.com/search/?wd=DeleteUserGroupMembers&type=document&lang=en)
 
         ## Import
 

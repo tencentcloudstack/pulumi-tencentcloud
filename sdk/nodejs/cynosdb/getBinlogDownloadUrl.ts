@@ -18,6 +18,12 @@ import * as utilities from "../utilities";
  *     binlogId: 6202249,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeBinlogDownloadUrl](https://www.tencentcloud.com/document/api/1098/48596)
  */
 export function getBinlogDownloadUrl(args: GetBinlogDownloadUrlArgs, opts?: pulumi.InvokeOptions): Promise<GetBinlogDownloadUrlResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -76,6 +82,12 @@ export interface GetBinlogDownloadUrlResult {
  *     binlogId: 6202249,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeBinlogDownloadUrl](https://www.tencentcloud.com/document/api/1098/48596)
  */
 export function getBinlogDownloadUrlOutput(args: GetBinlogDownloadUrlOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetBinlogDownloadUrlResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

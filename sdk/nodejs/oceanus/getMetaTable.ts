@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     table: "tf_table",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GetMetaTable](https://www.tencentcloud.com/search/?wd=GetMetaTable&type=document&lang=en)
  */
 export function getMetaTable(args: GetMetaTableArgs, opts?: pulumi.InvokeOptions): Promise<GetMetaTableResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -100,6 +106,12 @@ export interface GetMetaTableResult {
  *     table: "tf_table",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GetMetaTable](https://www.tencentcloud.com/search/?wd=GetMetaTable&type=document&lang=en)
  */
 export function getMetaTableOutput(args: GetMetaTableOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetMetaTableResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

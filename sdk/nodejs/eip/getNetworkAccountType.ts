@@ -15,6 +15,12 @@ import * as utilities from "../utilities";
  *
  * const networkAccountType = tencentcloud.eip.getNetworkAccountType({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeNetworkAccountType](https://www.tencentcloud.com/search/?wd=DescribeNetworkAccountType&type=document&lang=en)
  */
 export function getNetworkAccountType(args?: GetNetworkAccountTypeArgs, opts?: pulumi.InvokeOptions): Promise<GetNetworkAccountTypeResult> {
     args = args || {};
@@ -59,6 +65,12 @@ export interface GetNetworkAccountTypeResult {
  *
  * const networkAccountType = tencentcloud.eip.getNetworkAccountType({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeNetworkAccountType](https://www.tencentcloud.com/search/?wd=DescribeNetworkAccountType&type=document&lang=en)
  */
 export function getNetworkAccountTypeOutput(args?: GetNetworkAccountTypeOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetNetworkAccountTypeResult> {
     args = args || {};

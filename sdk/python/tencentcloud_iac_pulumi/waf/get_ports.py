@@ -137,6 +137,12 @@ def get_ports(edition: Optional[_builtins.str] = None,
         instance_id="waf_2ka80zly0702e8j3")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribePorts](https://www.tencentcloud.com/document/api/627/64770)
+
 
     :param _builtins.str edition: Instance type, sparta-waf represents SAAS WAF, clb-waf represents CLB WAF.
     :param _builtins.str instance_id: Instance unique ID.
@@ -191,6 +197,12 @@ def get_ports_output(edition: pulumi.Input[Optional[Optional[_builtins.str]]] = 
     example = tencentcloud.waf.get_ports(edition="sparta-waf",
         instance_id="waf_2ka80zly0702e8j3")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribePorts](https://www.tencentcloud.com/document/api/627/64770)
 
 
     :param _builtins.str edition: Instance type, sparta-waf represents SAAS WAF, clb-waf represents CLB WAF.

@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const example = tencentcloud.wedata.getListDatabase({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListDatabase](https://www.tencentcloud.com/document/api/1174/77948)
  */
 export function getListDatabase(args?: GetListDatabaseArgs, opts?: pulumi.InvokeOptions): Promise<GetListDatabaseResult> {
     args = args || {};
@@ -82,6 +88,12 @@ export interface GetListDatabaseResult {
  *
  * const example = tencentcloud.wedata.getListDatabase({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListDatabase](https://www.tencentcloud.com/document/api/1174/77948)
  */
 export function getListDatabaseOutput(args?: GetListDatabaseOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetListDatabaseResult> {
     args = args || {};

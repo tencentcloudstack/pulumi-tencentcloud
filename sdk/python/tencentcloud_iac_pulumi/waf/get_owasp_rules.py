@@ -134,6 +134,12 @@ def get_owasp_rules(by: Optional[_builtins.str] = None,
         }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeOwaspRules](https://www.tencentcloud.com/document/api/627/73182)
+
 
     :param _builtins.str by: Specifies the field used to sort. valid values: RuleId, ModifyTime.
     :param _builtins.str domain: Domain to be queried.
@@ -182,6 +188,12 @@ def get_owasp_rules_output(by: pulumi.Input[Optional[Optional[_builtins.str]]] =
             "exact_match": True,
         }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeOwaspRules](https://www.tencentcloud.com/document/api/627/73182)
 
 
     :param _builtins.str by: Specifies the field used to sort. valid values: RuleId, ModifyTime.

@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeOfflineLogConfigs](https://www.tencentcloud.com/search/?wd=DescribeOfflineLogConfigs&type=document&lang=en)
 func GetOfflineLogConfig(ctx *pulumi.Context, args *GetOfflineLogConfigArgs, opts ...pulumi.InvokeOption) (*GetOfflineLogConfigResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetOfflineLogConfigResult

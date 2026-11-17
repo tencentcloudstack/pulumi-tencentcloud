@@ -61,6 +61,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateDirectConnect](https://www.tencentcloud.com/document/api/216/37478)
+    /// * Read: [DescribeDirectConnects](https://www.tencentcloud.com/document/api/216/35330)
+    /// * Update: [ModifyDirectConnectAttribute](https://www.tencentcloud.com/document/api/216/37475)
+    /// * Delete: [DeleteDirectConnect](https://www.tencentcloud.com/document/api/216/37477)
+    /// 
     /// ## Import
     /// 
     /// DC instance can be imported using the id, e.g.

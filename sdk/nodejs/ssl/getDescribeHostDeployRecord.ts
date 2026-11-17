@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     resourceType: "ddos",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeHostDeployRecord](https://www.tencentcloud.com/search/?wd=DescribeHostDeployRecord&type=document&lang=en)
  */
 export function getDescribeHostDeployRecord(args: GetDescribeHostDeployRecordArgs, opts?: pulumi.InvokeOptions): Promise<GetDescribeHostDeployRecordResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -81,6 +87,12 @@ export interface GetDescribeHostDeployRecordResult {
  *     resourceType: "ddos",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeHostDeployRecord](https://www.tencentcloud.com/search/?wd=DescribeHostDeployRecord&type=document&lang=en)
  */
 export function getDescribeHostDeployRecordOutput(args: GetDescribeHostDeployRecordOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDescribeHostDeployRecordResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

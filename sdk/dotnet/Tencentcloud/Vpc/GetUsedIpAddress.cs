@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeUsedIpAddress](https://www.tencentcloud.com/document/api/215/55085)
         /// </summary>
         public static Task<GetUsedIpAddressResult> InvokeAsync(GetUsedIpAddressArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetUsedIpAddressResult>("tencentcloud:Vpc/getUsedIpAddress:getUsedIpAddress", args ?? new GetUsedIpAddressArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeUsedIpAddress](https://www.tencentcloud.com/document/api/215/55085)
         /// </summary>
         public static Output<GetUsedIpAddressResult> Invoke(GetUsedIpAddressInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetUsedIpAddressResult>("tencentcloud:Vpc/getUsedIpAddress:getUsedIpAddress", args ?? new GetUsedIpAddressInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeUsedIpAddress](https://www.tencentcloud.com/document/api/215/55085)
         /// </summary>
         public static Output<GetUsedIpAddressResult> Invoke(GetUsedIpAddressInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetUsedIpAddressResult>("tencentcloud:Vpc/getUsedIpAddress:getUsedIpAddress", args ?? new GetUsedIpAddressInvokeArgs(), options.WithDefaults());

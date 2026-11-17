@@ -881,6 +881,20 @@ class LibraDbInstance(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [AddLibraDBInstances](https://www.tencentcloud.com/document/api/1098/80035)
+          - [DescribeLibraDBInstanceDetail](https://www.tencentcloud.com/document/api/1098/80143)
+        * Read: [DescribeLibraDBInstanceDetail](https://www.tencentcloud.com/document/api/1098/80143)
+        * Update: [DescribeLibraDBInstanceDetail](https://www.tencentcloud.com/document/api/1098/80143)
+        * Delete:
+          - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+          - [IsolateLibraDBInstance](https://www.tencentcloud.com/document/api/1098/80139)
+          - [OfflineLibraDBInstance](https://www.tencentcloud.com/document/api/1098/80137)
+
         ## Import
 
         CynosDB LibraDB instance can be imported using the cluster_id#instance_id, e.g.
@@ -988,6 +1002,20 @@ class LibraDbInstance(pulumi.CustomResource):
                 },
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [AddLibraDBInstances](https://www.tencentcloud.com/document/api/1098/80035)
+          - [DescribeLibraDBInstanceDetail](https://www.tencentcloud.com/document/api/1098/80143)
+        * Read: [DescribeLibraDBInstanceDetail](https://www.tencentcloud.com/document/api/1098/80143)
+        * Update: [DescribeLibraDBInstanceDetail](https://www.tencentcloud.com/document/api/1098/80143)
+        * Delete:
+          - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+          - [IsolateLibraDBInstance](https://www.tencentcloud.com/document/api/1098/80139)
+          - [OfflineLibraDBInstance](https://www.tencentcloud.com/document/api/1098/80137)
 
         ## Import
 

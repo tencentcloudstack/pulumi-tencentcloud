@@ -34,6 +34,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeResourcePackageSaleSpec](https://www.tencentcloud.com/document/api/1098/55896)
         /// </summary>
         public static Task<GetResourcePackageSaleSpecsResult> InvokeAsync(GetResourcePackageSaleSpecsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetResourcePackageSaleSpecsResult>("tencentcloud:Cynosdb/getResourcePackageSaleSpecs:getResourcePackageSaleSpecs", args ?? new GetResourcePackageSaleSpecsArgs(), options.WithDefaults());
@@ -60,6 +66,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeResourcePackageSaleSpec](https://www.tencentcloud.com/document/api/1098/55896)
         /// </summary>
         public static Output<GetResourcePackageSaleSpecsResult> Invoke(GetResourcePackageSaleSpecsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetResourcePackageSaleSpecsResult>("tencentcloud:Cynosdb/getResourcePackageSaleSpecs:getResourcePackageSaleSpecs", args ?? new GetResourcePackageSaleSpecsInvokeArgs(), options.WithDefaults());
@@ -86,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeResourcePackageSaleSpec](https://www.tencentcloud.com/document/api/1098/55896)
         /// </summary>
         public static Output<GetResourcePackageSaleSpecsResult> Invoke(GetResourcePackageSaleSpecsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetResourcePackageSaleSpecsResult>("tencentcloud:Cynosdb/getResourcePackageSaleSpecs:getResourcePackageSaleSpecs", args ?? new GetResourcePackageSaleSpecsInvokeArgs(), options.WithDefaults());

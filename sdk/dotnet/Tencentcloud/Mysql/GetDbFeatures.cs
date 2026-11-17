@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBFeatures](https://www.tencentcloud.com/document/api/236/53575)
         /// </summary>
         public static Task<GetDbFeaturesResult> InvokeAsync(GetDbFeaturesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDbFeaturesResult>("tencentcloud:Mysql/getDbFeatures:getDbFeatures", args ?? new GetDbFeaturesArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBFeatures](https://www.tencentcloud.com/document/api/236/53575)
         /// </summary>
         public static Output<GetDbFeaturesResult> Invoke(GetDbFeaturesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDbFeaturesResult>("tencentcloud:Mysql/getDbFeatures:getDbFeatures", args ?? new GetDbFeaturesInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBFeatures](https://www.tencentcloud.com/document/api/236/53575)
         /// </summary>
         public static Output<GetDbFeaturesResult> Invoke(GetDbFeaturesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDbFeaturesResult>("tencentcloud:Mysql/getDbFeatures:getDbFeatures", args ?? new GetDbFeaturesInvokeArgs(), options.WithDefaults());

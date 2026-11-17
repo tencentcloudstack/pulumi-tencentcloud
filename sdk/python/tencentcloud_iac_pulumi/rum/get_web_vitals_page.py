@@ -307,6 +307,12 @@ def get_web_vitals_page(area: Optional[_builtins.str] = None,
         type="from")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDataWebVitalsPage](https://www.tencentcloud.com/document/api/1131/45316)
+
 
     :param _builtins.str area: The region where the data reporting takes place.
     :param _builtins.str brand: The mobile phone brand used for data reporting.
@@ -423,6 +429,12 @@ def get_web_vitals_page_output(area: pulumi.Input[Optional[Optional[_builtins.st
         project_id=1,
         type="from")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDataWebVitalsPage](https://www.tencentcloud.com/document/api/1131/45316)
 
 
     :param _builtins.str area: The region where the data reporting takes place.

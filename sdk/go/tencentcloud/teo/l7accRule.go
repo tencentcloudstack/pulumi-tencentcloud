@@ -432,6 +432,23 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [DescribeZoneConfigImportResult](https://www.tencentcloud.com/document/api/1145/67243)
+//   - [ImportZoneConfig](https://www.tencentcloud.com/document/api/1145/67241)
+//
+// * Read: [DescribeL7AccRules](https://www.tencentcloud.com/document/api/1145/68150)
+// * Update:
+//   - [DescribeZoneConfigImportResult](https://www.tencentcloud.com/document/api/1145/67243)
+//   - [ImportZoneConfig](https://www.tencentcloud.com/document/api/1145/67241)
+//
+// * Delete:
+//   - [DescribeZoneConfigImportResult](https://www.tencentcloud.com/document/api/1145/67243)
+//   - [ImportZoneConfig](https://www.tencentcloud.com/document/api/1145/67241)
+//
 // ## Import
 //
 // TEO l7 acc rule can be imported using the zone_id, e.g.

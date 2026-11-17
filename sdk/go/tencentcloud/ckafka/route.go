@@ -29,12 +29,17 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := ckafka.NewRoute(ctx, "example", &ckafka.RouteArgs{
-//				InstanceId:    pulumi.String("ckafka-8j4rodrr"),
+//				InstanceId:    pulumi.String("ckafka-8j4ra928"),
 //				VipType:       pulumi.Int(3),
-//				VpcId:         pulumi.String("vpc-axrsmmrv"),
-//				SubnetId:      pulumi.String("subnet-j5vja918"),
+//				VpcId:         pulumi.String("vpc-i5yyodl9"),
+//				SubnetId:      pulumi.String("subnet-hhi88a58"),
 //				AccessType:    pulumi.Int(0),
 //				PublicNetwork: pulumi.Int(3),
+//				SecurityGroupIds: pulumi.StringArray{
+//					pulumi.String("sg-8ztqghor"),
+//					pulumi.String("sg-rc9644tr"),
+//					pulumi.String("sg-n8zf5ry9"),
+//				},
 //			})
 //			if err != nil {
 //				return err
@@ -45,12 +50,27 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CreateRoute](https://www.tencentcloud.com/document/api/597/74258)
+//   - [DescribeTaskStatus](https://www.tencentcloud.com/document/api/597/55881)
+//
+// * Read:
+//   - [DescribeRoute](https://www.tencentcloud.com/document/api/597/37090)
+//   - [DescribeSecurityGroupRoutes](https://www.tencentcloud.com/document/api/597/74257)
+//
+// * Update: [ModifyRouteSecurityGroups](https://www.tencentcloud.com/search/?wd=ModifyRouteSecurityGroups&type=document&lang=en)
+// * Delete: [DeleteRoute](https://www.tencentcloud.com/document/api/597/47140)
+//
 // ## Import
 //
-// ckafka route can be imported using the id, e.g.
+// ckafka route can be imported using the instanceId#routeId, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Ckafka/route:Route example ckafka-8j4rodrr#135912
+// $ pulumi import tencentcloud:Ckafka/route:Route example ckafka-8j4ra928#135912
 // ```
 type Route struct {
 	pulumi.CustomResourceState
@@ -73,6 +93,10 @@ type Route struct {
 	Ip pulumi.StringOutput `pulumi:"ip"`
 	// Public network.
 	PublicNetwork pulumi.IntPtrOutput `pulumi:"publicNetwork"`
+	// Route ID.
+	RouteId pulumi.IntOutput `pulumi:"routeId"`
+	// List of associated security group IDs in order.
+	SecurityGroupIds pulumi.StringArrayOutput `pulumi:"securityGroupIds"`
 	// Subnet id.
 	SubnetId pulumi.StringOutput `pulumi:"subnetId"`
 	// Virtual IP list.
@@ -137,6 +161,10 @@ type routeState struct {
 	Ip *string `pulumi:"ip"`
 	// Public network.
 	PublicNetwork *int `pulumi:"publicNetwork"`
+	// Route ID.
+	RouteId *int `pulumi:"routeId"`
+	// List of associated security group IDs in order.
+	SecurityGroupIds []string `pulumi:"securityGroupIds"`
 	// Subnet id.
 	SubnetId *string `pulumi:"subnetId"`
 	// Virtual IP list.
@@ -166,6 +194,10 @@ type RouteState struct {
 	Ip pulumi.StringPtrInput
 	// Public network.
 	PublicNetwork pulumi.IntPtrInput
+	// Route ID.
+	RouteId pulumi.IntPtrInput
+	// List of associated security group IDs in order.
+	SecurityGroupIds pulumi.StringArrayInput
 	// Subnet id.
 	SubnetId pulumi.StringPtrInput
 	// Virtual IP list.
@@ -197,6 +229,8 @@ type routeArgs struct {
 	Ip *string `pulumi:"ip"`
 	// Public network.
 	PublicNetwork *int `pulumi:"publicNetwork"`
+	// List of associated security group IDs in order.
+	SecurityGroupIds []string `pulumi:"securityGroupIds"`
 	// Subnet id.
 	SubnetId *string `pulumi:"subnetId"`
 	// Routing network type (3:vpc routing; 4: standard support routing; 7: professional support routing).
@@ -223,6 +257,8 @@ type RouteArgs struct {
 	Ip pulumi.StringPtrInput
 	// Public network.
 	PublicNetwork pulumi.IntPtrInput
+	// List of associated security group IDs in order.
+	SecurityGroupIds pulumi.StringArrayInput
 	// Subnet id.
 	SubnetId pulumi.StringPtrInput
 	// Routing network type (3:vpc routing; 4: standard support routing; 7: professional support routing).
@@ -355,6 +391,16 @@ func (o RouteOutput) Ip() pulumi.StringOutput {
 // Public network.
 func (o RouteOutput) PublicNetwork() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Route) pulumi.IntPtrOutput { return v.PublicNetwork }).(pulumi.IntPtrOutput)
+}
+
+// Route ID.
+func (o RouteOutput) RouteId() pulumi.IntOutput {
+	return o.ApplyT(func(v *Route) pulumi.IntOutput { return v.RouteId }).(pulumi.IntOutput)
+}
+
+// List of associated security group IDs in order.
+func (o RouteOutput) SecurityGroupIds() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *Route) pulumi.StringArrayOutput { return v.SecurityGroupIds }).(pulumi.StringArrayOutput)
 }
 
 // Subnet id.

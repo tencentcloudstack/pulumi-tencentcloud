@@ -69,6 +69,14 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [AssociateInstancesToCcnRouteTable](https://www.tencentcloud.com/search/?wd=AssociateInstancesToCcnRouteTable&type=document&lang=en)
+ * * Read: [Send](https://www.tencentcloud.com/search/?wd=Send&type=document&lang=en)
+ * * Update: [AssociateInstancesToCcnRouteTable](https://www.tencentcloud.com/search/?wd=AssociateInstancesToCcnRouteTable&type=document&lang=en)
+ *
  * ## Import
  *
  * Ccn instance can be imported, e.g.

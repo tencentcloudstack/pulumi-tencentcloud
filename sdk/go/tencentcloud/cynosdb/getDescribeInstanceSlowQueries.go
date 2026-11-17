@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeBinlogs](https://www.tencentcloud.com/document/api/1098/48594)
 func GetDescribeInstanceSlowQueries(ctx *pulumi.Context, args *GetDescribeInstanceSlowQueriesArgs, opts ...pulumi.InvokeOption) (*GetDescribeInstanceSlowQueriesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDescribeInstanceSlowQueriesResult

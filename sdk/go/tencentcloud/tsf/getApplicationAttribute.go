@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeApplicationAttribute](https://www.tencentcloud.com/search/?wd=DescribeApplicationAttribute&type=document&lang=en)
 func LookupApplicationAttribute(ctx *pulumi.Context, args *LookupApplicationAttributeArgs, opts ...pulumi.InvokeOption) (*LookupApplicationAttributeResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupApplicationAttributeResult

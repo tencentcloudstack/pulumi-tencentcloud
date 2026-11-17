@@ -76,6 +76,22 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateRule](https://www.tencentcloud.com/document/api/214/33840)
+ *   - [DescribeListeners](https://www.tencentcloud.com/document/api/214/33831)
+ *   - [ModifyDomainAttributes](https://www.tencentcloud.com/document/api/214/33819)
+ *   - [ModifyRule](https://www.tencentcloud.com/document/api/214/33816)
+ * * Read: [DescribeListeners](https://www.tencentcloud.com/document/api/214/33831)
+ * * Update:
+ *   - [DescribeListeners](https://www.tencentcloud.com/document/api/214/33831)
+ *   - [ModifyDomainAttributes](https://www.tencentcloud.com/document/api/214/33819)
+ *   - [ModifyRule](https://www.tencentcloud.com/document/api/214/33816)
+ * * Delete: [DeleteRule](https://www.tencentcloud.com/document/api/214/33835)
+ *
  * ## Import
  *
  * CLB listener rule can be imported using the id (version >= 1.47.0), e.g.

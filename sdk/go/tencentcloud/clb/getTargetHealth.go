@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeTargetHealth](https://www.tencentcloud.com/document/api/214/33825)
 func GetTargetHealth(ctx *pulumi.Context, args *GetTargetHealthArgs, opts ...pulumi.InvokeOption) (*GetTargetHealthResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetTargetHealthResult

@@ -45,6 +45,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeVpcInstances](https://www.tencentcloud.com/document/api/215/36078)
 func GetCvmInstances(ctx *pulumi.Context, args *GetCvmInstancesArgs, opts ...pulumi.InvokeOption) (*GetCvmInstancesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetCvmInstancesResult

@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDeployHistory](https://www.tencentcloud.com/document/api/1145/57973)
 func GetDeployConfigVersionHistory(ctx *pulumi.Context, args *GetDeployConfigVersionHistoryArgs, opts ...pulumi.InvokeOption) (*GetDeployConfigVersionHistoryResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDeployConfigVersionHistoryResult

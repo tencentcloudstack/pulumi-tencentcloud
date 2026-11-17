@@ -27,6 +27,14 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [UpdateFunctionEventInvokeConfig](https://www.tencentcloud.com/document/api/583/39920)
+ * * Read: [GetFunctionEventInvokeConfig](https://www.tencentcloud.com/document/api/583/39921)
+ * * Update: [UpdateFunctionEventInvokeConfig](https://www.tencentcloud.com/document/api/583/39920)
+ *
  * ## Import
  *
  * scf functionEventInvokeConfig can be imported using the id, e.g.

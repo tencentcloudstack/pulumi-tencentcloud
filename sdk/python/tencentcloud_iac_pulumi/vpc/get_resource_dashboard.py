@@ -96,6 +96,12 @@ def get_resource_dashboard(result_output_file: Optional[_builtins.str] = None,
     resource_dashboard = tencentcloud.vpc.get_resource_dashboard(vpc_ids=["vpc-4owdpnwr"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeVpcResourceDashboard](https://www.tencentcloud.com/document/api/215/36076)
+
 
     :param _builtins.str result_output_file: Used to save results.
     :param Sequence[_builtins.str] vpc_ids: Vpc instance ID, e.g. vpc-f1xjkw1b.
@@ -125,6 +131,12 @@ def get_resource_dashboard_output(result_output_file: pulumi.Input[Optional[Opti
 
     resource_dashboard = tencentcloud.vpc.get_resource_dashboard(vpc_ids=["vpc-4owdpnwr"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeVpcResourceDashboard](https://www.tencentcloud.com/document/api/215/36076)
 
 
     :param _builtins.str result_output_file: Used to save results.

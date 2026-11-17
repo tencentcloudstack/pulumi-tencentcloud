@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     projectId: 0,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeProjectSecurityGroups](https://www.tencentcloud.com/document/api/237/39448)
  */
 export function getProjectSecurityGroups(args: GetProjectSecurityGroupsArgs, opts?: pulumi.InvokeOptions): Promise<GetProjectSecurityGroupsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -81,6 +87,12 @@ export interface GetProjectSecurityGroupsResult {
  *     projectId: 0,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeProjectSecurityGroups](https://www.tencentcloud.com/document/api/237/39448)
  */
 export function getProjectSecurityGroupsOutput(args: GetProjectSecurityGroupsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetProjectSecurityGroupsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

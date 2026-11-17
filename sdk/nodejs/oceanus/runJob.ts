@@ -26,6 +26,12 @@ import * as utilities from "../utilities";
  *     workSpaceId: "space-2idq8wbr",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [RunJobs](https://www.tencentcloud.com/search/?wd=RunJobs&type=document&lang=en)
  */
 export class RunJob extends pulumi.CustomResource {
     /**

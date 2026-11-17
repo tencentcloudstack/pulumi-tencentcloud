@@ -701,7 +701,7 @@ type CertificateConfigClientCertInfoCertInfo struct {
 	SignAlgo *string `pulumi:"signAlgo"`
 	// Certificate status.
 	Status *string `pulumi:"status"`
-	// Type of the certificate. Values: `default`: Default certificate; `upload`: Specified certificate; `managed`: Tencent Cloud-managed certificate.
+	// Type of the certificate.
 	Type *string `pulumi:"type"`
 }
 
@@ -729,7 +729,7 @@ type CertificateConfigClientCertInfoCertInfoArgs struct {
 	SignAlgo pulumi.StringPtrInput `pulumi:"signAlgo"`
 	// Certificate status.
 	Status pulumi.StringPtrInput `pulumi:"status"`
-	// Type of the certificate. Values: `default`: Default certificate; `upload`: Specified certificate; `managed`: Tencent Cloud-managed certificate.
+	// Type of the certificate.
 	Type pulumi.StringPtrInput `pulumi:"type"`
 }
 
@@ -814,7 +814,7 @@ func (o CertificateConfigClientCertInfoCertInfoOutput) Status() pulumi.StringPtr
 	return o.ApplyT(func(v CertificateConfigClientCertInfoCertInfo) *string { return v.Status }).(pulumi.StringPtrOutput)
 }
 
-// Type of the certificate. Values: `default`: Default certificate; `upload`: Specified certificate; `managed`: Tencent Cloud-managed certificate.
+// Type of the certificate.
 func (o CertificateConfigClientCertInfoCertInfoOutput) Type() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v CertificateConfigClientCertInfoCertInfo) *string { return v.Type }).(pulumi.StringPtrOutput)
 }
@@ -1648,7 +1648,7 @@ type CertificateConfigUpstreamCertInfoUpstreamMutualTlsCertInfo struct {
 	SignAlgo *string `pulumi:"signAlgo"`
 	// Certificate status.
 	Status *string `pulumi:"status"`
-	// Type of the certificate. Values: `default`: Default certificate `upload`: Specified certificate `managed`: Tencent Cloud-managed certificate.
+	// Type of the certificate.
 	Type *string `pulumi:"type"`
 }
 
@@ -1676,7 +1676,7 @@ type CertificateConfigUpstreamCertInfoUpstreamMutualTlsCertInfoArgs struct {
 	SignAlgo pulumi.StringPtrInput `pulumi:"signAlgo"`
 	// Certificate status.
 	Status pulumi.StringPtrInput `pulumi:"status"`
-	// Type of the certificate. Values: `default`: Default certificate `upload`: Specified certificate `managed`: Tencent Cloud-managed certificate.
+	// Type of the certificate.
 	Type pulumi.StringPtrInput `pulumi:"type"`
 }
 
@@ -1761,7 +1761,7 @@ func (o CertificateConfigUpstreamCertInfoUpstreamMutualTlsCertInfoOutput) Status
 	return o.ApplyT(func(v CertificateConfigUpstreamCertInfoUpstreamMutualTlsCertInfo) *string { return v.Status }).(pulumi.StringPtrOutput)
 }
 
-// Type of the certificate. Values: `default`: Default certificate `upload`: Specified certificate `managed`: Tencent Cloud-managed certificate.
+// Type of the certificate.
 func (o CertificateConfigUpstreamCertInfoUpstreamMutualTlsCertInfoOutput) Type() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v CertificateConfigUpstreamCertInfoUpstreamMutualTlsCertInfo) *string { return v.Type }).(pulumi.StringPtrOutput)
 }
@@ -3367,7 +3367,7 @@ type DeployConfigGroupVersionConfigGroupVersionInfo struct {
 	GroupType *string `pulumi:"groupType"`
 	// Source version ID. The version ID from which this version was derived. Read-only.
 	SourceVersion *string `pulumi:"sourceVersion"`
-	// Deploy status. Valid values: deploying (Deploying), failure (Deploy failed), success (Deploy successful).
+	// Version status. Valid values: creating (Being created), inactive (Not effective), active (Effective).
 	Status *string `pulumi:"status"`
 	// Version ID.
 	VersionId string `pulumi:"versionId"`
@@ -3397,7 +3397,7 @@ type DeployConfigGroupVersionConfigGroupVersionInfoArgs struct {
 	GroupType pulumi.StringPtrInput `pulumi:"groupType"`
 	// Source version ID. The version ID from which this version was derived. Read-only.
 	SourceVersion pulumi.StringPtrInput `pulumi:"sourceVersion"`
-	// Deploy status. Valid values: deploying (Deploying), failure (Deploy failed), success (Deploy successful).
+	// Version status. Valid values: creating (Being created), inactive (Not effective), active (Effective).
 	Status pulumi.StringPtrInput `pulumi:"status"`
 	// Version ID.
 	VersionId pulumi.StringInput `pulumi:"versionId"`
@@ -3481,7 +3481,7 @@ func (o DeployConfigGroupVersionConfigGroupVersionInfoOutput) SourceVersion() pu
 	return o.ApplyT(func(v DeployConfigGroupVersionConfigGroupVersionInfo) *string { return v.SourceVersion }).(pulumi.StringPtrOutput)
 }
 
-// Deploy status. Valid values: deploying (Deploying), failure (Deploy failed), success (Deploy successful).
+// Version status. Valid values: creating (Being created), inactive (Not effective), active (Effective).
 func (o DeployConfigGroupVersionConfigGroupVersionInfoOutput) Status() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DeployConfigGroupVersionConfigGroupVersionInfo) *string { return v.Status }).(pulumi.StringPtrOutput)
 }

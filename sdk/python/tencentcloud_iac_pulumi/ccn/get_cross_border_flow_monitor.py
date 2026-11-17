@@ -162,6 +162,12 @@ def get_cross_border_flow_monitor(ccn_id: Optional[_builtins.str] = None,
         end_time="2023-01-01 01:00:00")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCrossBorderFlowMonitor](https://www.tencentcloud.com/search/?wd=DescribeCrossBorderFlowMonitor&type=document&lang=en)
+
 
     :param _builtins.str ccn_id: CcnId.
     :param _builtins.str ccn_uin: CcnUin.
@@ -221,6 +227,12 @@ def get_cross_border_flow_monitor_output(ccn_id: pulumi.Input[Optional[_builtins
         start_time="2023-01-01 00:00:00",
         end_time="2023-01-01 01:00:00")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCrossBorderFlowMonitor](https://www.tencentcloud.com/search/?wd=DescribeCrossBorderFlowMonitor&type=document&lang=en)
 
 
     :param _builtins.str ccn_id: CcnId.

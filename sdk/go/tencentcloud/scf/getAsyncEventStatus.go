@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [GetAsyncEventStatus](https://www.tencentcloud.com/document/api/583/44482)
 func LookupAsyncEventStatus(ctx *pulumi.Context, args *LookupAsyncEventStatusArgs, opts ...pulumi.InvokeOption) (*LookupAsyncEventStatusResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupAsyncEventStatusResult

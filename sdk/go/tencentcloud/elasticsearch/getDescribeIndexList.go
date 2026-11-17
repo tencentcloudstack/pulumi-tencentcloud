@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeIndexList](https://www.tencentcloud.com/document/api/845/47607)
 func GetDescribeIndexList(ctx *pulumi.Context, args *GetDescribeIndexListArgs, opts ...pulumi.InvokeOption) (*GetDescribeIndexListResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDescribeIndexListResult

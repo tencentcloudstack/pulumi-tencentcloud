@@ -119,6 +119,14 @@ class SchedulingDomainUserName(pulumi.CustomResource):
             domain_user_name="")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyDomainUsrName](https://www.tencentcloud.com/document/api/1213/61398)
+        * Read: [DescribeListSchedulingDomain](https://www.tencentcloud.com/document/api/1213/61399)
+        * Update: [ModifyDomainUsrName](https://www.tencentcloud.com/document/api/1213/61398)
+
         ## Import
 
         antiddos scheduling_domain_user_name can be imported using the id, e.g.
@@ -152,6 +160,14 @@ class SchedulingDomainUserName(pulumi.CustomResource):
             domain_name="test.com",
             domain_user_name="")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyDomainUsrName](https://www.tencentcloud.com/document/api/1213/61398)
+        * Read: [DescribeListSchedulingDomain](https://www.tencentcloud.com/document/api/1213/61399)
+        * Update: [ModifyDomainUsrName](https://www.tencentcloud.com/document/api/1213/61398)
 
         ## Import
 

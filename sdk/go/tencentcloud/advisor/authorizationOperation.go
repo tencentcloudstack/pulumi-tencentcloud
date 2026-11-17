@@ -36,6 +36,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateAdvisorAuthorization](https://www.tencentcloud.com/document/api/1079/77120)
 type AuthorizationOperation struct {
 	pulumi.CustomResourceState
 }

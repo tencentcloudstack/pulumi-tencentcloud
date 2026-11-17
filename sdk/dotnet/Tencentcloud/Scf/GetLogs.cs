@@ -42,6 +42,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetFunctionLogs](https://www.tencentcloud.com/document/api/583/18583)
         /// </summary>
         public static Task<GetLogsResult> InvokeAsync(GetLogsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetLogsResult>("tencentcloud:Scf/getLogs:getLogs", args ?? new GetLogsArgs(), options.WithDefaults());
@@ -76,6 +82,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetFunctionLogs](https://www.tencentcloud.com/document/api/583/18583)
         /// </summary>
         public static Output<GetLogsResult> Invoke(GetLogsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetLogsResult>("tencentcloud:Scf/getLogs:getLogs", args ?? new GetLogsInvokeArgs(), options.WithDefaults());
@@ -110,6 +122,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetFunctionLogs](https://www.tencentcloud.com/document/api/583/18583)
         /// </summary>
         public static Output<GetLogsResult> Invoke(GetLogsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetLogsResult>("tencentcloud:Scf/getLogs:getLogs", args ?? new GetLogsInvokeArgs(), options.WithDefaults());

@@ -36,6 +36,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [ListLayers](https://www.tencentcloud.com/document/api/583/36317)
 func GetLayers(ctx *pulumi.Context, args *GetLayersArgs, opts ...pulumi.InvokeOption) (*GetLayersResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetLayersResult

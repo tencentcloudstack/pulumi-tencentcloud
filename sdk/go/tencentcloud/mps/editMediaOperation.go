@@ -78,6 +78,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [EditMedia](https://www.tencentcloud.com/document/api/1041/37460)
 type EditMediaOperation struct {
 	pulumi.CustomResourceState
 

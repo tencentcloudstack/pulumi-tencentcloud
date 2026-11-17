@@ -134,6 +134,14 @@ class Account(pulumi.CustomResource):
         pulumi.export("accountNickname", example.nickname)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreatePrivateDNSAccount](https://www.tencentcloud.com/document/api/1097/44057)
+        * Read: [DescribePrivateDNSAccountList](https://www.tencentcloud.com/document/api/1097/42527)
+        * Delete: [DeletePrivateDNSAccount](https://www.tencentcloud.com/document/api/1097/44056)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -173,6 +181,14 @@ class Account(pulumi.CustomResource):
         pulumi.export("accountEmail", example.account)
         pulumi.export("accountNickname", example.nickname)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreatePrivateDNSAccount](https://www.tencentcloud.com/document/api/1097/44057)
+        * Read: [DescribePrivateDNSAccountList](https://www.tencentcloud.com/document/api/1097/42527)
+        * Delete: [DeletePrivateDNSAccount](https://www.tencentcloud.com/document/api/1097/44056)
 
 
         :param str resource_name: The name of the resource.

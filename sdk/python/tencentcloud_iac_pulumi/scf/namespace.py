@@ -166,6 +166,15 @@ class Namespace(pulumi.CustomResource):
         foo = tencentcloud.scf.Namespace("foo", namespace="ci-test-scf")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateNamespace](https://www.tencentcloud.com/document/api/583/34413)
+        * Read: [ListNamespaces](https://www.tencentcloud.com/document/api/583/34411)
+        * Update: [UpdateNamespace](https://www.tencentcloud.com/document/api/583/38339)
+        * Delete: [DeleteNamespace](https://www.tencentcloud.com/document/api/583/34412)
+
         ## Import
 
         SCF namespace can be imported, e.g.
@@ -197,6 +206,15 @@ class Namespace(pulumi.CustomResource):
 
         foo = tencentcloud.scf.Namespace("foo", namespace="ci-test-scf")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateNamespace](https://www.tencentcloud.com/document/api/583/34413)
+        * Read: [ListNamespaces](https://www.tencentcloud.com/document/api/583/34411)
+        * Update: [UpdateNamespace](https://www.tencentcloud.com/document/api/583/38339)
+        * Delete: [DeleteNamespace](https://www.tencentcloud.com/document/api/583/34412)
 
         ## Import
 

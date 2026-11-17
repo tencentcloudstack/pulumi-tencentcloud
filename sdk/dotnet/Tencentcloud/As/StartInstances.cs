@@ -138,6 +138,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeAutoScalingActivities](https://www.tencentcloud.com/document/api/377/31014)
+    ///   - [StartAutoScalingInstances](https://www.tencentcloud.com/document/api/377/37502)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:As/startInstances:StartInstances")]
     public partial class StartInstances : global::Pulumi.CustomResource

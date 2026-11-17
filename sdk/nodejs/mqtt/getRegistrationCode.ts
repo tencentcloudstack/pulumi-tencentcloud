@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *     instanceId: "mqtt-zxjwkr98",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ApplyRegistrationCode](https://www.tencentcloud.com/search/?wd=ApplyRegistrationCode&type=document&lang=en)
  */
 export function getRegistrationCode(args: GetRegistrationCodeArgs, opts?: pulumi.InvokeOptions): Promise<GetRegistrationCodeResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -68,6 +74,12 @@ export interface GetRegistrationCodeResult {
  *     instanceId: "mqtt-zxjwkr98",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ApplyRegistrationCode](https://www.tencentcloud.com/search/?wd=ApplyRegistrationCode&type=document&lang=en)
  */
 export function getRegistrationCodeOutput(args: GetRegistrationCodeOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRegistrationCodeResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

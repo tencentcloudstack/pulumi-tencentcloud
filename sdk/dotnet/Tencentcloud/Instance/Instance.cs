@@ -193,6 +193,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
     ///         InstanceChargeType = "PREPAID",
     ///         InstanceChargeTypePrepaidPeriod = 1,
     ///         InstanceChargeTypePrepaidRenewFlag = "NOTIFY_AND_MANUAL_RENEW",
+    ///         DeleteWithInstance = false,
+    ///         DeleteWithInstancePrepaid = true,
     ///         ForceDelete = true,
     ///         DataDisks = new[]
     ///         {
@@ -664,6 +666,95 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
     /// });
     /// ```
     /// 
+    /// ### Create CVM instance with EnableJumboFrame
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Instance.Instance("example", new()
+    ///     {
+    ///         InstanceName = "tf-example",
+    ///         AvailabilityZone = "ap-guangzhou-6",
+    ///         ImageId = "img-eb30mz89",
+    ///         InstanceType = "S5.MEDIUM4",
+    ///         SystemDiskType = "CLOUD_HSSD",
+    ///         SystemDiskSize = 50,
+    ///         Hostname = "user",
+    ///         ProjectId = 0,
+    ///         VpcId = "vpc-i5yyodl9",
+    ///         SubnetId = "subnet-hhi88a58",
+    ///         EnableJumboFrame = true,
+    ///         DataDisks = new[]
+    ///         {
+    ///             new Tencentcloud.Instance.Inputs.InstanceDataDiskArgs
+    ///             {
+    ///                 DataDiskType = "CLOUD_HSSD",
+    ///                 DataDiskSize = 100,
+    ///                 Encrypt = false,
+    ///             },
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "tagKey", "tagValue" },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+    ///   - [DescribeImages](https://www.tencentcloud.com/document/api/213/33272)
+    ///   - [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258)
+    ///   - [DescribeInstancesAttributes](https://www.tencentcloud.com/document/api/213/68775)
+    ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+    ///   - [ModifyInstancesDisasterRecoverGroup](https://www.tencentcloud.com/document/api/213/73189)
+    ///   - [RunInstances](https://www.tencentcloud.com/document/api/213/33237)
+    ///   - [StopInstances](https://www.tencentcloud.com/document/api/213/33235)
+    /// * Read:
+    ///   - [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+    ///   - [DescribeImages](https://www.tencentcloud.com/document/api/213/33272)
+    ///   - [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258)
+    ///   - [DescribeInstancesAttributes](https://www.tencentcloud.com/document/api/213/68775)
+    ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+    /// * Update:
+    ///   - [AssociateInstancesKeyPairs](https://www.tencentcloud.com/document/api/213/33232)
+    ///   - [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+    ///   - [DescribeImages](https://www.tencentcloud.com/document/api/213/33272)
+    ///   - [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258)
+    ///   - [DescribeInstancesAttributes](https://www.tencentcloud.com/document/api/213/68775)
+    ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+    ///   - [DisassociateInstancesKeyPairs](https://www.tencentcloud.com/document/api/213/33228)
+    ///   - [ModifyDiskAttributes](https://www.tencentcloud.com/document/api/362/15659)
+    ///   - [ModifyInstancesAttribute](https://www.tencentcloud.com/document/api/213/33246)
+    ///   - [ModifyInstancesChargeType](https://www.tencentcloud.com/document/api/213/73503)
+    ///   - [ModifyInstancesDisasterRecoverGroup](https://www.tencentcloud.com/document/api/213/73189)
+    ///   - [ModifyInstancesProject](https://www.tencentcloud.com/document/api/213/33245)
+    ///   - [ModifyInstancesRenewFlag](https://www.tencentcloud.com/document/api/213/68324)
+    ///   - [ModifyInstancesVpcAttribute](https://www.tencentcloud.com/document/api/213/33244)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    ///   - [ResetInstance](https://www.tencentcloud.com/document/api/213/33242)
+    ///   - [ResetInstancesInternetMaxBandwidth](https://www.tencentcloud.com/document/api/213/33241)
+    ///   - [ResetInstancesPassword](https://www.tencentcloud.com/document/api/213/33240)
+    ///   - [ResetInstancesType](https://www.tencentcloud.com/document/api/213/33239)
+    ///   - [ResizeDisk](https://www.tencentcloud.com/document/api/362/16310)
+    ///   - [ResizeInstanceDisks](https://www.tencentcloud.com/document/api/213/33238)
+    /// * Delete:
+    ///   - [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+    ///   - [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258)
+    ///   - [DetachDisks](https://www.tencentcloud.com/document/api/362/16316)
+    ///   - [TerminateDisks](https://www.tencentcloud.com/document/api/362/16321)
+    ///   - [TerminateInstances](https://www.tencentcloud.com/document/api/213/33234)
+    /// 
     /// ## Import
     /// 
     /// CVM instance can be imported using the id, e.g.
@@ -788,6 +879,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         /// </summary>
         [Output("disasterRecoverGroupIds")]
         public Output<ImmutableArray<string>> DisasterRecoverGroupIds { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to enable jumbo frames for the instance. Only supported instance types accept `True`. See https://cloud.tencent.com/document/product/213/11518 for supported instance types. **NOTE: modifying this field automatically reboots the instance (`AutoReboot` is always set to `True` on update); use with caution**.
+        /// </summary>
+        [Output("enableJumboFrame")]
+        public Output<bool> EnableJumboFrame { get; private set; } = null!;
 
         /// <summary>
         /// Expired time of the instance.
@@ -1297,6 +1394,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         }
 
         /// <summary>
+        /// Whether to enable jumbo frames for the instance. Only supported instance types accept `True`. See https://cloud.tencent.com/document/product/213/11518 for supported instance types. **NOTE: modifying this field automatically reboots the instance (`AutoReboot` is always set to `True` on update); use with caution**.
+        /// </summary>
+        [Input("enableJumboFrame")]
+        public Input<bool>? EnableJumboFrame { get; set; }
+
+        /// <summary>
         /// Indicate whether to force delete the instance. Default is `False`. If set true, the instance will be permanently deleted instead of being moved into the recycle bin. Note: only works for `PREPAID` instance.
         /// </summary>
         [Input("forceDelete")]
@@ -1752,6 +1855,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
             get => _disasterRecoverGroupIds ?? (_disasterRecoverGroupIds = new InputList<string>());
             set => _disasterRecoverGroupIds = value;
         }
+
+        /// <summary>
+        /// Whether to enable jumbo frames for the instance. Only supported instance types accept `True`. See https://cloud.tencent.com/document/product/213/11518 for supported instance types. **NOTE: modifying this field automatically reboots the instance (`AutoReboot` is always set to `True` on update); use with caution**.
+        /// </summary>
+        [Input("enableJumboFrame")]
+        public Input<bool>? EnableJumboFrame { get; set; }
 
         /// <summary>
         /// Expired time of the instance.

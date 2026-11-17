@@ -213,6 +213,14 @@ def get_domain_verifier(auto_verify: Optional[_builtins.bool] = None,
     record_type = record_type_tencentcloud_cdn_domain_verifier
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [CreateVerifyRecord](https://www.tencentcloud.com/search/?wd=CreateVerifyRecord&type=document&lang=en)
+      - [VerifyDomainRecord](https://www.tencentcloud.com/search/?wd=VerifyDomainRecord&type=document&lang=en)
+
 
     :param _builtins.bool auto_verify: Specify whether to keep first create result instead of re-create again.
     :param _builtins.str domain: Specify domain name, e.g. `www.examplexxx123.com`.
@@ -270,6 +278,14 @@ def get_domain_verifier_output(auto_verify: pulumi.Input[Optional[Optional[_buil
     record_value = record
     record_type = record_type_tencentcloud_cdn_domain_verifier
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [CreateVerifyRecord](https://www.tencentcloud.com/search/?wd=CreateVerifyRecord&type=document&lang=en)
+      - [VerifyDomainRecord](https://www.tencentcloud.com/search/?wd=VerifyDomainRecord&type=document&lang=en)
 
 
     :param _builtins.bool auto_verify: Specify whether to keep first create result instead of re-create again.

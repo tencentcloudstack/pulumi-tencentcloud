@@ -138,6 +138,12 @@ def get_describe_host_vod_instance_list(certificate_id: Optional[_builtins.str] 
         resource_type="vod")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeHostVodInstanceList](https://www.tencentcloud.com/search/?wd=DescribeHostVodInstanceList&type=document&lang=en)
+
 
     :param _builtins.str certificate_id: Certificate ID to be deployed.
     :param Sequence[Union['GetDescribeHostVodInstanceListFilterArgs', 'GetDescribeHostVodInstanceListFilterArgsDict']] filters: List of filter parameters.
@@ -184,6 +190,12 @@ def get_describe_host_vod_instance_list_output(certificate_id: pulumi.Input[Opti
     describe_host_vod_instance_list = tencentcloud.ssl.get_describe_host_vod_instance_list(certificate_id="8u8DII0l",
         resource_type="vod")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeHostVodInstanceList](https://www.tencentcloud.com/search/?wd=DescribeHostVodInstanceList&type=document&lang=en)
 
 
     :param _builtins.str certificate_id: Certificate ID to be deployed.

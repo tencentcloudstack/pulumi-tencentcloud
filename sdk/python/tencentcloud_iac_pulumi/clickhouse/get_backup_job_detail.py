@@ -107,6 +107,12 @@ def get_backup_job_detail(back_up_job_id: Optional[_builtins.int] = None,
         back_up_job_id=1234)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBackUpJobDetail](https://www.tencentcloud.com/search/?wd=DescribeBackUpJobDetail&type=document&lang=en)
+
 
     :param _builtins.int back_up_job_id: Back up job id.
     :param _builtins.str instance_id: Instance id.
@@ -141,6 +147,12 @@ def get_backup_job_detail_output(back_up_job_id: pulumi.Input[Optional[_builtins
     backup_job_detail = tencentcloud.clickhouse.get_backup_job_detail(instance_id="cdwch-xxxxxx",
         back_up_job_id=1234)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBackUpJobDetail](https://www.tencentcloud.com/search/?wd=DescribeBackUpJobDetail&type=document&lang=en)
 
 
     :param _builtins.int back_up_job_id: Back up job id.

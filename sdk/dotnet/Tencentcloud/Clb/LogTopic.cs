@@ -28,10 +28,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
     ///         LogSetId = "2ed70190-bf06-4777-980d-2d8a327a2554",
     ///         TopicName = "tf-example",
     ///         Status = true,
+    ///         Period = 30,
+    ///         Tags = 
+    ///         {
+    ///             { "env", "prod" },
+    ///         },
     ///     });
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateTopic](https://www.tencentcloud.com/document/api/214/37820)
+    ///   - [DescribeLogsets](https://www.tencentcloud.com/document/api/614/42778)
+    ///   - [ModifyTopic](https://www.tencentcloud.com/document/api/614/42782)
+    /// * Read: [DescribeTopics](https://www.tencentcloud.com/document/api/614/42783)
+    /// * Update: [ModifyTopic](https://www.tencentcloud.com/document/api/614/42782)
+    /// * Delete: [DeleteTopic](https://www.tencentcloud.com/document/api/614/42784)
     /// 
     /// ## Import
     /// 
@@ -57,10 +74,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Output<string> LogSetId { get; private set; } = null!;
 
         /// <summary>
+        /// Log storage lifecycle in days. Standard storage supports 1-3600; 3640 means permanent retention. Defaults to 30 when unset.
+        /// </summary>
+        [Output("period")]
+        public Output<int> Period { get; private set; } = null!;
+
+        /// <summary>
         /// The status of log topic. true: enable; false: disable. Default is true.
         /// </summary>
         [Output("status")]
         public Output<bool> Status { get; private set; } = null!;
+
+        /// <summary>
+        /// Tags of clb log topic.
+        /// </summary>
+        [Output("tags")]
+        public Output<ImmutableDictionary<string, string>?> Tags { get; private set; } = null!;
 
         /// <summary>
         /// Log topic of CLB instance.
@@ -122,10 +151,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<string> LogSetId { get; set; } = null!;
 
         /// <summary>
+        /// Log storage lifecycle in days. Standard storage supports 1-3600; 3640 means permanent retention. Defaults to 30 when unset.
+        /// </summary>
+        [Input("period")]
+        public Input<int>? Period { get; set; }
+
+        /// <summary>
         /// The status of log topic. true: enable; false: disable. Default is true.
         /// </summary>
         [Input("status")]
         public Input<bool>? Status { get; set; }
+
+        [Input("tags")]
+        private InputMap<string>? _tags;
+
+        /// <summary>
+        /// Tags of clb log topic.
+        /// </summary>
+        public InputMap<string> Tags
+        {
+            get => _tags ?? (_tags = new InputMap<string>());
+            set => _tags = value;
+        }
 
         /// <summary>
         /// Log topic of CLB instance.
@@ -154,10 +201,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         public Input<string>? LogSetId { get; set; }
 
         /// <summary>
+        /// Log storage lifecycle in days. Standard storage supports 1-3600; 3640 means permanent retention. Defaults to 30 when unset.
+        /// </summary>
+        [Input("period")]
+        public Input<int>? Period { get; set; }
+
+        /// <summary>
         /// The status of log topic. true: enable; false: disable. Default is true.
         /// </summary>
         [Input("status")]
         public Input<bool>? Status { get; set; }
+
+        [Input("tags")]
+        private InputMap<string>? _tags;
+
+        /// <summary>
+        /// Tags of clb log topic.
+        /// </summary>
+        public InputMap<string> Tags
+        {
+            get => _tags ?? (_tags = new InputMap<string>());
+            set => _tags = value;
+        }
 
         /// <summary>
         /// Log topic of CLB instance.

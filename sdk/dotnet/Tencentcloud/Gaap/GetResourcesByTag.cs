@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeResourcesByTag](https://www.tencentcloud.com/document/api/608/33049)
         /// </summary>
         public static Task<GetResourcesByTagResult> InvokeAsync(GetResourcesByTagArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetResourcesByTagResult>("tencentcloud:Gaap/getResourcesByTag:getResourcesByTag", args ?? new GetResourcesByTagArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeResourcesByTag](https://www.tencentcloud.com/document/api/608/33049)
         /// </summary>
         public static Output<GetResourcesByTagResult> Invoke(GetResourcesByTagInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetResourcesByTagResult>("tencentcloud:Gaap/getResourcesByTag:getResourcesByTag", args ?? new GetResourcesByTagInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeResourcesByTag](https://www.tencentcloud.com/document/api/608/33049)
         /// </summary>
         public static Output<GetResourcesByTagResult> Invoke(GetResourcesByTagInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetResourcesByTagResult>("tencentcloud:Gaap/getResourcesByTag:getResourcesByTag", args ?? new GetResourcesByTagInvokeArgs(), options.WithDefaults());

@@ -42,6 +42,12 @@ import * as utilities from "../utilities";
  *     order: 1,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeTaskInfo](https://www.tencentcloud.com/search/?wd=DescribeTaskInfo&type=document&lang=en)
  */
 export function getRepairTasks(args?: GetRepairTasksArgs, opts?: pulumi.InvokeOptions): Promise<GetRepairTasksResult> {
     args = args || {};
@@ -181,6 +187,12 @@ export interface GetRepairTasksResult {
  *     order: 1,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeTaskInfo](https://www.tencentcloud.com/search/?wd=DescribeTaskInfo&type=document&lang=en)
  */
 export function getRepairTasksOutput(args?: GetRepairTasksOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRepairTasksResult> {
     args = args || {};

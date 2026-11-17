@@ -96,6 +96,12 @@ def get_invoker_records(invoker_ids: Optional[Sequence[_builtins.str]] = None,
     invoker_records = tencentcloud.tat.get_invoker_records(invoker_ids=["ivk-cas4upyf"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInvokerRecords](https://www.tencentcloud.com/document/api/1147/46694)
+
 
     :param Sequence[_builtins.str] invoker_ids: List of invoker IDs. Up to 100 IDs are allowed.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_invoker_records_output(invoker_ids: pulumi.Input[Optional[Optional[Seque
 
     invoker_records = tencentcloud.tat.get_invoker_records(invoker_ids=["ivk-cas4upyf"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInvokerRecords](https://www.tencentcloud.com/document/api/1147/46694)
 
 
     :param Sequence[_builtins.str] invoker_ids: List of invoker IDs. Up to 100 IDs are allowed.

@@ -185,6 +185,12 @@ def get_clusters(auto_renew_flags: Optional[Sequence[_builtins.int]] = None,
         ])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRedisClusters](https://www.tencentcloud.com/document/api/239/66798)
+
 
     :param Sequence[_builtins.int] auto_renew_flags: Renewal mode: 0- default state (manual renewal); 1- Automatic renewal; 2- Clearly stating that automatic renewal is not allowed.
     :param _builtins.str cluster_name: Cluster name.
@@ -261,6 +267,12 @@ def get_clusters_output(auto_renew_flags: pulumi.Input[Optional[Optional[Sequenc
             2,
         ])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRedisClusters](https://www.tencentcloud.com/document/api/239/66798)
 
 
     :param Sequence[_builtins.int] auto_renew_flags: Renewal mode: 0- default state (manual renewal); 1- Automatic renewal; 2- Clearly stating that automatic renewal is not allowed.

@@ -71,6 +71,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDefaultCertificates](https://www.tencentcloud.com/document/api/1145/50541)
 func GetDefaultCertificate(ctx *pulumi.Context, args *GetDefaultCertificateArgs, opts ...pulumi.InvokeOption) (*GetDefaultCertificateResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDefaultCertificateResult

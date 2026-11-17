@@ -41,6 +41,12 @@ import * as utilities from "../utilities";
  *     resourceTypes: ["cdn"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [UpdateCertificateInstance](https://www.tencentcloud.com/document/api/1007/57981)
  */
 export class UpdateCertificateInstanceOperation extends pulumi.CustomResource {
     /**

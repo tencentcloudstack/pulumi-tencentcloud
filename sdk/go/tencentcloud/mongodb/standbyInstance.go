@@ -28,32 +28,43 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			mongodb2, err := mongodb.NewInstance(ctx, "mongodb", &mongodb.InstanceArgs{
-//				InstanceName:  pulumi.String("tf-mongodb-test"),
-//				Memory:        pulumi.Int(4),
-//				Volume:        pulumi.Int(100),
-//				EngineVersion: pulumi.String("MONGO_40_WT"),
-//				MachineType:   pulumi.String("HIO10G"),
-//				AvailableZone: pulumi.Any(availabilityZone),
-//				ProjectId:     pulumi.Int(0),
-//				Password:      pulumi.String("test1234"),
-//				Tags: pulumi.StringMap{
-//					"test": pulumi.String("test"),
-//				},
+//			example, err := mongodb.NewInstance(ctx, "example", &mongodb.InstanceArgs{
+//				InstanceName:        pulumi.String("tf-example"),
+//				Cpu:                 pulumi.Int(2),
+//				Memory:              pulumi.Int(4),
+//				Volume:              pulumi.Int(100),
+//				EngineVersion:       pulumi.String("MONGO_80_WT"),
+//				MachineType:         pulumi.String("GE.LD.T1"),
+//				AvailableZone:       pulumi.String("ap-guangzhou-6"),
+//				VpcId:               pulumi.String("vpc-i5yyodl9"),
+//				SubnetId:            pulumi.String("subnet-hhi88a58"),
+//				ProjectId:           pulumi.Int(0),
+//				Password:            pulumi.String("Password@2026"),
+//				DataEncryption:      pulumi.String("TDE"),
+//				EncryptionKeySource: pulumi.String("manual"),
+//				KeyId:               pulumi.String("KMS-MONGODB"),
+//				KmsRegion:           pulumi.String("ap-guangzhou"),
 //			})
 //			if err != nil {
 //				return err
 //			}
-//			_, err = mongodb.NewStandbyInstance(ctx, "mongodb", &mongodb.StandbyInstanceArgs{
-//				InstanceName:         pulumi.String("tf-mongodb-standby-test"),
+//			_, err = mongodb.NewStandbyInstance(ctx, "example", &mongodb.StandbyInstanceArgs{
+//				InstanceName:         pulumi.String("tf-example"),
+//				Cpu:                  pulumi.Int(2),
 //				Memory:               pulumi.Int(4),
 //				Volume:               pulumi.Int(100),
-//				AvailableZone:        pulumi.String("ap-shanghai-2"),
+//				AvailableZone:        pulumi.String("ap-guangzhou-7"),
+//				VpcId:                pulumi.String("vpc-i5yyodl9"),
+//				SubnetId:             pulumi.String("subnet-d4umunpy"),
 //				ProjectId:            pulumi.Int(0),
-//				FatherInstanceId:     mongodb2.ID().ToIDOutput().ToStringOutput(),
+//				FatherInstanceId:     example.ID().ToIDOutput().ToStringOutput(),
 //				FatherInstanceRegion: pulumi.String("ap-guangzhou"),
+//				DataEncryption:       pulumi.String("TDE"),
+//				EncryptionKeySource:  pulumi.String("manual"),
+//				KeyId:                pulumi.String("KMS-MONGODB"),
+//				KmsRegion:            pulumi.String("ap-guangzhou"),
 //				Tags: pulumi.StringMap{
-//					"test": pulumi.String("test"),
+//					"createBy": pulumi.String("Terraform"),
 //				},
 //			})
 //			if err != nil {
@@ -65,9 +76,39 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CreateDBInstance](https://www.tencentcloud.com/search/?wd=CreateDBInstance&type=document&lang=en)
+//   - [CreateDBInstanceHour](https://www.tencentcloud.com/document/api/240/34704)
+//   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/240/34702)
+//   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+//   - [RenameInstance](https://www.tencentcloud.com/document/api/240/34697)
+//
+// * Read:
+//   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/240/34702)
+//   - [DescribeSecurityGroup](https://www.tencentcloud.com/document/api/240/40341)
+//   - [DescribeTransparentDataEncryptionStatus](https://www.tencentcloud.com/search/?wd=DescribeTransparentDataEncryptionStatus&type=document&lang=en)
+//
+// * Update:
+//   - [AssignProject](https://www.tencentcloud.com/document/api/240/34705)
+//   - [DescribeDBInstanceDeal](https://www.tencentcloud.com/document/api/240/37330)
+//   - [ModifyDBInstanceSecurityGroup](https://www.tencentcloud.com/document/api/240/45894)
+//   - [ModifyDBInstanceSpec](https://www.tencentcloud.com/document/api/240/34699)
+//   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+//   - [RenameInstance](https://www.tencentcloud.com/document/api/240/34697)
+//   - [RenewDBInstances](https://www.tencentcloud.com/document/api/240/37326)
+//
+// * Delete:
+//   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/240/34702)
+//   - [IsolateDBInstance](https://www.tencentcloud.com/document/api/240/34700)
+//   - [OfflineIsolatedDBInstance](https://www.tencentcloud.com/document/api/240/34698)
+//
 // ## Import
 //
-// Mongodb instance can be imported using the id, e.g.
+// Mongodb standby instance can be imported using the id, e.g.
 //
 // ```sh
 // $ pulumi import tencentcloud:Mongodb/standbyInstance:StandbyInstance mongodb cmgo-41s6jwy4
@@ -81,8 +122,14 @@ type StandbyInstance struct {
 	AvailableZone pulumi.StringOutput `pulumi:"availableZone"`
 	// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
 	ChargeType pulumi.StringPtrOutput `pulumi:"chargeType"`
+	// The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.
+	Cpu pulumi.IntOutput `pulumi:"cpu"`
 	// Creation time of the Mongodb instance.
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
+	// Database storage encryption setting. `No_Encryption`: Storage encryption is not used. `TDE`: Enables TDE storage encryption. Note: this field does not support update, please recreate the resource if you need to change it.
+	DataEncryption pulumi.StringOutput `pulumi:"dataEncryption"`
+	// If TDE storage encryption is selected, the key source must be specified. `auto`: Automatically generate the key. `manual`: Manually specify the key. Note: this field does not support update, please recreate the resource if you need to change it.
+	EncryptionKeySource pulumi.StringPtrOutput `pulumi:"encryptionKeySource"`
 	// Version of the standby Mongodb instance and must be same as the version of main instance.
 	EngineVersion pulumi.StringOutput `pulumi:"engineVersion"`
 	// Indicates the main instance ID of standby instances.
@@ -96,6 +143,10 @@ type StandbyInstance struct {
 	InMaintenance pulumi.IntPtrOutput `pulumi:"inMaintenance"`
 	// Name of the Mongodb instance.
 	InstanceName pulumi.StringOutput `pulumi:"instanceName"`
+	// Please note that this field is the CMK name, corresponding to the `alias` field in KMS. Key ID. If `manual` is selected as the key resource, you must enter the specified key ID. Note: this field does not support update, please recreate the resource if you need to change it.
+	KeyId pulumi.StringOutput `pulumi:"keyId"`
+	// Key ID. If `manual` is selected as the key resource, you must enter the specified key region. Note: this field does not support update, please recreate the resource if you need to change it.
+	KmsRegion pulumi.StringOutput `pulumi:"kmsRegion"`
 	// Type of standby Mongodb instance and must be same as the type of main instance.
 	MachineType pulumi.StringOutput `pulumi:"machineType"`
 	// Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
@@ -176,8 +227,14 @@ type standbyInstanceState struct {
 	AvailableZone *string `pulumi:"availableZone"`
 	// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
 	ChargeType *string `pulumi:"chargeType"`
+	// The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.
+	Cpu *int `pulumi:"cpu"`
 	// Creation time of the Mongodb instance.
 	CreateTime *string `pulumi:"createTime"`
+	// Database storage encryption setting. `No_Encryption`: Storage encryption is not used. `TDE`: Enables TDE storage encryption. Note: this field does not support update, please recreate the resource if you need to change it.
+	DataEncryption *string `pulumi:"dataEncryption"`
+	// If TDE storage encryption is selected, the key source must be specified. `auto`: Automatically generate the key. `manual`: Manually specify the key. Note: this field does not support update, please recreate the resource if you need to change it.
+	EncryptionKeySource *string `pulumi:"encryptionKeySource"`
 	// Version of the standby Mongodb instance and must be same as the version of main instance.
 	EngineVersion *string `pulumi:"engineVersion"`
 	// Indicates the main instance ID of standby instances.
@@ -191,6 +248,10 @@ type standbyInstanceState struct {
 	InMaintenance *int `pulumi:"inMaintenance"`
 	// Name of the Mongodb instance.
 	InstanceName *string `pulumi:"instanceName"`
+	// Please note that this field is the CMK name, corresponding to the `alias` field in KMS. Key ID. If `manual` is selected as the key resource, you must enter the specified key ID. Note: this field does not support update, please recreate the resource if you need to change it.
+	KeyId *string `pulumi:"keyId"`
+	// Key ID. If `manual` is selected as the key resource, you must enter the specified key region. Note: this field does not support update, please recreate the resource if you need to change it.
+	KmsRegion *string `pulumi:"kmsRegion"`
 	// Type of standby Mongodb instance and must be same as the type of main instance.
 	MachineType *string `pulumi:"machineType"`
 	// Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
@@ -224,8 +285,14 @@ type StandbyInstanceState struct {
 	AvailableZone pulumi.StringPtrInput
 	// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
 	ChargeType pulumi.StringPtrInput
+	// The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.
+	Cpu pulumi.IntPtrInput
 	// Creation time of the Mongodb instance.
 	CreateTime pulumi.StringPtrInput
+	// Database storage encryption setting. `No_Encryption`: Storage encryption is not used. `TDE`: Enables TDE storage encryption. Note: this field does not support update, please recreate the resource if you need to change it.
+	DataEncryption pulumi.StringPtrInput
+	// If TDE storage encryption is selected, the key source must be specified. `auto`: Automatically generate the key. `manual`: Manually specify the key. Note: this field does not support update, please recreate the resource if you need to change it.
+	EncryptionKeySource pulumi.StringPtrInput
 	// Version of the standby Mongodb instance and must be same as the version of main instance.
 	EngineVersion pulumi.StringPtrInput
 	// Indicates the main instance ID of standby instances.
@@ -239,6 +306,10 @@ type StandbyInstanceState struct {
 	InMaintenance pulumi.IntPtrInput
 	// Name of the Mongodb instance.
 	InstanceName pulumi.StringPtrInput
+	// Please note that this field is the CMK name, corresponding to the `alias` field in KMS. Key ID. If `manual` is selected as the key resource, you must enter the specified key ID. Note: this field does not support update, please recreate the resource if you need to change it.
+	KeyId pulumi.StringPtrInput
+	// Key ID. If `manual` is selected as the key resource, you must enter the specified key region. Note: this field does not support update, please recreate the resource if you need to change it.
+	KmsRegion pulumi.StringPtrInput
 	// Type of standby Mongodb instance and must be same as the type of main instance.
 	MachineType pulumi.StringPtrInput
 	// Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
@@ -276,6 +347,12 @@ type standbyInstanceArgs struct {
 	AvailableZone string `pulumi:"availableZone"`
 	// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
 	ChargeType *string `pulumi:"chargeType"`
+	// The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.
+	Cpu *int `pulumi:"cpu"`
+	// Database storage encryption setting. `No_Encryption`: Storage encryption is not used. `TDE`: Enables TDE storage encryption. Note: this field does not support update, please recreate the resource if you need to change it.
+	DataEncryption *string `pulumi:"dataEncryption"`
+	// If TDE storage encryption is selected, the key source must be specified. `auto`: Automatically generate the key. `manual`: Manually specify the key. Note: this field does not support update, please recreate the resource if you need to change it.
+	EncryptionKeySource *string `pulumi:"encryptionKeySource"`
 	// Indicates the main instance ID of standby instances.
 	FatherInstanceId string `pulumi:"fatherInstanceId"`
 	// Indicates the region of main instance.
@@ -287,6 +364,10 @@ type standbyInstanceArgs struct {
 	InMaintenance *int `pulumi:"inMaintenance"`
 	// Name of the Mongodb instance.
 	InstanceName string `pulumi:"instanceName"`
+	// Please note that this field is the CMK name, corresponding to the `alias` field in KMS. Key ID. If `manual` is selected as the key resource, you must enter the specified key ID. Note: this field does not support update, please recreate the resource if you need to change it.
+	KeyId *string `pulumi:"keyId"`
+	// Key ID. If `manual` is selected as the key resource, you must enter the specified key region. Note: this field does not support update, please recreate the resource if you need to change it.
+	KmsRegion *string `pulumi:"kmsRegion"`
 	// Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
 	Memory int `pulumi:"memory"`
 	// The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when chargeType is set to `PREPAID`.
@@ -313,6 +394,12 @@ type StandbyInstanceArgs struct {
 	AvailableZone pulumi.StringInput
 	// The charge type of instance. Valid values are `PREPAID` and `POSTPAID_BY_HOUR`. Default value is `POSTPAID_BY_HOUR`. Note: TencentCloud International only supports `POSTPAID_BY_HOUR`. Caution that update operation on this field will delete old instances and create new one with new charge type.
 	ChargeType pulumi.StringPtrInput
+	// The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.
+	Cpu pulumi.IntPtrInput
+	// Database storage encryption setting. `No_Encryption`: Storage encryption is not used. `TDE`: Enables TDE storage encryption. Note: this field does not support update, please recreate the resource if you need to change it.
+	DataEncryption pulumi.StringPtrInput
+	// If TDE storage encryption is selected, the key source must be specified. `auto`: Automatically generate the key. `manual`: Manually specify the key. Note: this field does not support update, please recreate the resource if you need to change it.
+	EncryptionKeySource pulumi.StringPtrInput
 	// Indicates the main instance ID of standby instances.
 	FatherInstanceId pulumi.StringInput
 	// Indicates the region of main instance.
@@ -324,6 +411,10 @@ type StandbyInstanceArgs struct {
 	InMaintenance pulumi.IntPtrInput
 	// Name of the Mongodb instance.
 	InstanceName pulumi.StringInput
+	// Please note that this field is the CMK name, corresponding to the `alias` field in KMS. Key ID. If `manual` is selected as the key resource, you must enter the specified key ID. Note: this field does not support update, please recreate the resource if you need to change it.
+	KeyId pulumi.StringPtrInput
+	// Key ID. If `manual` is selected as the key resource, you must enter the specified key region. Note: this field does not support update, please recreate the resource if you need to change it.
+	KmsRegion pulumi.StringPtrInput
 	// Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
 	Memory pulumi.IntInput
 	// The tenancy (time unit is month) of the prepaid instance. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36. NOTE: it only works when chargeType is set to `PREPAID`.
@@ -444,9 +535,24 @@ func (o StandbyInstanceOutput) ChargeType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *StandbyInstance) pulumi.StringPtrOutput { return v.ChargeType }).(pulumi.StringPtrOutput)
 }
 
+// The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.
+func (o StandbyInstanceOutput) Cpu() pulumi.IntOutput {
+	return o.ApplyT(func(v *StandbyInstance) pulumi.IntOutput { return v.Cpu }).(pulumi.IntOutput)
+}
+
 // Creation time of the Mongodb instance.
 func (o StandbyInstanceOutput) CreateTime() pulumi.StringOutput {
 	return o.ApplyT(func(v *StandbyInstance) pulumi.StringOutput { return v.CreateTime }).(pulumi.StringOutput)
+}
+
+// Database storage encryption setting. `No_Encryption`: Storage encryption is not used. `TDE`: Enables TDE storage encryption. Note: this field does not support update, please recreate the resource if you need to change it.
+func (o StandbyInstanceOutput) DataEncryption() pulumi.StringOutput {
+	return o.ApplyT(func(v *StandbyInstance) pulumi.StringOutput { return v.DataEncryption }).(pulumi.StringOutput)
+}
+
+// If TDE storage encryption is selected, the key source must be specified. `auto`: Automatically generate the key. `manual`: Manually specify the key. Note: this field does not support update, please recreate the resource if you need to change it.
+func (o StandbyInstanceOutput) EncryptionKeySource() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *StandbyInstance) pulumi.StringPtrOutput { return v.EncryptionKeySource }).(pulumi.StringPtrOutput)
 }
 
 // Version of the standby Mongodb instance and must be same as the version of main instance.
@@ -475,6 +581,16 @@ func (o StandbyInstanceOutput) InMaintenance() pulumi.IntPtrOutput {
 // Name of the Mongodb instance.
 func (o StandbyInstanceOutput) InstanceName() pulumi.StringOutput {
 	return o.ApplyT(func(v *StandbyInstance) pulumi.StringOutput { return v.InstanceName }).(pulumi.StringOutput)
+}
+
+// Please note that this field is the CMK name, corresponding to the `alias` field in KMS. Key ID. If `manual` is selected as the key resource, you must enter the specified key ID. Note: this field does not support update, please recreate the resource if you need to change it.
+func (o StandbyInstanceOutput) KeyId() pulumi.StringOutput {
+	return o.ApplyT(func(v *StandbyInstance) pulumi.StringOutput { return v.KeyId }).(pulumi.StringOutput)
+}
+
+// Key ID. If `manual` is selected as the key resource, you must enter the specified key region. Note: this field does not support update, please recreate the resource if you need to change it.
+func (o StandbyInstanceOutput) KmsRegion() pulumi.StringOutput {
+	return o.ApplyT(func(v *StandbyInstance) pulumi.StringOutput { return v.KmsRegion }).(pulumi.StringOutput)
 }
 
 // Type of standby Mongodb instance and must be same as the type of main instance.

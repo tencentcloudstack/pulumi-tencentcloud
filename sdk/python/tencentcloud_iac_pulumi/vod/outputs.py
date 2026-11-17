@@ -19,6 +19,7 @@ __all__ = [
     'AdaptiveDynamicStreamingTemplateStreamInfoAudio',
     'AdaptiveDynamicStreamingTemplateStreamInfoTehdConfig',
     'AdaptiveDynamicStreamingTemplateStreamInfoVideo',
+    'AigcQuotaModelQuota',
     'GetAdaptiveDynamicStreamingTemplatesTemplateListResult',
     'GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoAudioResult',
     'GetAdaptiveDynamicStreamingTemplatesTemplateListStreamInfoResult',
@@ -459,6 +460,82 @@ class AdaptiveDynamicStreamingTemplateStreamInfoVideo(dict):
         Maximum value of the width (or long side) of a video stream in px. Value range: `0` and `[128, 4096]`. If both `width` and `height` are `0`, the resolution will be the same as that of the source video; If `width` is `0`, but `height` is not `0`, `width` will be proportionally scaled; If `width` is not `0`, but `height` is `0`, `height` will be proportionally scaled; If both `width` and `height` are not `0`, the custom resolution will be used. Default value: `0`. Note: this field may return null, indicating that no valid values can be obtained.
         """
         return pulumi.get(self, "width")
+
+
+@pulumi.output_type
+class AigcQuotaModelQuota(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "modelName":
+            suggest = "model_name"
+        elif key == "modelVersion":
+            suggest = "model_version"
+        elif key == "quotaLimit":
+            suggest = "quota_limit"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in AigcQuotaModelQuota. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        AigcQuotaModelQuota.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        AigcQuotaModelQuota.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 model_name: Optional[_builtins.str] = None,
+                 model_version: Optional[_builtins.str] = None,
+                 quota_limit: Optional[_builtins.int] = None,
+                 usage: Optional[_builtins.int] = None):
+        """
+        :param _builtins.str model_name: Model name.
+        :param _builtins.str model_version: Model version.
+        :param _builtins.int quota_limit: Model quota limit value. Unit: when `quota_type` is `Image`, count by images; when `quota_type` is `Video`, count by seconds.
+        :param _builtins.int usage: Current usage amount of the model quota. Unit: when `quota_type` is `Image`, count by images; when `quota_type` is `Video`, count by seconds.
+        """
+        if model_name is not None:
+            pulumi.set(__self__, "model_name", model_name)
+        if model_version is not None:
+            pulumi.set(__self__, "model_version", model_version)
+        if quota_limit is not None:
+            pulumi.set(__self__, "quota_limit", quota_limit)
+        if usage is not None:
+            pulumi.set(__self__, "usage", usage)
+
+    @_builtins.property
+    @pulumi.getter(name="modelName")
+    def model_name(self) -> Optional[_builtins.str]:
+        """
+        Model name.
+        """
+        return pulumi.get(self, "model_name")
+
+    @_builtins.property
+    @pulumi.getter(name="modelVersion")
+    def model_version(self) -> Optional[_builtins.str]:
+        """
+        Model version.
+        """
+        return pulumi.get(self, "model_version")
+
+    @_builtins.property
+    @pulumi.getter(name="quotaLimit")
+    def quota_limit(self) -> Optional[_builtins.int]:
+        """
+        Model quota limit value. Unit: when `quota_type` is `Image`, count by images; when `quota_type` is `Video`, count by seconds.
+        """
+        return pulumi.get(self, "quota_limit")
+
+    @_builtins.property
+    @pulumi.getter
+    def usage(self) -> Optional[_builtins.int]:
+        """
+        Current usage amount of the model quota. Unit: when `quota_type` is `Image`, count by images; when `quota_type` is `Video`, count by seconds.
+        """
+        return pulumi.get(self, "usage")
 
 
 @pulumi.output_type

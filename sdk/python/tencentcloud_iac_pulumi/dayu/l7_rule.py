@@ -628,6 +628,24 @@ class L7Rule(pulumi.CustomResource):
             health_check_unhealth_num=10)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateL7HealthConfig](https://www.tencentcloud.com/search/?wd=CreateL7HealthConfig&type=document&lang=en)
+          - [CreateL7Rules](https://www.tencentcloud.com/search/?wd=CreateL7Rules&type=document&lang=en)
+          - [DescribleL7Rules](https://www.tencentcloud.com/search/?wd=DescribleL7Rules&type=document&lang=en)
+          - [ModifyCCHostProtection](https://www.tencentcloud.com/search/?wd=ModifyCCHostProtection&type=document&lang=en)
+          - [ModifyCCThreshold](https://www.tencentcloud.com/search/?wd=ModifyCCThreshold&type=document&lang=en)
+        * Read: [DescribleL7Rules](https://www.tencentcloud.com/search/?wd=DescribleL7Rules&type=document&lang=en)
+        * Update:
+          - [CreateL7HealthConfig](https://www.tencentcloud.com/search/?wd=CreateL7HealthConfig&type=document&lang=en)
+          - [ModifyCCHostProtection](https://www.tencentcloud.com/search/?wd=ModifyCCHostProtection&type=document&lang=en)
+          - [ModifyCCThreshold](https://www.tencentcloud.com/search/?wd=ModifyCCThreshold&type=document&lang=en)
+          - [ModifyL7Rules](https://www.tencentcloud.com/search/?wd=ModifyL7Rules&type=document&lang=en)
+        * Delete: [DeleteL7Rules](https://www.tencentcloud.com/search/?wd=DeleteL7Rules&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -686,6 +704,24 @@ class L7Rule(pulumi.CustomResource):
             health_check_health_num=5,
             health_check_unhealth_num=10)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateL7HealthConfig](https://www.tencentcloud.com/search/?wd=CreateL7HealthConfig&type=document&lang=en)
+          - [CreateL7Rules](https://www.tencentcloud.com/search/?wd=CreateL7Rules&type=document&lang=en)
+          - [DescribleL7Rules](https://www.tencentcloud.com/search/?wd=DescribleL7Rules&type=document&lang=en)
+          - [ModifyCCHostProtection](https://www.tencentcloud.com/search/?wd=ModifyCCHostProtection&type=document&lang=en)
+          - [ModifyCCThreshold](https://www.tencentcloud.com/search/?wd=ModifyCCThreshold&type=document&lang=en)
+        * Read: [DescribleL7Rules](https://www.tencentcloud.com/search/?wd=DescribleL7Rules&type=document&lang=en)
+        * Update:
+          - [CreateL7HealthConfig](https://www.tencentcloud.com/search/?wd=CreateL7HealthConfig&type=document&lang=en)
+          - [ModifyCCHostProtection](https://www.tencentcloud.com/search/?wd=ModifyCCHostProtection&type=document&lang=en)
+          - [ModifyCCThreshold](https://www.tencentcloud.com/search/?wd=ModifyCCThreshold&type=document&lang=en)
+          - [ModifyL7Rules](https://www.tencentcloud.com/search/?wd=ModifyL7Rules&type=document&lang=en)
+        * Delete: [DeleteL7Rules](https://www.tencentcloud.com/search/?wd=DeleteL7Rules&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

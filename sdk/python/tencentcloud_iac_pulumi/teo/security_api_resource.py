@@ -136,6 +136,15 @@ class SecurityApiResource(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateSecurityAPIResource](https://www.tencentcloud.com/document/api/1145/72319)
+        * Read: [DescribeSecurityAPIResource](https://www.tencentcloud.com/document/api/1145/72315)
+        * Update: [ModifySecurityAPIResource](https://www.tencentcloud.com/document/api/1145/72313)
+        * Delete: [DeleteSecurityAPIResource](https://www.tencentcloud.com/document/api/1145/72317)
+
         ## Import
 
         TEO security API resource can be imported using the zoneId#apiResourceId, e.g.
@@ -184,6 +193,15 @@ class SecurityApiResource(pulumi.CustomResource):
                 "request_constraint": "${http.request.body.form['operationType']} in ['query', 'create']",
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateSecurityAPIResource](https://www.tencentcloud.com/document/api/1145/72319)
+        * Read: [DescribeSecurityAPIResource](https://www.tencentcloud.com/document/api/1145/72315)
+        * Update: [ModifySecurityAPIResource](https://www.tencentcloud.com/document/api/1145/72313)
+        * Delete: [DeleteSecurityAPIResource](https://www.tencentcloud.com/document/api/1145/72317)
 
         ## Import
 

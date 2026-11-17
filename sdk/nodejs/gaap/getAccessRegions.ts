@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const accessRegions = tencentcloud.gaap.getAccessRegions({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAccessRegions](https://www.tencentcloud.com/document/api/608/33104)
  */
 export function getAccessRegions(args?: GetAccessRegionsArgs, opts?: pulumi.InvokeOptions): Promise<GetAccessRegionsResult> {
     args = args || {};
@@ -61,6 +67,12 @@ export interface GetAccessRegionsResult {
  *
  * const accessRegions = tencentcloud.gaap.getAccessRegions({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAccessRegions](https://www.tencentcloud.com/document/api/608/33104)
  */
 export function getAccessRegionsOutput(args?: GetAccessRegionsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAccessRegionsResult> {
     args = args || {};

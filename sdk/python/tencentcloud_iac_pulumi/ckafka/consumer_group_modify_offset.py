@@ -332,6 +332,12 @@ class ConsumerGroupModifyOffset(pulumi.CustomResource):
             topics=["xxxxxx"])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyGroupOffsets](https://www.tencentcloud.com/document/api/597/35355)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -369,6 +375,12 @@ class ConsumerGroupModifyOffset(pulumi.CustomResource):
             strategy=2,
             topics=["xxxxxx"])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyGroupOffsets](https://www.tencentcloud.com/document/api/597/35355)
 
 
         :param str resource_name: The name of the resource.

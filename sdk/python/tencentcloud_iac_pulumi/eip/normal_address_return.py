@@ -87,6 +87,12 @@ class NormalAddressReturn(pulumi.CustomResource):
         example = tencentcloud.eip.NormalAddressReturn("example", address_ips=["172.16.17.32"])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ReturnNormalAddresses](https://www.tencentcloud.com/document/api/215/52741)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -109,6 +115,12 @@ class NormalAddressReturn(pulumi.CustomResource):
 
         example = tencentcloud.eip.NormalAddressReturn("example", address_ips=["172.16.17.32"])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ReturnNormalAddresses](https://www.tencentcloud.com/document/api/215/52741)
 
 
         :param str resource_name: The name of the resource.

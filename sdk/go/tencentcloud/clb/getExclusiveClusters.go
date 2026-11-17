@@ -45,6 +45,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeExclusiveClusters](https://www.tencentcloud.com/search/?wd=DescribeExclusiveClusters&type=document&lang=en)
 func GetExclusiveClusters(ctx *pulumi.Context, args *GetExclusiveClustersArgs, opts ...pulumi.InvokeOption) (*GetExclusiveClustersResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetExclusiveClustersResult

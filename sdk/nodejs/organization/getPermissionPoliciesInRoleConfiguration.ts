@@ -48,6 +48,12 @@ import * as utilities from "../utilities";
  *     filter: "AdministratorAccess",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListPermissionPoliciesInRoleConfiguration](https://www.tencentcloud.com/document/api/1031/63599)
  */
 export function getPermissionPoliciesInRoleConfiguration(args: GetPermissionPoliciesInRoleConfigurationArgs, opts?: pulumi.InvokeOptions): Promise<GetPermissionPoliciesInRoleConfigurationResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -149,6 +155,12 @@ export interface GetPermissionPoliciesInRoleConfigurationResult {
  *     filter: "AdministratorAccess",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListPermissionPoliciesInRoleConfiguration](https://www.tencentcloud.com/document/api/1031/63599)
  */
 export function getPermissionPoliciesInRoleConfigurationOutput(args: GetPermissionPoliciesInRoleConfigurationOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetPermissionPoliciesInRoleConfigurationResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

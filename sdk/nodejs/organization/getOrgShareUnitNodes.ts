@@ -31,6 +31,12 @@ import * as utilities from "../utilities";
  *     searchKey: "123456",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeShareUnitNodes](https://www.tencentcloud.com/document/api/1031/78347)
  */
 export function getOrgShareUnitNodes(args: GetOrgShareUnitNodesArgs, opts?: pulumi.InvokeOptions): Promise<GetOrgShareUnitNodesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -100,6 +106,12 @@ export interface GetOrgShareUnitNodesResult {
  *     searchKey: "123456",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeShareUnitNodes](https://www.tencentcloud.com/document/api/1031/78347)
  */
 export function getOrgShareUnitNodesOutput(args: GetOrgShareUnitNodesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetOrgShareUnitNodesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

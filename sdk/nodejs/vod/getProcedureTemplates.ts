@@ -36,6 +36,12 @@ import * as utilities from "../utilities";
  *     name: fooProcedureTemplate.id,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeProcedureTemplates](https://www.tencentcloud.com/document/api/266/34147)
  */
 export function getProcedureTemplates(args?: GetProcedureTemplatesArgs, opts?: pulumi.InvokeOptions): Promise<GetProcedureTemplatesResult> {
     args = args || {};
@@ -123,6 +129,12 @@ export interface GetProcedureTemplatesResult {
  *     name: fooProcedureTemplate.id,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeProcedureTemplates](https://www.tencentcloud.com/document/api/266/34147)
  */
 export function getProcedureTemplatesOutput(args?: GetProcedureTemplatesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetProcedureTemplatesResult> {
     args = args || {};

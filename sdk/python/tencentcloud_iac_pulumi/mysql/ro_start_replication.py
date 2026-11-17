@@ -138,6 +138,14 @@ class RoStartReplication(pulumi.CustomResource):
         example_ro_start_replication = tencentcloud.mysql.RoStartReplication("example", instance_id=example_proxy.id)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+          - [StartReplication](https://www.tencentcloud.com/document/api/236/44329)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -213,6 +221,14 @@ class RoStartReplication(pulumi.CustomResource):
             vport=3306)
         example_ro_start_replication = tencentcloud.mysql.RoStartReplication("example", instance_id=example_proxy.id)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+          - [StartReplication](https://www.tencentcloud.com/document/api/236/44329)
 
 
         :param str resource_name: The name of the resource.

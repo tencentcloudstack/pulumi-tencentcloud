@@ -17,6 +17,7 @@ from .migrate_service import *
 from .sync_check_job_operation import *
 from .sync_config import *
 from .sync_job import *
+from .sync_job_config import *
 from .sync_job_continue_operation import *
 from .sync_job_isolate_operation import *
 from .sync_job_pause_operation import *

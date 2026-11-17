@@ -153,6 +153,14 @@ class OpsStopTaskAsync(pulumi.CustomResource):
             task_ids=["20251013154418424"])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [GetOpsAsyncJob](https://www.tencentcloud.com/document/api/1174/73832)
+          - [StopOpsTasksAsync](https://www.tencentcloud.com/document/api/1174/73811)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -179,6 +187,14 @@ class OpsStopTaskAsync(pulumi.CustomResource):
             project_id="1859317240494305280",
             task_ids=["20251013154418424"])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [GetOpsAsyncJob](https://www.tencentcloud.com/document/api/1174/73832)
+          - [StopOpsTasksAsync](https://www.tencentcloud.com/document/api/1174/73811)
 
 
         :param str resource_name: The name of the resource.

@@ -73,6 +73,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateResource](https://www.tencentcloud.com/search/?wd=CreateResource&amp;type=document&amp;lang=en)
+    ///   - [DeployResource](https://www.tencentcloud.com/search/?wd=DeployResource&amp;type=document&amp;lang=en)
+    ///   - [DescribeResources](https://www.tencentcloud.com/search/?wd=DescribeResources&amp;type=document&amp;lang=en)
+    ///   - [ModifyResource](https://www.tencentcloud.com/search/?wd=ModifyResource&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeResources](https://www.tencentcloud.com/search/?wd=DescribeResources&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyResource](https://www.tencentcloud.com/search/?wd=ModifyResource&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// dasb resource can be imported using the id, e.g.

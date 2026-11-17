@@ -32,6 +32,61 @@ import * as utilities from "../utilities";
  *     externalAccess: 1,
  * });
  * ```
+ *
+ * ### fields can be modified in-place without recreating the bastion host resource
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.bh.Resource("example", {
+ *     deployRegion: "ap-guangzhou",
+ *     vpcId: "vpc-q1of50wz",
+ *     subnetId: "subnet-7uhvm46o",
+ *     resourceEdition: "standard",
+ *     resourceNode: 20,
+ *     timeUnit: "m",
+ *     timeSpan: 1,
+ *     payMode: 1,
+ *     autoRenewFlag: 1,
+ *     deployZone: "ap-guangzhou-6",
+ *     cidrBlock: "192.168.11.0/24",
+ *     vpcCidrBlock: "192.168.0.0/16",
+ *     intranetAccess: 1,
+ *     externalAccess: 1,
+ *     webAccess: 1,
+ *     clientAccess: 1,
+ * });
+ * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateResource](https://www.tencentcloud.com/search/?wd=CreateResource&type=document&lang=en)
+ *   - [DeployResource](https://www.tencentcloud.com/search/?wd=DeployResource&type=document&lang=en)
+ *   - [DescribeResources](https://www.tencentcloud.com/search/?wd=DescribeResources&type=document&lang=en)
+ * * Read: [DescribeResources](https://www.tencentcloud.com/search/?wd=DescribeResources&type=document&lang=en)
+ * * Update:
+ *   - [DescribeResources](https://www.tencentcloud.com/search/?wd=DescribeResources&type=document&lang=en)
+ *   - [DisableClientTcpAccess](https://www.tencentcloud.com/search/?wd=DisableClientTcpAccess&type=document&lang=en)
+ *   - [DisableExternalAccess](https://www.tencentcloud.com/search/?wd=DisableExternalAccess&type=document&lang=en)
+ *   - [DisableIntranetAccess](https://www.tencentcloud.com/search/?wd=DisableIntranetAccess&type=document&lang=en)
+ *   - [DisableWebAccess](https://www.tencentcloud.com/search/?wd=DisableWebAccess&type=document&lang=en)
+ *   - [EnableClientTcpAccess](https://www.tencentcloud.com/search/?wd=EnableClientTcpAccess&type=document&lang=en)
+ *   - [EnableExternalAccess](https://www.tencentcloud.com/search/?wd=EnableExternalAccess&type=document&lang=en)
+ *   - [EnableIntranetAccess](https://www.tencentcloud.com/search/?wd=EnableIntranetAccess&type=document&lang=en)
+ *   - [EnableWebAccess](https://www.tencentcloud.com/search/?wd=EnableWebAccess&type=document&lang=en)
+ *   - [ModifyResource](https://www.tencentcloud.com/search/?wd=ModifyResource&type=document&lang=en)
+ *
+ * ## Import
+ *
+ * BH resource can be imported using the id, e.g.
+ *
+ * ```sh
+ * $ pulumi import tencentcloud:Bh/resource:Resource example bh-saas-sada9k
+ * ```
  */
 export class Resource extends pulumi.CustomResource {
     /**

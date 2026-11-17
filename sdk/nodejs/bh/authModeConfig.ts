@@ -15,6 +15,14 @@ import * as utilities from "../utilities";
  *
  * const example = new tencentcloud.bh.AuthModeConfig("example", {authMode: 2});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [ModifyAuthModeSetting](https://www.tencentcloud.com/search/?wd=ModifyAuthModeSetting&type=document&lang=en)
+ * * Read: [DescribeSecuritySetting](https://www.tencentcloud.com/search/?wd=DescribeSecuritySetting&type=document&lang=en)
+ * * Update: [ModifyAuthModeSetting](https://www.tencentcloud.com/search/?wd=ModifyAuthModeSetting&type=document&lang=en)
  */
 export class AuthModeConfig extends pulumi.CustomResource {
     /**

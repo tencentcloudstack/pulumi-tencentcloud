@@ -42,6 +42,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeRedisTopBigKeys](https://www.tencentcloud.com/search/?wd=DescribeRedisTopBigKeys&type=document&lang=en)
 func GetRedisTopBigKeys(ctx *pulumi.Context, args *GetRedisTopBigKeysArgs, opts ...pulumi.InvokeOption) (*GetRedisTopBigKeysResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetRedisTopBigKeysResult

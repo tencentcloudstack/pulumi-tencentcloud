@@ -490,6 +490,25 @@ class Instance(pulumi.CustomResource):
             ])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [AssignPrivateIpAddresses](https://www.tencentcloud.com/document/api/215/15813)
+          - [CreateNetworkInterface](https://www.tencentcloud.com/document/api/215/15818)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read: [DescribeNetworkInterfaces](https://www.tencentcloud.com/document/api/215/15817)
+        * Update:
+          - [AssignPrivateIpAddresses](https://www.tencentcloud.com/document/api/215/15813)
+          - [ModifyNetworkInterfaceAttribute](https://www.tencentcloud.com/document/api/215/15815)
+          - [ModifyPrivateIpAddressesAttribute](https://www.tencentcloud.com/document/api/215/15823)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+          - [UnassignPrivateIpAddresses](https://www.tencentcloud.com/document/api/215/15814)
+        * Delete:
+          - [DeleteNetworkInterface](https://www.tencentcloud.com/document/api/215/15822)
+          - [DescribeNetworkInterfaces](https://www.tencentcloud.com/document/api/215/15817)
+
         ## Import
 
         ENI can be imported using the id, e.g.
@@ -562,6 +581,25 @@ class Instance(pulumi.CustomResource):
                 example2.id,
             ])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [AssignPrivateIpAddresses](https://www.tencentcloud.com/document/api/215/15813)
+          - [CreateNetworkInterface](https://www.tencentcloud.com/document/api/215/15818)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read: [DescribeNetworkInterfaces](https://www.tencentcloud.com/document/api/215/15817)
+        * Update:
+          - [AssignPrivateIpAddresses](https://www.tencentcloud.com/document/api/215/15813)
+          - [ModifyNetworkInterfaceAttribute](https://www.tencentcloud.com/document/api/215/15815)
+          - [ModifyPrivateIpAddressesAttribute](https://www.tencentcloud.com/document/api/215/15823)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+          - [UnassignPrivateIpAddresses](https://www.tencentcloud.com/document/api/215/15814)
+        * Delete:
+          - [DeleteNetworkInterface](https://www.tencentcloud.com/document/api/215/15822)
+          - [DescribeNetworkInterfaces](https://www.tencentcloud.com/document/api/215/15817)
 
         ## Import
 

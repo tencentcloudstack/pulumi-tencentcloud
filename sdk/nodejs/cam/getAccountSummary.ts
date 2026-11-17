@@ -15,6 +15,12 @@ import * as utilities from "../utilities";
  *
  * const accountSummary = tencentcloud.cam.getAccountSummary({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GetAccountSummary](https://www.tencentcloud.com/document/api/598/41292)
  */
 export function getAccountSummary(args?: GetAccountSummaryArgs, opts?: pulumi.InvokeOptions): Promise<GetAccountSummaryResult> {
     args = args || {};
@@ -79,6 +85,12 @@ export interface GetAccountSummaryResult {
  *
  * const accountSummary = tencentcloud.cam.getAccountSummary({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GetAccountSummary](https://www.tencentcloud.com/document/api/598/41292)
  */
 export function getAccountSummaryOutput(args?: GetAccountSummaryOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAccountSummaryResult> {
     args = args || {};

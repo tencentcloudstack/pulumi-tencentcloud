@@ -119,6 +119,14 @@ class ResourceGroupToProjectAttachment(pulumi.CustomResource):
             project_id="2983848457986924544")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AssociateResourceGroupToProject](https://www.tencentcloud.com/document/api/1174/77857)
+        * Read: [ListResourceGroups](https://www.tencentcloud.com/document/api/1174/77852)
+        * Delete: [DissociateResourceGroupFromProject](https://www.tencentcloud.com/document/api/1174/77854)
+
         ## Import
 
         WeData resource group to project attachment can be imported using the resourceGroupId#projectId, e.g.
@@ -152,6 +160,14 @@ class ResourceGroupToProjectAttachment(pulumi.CustomResource):
             resource_group_id="20250909161820129828",
             project_id="2983848457986924544")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AssociateResourceGroupToProject](https://www.tencentcloud.com/document/api/1174/77857)
+        * Read: [ListResourceGroups](https://www.tencentcloud.com/document/api/1174/77852)
+        * Delete: [DissociateResourceGroupFromProject](https://www.tencentcloud.com/document/api/1174/77854)
 
         ## Import
 

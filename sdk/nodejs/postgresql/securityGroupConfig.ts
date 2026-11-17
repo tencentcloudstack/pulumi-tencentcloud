@@ -50,6 +50,14 @@ import * as utilities from "../utilities";
  *     readOnlyGroupId: group.id,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [ModifyDBInstanceSecurityGroups](https://www.tencentcloud.com/document/api/409/52647)
+ * * Read: [DescribeDBInstanceSecurityGroups](https://www.tencentcloud.com/document/api/409/52648)
+ * * Update: [ModifyDBInstanceSecurityGroups](https://www.tencentcloud.com/document/api/409/52647)
  */
 export class SecurityGroupConfig extends pulumi.CustomResource {
     /**

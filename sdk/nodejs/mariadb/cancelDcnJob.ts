@@ -15,6 +15,14 @@ import * as utilities from "../utilities";
  *
  * const cancelDcnJob = new tencentcloud.mariadb.CancelDcnJob("cancel_dcn_job", {instanceId: "tdsql-9vqvls95"});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CancelDcnJob](https://www.tencentcloud.com/document/api/237/41520)
+ *   - [DescribeFlow](https://www.tencentcloud.com/document/api/237/16177)
  */
 export class CancelDcnJob extends pulumi.CustomResource {
     /**

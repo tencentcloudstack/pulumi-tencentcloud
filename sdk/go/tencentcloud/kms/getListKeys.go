@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [ListKeys](https://www.tencentcloud.com/document/api/1030/32184)
 func GetListKeys(ctx *pulumi.Context, args *GetListKeysArgs, opts ...pulumi.InvokeOption) (*GetListKeysResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetListKeysResult

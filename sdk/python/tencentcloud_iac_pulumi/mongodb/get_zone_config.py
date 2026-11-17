@@ -99,6 +99,12 @@ def get_zone_config(available_zone: Optional[_builtins.str] = None,
     mongodb = tencentcloud.mongodb.get_zone_config(available_zone="ap-guangzhou-2")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSpecInfo](https://www.tencentcloud.com/document/api/240/34701)
+
 
     :param _builtins.str available_zone: The available zone of the Mongodb.
     :param _builtins.str result_output_file: Used to store results.
@@ -128,6 +134,12 @@ def get_zone_config_output(available_zone: pulumi.Input[Optional[Optional[_built
 
     mongodb = tencentcloud.mongodb.get_zone_config(available_zone="ap-guangzhou-2")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSpecInfo](https://www.tencentcloud.com/document/api/240/34701)
 
 
     :param _builtins.str available_zone: The available zone of the Mongodb.

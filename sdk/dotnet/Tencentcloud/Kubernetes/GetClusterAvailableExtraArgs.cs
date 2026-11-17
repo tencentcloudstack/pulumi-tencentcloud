@@ -54,6 +54,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeClusterAvailableExtraArgs](https://www.tencentcloud.com/search/?wd=DescribeClusterAvailableExtraArgs&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetClusterAvailableExtraArgsResult> InvokeAsync(GetClusterAvailableExtraArgsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetClusterAvailableExtraArgsResult>("tencentcloud:Kubernetes/getClusterAvailableExtraArgs:getClusterAvailableExtraArgs", args ?? new GetClusterAvailableExtraArgsArgs(), options.WithDefaults());
@@ -100,6 +106,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeClusterAvailableExtraArgs](https://www.tencentcloud.com/search/?wd=DescribeClusterAvailableExtraArgs&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetClusterAvailableExtraArgsResult> Invoke(GetClusterAvailableExtraArgsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetClusterAvailableExtraArgsResult>("tencentcloud:Kubernetes/getClusterAvailableExtraArgs:getClusterAvailableExtraArgs", args ?? new GetClusterAvailableExtraArgsInvokeArgs(), options.WithDefaults());
@@ -146,6 +158,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeClusterAvailableExtraArgs](https://www.tencentcloud.com/search/?wd=DescribeClusterAvailableExtraArgs&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetClusterAvailableExtraArgsResult> Invoke(GetClusterAvailableExtraArgsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetClusterAvailableExtraArgsResult>("tencentcloud:Kubernetes/getClusterAvailableExtraArgs:getClusterAvailableExtraArgs", args ?? new GetClusterAvailableExtraArgsInvokeArgs(), options.WithDefaults());

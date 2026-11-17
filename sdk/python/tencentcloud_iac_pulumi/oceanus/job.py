@@ -357,6 +357,15 @@ class Job(pulumi.CustomResource):
             work_space_id="space-2idq8wbr")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateJob](https://www.tencentcloud.com/search/?wd=CreateJob&type=document&lang=en)
+        * Read: [DescribeJobs](https://www.tencentcloud.com/search/?wd=DescribeJobs&type=document&lang=en)
+        * Update: [ModifyJob](https://www.tencentcloud.com/search/?wd=ModifyJob&type=document&lang=en)
+        * Delete: [DeleteJobs](https://www.tencentcloud.com/search/?wd=DeleteJobs&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -396,6 +405,15 @@ class Job(pulumi.CustomResource):
             flink_version="Flink-1.16",
             work_space_id="space-2idq8wbr")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateJob](https://www.tencentcloud.com/search/?wd=CreateJob&type=document&lang=en)
+        * Read: [DescribeJobs](https://www.tencentcloud.com/search/?wd=DescribeJobs&type=document&lang=en)
+        * Update: [ModifyJob](https://www.tencentcloud.com/search/?wd=ModifyJob&type=document&lang=en)
+        * Delete: [DeleteJobs](https://www.tencentcloud.com/search/?wd=DeleteJobs&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

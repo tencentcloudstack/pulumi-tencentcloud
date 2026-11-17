@@ -97,6 +97,12 @@ def get_cluster_levels(cluster_id: Optional[_builtins.str] = None,
     pulumi.export("level5", foo.lists[0].alias)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeClusterLevelAttribute](https://www.tencentcloud.com/document/api/457/46754)
+
 
     :param _builtins.str cluster_id: Specify cluster Id, if set will only query current cluster's available levels.
     :param _builtins.str result_output_file: Used to save results.
@@ -127,6 +133,12 @@ def get_cluster_levels_output(cluster_id: pulumi.Input[Optional[Optional[_builti
     foo = tencentcloud.kubernetes.get_cluster_levels()
     pulumi.export("level5", foo.lists[0].alias)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeClusterLevelAttribute](https://www.tencentcloud.com/document/api/457/46754)
 
 
     :param _builtins.str cluster_id: Specify cluster Id, if set will only query current cluster's available levels.

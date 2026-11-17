@@ -47,6 +47,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [PutProvisionedConcurrencyConfig](https://www.tencentcloud.com/document/api/583/39225)
+    /// * Read: [GetProvisionedConcurrencyConfig](https://www.tencentcloud.com/document/api/583/39227)
+    /// * Delete: [DeleteProvisionedConcurrencyConfig](https://www.tencentcloud.com/document/api/583/39229)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Scf/provisionedConcurrencyConfig:ProvisionedConcurrencyConfig")]
     public partial class ProvisionedConcurrencyConfig : global::Pulumi.CustomResource

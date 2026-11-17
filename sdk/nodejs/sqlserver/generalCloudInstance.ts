@@ -65,6 +65,30 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateCloudDBInstances](https://www.tencentcloud.com/document/api/238/55674)
+ *   - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+ *   - [DescribeOrders](https://www.tencentcloud.com/document/api/238/32134)
+ *   - [ModifyDBInstanceName](https://www.tencentcloud.com/document/api/238/32104)
+ * * Read:
+ *   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+ *   - [DescribeDBInstancesAttribute](https://www.tencentcloud.com/document/api/238/54811)
+ *   - [DescribeDBSecurityGroups](https://www.tencentcloud.com/document/api/238/72730)
+ *   - [DescribeMaintenanceSpan](https://www.tencentcloud.com/document/api/238/69303)
+ * * Update:
+ *   - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+ *   - [DescribeOrders](https://www.tencentcloud.com/document/api/238/32134)
+ *   - [ModifyDBInstanceName](https://www.tencentcloud.com/document/api/238/32104)
+ *   - [UpgradeDBInstance](https://www.tencentcloud.com/document/api/238/32094)
+ * * Delete:
+ *   - [DeleteDBInstance](https://www.tencentcloud.com/document/api/238/72759)
+ *   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+ *   - [TerminateDBInstance](https://www.tencentcloud.com/document/api/238/34685)
+ *
  * ## Import
  *
  * sqlserver generalCloudInstance can be imported using the id, e.g.
@@ -140,6 +164,10 @@ export class GeneralCloudInstance extends pulumi.CustomResource {
      */
     declare public readonly instanceChargeType: pulumi.Output<string | undefined>;
     /**
+     * Instance ID.
+     */
+    declare public /*out*/ readonly instanceId: pulumi.Output<string>;
+    /**
      * The host disk type of the purchased instance, CLOUD_HSSD-enhanced SSD cloud disk for virtual machines, CLOUD_TSSD-extremely fast SSD cloud disk for virtual machines, CLOUD_BSSD-universal SSD cloud disk for virtual machines.
      */
     declare public readonly machineType: pulumi.Output<string>;
@@ -200,6 +228,10 @@ export class GeneralCloudInstance extends pulumi.CustomResource {
      */
     declare public readonly timeZone: pulumi.Output<string | undefined>;
     /**
+     * Unique UID of the instance.
+     */
+    declare public /*out*/ readonly uid: pulumi.Output<string>;
+    /**
      * VPC network ID, in the form of vpc-dsp338hz; SubnetId and VpcId need to be set at the same time or not set at the same time.
      */
     declare public readonly vpcId: pulumi.Output<string | undefined>;
@@ -234,6 +266,7 @@ export class GeneralCloudInstance extends pulumi.CustomResource {
             resourceInputs["drZones"] = state?.drZones;
             resourceInputs["haType"] = state?.haType;
             resourceInputs["instanceChargeType"] = state?.instanceChargeType;
+            resourceInputs["instanceId"] = state?.instanceId;
             resourceInputs["machineType"] = state?.machineType;
             resourceInputs["memory"] = state?.memory;
             resourceInputs["multiNodes"] = state?.multiNodes;
@@ -249,6 +282,7 @@ export class GeneralCloudInstance extends pulumi.CustomResource {
             resourceInputs["subnetId"] = state?.subnetId;
             resourceInputs["tgwWanVport"] = state?.tgwWanVport;
             resourceInputs["timeZone"] = state?.timeZone;
+            resourceInputs["uid"] = state?.uid;
             resourceInputs["vpcId"] = state?.vpcId;
             resourceInputs["weeklies"] = state?.weeklies;
             resourceInputs["zone"] = state?.zone;
@@ -295,7 +329,9 @@ export class GeneralCloudInstance extends pulumi.CustomResource {
             resourceInputs["weeklies"] = args?.weeklies;
             resourceInputs["zone"] = args?.zone;
             resourceInputs["dnsPodDomain"] = undefined /*out*/;
+            resourceInputs["instanceId"] = undefined /*out*/;
             resourceInputs["tgwWanVport"] = undefined /*out*/;
+            resourceInputs["uid"] = undefined /*out*/;
         }
         opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts);
         super(GeneralCloudInstance.__pulumiType, name, resourceInputs, opts);
@@ -344,6 +380,10 @@ export interface GeneralCloudInstanceState {
      * Payment mode, the value supports PREPAID (prepaid), POSTPAID (postpaid).
      */
     instanceChargeType?: pulumi.Input<string | undefined>;
+    /**
+     * Instance ID.
+     */
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * The host disk type of the purchased instance, CLOUD_HSSD-enhanced SSD cloud disk for virtual machines, CLOUD_TSSD-extremely fast SSD cloud disk for virtual machines, CLOUD_BSSD-universal SSD cloud disk for virtual machines.
      */
@@ -404,6 +444,10 @@ export interface GeneralCloudInstanceState {
      * System time zone, default: China Standard Time.
      */
     timeZone?: pulumi.Input<string | undefined>;
+    /**
+     * Unique UID of the instance.
+     */
+    uid?: pulumi.Input<string | undefined>;
     /**
      * VPC network ID, in the form of vpc-dsp338hz; SubnetId and VpcId need to be set at the same time or not set at the same time.
      */

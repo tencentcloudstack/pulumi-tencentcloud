@@ -34,6 +34,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ActionAlterCkUser](https://www.tencentcloud.com/search/?wd=ActionAlterCkUser&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeCkSqlApis](https://www.tencentcloud.com/search/?wd=DescribeCkSqlApis&amp;type=document&amp;lang=en)
+    /// * Update: [ActionAlterCkUser](https://www.tencentcloud.com/search/?wd=ActionAlterCkUser&amp;type=document&amp;lang=en)
+    /// * Delete: [DescribeCkSqlApis](https://www.tencentcloud.com/search/?wd=DescribeCkSqlApis&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// clickhouse account can be imported using the id, e.g.

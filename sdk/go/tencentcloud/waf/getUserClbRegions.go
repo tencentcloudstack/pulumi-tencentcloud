@@ -36,6 +36,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeUserClbWafRegions](https://www.tencentcloud.com/document/api/627/64769)
 func GetUserClbRegions(ctx *pulumi.Context, args *GetUserClbRegionsArgs, opts ...pulumi.InvokeOption) (*GetUserClbRegionsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetUserClbRegionsResult

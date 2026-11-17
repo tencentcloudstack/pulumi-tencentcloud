@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeAutoScalingGroups](https://www.tencentcloud.com/document/api/377/31013)
 func GetScalingGroups(ctx *pulumi.Context, args *GetScalingGroupsArgs, opts ...pulumi.InvokeOption) (*GetScalingGroupsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetScalingGroupsResult

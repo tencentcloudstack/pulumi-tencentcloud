@@ -87,6 +87,12 @@ class BlackListDelete(pulumi.CustomResource):
         black_list = tencentcloud.ses.BlackListDelete("black_list", email_address="terraform-tf@gmail.com")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [DeleteBlackList](https://www.tencentcloud.com/document/api/1084/39417)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -111,6 +117,12 @@ class BlackListDelete(pulumi.CustomResource):
 
         black_list = tencentcloud.ses.BlackListDelete("black_list", email_address="terraform-tf@gmail.com")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [DeleteBlackList](https://www.tencentcloud.com/document/api/1084/39417)
 
 
         :param str resource_name: The name of the resource.

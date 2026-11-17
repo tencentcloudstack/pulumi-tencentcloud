@@ -318,6 +318,12 @@ def get_performance_page(area: Optional[_builtins.str] = None,
         level="1")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDataPerformancePage](https://www.tencentcloud.com/document/api/1131/45325)
+
 
     :param _builtins.str area: The region where the data reporting takes place.
     :param _builtins.str brand: The mobile phone brand used for data reporting.
@@ -439,6 +445,12 @@ def get_performance_page_output(area: pulumi.Input[Optional[Optional[_builtins.s
         type="pagepv",
         level="1")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDataPerformancePage](https://www.tencentcloud.com/document/api/1131/45325)
 
 
     :param _builtins.str area: The region where the data reporting takes place.

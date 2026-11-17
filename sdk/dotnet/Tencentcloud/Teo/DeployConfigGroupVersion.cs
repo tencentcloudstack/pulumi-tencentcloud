@@ -43,6 +43,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DeployConfigGroupVersion](https://www.tencentcloud.com/document/api/1145/57976)
+    ///   - [DescribeEnvironments](https://www.tencentcloud.com/document/api/1145/57972)
+    /// * Read: [DescribeDeployHistory](https://www.tencentcloud.com/document/api/1145/57973)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Teo/deployConfigGroupVersion:DeployConfigGroupVersion")]
     public partial class DeployConfigGroupVersion : global::Pulumi.CustomResource
@@ -84,7 +93,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Output<string> RecordId { get; private set; } = null!;
 
         /// <summary>
-        /// Deploy status. Valid values: deploying (Deploying), failure (Deploy failed), success (Deploy successful).
+        /// Version status. Valid values: creating (Being created), inactive (Not effective), active (Effective).
         /// </summary>
         [Output("status")]
         public Output<string> Status { get; private set; } = null!;
@@ -223,7 +232,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Input<string>? RecordId { get; set; }
 
         /// <summary>
-        /// Deploy status. Valid values: deploying (Deploying), failure (Deploy failed), success (Deploy successful).
+        /// Version status. Valid values: creating (Being created), inactive (Not effective), active (Effective).
         /// </summary>
         [Input("status")]
         public Input<string>? Status { get; set; }

@@ -59,6 +59,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeReadOnlyGroups](https://www.tencentcloud.com/document/api/409/39725)
 func GetReadonlyGroups(ctx *pulumi.Context, args *GetReadonlyGroupsArgs, opts ...pulumi.InvokeOption) (*GetReadonlyGroupsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetReadonlyGroupsResult

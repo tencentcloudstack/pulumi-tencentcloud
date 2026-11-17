@@ -48,6 +48,26 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateNetworkAcl](https://www.tencentcloud.com/document/api/215/35622)
+    ///   - [ModifyNetworkAclEntries](https://www.tencentcloud.com/document/api/215/35617)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    /// * Read:
+    ///   - [DescribeNetworkAcls](https://www.tencentcloud.com/document/api/215/35620)
+    ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+    /// * Update:
+    ///   - [ModifyNetworkAclAttribute](https://www.tencentcloud.com/document/api/215/35618)
+    ///   - [ModifyNetworkAclEntries](https://www.tencentcloud.com/document/api/215/35617)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    /// * Delete:
+    ///   - [DeleteNetworkAcl](https://www.tencentcloud.com/document/api/215/35621)
+    ///   - [DescribeNetworkAcls](https://www.tencentcloud.com/document/api/215/35620)
+    ///   - [DisassociateNetworkAclSubnets](https://www.tencentcloud.com/document/api/215/35619)
+    /// 
     /// ## Import
     /// 
     /// Vpc ACL can be imported, e.g.

@@ -33,6 +33,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeInstanceAttributes](https://www.tencentcloud.com/document/api/597/35358)
+        ///   - [DescribeTopicDetail](https://www.tencentcloud.com/document/api/597/35341)
         /// </summary>
         public static Task<GetTopicsResult> InvokeAsync(GetTopicsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetTopicsResult>("tencentcloud:Ckafka/getTopics:getTopics", args ?? new GetTopicsArgs(), options.WithDefaults());
@@ -58,6 +66,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeInstanceAttributes](https://www.tencentcloud.com/document/api/597/35358)
+        ///   - [DescribeTopicDetail](https://www.tencentcloud.com/document/api/597/35341)
         /// </summary>
         public static Output<GetTopicsResult> Invoke(GetTopicsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetTopicsResult>("tencentcloud:Ckafka/getTopics:getTopics", args ?? new GetTopicsInvokeArgs(), options.WithDefaults());
@@ -83,6 +99,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeInstanceAttributes](https://www.tencentcloud.com/document/api/597/35358)
+        ///   - [DescribeTopicDetail](https://www.tencentcloud.com/document/api/597/35341)
         /// </summary>
         public static Output<GetTopicsResult> Invoke(GetTopicsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetTopicsResult>("tencentcloud:Ckafka/getTopics:getTopics", args ?? new GetTopicsInvokeArgs(), options.WithDefaults());

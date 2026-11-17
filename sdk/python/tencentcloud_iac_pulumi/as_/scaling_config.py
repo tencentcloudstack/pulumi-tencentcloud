@@ -1472,6 +1472,17 @@ class ScalingConfig(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateLaunchConfiguration](https://www.tencentcloud.com/document/api/377/31001)
+        * Read: [DescribeLaunchConfigurations](https://www.tencentcloud.com/document/api/377/30999)
+        * Update:
+          - [ModifyLaunchConfigurationAttributes](https://www.tencentcloud.com/document/api/377/30998)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Delete: [DeleteLaunchConfiguration](https://www.tencentcloud.com/document/api/377/31000)
+
         ## Import
 
         AutoScaling Configuration can be imported using the id, e.g.
@@ -1735,6 +1746,17 @@ class ScalingConfig(pulumi.CustomResource):
                 "owner": "tf",
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateLaunchConfiguration](https://www.tencentcloud.com/document/api/377/31001)
+        * Read: [DescribeLaunchConfigurations](https://www.tencentcloud.com/document/api/377/30999)
+        * Update:
+          - [ModifyLaunchConfigurationAttributes](https://www.tencentcloud.com/document/api/377/30998)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Delete: [DeleteLaunchConfiguration](https://www.tencentcloud.com/document/api/377/31000)
 
         ## Import
 

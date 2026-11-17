@@ -15,6 +15,14 @@ import * as utilities from "../utilities";
  *
  * const syncCheckJobOperation = new tencentcloud.dts.SyncCheckJobOperation("sync_check_job_operation", {jobId: ""});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateCheckSyncJob](https://www.tencentcloud.com/document/api/571/51796)
+ *   - [DescribeCheckSyncJobResult](https://www.tencentcloud.com/document/api/571/51794)
  */
 export class SyncCheckJobOperation extends pulumi.CustomResource {
     /**

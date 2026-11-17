@@ -18,6 +18,12 @@ import * as utilities from "../utilities";
  *     proxyGroupId: "cynosdbmysql-proxy-l6zf9t30",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSupportProxyVersion](https://www.tencentcloud.com/document/api/1098/56555)
  */
 export function getProxyVersion(args: GetProxyVersionArgs, opts?: pulumi.InvokeOptions): Promise<GetProxyVersionResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -80,6 +86,12 @@ export interface GetProxyVersionResult {
  *     proxyGroupId: "cynosdbmysql-proxy-l6zf9t30",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSupportProxyVersion](https://www.tencentcloud.com/document/api/1098/56555)
  */
 export function getProxyVersionOutput(args: GetProxyVersionOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetProxyVersionResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

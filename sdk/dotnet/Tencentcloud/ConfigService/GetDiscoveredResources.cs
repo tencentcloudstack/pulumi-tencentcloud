@@ -96,6 +96,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ConfigService
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListDiscoveredResources](https://www.tencentcloud.com/document/api/1164/66770)
         /// </summary>
         public static Task<GetDiscoveredResourcesResult> InvokeAsync(GetDiscoveredResourcesArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDiscoveredResourcesResult>("tencentcloud:Config/getDiscoveredResources:getDiscoveredResources", args ?? new GetDiscoveredResourcesArgs(), options.WithDefaults());
@@ -184,6 +190,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ConfigService
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListDiscoveredResources](https://www.tencentcloud.com/document/api/1164/66770)
         /// </summary>
         public static Output<GetDiscoveredResourcesResult> Invoke(GetDiscoveredResourcesInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDiscoveredResourcesResult>("tencentcloud:Config/getDiscoveredResources:getDiscoveredResources", args ?? new GetDiscoveredResourcesInvokeArgs(), options.WithDefaults());
@@ -272,6 +284,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ConfigService
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListDiscoveredResources](https://www.tencentcloud.com/document/api/1164/66770)
         /// </summary>
         public static Output<GetDiscoveredResourcesResult> Invoke(GetDiscoveredResourcesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDiscoveredResourcesResult>("tencentcloud:Config/getDiscoveredResources:getDiscoveredResources", args ?? new GetDiscoveredResourcesInvokeArgs(), options.WithDefaults());

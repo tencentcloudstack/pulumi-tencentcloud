@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeGroupGateways](https://www.tencentcloud.com/search/?wd=DescribeGroupGateways&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetGroupGatewaysResult> InvokeAsync(GetGroupGatewaysArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetGroupGatewaysResult>("tencentcloud:Tsf/getGroupGateways:getGroupGateways", args ?? new GetGroupGatewaysArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeGroupGateways](https://www.tencentcloud.com/search/?wd=DescribeGroupGateways&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetGroupGatewaysResult> Invoke(GetGroupGatewaysInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetGroupGatewaysResult>("tencentcloud:Tsf/getGroupGateways:getGroupGateways", args ?? new GetGroupGatewaysInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeGroupGateways](https://www.tencentcloud.com/search/?wd=DescribeGroupGateways&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetGroupGatewaysResult> Invoke(GetGroupGatewaysInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetGroupGatewaysResult>("tencentcloud:Tsf/getGroupGateways:getGroupGateways", args ?? new GetGroupGatewaysInvokeArgs(), options.WithDefaults());

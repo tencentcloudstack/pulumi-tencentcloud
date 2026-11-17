@@ -185,6 +185,14 @@ class UpgradeProxyVersionOperation(pulumi.CustomResource):
             instance_type_upgrade_now=1)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
+          - [UpgradeProxyVersion](https://www.tencentcloud.com/document/api/239/47724)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -214,6 +222,14 @@ class UpgradeProxyVersionOperation(pulumi.CustomResource):
             upgrade_proxy_version="5.8.12",
             instance_type_upgrade_now=1)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
+          - [UpgradeProxyVersion](https://www.tencentcloud.com/document/api/239/47724)
 
 
         :param str resource_name: The name of the resource.

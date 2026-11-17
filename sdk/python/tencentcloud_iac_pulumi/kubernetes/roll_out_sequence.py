@@ -206,6 +206,19 @@ class RollOutSequence(pulumi.CustomResource):
             ])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateRollOutSequence](https://www.tencentcloud.com/search/?wd=CreateRollOutSequence&type=document&lang=en)
+          - [DescribeRollOutSequences](https://www.tencentcloud.com/search/?wd=DescribeRollOutSequences&type=document&lang=en)
+        * Read: [DescribeRollOutSequences](https://www.tencentcloud.com/search/?wd=DescribeRollOutSequences&type=document&lang=en)
+        * Update:
+          - [DescribeRollOutSequences](https://www.tencentcloud.com/search/?wd=DescribeRollOutSequences&type=document&lang=en)
+          - [ModifyRollOutSequence](https://www.tencentcloud.com/search/?wd=ModifyRollOutSequence&type=document&lang=en)
+        * Delete: [DeleteRollOutSequence](https://www.tencentcloud.com/search/?wd=DeleteRollOutSequence&type=document&lang=en)
+
         ## Import
 
         TKE roll-out sequence can be imported using the sequenceId, e.g.
@@ -275,6 +288,19 @@ class RollOutSequence(pulumi.CustomResource):
                 },
             ])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateRollOutSequence](https://www.tencentcloud.com/search/?wd=CreateRollOutSequence&type=document&lang=en)
+          - [DescribeRollOutSequences](https://www.tencentcloud.com/search/?wd=DescribeRollOutSequences&type=document&lang=en)
+        * Read: [DescribeRollOutSequences](https://www.tencentcloud.com/search/?wd=DescribeRollOutSequences&type=document&lang=en)
+        * Update:
+          - [DescribeRollOutSequences](https://www.tencentcloud.com/search/?wd=DescribeRollOutSequences&type=document&lang=en)
+          - [ModifyRollOutSequence](https://www.tencentcloud.com/search/?wd=ModifyRollOutSequence&type=document&lang=en)
+        * Delete: [DeleteRollOutSequence](https://www.tencentcloud.com/search/?wd=DeleteRollOutSequence&type=document&lang=en)
 
         ## Import
 

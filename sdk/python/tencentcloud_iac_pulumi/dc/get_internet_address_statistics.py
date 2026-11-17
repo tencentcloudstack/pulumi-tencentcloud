@@ -86,6 +86,12 @@ def get_internet_address_statistics(result_output_file: Optional[_builtins.str] 
     internet_address_statistics = tencentcloud.dc.get_internet_address_statistics()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInternetAddressStatistics](https://www.tencentcloud.com/document/api/216/39496)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -111,6 +117,12 @@ def get_internet_address_statistics_output(result_output_file: pulumi.Input[Opti
 
     internet_address_statistics = tencentcloud.dc.get_internet_address_statistics()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInternetAddressStatistics](https://www.tencentcloud.com/document/api/216/39496)
 
 
     :param _builtins.str result_output_file: Used to save results.

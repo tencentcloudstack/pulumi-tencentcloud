@@ -37,6 +37,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [UpdateIPWhitelist](https://www.tencentcloud.com/search/?wd=UpdateIPWhitelist&amp;type=document&amp;lang=en)
+    /// * Read: [GetIPWhitelist](https://www.tencentcloud.com/search/?wd=GetIPWhitelist&amp;type=document&amp;lang=en)
+    /// * Update: [UpdateIPWhitelist](https://www.tencentcloud.com/search/?wd=UpdateIPWhitelist&amp;type=document&amp;lang=en)
+    /// * Delete: [UpdateIPWhitelist](https://www.tencentcloud.com/search/?wd=UpdateIPWhitelist&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// Organization IP whitelist config can be imported using the zoneId, e.g.

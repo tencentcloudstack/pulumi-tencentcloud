@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CancelUpgradePlan](https://www.tencentcloud.com/search/?wd=CancelUpgradePlan&type=document&lang=en)
 type CancelUpgradePlanOperation struct {
 	pulumi.CustomResourceState
 

@@ -24,6 +24,12 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAccountPrivileges](https://www.tencentcloud.com/document/api/409/78818)
  */
 export function getAccountPrivileges(args: GetAccountPrivilegesArgs, opts?: pulumi.InvokeOptions): Promise<GetAccountPrivilegesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -92,6 +98,12 @@ export interface GetAccountPrivilegesResult {
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAccountPrivileges](https://www.tencentcloud.com/document/api/409/78818)
  */
 export function getAccountPrivilegesOutput(args: GetAccountPrivilegesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAccountPrivilegesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

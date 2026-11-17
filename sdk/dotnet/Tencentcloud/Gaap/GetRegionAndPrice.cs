@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRegionAndPrice](https://www.tencentcloud.com/document/api/608/33050)
         /// </summary>
         public static Task<GetRegionAndPriceResult> InvokeAsync(GetRegionAndPriceArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetRegionAndPriceResult>("tencentcloud:Gaap/getRegionAndPrice:getRegionAndPrice", args ?? new GetRegionAndPriceArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRegionAndPrice](https://www.tencentcloud.com/document/api/608/33050)
         /// </summary>
         public static Output<GetRegionAndPriceResult> Invoke(GetRegionAndPriceInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetRegionAndPriceResult>("tencentcloud:Gaap/getRegionAndPrice:getRegionAndPrice", args ?? new GetRegionAndPriceInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRegionAndPrice](https://www.tencentcloud.com/document/api/608/33050)
         /// </summary>
         public static Output<GetRegionAndPriceResult> Invoke(GetRegionAndPriceInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetRegionAndPriceResult>("tencentcloud:Gaap/getRegionAndPrice:getRegionAndPrice", args ?? new GetRegionAndPriceInvokeArgs(), options.WithDefaults());

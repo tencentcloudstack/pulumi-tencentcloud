@@ -119,6 +119,12 @@ class SuspendResumeDataEngine(pulumi.CustomResource):
             operate="suspend")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [SuspendResumeDataEngine](https://www.tencentcloud.com/document/api/1155/53307)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -144,6 +150,12 @@ class SuspendResumeDataEngine(pulumi.CustomResource):
             data_engine_name="tf-example",
             operate="suspend")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [SuspendResumeDataEngine](https://www.tencentcloud.com/document/api/1155/53307)
 
 
         :param str resource_name: The name of the resource.

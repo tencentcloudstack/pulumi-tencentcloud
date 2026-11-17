@@ -73,6 +73,19 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [DescribeTasks](https://www.tencentcloud.com/document/api/409/78807)
+//   - [ModifyDBInstanceSSLConfig](https://www.tencentcloud.com/document/api/409/78802)
+//
+// * Read: [DescribeDBInstanceSSLConfig](https://www.tencentcloud.com/document/api/409/78804)
+// * Update:
+//   - [DescribeTasks](https://www.tencentcloud.com/document/api/409/78807)
+//   - [ModifyDBInstanceSSLConfig](https://www.tencentcloud.com/document/api/409/78802)
+//
 // ## Import
 //
 // postgres instance ssl config can be imported using the id, e.g.

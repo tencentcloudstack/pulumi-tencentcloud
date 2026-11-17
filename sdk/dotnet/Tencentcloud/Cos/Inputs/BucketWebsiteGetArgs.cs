@@ -14,6 +14,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
     public sealed class BucketWebsiteGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// To configure whether to display the 404 public welfare page when the error code is 404, the optional values are `Enabled` or `Disabled`, with the default set to `Disabled`.
+        /// </summary>
+        [Input("charity404")]
+        public Input<string>? Charity404 { get; set; }
+
+        /// <summary>
         /// `Endpoint` of the static website.
         /// </summary>
         [Input("endpoint")]
@@ -30,6 +36,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Inputs
         /// </summary>
         [Input("indexDocument")]
         public Input<string>? IndexDocument { get; set; }
+
+        /// <summary>
+        /// The HTTP status code for configuring hit error documents, with optional values of `Enabled` or `Disabled`, defaulting to `Enabled`.
+        /// </summary>
+        [Input("originalHttpStatus")]
+        public Input<string>? OriginalHttpStatus { get; set; }
 
         /// <summary>
         /// Redirects all request configurations. Valid values: http, https. Default is `Http`.

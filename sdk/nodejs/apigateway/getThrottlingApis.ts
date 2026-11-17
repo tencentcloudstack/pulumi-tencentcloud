@@ -72,6 +72,14 @@ import * as utilities from "../utilities";
  *     ],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeApiEnvironmentStrategy](https://www.tencentcloud.com/search/?wd=DescribeApiEnvironmentStrategy&type=document&lang=en)
+ *   - [DescribeServicesStatus](https://www.tencentcloud.com/search/?wd=DescribeServicesStatus&type=document&lang=en)
  */
 export function getThrottlingApis(args?: GetThrottlingApisArgs, opts?: pulumi.InvokeOptions): Promise<GetThrottlingApisResult> {
     args = args || {};
@@ -186,6 +194,14 @@ export interface GetThrottlingApisResult {
  *     ],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeApiEnvironmentStrategy](https://www.tencentcloud.com/search/?wd=DescribeApiEnvironmentStrategy&type=document&lang=en)
+ *   - [DescribeServicesStatus](https://www.tencentcloud.com/search/?wd=DescribeServicesStatus&type=document&lang=en)
  */
 export function getThrottlingApisOutput(args?: GetThrottlingApisOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetThrottlingApisResult> {
     args = args || {};

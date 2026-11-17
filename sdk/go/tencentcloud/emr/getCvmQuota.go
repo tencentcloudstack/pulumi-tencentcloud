@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeCvmQuota](https://www.tencentcloud.com/search/?wd=DescribeCvmQuota&type=document&lang=en)
 func GetCvmQuota(ctx *pulumi.Context, args *GetCvmQuotaArgs, opts ...pulumi.InvokeOption) (*GetCvmQuotaResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetCvmQuotaResult

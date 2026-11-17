@@ -116,6 +116,12 @@ def get_access_regions_by_dest_region(dest_region: Optional[_builtins.str] = Non
     access_regions_by_dest_region = tencentcloud.gaap.get_access_regions_by_dest_region(dest_region="SouthChina")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAccessRegionsByDestRegion](https://www.tencentcloud.com/document/api/608/33103)
+
 
     :param _builtins.str dest_region: Origin region.
     :param _builtins.str ip_address_version: IP version, can be taken as IPv4 or IPv6, with a default value of IPv4.
@@ -153,6 +159,12 @@ def get_access_regions_by_dest_region_output(dest_region: pulumi.Input[Optional[
 
     access_regions_by_dest_region = tencentcloud.gaap.get_access_regions_by_dest_region(dest_region="SouthChina")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAccessRegionsByDestRegion](https://www.tencentcloud.com/document/api/608/33103)
 
 
     :param _builtins.str dest_region: Origin region.

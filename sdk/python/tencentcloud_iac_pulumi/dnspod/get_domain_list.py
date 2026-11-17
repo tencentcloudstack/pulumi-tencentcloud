@@ -252,6 +252,12 @@ def get_domain_list(group_ids: Optional[Sequence[_builtins.int]] = None,
         }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDomainFilterList](https://www.tencentcloud.com/search/?wd=DescribeDomainFilterList&type=document&lang=en)
+
 
     :param Sequence[_builtins.int] group_ids: Get domain names based on domain group id, which can be obtained through the GroupId field in DescribeDomain or DescribeDomainList interface.
     :param _builtins.str keyword: Get domain names based on keywords.
@@ -349,6 +355,12 @@ def get_domain_list_output(group_ids: pulumi.Input[Optional[Optional[Sequence[_b
             "tag_values": ["terraform"],
         }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDomainFilterList](https://www.tencentcloud.com/search/?wd=DescribeDomainFilterList&type=document&lang=en)
 
 
     :param Sequence[_builtins.int] group_ids: Get domain names based on domain group id, which can be obtained through the GroupId field in DescribeDomain or DescribeDomainList interface.

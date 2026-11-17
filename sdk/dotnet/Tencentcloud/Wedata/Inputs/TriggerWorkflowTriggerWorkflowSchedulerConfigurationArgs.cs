@@ -74,7 +74,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata.Inputs
         public Input<string>? TriggerId { get; set; }
 
         /// <summary>
-        /// Minimum trigger interval in file arrival mode (seconds).
+        /// This parameter is deprecated and will be removed in a future version. Minimum trigger interval in file arrival mode (seconds).
         /// </summary>
         [Input("triggerMinimumIntervalSecond")]
         public Input<int>? TriggerMinimumIntervalSecond { get; set; }
@@ -86,7 +86,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata.Inputs
         public Input<string> TriggerMode { get; set; } = null!;
 
         /// <summary>
-        /// Trigger wait time in file arrival mode (seconds).
+        /// This parameter is deprecated and will be removed in a future version. Trigger wait time in file arrival mode (seconds).
         /// </summary>
         [Input("triggerWaitTimeSecond")]
         public Input<int>? TriggerWaitTimeSecond { get; set; }

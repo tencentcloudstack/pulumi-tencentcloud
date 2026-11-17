@@ -36,6 +36,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeApiDetail](https://www.tencentcloud.com/search/?wd=DescribeApiDetail&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetApiDetailResult> InvokeAsync(GetApiDetailArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetApiDetailResult>("tencentcloud:Tsf/getApiDetail:getApiDetail", args ?? new GetApiDetailArgs(), options.WithDefaults());
@@ -64,6 +70,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeApiDetail](https://www.tencentcloud.com/search/?wd=DescribeApiDetail&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetApiDetailResult> Invoke(GetApiDetailInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetApiDetailResult>("tencentcloud:Tsf/getApiDetail:getApiDetail", args ?? new GetApiDetailInvokeArgs(), options.WithDefaults());
@@ -92,6 +104,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeApiDetail](https://www.tencentcloud.com/search/?wd=DescribeApiDetail&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetApiDetailResult> Invoke(GetApiDetailInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetApiDetailResult>("tencentcloud:Tsf/getApiDetail:getApiDetail", args ?? new GetApiDetailInvokeArgs(), options.WithDefaults());

@@ -25,6 +25,12 @@ import * as utilities from "../utilities";
  *     transCodeId: 0,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeTimeShiftRecordDetail](https://www.tencentcloud.com/document/api/267/53720)
  */
 export function getTimeShiftRecordDetail(args: GetTimeShiftRecordDetailArgs, opts?: pulumi.InvokeOptions): Promise<GetTimeShiftRecordDetailResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -124,6 +130,12 @@ export interface GetTimeShiftRecordDetailResult {
  *     transCodeId: 0,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeTimeShiftRecordDetail](https://www.tencentcloud.com/document/api/267/53720)
  */
 export function getTimeShiftRecordDetailOutput(args: GetTimeShiftRecordDetailOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetTimeShiftRecordDetailResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

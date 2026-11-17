@@ -36,6 +36,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeInvokers](https://www.tencentcloud.com/document/api/1147/46693)
 func LookupInvoker(ctx *pulumi.Context, args *LookupInvokerArgs, opts ...pulumi.InvokeOption) (*LookupInvokerResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupInvokerResult

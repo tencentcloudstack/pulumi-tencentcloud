@@ -57,6 +57,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcx
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ModifyDirectConnectTunnelExtra](https://www.tencentcloud.com/search/?wd=ModifyDirectConnectTunnelExtra&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeDirectConnectTunnelExtra](https://www.tencentcloud.com/search/?wd=DescribeDirectConnectTunnelExtra&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyDirectConnectTunnelExtra](https://www.tencentcloud.com/search/?wd=ModifyDirectConnectTunnelExtra&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// DC extra config can be imported using the id, e.g.

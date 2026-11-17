@@ -137,6 +137,17 @@ class Group(pulumi.CustomResource):
             remark="tf_group_remark")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateGroup](https://www.tencentcloud.com/document/api/598/32263)
+          - [GetGroup](https://www.tencentcloud.com/document/api/598/32260)
+        * Read: [GetGroup](https://www.tencentcloud.com/document/api/598/32260)
+        * Update: [UpdateGroup](https://www.tencentcloud.com/document/api/598/32253)
+        * Delete: [DeleteGroup](https://www.tencentcloud.com/document/api/598/32262)
+
         ## Import
 
         CAM group can be imported using the id, e.g.
@@ -170,6 +181,17 @@ class Group(pulumi.CustomResource):
             name="tf_cam_group",
             remark="tf_group_remark")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateGroup](https://www.tencentcloud.com/document/api/598/32263)
+          - [GetGroup](https://www.tencentcloud.com/document/api/598/32260)
+        * Read: [GetGroup](https://www.tencentcloud.com/document/api/598/32260)
+        * Update: [UpdateGroup](https://www.tencentcloud.com/document/api/598/32253)
+        * Delete: [DeleteGroup](https://www.tencentcloud.com/document/api/598/32262)
 
         ## Import
 

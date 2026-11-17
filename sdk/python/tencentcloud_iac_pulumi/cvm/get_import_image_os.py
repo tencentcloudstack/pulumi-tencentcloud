@@ -98,6 +98,12 @@ def get_import_image_os(result_output_file: Optional[_builtins.str] = None,
     import_image_os = tencentcloud.cvm.get_import_image_os()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeImportImageOs](https://www.tencentcloud.com/document/api/213/33271)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -124,6 +130,12 @@ def get_import_image_os_output(result_output_file: pulumi.Input[Optional[Optiona
 
     import_image_os = tencentcloud.cvm.get_import_image_os()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeImportImageOs](https://www.tencentcloud.com/document/api/213/33271)
 
 
     :param _builtins.str result_output_file: Used to save results.

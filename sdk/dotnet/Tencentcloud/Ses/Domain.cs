@@ -26,10 +26,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
     ///     var domain = new Tencentcloud.Ses.Domain("domain", new()
     ///     {
     ///         EmailIdentity = "iac.cloud",
+    ///         DkimOption = 1,
+    ///         TagLists = new[]
+    ///         {
+    ///             new Tencentcloud.Ses.Inputs.DomainTagListArgs
+    ///             {
+    ///                 TagKey = "env",
+    ///                 TagValue = "prod",
+    ///             },
+    ///         },
     ///     });
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateEmailIdentity](https://www.tencentcloud.com/document/api/1084/39414)
+    /// * Read: [GetEmailIdentity](https://www.tencentcloud.com/document/api/1084/39412)
+    /// * Delete: [DeleteEmailIdentity](https://www.tencentcloud.com/document/api/1084/39413)
     /// 
     /// ## Import
     /// 
@@ -48,10 +65,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         public Output<ImmutableArray<Outputs.DomainAttribute>> Attributes { get; private set; } = null!;
 
         /// <summary>
+        /// DKIM key length. 0: 1024-bit, 1: 2048-bit.
+        /// </summary>
+        [Output("dkimOption")]
+        public Output<int> DkimOption { get; private set; } = null!;
+
+        /// <summary>
         /// Your sender domain. You are advised to use a third-level domain, for example, mail.qcloud.com.
         /// </summary>
         [Output("emailIdentity")]
         public Output<string> EmailIdentity { get; private set; } = null!;
+
+        /// <summary>
+        /// Tag list.
+        /// </summary>
+        [Output("tagLists")]
+        public Output<ImmutableArray<Outputs.DomainTagList>> TagLists { get; private set; } = null!;
 
 
         /// <summary>
@@ -101,10 +130,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
     public sealed class DomainArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// DKIM key length. 0: 1024-bit, 1: 2048-bit.
+        /// </summary>
+        [Input("dkimOption")]
+        public Input<int>? DkimOption { get; set; }
+
+        /// <summary>
         /// Your sender domain. You are advised to use a third-level domain, for example, mail.qcloud.com.
         /// </summary>
         [Input("emailIdentity", required: true)]
         public Input<string> EmailIdentity { get; set; } = null!;
+
+        [Input("tagLists")]
+        private InputList<Inputs.DomainTagListArgs>? _tagLists;
+
+        /// <summary>
+        /// Tag list.
+        /// </summary>
+        public InputList<Inputs.DomainTagListArgs> TagLists
+        {
+            get => _tagLists ?? (_tagLists = new InputList<Inputs.DomainTagListArgs>());
+            set => _tagLists = value;
+        }
 
         public DomainArgs()
         {
@@ -127,10 +174,28 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         }
 
         /// <summary>
+        /// DKIM key length. 0: 1024-bit, 1: 2048-bit.
+        /// </summary>
+        [Input("dkimOption")]
+        public Input<int>? DkimOption { get; set; }
+
+        /// <summary>
         /// Your sender domain. You are advised to use a third-level domain, for example, mail.qcloud.com.
         /// </summary>
         [Input("emailIdentity")]
         public Input<string>? EmailIdentity { get; set; }
+
+        [Input("tagLists")]
+        private InputList<Inputs.DomainTagListGetArgs>? _tagLists;
+
+        /// <summary>
+        /// Tag list.
+        /// </summary>
+        public InputList<Inputs.DomainTagListGetArgs> TagLists
+        {
+            get => _tagLists ?? (_tagLists = new InputList<Inputs.DomainTagListGetArgs>());
+            set => _tagLists = value;
+        }
 
         public DomainState()
         {

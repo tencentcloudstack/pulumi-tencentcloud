@@ -23,6 +23,12 @@ import * as utilities from "../utilities";
  *     instanceName: "Keep-terraform",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeInstanceBackups](https://www.tencentcloud.com/document/api/239/32074)
  */
 export function getBackup(args?: GetBackupArgs, opts?: pulumi.InvokeOptions): Promise<GetBackupResult> {
     args = args || {};
@@ -115,6 +121,12 @@ export interface GetBackupResult {
  *     instanceName: "Keep-terraform",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeInstanceBackups](https://www.tencentcloud.com/document/api/239/32074)
  */
 export function getBackupOutput(args?: GetBackupOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetBackupResult> {
     args = args || {};

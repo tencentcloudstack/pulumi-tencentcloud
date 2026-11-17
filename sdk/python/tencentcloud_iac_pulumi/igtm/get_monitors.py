@@ -122,6 +122,12 @@ def get_monitors(filters: Optional[Sequence[Union['GetMonitorsFilterArgs', 'GetM
     }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeMonitors](https://www.tencentcloud.com/search/?wd=DescribeMonitors&type=document&lang=en)
+
 
     :param Sequence[Union['GetMonitorsFilterArgs', 'GetMonitorsFilterArgsDict']] filters: Query filter conditions.
     :param _builtins.int is_detect_num: Whether to query detection count, 0 for no, 1 for yes.
@@ -170,6 +176,12 @@ def get_monitors_output(filters: pulumi.Input[Optional[Optional[Sequence[Union['
         "fuzzy": True,
     }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeMonitors](https://www.tencentcloud.com/search/?wd=DescribeMonitors&type=document&lang=en)
 
 
     :param Sequence[Union['GetMonitorsFilterArgs', 'GetMonitorsFilterArgsDict']] filters: Query filter conditions.

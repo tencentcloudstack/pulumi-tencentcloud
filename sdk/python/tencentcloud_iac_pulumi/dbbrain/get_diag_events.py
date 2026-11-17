@@ -164,6 +164,12 @@ def get_diag_events(end_time: Optional[_builtins.str] = None,
         ])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBDiagEvents](https://www.tencentcloud.com/document/api/1035/44292)
+
 
     :param _builtins.str end_time: End time.
     :param Sequence[_builtins.str] instance_ids: Instance ID list.
@@ -231,6 +237,12 @@ def get_diag_events_output(end_time: pulumi.Input[Optional[_builtins.str]] = Non
             5,
         ])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBDiagEvents](https://www.tencentcloud.com/document/api/1035/44292)
 
 
     :param _builtins.str end_time: End time.

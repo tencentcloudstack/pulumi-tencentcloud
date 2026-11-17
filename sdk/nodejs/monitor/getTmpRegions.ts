@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     payMode: 1,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribePrometheusRegions](https://www.tencentcloud.com/search/?wd=DescribePrometheusRegions&type=document&lang=en)
  */
 export function getTmpRegions(args?: GetTmpRegionsArgs, opts?: pulumi.InvokeOptions): Promise<GetTmpRegionsResult> {
     args = args || {};
@@ -71,6 +77,12 @@ export interface GetTmpRegionsResult {
  *     payMode: 1,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribePrometheusRegions](https://www.tencentcloud.com/search/?wd=DescribePrometheusRegions&type=document&lang=en)
  */
 export function getTmpRegionsOutput(args?: GetTmpRegionsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetTmpRegionsResult> {
     args = args || {};

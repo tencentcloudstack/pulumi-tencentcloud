@@ -85,6 +85,14 @@ class SyncCheckJobOperation(pulumi.CustomResource):
         sync_check_job_operation = tencentcloud.dts.SyncCheckJobOperation("sync_check_job_operation", job_id="")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateCheckSyncJob](https://www.tencentcloud.com/document/api/571/51796)
+          - [DescribeCheckSyncJobResult](https://www.tencentcloud.com/document/api/571/51794)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -107,6 +115,14 @@ class SyncCheckJobOperation(pulumi.CustomResource):
 
         sync_check_job_operation = tencentcloud.dts.SyncCheckJobOperation("sync_check_job_operation", job_id="")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateCheckSyncJob](https://www.tencentcloud.com/document/api/571/51796)
+          - [DescribeCheckSyncJobResult](https://www.tencentcloud.com/document/api/571/51794)
 
 
         :param str resource_name: The name of the resource.

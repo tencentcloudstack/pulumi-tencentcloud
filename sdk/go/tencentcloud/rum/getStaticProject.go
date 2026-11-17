@@ -41,6 +41,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDataStaticProject](https://www.tencentcloud.com/document/api/1131/45319)
 func GetStaticProject(ctx *pulumi.Context, args *GetStaticProjectArgs, opts ...pulumi.InvokeOption) (*GetStaticProjectResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetStaticProjectResult

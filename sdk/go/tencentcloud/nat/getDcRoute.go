@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeNatGatewayDirectConnectGatewayRoute](https://www.tencentcloud.com/document/api/215/48124)
 func GetDcRoute(ctx *pulumi.Context, args *GetDcRouteArgs, opts ...pulumi.InvokeOption) (*GetDcRouteResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDcRouteResult

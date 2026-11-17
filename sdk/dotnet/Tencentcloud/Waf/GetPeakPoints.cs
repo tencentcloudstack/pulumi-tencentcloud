@@ -58,6 +58,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePeakPoints](https://www.tencentcloud.com/document/api/627/64501)
         /// </summary>
         public static Task<GetPeakPointsResult> InvokeAsync(GetPeakPointsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetPeakPointsResult>("tencentcloud:Waf/getPeakPoints:getPeakPoints", args ?? new GetPeakPointsArgs(), options.WithDefaults());
@@ -108,6 +114,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePeakPoints](https://www.tencentcloud.com/document/api/627/64501)
         /// </summary>
         public static Output<GetPeakPointsResult> Invoke(GetPeakPointsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetPeakPointsResult>("tencentcloud:Waf/getPeakPoints:getPeakPoints", args ?? new GetPeakPointsInvokeArgs(), options.WithDefaults());
@@ -158,6 +170,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePeakPoints](https://www.tencentcloud.com/document/api/627/64501)
         /// </summary>
         public static Output<GetPeakPointsResult> Invoke(GetPeakPointsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetPeakPointsResult>("tencentcloud:Waf/getPeakPoints:getPeakPoints", args ?? new GetPeakPointsInvokeArgs(), options.WithDefaults());

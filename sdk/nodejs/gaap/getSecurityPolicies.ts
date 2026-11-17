@@ -28,6 +28,12 @@ import * as utilities from "../utilities";
  *     id: fooSecurityPolicy.id,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSecurityPolicyDetail](https://www.tencentcloud.com/document/api/608/33097)
  */
 export function getSecurityPolicies(args: GetSecurityPoliciesArgs, opts?: pulumi.InvokeOptions): Promise<GetSecurityPoliciesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -94,6 +100,12 @@ export interface GetSecurityPoliciesResult {
  *     id: fooSecurityPolicy.id,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSecurityPolicyDetail](https://www.tencentcloud.com/document/api/608/33097)
  */
 export function getSecurityPoliciesOutput(args: GetSecurityPoliciesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSecurityPoliciesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

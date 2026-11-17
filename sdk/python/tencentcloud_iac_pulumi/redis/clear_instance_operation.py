@@ -147,6 +147,14 @@ class ClearInstanceOperation(pulumi.CustomResource):
             password=password)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [ClearInstance](https://www.tencentcloud.com/document/api/239/32070)
+          - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -199,6 +207,14 @@ class ClearInstanceOperation(pulumi.CustomResource):
             instance_id=example.id,
             password=password)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [ClearInstance](https://www.tencentcloud.com/document/api/239/32070)
+          - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
 
 
         :param str resource_name: The name of the resource.

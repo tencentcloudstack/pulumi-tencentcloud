@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeCloudNativeAPIGatewayNodes](https://www.tencentcloud.com/document/api/1290/79262)
 func GetGatewayNodes(ctx *pulumi.Context, args *GetGatewayNodesArgs, opts ...pulumi.InvokeOption) (*GetGatewayNodesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetGatewayNodesResult

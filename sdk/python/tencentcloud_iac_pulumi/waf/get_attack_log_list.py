@@ -179,6 +179,12 @@ def get_attack_log_list(domain: Optional[_builtins.str] = None,
         page=1)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [SearchAttackLog](https://www.tencentcloud.com/document/api/627/66358)
+
 
     :param _builtins.str domain: Domain for query, all domain use all.
     :param _builtins.str end_time: End time.
@@ -255,6 +261,12 @@ def get_attack_log_list_output(domain: pulumi.Input[Optional[_builtins.str]] = N
         query_count=20,
         page=1)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [SearchAttackLog](https://www.tencentcloud.com/document/api/627/66358)
 
 
     :param _builtins.str domain: Domain for query, all domain use all.

@@ -64,6 +64,15 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateVpcPeeringConnection](https://www.tencentcloud.com/search/?wd=CreateVpcPeeringConnection&type=document&lang=en)
+// * Read: [DescribeVpcPeeringConnections](https://www.tencentcloud.com/search/?wd=DescribeVpcPeeringConnections&type=document&lang=en)
+// * Update: [ModifyVpcPeeringConnection](https://www.tencentcloud.com/search/?wd=ModifyVpcPeeringConnection&type=document&lang=en)
+// * Delete: [DeleteVpcPeeringConnection](https://www.tencentcloud.com/search/?wd=DeleteVpcPeeringConnection&type=document&lang=en)
+//
 // ## Import
 //
 // vpc peerConnectManager can be imported using the id, e.g.

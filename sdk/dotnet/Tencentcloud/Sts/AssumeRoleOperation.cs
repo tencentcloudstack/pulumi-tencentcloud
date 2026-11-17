@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sts
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [AssumeRole](https://www.tencentcloud.com/document/api/1150/49456)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Sts/assumeRoleOperation:AssumeRoleOperation")]
     public partial class AssumeRoleOperation : global::Pulumi.CustomResource

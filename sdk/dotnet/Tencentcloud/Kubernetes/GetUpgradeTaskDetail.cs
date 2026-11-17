@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeUpgradeTaskDetail](https://www.tencentcloud.com/search/?wd=DescribeUpgradeTaskDetail&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetUpgradeTaskDetailResult> InvokeAsync(GetUpgradeTaskDetailArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetUpgradeTaskDetailResult>("tencentcloud:Kubernetes/getUpgradeTaskDetail:getUpgradeTaskDetail", args ?? new GetUpgradeTaskDetailArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeUpgradeTaskDetail](https://www.tencentcloud.com/search/?wd=DescribeUpgradeTaskDetail&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetUpgradeTaskDetailResult> Invoke(GetUpgradeTaskDetailInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetUpgradeTaskDetailResult>("tencentcloud:Kubernetes/getUpgradeTaskDetail:getUpgradeTaskDetail", args ?? new GetUpgradeTaskDetailInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeUpgradeTaskDetail](https://www.tencentcloud.com/search/?wd=DescribeUpgradeTaskDetail&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetUpgradeTaskDetailResult> Invoke(GetUpgradeTaskDetailInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetUpgradeTaskDetailResult>("tencentcloud:Kubernetes/getUpgradeTaskDetail:getUpgradeTaskDetail", args ?? new GetUpgradeTaskDetailInvokeArgs(), options.WithDefaults());

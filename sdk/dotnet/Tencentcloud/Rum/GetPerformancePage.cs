@@ -36,6 +36,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataPerformancePage](https://www.tencentcloud.com/document/api/1131/45325)
         /// </summary>
         public static Task<GetPerformancePageResult> InvokeAsync(GetPerformancePageArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetPerformancePageResult>("tencentcloud:Rum/getPerformancePage:getPerformancePage", args ?? new GetPerformancePageArgs(), options.WithDefaults());
@@ -64,6 +70,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataPerformancePage](https://www.tencentcloud.com/document/api/1131/45325)
         /// </summary>
         public static Output<GetPerformancePageResult> Invoke(GetPerformancePageInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetPerformancePageResult>("tencentcloud:Rum/getPerformancePage:getPerformancePage", args ?? new GetPerformancePageInvokeArgs(), options.WithDefaults());
@@ -92,6 +104,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataPerformancePage](https://www.tencentcloud.com/document/api/1131/45325)
         /// </summary>
         public static Output<GetPerformancePageResult> Invoke(GetPerformancePageInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetPerformancePageResult>("tencentcloud:Rum/getPerformancePage:getPerformancePage", args ?? new GetPerformancePageInvokeArgs(), options.WithDefaults());

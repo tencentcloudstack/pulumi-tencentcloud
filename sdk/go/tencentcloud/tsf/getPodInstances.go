@@ -41,6 +41,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribePodInstances](https://www.tencentcloud.com/search/?wd=DescribePodInstances&type=document&lang=en)
 func LookupPodInstances(ctx *pulumi.Context, args *LookupPodInstancesArgs, opts ...pulumi.InvokeOption) (*LookupPodInstancesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupPodInstancesResult

@@ -318,6 +318,12 @@ class ReplaceCertificateOperation(pulumi.CustomResource):
             csr_type="online")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ReplaceCertificate](https://www.tencentcloud.com/document/api/1007/36581)
+
         ## Import
 
         ssl replace_certificate can be imported using the id, e.g.
@@ -358,6 +364,12 @@ class ReplaceCertificateOperation(pulumi.CustomResource):
             valid_type="DNS_AUTO",
             csr_type="online")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ReplaceCertificate](https://www.tencentcloud.com/document/api/1007/36581)
 
         ## Import
 

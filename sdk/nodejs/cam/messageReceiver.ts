@@ -24,6 +24,14 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateMessageReceiver](https://www.tencentcloud.com/search/?wd=CreateMessageReceiver&type=document&lang=en)
+ * * Read: [ListReceiver](https://www.tencentcloud.com/search/?wd=ListReceiver&type=document&lang=en)
+ * * Delete: [DeleteMessageReceiver](https://www.tencentcloud.com/search/?wd=DeleteMessageReceiver&type=document&lang=en)
+ *
  * ## Import
  *
  * CAM message receiver can be imported using the id, e.g.

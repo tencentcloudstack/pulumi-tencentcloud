@@ -51,6 +51,15 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateCodeFile](https://www.tencentcloud.com/document/api/1174/73857)
+// * Read: [GetCodeFile](https://www.tencentcloud.com/document/api/1174/73849)
+// * Update: [UpdateCodeFile](https://www.tencentcloud.com/document/api/1174/73842)
+// * Delete: [DeleteCodeFile](https://www.tencentcloud.com/document/api/1174/73853)
+//
 // ## Import
 //
 // WeData code file can be imported using the projectId#codeFileId, e.g.

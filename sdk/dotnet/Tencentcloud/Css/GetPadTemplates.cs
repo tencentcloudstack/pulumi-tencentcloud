@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeLivePadTemplates](https://www.tencentcloud.com/search/?wd=DescribeLivePadTemplates&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetPadTemplatesResult> InvokeAsync(GetPadTemplatesArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetPadTemplatesResult>("tencentcloud:Css/getPadTemplates:getPadTemplates", args ?? new GetPadTemplatesArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeLivePadTemplates](https://www.tencentcloud.com/search/?wd=DescribeLivePadTemplates&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetPadTemplatesResult> Invoke(GetPadTemplatesInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetPadTemplatesResult>("tencentcloud:Css/getPadTemplates:getPadTemplates", args ?? new GetPadTemplatesInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeLivePadTemplates](https://www.tencentcloud.com/search/?wd=DescribeLivePadTemplates&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetPadTemplatesResult> Invoke(GetPadTemplatesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetPadTemplatesResult>("tencentcloud:Css/getPadTemplates:getPadTemplates", args ?? new GetPadTemplatesInvokeArgs(), options.WithDefaults());

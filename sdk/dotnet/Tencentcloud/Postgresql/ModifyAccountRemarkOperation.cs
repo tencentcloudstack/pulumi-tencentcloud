@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ModifyAccountRemark](https://www.tencentcloud.com/document/api/409/18108)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Postgresql/modifyAccountRemarkOperation:ModifyAccountRemarkOperation")]
     public partial class ModifyAccountRemarkOperation : global::Pulumi.CustomResource

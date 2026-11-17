@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListCatalog](https://www.tencentcloud.com/document/api/1174/77950)
         /// </summary>
         public static Task<GetListCatalogResult> InvokeAsync(GetListCatalogArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetListCatalogResult>("tencentcloud:Wedata/getListCatalog:getListCatalog", args ?? new GetListCatalogArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListCatalog](https://www.tencentcloud.com/document/api/1174/77950)
         /// </summary>
         public static Output<GetListCatalogResult> Invoke(GetListCatalogInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetListCatalogResult>("tencentcloud:Wedata/getListCatalog:getListCatalog", args ?? new GetListCatalogInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListCatalog](https://www.tencentcloud.com/document/api/1174/77950)
         /// </summary>
         public static Output<GetListCatalogResult> Invoke(GetListCatalogInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetListCatalogResult>("tencentcloud:Wedata/getListCatalog:getListCatalog", args ?? new GetListCatalogInvokeArgs(), options.WithDefaults());

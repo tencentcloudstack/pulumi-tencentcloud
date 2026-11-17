@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     workSpaceId: "space-2idq8wbr",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeJobSavepoint](https://www.tencentcloud.com/search/?wd=DescribeJobSavepoint&type=document&lang=en)
  */
 export function getSavepointList(args: GetSavepointListArgs, opts?: pulumi.InvokeOptions): Promise<GetSavepointListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -78,6 +84,12 @@ export interface GetSavepointListResult {
  *     workSpaceId: "space-2idq8wbr",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeJobSavepoint](https://www.tencentcloud.com/search/?wd=DescribeJobSavepoint&type=document&lang=en)
  */
 export function getSavepointListOutput(args: GetSavepointListOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSavepointListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

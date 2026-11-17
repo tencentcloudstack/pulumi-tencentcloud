@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     loadBalancerRegion: "ap-guangzhou",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeLoadBalancerTraffic](https://www.tencentcloud.com/document/api/214/39109)
  */
 export function getInstanceTraffic(args?: GetInstanceTrafficArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceTrafficResult> {
     args = args || {};
@@ -71,6 +77,12 @@ export interface GetInstanceTrafficResult {
  *     loadBalancerRegion: "ap-guangzhou",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeLoadBalancerTraffic](https://www.tencentcloud.com/document/api/214/39109)
  */
 export function getInstanceTrafficOutput(args?: GetInstanceTrafficOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInstanceTrafficResult> {
     args = args || {};

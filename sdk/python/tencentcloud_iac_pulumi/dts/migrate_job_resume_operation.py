@@ -119,6 +119,14 @@ class MigrateJobResumeOperation(pulumi.CustomResource):
             resume_option="normal")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeMigrationDetail](https://www.tencentcloud.com/document/api/571/51813)
+          - [ResumeMigrateJob](https://www.tencentcloud.com/document/api/571/51803)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -144,6 +152,14 @@ class MigrateJobResumeOperation(pulumi.CustomResource):
             job_id="dts-puwyj5uy",
             resume_option="normal")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeMigrationDetail](https://www.tencentcloud.com/document/api/571/51813)
+          - [ResumeMigrateJob](https://www.tencentcloud.com/document/api/571/51803)
 
 
         :param str resource_name: The name of the resource.

@@ -96,6 +96,12 @@ def get_orders(deal_names: Optional[Sequence[_builtins.str]] = None,
     orders = tencentcloud.dcdb.get_orders(deal_names=["2023061224903413767xxxx"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeOrders](https://www.tencentcloud.com/document/api/1042/47773)
+
 
     :param Sequence[_builtins.str] deal_names: List of long order numbers to be queried, which are returned for the APIs for creating, renewing, or scaling instances.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_orders_output(deal_names: pulumi.Input[Optional[Sequence[_builtins.str]]
 
     orders = tencentcloud.dcdb.get_orders(deal_names=["2023061224903413767xxxx"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeOrders](https://www.tencentcloud.com/document/api/1042/47773)
 
 
     :param Sequence[_builtins.str] deal_names: List of long order numbers to be queried, which are returned for the APIs for creating, renewing, or scaling instances.

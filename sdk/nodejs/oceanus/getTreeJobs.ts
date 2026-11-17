@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     workSpaceId: "space-2idq8wbr",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeTreeJobs](https://www.tencentcloud.com/search/?wd=DescribeTreeJobs&type=document&lang=en)
  */
 export function getTreeJobs(args?: GetTreeJobsArgs, opts?: pulumi.InvokeOptions): Promise<GetTreeJobsResult> {
     args = args || {};
@@ -77,6 +83,12 @@ export interface GetTreeJobsResult {
  *     workSpaceId: "space-2idq8wbr",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeTreeJobs](https://www.tencentcloud.com/search/?wd=DescribeTreeJobs&type=document&lang=en)
  */
 export function getTreeJobsOutput(args?: GetTreeJobsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetTreeJobsResult> {
     args = args || {};

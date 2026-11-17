@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListGroupsForUser](https://www.tencentcloud.com/document/api/598/32257)
         /// </summary>
         public static Task<GetGroupUserAccountResult> InvokeAsync(GetGroupUserAccountArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetGroupUserAccountResult>("tencentcloud:Cam/getGroupUserAccount:getGroupUserAccount", args ?? new GetGroupUserAccountArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListGroupsForUser](https://www.tencentcloud.com/document/api/598/32257)
         /// </summary>
         public static Output<GetGroupUserAccountResult> Invoke(GetGroupUserAccountInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetGroupUserAccountResult>("tencentcloud:Cam/getGroupUserAccount:getGroupUserAccount", args ?? new GetGroupUserAccountInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListGroupsForUser](https://www.tencentcloud.com/document/api/598/32257)
         /// </summary>
         public static Output<GetGroupUserAccountResult> Invoke(GetGroupUserAccountInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetGroupUserAccountResult>("tencentcloud:Cam/getGroupUserAccount:getGroupUserAccount", args ?? new GetGroupUserAccountInvokeArgs(), options.WithDefaults());

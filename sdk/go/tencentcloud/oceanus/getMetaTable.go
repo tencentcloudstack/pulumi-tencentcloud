@@ -41,6 +41,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [GetMetaTable](https://www.tencentcloud.com/search/?wd=GetMetaTable&type=document&lang=en)
 func GetMetaTable(ctx *pulumi.Context, args *GetMetaTableArgs, opts ...pulumi.InvokeOption) (*GetMetaTableResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetMetaTableResult

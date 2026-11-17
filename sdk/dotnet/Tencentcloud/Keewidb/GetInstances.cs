@@ -59,6 +59,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Keewidb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstances](https://www.tencentcloud.com/search/?wd=DescribeInstances&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetInstancesResult> InvokeAsync(GetInstancesArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstancesResult>("tencentcloud:Keewidb/getInstances:getInstances", args ?? new GetInstancesArgs(), options.WithDefaults());
@@ -110,6 +116,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Keewidb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstances](https://www.tencentcloud.com/search/?wd=DescribeInstances&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetInstancesResult> Invoke(GetInstancesInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstancesResult>("tencentcloud:Keewidb/getInstances:getInstances", args ?? new GetInstancesInvokeArgs(), options.WithDefaults());
@@ -161,6 +173,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Keewidb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstances](https://www.tencentcloud.com/search/?wd=DescribeInstances&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetInstancesResult> Invoke(GetInstancesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstancesResult>("tencentcloud:Keewidb/getInstances:getInstances", args ?? new GetInstancesInvokeArgs(), options.WithDefaults());

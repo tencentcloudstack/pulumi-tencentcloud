@@ -41,6 +41,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDataReportCount](https://www.tencentcloud.com/document/api/1131/45321)
 func GetReportCount(ctx *pulumi.Context, args *GetReportCountArgs, opts ...pulumi.InvokeOption) (*GetReportCountResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetReportCountResult

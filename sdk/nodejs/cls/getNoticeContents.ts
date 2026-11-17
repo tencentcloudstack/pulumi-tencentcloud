@@ -47,6 +47,12 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeNoticeContents](https://www.tencentcloud.com/document/api/614/80575)
  */
 export function getNoticeContents(args?: GetNoticeContentsArgs, opts?: pulumi.InvokeOptions): Promise<GetNoticeContentsResult> {
     args = args || {};
@@ -127,6 +133,12 @@ export interface GetNoticeContentsResult {
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeNoticeContents](https://www.tencentcloud.com/document/api/614/80575)
  */
 export function getNoticeContentsOutput(args?: GetNoticeContentsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetNoticeContentsResult> {
     args = args || {};

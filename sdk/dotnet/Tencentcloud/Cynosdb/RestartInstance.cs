@@ -30,6 +30,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+    ///   - [RestartInstance](https://www.tencentcloud.com/document/api/1098/53464)
+    /// * Read:
+    ///   - [DescribeInstanceDetail](https://www.tencentcloud.com/document/api/1098/40749)
+    ///   - [DescribeInstances](https://www.tencentcloud.com/document/api/1098/40747)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cynosdb/restartInstance:RestartInstance")]
     public partial class RestartInstance : global::Pulumi.CustomResource

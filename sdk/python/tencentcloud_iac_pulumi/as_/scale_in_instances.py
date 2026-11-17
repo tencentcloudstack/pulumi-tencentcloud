@@ -151,6 +151,12 @@ class ScaleInInstances(pulumi.CustomResource):
             scale_in_number=1)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ScaleInInstances](https://www.tencentcloud.com/document/api/377/40718)
+
         ## Import
 
         as scale_in_instances can be imported using the id, e.g.
@@ -216,6 +222,12 @@ class ScaleInInstances(pulumi.CustomResource):
             auto_scaling_group_id=example_scaling_group.id,
             scale_in_number=1)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ScaleInInstances](https://www.tencentcloud.com/document/api/377/40718)
 
         ## Import
 

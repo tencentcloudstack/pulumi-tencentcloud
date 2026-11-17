@@ -1830,8 +1830,6 @@ type RoutePolicyEntriesRoutePolicyEntrySet struct {
 	// Note: This field may return null, indicating that no valid value was found.
 	CidrBlock *string `pulumi:"cidrBlock"`
 	// Creation time.
-	//
-	// Note: This field may return null, indicating that no valid value was found.
 	CreatedTime *string `pulumi:"createdTime"`
 	// Describes the routing strategy rule.
 	// Note: This field may return null, indicating that no valid value was found.
@@ -1891,8 +1889,6 @@ type RoutePolicyEntriesRoutePolicyEntrySetArgs struct {
 	// Note: This field may return null, indicating that no valid value was found.
 	CidrBlock pulumi.StringPtrInput `pulumi:"cidrBlock"`
 	// Creation time.
-	//
-	// Note: This field may return null, indicating that no valid value was found.
 	CreatedTime pulumi.StringPtrInput `pulumi:"createdTime"`
 	// Describes the routing strategy rule.
 	// Note: This field may return null, indicating that no valid value was found.
@@ -1997,8 +1993,6 @@ func (o RoutePolicyEntriesRoutePolicyEntrySetOutput) CidrBlock() pulumi.StringPt
 }
 
 // Creation time.
-//
-// Note: This field may return null, indicating that no valid value was found.
 func (o RoutePolicyEntriesRoutePolicyEntrySetOutput) CreatedTime() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v RoutePolicyEntriesRoutePolicyEntrySet) *string { return v.CreatedTime }).(pulumi.StringPtrOutput)
 }

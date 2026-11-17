@@ -132,6 +132,12 @@ def get_cluster_common_names(cluster_id: Optional[_builtins.str] = None,
         role_ids=["4611686018441060141"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeClusterCommonNames](https://www.tencentcloud.com/document/api/457/41571)
+
 
     :param _builtins.str cluster_id: Cluster ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -185,6 +191,12 @@ def get_cluster_common_names_output(cluster_id: pulumi.Input[Optional[Optional[_
     example = tencentcloud.kubernetes.get_cluster_common_names(cluster_id="cls-fdy7hm1q",
         role_ids=["4611686018441060141"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeClusterCommonNames](https://www.tencentcloud.com/document/api/457/41571)
 
 
     :param _builtins.str cluster_id: Cluster ID.

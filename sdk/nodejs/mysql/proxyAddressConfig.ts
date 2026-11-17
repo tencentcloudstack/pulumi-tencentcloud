@@ -51,6 +51,20 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [AdjustCdbProxyAddress](https://www.tencentcloud.com/document/api/236/55491)
+ *   - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+ *   - [DescribeCdbProxyInfo](https://www.tencentcloud.com/document/api/236/55487)
+ * * Read: [DescribeCdbProxyInfo](https://www.tencentcloud.com/document/api/236/55487)
+ * * Update:
+ *   - [AdjustCdbProxyAddress](https://www.tencentcloud.com/document/api/236/55491)
+ *   - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+ *   - [DescribeCdbProxyInfo](https://www.tencentcloud.com/document/api/236/55487)
+ *
  * ## Import
  *
  * MySQL proxy address config can be imported using the instanceId#proxyGroupId#proxyAddressId, e.g.

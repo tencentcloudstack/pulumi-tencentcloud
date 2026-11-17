@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDefaultParameters](https://www.tencentcloud.com/document/api/409/52653)
         /// </summary>
         public static Task<GetDefaultParametersResult> InvokeAsync(GetDefaultParametersArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDefaultParametersResult>("tencentcloud:Postgresql/getDefaultParameters:getDefaultParameters", args ?? new GetDefaultParametersArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDefaultParameters](https://www.tencentcloud.com/document/api/409/52653)
         /// </summary>
         public static Output<GetDefaultParametersResult> Invoke(GetDefaultParametersInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDefaultParametersResult>("tencentcloud:Postgresql/getDefaultParameters:getDefaultParameters", args ?? new GetDefaultParametersInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDefaultParameters](https://www.tencentcloud.com/document/api/409/52653)
         /// </summary>
         public static Output<GetDefaultParametersResult> Invoke(GetDefaultParametersInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDefaultParametersResult>("tencentcloud:Postgresql/getDefaultParameters:getDefaultParameters", args ?? new GetDefaultParametersInvokeArgs(), options.WithDefaults());

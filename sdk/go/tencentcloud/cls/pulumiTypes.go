@@ -7830,8 +7830,18 @@ func (o DataTransformDataTransformSqlDataSourceArrayOutput) Index(i pulumi.IntIn
 type DataTransformDstResource struct {
 	// Alias.
 	Alias string `pulumi:"alias"`
+	// External ID value, used for cross-account role assumption. Find this in the target account role trust policy.
+	ExternalId *string `pulumi:"externalId"`
+	// Whether the destination topic is in another TencentCloud account. `false`: same account (default); `true`: cross-account.
+	IsCrossAccount *bool `pulumi:"isCrossAccount"`
+	// Name of the logset that contains the destination topic. Used in cross-account scenario.
+	LogsetName *string `pulumi:"logsetName"`
+	// In the cross-account scenario, the Role ARN value. The target account creates a role for the delivering account. Find this in the target account role list.
+	RoleArn *string `pulumi:"roleArn"`
 	// Dst topic ID.
 	TopicId string `pulumi:"topicId"`
+	// Name of the destination topic. Used in cross-account scenario.
+	TopicName *string `pulumi:"topicName"`
 }
 
 // DataTransformDstResourceInput is an input type that accepts DataTransformDstResourceArgs and DataTransformDstResourceOutput values.
@@ -7848,8 +7858,18 @@ type DataTransformDstResourceInput interface {
 type DataTransformDstResourceArgs struct {
 	// Alias.
 	Alias pulumi.StringInput `pulumi:"alias"`
+	// External ID value, used for cross-account role assumption. Find this in the target account role trust policy.
+	ExternalId pulumi.StringPtrInput `pulumi:"externalId"`
+	// Whether the destination topic is in another TencentCloud account. `false`: same account (default); `true`: cross-account.
+	IsCrossAccount pulumi.BoolPtrInput `pulumi:"isCrossAccount"`
+	// Name of the logset that contains the destination topic. Used in cross-account scenario.
+	LogsetName pulumi.StringPtrInput `pulumi:"logsetName"`
+	// In the cross-account scenario, the Role ARN value. The target account creates a role for the delivering account. Find this in the target account role list.
+	RoleArn pulumi.StringPtrInput `pulumi:"roleArn"`
 	// Dst topic ID.
 	TopicId pulumi.StringInput `pulumi:"topicId"`
+	// Name of the destination topic. Used in cross-account scenario.
+	TopicName pulumi.StringPtrInput `pulumi:"topicName"`
 }
 
 func (DataTransformDstResourceArgs) ElementType() reflect.Type {
@@ -7908,9 +7928,34 @@ func (o DataTransformDstResourceOutput) Alias() pulumi.StringOutput {
 	return o.ApplyT(func(v DataTransformDstResource) string { return v.Alias }).(pulumi.StringOutput)
 }
 
+// External ID value, used for cross-account role assumption. Find this in the target account role trust policy.
+func (o DataTransformDstResourceOutput) ExternalId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DataTransformDstResource) *string { return v.ExternalId }).(pulumi.StringPtrOutput)
+}
+
+// Whether the destination topic is in another TencentCloud account. `false`: same account (default); `true`: cross-account.
+func (o DataTransformDstResourceOutput) IsCrossAccount() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v DataTransformDstResource) *bool { return v.IsCrossAccount }).(pulumi.BoolPtrOutput)
+}
+
+// Name of the logset that contains the destination topic. Used in cross-account scenario.
+func (o DataTransformDstResourceOutput) LogsetName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DataTransformDstResource) *string { return v.LogsetName }).(pulumi.StringPtrOutput)
+}
+
+// In the cross-account scenario, the Role ARN value. The target account creates a role for the delivering account. Find this in the target account role list.
+func (o DataTransformDstResourceOutput) RoleArn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DataTransformDstResource) *string { return v.RoleArn }).(pulumi.StringPtrOutput)
+}
+
 // Dst topic ID.
 func (o DataTransformDstResourceOutput) TopicId() pulumi.StringOutput {
 	return o.ApplyT(func(v DataTransformDstResource) string { return v.TopicId }).(pulumi.StringOutput)
+}
+
+// Name of the destination topic. Used in cross-account scenario.
+func (o DataTransformDstResourceOutput) TopicName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DataTransformDstResource) *string { return v.TopicName }).(pulumi.StringPtrOutput)
 }
 
 type DataTransformDstResourceArrayOutput struct{ *pulumi.OutputState }
@@ -8037,6 +8082,647 @@ func (o DataTransformEnvInfoArrayOutput) Index(i pulumi.IntInput) DataTransformE
 	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DataTransformEnvInfo {
 		return vs[0].([]DataTransformEnvInfo)[vs[1].(int)]
 	}).(DataTransformEnvInfoOutput)
+}
+
+type DeliverTaskDeliverRule struct {
+	// Data deliver scope. 1: history+new, 2: custom time range, 3: new only.
+	DataScope int `pulumi:"dataScope"`
+}
+
+// DeliverTaskDeliverRuleInput is an input type that accepts DeliverTaskDeliverRuleArgs and DeliverTaskDeliverRuleOutput values.
+// You can construct a concrete instance of `DeliverTaskDeliverRuleInput` via:
+//
+//	DeliverTaskDeliverRuleArgs{...}
+type DeliverTaskDeliverRuleInput interface {
+	pulumi.Input
+
+	ToDeliverTaskDeliverRuleOutput() DeliverTaskDeliverRuleOutput
+	ToDeliverTaskDeliverRuleOutputWithContext(context.Context) DeliverTaskDeliverRuleOutput
+}
+
+type DeliverTaskDeliverRuleArgs struct {
+	// Data deliver scope. 1: history+new, 2: custom time range, 3: new only.
+	DataScope pulumi.IntInput `pulumi:"dataScope"`
+}
+
+func (DeliverTaskDeliverRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeliverTaskDeliverRule)(nil)).Elem()
+}
+
+func (i DeliverTaskDeliverRuleArgs) ToDeliverTaskDeliverRuleOutput() DeliverTaskDeliverRuleOutput {
+	return i.ToDeliverTaskDeliverRuleOutputWithContext(context.Background())
+}
+
+func (i DeliverTaskDeliverRuleArgs) ToDeliverTaskDeliverRuleOutputWithContext(ctx context.Context) DeliverTaskDeliverRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeliverTaskDeliverRuleOutput)
+}
+
+func (i DeliverTaskDeliverRuleArgs) ToDeliverTaskDeliverRulePtrOutput() DeliverTaskDeliverRulePtrOutput {
+	return i.ToDeliverTaskDeliverRulePtrOutputWithContext(context.Background())
+}
+
+func (i DeliverTaskDeliverRuleArgs) ToDeliverTaskDeliverRulePtrOutputWithContext(ctx context.Context) DeliverTaskDeliverRulePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeliverTaskDeliverRuleOutput).ToDeliverTaskDeliverRulePtrOutputWithContext(ctx)
+}
+
+// DeliverTaskDeliverRulePtrInput is an input type that accepts DeliverTaskDeliverRuleArgs, DeliverTaskDeliverRulePtr and DeliverTaskDeliverRulePtrOutput values.
+// You can construct a concrete instance of `DeliverTaskDeliverRulePtrInput` via:
+//
+//	        DeliverTaskDeliverRuleArgs{...}
+//
+//	or:
+//
+//	        nil
+type DeliverTaskDeliverRulePtrInput interface {
+	pulumi.Input
+
+	ToDeliverTaskDeliverRulePtrOutput() DeliverTaskDeliverRulePtrOutput
+	ToDeliverTaskDeliverRulePtrOutputWithContext(context.Context) DeliverTaskDeliverRulePtrOutput
+}
+
+type deliverTaskDeliverRulePtrType DeliverTaskDeliverRuleArgs
+
+func DeliverTaskDeliverRulePtr(v *DeliverTaskDeliverRuleArgs) DeliverTaskDeliverRulePtrInput {
+	return (*deliverTaskDeliverRulePtrType)(v)
+}
+
+func (*deliverTaskDeliverRulePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeliverTaskDeliverRule)(nil)).Elem()
+}
+
+func (i *deliverTaskDeliverRulePtrType) ToDeliverTaskDeliverRulePtrOutput() DeliverTaskDeliverRulePtrOutput {
+	return i.ToDeliverTaskDeliverRulePtrOutputWithContext(context.Background())
+}
+
+func (i *deliverTaskDeliverRulePtrType) ToDeliverTaskDeliverRulePtrOutputWithContext(ctx context.Context) DeliverTaskDeliverRulePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeliverTaskDeliverRulePtrOutput)
+}
+
+type DeliverTaskDeliverRuleOutput struct{ *pulumi.OutputState }
+
+func (DeliverTaskDeliverRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeliverTaskDeliverRule)(nil)).Elem()
+}
+
+func (o DeliverTaskDeliverRuleOutput) ToDeliverTaskDeliverRuleOutput() DeliverTaskDeliverRuleOutput {
+	return o
+}
+
+func (o DeliverTaskDeliverRuleOutput) ToDeliverTaskDeliverRuleOutputWithContext(ctx context.Context) DeliverTaskDeliverRuleOutput {
+	return o
+}
+
+func (o DeliverTaskDeliverRuleOutput) ToDeliverTaskDeliverRulePtrOutput() DeliverTaskDeliverRulePtrOutput {
+	return o.ToDeliverTaskDeliverRulePtrOutputWithContext(context.Background())
+}
+
+func (o DeliverTaskDeliverRuleOutput) ToDeliverTaskDeliverRulePtrOutputWithContext(ctx context.Context) DeliverTaskDeliverRulePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeliverTaskDeliverRule) *DeliverTaskDeliverRule {
+		return &v
+	}).(DeliverTaskDeliverRulePtrOutput)
+}
+
+// Data deliver scope. 1: history+new, 2: custom time range, 3: new only.
+func (o DeliverTaskDeliverRuleOutput) DataScope() pulumi.IntOutput {
+	return o.ApplyT(func(v DeliverTaskDeliverRule) int { return v.DataScope }).(pulumi.IntOutput)
+}
+
+type DeliverTaskDeliverRulePtrOutput struct{ *pulumi.OutputState }
+
+func (DeliverTaskDeliverRulePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeliverTaskDeliverRule)(nil)).Elem()
+}
+
+func (o DeliverTaskDeliverRulePtrOutput) ToDeliverTaskDeliverRulePtrOutput() DeliverTaskDeliverRulePtrOutput {
+	return o
+}
+
+func (o DeliverTaskDeliverRulePtrOutput) ToDeliverTaskDeliverRulePtrOutputWithContext(ctx context.Context) DeliverTaskDeliverRulePtrOutput {
+	return o
+}
+
+func (o DeliverTaskDeliverRulePtrOutput) Elem() DeliverTaskDeliverRuleOutput {
+	return o.ApplyT(func(v *DeliverTaskDeliverRule) DeliverTaskDeliverRule {
+		if v != nil {
+			return *v
+		}
+		var ret DeliverTaskDeliverRule
+		return ret
+	}).(DeliverTaskDeliverRuleOutput)
+}
+
+// Data deliver scope. 1: history+new, 2: custom time range, 3: new only.
+func (o DeliverTaskDeliverRulePtrOutput) DataScope() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DeliverTaskDeliverRule) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.DataScope
+	}).(pulumi.IntPtrOutput)
+}
+
+type DeliverTaskSourceTopicConfig struct {
+	// Source logset id.
+	LogsetId string `pulumi:"logsetId"`
+	// Topic filter type. 1: static select.
+	TopicFilterType int `pulumi:"topicFilterType"`
+	// Source topic list.
+	Topics []DeliverTaskSourceTopicConfigTopic `pulumi:"topics"`
+}
+
+// DeliverTaskSourceTopicConfigInput is an input type that accepts DeliverTaskSourceTopicConfigArgs and DeliverTaskSourceTopicConfigOutput values.
+// You can construct a concrete instance of `DeliverTaskSourceTopicConfigInput` via:
+//
+//	DeliverTaskSourceTopicConfigArgs{...}
+type DeliverTaskSourceTopicConfigInput interface {
+	pulumi.Input
+
+	ToDeliverTaskSourceTopicConfigOutput() DeliverTaskSourceTopicConfigOutput
+	ToDeliverTaskSourceTopicConfigOutputWithContext(context.Context) DeliverTaskSourceTopicConfigOutput
+}
+
+type DeliverTaskSourceTopicConfigArgs struct {
+	// Source logset id.
+	LogsetId pulumi.StringInput `pulumi:"logsetId"`
+	// Topic filter type. 1: static select.
+	TopicFilterType pulumi.IntInput `pulumi:"topicFilterType"`
+	// Source topic list.
+	Topics DeliverTaskSourceTopicConfigTopicArrayInput `pulumi:"topics"`
+}
+
+func (DeliverTaskSourceTopicConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeliverTaskSourceTopicConfig)(nil)).Elem()
+}
+
+func (i DeliverTaskSourceTopicConfigArgs) ToDeliverTaskSourceTopicConfigOutput() DeliverTaskSourceTopicConfigOutput {
+	return i.ToDeliverTaskSourceTopicConfigOutputWithContext(context.Background())
+}
+
+func (i DeliverTaskSourceTopicConfigArgs) ToDeliverTaskSourceTopicConfigOutputWithContext(ctx context.Context) DeliverTaskSourceTopicConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeliverTaskSourceTopicConfigOutput)
+}
+
+func (i DeliverTaskSourceTopicConfigArgs) ToDeliverTaskSourceTopicConfigPtrOutput() DeliverTaskSourceTopicConfigPtrOutput {
+	return i.ToDeliverTaskSourceTopicConfigPtrOutputWithContext(context.Background())
+}
+
+func (i DeliverTaskSourceTopicConfigArgs) ToDeliverTaskSourceTopicConfigPtrOutputWithContext(ctx context.Context) DeliverTaskSourceTopicConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeliverTaskSourceTopicConfigOutput).ToDeliverTaskSourceTopicConfigPtrOutputWithContext(ctx)
+}
+
+// DeliverTaskSourceTopicConfigPtrInput is an input type that accepts DeliverTaskSourceTopicConfigArgs, DeliverTaskSourceTopicConfigPtr and DeliverTaskSourceTopicConfigPtrOutput values.
+// You can construct a concrete instance of `DeliverTaskSourceTopicConfigPtrInput` via:
+//
+//	        DeliverTaskSourceTopicConfigArgs{...}
+//
+//	or:
+//
+//	        nil
+type DeliverTaskSourceTopicConfigPtrInput interface {
+	pulumi.Input
+
+	ToDeliverTaskSourceTopicConfigPtrOutput() DeliverTaskSourceTopicConfigPtrOutput
+	ToDeliverTaskSourceTopicConfigPtrOutputWithContext(context.Context) DeliverTaskSourceTopicConfigPtrOutput
+}
+
+type deliverTaskSourceTopicConfigPtrType DeliverTaskSourceTopicConfigArgs
+
+func DeliverTaskSourceTopicConfigPtr(v *DeliverTaskSourceTopicConfigArgs) DeliverTaskSourceTopicConfigPtrInput {
+	return (*deliverTaskSourceTopicConfigPtrType)(v)
+}
+
+func (*deliverTaskSourceTopicConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeliverTaskSourceTopicConfig)(nil)).Elem()
+}
+
+func (i *deliverTaskSourceTopicConfigPtrType) ToDeliverTaskSourceTopicConfigPtrOutput() DeliverTaskSourceTopicConfigPtrOutput {
+	return i.ToDeliverTaskSourceTopicConfigPtrOutputWithContext(context.Background())
+}
+
+func (i *deliverTaskSourceTopicConfigPtrType) ToDeliverTaskSourceTopicConfigPtrOutputWithContext(ctx context.Context) DeliverTaskSourceTopicConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeliverTaskSourceTopicConfigPtrOutput)
+}
+
+type DeliverTaskSourceTopicConfigOutput struct{ *pulumi.OutputState }
+
+func (DeliverTaskSourceTopicConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeliverTaskSourceTopicConfig)(nil)).Elem()
+}
+
+func (o DeliverTaskSourceTopicConfigOutput) ToDeliverTaskSourceTopicConfigOutput() DeliverTaskSourceTopicConfigOutput {
+	return o
+}
+
+func (o DeliverTaskSourceTopicConfigOutput) ToDeliverTaskSourceTopicConfigOutputWithContext(ctx context.Context) DeliverTaskSourceTopicConfigOutput {
+	return o
+}
+
+func (o DeliverTaskSourceTopicConfigOutput) ToDeliverTaskSourceTopicConfigPtrOutput() DeliverTaskSourceTopicConfigPtrOutput {
+	return o.ToDeliverTaskSourceTopicConfigPtrOutputWithContext(context.Background())
+}
+
+func (o DeliverTaskSourceTopicConfigOutput) ToDeliverTaskSourceTopicConfigPtrOutputWithContext(ctx context.Context) DeliverTaskSourceTopicConfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeliverTaskSourceTopicConfig) *DeliverTaskSourceTopicConfig {
+		return &v
+	}).(DeliverTaskSourceTopicConfigPtrOutput)
+}
+
+// Source logset id.
+func (o DeliverTaskSourceTopicConfigOutput) LogsetId() pulumi.StringOutput {
+	return o.ApplyT(func(v DeliverTaskSourceTopicConfig) string { return v.LogsetId }).(pulumi.StringOutput)
+}
+
+// Topic filter type. 1: static select.
+func (o DeliverTaskSourceTopicConfigOutput) TopicFilterType() pulumi.IntOutput {
+	return o.ApplyT(func(v DeliverTaskSourceTopicConfig) int { return v.TopicFilterType }).(pulumi.IntOutput)
+}
+
+// Source topic list.
+func (o DeliverTaskSourceTopicConfigOutput) Topics() DeliverTaskSourceTopicConfigTopicArrayOutput {
+	return o.ApplyT(func(v DeliverTaskSourceTopicConfig) []DeliverTaskSourceTopicConfigTopic { return v.Topics }).(DeliverTaskSourceTopicConfigTopicArrayOutput)
+}
+
+type DeliverTaskSourceTopicConfigPtrOutput struct{ *pulumi.OutputState }
+
+func (DeliverTaskSourceTopicConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeliverTaskSourceTopicConfig)(nil)).Elem()
+}
+
+func (o DeliverTaskSourceTopicConfigPtrOutput) ToDeliverTaskSourceTopicConfigPtrOutput() DeliverTaskSourceTopicConfigPtrOutput {
+	return o
+}
+
+func (o DeliverTaskSourceTopicConfigPtrOutput) ToDeliverTaskSourceTopicConfigPtrOutputWithContext(ctx context.Context) DeliverTaskSourceTopicConfigPtrOutput {
+	return o
+}
+
+func (o DeliverTaskSourceTopicConfigPtrOutput) Elem() DeliverTaskSourceTopicConfigOutput {
+	return o.ApplyT(func(v *DeliverTaskSourceTopicConfig) DeliverTaskSourceTopicConfig {
+		if v != nil {
+			return *v
+		}
+		var ret DeliverTaskSourceTopicConfig
+		return ret
+	}).(DeliverTaskSourceTopicConfigOutput)
+}
+
+// Source logset id.
+func (o DeliverTaskSourceTopicConfigPtrOutput) LogsetId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeliverTaskSourceTopicConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.LogsetId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Topic filter type. 1: static select.
+func (o DeliverTaskSourceTopicConfigPtrOutput) TopicFilterType() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DeliverTaskSourceTopicConfig) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.TopicFilterType
+	}).(pulumi.IntPtrOutput)
+}
+
+// Source topic list.
+func (o DeliverTaskSourceTopicConfigPtrOutput) Topics() DeliverTaskSourceTopicConfigTopicArrayOutput {
+	return o.ApplyT(func(v *DeliverTaskSourceTopicConfig) []DeliverTaskSourceTopicConfigTopic {
+		if v == nil {
+			return nil
+		}
+		return v.Topics
+	}).(DeliverTaskSourceTopicConfigTopicArrayOutput)
+}
+
+type DeliverTaskSourceTopicConfigTopic struct {
+	// Log topic id.
+	TopicId string `pulumi:"topicId"`
+}
+
+// DeliverTaskSourceTopicConfigTopicInput is an input type that accepts DeliverTaskSourceTopicConfigTopicArgs and DeliverTaskSourceTopicConfigTopicOutput values.
+// You can construct a concrete instance of `DeliverTaskSourceTopicConfigTopicInput` via:
+//
+//	DeliverTaskSourceTopicConfigTopicArgs{...}
+type DeliverTaskSourceTopicConfigTopicInput interface {
+	pulumi.Input
+
+	ToDeliverTaskSourceTopicConfigTopicOutput() DeliverTaskSourceTopicConfigTopicOutput
+	ToDeliverTaskSourceTopicConfigTopicOutputWithContext(context.Context) DeliverTaskSourceTopicConfigTopicOutput
+}
+
+type DeliverTaskSourceTopicConfigTopicArgs struct {
+	// Log topic id.
+	TopicId pulumi.StringInput `pulumi:"topicId"`
+}
+
+func (DeliverTaskSourceTopicConfigTopicArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeliverTaskSourceTopicConfigTopic)(nil)).Elem()
+}
+
+func (i DeliverTaskSourceTopicConfigTopicArgs) ToDeliverTaskSourceTopicConfigTopicOutput() DeliverTaskSourceTopicConfigTopicOutput {
+	return i.ToDeliverTaskSourceTopicConfigTopicOutputWithContext(context.Background())
+}
+
+func (i DeliverTaskSourceTopicConfigTopicArgs) ToDeliverTaskSourceTopicConfigTopicOutputWithContext(ctx context.Context) DeliverTaskSourceTopicConfigTopicOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeliverTaskSourceTopicConfigTopicOutput)
+}
+
+// DeliverTaskSourceTopicConfigTopicArrayInput is an input type that accepts DeliverTaskSourceTopicConfigTopicArray and DeliverTaskSourceTopicConfigTopicArrayOutput values.
+// You can construct a concrete instance of `DeliverTaskSourceTopicConfigTopicArrayInput` via:
+//
+//	DeliverTaskSourceTopicConfigTopicArray{ DeliverTaskSourceTopicConfigTopicArgs{...} }
+type DeliverTaskSourceTopicConfigTopicArrayInput interface {
+	pulumi.Input
+
+	ToDeliverTaskSourceTopicConfigTopicArrayOutput() DeliverTaskSourceTopicConfigTopicArrayOutput
+	ToDeliverTaskSourceTopicConfigTopicArrayOutputWithContext(context.Context) DeliverTaskSourceTopicConfigTopicArrayOutput
+}
+
+type DeliverTaskSourceTopicConfigTopicArray []DeliverTaskSourceTopicConfigTopicInput
+
+func (DeliverTaskSourceTopicConfigTopicArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DeliverTaskSourceTopicConfigTopic)(nil)).Elem()
+}
+
+func (i DeliverTaskSourceTopicConfigTopicArray) ToDeliverTaskSourceTopicConfigTopicArrayOutput() DeliverTaskSourceTopicConfigTopicArrayOutput {
+	return i.ToDeliverTaskSourceTopicConfigTopicArrayOutputWithContext(context.Background())
+}
+
+func (i DeliverTaskSourceTopicConfigTopicArray) ToDeliverTaskSourceTopicConfigTopicArrayOutputWithContext(ctx context.Context) DeliverTaskSourceTopicConfigTopicArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeliverTaskSourceTopicConfigTopicArrayOutput)
+}
+
+type DeliverTaskSourceTopicConfigTopicOutput struct{ *pulumi.OutputState }
+
+func (DeliverTaskSourceTopicConfigTopicOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeliverTaskSourceTopicConfigTopic)(nil)).Elem()
+}
+
+func (o DeliverTaskSourceTopicConfigTopicOutput) ToDeliverTaskSourceTopicConfigTopicOutput() DeliverTaskSourceTopicConfigTopicOutput {
+	return o
+}
+
+func (o DeliverTaskSourceTopicConfigTopicOutput) ToDeliverTaskSourceTopicConfigTopicOutputWithContext(ctx context.Context) DeliverTaskSourceTopicConfigTopicOutput {
+	return o
+}
+
+// Log topic id.
+func (o DeliverTaskSourceTopicConfigTopicOutput) TopicId() pulumi.StringOutput {
+	return o.ApplyT(func(v DeliverTaskSourceTopicConfigTopic) string { return v.TopicId }).(pulumi.StringOutput)
+}
+
+type DeliverTaskSourceTopicConfigTopicArrayOutput struct{ *pulumi.OutputState }
+
+func (DeliverTaskSourceTopicConfigTopicArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DeliverTaskSourceTopicConfigTopic)(nil)).Elem()
+}
+
+func (o DeliverTaskSourceTopicConfigTopicArrayOutput) ToDeliverTaskSourceTopicConfigTopicArrayOutput() DeliverTaskSourceTopicConfigTopicArrayOutput {
+	return o
+}
+
+func (o DeliverTaskSourceTopicConfigTopicArrayOutput) ToDeliverTaskSourceTopicConfigTopicArrayOutputWithContext(ctx context.Context) DeliverTaskSourceTopicConfigTopicArrayOutput {
+	return o
+}
+
+func (o DeliverTaskSourceTopicConfigTopicArrayOutput) Index(i pulumi.IntInput) DeliverTaskSourceTopicConfigTopicOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DeliverTaskSourceTopicConfigTopic {
+		return vs[0].([]DeliverTaskSourceTopicConfigTopic)[vs[1].(int)]
+	}).(DeliverTaskSourceTopicConfigTopicOutput)
+}
+
+type DeliverTaskTargetTopicConfig struct {
+	// Target account type. 1: current main account, 2: other main account.
+	AccountType int `pulumi:"accountType"`
+	// External ID, required when AccountType=2.
+	ExternalId *string `pulumi:"externalId"`
+	// Target logset id.
+	LogsetId string `pulumi:"logsetId"`
+	// Target region, e.g. ap-guangzhou.
+	Region string `pulumi:"region"`
+	// Role ARN, required when AccountType=2.
+	RoleArn *string `pulumi:"roleArn"`
+	// Target topic id.
+	TopicId string `pulumi:"topicId"`
+}
+
+// DeliverTaskTargetTopicConfigInput is an input type that accepts DeliverTaskTargetTopicConfigArgs and DeliverTaskTargetTopicConfigOutput values.
+// You can construct a concrete instance of `DeliverTaskTargetTopicConfigInput` via:
+//
+//	DeliverTaskTargetTopicConfigArgs{...}
+type DeliverTaskTargetTopicConfigInput interface {
+	pulumi.Input
+
+	ToDeliverTaskTargetTopicConfigOutput() DeliverTaskTargetTopicConfigOutput
+	ToDeliverTaskTargetTopicConfigOutputWithContext(context.Context) DeliverTaskTargetTopicConfigOutput
+}
+
+type DeliverTaskTargetTopicConfigArgs struct {
+	// Target account type. 1: current main account, 2: other main account.
+	AccountType pulumi.IntInput `pulumi:"accountType"`
+	// External ID, required when AccountType=2.
+	ExternalId pulumi.StringPtrInput `pulumi:"externalId"`
+	// Target logset id.
+	LogsetId pulumi.StringInput `pulumi:"logsetId"`
+	// Target region, e.g. ap-guangzhou.
+	Region pulumi.StringInput `pulumi:"region"`
+	// Role ARN, required when AccountType=2.
+	RoleArn pulumi.StringPtrInput `pulumi:"roleArn"`
+	// Target topic id.
+	TopicId pulumi.StringInput `pulumi:"topicId"`
+}
+
+func (DeliverTaskTargetTopicConfigArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeliverTaskTargetTopicConfig)(nil)).Elem()
+}
+
+func (i DeliverTaskTargetTopicConfigArgs) ToDeliverTaskTargetTopicConfigOutput() DeliverTaskTargetTopicConfigOutput {
+	return i.ToDeliverTaskTargetTopicConfigOutputWithContext(context.Background())
+}
+
+func (i DeliverTaskTargetTopicConfigArgs) ToDeliverTaskTargetTopicConfigOutputWithContext(ctx context.Context) DeliverTaskTargetTopicConfigOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeliverTaskTargetTopicConfigOutput)
+}
+
+func (i DeliverTaskTargetTopicConfigArgs) ToDeliverTaskTargetTopicConfigPtrOutput() DeliverTaskTargetTopicConfigPtrOutput {
+	return i.ToDeliverTaskTargetTopicConfigPtrOutputWithContext(context.Background())
+}
+
+func (i DeliverTaskTargetTopicConfigArgs) ToDeliverTaskTargetTopicConfigPtrOutputWithContext(ctx context.Context) DeliverTaskTargetTopicConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeliverTaskTargetTopicConfigOutput).ToDeliverTaskTargetTopicConfigPtrOutputWithContext(ctx)
+}
+
+// DeliverTaskTargetTopicConfigPtrInput is an input type that accepts DeliverTaskTargetTopicConfigArgs, DeliverTaskTargetTopicConfigPtr and DeliverTaskTargetTopicConfigPtrOutput values.
+// You can construct a concrete instance of `DeliverTaskTargetTopicConfigPtrInput` via:
+//
+//	        DeliverTaskTargetTopicConfigArgs{...}
+//
+//	or:
+//
+//	        nil
+type DeliverTaskTargetTopicConfigPtrInput interface {
+	pulumi.Input
+
+	ToDeliverTaskTargetTopicConfigPtrOutput() DeliverTaskTargetTopicConfigPtrOutput
+	ToDeliverTaskTargetTopicConfigPtrOutputWithContext(context.Context) DeliverTaskTargetTopicConfigPtrOutput
+}
+
+type deliverTaskTargetTopicConfigPtrType DeliverTaskTargetTopicConfigArgs
+
+func DeliverTaskTargetTopicConfigPtr(v *DeliverTaskTargetTopicConfigArgs) DeliverTaskTargetTopicConfigPtrInput {
+	return (*deliverTaskTargetTopicConfigPtrType)(v)
+}
+
+func (*deliverTaskTargetTopicConfigPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeliverTaskTargetTopicConfig)(nil)).Elem()
+}
+
+func (i *deliverTaskTargetTopicConfigPtrType) ToDeliverTaskTargetTopicConfigPtrOutput() DeliverTaskTargetTopicConfigPtrOutput {
+	return i.ToDeliverTaskTargetTopicConfigPtrOutputWithContext(context.Background())
+}
+
+func (i *deliverTaskTargetTopicConfigPtrType) ToDeliverTaskTargetTopicConfigPtrOutputWithContext(ctx context.Context) DeliverTaskTargetTopicConfigPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DeliverTaskTargetTopicConfigPtrOutput)
+}
+
+type DeliverTaskTargetTopicConfigOutput struct{ *pulumi.OutputState }
+
+func (DeliverTaskTargetTopicConfigOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DeliverTaskTargetTopicConfig)(nil)).Elem()
+}
+
+func (o DeliverTaskTargetTopicConfigOutput) ToDeliverTaskTargetTopicConfigOutput() DeliverTaskTargetTopicConfigOutput {
+	return o
+}
+
+func (o DeliverTaskTargetTopicConfigOutput) ToDeliverTaskTargetTopicConfigOutputWithContext(ctx context.Context) DeliverTaskTargetTopicConfigOutput {
+	return o
+}
+
+func (o DeliverTaskTargetTopicConfigOutput) ToDeliverTaskTargetTopicConfigPtrOutput() DeliverTaskTargetTopicConfigPtrOutput {
+	return o.ToDeliverTaskTargetTopicConfigPtrOutputWithContext(context.Background())
+}
+
+func (o DeliverTaskTargetTopicConfigOutput) ToDeliverTaskTargetTopicConfigPtrOutputWithContext(ctx context.Context) DeliverTaskTargetTopicConfigPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v DeliverTaskTargetTopicConfig) *DeliverTaskTargetTopicConfig {
+		return &v
+	}).(DeliverTaskTargetTopicConfigPtrOutput)
+}
+
+// Target account type. 1: current main account, 2: other main account.
+func (o DeliverTaskTargetTopicConfigOutput) AccountType() pulumi.IntOutput {
+	return o.ApplyT(func(v DeliverTaskTargetTopicConfig) int { return v.AccountType }).(pulumi.IntOutput)
+}
+
+// External ID, required when AccountType=2.
+func (o DeliverTaskTargetTopicConfigOutput) ExternalId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DeliverTaskTargetTopicConfig) *string { return v.ExternalId }).(pulumi.StringPtrOutput)
+}
+
+// Target logset id.
+func (o DeliverTaskTargetTopicConfigOutput) LogsetId() pulumi.StringOutput {
+	return o.ApplyT(func(v DeliverTaskTargetTopicConfig) string { return v.LogsetId }).(pulumi.StringOutput)
+}
+
+// Target region, e.g. ap-guangzhou.
+func (o DeliverTaskTargetTopicConfigOutput) Region() pulumi.StringOutput {
+	return o.ApplyT(func(v DeliverTaskTargetTopicConfig) string { return v.Region }).(pulumi.StringOutput)
+}
+
+// Role ARN, required when AccountType=2.
+func (o DeliverTaskTargetTopicConfigOutput) RoleArn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DeliverTaskTargetTopicConfig) *string { return v.RoleArn }).(pulumi.StringPtrOutput)
+}
+
+// Target topic id.
+func (o DeliverTaskTargetTopicConfigOutput) TopicId() pulumi.StringOutput {
+	return o.ApplyT(func(v DeliverTaskTargetTopicConfig) string { return v.TopicId }).(pulumi.StringOutput)
+}
+
+type DeliverTaskTargetTopicConfigPtrOutput struct{ *pulumi.OutputState }
+
+func (DeliverTaskTargetTopicConfigPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**DeliverTaskTargetTopicConfig)(nil)).Elem()
+}
+
+func (o DeliverTaskTargetTopicConfigPtrOutput) ToDeliverTaskTargetTopicConfigPtrOutput() DeliverTaskTargetTopicConfigPtrOutput {
+	return o
+}
+
+func (o DeliverTaskTargetTopicConfigPtrOutput) ToDeliverTaskTargetTopicConfigPtrOutputWithContext(ctx context.Context) DeliverTaskTargetTopicConfigPtrOutput {
+	return o
+}
+
+func (o DeliverTaskTargetTopicConfigPtrOutput) Elem() DeliverTaskTargetTopicConfigOutput {
+	return o.ApplyT(func(v *DeliverTaskTargetTopicConfig) DeliverTaskTargetTopicConfig {
+		if v != nil {
+			return *v
+		}
+		var ret DeliverTaskTargetTopicConfig
+		return ret
+	}).(DeliverTaskTargetTopicConfigOutput)
+}
+
+// Target account type. 1: current main account, 2: other main account.
+func (o DeliverTaskTargetTopicConfigPtrOutput) AccountType() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *DeliverTaskTargetTopicConfig) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.AccountType
+	}).(pulumi.IntPtrOutput)
+}
+
+// External ID, required when AccountType=2.
+func (o DeliverTaskTargetTopicConfigPtrOutput) ExternalId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeliverTaskTargetTopicConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.ExternalId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Target logset id.
+func (o DeliverTaskTargetTopicConfigPtrOutput) LogsetId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeliverTaskTargetTopicConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.LogsetId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Target region, e.g. ap-guangzhou.
+func (o DeliverTaskTargetTopicConfigPtrOutput) Region() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeliverTaskTargetTopicConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Region
+	}).(pulumi.StringPtrOutput)
+}
+
+// Role ARN, required when AccountType=2.
+func (o DeliverTaskTargetTopicConfigPtrOutput) RoleArn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeliverTaskTargetTopicConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return v.RoleArn
+	}).(pulumi.StringPtrOutput)
+}
+
+// Target topic id.
+func (o DeliverTaskTargetTopicConfigPtrOutput) TopicId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *DeliverTaskTargetTopicConfig) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.TopicId
+	}).(pulumi.StringPtrOutput)
 }
 
 type DlcDeliverDlcInfo struct {
@@ -14773,6 +15459,112 @@ func (o KafkaRechargeProtocolPtrOutput) UserName() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
+type LogsetTagList struct {
+	// Tag key.
+	Key string `pulumi:"key"`
+	// Tag value.
+	Value string `pulumi:"value"`
+}
+
+// LogsetTagListInput is an input type that accepts LogsetTagListArgs and LogsetTagListOutput values.
+// You can construct a concrete instance of `LogsetTagListInput` via:
+//
+//	LogsetTagListArgs{...}
+type LogsetTagListInput interface {
+	pulumi.Input
+
+	ToLogsetTagListOutput() LogsetTagListOutput
+	ToLogsetTagListOutputWithContext(context.Context) LogsetTagListOutput
+}
+
+type LogsetTagListArgs struct {
+	// Tag key.
+	Key pulumi.StringInput `pulumi:"key"`
+	// Tag value.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (LogsetTagListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*LogsetTagList)(nil)).Elem()
+}
+
+func (i LogsetTagListArgs) ToLogsetTagListOutput() LogsetTagListOutput {
+	return i.ToLogsetTagListOutputWithContext(context.Background())
+}
+
+func (i LogsetTagListArgs) ToLogsetTagListOutputWithContext(ctx context.Context) LogsetTagListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(LogsetTagListOutput)
+}
+
+// LogsetTagListArrayInput is an input type that accepts LogsetTagListArray and LogsetTagListArrayOutput values.
+// You can construct a concrete instance of `LogsetTagListArrayInput` via:
+//
+//	LogsetTagListArray{ LogsetTagListArgs{...} }
+type LogsetTagListArrayInput interface {
+	pulumi.Input
+
+	ToLogsetTagListArrayOutput() LogsetTagListArrayOutput
+	ToLogsetTagListArrayOutputWithContext(context.Context) LogsetTagListArrayOutput
+}
+
+type LogsetTagListArray []LogsetTagListInput
+
+func (LogsetTagListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]LogsetTagList)(nil)).Elem()
+}
+
+func (i LogsetTagListArray) ToLogsetTagListArrayOutput() LogsetTagListArrayOutput {
+	return i.ToLogsetTagListArrayOutputWithContext(context.Background())
+}
+
+func (i LogsetTagListArray) ToLogsetTagListArrayOutputWithContext(ctx context.Context) LogsetTagListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(LogsetTagListArrayOutput)
+}
+
+type LogsetTagListOutput struct{ *pulumi.OutputState }
+
+func (LogsetTagListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*LogsetTagList)(nil)).Elem()
+}
+
+func (o LogsetTagListOutput) ToLogsetTagListOutput() LogsetTagListOutput {
+	return o
+}
+
+func (o LogsetTagListOutput) ToLogsetTagListOutputWithContext(ctx context.Context) LogsetTagListOutput {
+	return o
+}
+
+// Tag key.
+func (o LogsetTagListOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v LogsetTagList) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// Tag value.
+func (o LogsetTagListOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v LogsetTagList) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type LogsetTagListArrayOutput struct{ *pulumi.OutputState }
+
+func (LogsetTagListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]LogsetTagList)(nil)).Elem()
+}
+
+func (o LogsetTagListArrayOutput) ToLogsetTagListArrayOutput() LogsetTagListArrayOutput {
+	return o
+}
+
+func (o LogsetTagListArrayOutput) ToLogsetTagListArrayOutputWithContext(ctx context.Context) LogsetTagListArrayOutput {
+	return o
+}
+
+func (o LogsetTagListArrayOutput) Index(i pulumi.IntInput) LogsetTagListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) LogsetTagList {
+		return vs[0].([]LogsetTagList)[vs[1].(int)]
+	}).(LogsetTagListOutput)
+}
+
 type MachineGroupMachineGroupType struct {
 	// Machine group type. Valid values: ip: the IP addresses of collection machines are stored in Values of the machine group; label: the tags of the machines are stored in Values of the machine group.
 	Type string `pulumi:"type"`
@@ -15932,11 +16724,194 @@ func (o NoticeContentNoticeContentsTriggerContentPtrOutput) Title() pulumi.Strin
 	}).(pulumi.StringPtrOutput)
 }
 
+type RemoteWriteTaskAuthInfo struct {
+	// Basic auth password.
+	Password *string `pulumi:"password"`
+	// Basic auth token.
+	Token *string `pulumi:"token"`
+	// Basic auth username.
+	Username *string `pulumi:"username"`
+}
+
+// RemoteWriteTaskAuthInfoInput is an input type that accepts RemoteWriteTaskAuthInfoArgs and RemoteWriteTaskAuthInfoOutput values.
+// You can construct a concrete instance of `RemoteWriteTaskAuthInfoInput` via:
+//
+//	RemoteWriteTaskAuthInfoArgs{...}
+type RemoteWriteTaskAuthInfoInput interface {
+	pulumi.Input
+
+	ToRemoteWriteTaskAuthInfoOutput() RemoteWriteTaskAuthInfoOutput
+	ToRemoteWriteTaskAuthInfoOutputWithContext(context.Context) RemoteWriteTaskAuthInfoOutput
+}
+
+type RemoteWriteTaskAuthInfoArgs struct {
+	// Basic auth password.
+	Password pulumi.StringPtrInput `pulumi:"password"`
+	// Basic auth token.
+	Token pulumi.StringPtrInput `pulumi:"token"`
+	// Basic auth username.
+	Username pulumi.StringPtrInput `pulumi:"username"`
+}
+
+func (RemoteWriteTaskAuthInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*RemoteWriteTaskAuthInfo)(nil)).Elem()
+}
+
+func (i RemoteWriteTaskAuthInfoArgs) ToRemoteWriteTaskAuthInfoOutput() RemoteWriteTaskAuthInfoOutput {
+	return i.ToRemoteWriteTaskAuthInfoOutputWithContext(context.Background())
+}
+
+func (i RemoteWriteTaskAuthInfoArgs) ToRemoteWriteTaskAuthInfoOutputWithContext(ctx context.Context) RemoteWriteTaskAuthInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RemoteWriteTaskAuthInfoOutput)
+}
+
+func (i RemoteWriteTaskAuthInfoArgs) ToRemoteWriteTaskAuthInfoPtrOutput() RemoteWriteTaskAuthInfoPtrOutput {
+	return i.ToRemoteWriteTaskAuthInfoPtrOutputWithContext(context.Background())
+}
+
+func (i RemoteWriteTaskAuthInfoArgs) ToRemoteWriteTaskAuthInfoPtrOutputWithContext(ctx context.Context) RemoteWriteTaskAuthInfoPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RemoteWriteTaskAuthInfoOutput).ToRemoteWriteTaskAuthInfoPtrOutputWithContext(ctx)
+}
+
+// RemoteWriteTaskAuthInfoPtrInput is an input type that accepts RemoteWriteTaskAuthInfoArgs, RemoteWriteTaskAuthInfoPtr and RemoteWriteTaskAuthInfoPtrOutput values.
+// You can construct a concrete instance of `RemoteWriteTaskAuthInfoPtrInput` via:
+//
+//	        RemoteWriteTaskAuthInfoArgs{...}
+//
+//	or:
+//
+//	        nil
+type RemoteWriteTaskAuthInfoPtrInput interface {
+	pulumi.Input
+
+	ToRemoteWriteTaskAuthInfoPtrOutput() RemoteWriteTaskAuthInfoPtrOutput
+	ToRemoteWriteTaskAuthInfoPtrOutputWithContext(context.Context) RemoteWriteTaskAuthInfoPtrOutput
+}
+
+type remoteWriteTaskAuthInfoPtrType RemoteWriteTaskAuthInfoArgs
+
+func RemoteWriteTaskAuthInfoPtr(v *RemoteWriteTaskAuthInfoArgs) RemoteWriteTaskAuthInfoPtrInput {
+	return (*remoteWriteTaskAuthInfoPtrType)(v)
+}
+
+func (*remoteWriteTaskAuthInfoPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**RemoteWriteTaskAuthInfo)(nil)).Elem()
+}
+
+func (i *remoteWriteTaskAuthInfoPtrType) ToRemoteWriteTaskAuthInfoPtrOutput() RemoteWriteTaskAuthInfoPtrOutput {
+	return i.ToRemoteWriteTaskAuthInfoPtrOutputWithContext(context.Background())
+}
+
+func (i *remoteWriteTaskAuthInfoPtrType) ToRemoteWriteTaskAuthInfoPtrOutputWithContext(ctx context.Context) RemoteWriteTaskAuthInfoPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(RemoteWriteTaskAuthInfoPtrOutput)
+}
+
+type RemoteWriteTaskAuthInfoOutput struct{ *pulumi.OutputState }
+
+func (RemoteWriteTaskAuthInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*RemoteWriteTaskAuthInfo)(nil)).Elem()
+}
+
+func (o RemoteWriteTaskAuthInfoOutput) ToRemoteWriteTaskAuthInfoOutput() RemoteWriteTaskAuthInfoOutput {
+	return o
+}
+
+func (o RemoteWriteTaskAuthInfoOutput) ToRemoteWriteTaskAuthInfoOutputWithContext(ctx context.Context) RemoteWriteTaskAuthInfoOutput {
+	return o
+}
+
+func (o RemoteWriteTaskAuthInfoOutput) ToRemoteWriteTaskAuthInfoPtrOutput() RemoteWriteTaskAuthInfoPtrOutput {
+	return o.ToRemoteWriteTaskAuthInfoPtrOutputWithContext(context.Background())
+}
+
+func (o RemoteWriteTaskAuthInfoOutput) ToRemoteWriteTaskAuthInfoPtrOutputWithContext(ctx context.Context) RemoteWriteTaskAuthInfoPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v RemoteWriteTaskAuthInfo) *RemoteWriteTaskAuthInfo {
+		return &v
+	}).(RemoteWriteTaskAuthInfoPtrOutput)
+}
+
+// Basic auth password.
+func (o RemoteWriteTaskAuthInfoOutput) Password() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RemoteWriteTaskAuthInfo) *string { return v.Password }).(pulumi.StringPtrOutput)
+}
+
+// Basic auth token.
+func (o RemoteWriteTaskAuthInfoOutput) Token() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RemoteWriteTaskAuthInfo) *string { return v.Token }).(pulumi.StringPtrOutput)
+}
+
+// Basic auth username.
+func (o RemoteWriteTaskAuthInfoOutput) Username() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v RemoteWriteTaskAuthInfo) *string { return v.Username }).(pulumi.StringPtrOutput)
+}
+
+type RemoteWriteTaskAuthInfoPtrOutput struct{ *pulumi.OutputState }
+
+func (RemoteWriteTaskAuthInfoPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**RemoteWriteTaskAuthInfo)(nil)).Elem()
+}
+
+func (o RemoteWriteTaskAuthInfoPtrOutput) ToRemoteWriteTaskAuthInfoPtrOutput() RemoteWriteTaskAuthInfoPtrOutput {
+	return o
+}
+
+func (o RemoteWriteTaskAuthInfoPtrOutput) ToRemoteWriteTaskAuthInfoPtrOutputWithContext(ctx context.Context) RemoteWriteTaskAuthInfoPtrOutput {
+	return o
+}
+
+func (o RemoteWriteTaskAuthInfoPtrOutput) Elem() RemoteWriteTaskAuthInfoOutput {
+	return o.ApplyT(func(v *RemoteWriteTaskAuthInfo) RemoteWriteTaskAuthInfo {
+		if v != nil {
+			return *v
+		}
+		var ret RemoteWriteTaskAuthInfo
+		return ret
+	}).(RemoteWriteTaskAuthInfoOutput)
+}
+
+// Basic auth password.
+func (o RemoteWriteTaskAuthInfoPtrOutput) Password() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RemoteWriteTaskAuthInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Password
+	}).(pulumi.StringPtrOutput)
+}
+
+// Basic auth token.
+func (o RemoteWriteTaskAuthInfoPtrOutput) Token() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RemoteWriteTaskAuthInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Token
+	}).(pulumi.StringPtrOutput)
+}
+
+// Basic auth username.
+func (o RemoteWriteTaskAuthInfoPtrOutput) Username() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *RemoteWriteTaskAuthInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Username
+	}).(pulumi.StringPtrOutput)
+}
+
 type ScheduledSqlDstResource struct {
 	// topic type.
 	BizType *int `pulumi:"bizType"`
+	// custom metric labels, used to add static dimensions to metrics.
+	CustomMetricLabels []ScheduledSqlDstResourceCustomMetricLabel `pulumi:"customMetricLabels"`
+	// metric timestamp field, the default value is the left boundary time of the SQL query range.
+	CustomTime *string `pulumi:"customTime"`
+	// metric dimensions, time type is not accepted.
+	MetricLabels []string `pulumi:"metricLabels"`
 	// metric name.
 	MetricName *string `pulumi:"metricName"`
+	// metric names, used when bizType is 1 (metric topic) for multi-metric scenarios.
+	MetricNames []string `pulumi:"metricNames"`
 	// topic region.
 	Region *string `pulumi:"region"`
 	// dst topic id.
@@ -15957,8 +16932,16 @@ type ScheduledSqlDstResourceInput interface {
 type ScheduledSqlDstResourceArgs struct {
 	// topic type.
 	BizType pulumi.IntPtrInput `pulumi:"bizType"`
+	// custom metric labels, used to add static dimensions to metrics.
+	CustomMetricLabels ScheduledSqlDstResourceCustomMetricLabelArrayInput `pulumi:"customMetricLabels"`
+	// metric timestamp field, the default value is the left boundary time of the SQL query range.
+	CustomTime pulumi.StringPtrInput `pulumi:"customTime"`
+	// metric dimensions, time type is not accepted.
+	MetricLabels pulumi.StringArrayInput `pulumi:"metricLabels"`
 	// metric name.
 	MetricName pulumi.StringPtrInput `pulumi:"metricName"`
+	// metric names, used when bizType is 1 (metric topic) for multi-metric scenarios.
+	MetricNames pulumi.StringArrayInput `pulumi:"metricNames"`
 	// topic region.
 	Region pulumi.StringPtrInput `pulumi:"region"`
 	// dst topic id.
@@ -16047,9 +17030,31 @@ func (o ScheduledSqlDstResourceOutput) BizType() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ScheduledSqlDstResource) *int { return v.BizType }).(pulumi.IntPtrOutput)
 }
 
+// custom metric labels, used to add static dimensions to metrics.
+func (o ScheduledSqlDstResourceOutput) CustomMetricLabels() ScheduledSqlDstResourceCustomMetricLabelArrayOutput {
+	return o.ApplyT(func(v ScheduledSqlDstResource) []ScheduledSqlDstResourceCustomMetricLabel {
+		return v.CustomMetricLabels
+	}).(ScheduledSqlDstResourceCustomMetricLabelArrayOutput)
+}
+
+// metric timestamp field, the default value is the left boundary time of the SQL query range.
+func (o ScheduledSqlDstResourceOutput) CustomTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v ScheduledSqlDstResource) *string { return v.CustomTime }).(pulumi.StringPtrOutput)
+}
+
+// metric dimensions, time type is not accepted.
+func (o ScheduledSqlDstResourceOutput) MetricLabels() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ScheduledSqlDstResource) []string { return v.MetricLabels }).(pulumi.StringArrayOutput)
+}
+
 // metric name.
 func (o ScheduledSqlDstResourceOutput) MetricName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v ScheduledSqlDstResource) *string { return v.MetricName }).(pulumi.StringPtrOutput)
+}
+
+// metric names, used when bizType is 1 (metric topic) for multi-metric scenarios.
+func (o ScheduledSqlDstResourceOutput) MetricNames() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v ScheduledSqlDstResource) []string { return v.MetricNames }).(pulumi.StringArrayOutput)
 }
 
 // topic region.
@@ -16096,6 +17101,36 @@ func (o ScheduledSqlDstResourcePtrOutput) BizType() pulumi.IntPtrOutput {
 	}).(pulumi.IntPtrOutput)
 }
 
+// custom metric labels, used to add static dimensions to metrics.
+func (o ScheduledSqlDstResourcePtrOutput) CustomMetricLabels() ScheduledSqlDstResourceCustomMetricLabelArrayOutput {
+	return o.ApplyT(func(v *ScheduledSqlDstResource) []ScheduledSqlDstResourceCustomMetricLabel {
+		if v == nil {
+			return nil
+		}
+		return v.CustomMetricLabels
+	}).(ScheduledSqlDstResourceCustomMetricLabelArrayOutput)
+}
+
+// metric timestamp field, the default value is the left boundary time of the SQL query range.
+func (o ScheduledSqlDstResourcePtrOutput) CustomTime() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *ScheduledSqlDstResource) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CustomTime
+	}).(pulumi.StringPtrOutput)
+}
+
+// metric dimensions, time type is not accepted.
+func (o ScheduledSqlDstResourcePtrOutput) MetricLabels() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *ScheduledSqlDstResource) []string {
+		if v == nil {
+			return nil
+		}
+		return v.MetricLabels
+	}).(pulumi.StringArrayOutput)
+}
+
 // metric name.
 func (o ScheduledSqlDstResourcePtrOutput) MetricName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *ScheduledSqlDstResource) *string {
@@ -16104,6 +17139,16 @@ func (o ScheduledSqlDstResourcePtrOutput) MetricName() pulumi.StringPtrOutput {
 		}
 		return v.MetricName
 	}).(pulumi.StringPtrOutput)
+}
+
+// metric names, used when bizType is 1 (metric topic) for multi-metric scenarios.
+func (o ScheduledSqlDstResourcePtrOutput) MetricNames() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *ScheduledSqlDstResource) []string {
+		if v == nil {
+			return nil
+		}
+		return v.MetricNames
+	}).(pulumi.StringArrayOutput)
 }
 
 // topic region.
@@ -16123,6 +17168,713 @@ func (o ScheduledSqlDstResourcePtrOutput) TopicId() pulumi.StringPtrOutput {
 			return nil
 		}
 		return &v.TopicId
+	}).(pulumi.StringPtrOutput)
+}
+
+type ScheduledSqlDstResourceCustomMetricLabel struct {
+	// custom metric label key.
+	Key string `pulumi:"key"`
+	// custom metric label value.
+	Value string `pulumi:"value"`
+}
+
+// ScheduledSqlDstResourceCustomMetricLabelInput is an input type that accepts ScheduledSqlDstResourceCustomMetricLabelArgs and ScheduledSqlDstResourceCustomMetricLabelOutput values.
+// You can construct a concrete instance of `ScheduledSqlDstResourceCustomMetricLabelInput` via:
+//
+//	ScheduledSqlDstResourceCustomMetricLabelArgs{...}
+type ScheduledSqlDstResourceCustomMetricLabelInput interface {
+	pulumi.Input
+
+	ToScheduledSqlDstResourceCustomMetricLabelOutput() ScheduledSqlDstResourceCustomMetricLabelOutput
+	ToScheduledSqlDstResourceCustomMetricLabelOutputWithContext(context.Context) ScheduledSqlDstResourceCustomMetricLabelOutput
+}
+
+type ScheduledSqlDstResourceCustomMetricLabelArgs struct {
+	// custom metric label key.
+	Key pulumi.StringInput `pulumi:"key"`
+	// custom metric label value.
+	Value pulumi.StringInput `pulumi:"value"`
+}
+
+func (ScheduledSqlDstResourceCustomMetricLabelArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*ScheduledSqlDstResourceCustomMetricLabel)(nil)).Elem()
+}
+
+func (i ScheduledSqlDstResourceCustomMetricLabelArgs) ToScheduledSqlDstResourceCustomMetricLabelOutput() ScheduledSqlDstResourceCustomMetricLabelOutput {
+	return i.ToScheduledSqlDstResourceCustomMetricLabelOutputWithContext(context.Background())
+}
+
+func (i ScheduledSqlDstResourceCustomMetricLabelArgs) ToScheduledSqlDstResourceCustomMetricLabelOutputWithContext(ctx context.Context) ScheduledSqlDstResourceCustomMetricLabelOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ScheduledSqlDstResourceCustomMetricLabelOutput)
+}
+
+// ScheduledSqlDstResourceCustomMetricLabelArrayInput is an input type that accepts ScheduledSqlDstResourceCustomMetricLabelArray and ScheduledSqlDstResourceCustomMetricLabelArrayOutput values.
+// You can construct a concrete instance of `ScheduledSqlDstResourceCustomMetricLabelArrayInput` via:
+//
+//	ScheduledSqlDstResourceCustomMetricLabelArray{ ScheduledSqlDstResourceCustomMetricLabelArgs{...} }
+type ScheduledSqlDstResourceCustomMetricLabelArrayInput interface {
+	pulumi.Input
+
+	ToScheduledSqlDstResourceCustomMetricLabelArrayOutput() ScheduledSqlDstResourceCustomMetricLabelArrayOutput
+	ToScheduledSqlDstResourceCustomMetricLabelArrayOutputWithContext(context.Context) ScheduledSqlDstResourceCustomMetricLabelArrayOutput
+}
+
+type ScheduledSqlDstResourceCustomMetricLabelArray []ScheduledSqlDstResourceCustomMetricLabelInput
+
+func (ScheduledSqlDstResourceCustomMetricLabelArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ScheduledSqlDstResourceCustomMetricLabel)(nil)).Elem()
+}
+
+func (i ScheduledSqlDstResourceCustomMetricLabelArray) ToScheduledSqlDstResourceCustomMetricLabelArrayOutput() ScheduledSqlDstResourceCustomMetricLabelArrayOutput {
+	return i.ToScheduledSqlDstResourceCustomMetricLabelArrayOutputWithContext(context.Background())
+}
+
+func (i ScheduledSqlDstResourceCustomMetricLabelArray) ToScheduledSqlDstResourceCustomMetricLabelArrayOutputWithContext(ctx context.Context) ScheduledSqlDstResourceCustomMetricLabelArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(ScheduledSqlDstResourceCustomMetricLabelArrayOutput)
+}
+
+type ScheduledSqlDstResourceCustomMetricLabelOutput struct{ *pulumi.OutputState }
+
+func (ScheduledSqlDstResourceCustomMetricLabelOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*ScheduledSqlDstResourceCustomMetricLabel)(nil)).Elem()
+}
+
+func (o ScheduledSqlDstResourceCustomMetricLabelOutput) ToScheduledSqlDstResourceCustomMetricLabelOutput() ScheduledSqlDstResourceCustomMetricLabelOutput {
+	return o
+}
+
+func (o ScheduledSqlDstResourceCustomMetricLabelOutput) ToScheduledSqlDstResourceCustomMetricLabelOutputWithContext(ctx context.Context) ScheduledSqlDstResourceCustomMetricLabelOutput {
+	return o
+}
+
+// custom metric label key.
+func (o ScheduledSqlDstResourceCustomMetricLabelOutput) Key() pulumi.StringOutput {
+	return o.ApplyT(func(v ScheduledSqlDstResourceCustomMetricLabel) string { return v.Key }).(pulumi.StringOutput)
+}
+
+// custom metric label value.
+func (o ScheduledSqlDstResourceCustomMetricLabelOutput) Value() pulumi.StringOutput {
+	return o.ApplyT(func(v ScheduledSqlDstResourceCustomMetricLabel) string { return v.Value }).(pulumi.StringOutput)
+}
+
+type ScheduledSqlDstResourceCustomMetricLabelArrayOutput struct{ *pulumi.OutputState }
+
+func (ScheduledSqlDstResourceCustomMetricLabelArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]ScheduledSqlDstResourceCustomMetricLabel)(nil)).Elem()
+}
+
+func (o ScheduledSqlDstResourceCustomMetricLabelArrayOutput) ToScheduledSqlDstResourceCustomMetricLabelArrayOutput() ScheduledSqlDstResourceCustomMetricLabelArrayOutput {
+	return o
+}
+
+func (o ScheduledSqlDstResourceCustomMetricLabelArrayOutput) ToScheduledSqlDstResourceCustomMetricLabelArrayOutputWithContext(ctx context.Context) ScheduledSqlDstResourceCustomMetricLabelArrayOutput {
+	return o
+}
+
+func (o ScheduledSqlDstResourceCustomMetricLabelArrayOutput) Index(i pulumi.IntInput) ScheduledSqlDstResourceCustomMetricLabelOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) ScheduledSqlDstResourceCustomMetricLabel {
+		return vs[0].([]ScheduledSqlDstResourceCustomMetricLabel)[vs[1].(int)]
+	}).(ScheduledSqlDstResourceCustomMetricLabelOutput)
+}
+
+type SplunkDeliverExternalRole struct {
+	// Cross-account delivery role name.
+	ExternalId string `pulumi:"externalId"`
+	// Cross-account delivery role RoleArn.
+	RoleArn string `pulumi:"roleArn"`
+}
+
+// SplunkDeliverExternalRoleInput is an input type that accepts SplunkDeliverExternalRoleArgs and SplunkDeliverExternalRoleOutput values.
+// You can construct a concrete instance of `SplunkDeliverExternalRoleInput` via:
+//
+//	SplunkDeliverExternalRoleArgs{...}
+type SplunkDeliverExternalRoleInput interface {
+	pulumi.Input
+
+	ToSplunkDeliverExternalRoleOutput() SplunkDeliverExternalRoleOutput
+	ToSplunkDeliverExternalRoleOutputWithContext(context.Context) SplunkDeliverExternalRoleOutput
+}
+
+type SplunkDeliverExternalRoleArgs struct {
+	// Cross-account delivery role name.
+	ExternalId pulumi.StringInput `pulumi:"externalId"`
+	// Cross-account delivery role RoleArn.
+	RoleArn pulumi.StringInput `pulumi:"roleArn"`
+}
+
+func (SplunkDeliverExternalRoleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SplunkDeliverExternalRole)(nil)).Elem()
+}
+
+func (i SplunkDeliverExternalRoleArgs) ToSplunkDeliverExternalRoleOutput() SplunkDeliverExternalRoleOutput {
+	return i.ToSplunkDeliverExternalRoleOutputWithContext(context.Background())
+}
+
+func (i SplunkDeliverExternalRoleArgs) ToSplunkDeliverExternalRoleOutputWithContext(ctx context.Context) SplunkDeliverExternalRoleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SplunkDeliverExternalRoleOutput)
+}
+
+func (i SplunkDeliverExternalRoleArgs) ToSplunkDeliverExternalRolePtrOutput() SplunkDeliverExternalRolePtrOutput {
+	return i.ToSplunkDeliverExternalRolePtrOutputWithContext(context.Background())
+}
+
+func (i SplunkDeliverExternalRoleArgs) ToSplunkDeliverExternalRolePtrOutputWithContext(ctx context.Context) SplunkDeliverExternalRolePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SplunkDeliverExternalRoleOutput).ToSplunkDeliverExternalRolePtrOutputWithContext(ctx)
+}
+
+// SplunkDeliverExternalRolePtrInput is an input type that accepts SplunkDeliverExternalRoleArgs, SplunkDeliverExternalRolePtr and SplunkDeliverExternalRolePtrOutput values.
+// You can construct a concrete instance of `SplunkDeliverExternalRolePtrInput` via:
+//
+//	        SplunkDeliverExternalRoleArgs{...}
+//
+//	or:
+//
+//	        nil
+type SplunkDeliverExternalRolePtrInput interface {
+	pulumi.Input
+
+	ToSplunkDeliverExternalRolePtrOutput() SplunkDeliverExternalRolePtrOutput
+	ToSplunkDeliverExternalRolePtrOutputWithContext(context.Context) SplunkDeliverExternalRolePtrOutput
+}
+
+type splunkDeliverExternalRolePtrType SplunkDeliverExternalRoleArgs
+
+func SplunkDeliverExternalRolePtr(v *SplunkDeliverExternalRoleArgs) SplunkDeliverExternalRolePtrInput {
+	return (*splunkDeliverExternalRolePtrType)(v)
+}
+
+func (*splunkDeliverExternalRolePtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SplunkDeliverExternalRole)(nil)).Elem()
+}
+
+func (i *splunkDeliverExternalRolePtrType) ToSplunkDeliverExternalRolePtrOutput() SplunkDeliverExternalRolePtrOutput {
+	return i.ToSplunkDeliverExternalRolePtrOutputWithContext(context.Background())
+}
+
+func (i *splunkDeliverExternalRolePtrType) ToSplunkDeliverExternalRolePtrOutputWithContext(ctx context.Context) SplunkDeliverExternalRolePtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SplunkDeliverExternalRolePtrOutput)
+}
+
+type SplunkDeliverExternalRoleOutput struct{ *pulumi.OutputState }
+
+func (SplunkDeliverExternalRoleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SplunkDeliverExternalRole)(nil)).Elem()
+}
+
+func (o SplunkDeliverExternalRoleOutput) ToSplunkDeliverExternalRoleOutput() SplunkDeliverExternalRoleOutput {
+	return o
+}
+
+func (o SplunkDeliverExternalRoleOutput) ToSplunkDeliverExternalRoleOutputWithContext(ctx context.Context) SplunkDeliverExternalRoleOutput {
+	return o
+}
+
+func (o SplunkDeliverExternalRoleOutput) ToSplunkDeliverExternalRolePtrOutput() SplunkDeliverExternalRolePtrOutput {
+	return o.ToSplunkDeliverExternalRolePtrOutputWithContext(context.Background())
+}
+
+func (o SplunkDeliverExternalRoleOutput) ToSplunkDeliverExternalRolePtrOutputWithContext(ctx context.Context) SplunkDeliverExternalRolePtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SplunkDeliverExternalRole) *SplunkDeliverExternalRole {
+		return &v
+	}).(SplunkDeliverExternalRolePtrOutput)
+}
+
+// Cross-account delivery role name.
+func (o SplunkDeliverExternalRoleOutput) ExternalId() pulumi.StringOutput {
+	return o.ApplyT(func(v SplunkDeliverExternalRole) string { return v.ExternalId }).(pulumi.StringOutput)
+}
+
+// Cross-account delivery role RoleArn.
+func (o SplunkDeliverExternalRoleOutput) RoleArn() pulumi.StringOutput {
+	return o.ApplyT(func(v SplunkDeliverExternalRole) string { return v.RoleArn }).(pulumi.StringOutput)
+}
+
+type SplunkDeliverExternalRolePtrOutput struct{ *pulumi.OutputState }
+
+func (SplunkDeliverExternalRolePtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SplunkDeliverExternalRole)(nil)).Elem()
+}
+
+func (o SplunkDeliverExternalRolePtrOutput) ToSplunkDeliverExternalRolePtrOutput() SplunkDeliverExternalRolePtrOutput {
+	return o
+}
+
+func (o SplunkDeliverExternalRolePtrOutput) ToSplunkDeliverExternalRolePtrOutputWithContext(ctx context.Context) SplunkDeliverExternalRolePtrOutput {
+	return o
+}
+
+func (o SplunkDeliverExternalRolePtrOutput) Elem() SplunkDeliverExternalRoleOutput {
+	return o.ApplyT(func(v *SplunkDeliverExternalRole) SplunkDeliverExternalRole {
+		if v != nil {
+			return *v
+		}
+		var ret SplunkDeliverExternalRole
+		return ret
+	}).(SplunkDeliverExternalRoleOutput)
+}
+
+// Cross-account delivery role name.
+func (o SplunkDeliverExternalRolePtrOutput) ExternalId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SplunkDeliverExternalRole) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.ExternalId
+	}).(pulumi.StringPtrOutput)
+}
+
+// Cross-account delivery role RoleArn.
+func (o SplunkDeliverExternalRolePtrOutput) RoleArn() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SplunkDeliverExternalRole) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.RoleArn
+	}).(pulumi.StringPtrOutput)
+}
+
+type SplunkDeliverMetadataInfo struct {
+	// Whether to deliver __TAG__ field.
+	EnableTag *bool `pulumi:"enableTag"`
+	// Data format. Valid values: rawlog, json.
+	Format string `pulumi:"format"`
+	// Delivery fields, including __SOURCE__, __FILENAME__, __TIMESTAMP__, __HOSTNAME__, __PKG_ID__.
+	MetaFields []string `pulumi:"metaFields"`
+	// Whether to flatten JSON. Required when enableTag is true.
+	TagJsonTiled *bool `pulumi:"tagJsonTiled"`
+}
+
+// SplunkDeliverMetadataInfoInput is an input type that accepts SplunkDeliverMetadataInfoArgs and SplunkDeliverMetadataInfoOutput values.
+// You can construct a concrete instance of `SplunkDeliverMetadataInfoInput` via:
+//
+//	SplunkDeliverMetadataInfoArgs{...}
+type SplunkDeliverMetadataInfoInput interface {
+	pulumi.Input
+
+	ToSplunkDeliverMetadataInfoOutput() SplunkDeliverMetadataInfoOutput
+	ToSplunkDeliverMetadataInfoOutputWithContext(context.Context) SplunkDeliverMetadataInfoOutput
+}
+
+type SplunkDeliverMetadataInfoArgs struct {
+	// Whether to deliver __TAG__ field.
+	EnableTag pulumi.BoolPtrInput `pulumi:"enableTag"`
+	// Data format. Valid values: rawlog, json.
+	Format pulumi.StringInput `pulumi:"format"`
+	// Delivery fields, including __SOURCE__, __FILENAME__, __TIMESTAMP__, __HOSTNAME__, __PKG_ID__.
+	MetaFields pulumi.StringArrayInput `pulumi:"metaFields"`
+	// Whether to flatten JSON. Required when enableTag is true.
+	TagJsonTiled pulumi.BoolPtrInput `pulumi:"tagJsonTiled"`
+}
+
+func (SplunkDeliverMetadataInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SplunkDeliverMetadataInfo)(nil)).Elem()
+}
+
+func (i SplunkDeliverMetadataInfoArgs) ToSplunkDeliverMetadataInfoOutput() SplunkDeliverMetadataInfoOutput {
+	return i.ToSplunkDeliverMetadataInfoOutputWithContext(context.Background())
+}
+
+func (i SplunkDeliverMetadataInfoArgs) ToSplunkDeliverMetadataInfoOutputWithContext(ctx context.Context) SplunkDeliverMetadataInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SplunkDeliverMetadataInfoOutput)
+}
+
+func (i SplunkDeliverMetadataInfoArgs) ToSplunkDeliverMetadataInfoPtrOutput() SplunkDeliverMetadataInfoPtrOutput {
+	return i.ToSplunkDeliverMetadataInfoPtrOutputWithContext(context.Background())
+}
+
+func (i SplunkDeliverMetadataInfoArgs) ToSplunkDeliverMetadataInfoPtrOutputWithContext(ctx context.Context) SplunkDeliverMetadataInfoPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SplunkDeliverMetadataInfoOutput).ToSplunkDeliverMetadataInfoPtrOutputWithContext(ctx)
+}
+
+// SplunkDeliverMetadataInfoPtrInput is an input type that accepts SplunkDeliverMetadataInfoArgs, SplunkDeliverMetadataInfoPtr and SplunkDeliverMetadataInfoPtrOutput values.
+// You can construct a concrete instance of `SplunkDeliverMetadataInfoPtrInput` via:
+//
+//	        SplunkDeliverMetadataInfoArgs{...}
+//
+//	or:
+//
+//	        nil
+type SplunkDeliverMetadataInfoPtrInput interface {
+	pulumi.Input
+
+	ToSplunkDeliverMetadataInfoPtrOutput() SplunkDeliverMetadataInfoPtrOutput
+	ToSplunkDeliverMetadataInfoPtrOutputWithContext(context.Context) SplunkDeliverMetadataInfoPtrOutput
+}
+
+type splunkDeliverMetadataInfoPtrType SplunkDeliverMetadataInfoArgs
+
+func SplunkDeliverMetadataInfoPtr(v *SplunkDeliverMetadataInfoArgs) SplunkDeliverMetadataInfoPtrInput {
+	return (*splunkDeliverMetadataInfoPtrType)(v)
+}
+
+func (*splunkDeliverMetadataInfoPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SplunkDeliverMetadataInfo)(nil)).Elem()
+}
+
+func (i *splunkDeliverMetadataInfoPtrType) ToSplunkDeliverMetadataInfoPtrOutput() SplunkDeliverMetadataInfoPtrOutput {
+	return i.ToSplunkDeliverMetadataInfoPtrOutputWithContext(context.Background())
+}
+
+func (i *splunkDeliverMetadataInfoPtrType) ToSplunkDeliverMetadataInfoPtrOutputWithContext(ctx context.Context) SplunkDeliverMetadataInfoPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SplunkDeliverMetadataInfoPtrOutput)
+}
+
+type SplunkDeliverMetadataInfoOutput struct{ *pulumi.OutputState }
+
+func (SplunkDeliverMetadataInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SplunkDeliverMetadataInfo)(nil)).Elem()
+}
+
+func (o SplunkDeliverMetadataInfoOutput) ToSplunkDeliverMetadataInfoOutput() SplunkDeliverMetadataInfoOutput {
+	return o
+}
+
+func (o SplunkDeliverMetadataInfoOutput) ToSplunkDeliverMetadataInfoOutputWithContext(ctx context.Context) SplunkDeliverMetadataInfoOutput {
+	return o
+}
+
+func (o SplunkDeliverMetadataInfoOutput) ToSplunkDeliverMetadataInfoPtrOutput() SplunkDeliverMetadataInfoPtrOutput {
+	return o.ToSplunkDeliverMetadataInfoPtrOutputWithContext(context.Background())
+}
+
+func (o SplunkDeliverMetadataInfoOutput) ToSplunkDeliverMetadataInfoPtrOutputWithContext(ctx context.Context) SplunkDeliverMetadataInfoPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SplunkDeliverMetadataInfo) *SplunkDeliverMetadataInfo {
+		return &v
+	}).(SplunkDeliverMetadataInfoPtrOutput)
+}
+
+// Whether to deliver __TAG__ field.
+func (o SplunkDeliverMetadataInfoOutput) EnableTag() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v SplunkDeliverMetadataInfo) *bool { return v.EnableTag }).(pulumi.BoolPtrOutput)
+}
+
+// Data format. Valid values: rawlog, json.
+func (o SplunkDeliverMetadataInfoOutput) Format() pulumi.StringOutput {
+	return o.ApplyT(func(v SplunkDeliverMetadataInfo) string { return v.Format }).(pulumi.StringOutput)
+}
+
+// Delivery fields, including __SOURCE__, __FILENAME__, __TIMESTAMP__, __HOSTNAME__, __PKG_ID__.
+func (o SplunkDeliverMetadataInfoOutput) MetaFields() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v SplunkDeliverMetadataInfo) []string { return v.MetaFields }).(pulumi.StringArrayOutput)
+}
+
+// Whether to flatten JSON. Required when enableTag is true.
+func (o SplunkDeliverMetadataInfoOutput) TagJsonTiled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v SplunkDeliverMetadataInfo) *bool { return v.TagJsonTiled }).(pulumi.BoolPtrOutput)
+}
+
+type SplunkDeliverMetadataInfoPtrOutput struct{ *pulumi.OutputState }
+
+func (SplunkDeliverMetadataInfoPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SplunkDeliverMetadataInfo)(nil)).Elem()
+}
+
+func (o SplunkDeliverMetadataInfoPtrOutput) ToSplunkDeliverMetadataInfoPtrOutput() SplunkDeliverMetadataInfoPtrOutput {
+	return o
+}
+
+func (o SplunkDeliverMetadataInfoPtrOutput) ToSplunkDeliverMetadataInfoPtrOutputWithContext(ctx context.Context) SplunkDeliverMetadataInfoPtrOutput {
+	return o
+}
+
+func (o SplunkDeliverMetadataInfoPtrOutput) Elem() SplunkDeliverMetadataInfoOutput {
+	return o.ApplyT(func(v *SplunkDeliverMetadataInfo) SplunkDeliverMetadataInfo {
+		if v != nil {
+			return *v
+		}
+		var ret SplunkDeliverMetadataInfo
+		return ret
+	}).(SplunkDeliverMetadataInfoOutput)
+}
+
+// Whether to deliver __TAG__ field.
+func (o SplunkDeliverMetadataInfoPtrOutput) EnableTag() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *SplunkDeliverMetadataInfo) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.EnableTag
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Data format. Valid values: rawlog, json.
+func (o SplunkDeliverMetadataInfoPtrOutput) Format() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SplunkDeliverMetadataInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Format
+	}).(pulumi.StringPtrOutput)
+}
+
+// Delivery fields, including __SOURCE__, __FILENAME__, __TIMESTAMP__, __HOSTNAME__, __PKG_ID__.
+func (o SplunkDeliverMetadataInfoPtrOutput) MetaFields() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *SplunkDeliverMetadataInfo) []string {
+		if v == nil {
+			return nil
+		}
+		return v.MetaFields
+	}).(pulumi.StringArrayOutput)
+}
+
+// Whether to flatten JSON. Required when enableTag is true.
+func (o SplunkDeliverMetadataInfoPtrOutput) TagJsonTiled() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *SplunkDeliverMetadataInfo) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.TagJsonTiled
+	}).(pulumi.BoolPtrOutput)
+}
+
+type SplunkDeliverNetInfo struct {
+	// Network address.
+	Host string `pulumi:"host"`
+	// Whether to use SSL. Default is false.
+	IsSsl *bool `pulumi:"isSsl"`
+	// Network type. 1: internal network, 2: external network.
+	NetType int `pulumi:"netType"`
+	// Port.
+	Port int `pulumi:"port"`
+	// Authentication token.
+	Token string `pulumi:"token"`
+	// Network service type. Required when netType is internal network. 0: CVM, 3: Direct Connect Gateway, 11: CCN, 1025: CLB.
+	VirtualGatewayType *int `pulumi:"virtualGatewayType"`
+	// VPC ID. Required when netType is internal network.
+	VpcId *string `pulumi:"vpcId"`
+}
+
+// SplunkDeliverNetInfoInput is an input type that accepts SplunkDeliverNetInfoArgs and SplunkDeliverNetInfoOutput values.
+// You can construct a concrete instance of `SplunkDeliverNetInfoInput` via:
+//
+//	SplunkDeliverNetInfoArgs{...}
+type SplunkDeliverNetInfoInput interface {
+	pulumi.Input
+
+	ToSplunkDeliverNetInfoOutput() SplunkDeliverNetInfoOutput
+	ToSplunkDeliverNetInfoOutputWithContext(context.Context) SplunkDeliverNetInfoOutput
+}
+
+type SplunkDeliverNetInfoArgs struct {
+	// Network address.
+	Host pulumi.StringInput `pulumi:"host"`
+	// Whether to use SSL. Default is false.
+	IsSsl pulumi.BoolPtrInput `pulumi:"isSsl"`
+	// Network type. 1: internal network, 2: external network.
+	NetType pulumi.IntInput `pulumi:"netType"`
+	// Port.
+	Port pulumi.IntInput `pulumi:"port"`
+	// Authentication token.
+	Token pulumi.StringInput `pulumi:"token"`
+	// Network service type. Required when netType is internal network. 0: CVM, 3: Direct Connect Gateway, 11: CCN, 1025: CLB.
+	VirtualGatewayType pulumi.IntPtrInput `pulumi:"virtualGatewayType"`
+	// VPC ID. Required when netType is internal network.
+	VpcId pulumi.StringPtrInput `pulumi:"vpcId"`
+}
+
+func (SplunkDeliverNetInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*SplunkDeliverNetInfo)(nil)).Elem()
+}
+
+func (i SplunkDeliverNetInfoArgs) ToSplunkDeliverNetInfoOutput() SplunkDeliverNetInfoOutput {
+	return i.ToSplunkDeliverNetInfoOutputWithContext(context.Background())
+}
+
+func (i SplunkDeliverNetInfoArgs) ToSplunkDeliverNetInfoOutputWithContext(ctx context.Context) SplunkDeliverNetInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SplunkDeliverNetInfoOutput)
+}
+
+func (i SplunkDeliverNetInfoArgs) ToSplunkDeliverNetInfoPtrOutput() SplunkDeliverNetInfoPtrOutput {
+	return i.ToSplunkDeliverNetInfoPtrOutputWithContext(context.Background())
+}
+
+func (i SplunkDeliverNetInfoArgs) ToSplunkDeliverNetInfoPtrOutputWithContext(ctx context.Context) SplunkDeliverNetInfoPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SplunkDeliverNetInfoOutput).ToSplunkDeliverNetInfoPtrOutputWithContext(ctx)
+}
+
+// SplunkDeliverNetInfoPtrInput is an input type that accepts SplunkDeliverNetInfoArgs, SplunkDeliverNetInfoPtr and SplunkDeliverNetInfoPtrOutput values.
+// You can construct a concrete instance of `SplunkDeliverNetInfoPtrInput` via:
+//
+//	        SplunkDeliverNetInfoArgs{...}
+//
+//	or:
+//
+//	        nil
+type SplunkDeliverNetInfoPtrInput interface {
+	pulumi.Input
+
+	ToSplunkDeliverNetInfoPtrOutput() SplunkDeliverNetInfoPtrOutput
+	ToSplunkDeliverNetInfoPtrOutputWithContext(context.Context) SplunkDeliverNetInfoPtrOutput
+}
+
+type splunkDeliverNetInfoPtrType SplunkDeliverNetInfoArgs
+
+func SplunkDeliverNetInfoPtr(v *SplunkDeliverNetInfoArgs) SplunkDeliverNetInfoPtrInput {
+	return (*splunkDeliverNetInfoPtrType)(v)
+}
+
+func (*splunkDeliverNetInfoPtrType) ElementType() reflect.Type {
+	return reflect.TypeOf((**SplunkDeliverNetInfo)(nil)).Elem()
+}
+
+func (i *splunkDeliverNetInfoPtrType) ToSplunkDeliverNetInfoPtrOutput() SplunkDeliverNetInfoPtrOutput {
+	return i.ToSplunkDeliverNetInfoPtrOutputWithContext(context.Background())
+}
+
+func (i *splunkDeliverNetInfoPtrType) ToSplunkDeliverNetInfoPtrOutputWithContext(ctx context.Context) SplunkDeliverNetInfoPtrOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(SplunkDeliverNetInfoPtrOutput)
+}
+
+type SplunkDeliverNetInfoOutput struct{ *pulumi.OutputState }
+
+func (SplunkDeliverNetInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*SplunkDeliverNetInfo)(nil)).Elem()
+}
+
+func (o SplunkDeliverNetInfoOutput) ToSplunkDeliverNetInfoOutput() SplunkDeliverNetInfoOutput {
+	return o
+}
+
+func (o SplunkDeliverNetInfoOutput) ToSplunkDeliverNetInfoOutputWithContext(ctx context.Context) SplunkDeliverNetInfoOutput {
+	return o
+}
+
+func (o SplunkDeliverNetInfoOutput) ToSplunkDeliverNetInfoPtrOutput() SplunkDeliverNetInfoPtrOutput {
+	return o.ToSplunkDeliverNetInfoPtrOutputWithContext(context.Background())
+}
+
+func (o SplunkDeliverNetInfoOutput) ToSplunkDeliverNetInfoPtrOutputWithContext(ctx context.Context) SplunkDeliverNetInfoPtrOutput {
+	return o.ApplyTWithContext(ctx, func(_ context.Context, v SplunkDeliverNetInfo) *SplunkDeliverNetInfo {
+		return &v
+	}).(SplunkDeliverNetInfoPtrOutput)
+}
+
+// Network address.
+func (o SplunkDeliverNetInfoOutput) Host() pulumi.StringOutput {
+	return o.ApplyT(func(v SplunkDeliverNetInfo) string { return v.Host }).(pulumi.StringOutput)
+}
+
+// Whether to use SSL. Default is false.
+func (o SplunkDeliverNetInfoOutput) IsSsl() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v SplunkDeliverNetInfo) *bool { return v.IsSsl }).(pulumi.BoolPtrOutput)
+}
+
+// Network type. 1: internal network, 2: external network.
+func (o SplunkDeliverNetInfoOutput) NetType() pulumi.IntOutput {
+	return o.ApplyT(func(v SplunkDeliverNetInfo) int { return v.NetType }).(pulumi.IntOutput)
+}
+
+// Port.
+func (o SplunkDeliverNetInfoOutput) Port() pulumi.IntOutput {
+	return o.ApplyT(func(v SplunkDeliverNetInfo) int { return v.Port }).(pulumi.IntOutput)
+}
+
+// Authentication token.
+func (o SplunkDeliverNetInfoOutput) Token() pulumi.StringOutput {
+	return o.ApplyT(func(v SplunkDeliverNetInfo) string { return v.Token }).(pulumi.StringOutput)
+}
+
+// Network service type. Required when netType is internal network. 0: CVM, 3: Direct Connect Gateway, 11: CCN, 1025: CLB.
+func (o SplunkDeliverNetInfoOutput) VirtualGatewayType() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v SplunkDeliverNetInfo) *int { return v.VirtualGatewayType }).(pulumi.IntPtrOutput)
+}
+
+// VPC ID. Required when netType is internal network.
+func (o SplunkDeliverNetInfoOutput) VpcId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v SplunkDeliverNetInfo) *string { return v.VpcId }).(pulumi.StringPtrOutput)
+}
+
+type SplunkDeliverNetInfoPtrOutput struct{ *pulumi.OutputState }
+
+func (SplunkDeliverNetInfoPtrOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((**SplunkDeliverNetInfo)(nil)).Elem()
+}
+
+func (o SplunkDeliverNetInfoPtrOutput) ToSplunkDeliverNetInfoPtrOutput() SplunkDeliverNetInfoPtrOutput {
+	return o
+}
+
+func (o SplunkDeliverNetInfoPtrOutput) ToSplunkDeliverNetInfoPtrOutputWithContext(ctx context.Context) SplunkDeliverNetInfoPtrOutput {
+	return o
+}
+
+func (o SplunkDeliverNetInfoPtrOutput) Elem() SplunkDeliverNetInfoOutput {
+	return o.ApplyT(func(v *SplunkDeliverNetInfo) SplunkDeliverNetInfo {
+		if v != nil {
+			return *v
+		}
+		var ret SplunkDeliverNetInfo
+		return ret
+	}).(SplunkDeliverNetInfoOutput)
+}
+
+// Network address.
+func (o SplunkDeliverNetInfoPtrOutput) Host() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SplunkDeliverNetInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Host
+	}).(pulumi.StringPtrOutput)
+}
+
+// Whether to use SSL. Default is false.
+func (o SplunkDeliverNetInfoPtrOutput) IsSsl() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v *SplunkDeliverNetInfo) *bool {
+		if v == nil {
+			return nil
+		}
+		return v.IsSsl
+	}).(pulumi.BoolPtrOutput)
+}
+
+// Network type. 1: internal network, 2: external network.
+func (o SplunkDeliverNetInfoPtrOutput) NetType() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *SplunkDeliverNetInfo) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.NetType
+	}).(pulumi.IntPtrOutput)
+}
+
+// Port.
+func (o SplunkDeliverNetInfoPtrOutput) Port() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *SplunkDeliverNetInfo) *int {
+		if v == nil {
+			return nil
+		}
+		return &v.Port
+	}).(pulumi.IntPtrOutput)
+}
+
+// Authentication token.
+func (o SplunkDeliverNetInfoPtrOutput) Token() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SplunkDeliverNetInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return &v.Token
+	}).(pulumi.StringPtrOutput)
+}
+
+// Network service type. Required when netType is internal network. 0: CVM, 3: Direct Connect Gateway, 11: CCN, 1025: CLB.
+func (o SplunkDeliverNetInfoPtrOutput) VirtualGatewayType() pulumi.IntPtrOutput {
+	return o.ApplyT(func(v *SplunkDeliverNetInfo) *int {
+		if v == nil {
+			return nil
+		}
+		return v.VirtualGatewayType
+	}).(pulumi.IntPtrOutput)
+}
+
+// VPC ID. Required when netType is internal network.
+func (o SplunkDeliverNetInfoPtrOutput) VpcId() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *SplunkDeliverNetInfo) *string {
+		if v == nil {
+			return nil
+		}
+		return v.VpcId
 	}).(pulumi.StringPtrOutput)
 }
 
@@ -21248,6 +23000,14 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*DataTransformDstResourceArrayInput)(nil)).Elem(), DataTransformDstResourceArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DataTransformEnvInfoInput)(nil)).Elem(), DataTransformEnvInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DataTransformEnvInfoArrayInput)(nil)).Elem(), DataTransformEnvInfoArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeliverTaskDeliverRuleInput)(nil)).Elem(), DeliverTaskDeliverRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeliverTaskDeliverRulePtrInput)(nil)).Elem(), DeliverTaskDeliverRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeliverTaskSourceTopicConfigInput)(nil)).Elem(), DeliverTaskSourceTopicConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeliverTaskSourceTopicConfigPtrInput)(nil)).Elem(), DeliverTaskSourceTopicConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeliverTaskSourceTopicConfigTopicInput)(nil)).Elem(), DeliverTaskSourceTopicConfigTopicArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeliverTaskSourceTopicConfigTopicArrayInput)(nil)).Elem(), DeliverTaskSourceTopicConfigTopicArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeliverTaskTargetTopicConfigInput)(nil)).Elem(), DeliverTaskTargetTopicConfigArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DeliverTaskTargetTopicConfigPtrInput)(nil)).Elem(), DeliverTaskTargetTopicConfigArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DlcDeliverDlcInfoInput)(nil)).Elem(), DlcDeliverDlcInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DlcDeliverDlcInfoPtrInput)(nil)).Elem(), DlcDeliverDlcInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DlcDeliverDlcInfoFieldInfoInput)(nil)).Elem(), DlcDeliverDlcInfoFieldInfoArgs{})
@@ -21322,6 +23082,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*KafkaRechargeLogRechargeRulePtrInput)(nil)).Elem(), KafkaRechargeLogRechargeRuleArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*KafkaRechargeProtocolInput)(nil)).Elem(), KafkaRechargeProtocolArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*KafkaRechargeProtocolPtrInput)(nil)).Elem(), KafkaRechargeProtocolArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*LogsetTagListInput)(nil)).Elem(), LogsetTagListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*LogsetTagListArrayInput)(nil)).Elem(), LogsetTagListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*MachineGroupMachineGroupTypeInput)(nil)).Elem(), MachineGroupMachineGroupTypeArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*MachineGroupMachineGroupTypePtrInput)(nil)).Elem(), MachineGroupMachineGroupTypeArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*MetricSubscribeInstanceInfoInput)(nil)).Elem(), MetricSubscribeInstanceInfoArgs{})
@@ -21338,8 +23100,18 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentNoticeContentsRecoveryContentPtrInput)(nil)).Elem(), NoticeContentNoticeContentsRecoveryContentArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentNoticeContentsTriggerContentInput)(nil)).Elem(), NoticeContentNoticeContentsTriggerContentArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*NoticeContentNoticeContentsTriggerContentPtrInput)(nil)).Elem(), NoticeContentNoticeContentsTriggerContentArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RemoteWriteTaskAuthInfoInput)(nil)).Elem(), RemoteWriteTaskAuthInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*RemoteWriteTaskAuthInfoPtrInput)(nil)).Elem(), RemoteWriteTaskAuthInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ScheduledSqlDstResourceInput)(nil)).Elem(), ScheduledSqlDstResourceArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ScheduledSqlDstResourcePtrInput)(nil)).Elem(), ScheduledSqlDstResourceArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ScheduledSqlDstResourceCustomMetricLabelInput)(nil)).Elem(), ScheduledSqlDstResourceCustomMetricLabelArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*ScheduledSqlDstResourceCustomMetricLabelArrayInput)(nil)).Elem(), ScheduledSqlDstResourceCustomMetricLabelArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SplunkDeliverExternalRoleInput)(nil)).Elem(), SplunkDeliverExternalRoleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SplunkDeliverExternalRolePtrInput)(nil)).Elem(), SplunkDeliverExternalRoleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SplunkDeliverMetadataInfoInput)(nil)).Elem(), SplunkDeliverMetadataInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SplunkDeliverMetadataInfoPtrInput)(nil)).Elem(), SplunkDeliverMetadataInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SplunkDeliverNetInfoInput)(nil)).Elem(), SplunkDeliverNetInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*SplunkDeliverNetInfoPtrInput)(nil)).Elem(), SplunkDeliverNetInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TopicCustomKmsInfoInput)(nil)).Elem(), TopicCustomKmsInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TopicCustomKmsInfoPtrInput)(nil)).Elem(), TopicCustomKmsInfoArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*TopicExtendsInput)(nil)).Elem(), TopicExtendsArgs{})
@@ -21510,6 +23282,14 @@ func init() {
 	pulumi.RegisterOutputType(DataTransformDstResourceArrayOutput{})
 	pulumi.RegisterOutputType(DataTransformEnvInfoOutput{})
 	pulumi.RegisterOutputType(DataTransformEnvInfoArrayOutput{})
+	pulumi.RegisterOutputType(DeliverTaskDeliverRuleOutput{})
+	pulumi.RegisterOutputType(DeliverTaskDeliverRulePtrOutput{})
+	pulumi.RegisterOutputType(DeliverTaskSourceTopicConfigOutput{})
+	pulumi.RegisterOutputType(DeliverTaskSourceTopicConfigPtrOutput{})
+	pulumi.RegisterOutputType(DeliverTaskSourceTopicConfigTopicOutput{})
+	pulumi.RegisterOutputType(DeliverTaskSourceTopicConfigTopicArrayOutput{})
+	pulumi.RegisterOutputType(DeliverTaskTargetTopicConfigOutput{})
+	pulumi.RegisterOutputType(DeliverTaskTargetTopicConfigPtrOutput{})
 	pulumi.RegisterOutputType(DlcDeliverDlcInfoOutput{})
 	pulumi.RegisterOutputType(DlcDeliverDlcInfoPtrOutput{})
 	pulumi.RegisterOutputType(DlcDeliverDlcInfoFieldInfoOutput{})
@@ -21584,6 +23364,8 @@ func init() {
 	pulumi.RegisterOutputType(KafkaRechargeLogRechargeRulePtrOutput{})
 	pulumi.RegisterOutputType(KafkaRechargeProtocolOutput{})
 	pulumi.RegisterOutputType(KafkaRechargeProtocolPtrOutput{})
+	pulumi.RegisterOutputType(LogsetTagListOutput{})
+	pulumi.RegisterOutputType(LogsetTagListArrayOutput{})
 	pulumi.RegisterOutputType(MachineGroupMachineGroupTypeOutput{})
 	pulumi.RegisterOutputType(MachineGroupMachineGroupTypePtrOutput{})
 	pulumi.RegisterOutputType(MetricSubscribeInstanceInfoOutput{})
@@ -21600,8 +23382,18 @@ func init() {
 	pulumi.RegisterOutputType(NoticeContentNoticeContentsRecoveryContentPtrOutput{})
 	pulumi.RegisterOutputType(NoticeContentNoticeContentsTriggerContentOutput{})
 	pulumi.RegisterOutputType(NoticeContentNoticeContentsTriggerContentPtrOutput{})
+	pulumi.RegisterOutputType(RemoteWriteTaskAuthInfoOutput{})
+	pulumi.RegisterOutputType(RemoteWriteTaskAuthInfoPtrOutput{})
 	pulumi.RegisterOutputType(ScheduledSqlDstResourceOutput{})
 	pulumi.RegisterOutputType(ScheduledSqlDstResourcePtrOutput{})
+	pulumi.RegisterOutputType(ScheduledSqlDstResourceCustomMetricLabelOutput{})
+	pulumi.RegisterOutputType(ScheduledSqlDstResourceCustomMetricLabelArrayOutput{})
+	pulumi.RegisterOutputType(SplunkDeliverExternalRoleOutput{})
+	pulumi.RegisterOutputType(SplunkDeliverExternalRolePtrOutput{})
+	pulumi.RegisterOutputType(SplunkDeliverMetadataInfoOutput{})
+	pulumi.RegisterOutputType(SplunkDeliverMetadataInfoPtrOutput{})
+	pulumi.RegisterOutputType(SplunkDeliverNetInfoOutput{})
+	pulumi.RegisterOutputType(SplunkDeliverNetInfoPtrOutput{})
 	pulumi.RegisterOutputType(TopicCustomKmsInfoOutput{})
 	pulumi.RegisterOutputType(TopicCustomKmsInfoPtrOutput{})
 	pulumi.RegisterOutputType(TopicExtendsOutput{})

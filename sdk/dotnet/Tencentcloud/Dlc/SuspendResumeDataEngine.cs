@@ -31,6 +31,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [SuspendResumeDataEngine](https://www.tencentcloud.com/document/api/1155/53307)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dlc/suspendResumeDataEngine:SuspendResumeDataEngine")]
     public partial class SuspendResumeDataEngine : global::Pulumi.CustomResource

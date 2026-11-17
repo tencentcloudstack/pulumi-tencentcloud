@@ -22,6 +22,15 @@ import * as utilities from "../utilities";
  *     host: "2",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeACL](https://www.tencentcloud.com/document/api/597/35364)
+ *   - [DescribeInstanceAttributes](https://www.tencentcloud.com/document/api/597/35358)
+ *   - [DescribeTopicAttributes](https://www.tencentcloud.com/document/api/597/35342)
  */
 export function getAcls(args: GetAclsArgs, opts?: pulumi.InvokeOptions): Promise<GetAclsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -103,6 +112,15 @@ export interface GetAclsResult {
  *     host: "2",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeACL](https://www.tencentcloud.com/document/api/597/35364)
+ *   - [DescribeInstanceAttributes](https://www.tencentcloud.com/document/api/597/35358)
+ *   - [DescribeTopicAttributes](https://www.tencentcloud.com/document/api/597/35342)
  */
 export function getAclsOutput(args: GetAclsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAclsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

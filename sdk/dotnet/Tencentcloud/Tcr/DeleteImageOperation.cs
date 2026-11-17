@@ -62,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [DeleteImage](https://www.tencentcloud.com/document/api/1051/50726)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tcr/deleteImageOperation:DeleteImageOperation")]
     public partial class DeleteImageOperation : global::Pulumi.CustomResource

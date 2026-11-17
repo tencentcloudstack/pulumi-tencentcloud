@@ -96,6 +96,12 @@ def get_proxies_status(proxy_ids: Optional[Sequence[_builtins.str]] = None,
     proxies_status = tencentcloud.gaap.get_proxies_status(proxy_ids=["link-xxxxxx"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeProxiesStatus](https://www.tencentcloud.com/document/api/608/33100)
+
 
     :param Sequence[_builtins.str] proxy_ids: List of Proxy IDs.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_proxies_status_output(proxy_ids: pulumi.Input[Optional[Optional[Sequence
 
     proxies_status = tencentcloud.gaap.get_proxies_status(proxy_ids=["link-xxxxxx"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeProxiesStatus](https://www.tencentcloud.com/document/api/608/33100)
 
 
     :param Sequence[_builtins.str] proxy_ids: List of Proxy IDs.

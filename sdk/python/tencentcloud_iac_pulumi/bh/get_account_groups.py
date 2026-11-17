@@ -142,6 +142,12 @@ def get_account_groups(deep_in: Optional[_builtins.int] = None,
         group_name="tf-example")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAccountGroups](https://www.tencentcloud.com/search/?wd=DescribeAccountGroups&type=document&lang=en)
+
 
     :param _builtins.int deep_in: Whether to recursively query, 0 for non-recursive, 1 for recursive.
     :param _builtins.str group_name: Account group name, fuzzy query.
@@ -196,6 +202,12 @@ def get_account_groups_output(deep_in: pulumi.Input[Optional[Optional[_builtins.
         parent_id=819729,
         group_name="tf-example")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAccountGroups](https://www.tencentcloud.com/search/?wd=DescribeAccountGroups&type=document&lang=en)
 
 
     :param _builtins.int deep_in: Whether to recursively query, 0 for non-recursive, 1 for recursive.

@@ -109,6 +109,12 @@ def get_bandwidth_limits(ccn_id: Optional[_builtins.str] = None,
         bandwidth_limit=500)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetCcnRegionBandwidthLimits](https://www.tencentcloud.com/document/api/215/37319)
+
 
     :param _builtins.str ccn_id: ID of the CCN to be queried.
     :param _builtins.str result_output_file: Used to save results.
@@ -151,6 +157,12 @@ def get_bandwidth_limits_output(ccn_id: pulumi.Input[Optional[_builtins.str]] = 
         region=other_region1,
         bandwidth_limit=500)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetCcnRegionBandwidthLimits](https://www.tencentcloud.com/document/api/215/37319)
 
 
     :param _builtins.str ccn_id: ID of the CCN to be queried.

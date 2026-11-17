@@ -182,6 +182,20 @@ class Ssl(pulumi.CustomResource):
             status="ON")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CloseSSL](https://www.tencentcloud.com/document/api/236/80220)
+          - [DescribeSSLStatus](https://www.tencentcloud.com/document/api/236/78957)
+          - [OpenSSL](https://www.tencentcloud.com/document/api/236/80219)
+        * Read: [DescribeSSLStatus](https://www.tencentcloud.com/document/api/236/78957)
+        * Update:
+          - [CloseSSL](https://www.tencentcloud.com/document/api/236/80220)
+          - [DescribeSSLStatus](https://www.tencentcloud.com/document/api/236/78957)
+          - [OpenSSL](https://www.tencentcloud.com/document/api/236/80219)
+
         ## Import
 
         MySQL SSL can be imported using the id, e.g.
@@ -235,6 +249,20 @@ class Ssl(pulumi.CustomResource):
             ro_group_id="cdbrg-k9a6gup3",
             status="ON")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CloseSSL](https://www.tencentcloud.com/document/api/236/80220)
+          - [DescribeSSLStatus](https://www.tencentcloud.com/document/api/236/78957)
+          - [OpenSSL](https://www.tencentcloud.com/document/api/236/80219)
+        * Read: [DescribeSSLStatus](https://www.tencentcloud.com/document/api/236/78957)
+        * Update:
+          - [CloseSSL](https://www.tencentcloud.com/document/api/236/80220)
+          - [DescribeSSLStatus](https://www.tencentcloud.com/document/api/236/78957)
+          - [OpenSSL](https://www.tencentcloud.com/document/api/236/80219)
 
         ## Import
 

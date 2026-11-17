@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     instanceId: "ins-7eb7eea7",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeZookeeperReplicas](https://www.tencentcloud.com/search/?wd=DescribeZookeeperReplicas&type=document&lang=en)
  */
 export function getZookeeperReplicas(args: GetZookeeperReplicasArgs, opts?: pulumi.InvokeOptions): Promise<GetZookeeperReplicasResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetZookeeperReplicasResult {
  *     instanceId: "ins-7eb7eea7",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeZookeeperReplicas](https://www.tencentcloud.com/search/?wd=DescribeZookeeperReplicas&type=document&lang=en)
  */
 export function getZookeeperReplicasOutput(args: GetZookeeperReplicasOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetZookeeperReplicasResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

@@ -32,6 +32,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dasb
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateDeviceGroup](https://www.tencentcloud.com/search/?wd=CreateDeviceGroup&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeDeviceGroups](https://www.tencentcloud.com/search/?wd=DescribeDeviceGroups&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyDeviceGroup](https://www.tencentcloud.com/search/?wd=ModifyDeviceGroup&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteDeviceGroups](https://www.tencentcloud.com/search/?wd=DeleteDeviceGroups&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// dasb DeviceGroup can be imported using the id, e.g.

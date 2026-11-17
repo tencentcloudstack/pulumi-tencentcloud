@@ -40,6 +40,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        ///   - [DescribeVpnGateways](https://www.tencentcloud.com/document/api/215/17514)
         /// </summary>
         public static Task<GetGatewaysResult> InvokeAsync(GetGatewaysArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetGatewaysResult>("tencentcloud:Vpn/getGateways:getGateways", args ?? new GetGatewaysArgs(), options.WithDefaults());
@@ -72,6 +80,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        ///   - [DescribeVpnGateways](https://www.tencentcloud.com/document/api/215/17514)
         /// </summary>
         public static Output<GetGatewaysResult> Invoke(GetGatewaysInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetGatewaysResult>("tencentcloud:Vpn/getGateways:getGateways", args ?? new GetGatewaysInvokeArgs(), options.WithDefaults());
@@ -104,6 +120,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        ///   - [DescribeVpnGateways](https://www.tencentcloud.com/document/api/215/17514)
         /// </summary>
         public static Output<GetGatewaysResult> Invoke(GetGatewaysInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetGatewaysResult>("tencentcloud:Vpn/getGateways:getGateways", args ?? new GetGatewaysInvokeArgs(), options.WithDefaults());

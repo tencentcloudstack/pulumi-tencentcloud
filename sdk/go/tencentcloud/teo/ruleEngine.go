@@ -181,6 +181,15 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateRule](https://www.tencentcloud.com/document/api/1145/50471)
+// * Read: [DescribeRules](https://www.tencentcloud.com/document/api/1145/50468)
+// * Update: [ModifyRule](https://www.tencentcloud.com/document/api/1145/50465)
+// * Delete: [DeleteRules](https://www.tencentcloud.com/document/api/1145/50470)
+//
 // ## Import
 //
 // teo ruleEngine can be imported using the id#rule_id, e.g.

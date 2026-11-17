@@ -36,6 +36,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeJobSubmissionLog](https://www.tencentcloud.com/search/?wd=DescribeJobSubmissionLog&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetJobSubmissionLogResult> InvokeAsync(GetJobSubmissionLogArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetJobSubmissionLogResult>("tencentcloud:Oceanus/getJobSubmissionLog:getJobSubmissionLog", args ?? new GetJobSubmissionLogArgs(), options.WithDefaults());
@@ -64,6 +70,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeJobSubmissionLog](https://www.tencentcloud.com/search/?wd=DescribeJobSubmissionLog&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetJobSubmissionLogResult> Invoke(GetJobSubmissionLogInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetJobSubmissionLogResult>("tencentcloud:Oceanus/getJobSubmissionLog:getJobSubmissionLog", args ?? new GetJobSubmissionLogInvokeArgs(), options.WithDefaults());
@@ -92,6 +104,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeJobSubmissionLog](https://www.tencentcloud.com/search/?wd=DescribeJobSubmissionLog&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetJobSubmissionLogResult> Invoke(GetJobSubmissionLogInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetJobSubmissionLogResult>("tencentcloud:Oceanus/getJobSubmissionLog:getJobSubmissionLog", args ?? new GetJobSubmissionLogInvokeArgs(), options.WithDefaults());

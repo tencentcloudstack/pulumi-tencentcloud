@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeUpgradePrice](https://www.tencentcloud.com/search/?wd=DescribeUpgradePrice&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetUpgradePriceResult> InvokeAsync(GetUpgradePriceArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetUpgradePriceResult>("tencentcloud:Mariadb/getUpgradePrice:getUpgradePrice", args ?? new GetUpgradePriceArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeUpgradePrice](https://www.tencentcloud.com/search/?wd=DescribeUpgradePrice&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetUpgradePriceResult> Invoke(GetUpgradePriceInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetUpgradePriceResult>("tencentcloud:Mariadb/getUpgradePrice:getUpgradePrice", args ?? new GetUpgradePriceInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeUpgradePrice](https://www.tencentcloud.com/search/?wd=DescribeUpgradePrice&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetUpgradePriceResult> Invoke(GetUpgradePriceInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetUpgradePriceResult>("tencentcloud:Mariadb/getUpgradePrice:getUpgradePrice", args ?? new GetUpgradePriceInvokeArgs(), options.WithDefaults());

@@ -30,6 +30,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeFlow](https://www.tencentcloud.com/document/api/237/16177)
+    ///   - [RestartDBInstances](https://www.tencentcloud.com/search/?wd=RestartDBInstances&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mariadb/restartInstance:RestartInstance")]
     public partial class RestartInstance : global::Pulumi.CustomResource

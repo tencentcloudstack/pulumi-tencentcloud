@@ -3879,6 +3879,351 @@ func (o GetBgpInstancesFilterTagArrayOutput) Index(i pulumi.IntInput) GetBgpInst
 	}).(GetBgpInstancesFilterTagOutput)
 }
 
+type GetDdosBlockRecordsBlockRecord struct {
+	// Block time.
+	BlockTime string `pulumi:"blockTime"`
+	// Blocked resource, public network IP.
+	Resource string `pulumi:"resource"`
+	// Block/unblock status. Enum: Blocked, Unblocking, Unblocked.
+	Status string `pulumi:"status"`
+}
+
+// GetDdosBlockRecordsBlockRecordInput is an input type that accepts GetDdosBlockRecordsBlockRecordArgs and GetDdosBlockRecordsBlockRecordOutput values.
+// You can construct a concrete instance of `GetDdosBlockRecordsBlockRecordInput` via:
+//
+//	GetDdosBlockRecordsBlockRecordArgs{...}
+type GetDdosBlockRecordsBlockRecordInput interface {
+	pulumi.Input
+
+	ToGetDdosBlockRecordsBlockRecordOutput() GetDdosBlockRecordsBlockRecordOutput
+	ToGetDdosBlockRecordsBlockRecordOutputWithContext(context.Context) GetDdosBlockRecordsBlockRecordOutput
+}
+
+type GetDdosBlockRecordsBlockRecordArgs struct {
+	// Block time.
+	BlockTime pulumi.StringInput `pulumi:"blockTime"`
+	// Blocked resource, public network IP.
+	Resource pulumi.StringInput `pulumi:"resource"`
+	// Block/unblock status. Enum: Blocked, Unblocking, Unblocked.
+	Status pulumi.StringInput `pulumi:"status"`
+}
+
+func (GetDdosBlockRecordsBlockRecordArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDdosBlockRecordsBlockRecord)(nil)).Elem()
+}
+
+func (i GetDdosBlockRecordsBlockRecordArgs) ToGetDdosBlockRecordsBlockRecordOutput() GetDdosBlockRecordsBlockRecordOutput {
+	return i.ToGetDdosBlockRecordsBlockRecordOutputWithContext(context.Background())
+}
+
+func (i GetDdosBlockRecordsBlockRecordArgs) ToGetDdosBlockRecordsBlockRecordOutputWithContext(ctx context.Context) GetDdosBlockRecordsBlockRecordOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDdosBlockRecordsBlockRecordOutput)
+}
+
+// GetDdosBlockRecordsBlockRecordArrayInput is an input type that accepts GetDdosBlockRecordsBlockRecordArray and GetDdosBlockRecordsBlockRecordArrayOutput values.
+// You can construct a concrete instance of `GetDdosBlockRecordsBlockRecordArrayInput` via:
+//
+//	GetDdosBlockRecordsBlockRecordArray{ GetDdosBlockRecordsBlockRecordArgs{...} }
+type GetDdosBlockRecordsBlockRecordArrayInput interface {
+	pulumi.Input
+
+	ToGetDdosBlockRecordsBlockRecordArrayOutput() GetDdosBlockRecordsBlockRecordArrayOutput
+	ToGetDdosBlockRecordsBlockRecordArrayOutputWithContext(context.Context) GetDdosBlockRecordsBlockRecordArrayOutput
+}
+
+type GetDdosBlockRecordsBlockRecordArray []GetDdosBlockRecordsBlockRecordInput
+
+func (GetDdosBlockRecordsBlockRecordArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDdosBlockRecordsBlockRecord)(nil)).Elem()
+}
+
+func (i GetDdosBlockRecordsBlockRecordArray) ToGetDdosBlockRecordsBlockRecordArrayOutput() GetDdosBlockRecordsBlockRecordArrayOutput {
+	return i.ToGetDdosBlockRecordsBlockRecordArrayOutputWithContext(context.Background())
+}
+
+func (i GetDdosBlockRecordsBlockRecordArray) ToGetDdosBlockRecordsBlockRecordArrayOutputWithContext(ctx context.Context) GetDdosBlockRecordsBlockRecordArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDdosBlockRecordsBlockRecordArrayOutput)
+}
+
+type GetDdosBlockRecordsBlockRecordOutput struct{ *pulumi.OutputState }
+
+func (GetDdosBlockRecordsBlockRecordOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDdosBlockRecordsBlockRecord)(nil)).Elem()
+}
+
+func (o GetDdosBlockRecordsBlockRecordOutput) ToGetDdosBlockRecordsBlockRecordOutput() GetDdosBlockRecordsBlockRecordOutput {
+	return o
+}
+
+func (o GetDdosBlockRecordsBlockRecordOutput) ToGetDdosBlockRecordsBlockRecordOutputWithContext(ctx context.Context) GetDdosBlockRecordsBlockRecordOutput {
+	return o
+}
+
+// Block time.
+func (o GetDdosBlockRecordsBlockRecordOutput) BlockTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDdosBlockRecordsBlockRecord) string { return v.BlockTime }).(pulumi.StringOutput)
+}
+
+// Blocked resource, public network IP.
+func (o GetDdosBlockRecordsBlockRecordOutput) Resource() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDdosBlockRecordsBlockRecord) string { return v.Resource }).(pulumi.StringOutput)
+}
+
+// Block/unblock status. Enum: Blocked, Unblocking, Unblocked.
+func (o GetDdosBlockRecordsBlockRecordOutput) Status() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDdosBlockRecordsBlockRecord) string { return v.Status }).(pulumi.StringOutput)
+}
+
+type GetDdosBlockRecordsBlockRecordArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDdosBlockRecordsBlockRecordArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDdosBlockRecordsBlockRecord)(nil)).Elem()
+}
+
+func (o GetDdosBlockRecordsBlockRecordArrayOutput) ToGetDdosBlockRecordsBlockRecordArrayOutput() GetDdosBlockRecordsBlockRecordArrayOutput {
+	return o
+}
+
+func (o GetDdosBlockRecordsBlockRecordArrayOutput) ToGetDdosBlockRecordsBlockRecordArrayOutputWithContext(ctx context.Context) GetDdosBlockRecordsBlockRecordArrayOutput {
+	return o
+}
+
+func (o GetDdosBlockRecordsBlockRecordArrayOutput) Index(i pulumi.IntInput) GetDdosBlockRecordsBlockRecordOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDdosBlockRecordsBlockRecord {
+		return vs[0].([]GetDdosBlockRecordsBlockRecord)[vs[1].(int)]
+	}).(GetDdosBlockRecordsBlockRecordOutput)
+}
+
+type GetDdosBlockRecordsFilter struct {
+	// Filter field name. Supported: Resource, Status.
+	Name string `pulumi:"name"`
+	// Filter field value.
+	Values []string `pulumi:"values"`
+}
+
+// GetDdosBlockRecordsFilterInput is an input type that accepts GetDdosBlockRecordsFilterArgs and GetDdosBlockRecordsFilterOutput values.
+// You can construct a concrete instance of `GetDdosBlockRecordsFilterInput` via:
+//
+//	GetDdosBlockRecordsFilterArgs{...}
+type GetDdosBlockRecordsFilterInput interface {
+	pulumi.Input
+
+	ToGetDdosBlockRecordsFilterOutput() GetDdosBlockRecordsFilterOutput
+	ToGetDdosBlockRecordsFilterOutputWithContext(context.Context) GetDdosBlockRecordsFilterOutput
+}
+
+type GetDdosBlockRecordsFilterArgs struct {
+	// Filter field name. Supported: Resource, Status.
+	Name pulumi.StringInput `pulumi:"name"`
+	// Filter field value.
+	Values pulumi.StringArrayInput `pulumi:"values"`
+}
+
+func (GetDdosBlockRecordsFilterArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDdosBlockRecordsFilter)(nil)).Elem()
+}
+
+func (i GetDdosBlockRecordsFilterArgs) ToGetDdosBlockRecordsFilterOutput() GetDdosBlockRecordsFilterOutput {
+	return i.ToGetDdosBlockRecordsFilterOutputWithContext(context.Background())
+}
+
+func (i GetDdosBlockRecordsFilterArgs) ToGetDdosBlockRecordsFilterOutputWithContext(ctx context.Context) GetDdosBlockRecordsFilterOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDdosBlockRecordsFilterOutput)
+}
+
+// GetDdosBlockRecordsFilterArrayInput is an input type that accepts GetDdosBlockRecordsFilterArray and GetDdosBlockRecordsFilterArrayOutput values.
+// You can construct a concrete instance of `GetDdosBlockRecordsFilterArrayInput` via:
+//
+//	GetDdosBlockRecordsFilterArray{ GetDdosBlockRecordsFilterArgs{...} }
+type GetDdosBlockRecordsFilterArrayInput interface {
+	pulumi.Input
+
+	ToGetDdosBlockRecordsFilterArrayOutput() GetDdosBlockRecordsFilterArrayOutput
+	ToGetDdosBlockRecordsFilterArrayOutputWithContext(context.Context) GetDdosBlockRecordsFilterArrayOutput
+}
+
+type GetDdosBlockRecordsFilterArray []GetDdosBlockRecordsFilterInput
+
+func (GetDdosBlockRecordsFilterArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDdosBlockRecordsFilter)(nil)).Elem()
+}
+
+func (i GetDdosBlockRecordsFilterArray) ToGetDdosBlockRecordsFilterArrayOutput() GetDdosBlockRecordsFilterArrayOutput {
+	return i.ToGetDdosBlockRecordsFilterArrayOutputWithContext(context.Background())
+}
+
+func (i GetDdosBlockRecordsFilterArray) ToGetDdosBlockRecordsFilterArrayOutputWithContext(ctx context.Context) GetDdosBlockRecordsFilterArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDdosBlockRecordsFilterArrayOutput)
+}
+
+type GetDdosBlockRecordsFilterOutput struct{ *pulumi.OutputState }
+
+func (GetDdosBlockRecordsFilterOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDdosBlockRecordsFilter)(nil)).Elem()
+}
+
+func (o GetDdosBlockRecordsFilterOutput) ToGetDdosBlockRecordsFilterOutput() GetDdosBlockRecordsFilterOutput {
+	return o
+}
+
+func (o GetDdosBlockRecordsFilterOutput) ToGetDdosBlockRecordsFilterOutputWithContext(ctx context.Context) GetDdosBlockRecordsFilterOutput {
+	return o
+}
+
+// Filter field name. Supported: Resource, Status.
+func (o GetDdosBlockRecordsFilterOutput) Name() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDdosBlockRecordsFilter) string { return v.Name }).(pulumi.StringOutput)
+}
+
+// Filter field value.
+func (o GetDdosBlockRecordsFilterOutput) Values() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v GetDdosBlockRecordsFilter) []string { return v.Values }).(pulumi.StringArrayOutput)
+}
+
+type GetDdosBlockRecordsFilterArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDdosBlockRecordsFilterArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDdosBlockRecordsFilter)(nil)).Elem()
+}
+
+func (o GetDdosBlockRecordsFilterArrayOutput) ToGetDdosBlockRecordsFilterArrayOutput() GetDdosBlockRecordsFilterArrayOutput {
+	return o
+}
+
+func (o GetDdosBlockRecordsFilterArrayOutput) ToGetDdosBlockRecordsFilterArrayOutputWithContext(ctx context.Context) GetDdosBlockRecordsFilterArrayOutput {
+	return o
+}
+
+func (o GetDdosBlockRecordsFilterArrayOutput) Index(i pulumi.IntInput) GetDdosBlockRecordsFilterOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDdosBlockRecordsFilter {
+		return vs[0].([]GetDdosBlockRecordsFilter)[vs[1].(int)]
+	}).(GetDdosBlockRecordsFilterOutput)
+}
+
+type GetDdosBlockRecordsUnblockQuotaInfo struct {
+	// Quota effective end time.
+	QuotaEndTime string `pulumi:"quotaEndTime"`
+	// Quota effective start time.
+	QuotaStartTime string `pulumi:"quotaStartTime"`
+	// Total unblock quota.
+	TotalQuota int `pulumi:"totalQuota"`
+	// Used unblock quota.
+	UsedQuota int `pulumi:"usedQuota"`
+}
+
+// GetDdosBlockRecordsUnblockQuotaInfoInput is an input type that accepts GetDdosBlockRecordsUnblockQuotaInfoArgs and GetDdosBlockRecordsUnblockQuotaInfoOutput values.
+// You can construct a concrete instance of `GetDdosBlockRecordsUnblockQuotaInfoInput` via:
+//
+//	GetDdosBlockRecordsUnblockQuotaInfoArgs{...}
+type GetDdosBlockRecordsUnblockQuotaInfoInput interface {
+	pulumi.Input
+
+	ToGetDdosBlockRecordsUnblockQuotaInfoOutput() GetDdosBlockRecordsUnblockQuotaInfoOutput
+	ToGetDdosBlockRecordsUnblockQuotaInfoOutputWithContext(context.Context) GetDdosBlockRecordsUnblockQuotaInfoOutput
+}
+
+type GetDdosBlockRecordsUnblockQuotaInfoArgs struct {
+	// Quota effective end time.
+	QuotaEndTime pulumi.StringInput `pulumi:"quotaEndTime"`
+	// Quota effective start time.
+	QuotaStartTime pulumi.StringInput `pulumi:"quotaStartTime"`
+	// Total unblock quota.
+	TotalQuota pulumi.IntInput `pulumi:"totalQuota"`
+	// Used unblock quota.
+	UsedQuota pulumi.IntInput `pulumi:"usedQuota"`
+}
+
+func (GetDdosBlockRecordsUnblockQuotaInfoArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDdosBlockRecordsUnblockQuotaInfo)(nil)).Elem()
+}
+
+func (i GetDdosBlockRecordsUnblockQuotaInfoArgs) ToGetDdosBlockRecordsUnblockQuotaInfoOutput() GetDdosBlockRecordsUnblockQuotaInfoOutput {
+	return i.ToGetDdosBlockRecordsUnblockQuotaInfoOutputWithContext(context.Background())
+}
+
+func (i GetDdosBlockRecordsUnblockQuotaInfoArgs) ToGetDdosBlockRecordsUnblockQuotaInfoOutputWithContext(ctx context.Context) GetDdosBlockRecordsUnblockQuotaInfoOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDdosBlockRecordsUnblockQuotaInfoOutput)
+}
+
+// GetDdosBlockRecordsUnblockQuotaInfoArrayInput is an input type that accepts GetDdosBlockRecordsUnblockQuotaInfoArray and GetDdosBlockRecordsUnblockQuotaInfoArrayOutput values.
+// You can construct a concrete instance of `GetDdosBlockRecordsUnblockQuotaInfoArrayInput` via:
+//
+//	GetDdosBlockRecordsUnblockQuotaInfoArray{ GetDdosBlockRecordsUnblockQuotaInfoArgs{...} }
+type GetDdosBlockRecordsUnblockQuotaInfoArrayInput interface {
+	pulumi.Input
+
+	ToGetDdosBlockRecordsUnblockQuotaInfoArrayOutput() GetDdosBlockRecordsUnblockQuotaInfoArrayOutput
+	ToGetDdosBlockRecordsUnblockQuotaInfoArrayOutputWithContext(context.Context) GetDdosBlockRecordsUnblockQuotaInfoArrayOutput
+}
+
+type GetDdosBlockRecordsUnblockQuotaInfoArray []GetDdosBlockRecordsUnblockQuotaInfoInput
+
+func (GetDdosBlockRecordsUnblockQuotaInfoArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDdosBlockRecordsUnblockQuotaInfo)(nil)).Elem()
+}
+
+func (i GetDdosBlockRecordsUnblockQuotaInfoArray) ToGetDdosBlockRecordsUnblockQuotaInfoArrayOutput() GetDdosBlockRecordsUnblockQuotaInfoArrayOutput {
+	return i.ToGetDdosBlockRecordsUnblockQuotaInfoArrayOutputWithContext(context.Background())
+}
+
+func (i GetDdosBlockRecordsUnblockQuotaInfoArray) ToGetDdosBlockRecordsUnblockQuotaInfoArrayOutputWithContext(ctx context.Context) GetDdosBlockRecordsUnblockQuotaInfoArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(GetDdosBlockRecordsUnblockQuotaInfoArrayOutput)
+}
+
+type GetDdosBlockRecordsUnblockQuotaInfoOutput struct{ *pulumi.OutputState }
+
+func (GetDdosBlockRecordsUnblockQuotaInfoOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*GetDdosBlockRecordsUnblockQuotaInfo)(nil)).Elem()
+}
+
+func (o GetDdosBlockRecordsUnblockQuotaInfoOutput) ToGetDdosBlockRecordsUnblockQuotaInfoOutput() GetDdosBlockRecordsUnblockQuotaInfoOutput {
+	return o
+}
+
+func (o GetDdosBlockRecordsUnblockQuotaInfoOutput) ToGetDdosBlockRecordsUnblockQuotaInfoOutputWithContext(ctx context.Context) GetDdosBlockRecordsUnblockQuotaInfoOutput {
+	return o
+}
+
+// Quota effective end time.
+func (o GetDdosBlockRecordsUnblockQuotaInfoOutput) QuotaEndTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDdosBlockRecordsUnblockQuotaInfo) string { return v.QuotaEndTime }).(pulumi.StringOutput)
+}
+
+// Quota effective start time.
+func (o GetDdosBlockRecordsUnblockQuotaInfoOutput) QuotaStartTime() pulumi.StringOutput {
+	return o.ApplyT(func(v GetDdosBlockRecordsUnblockQuotaInfo) string { return v.QuotaStartTime }).(pulumi.StringOutput)
+}
+
+// Total unblock quota.
+func (o GetDdosBlockRecordsUnblockQuotaInfoOutput) TotalQuota() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDdosBlockRecordsUnblockQuotaInfo) int { return v.TotalQuota }).(pulumi.IntOutput)
+}
+
+// Used unblock quota.
+func (o GetDdosBlockRecordsUnblockQuotaInfoOutput) UsedQuota() pulumi.IntOutput {
+	return o.ApplyT(func(v GetDdosBlockRecordsUnblockQuotaInfo) int { return v.UsedQuota }).(pulumi.IntOutput)
+}
+
+type GetDdosBlockRecordsUnblockQuotaInfoArrayOutput struct{ *pulumi.OutputState }
+
+func (GetDdosBlockRecordsUnblockQuotaInfoArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]GetDdosBlockRecordsUnblockQuotaInfo)(nil)).Elem()
+}
+
+func (o GetDdosBlockRecordsUnblockQuotaInfoArrayOutput) ToGetDdosBlockRecordsUnblockQuotaInfoArrayOutput() GetDdosBlockRecordsUnblockQuotaInfoArrayOutput {
+	return o
+}
+
+func (o GetDdosBlockRecordsUnblockQuotaInfoArrayOutput) ToGetDdosBlockRecordsUnblockQuotaInfoArrayOutputWithContext(ctx context.Context) GetDdosBlockRecordsUnblockQuotaInfoArrayOutput {
+	return o
+}
+
+func (o GetDdosBlockRecordsUnblockQuotaInfoArrayOutput) Index(i pulumi.IntInput) GetDdosBlockRecordsUnblockQuotaInfoOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) GetDdosBlockRecordsUnblockQuotaInfo {
+		return vs[0].([]GetDdosBlockRecordsUnblockQuotaInfo)[vs[1].(int)]
+	}).(GetDdosBlockRecordsUnblockQuotaInfoOutput)
+}
+
 type GetListListenerLayer4Listener struct {
 	// Origin port, value 1~65535.
 	BackendPort int `pulumi:"backendPort"`
@@ -5212,6 +5557,12 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBgpInstancesBgpInstanceListTagInfoListArrayInput)(nil)).Elem(), GetBgpInstancesBgpInstanceListTagInfoListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBgpInstancesFilterTagInput)(nil)).Elem(), GetBgpInstancesFilterTagArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetBgpInstancesFilterTagArrayInput)(nil)).Elem(), GetBgpInstancesFilterTagArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDdosBlockRecordsBlockRecordInput)(nil)).Elem(), GetDdosBlockRecordsBlockRecordArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDdosBlockRecordsBlockRecordArrayInput)(nil)).Elem(), GetDdosBlockRecordsBlockRecordArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDdosBlockRecordsFilterInput)(nil)).Elem(), GetDdosBlockRecordsFilterArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDdosBlockRecordsFilterArrayInput)(nil)).Elem(), GetDdosBlockRecordsFilterArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDdosBlockRecordsUnblockQuotaInfoInput)(nil)).Elem(), GetDdosBlockRecordsUnblockQuotaInfoArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*GetDdosBlockRecordsUnblockQuotaInfoArrayInput)(nil)).Elem(), GetDdosBlockRecordsUnblockQuotaInfoArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetListListenerLayer4ListenerInput)(nil)).Elem(), GetListListenerLayer4ListenerArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetListListenerLayer4ListenerArrayInput)(nil)).Elem(), GetListListenerLayer4ListenerArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*GetListListenerLayer4ListenerInstanceDetailInput)(nil)).Elem(), GetListListenerLayer4ListenerInstanceDetailArgs{})
@@ -5278,6 +5629,12 @@ func init() {
 	pulumi.RegisterOutputType(GetBgpInstancesBgpInstanceListTagInfoListArrayOutput{})
 	pulumi.RegisterOutputType(GetBgpInstancesFilterTagOutput{})
 	pulumi.RegisterOutputType(GetBgpInstancesFilterTagArrayOutput{})
+	pulumi.RegisterOutputType(GetDdosBlockRecordsBlockRecordOutput{})
+	pulumi.RegisterOutputType(GetDdosBlockRecordsBlockRecordArrayOutput{})
+	pulumi.RegisterOutputType(GetDdosBlockRecordsFilterOutput{})
+	pulumi.RegisterOutputType(GetDdosBlockRecordsFilterArrayOutput{})
+	pulumi.RegisterOutputType(GetDdosBlockRecordsUnblockQuotaInfoOutput{})
+	pulumi.RegisterOutputType(GetDdosBlockRecordsUnblockQuotaInfoArrayOutput{})
 	pulumi.RegisterOutputType(GetListListenerLayer4ListenerOutput{})
 	pulumi.RegisterOutputType(GetListListenerLayer4ListenerArrayOutput{})
 	pulumi.RegisterOutputType(GetListListenerLayer4ListenerInstanceDetailOutput{})

@@ -117,6 +117,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateBackupMigration](https://www.tencentcloud.com/document/api/238/39843)
+    /// * Read: [DescribeBackupMigration](https://www.tencentcloud.com/document/api/238/39838)
+    /// * Update: [ModifyBackupMigration](https://www.tencentcloud.com/document/api/238/39834)
+    /// * Delete: [DeleteBackupMigration](https://www.tencentcloud.com/document/api/238/39841)
+    /// 
     /// ## Import
     /// 
     /// sqlserver FullBackupMigration can be imported using the id, e.g.

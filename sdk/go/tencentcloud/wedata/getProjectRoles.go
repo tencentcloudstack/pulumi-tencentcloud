@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [ListProjectRoles](https://www.tencentcloud.com/document/api/1174/77864)
 func GetProjectRoles(ctx *pulumi.Context, args *GetProjectRolesArgs, opts ...pulumi.InvokeOption) (*GetProjectRolesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetProjectRolesResult

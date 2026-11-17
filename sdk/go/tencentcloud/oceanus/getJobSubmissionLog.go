@@ -42,6 +42,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeJobSubmissionLog](https://www.tencentcloud.com/search/?wd=DescribeJobSubmissionLog&type=document&lang=en)
 func GetJobSubmissionLog(ctx *pulumi.Context, args *GetJobSubmissionLogArgs, opts ...pulumi.InvokeOption) (*GetJobSubmissionLogResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetJobSubmissionLogResult

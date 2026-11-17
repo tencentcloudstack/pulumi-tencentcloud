@@ -185,6 +185,14 @@ class GatewayCcnRoutes(pulumi.CustomResource):
             vpn_gateway_id="vpngw-lie1a4u7")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyVpnGatewayCcnRoutes](https://www.tencentcloud.com/document/api/215/36074)
+        * Read: [DescribeVpnGatewayCcnRoutes](https://www.tencentcloud.com/document/api/215/36075)
+        * Update: [ModifyVpnGatewayCcnRoutes](https://www.tencentcloud.com/document/api/215/36074)
+
         ## Import
 
         vpc vpn_gateway_ccn_routes can be imported using the id, e.g.
@@ -222,6 +230,14 @@ class GatewayCcnRoutes(pulumi.CustomResource):
             status="DISABLE",
             vpn_gateway_id="vpngw-lie1a4u7")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyVpnGatewayCcnRoutes](https://www.tencentcloud.com/document/api/215/36074)
+        * Read: [DescribeVpnGatewayCcnRoutes](https://www.tencentcloud.com/document/api/215/36075)
+        * Update: [ModifyVpnGatewayCcnRoutes](https://www.tencentcloud.com/document/api/215/36074)
 
         ## Import
 

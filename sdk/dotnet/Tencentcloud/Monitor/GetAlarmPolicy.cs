@@ -57,6 +57,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAlarmPolicies](https://www.tencentcloud.com/document/api/248/39321)
         /// </summary>
         public static Task<GetAlarmPolicyResult> InvokeAsync(GetAlarmPolicyArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetAlarmPolicyResult>("tencentcloud:Monitor/getAlarmPolicy:getAlarmPolicy", args ?? new GetAlarmPolicyArgs(), options.WithDefaults());
@@ -106,6 +112,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAlarmPolicies](https://www.tencentcloud.com/document/api/248/39321)
         /// </summary>
         public static Output<GetAlarmPolicyResult> Invoke(GetAlarmPolicyInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetAlarmPolicyResult>("tencentcloud:Monitor/getAlarmPolicy:getAlarmPolicy", args ?? new GetAlarmPolicyInvokeArgs(), options.WithDefaults());
@@ -155,6 +167,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAlarmPolicies](https://www.tencentcloud.com/document/api/248/39321)
         /// </summary>
         public static Output<GetAlarmPolicyResult> Invoke(GetAlarmPolicyInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetAlarmPolicyResult>("tencentcloud:Monitor/getAlarmPolicy:getAlarmPolicy", args ?? new GetAlarmPolicyInvokeArgs(), options.WithDefaults());

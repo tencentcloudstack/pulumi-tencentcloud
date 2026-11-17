@@ -21,6 +21,12 @@ import * as utilities from "../utilities";
  *     namespace: "cvm_device",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAlarmMetrics](https://www.tencentcloud.com/document/api/248/39322)
  */
 export function getAlarmMetric(args: GetAlarmMetricArgs, opts?: pulumi.InvokeOptions): Promise<GetAlarmMetricResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -89,6 +95,12 @@ export interface GetAlarmMetricResult {
  *     namespace: "cvm_device",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAlarmMetrics](https://www.tencentcloud.com/document/api/248/39322)
  */
 export function getAlarmMetricOutput(args: GetAlarmMetricOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAlarmMetricResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

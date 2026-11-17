@@ -250,6 +250,15 @@ class CenterGroup(pulumi.CustomResource):
             description="test")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateGroup](https://www.tencentcloud.com/document/api/1031/63572)
+        * Read: [GetGroup](https://www.tencentcloud.com/document/api/1031/63570)
+        * Update: [UpdateGroup](https://www.tencentcloud.com/document/api/1031/63565)
+        * Delete: [DeleteGroup](https://www.tencentcloud.com/document/api/1031/63571)
+
         ## Import
 
         Identity.CenterGroup can be imported using the id, e.g.
@@ -286,6 +295,15 @@ class CenterGroup(pulumi.CustomResource):
             group_name="test-group",
             description="test")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateGroup](https://www.tencentcloud.com/document/api/1031/63572)
+        * Read: [GetGroup](https://www.tencentcloud.com/document/api/1031/63570)
+        * Update: [UpdateGroup](https://www.tencentcloud.com/document/api/1031/63565)
+        * Delete: [DeleteGroup](https://www.tencentcloud.com/document/api/1031/63571)
 
         ## Import
 

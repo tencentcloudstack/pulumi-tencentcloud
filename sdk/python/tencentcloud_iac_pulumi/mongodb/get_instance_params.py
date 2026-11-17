@@ -132,6 +132,12 @@ def get_instance_params(instance_id: Optional[_builtins.str] = None,
     instance_params = tencentcloud.mongodb.get_instance_params(instance_id="cmgo-gwqk8669")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstanceParams](https://www.tencentcloud.com/document/api/240/44226)
+
 
     :param _builtins.str instance_id: InstanceId.
     :param _builtins.str result_output_file: Used to save results.
@@ -164,6 +170,12 @@ def get_instance_params_output(instance_id: pulumi.Input[Optional[_builtins.str]
 
     instance_params = tencentcloud.mongodb.get_instance_params(instance_id="cmgo-gwqk8669")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstanceParams](https://www.tencentcloud.com/document/api/240/44226)
 
 
     :param _builtins.str instance_id: InstanceId.

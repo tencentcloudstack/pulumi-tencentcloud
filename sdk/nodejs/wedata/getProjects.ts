@@ -36,6 +36,12 @@ import * as utilities from "../utilities";
  *     projectModel: "SIMPLE",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListProjects](https://www.tencentcloud.com/document/api/1174/77863)
  */
 export function getProjects(args?: GetProjectsArgs, opts?: pulumi.InvokeOptions): Promise<GetProjectsResult> {
     args = args || {};
@@ -132,6 +138,12 @@ export interface GetProjectsResult {
  *     projectModel: "SIMPLE",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListProjects](https://www.tencentcloud.com/document/api/1174/77863)
  */
 export function getProjectsOutput(args?: GetProjectsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetProjectsResult> {
     args = args || {};

@@ -129,6 +129,12 @@ def get_system_rules(keyword: Optional[_builtins.str] = None,
     example = tencentcloud.config.get_system_rules(risk_level=1)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListSystemRules](https://www.tencentcloud.com/document/api/1164/84962)
+
 
     :param _builtins.str keyword: Search keyword. Supports identifier/name/label/description search.
     :param _builtins.str result_output_file: Used to save results.
@@ -182,6 +188,12 @@ def get_system_rules_output(keyword: pulumi.Input[Optional[Optional[_builtins.st
 
     example = tencentcloud.config.get_system_rules(risk_level=1)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListSystemRules](https://www.tencentcloud.com/document/api/1164/84962)
 
 
     :param _builtins.str keyword: Search keyword. Supports identifier/name/label/description search.

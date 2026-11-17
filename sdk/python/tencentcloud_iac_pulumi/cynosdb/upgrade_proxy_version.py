@@ -119,6 +119,19 @@ class UpgradeProxyVersion(pulumi.CustomResource):
             dst_proxy_version="1.3.7")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+          - [DescribeProxies](https://www.tencentcloud.com/document/api/1098/56558)
+          - [UpgradeProxyVersion](https://www.tencentcloud.com/document/api/1098/56550)
+        * Read: [DescribeProxies](https://www.tencentcloud.com/document/api/1098/56558)
+        * Update:
+          - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+          - [UpgradeProxyVersion](https://www.tencentcloud.com/document/api/1098/56550)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -144,6 +157,19 @@ class UpgradeProxyVersion(pulumi.CustomResource):
             cluster_id="cynosdbmysql-bws8h88b",
             dst_proxy_version="1.3.7")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+          - [DescribeProxies](https://www.tencentcloud.com/document/api/1098/56558)
+          - [UpgradeProxyVersion](https://www.tencentcloud.com/document/api/1098/56550)
+        * Read: [DescribeProxies](https://www.tencentcloud.com/document/api/1098/56558)
+        * Update:
+          - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+          - [UpgradeProxyVersion](https://www.tencentcloud.com/document/api/1098/56550)
 
 
         :param str resource_name: The name of the resource.

@@ -99,6 +99,12 @@ def get_budget_operation_log(budget_id: Optional[_builtins.str] = None,
     billing_budget_operation_log = tencentcloud.billing.get_budget_operation_log(budget_id="1971489821259956225")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBudgetOperationLog](https://www.tencentcloud.com/search/?wd=DescribeBudgetOperationLog&type=document&lang=en)
+
 
     :param _builtins.str budget_id: Budget id.
     :param _builtins.str result_output_file: Used to save results.
@@ -128,6 +134,12 @@ def get_budget_operation_log_output(budget_id: pulumi.Input[Optional[_builtins.s
 
     billing_budget_operation_log = tencentcloud.billing.get_budget_operation_log(budget_id="1971489821259956225")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBudgetOperationLog](https://www.tencentcloud.com/search/?wd=DescribeBudgetOperationLog&type=document&lang=en)
 
 
     :param _builtins.str budget_id: Budget id.

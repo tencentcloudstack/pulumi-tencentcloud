@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTaskStatus](https://www.tencentcloud.com/document/api/597/55881)
         /// </summary>
         public static Task<GetTaskStatusResult> InvokeAsync(GetTaskStatusArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetTaskStatusResult>("tencentcloud:Ckafka/getTaskStatus:getTaskStatus", args ?? new GetTaskStatusArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTaskStatus](https://www.tencentcloud.com/document/api/597/55881)
         /// </summary>
         public static Output<GetTaskStatusResult> Invoke(GetTaskStatusInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetTaskStatusResult>("tencentcloud:Ckafka/getTaskStatus:getTaskStatus", args ?? new GetTaskStatusInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTaskStatus](https://www.tencentcloud.com/document/api/597/55881)
         /// </summary>
         public static Output<GetTaskStatusResult> Invoke(GetTaskStatusInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetTaskStatusResult>("tencentcloud:Ckafka/getTaskStatus:getTaskStatus", args ?? new GetTaskStatusInvokeArgs(), options.WithDefaults());

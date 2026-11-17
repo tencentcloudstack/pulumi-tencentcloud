@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     netDetectIds: ["netd-12345678"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeNetDetectStates](https://www.tencentcloud.com/document/api/215/34743)
  */
 export function getNetDetectStates(args?: GetNetDetectStatesArgs, opts?: pulumi.InvokeOptions): Promise<GetNetDetectStatesResult> {
     args = args || {};
@@ -77,6 +83,12 @@ export interface GetNetDetectStatesResult {
  *     netDetectIds: ["netd-12345678"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeNetDetectStates](https://www.tencentcloud.com/document/api/215/34743)
  */
 export function getNetDetectStatesOutput(args?: GetNetDetectStatesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetNetDetectStatesResult> {
     args = args || {};

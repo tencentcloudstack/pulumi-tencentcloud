@@ -36,6 +36,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeFileSystems](https://www.tencentcloud.com/document/api/1106/42443)
 func GetFileSystems(ctx *pulumi.Context, args *GetFileSystemsArgs, opts ...pulumi.InvokeOption) (*GetFileSystemsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetFileSystemsResult

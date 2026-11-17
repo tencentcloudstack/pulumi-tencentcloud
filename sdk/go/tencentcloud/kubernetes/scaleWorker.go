@@ -212,6 +212,22 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CreateClusterInstances](https://www.tencentcloud.com/document/api/457/33862)
+//   - [DescribeClusterInstances](https://www.tencentcloud.com/document/api/457/66315)
+//   - [DescribeClusters](https://www.tencentcloud.com/document/api/457/32025)
+//
+// * Read: [DescribeClusters](https://www.tencentcloud.com/document/api/457/32025)
+// * Update:
+//   - [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258)
+//   - [ModifyInstancesChargeType](https://www.tencentcloud.com/document/api/213/73503)
+//
+// * Delete: [DescribeClusters](https://www.tencentcloud.com/document/api/457/32025)
+//
 // ## Import
 //
 // tke scale worker can be imported, e.g.

@@ -357,6 +357,15 @@ class Invoker(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateInvoker](https://www.tencentcloud.com/document/api/1147/46701)
+        * Read: [DescribeInvokers](https://www.tencentcloud.com/document/api/1147/46693)
+        * Update: [ModifyInvoker](https://www.tencentcloud.com/document/api/1147/46688)
+        * Delete: [DeleteInvoker](https://www.tencentcloud.com/document/api/1147/46699)
+
         ## Import
 
         tat invoker can be imported using the id, e.g.
@@ -401,6 +410,15 @@ class Invoker(pulumi.CustomResource):
                 "invoke_time": "2099-11-17T16:00:00Z",
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateInvoker](https://www.tencentcloud.com/document/api/1147/46701)
+        * Read: [DescribeInvokers](https://www.tencentcloud.com/document/api/1147/46693)
+        * Update: [ModifyInvoker](https://www.tencentcloud.com/document/api/1147/46688)
+        * Delete: [DeleteInvoker](https://www.tencentcloud.com/document/api/1147/46699)
 
         ## Import
 

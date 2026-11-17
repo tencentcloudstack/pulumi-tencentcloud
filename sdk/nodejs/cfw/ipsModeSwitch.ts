@@ -16,6 +16,14 @@ import * as utilities from "../utilities";
  * const example = new tencentcloud.cfw.IpsModeSwitch("example", {mode: 1});
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [ModifyIpsModeSwitch](https://www.tencentcloud.com/search/?wd=ModifyIpsModeSwitch&type=document&lang=en)
+ * * Read: [DescribeIpsModeSwitch](https://www.tencentcloud.com/search/?wd=DescribeIpsModeSwitch&type=document&lang=en)
+ * * Update: [ModifyIpsModeSwitch](https://www.tencentcloud.com/search/?wd=ModifyIpsModeSwitch&type=document&lang=en)
+ *
  * ## Import
  *
  * CFW ips mode switch can be imported using the customId(like uuid or base64 string), e.g.

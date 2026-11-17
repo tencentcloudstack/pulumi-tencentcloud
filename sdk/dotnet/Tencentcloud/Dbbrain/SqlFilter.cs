@@ -49,6 +49,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateSqlFilter](https://www.tencentcloud.com/search/?wd=CreateSqlFilter&amp;type=document&amp;lang=en)
+    ///   - [VerifyUserAccount](https://www.tencentcloud.com/search/?wd=VerifyUserAccount&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeSqlFilters](https://www.tencentcloud.com/search/?wd=DescribeSqlFilters&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [ModifySqlFilters](https://www.tencentcloud.com/search/?wd=ModifySqlFilters&amp;type=document&amp;lang=en)
+    ///   - [VerifyUserAccount](https://www.tencentcloud.com/search/?wd=VerifyUserAccount&amp;type=document&amp;lang=en)
+    /// * Delete:
+    ///   - [DeleteSqlFilters](https://www.tencentcloud.com/search/?wd=DeleteSqlFilters&amp;type=document&amp;lang=en)
+    ///   - [VerifyUserAccount](https://www.tencentcloud.com/search/?wd=VerifyUserAccount&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dbbrain/sqlFilter:SqlFilter")]
     public partial class SqlFilter : global::Pulumi.CustomResource

@@ -23,6 +23,12 @@ import * as utilities from "../utilities";
  *     instanceIds: ["rum-pasZKEI3RLgakj"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeTawInstances](https://www.tencentcloud.com/document/api/1131/45302)
  */
 export function getTawInstance(args?: GetTawInstanceArgs, opts?: pulumi.InvokeOptions): Promise<GetTawInstanceResult> {
     args = args || {};
@@ -103,6 +109,12 @@ export interface GetTawInstanceResult {
  *     instanceIds: ["rum-pasZKEI3RLgakj"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeTawInstances](https://www.tencentcloud.com/document/api/1131/45302)
  */
 export function getTawInstanceOutput(args?: GetTawInstanceOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetTawInstanceResult> {
     args = args || {};

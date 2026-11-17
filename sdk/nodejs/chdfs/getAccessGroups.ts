@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     vpcId: "vpc-pewdpc0d",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAccessGroups](https://www.tencentcloud.com/document/api/1106/42421)
  */
 export function getAccessGroups(args?: GetAccessGroupsArgs, opts?: pulumi.InvokeOptions): Promise<GetAccessGroupsResult> {
     args = args || {};
@@ -80,6 +86,12 @@ export interface GetAccessGroupsResult {
  *     vpcId: "vpc-pewdpc0d",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAccessGroups](https://www.tencentcloud.com/document/api/1106/42421)
  */
 export function getAccessGroupsOutput(args?: GetAccessGroupsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAccessGroupsResult> {
     args = args || {};

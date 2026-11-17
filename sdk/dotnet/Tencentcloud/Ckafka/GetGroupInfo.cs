@@ -36,6 +36,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeGroupInfo](https://www.tencentcloud.com/document/api/597/35360)
         /// </summary>
         public static Task<GetGroupInfoResult> InvokeAsync(GetGroupInfoArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetGroupInfoResult>("tencentcloud:Ckafka/getGroupInfo:getGroupInfo", args ?? new GetGroupInfoArgs(), options.WithDefaults());
@@ -64,6 +70,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeGroupInfo](https://www.tencentcloud.com/document/api/597/35360)
         /// </summary>
         public static Output<GetGroupInfoResult> Invoke(GetGroupInfoInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetGroupInfoResult>("tencentcloud:Ckafka/getGroupInfo:getGroupInfo", args ?? new GetGroupInfoInvokeArgs(), options.WithDefaults());
@@ -92,6 +104,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeGroupInfo](https://www.tencentcloud.com/document/api/597/35360)
         /// </summary>
         public static Output<GetGroupInfoResult> Invoke(GetGroupInfoInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetGroupInfoResult>("tencentcloud:Ckafka/getGroupInfo:getGroupInfo", args ?? new GetGroupInfoInvokeArgs(), options.WithDefaults());

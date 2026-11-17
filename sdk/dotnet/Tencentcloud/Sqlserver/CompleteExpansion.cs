@@ -141,6 +141,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CompleteExpansion](https://www.tencentcloud.com/document/api/238/72761)
+    ///   - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Sqlserver/completeExpansion:CompleteExpansion")]
     public partial class CompleteExpansion : global::Pulumi.CustomResource

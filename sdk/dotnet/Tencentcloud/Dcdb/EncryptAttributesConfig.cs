@@ -121,6 +121,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ModifyDBEncryptAttributes](https://www.tencentcloud.com/document/api/1042/54067)
+    /// * Read: [DescribeDBEncryptAttributes](https://www.tencentcloud.com/document/api/1042/55638)
+    /// * Update: [ModifyDBEncryptAttributes](https://www.tencentcloud.com/document/api/1042/54067)
+    /// 
     /// ## Import
     /// 
     /// dcdb EncryptAttributesConfig can be imported using the id, e.g.

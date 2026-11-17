@@ -31,6 +31,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [StopCompare](https://www.tencentcloud.com/document/api/571/51800)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dts/compareTaskStopOperation:CompareTaskStopOperation")]
     public partial class CompareTaskStopOperation : global::Pulumi.CustomResource

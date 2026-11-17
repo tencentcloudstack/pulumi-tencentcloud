@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     groupId: fooTencentcloudCamGroup.id,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListUsersForGroup](https://www.tencentcloud.com/document/api/598/32255)
  */
 export function getGroupMemberships(args?: GetGroupMembershipsArgs, opts?: pulumi.InvokeOptions): Promise<GetGroupMembershipsResult> {
     args = args || {};
@@ -74,6 +80,12 @@ export interface GetGroupMembershipsResult {
  *     groupId: fooTencentcloudCamGroup.id,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListUsersForGroup](https://www.tencentcloud.com/document/api/598/32255)
  */
 export function getGroupMembershipsOutput(args?: GetGroupMembershipsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetGroupMembershipsResult> {
     args = args || {};

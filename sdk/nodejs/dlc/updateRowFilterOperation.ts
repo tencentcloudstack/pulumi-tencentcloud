@@ -29,6 +29,12 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [UpdateRowFilter](https://www.tencentcloud.com/document/api/1155/54459)
  */
 export class UpdateRowFilterOperation extends pulumi.CustomResource {
     /**

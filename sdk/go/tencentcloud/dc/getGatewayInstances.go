@@ -57,6 +57,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDirectConnectGateways](https://www.tencentcloud.com/document/api/215/36913)
 func GetGatewayInstances(ctx *pulumi.Context, args *GetGatewayInstancesArgs, opts ...pulumi.InvokeOption) (*GetGatewayInstancesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetGatewayInstancesResult

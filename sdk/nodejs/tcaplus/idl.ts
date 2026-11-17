@@ -73,6 +73,14 @@ import * as utilities from "../utilities";
  * `,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [VerifyIdlFiles](https://www.tencentcloud.com/document/api/1016/35029)
+ * * Read: [VerifyIdlFiles](https://www.tencentcloud.com/document/api/1016/35029)
+ * * Delete: [DeleteIdlFiles](https://www.tencentcloud.com/document/api/1016/35051)
  */
 export class Idl extends pulumi.CustomResource {
     /**

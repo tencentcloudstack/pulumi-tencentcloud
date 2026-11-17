@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const example = tencentcloud.bh.getSourceTypes({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSourceTypes](https://www.tencentcloud.com/search/?wd=DescribeSourceTypes&type=document&lang=en)
  */
 export function getSourceTypes(args?: GetSourceTypesArgs, opts?: pulumi.InvokeOptions): Promise<GetSourceTypesResult> {
     args = args || {};
@@ -61,6 +67,12 @@ export interface GetSourceTypesResult {
  *
  * const example = tencentcloud.bh.getSourceTypes({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSourceTypes](https://www.tencentcloud.com/search/?wd=DescribeSourceTypes&type=document&lang=en)
  */
 export function getSourceTypesOutput(args?: GetSourceTypesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSourceTypesResult> {
     args = args || {};

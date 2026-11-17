@@ -86,6 +86,12 @@ def get_region(result_output_file: Optional[_builtins.str] = None,
     region = tencentcloud.lighthouse.get_region()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRegions](https://www.tencentcloud.com/document/api/1103/42468)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -111,6 +117,12 @@ def get_region_output(result_output_file: pulumi.Input[Optional[Optional[_builti
 
     region = tencentcloud.lighthouse.get_region()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRegions](https://www.tencentcloud.com/document/api/1103/42468)
 
 
     :param _builtins.str result_output_file: Used to save results.

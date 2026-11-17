@@ -33,6 +33,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateApiRateLimitRuleWithDetailResp](https://www.tencentcloud.com/search/?wd=CreateApiRateLimitRuleWithDetailResp&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeApiRateLimitRules](https://www.tencentcloud.com/search/?wd=DescribeApiRateLimitRules&amp;type=document&amp;lang=en)
+    /// * Update: [UpdateApiRateLimitRule](https://www.tencentcloud.com/search/?wd=UpdateApiRateLimitRule&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteApiRateLimitRule](https://www.tencentcloud.com/search/?wd=DeleteApiRateLimitRule&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// tsf ApiRateLimitRule can be imported using the id, e.g.

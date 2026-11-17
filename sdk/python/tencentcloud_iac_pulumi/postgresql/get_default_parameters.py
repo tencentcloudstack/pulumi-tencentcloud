@@ -107,6 +107,12 @@ def get_default_parameters(db_engine: Optional[_builtins.str] = None,
         db_engine="postgresql")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDefaultParameters](https://www.tencentcloud.com/document/api/409/52653)
+
 
     :param _builtins.str db_engine: Database engine, such as postgresql, mssql_compatible.
     :param _builtins.str db_major_version: The major database version number, such as 11, 12, 13.
@@ -141,6 +147,12 @@ def get_default_parameters_output(db_engine: pulumi.Input[Optional[_builtins.str
     default_parameters = tencentcloud.postgresql.get_default_parameters(db_major_version="13",
         db_engine="postgresql")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDefaultParameters](https://www.tencentcloud.com/document/api/409/52653)
 
 
     :param _builtins.str db_engine: Database engine, such as postgresql, mssql_compatible.

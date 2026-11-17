@@ -132,6 +132,12 @@ def get_internet_address_quota(result_output_file: Optional[_builtins.str] = Non
     internet_address_quota = tencentcloud.dc.get_internet_address_quota()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInternetAddressQuota](https://www.tencentcloud.com/document/api/216/39497)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -161,6 +167,12 @@ def get_internet_address_quota_output(result_output_file: pulumi.Input[Optional[
 
     internet_address_quota = tencentcloud.dc.get_internet_address_quota()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInternetAddressQuota](https://www.tencentcloud.com/document/api/216/39497)
 
 
     :param _builtins.str result_output_file: Used to save results.

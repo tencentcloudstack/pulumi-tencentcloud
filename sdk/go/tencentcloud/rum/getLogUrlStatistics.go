@@ -41,6 +41,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDataLogUrlStatistics](https://www.tencentcloud.com/document/api/1131/45326)
 func GetLogUrlStatistics(ctx *pulumi.Context, args *GetLogUrlStatisticsArgs, opts ...pulumi.InvokeOption) (*GetLogUrlStatisticsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetLogUrlStatisticsResult

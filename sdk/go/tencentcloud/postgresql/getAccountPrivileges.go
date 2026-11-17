@@ -45,6 +45,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeAccountPrivileges](https://www.tencentcloud.com/document/api/409/78818)
 func GetAccountPrivileges(ctx *pulumi.Context, args *GetAccountPrivilegesArgs, opts ...pulumi.InvokeOption) (*GetAccountPrivilegesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetAccountPrivilegesResult

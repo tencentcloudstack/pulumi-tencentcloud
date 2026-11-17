@@ -65,6 +65,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [WithdrawsWatermark](https://www.tencentcloud.com/search/?wd=WithdrawsWatermark&type=document&lang=en)
 type WithdrawsWatermarkOperation struct {
 	pulumi.CustomResourceState
 

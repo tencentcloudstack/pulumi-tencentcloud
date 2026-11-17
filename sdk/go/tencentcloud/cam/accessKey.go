@@ -110,12 +110,24 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CreateAccessKey](https://www.tencentcloud.com/document/api/598/52594)
+//   - [UpdateAccessKey](https://www.tencentcloud.com/document/api/598/52592)
+//
+// * Read: [ListAccessKeys](https://www.tencentcloud.com/document/api/598/37088)
+// * Update: [UpdateAccessKey](https://www.tencentcloud.com/document/api/598/52592)
+// * Delete: [DeleteAccessKey](https://www.tencentcloud.com/document/api/598/52593)
+//
 // ## Import
 //
 // cam access key can be imported using the id, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Cam/accessKey:AccessKey example 100037718101#AKID7F******************
+// $ pulumi import tencentcloud:Cam/accessKey:AccessKey example 10003****101#AKID7F******************
 // ```
 type AccessKey struct {
 	pulumi.CustomResourceState

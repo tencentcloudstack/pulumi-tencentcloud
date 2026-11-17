@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     instanceIds: ["cdb-fitq5t9h"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBInstanceRebootTime](https://www.tencentcloud.com/document/api/236/15874)
  */
 export function getInstanceRebootTime(args: GetInstanceRebootTimeArgs, opts?: pulumi.InvokeOptions): Promise<GetInstanceRebootTimeResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetInstanceRebootTimeResult {
  *     instanceIds: ["cdb-fitq5t9h"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBInstanceRebootTime](https://www.tencentcloud.com/document/api/236/15874)
  */
 export function getInstanceRebootTimeOutput(args: GetInstanceRebootTimeOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInstanceRebootTimeResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

@@ -32,6 +32,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [BindApiGroup](https://www.tencentcloud.com/search/?wd=BindApiGroup&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeGroupBindedGateways](https://www.tencentcloud.com/search/?wd=DescribeGroupBindedGateways&amp;type=document&amp;lang=en)
+    /// * Delete: [UnbindApiGroup](https://www.tencentcloud.com/search/?wd=UnbindApiGroup&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// tsf BindApiGroup can be imported using the id, e.g.

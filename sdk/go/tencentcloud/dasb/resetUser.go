@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [ResetUser](https://www.tencentcloud.com/search/?wd=ResetUser&type=document&lang=en)
 type ResetUser struct {
 	pulumi.CustomResourceState
 

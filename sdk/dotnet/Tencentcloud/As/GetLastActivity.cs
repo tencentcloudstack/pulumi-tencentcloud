@@ -36,6 +36,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAutoScalingGroupLastActivities](https://www.tencentcloud.com/document/api/377/33204)
         /// </summary>
         public static Task<GetLastActivityResult> InvokeAsync(GetLastActivityArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetLastActivityResult>("tencentcloud:As/getLastActivity:getLastActivity", args ?? new GetLastActivityArgs(), options.WithDefaults());
@@ -64,6 +70,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAutoScalingGroupLastActivities](https://www.tencentcloud.com/document/api/377/33204)
         /// </summary>
         public static Output<GetLastActivityResult> Invoke(GetLastActivityInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetLastActivityResult>("tencentcloud:As/getLastActivity:getLastActivity", args ?? new GetLastActivityInvokeArgs(), options.WithDefaults());
@@ -92,6 +104,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAutoScalingGroupLastActivities](https://www.tencentcloud.com/document/api/377/33204)
         /// </summary>
         public static Output<GetLastActivityResult> Invoke(GetLastActivityInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetLastActivityResult>("tencentcloud:As/getLastActivity:getLastActivity", args ?? new GetLastActivityInvokeArgs(), options.WithDefaults());

@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeWhiteBoxDeviceFingerprints](https://www.tencentcloud.com/search/?wd=DescribeWhiteBoxDeviceFingerprints&type=document&lang=en)
 func GetWhiteBoxDeviceFingerprints(ctx *pulumi.Context, args *GetWhiteBoxDeviceFingerprintsArgs, opts ...pulumi.InvokeOption) (*GetWhiteBoxDeviceFingerprintsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetWhiteBoxDeviceFingerprintsResult

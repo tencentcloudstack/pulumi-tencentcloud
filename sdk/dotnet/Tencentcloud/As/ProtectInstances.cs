@@ -160,6 +160,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [SetInstancesProtection](https://www.tencentcloud.com/document/api/377/33203)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:As/protectInstances:ProtectInstances")]
     public partial class ProtectInstances : global::Pulumi.CustomResource

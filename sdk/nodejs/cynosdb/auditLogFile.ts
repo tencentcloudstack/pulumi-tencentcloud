@@ -21,6 +21,16 @@ import * as utilities from "../utilities";
  *     endTime: "2022-08-12 10:29:20",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateAuditLogFile](https://www.tencentcloud.com/search/?wd=CreateAuditLogFile&type=document&lang=en)
+ *   - [DescribeAuditLogFiles](https://www.tencentcloud.com/search/?wd=DescribeAuditLogFiles&type=document&lang=en)
+ * * Read: [DescribeAuditLogFiles](https://www.tencentcloud.com/search/?wd=DescribeAuditLogFiles&type=document&lang=en)
+ * * Delete: [DeleteAuditLogFile](https://www.tencentcloud.com/search/?wd=DeleteAuditLogFile&type=document&lang=en)
  */
 export class AuditLogFile extends pulumi.CustomResource {
     /**

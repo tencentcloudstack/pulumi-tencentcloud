@@ -252,6 +252,15 @@ class UserRole(pulumi.CustomResource):
             user_name="keep-iac-test")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateUserRole](https://www.tencentcloud.com/document/api/1270/72620)
+        * Read: [DescribeUserRoleList](https://www.tencentcloud.com/document/api/1270/72615)
+        * Update: [ModifyUserRole](https://www.tencentcloud.com/document/api/1270/72613)
+        * Delete: [DeleteUserRole](https://www.tencentcloud.com/document/api/1270/72618)
+
         ## Import
 
         bi user_role can be imported using the id, e.g.
@@ -293,6 +302,15 @@ class UserRole(pulumi.CustomResource):
             user_id="100032767426",
             user_name="keep-iac-test")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateUserRole](https://www.tencentcloud.com/document/api/1270/72620)
+        * Read: [DescribeUserRoleList](https://www.tencentcloud.com/document/api/1270/72615)
+        * Update: [ModifyUserRole](https://www.tencentcloud.com/document/api/1270/72613)
+        * Delete: [DeleteUserRole](https://www.tencentcloud.com/document/api/1270/72618)
 
         ## Import
 

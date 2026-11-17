@@ -24,6 +24,12 @@ import * as utilities from "../utilities";
  *     scheduler: "WRR",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeListeners](https://www.tencentcloud.com/document/api/214/33831)
  */
 export function getListenerRules(args: GetListenerRulesArgs, opts?: pulumi.InvokeOptions): Promise<GetListenerRulesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -122,6 +128,12 @@ export interface GetListenerRulesResult {
  *     scheduler: "WRR",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeListeners](https://www.tencentcloud.com/document/api/214/33831)
  */
 export function getListenerRulesOutput(args: GetListenerRulesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetListenerRulesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

@@ -30,6 +30,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dts
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateCheckSyncJob](https://www.tencentcloud.com/document/api/571/51796)
+    ///   - [DescribeCheckSyncJobResult](https://www.tencentcloud.com/document/api/571/51794)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dts/syncCheckJobOperation:SyncCheckJobOperation")]
     public partial class SyncCheckJobOperation : global::Pulumi.CustomResource

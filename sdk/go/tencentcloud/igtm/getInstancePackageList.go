@@ -72,6 +72,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeInstancePackageList](https://www.tencentcloud.com/search/?wd=DescribeInstancePackageList&type=document&lang=en)
 func GetInstancePackageList(ctx *pulumi.Context, args *GetInstancePackageListArgs, opts ...pulumi.InvokeOption) (*GetInstancePackageListResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetInstancePackageListResult

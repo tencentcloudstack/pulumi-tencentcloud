@@ -87,6 +87,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ApiGateway
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ImportOpenApi](https://www.tencentcloud.com/search/?wd=ImportOpenApi&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeApi](https://www.tencentcloud.com/search/?wd=DescribeApi&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteApi](https://www.tencentcloud.com/search/?wd=DeleteApi&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:ApiGateway/importOpenApi:ImportOpenApi")]
     public partial class ImportOpenApi : global::Pulumi.CustomResource

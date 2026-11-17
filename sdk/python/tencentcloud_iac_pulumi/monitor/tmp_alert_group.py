@@ -310,6 +310,15 @@ class TmpAlertGroup(pulumi.CustomResource):
             }])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreatePrometheusAlertGroup](https://www.tencentcloud.com/document/api/248/74016)
+        * Read: [DescribePrometheusAlertGroups](https://www.tencentcloud.com/document/api/248/74014)
+        * Update: [UpdatePrometheusAlertGroup](https://www.tencentcloud.com/document/api/248/74013)
+        * Delete: [DeletePrometheusAlertGroups](https://www.tencentcloud.com/document/api/248/74015)
+
         ## Import
 
         monitor tmp alert group can be imported using the id, e.g.
@@ -385,6 +394,15 @@ class TmpAlertGroup(pulumi.CustomResource):
                 },
             }])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreatePrometheusAlertGroup](https://www.tencentcloud.com/document/api/248/74016)
+        * Read: [DescribePrometheusAlertGroups](https://www.tencentcloud.com/document/api/248/74014)
+        * Update: [UpdatePrometheusAlertGroup](https://www.tencentcloud.com/document/api/248/74013)
+        * Delete: [DeletePrometheusAlertGroups](https://www.tencentcloud.com/document/api/248/74015)
 
         ## Import
 

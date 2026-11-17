@@ -187,6 +187,14 @@ class ProtectionMode(pulumi.CustomResource):
             type=0)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifySpartaProtectionMode](https://www.tencentcloud.com/document/api/627/64507)
+        * Read: [DescribeSpartaProtectionInfo](https://www.tencentcloud.com/document/api/627/64518)
+        * Update: [ModifySpartaProtectionMode](https://www.tencentcloud.com/document/api/627/64507)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -216,6 +224,14 @@ class ProtectionMode(pulumi.CustomResource):
             edition="sparta-waf",
             type=0)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifySpartaProtectionMode](https://www.tencentcloud.com/document/api/627/64507)
+        * Read: [DescribeSpartaProtectionInfo](https://www.tencentcloud.com/document/api/627/64518)
+        * Update: [ModifySpartaProtectionMode](https://www.tencentcloud.com/document/api/627/64507)
 
 
         :param str resource_name: The name of the resource.

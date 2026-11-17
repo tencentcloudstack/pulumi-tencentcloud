@@ -52,6 +52,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+    ///   - [OpenReadOnlyInstanceExclusiveAccess](https://www.tencentcloud.com/document/api/1098/55910)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cynosdb/readOnlyInstanceExclusiveAccess:ReadOnlyInstanceExclusiveAccess")]
     public partial class ReadOnlyInstanceExclusiveAccess : global::Pulumi.CustomResource

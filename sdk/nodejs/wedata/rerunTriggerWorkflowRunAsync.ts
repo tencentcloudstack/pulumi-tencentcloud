@@ -33,6 +33,14 @@ import * as utilities from "../utilities";
  *     executeType: "1",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [GetOpsAsyncJob](https://www.tencentcloud.com/document/api/1174/73832)
+ *   - [RerunTriggerWorkflowRunAsync](https://www.tencentcloud.com/document/api/1174/77884)
  */
 export class RerunTriggerWorkflowRunAsync extends pulumi.CustomResource {
     /**

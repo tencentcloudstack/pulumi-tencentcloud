@@ -118,6 +118,12 @@ def get_api_plugins(api_id: Optional[_builtins.str] = None,
         environment_name="test")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribePluginsByApi](https://www.tencentcloud.com/search/?wd=DescribePluginsByApi&type=document&lang=en)
+
 
     :param _builtins.str api_id: API ID to be queried.
     :param _builtins.str environment_name: Environment information.
@@ -157,6 +163,12 @@ def get_api_plugins_output(api_id: pulumi.Input[Optional[_builtins.str]] = None,
         service_id="service-nxz6yync",
         environment_name="test")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribePluginsByApi](https://www.tencentcloud.com/search/?wd=DescribePluginsByApi&type=document&lang=en)
 
 
     :param _builtins.str api_id: API ID to be queried.

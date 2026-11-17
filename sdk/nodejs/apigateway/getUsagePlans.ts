@@ -28,6 +28,12 @@ import * as utilities from "../utilities";
  *     usagePlanId: plan.id,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeUsagePlansStatus](https://www.tencentcloud.com/search/?wd=DescribeUsagePlansStatus&type=document&lang=en)
  */
 export function getUsagePlans(args?: GetUsagePlansArgs, opts?: pulumi.InvokeOptions): Promise<GetUsagePlansResult> {
     args = args || {};
@@ -101,6 +107,12 @@ export interface GetUsagePlansResult {
  *     usagePlanId: plan.id,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeUsagePlansStatus](https://www.tencentcloud.com/search/?wd=DescribeUsagePlansStatus&type=document&lang=en)
  */
 export function getUsagePlansOutput(args?: GetUsagePlansOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetUsagePlansResult> {
     args = args || {};

@@ -165,6 +165,12 @@ def get_plans(direction: Optional[_builtins.str] = None,
         ])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribePlans](https://www.tencentcloud.com/document/api/1145/72310)
+
 
     :param _builtins.str direction: Sorting direction, the possible values are: <li>asc: sort from small to large; </li><li>desc: sort from large to small. </li>If not filled in, the default value desc will be used.
     :param Sequence[Union['GetPlansFilterArgs', 'GetPlansFilterArgsDict']] filters: Filter conditions, the upper limit of Filters. Values is 20. The detailed filtering conditions are as follows: <li>plan-type<br>Filter according to [<strong>Package Type</strong>]. <br>Optional types are: <br>plan-trial: Trial Package; <br>plan-personal: Personal Package; <br>plan-basic: Basic Package; <br>plan-standard: Standard Package; <br>plan-enterprise: Enterprise Package. </li><li>plan-id<br>Filter according to [<strong>Package ID</strong>]. The package ID is in the form of: edgeone-268z103ob0sx.</li><li>area<br>Filter according to [<strong>Package Acceleration Region</strong>]. </li>Service area, optional types are: <br>mainland: Mainland China; <br>overseas: Global (excluding Mainland China); <br>global: Global (including Mainland China).<br><li>status<br>Filter by [<strong>Package Status</strong>].<br>The available statuses are:<br>normal: normal status;<br>expiring-soon: about to expire;<br>expired: expired;<br>isolated: isolated.</li>.
@@ -250,6 +256,12 @@ def get_plans_output(direction: pulumi.Input[Optional[Optional[_builtins.str]]] 
             },
         ])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribePlans](https://www.tencentcloud.com/document/api/1145/72310)
 
 
     :param _builtins.str direction: Sorting direction, the possible values are: <li>asc: sort from small to large; </li><li>desc: sort from large to small. </li>If not filled in, the default value desc will be used.

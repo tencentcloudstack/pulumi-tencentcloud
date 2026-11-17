@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListDownstreamTriggerTasks](https://www.tencentcloud.com/document/api/1174/77922)
         /// </summary>
         public static Task<GetDownstreamTriggerTasksResult> InvokeAsync(GetDownstreamTriggerTasksArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDownstreamTriggerTasksResult>("tencentcloud:Wedata/getDownstreamTriggerTasks:getDownstreamTriggerTasks", args ?? new GetDownstreamTriggerTasksArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListDownstreamTriggerTasks](https://www.tencentcloud.com/document/api/1174/77922)
         /// </summary>
         public static Output<GetDownstreamTriggerTasksResult> Invoke(GetDownstreamTriggerTasksInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDownstreamTriggerTasksResult>("tencentcloud:Wedata/getDownstreamTriggerTasks:getDownstreamTriggerTasks", args ?? new GetDownstreamTriggerTasksInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListDownstreamTriggerTasks](https://www.tencentcloud.com/document/api/1174/77922)
         /// </summary>
         public static Output<GetDownstreamTriggerTasksResult> Invoke(GetDownstreamTriggerTasksInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDownstreamTriggerTasksResult>("tencentcloud:Wedata/getDownstreamTriggerTasks:getDownstreamTriggerTasks", args ?? new GetDownstreamTriggerTasksInvokeArgs(), options.WithDefaults());

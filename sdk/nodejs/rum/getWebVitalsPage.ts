@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     type: "from",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDataWebVitalsPage](https://www.tencentcloud.com/document/api/1131/45316)
  */
 export function getWebVitalsPage(args: GetWebVitalsPageArgs, opts?: pulumi.InvokeOptions): Promise<GetWebVitalsPageResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -200,6 +206,12 @@ export interface GetWebVitalsPageResult {
  *     type: "from",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDataWebVitalsPage](https://www.tencentcloud.com/document/api/1131/45316)
  */
 export function getWebVitalsPageOutput(args: GetWebVitalsPageOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetWebVitalsPageResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

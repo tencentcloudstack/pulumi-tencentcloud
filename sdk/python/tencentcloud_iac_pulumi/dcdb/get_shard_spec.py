@@ -86,6 +86,12 @@ def get_shard_spec(result_output_file: Optional[_builtins.str] = None,
     shard_spec = tencentcloud.dcdb.get_shard_spec()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeShardSpec](https://www.tencentcloud.com/search/?wd=DescribeShardSpec&type=document&lang=en)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -111,6 +117,12 @@ def get_shard_spec_output(result_output_file: pulumi.Input[Optional[Optional[_bu
 
     shard_spec = tencentcloud.dcdb.get_shard_spec()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeShardSpec](https://www.tencentcloud.com/search/?wd=DescribeShardSpec&type=document&lang=en)
 
 
     :param _builtins.str result_output_file: Used to save results.

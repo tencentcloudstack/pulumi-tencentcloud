@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const ckafkaZone = tencentcloud.ckafka.getZone({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCkafkaZone](https://www.tencentcloud.com/document/api/597/40318)
  */
 export function getZone(args?: GetZoneArgs, opts?: pulumi.InvokeOptions): Promise<GetZoneResult> {
     args = args || {};
@@ -67,6 +73,12 @@ export interface GetZoneResult {
  *
  * const ckafkaZone = tencentcloud.ckafka.getZone({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCkafkaZone](https://www.tencentcloud.com/document/api/597/40318)
  */
 export function getZoneOutput(args?: GetZoneOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetZoneResult> {
     args = args || {};

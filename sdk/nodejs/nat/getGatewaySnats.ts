@@ -23,6 +23,12 @@ import * as utilities from "../utilities";
  *     resultOutputFile: "./snat.txt",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeNatGatewaySourceIpTranslationNatRules](https://www.tencentcloud.com/document/api/215/39644)
  */
 export function getGatewaySnats(args: GetGatewaySnatsArgs, opts?: pulumi.InvokeOptions): Promise<GetGatewaySnatsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -102,6 +108,12 @@ export interface GetGatewaySnatsResult {
  *     resultOutputFile: "./snat.txt",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeNatGatewaySourceIpTranslationNatRules](https://www.tencentcloud.com/document/api/215/39644)
  */
 export function getGatewaySnatsOutput(args: GetGatewaySnatsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetGatewaySnatsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

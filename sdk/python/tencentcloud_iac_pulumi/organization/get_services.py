@@ -107,6 +107,12 @@ def get_services(result_output_file: Optional[_builtins.str] = None,
     services = tencentcloud.organization.get_services(search_key="KeyWord")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListOrganizationService](https://www.tencentcloud.com/document/api/1031/63259)
+
 
     :param _builtins.str result_output_file: Used to save results.
     :param _builtins.str search_key: Keyword for search by name.
@@ -147,6 +153,12 @@ def get_services_output(result_output_file: pulumi.Input[Optional[Optional[_buil
 
     services = tencentcloud.organization.get_services(search_key="KeyWord")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListOrganizationService](https://www.tencentcloud.com/document/api/1031/63259)
 
 
     :param _builtins.str result_output_file: Used to save results.

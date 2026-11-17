@@ -100,6 +100,12 @@ def get_template_groups(id: Optional[_builtins.str] = None,
     name = tencentcloud.address.get_template_groups(name="test")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAddressTemplateGroups](https://www.tencentcloud.com/document/api/215/16716)
+
 
     :param _builtins.str id: Id of the address template group to query.
     :param _builtins.str name: Name of the address template group to query.
@@ -132,6 +138,12 @@ def get_template_groups_output(id: pulumi.Input[Optional[Optional[_builtins.str]
 
     name = tencentcloud.address.get_template_groups(name="test")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAddressTemplateGroups](https://www.tencentcloud.com/document/api/215/16716)
 
 
     :param _builtins.str id: Id of the address template group to query.

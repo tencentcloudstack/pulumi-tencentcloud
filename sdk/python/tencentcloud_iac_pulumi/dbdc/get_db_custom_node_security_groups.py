@@ -96,6 +96,12 @@ def get_db_custom_node_security_groups(node_id: Optional[_builtins.str] = None,
     example = tencentcloud.dbdc.get_db_custom_node_security_groups(node_id="dbcn-vvkg2xls")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBCustomNodeSecurityGroups](https://www.tencentcloud.com/search/?wd=DescribeDBCustomNodeSecurityGroups&type=document&lang=en)
+
 
     :param _builtins.str node_id: DB Custom node ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_db_custom_node_security_groups_output(node_id: pulumi.Input[Optional[_bu
 
     example = tencentcloud.dbdc.get_db_custom_node_security_groups(node_id="dbcn-vvkg2xls")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBCustomNodeSecurityGroups](https://www.tencentcloud.com/search/?wd=DescribeDBCustomNodeSecurityGroups&type=document&lang=en)
 
 
     :param _builtins.str node_id: DB Custom node ID.

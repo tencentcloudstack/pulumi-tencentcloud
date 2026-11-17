@@ -48,6 +48,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSystemResources](https://www.tencentcloud.com/search/?wd=DescribeSystemResources&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetSystemResourceResult> InvokeAsync(GetSystemResourceArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSystemResourceResult>("tencentcloud:Oceanus/getSystemResource:getSystemResource", args ?? new GetSystemResourceArgs(), options.WithDefaults());
@@ -88,6 +94,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSystemResources](https://www.tencentcloud.com/search/?wd=DescribeSystemResources&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetSystemResourceResult> Invoke(GetSystemResourceInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSystemResourceResult>("tencentcloud:Oceanus/getSystemResource:getSystemResource", args ?? new GetSystemResourceInvokeArgs(), options.WithDefaults());
@@ -128,6 +140,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSystemResources](https://www.tencentcloud.com/search/?wd=DescribeSystemResources&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetSystemResourceResult> Invoke(GetSystemResourceInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetSystemResourceResult>("tencentcloud:Oceanus/getSystemResource:getSystemResource", args ?? new GetSystemResourceInvokeArgs(), options.WithDefaults());

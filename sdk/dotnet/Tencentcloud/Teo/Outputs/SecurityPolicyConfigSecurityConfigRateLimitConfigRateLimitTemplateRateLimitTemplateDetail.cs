@@ -15,11 +15,11 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
     public sealed class SecurityPolicyConfigSecurityConfigRateLimitConfigRateLimitTemplateRateLimitTemplateDetail
     {
         /// <summary>
-        /// Template action. Output-only.
+        /// Action. Valid values: `Skip`, `Scan`. Output-only.
         /// </summary>
         public readonly string? Action;
         /// <summary>
-        /// ID of the resource.
+        /// Template ID. Output-only.
         /// </summary>
         public readonly int? Id;
         /// <summary>

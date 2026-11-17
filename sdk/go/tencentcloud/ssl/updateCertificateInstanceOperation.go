@@ -88,6 +88,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [UpdateCertificateInstance](https://www.tencentcloud.com/document/api/1007/57981)
 type UpdateCertificateInstanceOperation struct {
 	pulumi.CustomResourceState
 

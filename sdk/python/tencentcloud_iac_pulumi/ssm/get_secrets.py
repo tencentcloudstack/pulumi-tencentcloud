@@ -176,6 +176,12 @@ def get_secrets(order_type: Optional[_builtins.int] = None,
         })
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListSecrets](https://www.tencentcloud.com/document/api/1078/38646)
+
 
     :param _builtins.int order_type: The order to sort the create time of secret. `0` - desc, `1` - asc. Default value is `0`.
     :param _builtins.str product_name: This parameter only takes effect when the SecretType parameter value is 1. When the SecretType value is 1, if the Product Name value is empty, it means to query all types of cloud product credentials. If the Product Name value is MySQL, it means to query MySQL database credentials. If the Product Name value is Tdsql mysql, it means to query Tdsql (MySQL version) credentials.
@@ -246,6 +252,12 @@ def get_secrets_output(order_type: pulumi.Input[Optional[Optional[_builtins.int]
             "createdBy": "terraform",
         })
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListSecrets](https://www.tencentcloud.com/document/api/1078/38646)
 
 
     :param _builtins.int order_type: The order to sort the create time of secret. `0` - desc, `1` - asc. Default value is `0`.

@@ -76,10 +76,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     ///     {
     ///         ClusterId = example.Id,
     ///         SlaveZone = "ap-guangzhou-7",
+    ///         BinlogSyncWay = "async",
+    ///         SemiSyncTimeout = 10000,
     ///     });
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [AddClusterSlaveZone](https://www.tencentcloud.com/document/api/1098/50016)
+    ///   - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+    /// * Read: [DescribeClusterDetail](https://www.tencentcloud.com/document/api/1098/40752)
+    /// * Update:
+    ///   - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+    ///   - [ModifyClusterSlaveZone](https://www.tencentcloud.com/document/api/1098/50015)
+    /// * Delete:
+    ///   - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+    ///   - [RemoveClusterSlaveZone](https://www.tencentcloud.com/document/api/1098/50014)
     /// 
     /// ## Import
     /// 
@@ -93,10 +110,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     public partial class ClusterSlaveZone : global::Pulumi.CustomResource
     {
         /// <summary>
+        /// Binlog sync way. Default value: `Async`. Valid values: `Sync`, `Semisync`, `Async`.
+        /// </summary>
+        [Output("binlogSyncWay")]
+        public Output<string> BinlogSyncWay { get; private set; } = null!;
+
+        /// <summary>
         /// The ID of cluster.
         /// </summary>
         [Output("clusterId")]
         public Output<string> ClusterId { get; private set; } = null!;
+
+        /// <summary>
+        /// Semisync timeout in ms. The semisync replication degrades to async replication if the timeout is exceeded. Minimum: 1000, maximum: 4294967295, default: 10000.
+        /// </summary>
+        [Output("semiSyncTimeout")]
+        public Output<int> SemiSyncTimeout { get; private set; } = null!;
 
         /// <summary>
         /// Slave zone.
@@ -152,10 +181,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     public sealed class ClusterSlaveZoneArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Binlog sync way. Default value: `Async`. Valid values: `Sync`, `Semisync`, `Async`.
+        /// </summary>
+        [Input("binlogSyncWay")]
+        public Input<string>? BinlogSyncWay { get; set; }
+
+        /// <summary>
         /// The ID of cluster.
         /// </summary>
         [Input("clusterId", required: true)]
         public Input<string> ClusterId { get; set; } = null!;
+
+        /// <summary>
+        /// Semisync timeout in ms. The semisync replication degrades to async replication if the timeout is exceeded. Minimum: 1000, maximum: 4294967295, default: 10000.
+        /// </summary>
+        [Input("semiSyncTimeout")]
+        public Input<int>? SemiSyncTimeout { get; set; }
 
         /// <summary>
         /// Slave zone.
@@ -172,10 +213,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     public sealed class ClusterSlaveZoneState : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Binlog sync way. Default value: `Async`. Valid values: `Sync`, `Semisync`, `Async`.
+        /// </summary>
+        [Input("binlogSyncWay")]
+        public Input<string>? BinlogSyncWay { get; set; }
+
+        /// <summary>
         /// The ID of cluster.
         /// </summary>
         [Input("clusterId")]
         public Input<string>? ClusterId { get; set; }
+
+        /// <summary>
+        /// Semisync timeout in ms. The semisync replication degrades to async replication if the timeout is exceeded. Minimum: 1000, maximum: 4294967295, default: 10000.
+        /// </summary>
+        [Input("semiSyncTimeout")]
+        public Input<int>? SemiSyncTimeout { get; set; }
 
         /// <summary>
         /// Slave zone.

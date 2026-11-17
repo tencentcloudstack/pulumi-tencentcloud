@@ -208,6 +208,15 @@ class RouteTableInputPolicies(pulumi.CustomResource):
             }])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ReplaceCcnRouteTableInputPolicys](https://www.tencentcloud.com/search/?wd=ReplaceCcnRouteTableInputPolicys&type=document&lang=en)
+        * Read: [DescribeCcnRouteTableInputPolicys](https://www.tencentcloud.com/search/?wd=DescribeCcnRouteTableInputPolicys&type=document&lang=en)
+        * Update: [ReplaceCcnRouteTableInputPolicys](https://www.tencentcloud.com/search/?wd=ReplaceCcnRouteTableInputPolicys&type=document&lang=en)
+        * Delete: [Send](https://www.tencentcloud.com/search/?wd=Send&type=document&lang=en)
+
         ## Import
 
         Ccn instance can be imported, e.g.
@@ -295,6 +304,15 @@ class RouteTableInputPolicies(pulumi.CustomResource):
                 }],
             }])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ReplaceCcnRouteTableInputPolicys](https://www.tencentcloud.com/search/?wd=ReplaceCcnRouteTableInputPolicys&type=document&lang=en)
+        * Read: [DescribeCcnRouteTableInputPolicys](https://www.tencentcloud.com/search/?wd=DescribeCcnRouteTableInputPolicys&type=document&lang=en)
+        * Update: [ReplaceCcnRouteTableInputPolicys](https://www.tencentcloud.com/search/?wd=ReplaceCcnRouteTableInputPolicys&type=document&lang=en)
+        * Delete: [Send](https://www.tencentcloud.com/search/?wd=Send&type=document&lang=en)
 
         ## Import
 

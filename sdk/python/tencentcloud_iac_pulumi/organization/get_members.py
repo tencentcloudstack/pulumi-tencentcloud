@@ -138,6 +138,12 @@ def get_members(auth_name: Optional[_builtins.str] = None,
         search_key="tf-example")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeOrganizationMembers](https://www.tencentcloud.com/document/api/1031/52062)
+
 
     :param _builtins.str auth_name: Entity name.
     :param _builtins.str lang: Valid values: `en` (Tencent Cloud International); `zh` (Tencent Cloud).
@@ -191,6 +197,12 @@ def get_members_output(auth_name: pulumi.Input[Optional[Optional[_builtins.str]]
     example = tencentcloud.organization.get_members(lang="en",
         search_key="tf-example")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeOrganizationMembers](https://www.tencentcloud.com/document/api/1031/52062)
 
 
     :param _builtins.str auth_name: Entity name.

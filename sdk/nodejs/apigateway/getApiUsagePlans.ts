@@ -75,6 +75,12 @@ import * as utilities from "../utilities";
  *     serviceId: exampleUsagePlanAttachment.serviceId,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeApiUsagePlan](https://www.tencentcloud.com/search/?wd=DescribeApiUsagePlan&type=document&lang=en)
  */
 export function getApiUsagePlans(args: GetApiUsagePlansArgs, opts?: pulumi.InvokeOptions): Promise<GetApiUsagePlansResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -185,6 +191,12 @@ export interface GetApiUsagePlansResult {
  *     serviceId: exampleUsagePlanAttachment.serviceId,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeApiUsagePlan](https://www.tencentcloud.com/search/?wd=DescribeApiUsagePlan&type=document&lang=en)
  */
 export function getApiUsagePlansOutput(args: GetApiUsagePlansOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetApiUsagePlansResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

@@ -86,6 +86,12 @@ def get_user_domains(result_output_file: Optional[_builtins.str] = None,
     user_domains = tencentcloud.waf.get_user_domains()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeUserDomainInfo](https://www.tencentcloud.com/document/api/627/64544)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -111,6 +117,12 @@ def get_user_domains_output(result_output_file: pulumi.Input[Optional[Optional[_
 
     user_domains = tencentcloud.waf.get_user_domains()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeUserDomainInfo](https://www.tencentcloud.com/document/api/627/64544)
 
 
     :param _builtins.str result_output_file: Used to save results.

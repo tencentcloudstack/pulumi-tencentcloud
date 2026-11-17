@@ -156,6 +156,12 @@ class RollbackDataEngineImageOperation(pulumi.CustomResource):
             to_record_id=example.to_record_id)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [RollbackDataEngineImage](https://www.tencentcloud.com/document/api/1155/62647)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -185,6 +191,12 @@ class RollbackDataEngineImageOperation(pulumi.CustomResource):
             from_record_id=example.from_record_id,
             to_record_id=example.to_record_id)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [RollbackDataEngineImage](https://www.tencentcloud.com/document/api/1155/62647)
 
 
         :param str resource_name: The name of the resource.

@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeOrders](https://www.tencentcloud.com/document/api/1042/47773)
         /// </summary>
         public static Task<GetOrdersResult> InvokeAsync(GetOrdersArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetOrdersResult>("tencentcloud:Dcdb/getOrders:getOrders", args ?? new GetOrdersArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeOrders](https://www.tencentcloud.com/document/api/1042/47773)
         /// </summary>
         public static Output<GetOrdersResult> Invoke(GetOrdersInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetOrdersResult>("tencentcloud:Dcdb/getOrders:getOrders", args ?? new GetOrdersInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeOrders](https://www.tencentcloud.com/document/api/1042/47773)
         /// </summary>
         public static Output<GetOrdersResult> Invoke(GetOrdersInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetOrdersResult>("tencentcloud:Dcdb/getOrders:getOrders", args ?? new GetOrdersInvokeArgs(), options.WithDefaults());

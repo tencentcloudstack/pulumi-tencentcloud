@@ -41,6 +41,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribleL4Rules](https://www.tencentcloud.com/search/?wd=DescribleL4Rules&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetL4RulesResult> InvokeAsync(GetL4RulesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetL4RulesResult>("tencentcloud:Dayu/getL4Rules:getL4Rules", args ?? new GetL4RulesArgs(), options.WithDefaults());
@@ -74,6 +80,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribleL4Rules](https://www.tencentcloud.com/search/?wd=DescribleL4Rules&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetL4RulesResult> Invoke(GetL4RulesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetL4RulesResult>("tencentcloud:Dayu/getL4Rules:getL4Rules", args ?? new GetL4RulesInvokeArgs(), options.WithDefaults());
@@ -107,6 +119,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribleL4Rules](https://www.tencentcloud.com/search/?wd=DescribleL4Rules&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetL4RulesResult> Invoke(GetL4RulesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetL4RulesResult>("tencentcloud:Dayu/getL4Rules:getL4Rules", args ?? new GetL4RulesInvokeArgs(), options.WithDefaults());

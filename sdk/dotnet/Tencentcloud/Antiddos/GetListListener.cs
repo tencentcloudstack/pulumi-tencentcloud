@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeListListener](https://www.tencentcloud.com/document/api/1213/61346)
         /// </summary>
         public static Task<GetListListenerResult> InvokeAsync(GetListListenerArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetListListenerResult>("tencentcloud:Antiddos/getListListener:getListListener", args ?? new GetListListenerArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeListListener](https://www.tencentcloud.com/document/api/1213/61346)
         /// </summary>
         public static Output<GetListListenerResult> Invoke(GetListListenerInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetListListenerResult>("tencentcloud:Antiddos/getListListener:getListListener", args ?? new GetListListenerInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeListListener](https://www.tencentcloud.com/document/api/1213/61346)
         /// </summary>
         public static Output<GetListListenerResult> Invoke(GetListListenerInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetListListenerResult>("tencentcloud:Antiddos/getListListener:getListListener", args ?? new GetListListenerInvokeArgs(), options.WithDefaults());

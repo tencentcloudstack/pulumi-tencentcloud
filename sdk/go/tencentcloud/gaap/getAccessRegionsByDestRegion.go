@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeAccessRegionsByDestRegion](https://www.tencentcloud.com/document/api/608/33103)
 func GetAccessRegionsByDestRegion(ctx *pulumi.Context, args *GetAccessRegionsByDestRegionArgs, opts ...pulumi.InvokeOption) (*GetAccessRegionsByDestRegionResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetAccessRegionsByDestRegionResult

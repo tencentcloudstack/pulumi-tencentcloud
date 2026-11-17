@@ -36,6 +36,35 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CloseDBExtranetAccess](https://www.tencentcloud.com/document/api/1042/34451)
+ *   - [CreateHourDCDBInstance](https://www.tencentcloud.com/document/api/1042/45899)
+ *   - [DescribeDCDBInstances](https://www.tencentcloud.com/document/api/1042/34442)
+ *   - [DescribeDcnDetail](https://www.tencentcloud.com/document/api/1042/40671)
+ *   - [DescribeFlow](https://www.tencentcloud.com/document/api/1042/40887)
+ *   - [InitDCDBInstances](https://www.tencentcloud.com/document/api/1042/34436)
+ *   - [ModifyInstanceNetwork](https://www.tencentcloud.com/document/api/1042/51398)
+ *   - [OpenDBExtranetAccess](https://www.tencentcloud.com/document/api/1042/34431)
+ * * Read:
+ *   - [DescribeDBSecurityGroups](https://www.tencentcloud.com/document/api/1042/39459)
+ *   - [DescribeDCDBInstanceDetail](https://www.tencentcloud.com/document/api/1042/54586)
+ *   - [DescribeDCDBInstances](https://www.tencentcloud.com/document/api/1042/34442)
+ *   - [DescribeDcnDetail](https://www.tencentcloud.com/document/api/1042/40671)
+ * * Update:
+ *   - [CloseDBExtranetAccess](https://www.tencentcloud.com/document/api/1042/34451)
+ *   - [DescribeDCDBInstances](https://www.tencentcloud.com/document/api/1042/34442)
+ *   - [DescribeFlow](https://www.tencentcloud.com/document/api/1042/40887)
+ *   - [ModifyDBInstanceName](https://www.tencentcloud.com/document/api/1042/46993)
+ *   - [ModifyDBInstancesProject](https://www.tencentcloud.com/document/api/1042/34434)
+ *   - [ModifyInstanceNetwork](https://www.tencentcloud.com/document/api/1042/51398)
+ *   - [OpenDBExtranetAccess](https://www.tencentcloud.com/document/api/1042/34431)
+ *   - [UpgradeHourDCDBInstance](https://www.tencentcloud.com/document/api/1042/53573)
+ * * Delete: [DestroyHourDCDBInstance](https://www.tencentcloud.com/document/api/1042/40885)
+ *
  * ## Import
  *
  * DCDB hourdb instance can be imported using the id, e.g.

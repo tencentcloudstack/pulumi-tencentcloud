@@ -137,6 +137,12 @@ def get_bundle(bundle_ids: Optional[Sequence[_builtins.str]] = None,
     bundle = tencentcloud.lighthouse.get_bundle()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBundles](https://www.tencentcloud.com/document/api/1103/42472)
+
 
     :param Sequence[_builtins.str] bundle_ids: Bundle ID list.
     :param Sequence[Union['GetBundleFilterArgs', 'GetBundleFilterArgsDict']] filters: Filter list.
@@ -187,6 +193,12 @@ def get_bundle_output(bundle_ids: pulumi.Input[Optional[Optional[Sequence[_built
 
     bundle = tencentcloud.lighthouse.get_bundle()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBundles](https://www.tencentcloud.com/document/api/1103/42472)
 
 
     :param Sequence[_builtins.str] bundle_ids: Bundle ID list.

@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [GenerateVpnConnectionDefaultHealthCheckIp](https://www.tencentcloud.com/document/api/215/56575)
 func GetDefaultHealthCheckIp(ctx *pulumi.Context, args *GetDefaultHealthCheckIpArgs, opts ...pulumi.InvokeOption) (*GetDefaultHealthCheckIpResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDefaultHealthCheckIpResult

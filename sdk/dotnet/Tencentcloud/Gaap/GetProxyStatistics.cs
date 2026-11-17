@@ -49,6 +49,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeProxyStatistics](https://www.tencentcloud.com/document/api/608/33052)
         /// </summary>
         public static Task<GetProxyStatisticsResult> InvokeAsync(GetProxyStatisticsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetProxyStatisticsResult>("tencentcloud:Gaap/getProxyStatistics:getProxyStatistics", args ?? new GetProxyStatisticsArgs(), options.WithDefaults());
@@ -90,6 +96,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeProxyStatistics](https://www.tencentcloud.com/document/api/608/33052)
         /// </summary>
         public static Output<GetProxyStatisticsResult> Invoke(GetProxyStatisticsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetProxyStatisticsResult>("tencentcloud:Gaap/getProxyStatistics:getProxyStatistics", args ?? new GetProxyStatisticsInvokeArgs(), options.WithDefaults());
@@ -131,6 +143,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeProxyStatistics](https://www.tencentcloud.com/document/api/608/33052)
         /// </summary>
         public static Output<GetProxyStatisticsResult> Invoke(GetProxyStatisticsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetProxyStatisticsResult>("tencentcloud:Gaap/getProxyStatistics:getProxyStatistics", args ?? new GetProxyStatisticsInvokeArgs(), options.WithDefaults());

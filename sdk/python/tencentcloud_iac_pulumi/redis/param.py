@@ -140,6 +140,20 @@ class Param(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeInstanceParams](https://www.tencentcloud.com/document/api/239/32082)
+          - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
+          - [ModifyInstanceParams](https://www.tencentcloud.com/document/api/239/32079)
+        * Read: [DescribeInstanceParams](https://www.tencentcloud.com/document/api/239/32082)
+        * Update:
+          - [DescribeInstanceParams](https://www.tencentcloud.com/document/api/239/32082)
+          - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
+          - [ModifyInstanceParams](https://www.tencentcloud.com/document/api/239/32079)
+
         ## Import
 
         redis param can be imported using the instanceId, e.g.
@@ -193,6 +207,20 @@ class Param(pulumi.CustomResource):
                 "zset-max-ziplist-value": "64",
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeInstanceParams](https://www.tencentcloud.com/document/api/239/32082)
+          - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
+          - [ModifyInstanceParams](https://www.tencentcloud.com/document/api/239/32079)
+        * Read: [DescribeInstanceParams](https://www.tencentcloud.com/document/api/239/32082)
+        * Update:
+          - [DescribeInstanceParams](https://www.tencentcloud.com/document/api/239/32082)
+          - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
+          - [ModifyInstanceParams](https://www.tencentcloud.com/document/api/239/32079)
 
         ## Import
 

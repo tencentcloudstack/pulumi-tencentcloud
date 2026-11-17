@@ -119,6 +119,12 @@ import * as utilities from "../utilities";
  *     instanceId: examplePublishSubscribe.publishInstanceId,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribePublishSubscribe](https://www.tencentcloud.com/document/api/238/72746)
  */
 export function getPublishSubscribes(args: GetPublishSubscribesArgs, opts?: pulumi.InvokeOptions): Promise<GetPublishSubscribesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -318,6 +324,12 @@ export interface GetPublishSubscribesResult {
  *     instanceId: examplePublishSubscribe.publishInstanceId,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribePublishSubscribe](https://www.tencentcloud.com/document/api/238/72746)
  */
 export function getPublishSubscribesOutput(args: GetPublishSubscribesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetPublishSubscribesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

@@ -34,6 +34,12 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDetectTaskPackageList](https://www.tencentcloud.com/search/?wd=DescribeDetectTaskPackageList&type=document&lang=en)
  */
 export function getDetectTaskPackageList(args?: GetDetectTaskPackageListArgs, opts?: pulumi.InvokeOptions): Promise<GetDetectTaskPackageListResult> {
     args = args || {};
@@ -101,6 +107,12 @@ export interface GetDetectTaskPackageListResult {
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDetectTaskPackageList](https://www.tencentcloud.com/search/?wd=DescribeDetectTaskPackageList&type=document&lang=en)
  */
 export function getDetectTaskPackageListOutput(args?: GetDetectTaskPackageListOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDetectTaskPackageListResult> {
     args = args || {};

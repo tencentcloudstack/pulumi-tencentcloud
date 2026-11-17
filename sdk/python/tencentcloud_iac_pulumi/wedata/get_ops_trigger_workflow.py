@@ -117,6 +117,12 @@ def get_ops_trigger_workflow(project_id: Optional[_builtins.str] = None,
         workflow_id="b41e8d13-905a-4006-9d05-1fe180338f59")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetOpsTriggerWorkflow](https://www.tencentcloud.com/document/api/1174/77890)
+
 
     :param _builtins.str project_id: Project ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -155,6 +161,12 @@ def get_ops_trigger_workflow_output(project_id: pulumi.Input[Optional[_builtins.
     ops_trigger_workflow = tencentcloud.wedata.get_ops_trigger_workflow(project_id="3108707295180644352",
         workflow_id="b41e8d13-905a-4006-9d05-1fe180338f59")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetOpsTriggerWorkflow](https://www.tencentcloud.com/document/api/1174/77890)
 
 
     :param _builtins.str project_id: Project ID.

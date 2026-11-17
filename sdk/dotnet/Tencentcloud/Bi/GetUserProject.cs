@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bi
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeUserProjectList](https://www.tencentcloud.com/document/api/1270/72616)
         /// </summary>
         public static Task<GetUserProjectResult> InvokeAsync(GetUserProjectArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetUserProjectResult>("tencentcloud:Bi/getUserProject:getUserProject", args ?? new GetUserProjectArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bi
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeUserProjectList](https://www.tencentcloud.com/document/api/1270/72616)
         /// </summary>
         public static Output<GetUserProjectResult> Invoke(GetUserProjectInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetUserProjectResult>("tencentcloud:Bi/getUserProject:getUserProject", args ?? new GetUserProjectInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bi
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeUserProjectList](https://www.tencentcloud.com/document/api/1270/72616)
         /// </summary>
         public static Output<GetUserProjectResult> Invoke(GetUserProjectInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetUserProjectResult>("tencentcloud:Bi/getUserProject:getUserProject", args ?? new GetUserProjectInvokeArgs(), options.WithDefaults());

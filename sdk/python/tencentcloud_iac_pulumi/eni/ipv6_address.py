@@ -182,6 +182,19 @@ class Ipv6Address(pulumi.CustomResource):
             ipv6_address_count=1)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [AssignIpv6Addresses](https://www.tencentcloud.com/document/api/215/34769)
+          - [DescribeVpcTaskResult](https://www.tencentcloud.com/document/api/215/41567)
+        * Read: [DescribeNetworkInterfaces](https://www.tencentcloud.com/document/api/215/15817)
+        * Delete:
+          - [DescribeNetworkInterfaces](https://www.tencentcloud.com/document/api/215/15817)
+          - [DescribeVpcTaskResult](https://www.tencentcloud.com/document/api/215/41567)
+          - [UnassignIpv6Addresses](https://www.tencentcloud.com/document/api/215/34766)
+
         ## Import
 
         vpc eni ipv6 address can be imported using the id, e.g.
@@ -242,6 +255,19 @@ class Ipv6Address(pulumi.CustomResource):
             network_interface_id=example_instance.id,
             ipv6_address_count=1)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [AssignIpv6Addresses](https://www.tencentcloud.com/document/api/215/34769)
+          - [DescribeVpcTaskResult](https://www.tencentcloud.com/document/api/215/41567)
+        * Read: [DescribeNetworkInterfaces](https://www.tencentcloud.com/document/api/215/15817)
+        * Delete:
+          - [DescribeNetworkInterfaces](https://www.tencentcloud.com/document/api/215/15817)
+          - [DescribeVpcTaskResult](https://www.tencentcloud.com/document/api/215/41567)
+          - [UnassignIpv6Addresses](https://www.tencentcloud.com/document/api/215/34766)
 
         ## Import
 

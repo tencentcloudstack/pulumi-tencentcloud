@@ -25,6 +25,12 @@ import * as utilities from "../utilities";
  *     nextHopDestination: "10.0.0.4",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [CheckNetDetectState](https://www.tencentcloud.com/document/api/215/34746)
  */
 export function getNetDetectStateCheck(args: GetNetDetectStateCheckArgs, opts?: pulumi.InvokeOptions): Promise<GetNetDetectStateCheckResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -121,6 +127,12 @@ export interface GetNetDetectStateCheckResult {
  *     nextHopDestination: "10.0.0.4",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [CheckNetDetectState](https://www.tencentcloud.com/document/api/215/34746)
  */
 export function getNetDetectStateCheckOutput(args: GetNetDetectStateCheckOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetNetDetectStateCheckResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

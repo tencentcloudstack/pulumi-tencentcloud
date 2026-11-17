@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *
  * const example = tencentcloud.system.getConfigCompliancePacks({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListSystemCompliancePacks](https://www.tencentcloud.com/document/api/1164/84999)
  */
 export function getConfigCompliancePacks(args?: GetConfigCompliancePacksArgs, opts?: pulumi.InvokeOptions): Promise<GetConfigCompliancePacksResult> {
     args = args || {};
@@ -65,6 +71,12 @@ export interface GetConfigCompliancePacksResult {
  *
  * const example = tencentcloud.system.getConfigCompliancePacks({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListSystemCompliancePacks](https://www.tencentcloud.com/document/api/1164/84999)
  */
 export function getConfigCompliancePacksOutput(args?: GetConfigCompliancePacksOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetConfigCompliancePacksResult> {
     args = args || {};

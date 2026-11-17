@@ -193,6 +193,18 @@ class NatPolicyOrderConfig(pulumi.CustomResource):
             ])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeNatAcRule](https://www.tencentcloud.com/document/api/1160/54831)
+          - [ModifyNatAcRule](https://www.tencentcloud.com/document/api/1160/54829)
+        * Read: [DescribeNatAcRule](https://www.tencentcloud.com/document/api/1160/54831)
+        * Update:
+          - [DescribeNatAcRule](https://www.tencentcloud.com/document/api/1160/54831)
+          - [ModifyNatAcRule](https://www.tencentcloud.com/document/api/1160/54829)
+
         ## Import
 
         CFW nat policy order config can be imported using the customId(like uuid or base64 string), e.g.
@@ -297,6 +309,18 @@ class NatPolicyOrderConfig(pulumi.CustomResource):
                 out_example1.uuid,
             ])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeNatAcRule](https://www.tencentcloud.com/document/api/1160/54831)
+          - [ModifyNatAcRule](https://www.tencentcloud.com/document/api/1160/54829)
+        * Read: [DescribeNatAcRule](https://www.tencentcloud.com/document/api/1160/54831)
+        * Update:
+          - [DescribeNatAcRule](https://www.tencentcloud.com/document/api/1160/54831)
+          - [ModifyNatAcRule](https://www.tencentcloud.com/document/api/1160/54829)
 
         ## Import
 

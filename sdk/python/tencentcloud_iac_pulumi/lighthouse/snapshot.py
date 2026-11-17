@@ -120,6 +120,17 @@ class Snapshot(pulumi.CustomResource):
             snapshot_name="snap_20200903")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateInstanceSnapshot](https://www.tencentcloud.com/document/api/1103/42464)
+          - [DescribeSnapshots](https://www.tencentcloud.com/document/api/1103/42462)
+        * Read: [DescribeSnapshots](https://www.tencentcloud.com/document/api/1103/42462)
+        * Update: [ModifySnapshotAttribute](https://www.tencentcloud.com/document/api/1103/42460)
+        * Delete: [DeleteSnapshots](https://www.tencentcloud.com/document/api/1103/42463)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -145,6 +156,17 @@ class Snapshot(pulumi.CustomResource):
             instance_id="lhins-acd1234",
             snapshot_name="snap_20200903")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateInstanceSnapshot](https://www.tencentcloud.com/document/api/1103/42464)
+          - [DescribeSnapshots](https://www.tencentcloud.com/document/api/1103/42462)
+        * Read: [DescribeSnapshots](https://www.tencentcloud.com/document/api/1103/42462)
+        * Update: [ModifySnapshotAttribute](https://www.tencentcloud.com/document/api/1103/42460)
+        * Delete: [DeleteSnapshots](https://www.tencentcloud.com/document/api/1103/42463)
 
 
         :param str resource_name: The name of the resource.

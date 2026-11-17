@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     scriptId: "971c1520-836f-41be-b13f-7a6c637317c8",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListSQLScriptRuns](https://www.tencentcloud.com/document/api/1174/73845)
  */
 export function getSqlScriptRuns(args: GetSqlScriptRunsArgs, opts?: pulumi.InvokeOptions): Promise<GetSqlScriptRunsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -117,6 +123,12 @@ export interface GetSqlScriptRunsResult {
  *     scriptId: "971c1520-836f-41be-b13f-7a6c637317c8",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListSQLScriptRuns](https://www.tencentcloud.com/document/api/1174/73845)
  */
 export function getSqlScriptRunsOutput(args: GetSqlScriptRunsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSqlScriptRunsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

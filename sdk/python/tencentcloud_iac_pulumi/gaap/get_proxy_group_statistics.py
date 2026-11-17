@@ -145,6 +145,12 @@ def get_proxy_group_statistics(end_time: Optional[_builtins.str] = None,
         granularity=300)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeProxyGroupStatistics](https://www.tencentcloud.com/document/api/608/33053)
+
 
     :param _builtins.str end_time: End Time.
     :param _builtins.int granularity: Monitoring granularity, currently supporting 60 300 3600 86400, in seconds.When the time range does not exceed 1 day, support a minimum granularity of 60 seconds;When the time range does not exceed 7 days, support a minimum granularity of 3600 seconds;When the time range does not exceed 30 days, the minimum granularity supported is 86400 seconds.
@@ -199,6 +205,12 @@ def get_proxy_group_statistics_output(end_time: pulumi.Input[Optional[_builtins.
         ],
         granularity=300)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeProxyGroupStatistics](https://www.tencentcloud.com/document/api/608/33053)
 
 
     :param _builtins.str end_time: End Time.

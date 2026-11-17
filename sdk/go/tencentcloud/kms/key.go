@@ -49,6 +49,40 @@ import (
 //
 // ```
 //
+// ### Create kms instance with key rotation and rotate days.
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/kms"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := kms.NewKey(ctx, "example", &kms.KeyArgs{
+//				Alias:              pulumi.String("tf-example-kms-key"),
+//				Description:        pulumi.String("example of kms key"),
+//				KeyUsage:           pulumi.String("ENCRYPT_DECRYPT"),
+//				KeyRotationEnabled: pulumi.Bool(true),
+//				RotateDays:         pulumi.Int(30),
+//				IsEnabled:          pulumi.Bool(true),
+//				Tags: pulumi.StringMap{
+//					"createdBy": pulumi.String("Terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
 // ### Create kms instance with HSM
 //
 // ```go
@@ -144,6 +178,33 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [ArchiveKey](https://www.tencentcloud.com/document/api/1030/38198)
+//   - [CreateKey](https://www.tencentcloud.com/document/api/1030/32199)
+//   - [DescribeKey](https://www.tencentcloud.com/document/api/1030/32197)
+//   - [DisableKey](https://www.tencentcloud.com/document/api/1030/32195)
+//   - [EnableKeyRotation](https://www.tencentcloud.com/document/api/1030/32191)
+//   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+//
+// * Read:
+//   - [DescribeKey](https://www.tencentcloud.com/document/api/1030/32197)
+//   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+//
+// * Update:
+//   - [DescribeKey](https://www.tencentcloud.com/document/api/1030/32197)
+//   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+//   - [UpdateAlias](https://www.tencentcloud.com/document/api/1030/32182)
+//   - [UpdateKeyDescription](https://www.tencentcloud.com/document/api/1030/32181)
+//
+// * Delete:
+//   - [DescribeKey](https://www.tencentcloud.com/document/api/1030/32197)
+//   - [DisableKey](https://www.tencentcloud.com/document/api/1030/32195)
+//   - [ScheduleKeyDeletion](https://www.tencentcloud.com/document/api/1030/33534)
+//
 // ## Import
 //
 // KMS keys can be imported using the id, e.g.
@@ -172,6 +233,8 @@ type Key struct {
 	KeyUsage pulumi.StringPtrOutput `pulumi:"keyUsage"`
 	// Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.
 	PendingDeleteWindowInDays pulumi.IntPtrOutput `pulumi:"pendingDeleteWindowInDays"`
+	// Key rotation period in days, range 7~365, default 365. Only effective when `keyUsage` is `ENCRYPT_DECRYPT` and `keyRotationEnabled` is `true`.
+	RotateDays pulumi.IntOutput `pulumi:"rotateDays"`
 	// Tags of CMK.
 	Tags pulumi.StringMapOutput `pulumi:"tags"`
 }
@@ -227,6 +290,8 @@ type keyState struct {
 	KeyUsage *string `pulumi:"keyUsage"`
 	// Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.
 	PendingDeleteWindowInDays *int `pulumi:"pendingDeleteWindowInDays"`
+	// Key rotation period in days, range 7~365, default 365. Only effective when `keyUsage` is `ENCRYPT_DECRYPT` and `keyRotationEnabled` is `true`.
+	RotateDays *int `pulumi:"rotateDays"`
 	// Tags of CMK.
 	Tags map[string]string `pulumi:"tags"`
 }
@@ -250,6 +315,8 @@ type KeyState struct {
 	KeyUsage pulumi.StringPtrInput
 	// Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.
 	PendingDeleteWindowInDays pulumi.IntPtrInput
+	// Key rotation period in days, range 7~365, default 365. Only effective when `keyUsage` is `ENCRYPT_DECRYPT` and `keyRotationEnabled` is `true`.
+	RotateDays pulumi.IntPtrInput
 	// Tags of CMK.
 	Tags pulumi.StringMapInput
 }
@@ -275,6 +342,8 @@ type keyArgs struct {
 	KeyUsage *string `pulumi:"keyUsage"`
 	// Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.
 	PendingDeleteWindowInDays *int `pulumi:"pendingDeleteWindowInDays"`
+	// Key rotation period in days, range 7~365, default 365. Only effective when `keyUsage` is `ENCRYPT_DECRYPT` and `keyRotationEnabled` is `true`.
+	RotateDays *int `pulumi:"rotateDays"`
 	// Tags of CMK.
 	Tags map[string]string `pulumi:"tags"`
 }
@@ -297,6 +366,8 @@ type KeyArgs struct {
 	KeyUsage pulumi.StringPtrInput
 	// Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.
 	PendingDeleteWindowInDays pulumi.IntPtrInput
+	// Key rotation period in days, range 7~365, default 365. Only effective when `keyUsage` is `ENCRYPT_DECRYPT` and `keyRotationEnabled` is `true`.
+	RotateDays pulumi.IntPtrInput
 	// Tags of CMK.
 	Tags pulumi.StringMapInput
 }
@@ -431,6 +502,11 @@ func (o KeyOutput) KeyUsage() pulumi.StringPtrOutput {
 // Duration in days after which the key is deleted after destruction of the resource, must be between 7 and 30 days. Defaults to 7 days.
 func (o KeyOutput) PendingDeleteWindowInDays() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *Key) pulumi.IntPtrOutput { return v.PendingDeleteWindowInDays }).(pulumi.IntPtrOutput)
+}
+
+// Key rotation period in days, range 7~365, default 365. Only effective when `keyUsage` is `ENCRYPT_DECRYPT` and `keyRotationEnabled` is `true`.
+func (o KeyOutput) RotateDays() pulumi.IntOutput {
+	return o.ApplyT(func(v *Key) pulumi.IntOutput { return v.RotateDays }).(pulumi.IntOutput)
 }
 
 // Tags of CMK.

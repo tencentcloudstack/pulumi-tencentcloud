@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribePublicDirectConnectTunnelRoutes](https://www.tencentcloud.com/search/?wd=DescribePublicDirectConnectTunnelRoutes&type=document&lang=en)
 func GetPublicDirectConnectTunnelRoutes(ctx *pulumi.Context, args *GetPublicDirectConnectTunnelRoutesArgs, opts ...pulumi.InvokeOption) (*GetPublicDirectConnectTunnelRoutesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetPublicDirectConnectTunnelRoutesResult

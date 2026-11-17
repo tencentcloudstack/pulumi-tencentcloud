@@ -36,6 +36,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRocketMQMsg](https://www.tencentcloud.com/search/?wd=DescribeRocketMQMsg&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetRocketmqMessagesResult> InvokeAsync(GetRocketmqMessagesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetRocketmqMessagesResult>("tencentcloud:Tdmq/getRocketmqMessages:getRocketmqMessages", args ?? new GetRocketmqMessagesArgs(), options.WithDefaults());
@@ -64,6 +70,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRocketMQMsg](https://www.tencentcloud.com/search/?wd=DescribeRocketMQMsg&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetRocketmqMessagesResult> Invoke(GetRocketmqMessagesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetRocketmqMessagesResult>("tencentcloud:Tdmq/getRocketmqMessages:getRocketmqMessages", args ?? new GetRocketmqMessagesInvokeArgs(), options.WithDefaults());
@@ -92,6 +104,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRocketMQMsg](https://www.tencentcloud.com/search/?wd=DescribeRocketMQMsg&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetRocketmqMessagesResult> Invoke(GetRocketmqMessagesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetRocketmqMessagesResult>("tencentcloud:Tdmq/getRocketmqMessages:getRocketmqMessages", args ?? new GetRocketmqMessagesInvokeArgs(), options.WithDefaults());

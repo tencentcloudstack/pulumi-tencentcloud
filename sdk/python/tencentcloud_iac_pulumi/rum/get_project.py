@@ -99,6 +99,12 @@ def get_project(instance_id: Optional[_builtins.str] = None,
     project = tencentcloud.rum.get_project(instance_id="rum-pasZKEI3RLgakj")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeProjects](https://www.tencentcloud.com/document/api/1131/45308)
+
 
     :param _builtins.str instance_id: Instance ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -128,6 +134,12 @@ def get_project_output(instance_id: pulumi.Input[Optional[_builtins.str]] = None
 
     project = tencentcloud.rum.get_project(instance_id="rum-pasZKEI3RLgakj")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeProjects](https://www.tencentcloud.com/document/api/1131/45308)
 
 
     :param _builtins.str instance_id: Instance ID.

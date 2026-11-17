@@ -11,9 +11,9 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
 {
     /// <summary>
-    /// Provides a resource to create a teo web security template
+    /// Provides a resource to create a TEO web security template
     /// 
-    /// &gt; **NOTE:** The current resources do not support managed_rule_groups.
+    /// &gt; **NOTE:** The current resources do not support `ManagedRuleGroups`.
     /// 
     /// ## Example Usage
     /// 
@@ -27,7 +27,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var webSecurityTemplate = new Tencentcloud.Teo.WebSecurityTemplate("web_security_template", new()
+    ///     var example = new Tencentcloud.Teo.WebSecurityTemplate("example", new()
     ///     {
     ///         TemplateName = "tf_example",
     ///         ZoneId = "zone-3fkff38fyw8s",
@@ -95,7 +95,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     ///                                 },
     ///                                 Action = new Tencentcloud.Teo.Inputs.WebSecurityTemplateSecurityPolicyBotManagementBasicBotSettingsSearchEngineBotsBotManagementActionOverrideActionArgs
     ///                                 {
-    ///                                     Name = "Deny",
+    ///                                     Name = "Allow",
     ///                                 },
     ///                             },
     ///                         },
@@ -186,6 +186,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     ///                                 },
     ///                             },
     ///                         },
+    ///                     },
+    ///                 },
+    ///             },
+    ///             BotManagementLite = new Tencentcloud.Teo.Inputs.WebSecurityTemplateSecurityPolicyBotManagementLiteArgs
+    ///             {
+    ///                 CaptchaPageChallenge = new Tencentcloud.Teo.Inputs.WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeArgs
+    ///                 {
+    ///                     Enabled = "on",
+    ///                 },
+    ///                 AiCrawlerDetection = new Tencentcloud.Teo.Inputs.WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionArgs
+    ///                 {
+    ///                     Enabled = "on",
+    ///                     Action = new Tencentcloud.Teo.Inputs.WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionArgs
+    ///                     {
+    ///                         Name = "Deny",
     ///                     },
     ///                 },
     ///             },
@@ -361,12 +376,23 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateWebSecurityTemplate](https://www.tencentcloud.com/document/api/1145/71948)
+    /// * Read:
+    ///   - [DescribeWebSecurityTemplate](https://www.tencentcloud.com/document/api/1145/71946)
+    ///   - [DescribeWebSecurityTemplates](https://www.tencentcloud.com/document/api/1145/71945)
+    /// * Update: [ModifyWebSecurityTemplate](https://www.tencentcloud.com/document/api/1145/71944)
+    /// * Delete: [DeleteWebSecurityTemplate](https://www.tencentcloud.com/document/api/1145/71947)
+    /// 
     /// ## Import
     /// 
-    /// teo web security template can be imported using the id, e.g.
+    /// TEO web security template can be imported using the zoneId#templateId, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Teo/webSecurityTemplate:WebSecurityTemplate example zone-3fkff38fyw8s#temp-rpccs7c6
+    /// $ pulumi import tencentcloud:Teo/webSecurityTemplate:WebSecurityTemplate example zone-3fkff38fyw8s#temp-3u86ilp39yyn
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Teo/webSecurityTemplate:WebSecurityTemplate")]
@@ -377,6 +403,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// </summary>
         [Output("securityPolicy")]
         public Output<Outputs.WebSecurityTemplateSecurityPolicy> SecurityPolicy { get; private set; } = null!;
+
+        /// <summary>
+        /// Template ID.
+        /// </summary>
+        [Output("templateId")]
+        public Output<string> TemplateId { get; private set; } = null!;
 
         /// <summary>
         /// Policy template name. Composed of Chinese characters, letters, digits, and underscores. Cannot begin with an underscore and must be less than or equal to 32 characters.
@@ -468,6 +500,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// </summary>
         [Input("securityPolicy")]
         public Input<Inputs.WebSecurityTemplateSecurityPolicyGetArgs>? SecurityPolicy { get; set; }
+
+        /// <summary>
+        /// Template ID.
+        /// </summary>
+        [Input("templateId")]
+        public Input<string>? TemplateId { get; set; }
 
         /// <summary>
         /// Policy template name. Composed of Chinese characters, letters, digits, and underscores. Cannot begin with an underscore and must be less than or equal to 32 characters.

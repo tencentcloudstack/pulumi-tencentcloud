@@ -138,6 +138,15 @@ def get_acls(host: Optional[_builtins.str] = None,
         host="2")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeACL](https://www.tencentcloud.com/document/api/597/35364)
+      - [DescribeInstanceAttributes](https://www.tencentcloud.com/document/api/597/35358)
+      - [DescribeTopicAttributes](https://www.tencentcloud.com/document/api/597/35342)
+
 
     :param _builtins.str host: Host substr used for querying.
     :param _builtins.str instance_id: Id of the ckafka instance.
@@ -182,6 +191,15 @@ def get_acls_output(host: pulumi.Input[Optional[Optional[_builtins.str]]] = None
         resource_name="topic-tf-test",
         host="2")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeACL](https://www.tencentcloud.com/document/api/597/35364)
+      - [DescribeInstanceAttributes](https://www.tencentcloud.com/document/api/597/35358)
+      - [DescribeTopicAttributes](https://www.tencentcloud.com/document/api/597/35342)
 
 
     :param _builtins.str host: Host substr used for querying.

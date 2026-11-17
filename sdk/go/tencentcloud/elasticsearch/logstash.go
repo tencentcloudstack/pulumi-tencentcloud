@@ -131,6 +131,28 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CreateLogstashInstance](https://www.tencentcloud.com/search/?wd=CreateLogstashInstance&type=document&lang=en)
+//   - [DescribeLogstashInstances](https://www.tencentcloud.com/search/?wd=DescribeLogstashInstances&type=document&lang=en)
+//   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+//
+// * Read:
+//   - [DescribeLogstashInstances](https://www.tencentcloud.com/search/?wd=DescribeLogstashInstances&type=document&lang=en)
+//   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+//
+// * Update:
+//   - [DescribeLogstashInstances](https://www.tencentcloud.com/search/?wd=DescribeLogstashInstances&type=document&lang=en)
+//   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+//   - [UpdateLogstashInstance](https://www.tencentcloud.com/search/?wd=UpdateLogstashInstance&type=document&lang=en)
+//
+// * Delete:
+//   - [DeleteLogstashInstance](https://www.tencentcloud.com/search/?wd=DeleteLogstashInstance&type=document&lang=en)
+//   - [DescribeLogstashInstances](https://www.tencentcloud.com/search/?wd=DescribeLogstashInstances&type=document&lang=en)
+//
 // ## Import
 //
 // elasticsearch logstash can be imported using the id, e.g.

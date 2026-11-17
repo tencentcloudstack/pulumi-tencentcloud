@@ -272,6 +272,14 @@ class ApplicationAndVideo(pulumi.CustomResource):
             package_name="com.example.appName")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateApplicationAndVideo](https://www.tencentcloud.com/search/?wd=CreateApplicationAndVideo&type=document&lang=en)
+        * Read: [DescribeVcubeApplicationAndPlayList](https://www.tencentcloud.com/search/?wd=DescribeVcubeApplicationAndPlayList&type=document&lang=en)
+        * Delete: [DeleteApplicationAndVideoLicense](https://www.tencentcloud.com/search/?wd=DeleteApplicationAndVideoLicense&type=document&lang=en)
+
         ## Import
 
         VCube application and video can be imported using the id, e.g.
@@ -329,6 +337,14 @@ class ApplicationAndVideo(pulumi.CustomResource):
             bundle_id="com.example.appName",
             package_name="com.example.appName")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateApplicationAndVideo](https://www.tencentcloud.com/search/?wd=CreateApplicationAndVideo&type=document&lang=en)
+        * Read: [DescribeVcubeApplicationAndPlayList](https://www.tencentcloud.com/search/?wd=DescribeVcubeApplicationAndPlayList&type=document&lang=en)
+        * Delete: [DeleteApplicationAndVideoLicense](https://www.tencentcloud.com/search/?wd=DeleteApplicationAndVideoLicense&type=document&lang=en)
 
         ## Import
 

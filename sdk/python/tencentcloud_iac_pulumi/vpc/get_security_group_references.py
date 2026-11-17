@@ -96,6 +96,12 @@ def get_security_group_references(result_output_file: Optional[_builtins.str] = 
     security_group_references = tencentcloud.vpc.get_security_group_references(security_group_ids=["sg-edmur627"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSecurityGroupReferences](https://www.tencentcloud.com/document/api/215/36092)
+
 
     :param _builtins.str result_output_file: Used to save results.
     :param Sequence[_builtins.str] security_group_ids: A set of security group instance IDs, e.g. [sg-12345678].
@@ -125,6 +131,12 @@ def get_security_group_references_output(result_output_file: pulumi.Input[Option
 
     security_group_references = tencentcloud.vpc.get_security_group_references(security_group_ids=["sg-edmur627"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSecurityGroupReferences](https://www.tencentcloud.com/document/api/215/36092)
 
 
     :param _builtins.str result_output_file: Used to save results.

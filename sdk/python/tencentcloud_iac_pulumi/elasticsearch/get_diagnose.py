@@ -121,6 +121,12 @@ def get_diagnose(date: Optional[_builtins.str] = None,
         limit=1)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDiagnose](https://www.tencentcloud.com/search/?wd=DescribeDiagnose&type=document&lang=en)
+
 
     :param _builtins.str date: Report date, format 20210301.
     :param _builtins.str instance_id: Instance id.
@@ -160,6 +166,12 @@ def get_diagnose_output(date: pulumi.Input[Optional[Optional[_builtins.str]]] = 
         date="20231030",
         limit=1)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDiagnose](https://www.tencentcloud.com/search/?wd=DescribeDiagnose&type=document&lang=en)
 
 
     :param _builtins.str date: Report date, format 20210301.

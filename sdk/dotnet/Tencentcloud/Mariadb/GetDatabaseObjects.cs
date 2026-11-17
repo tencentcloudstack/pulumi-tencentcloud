@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDatabaseObjects](https://www.tencentcloud.com/document/api/237/45571)
         /// </summary>
         public static Task<GetDatabaseObjectsResult> InvokeAsync(GetDatabaseObjectsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDatabaseObjectsResult>("tencentcloud:Mariadb/getDatabaseObjects:getDatabaseObjects", args ?? new GetDatabaseObjectsArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDatabaseObjects](https://www.tencentcloud.com/document/api/237/45571)
         /// </summary>
         public static Output<GetDatabaseObjectsResult> Invoke(GetDatabaseObjectsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDatabaseObjectsResult>("tencentcloud:Mariadb/getDatabaseObjects:getDatabaseObjects", args ?? new GetDatabaseObjectsInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDatabaseObjects](https://www.tencentcloud.com/document/api/237/45571)
         /// </summary>
         public static Output<GetDatabaseObjectsResult> Invoke(GetDatabaseObjectsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDatabaseObjectsResult>("tencentcloud:Mariadb/getDatabaseObjects:getDatabaseObjects", args ?? new GetDatabaseObjectsInvokeArgs(), options.WithDefaults());

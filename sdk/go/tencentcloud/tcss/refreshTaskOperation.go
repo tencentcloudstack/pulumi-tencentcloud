@@ -65,6 +65,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateRefreshTask](https://www.tencentcloud.com/document/api/1163/53206)
 type RefreshTaskOperation struct {
 	pulumi.CustomResourceState
 

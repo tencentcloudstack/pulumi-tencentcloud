@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeImageSharePermission](https://www.tencentcloud.com/document/api/213/33273)
         /// </summary>
         public static Task<GetImageSharePermissionResult> InvokeAsync(GetImageSharePermissionArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetImageSharePermissionResult>("tencentcloud:Cvm/getImageSharePermission:getImageSharePermission", args ?? new GetImageSharePermissionArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeImageSharePermission](https://www.tencentcloud.com/document/api/213/33273)
         /// </summary>
         public static Output<GetImageSharePermissionResult> Invoke(GetImageSharePermissionInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetImageSharePermissionResult>("tencentcloud:Cvm/getImageSharePermission:getImageSharePermission", args ?? new GetImageSharePermissionInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeImageSharePermission](https://www.tencentcloud.com/document/api/213/33273)
         /// </summary>
         public static Output<GetImageSharePermissionResult> Invoke(GetImageSharePermissionInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetImageSharePermissionResult>("tencentcloud:Cvm/getImageSharePermission:getImageSharePermission", args ?? new GetImageSharePermissionInvokeArgs(), options.WithDefaults());

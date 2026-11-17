@@ -25,6 +25,23 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ### Encrypted Nfs CFS
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const foo = new tencentcloud.cfs.FileSystem("foo", {
+ *     name: "test_file_system",
+ *     availabilityZone: "ap-guangzhou-3",
+ *     accessGroupId: "pgroup-7nx89k7l",
+ *     protocol: "NFS",
+ *     vpcId: "vpc-ah9fbkap",
+ *     subnetId: "subnet-9mu2t9iw",
+ *     encrypted: true,
+ * });
+ * ```
+ *
  * ### High-Performance Nfs CFS
  *
  * ```typescript
@@ -79,6 +96,26 @@ import * as utilities from "../utilities";
  *     cidrBlock: "11.0.0.0/24",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateCfsFileSystem](https://www.tencentcloud.com/document/api/582/34517)
+ *   - [DescribeCfsFileSystems](https://www.tencentcloud.com/document/api/582/34514)
+ *   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+ * * Read:
+ *   - [DescribeCfsFileSystems](https://www.tencentcloud.com/document/api/582/34514)
+ *   - [DescribeMountTargets](https://www.tencentcloud.com/document/api/582/34513)
+ *   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+ * * Update:
+ *   - [DescribeCfsFileSystems](https://www.tencentcloud.com/document/api/582/34514)
+ *   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+ *   - [ScaleUpFileSystem](https://www.tencentcloud.com/document/api/582/55870)
+ *   - [UpdateCfsFileSystemName](https://www.tencentcloud.com/document/api/582/35059)
+ *   - [UpdateCfsFileSystemPGroup](https://www.tencentcloud.com/document/api/582/34512)
+ * * Delete: [DeleteCfsFileSystem](https://www.tencentcloud.com/document/api/582/34516)
  *
  * ## Import
  *
@@ -141,6 +178,10 @@ export class FileSystem extends pulumi.CustomResource {
      */
     declare public /*out*/ readonly createTime: pulumi.Output<string>;
     /**
+     * Indicates whether the cfsFileSystem is encrypted. true means encrypted, false means not encrypted. Modifying this parameter will trigger a rebuild.
+     */
+    declare public readonly encrypted: pulumi.Output<boolean>;
+    /**
      * Mount root-directory.
      */
     declare public /*out*/ readonly fsId: pulumi.Output<string>;
@@ -196,6 +237,7 @@ export class FileSystem extends pulumi.CustomResource {
             resourceInputs["ccnId"] = state?.ccnId;
             resourceInputs["cidrBlock"] = state?.cidrBlock;
             resourceInputs["createTime"] = state?.createTime;
+            resourceInputs["encrypted"] = state?.encrypted;
             resourceInputs["fsId"] = state?.fsId;
             resourceInputs["mountIp"] = state?.mountIp;
             resourceInputs["name"] = state?.name;
@@ -218,6 +260,7 @@ export class FileSystem extends pulumi.CustomResource {
             resourceInputs["capacity"] = args?.capacity;
             resourceInputs["ccnId"] = args?.ccnId;
             resourceInputs["cidrBlock"] = args?.cidrBlock;
+            resourceInputs["encrypted"] = args?.encrypted;
             resourceInputs["mountIp"] = args?.mountIp;
             resourceInputs["name"] = args?.name;
             resourceInputs["netInterface"] = args?.netInterface;
@@ -262,6 +305,10 @@ export interface FileSystemState {
      * Create time of the file system.
      */
     createTime?: pulumi.Input<string | undefined>;
+    /**
+     * Indicates whether the cfsFileSystem is encrypted. true means encrypted, false means not encrypted. Modifying this parameter will trigger a rebuild.
+     */
+    encrypted?: pulumi.Input<boolean | undefined>;
     /**
      * Mount root-directory.
      */
@@ -324,6 +371,10 @@ export interface FileSystemArgs {
      * CCN IP range used by the CFS (required if the network type is CCN), which cannot conflict with other IP ranges bound in CCN.
      */
     cidrBlock?: pulumi.Input<string | undefined>;
+    /**
+     * Indicates whether the cfsFileSystem is encrypted. true means encrypted, false means not encrypted. Modifying this parameter will trigger a rebuild.
+     */
+    encrypted?: pulumi.Input<boolean | undefined>;
     /**
      * IP of mount point.
      */

@@ -119,6 +119,14 @@ class StopLogstashPipelineOperation(pulumi.CustomResource):
             pipeline_id="xxxxxx")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeLogstashPipelines](https://www.tencentcloud.com/search/?wd=DescribeLogstashPipelines&type=document&lang=en)
+          - [StopLogstashPipelines](https://www.tencentcloud.com/search/?wd=StopLogstashPipelines&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -144,6 +152,14 @@ class StopLogstashPipelineOperation(pulumi.CustomResource):
             instance_id="ls-xxxxxx",
             pipeline_id="xxxxxx")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeLogstashPipelines](https://www.tencentcloud.com/search/?wd=DescribeLogstashPipelines&type=document&lang=en)
+          - [StopLogstashPipelines](https://www.tencentcloud.com/search/?wd=StopLogstashPipelines&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

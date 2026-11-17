@@ -143,6 +143,12 @@ def get_event_rules(event_bus_id: Optional[_builtins.str] = None,
         order="DESC")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListRules](https://www.tencentcloud.com/document/api/1108/45814)
+
 
     :param _builtins.str event_bus_id: event bus Id.
     :param _builtins.str order: Return results in ascending or descending order, optional values ASC (ascending) and DESC (descending).
@@ -204,6 +210,12 @@ def get_event_rules_output(event_bus_id: pulumi.Input[Optional[_builtins.str]] =
         order_by="AddTime",
         order="DESC")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListRules](https://www.tencentcloud.com/document/api/1108/45814)
 
 
     :param _builtins.str event_bus_id: event bus Id.

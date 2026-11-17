@@ -31,6 +31,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CompleteCertificate](https://www.tencentcloud.com/search/?wd=CompleteCertificate&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// ssl CompleteCertificate can be imported using the id, e.g.

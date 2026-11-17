@@ -132,6 +132,12 @@ def get_mesh(mesh_clusters: Optional[Sequence[_builtins.str]] = None,
         mesh_clusters=["cls-xxxx"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeMeshList](https://www.tencentcloud.com/search/?wd=DescribeMeshList&type=document&lang=en)
+
 
     :param Sequence[_builtins.str] mesh_clusters: Mesh name.
     :param Sequence[_builtins.str] mesh_ids: Mesh instance Id.
@@ -176,6 +182,12 @@ def get_mesh_output(mesh_clusters: pulumi.Input[Optional[Optional[Sequence[_buil
         tags=["key"],
         mesh_clusters=["cls-xxxx"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeMeshList](https://www.tencentcloud.com/search/?wd=DescribeMeshList&type=document&lang=en)
 
 
     :param Sequence[_builtins.str] mesh_clusters: Mesh name.

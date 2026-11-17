@@ -120,6 +120,15 @@ class Event(pulumi.CustomResource):
             description="event description")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateStreamLinkEvent](https://www.tencentcloud.com/search/?wd=CreateStreamLinkEvent&type=document&lang=en)
+        * Read: [DescribeStreamLinkEvent](https://www.tencentcloud.com/search/?wd=DescribeStreamLinkEvent&type=document&lang=en)
+        * Update: [ModifyStreamLinkEvent](https://www.tencentcloud.com/search/?wd=ModifyStreamLinkEvent&type=document&lang=en)
+        * Delete: [DeleteStreamLinkEvent](https://www.tencentcloud.com/search/?wd=DeleteStreamLinkEvent&type=document&lang=en)
+
         ## Import
 
         mps event can be imported using the id, e.g.
@@ -153,6 +162,15 @@ class Event(pulumi.CustomResource):
             event_name="you-event-name",
             description="event description")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateStreamLinkEvent](https://www.tencentcloud.com/search/?wd=CreateStreamLinkEvent&type=document&lang=en)
+        * Read: [DescribeStreamLinkEvent](https://www.tencentcloud.com/search/?wd=DescribeStreamLinkEvent&type=document&lang=en)
+        * Update: [ModifyStreamLinkEvent](https://www.tencentcloud.com/search/?wd=ModifyStreamLinkEvent&type=document&lang=en)
+        * Delete: [DeleteStreamLinkEvent](https://www.tencentcloud.com/search/?wd=DeleteStreamLinkEvent&type=document&lang=en)
 
         ## Import
 

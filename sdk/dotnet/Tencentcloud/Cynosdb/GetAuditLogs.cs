@@ -53,6 +53,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAuditLogs](https://www.tencentcloud.com/document/api/1098/84940)
         /// </summary>
         public static Task<GetAuditLogsResult> InvokeAsync(GetAuditLogsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetAuditLogsResult>("tencentcloud:Cynosdb/getAuditLogs:getAuditLogs", args ?? new GetAuditLogsArgs(), options.WithDefaults());
@@ -98,6 +104,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAuditLogs](https://www.tencentcloud.com/document/api/1098/84940)
         /// </summary>
         public static Output<GetAuditLogsResult> Invoke(GetAuditLogsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetAuditLogsResult>("tencentcloud:Cynosdb/getAuditLogs:getAuditLogs", args ?? new GetAuditLogsInvokeArgs(), options.WithDefaults());
@@ -143,6 +155,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAuditLogs](https://www.tencentcloud.com/document/api/1098/84940)
         /// </summary>
         public static Output<GetAuditLogsResult> Invoke(GetAuditLogsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetAuditLogsResult>("tencentcloud:Cynosdb/getAuditLogs:getAuditLogs", args ?? new GetAuditLogsInvokeArgs(), options.WithDefaults());

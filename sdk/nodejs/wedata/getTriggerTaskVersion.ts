@@ -21,6 +21,12 @@ import * as utilities from "../utilities";
  *     versionId: "20241024174712123456_1",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GetTriggerTaskVersion](https://www.tencentcloud.com/document/api/1174/77925)
  */
 export function getTriggerTaskVersion(args: GetTriggerTaskVersionArgs, opts?: pulumi.InvokeOptions): Promise<GetTriggerTaskVersionResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -86,6 +92,12 @@ export interface GetTriggerTaskVersionResult {
  *     versionId: "20241024174712123456_1",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GetTriggerTaskVersion](https://www.tencentcloud.com/document/api/1174/77925)
  */
 export function getTriggerTaskVersionOutput(args: GetTriggerTaskVersionOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetTriggerTaskVersionResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

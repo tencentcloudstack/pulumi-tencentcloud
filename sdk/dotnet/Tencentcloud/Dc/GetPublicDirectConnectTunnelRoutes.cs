@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePublicDirectConnectTunnelRoutes](https://www.tencentcloud.com/search/?wd=DescribePublicDirectConnectTunnelRoutes&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetPublicDirectConnectTunnelRoutesResult> InvokeAsync(GetPublicDirectConnectTunnelRoutesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetPublicDirectConnectTunnelRoutesResult>("tencentcloud:Dc/getPublicDirectConnectTunnelRoutes:getPublicDirectConnectTunnelRoutes", args ?? new GetPublicDirectConnectTunnelRoutesArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePublicDirectConnectTunnelRoutes](https://www.tencentcloud.com/search/?wd=DescribePublicDirectConnectTunnelRoutes&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetPublicDirectConnectTunnelRoutesResult> Invoke(GetPublicDirectConnectTunnelRoutesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetPublicDirectConnectTunnelRoutesResult>("tencentcloud:Dc/getPublicDirectConnectTunnelRoutes:getPublicDirectConnectTunnelRoutes", args ?? new GetPublicDirectConnectTunnelRoutesInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePublicDirectConnectTunnelRoutes](https://www.tencentcloud.com/search/?wd=DescribePublicDirectConnectTunnelRoutes&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetPublicDirectConnectTunnelRoutesResult> Invoke(GetPublicDirectConnectTunnelRoutesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetPublicDirectConnectTunnelRoutesResult>("tencentcloud:Dc/getPublicDirectConnectTunnelRoutes:getPublicDirectConnectTunnelRoutes", args ?? new GetPublicDirectConnectTunnelRoutesInvokeArgs(), options.WithDefaults());

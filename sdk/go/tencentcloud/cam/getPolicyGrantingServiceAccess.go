@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [ListPoliciesGrantingServiceAccess](https://www.tencentcloud.com/search/?wd=ListPoliciesGrantingServiceAccess&type=document&lang=en)
 func GetPolicyGrantingServiceAccess(ctx *pulumi.Context, args *GetPolicyGrantingServiceAccessArgs, opts ...pulumi.InvokeOption) (*GetPolicyGrantingServiceAccessResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetPolicyGrantingServiceAccessResult

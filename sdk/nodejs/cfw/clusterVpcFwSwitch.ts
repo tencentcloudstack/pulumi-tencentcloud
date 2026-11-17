@@ -115,6 +115,26 @@ import * as utilities from "../utilities";
  *     ],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeClusterVpcFwSwitchs](https://www.tencentcloud.com/search/?wd=DescribeClusterVpcFwSwitchs&type=document&lang=en)
+ *   - [DescribeSwitchError](https://www.tencentcloud.com/search/?wd=DescribeSwitchError&type=document&lang=en)
+ *   - [ModifyClusterVpcFwSwitch](https://www.tencentcloud.com/search/?wd=ModifyClusterVpcFwSwitch&type=document&lang=en)
+ * * Read:
+ *   - [DescribeCcnVpcFwSwitch](https://www.tencentcloud.com/search/?wd=DescribeCcnVpcFwSwitch&type=document&lang=en)
+ *   - [DescribeClusterVpcFwSwitchs](https://www.tencentcloud.com/search/?wd=DescribeClusterVpcFwSwitchs&type=document&lang=en)
+ * * Update:
+ *   - [DescribeClusterVpcFwSwitchs](https://www.tencentcloud.com/search/?wd=DescribeClusterVpcFwSwitchs&type=document&lang=en)
+ *   - [DescribeSwitchError](https://www.tencentcloud.com/search/?wd=DescribeSwitchError&type=document&lang=en)
+ *   - [UpdateClusterVpcFw](https://www.tencentcloud.com/search/?wd=UpdateClusterVpcFw&type=document&lang=en)
+ * * Delete:
+ *   - [DescribeClusterVpcFwSwitchs](https://www.tencentcloud.com/search/?wd=DescribeClusterVpcFwSwitchs&type=document&lang=en)
+ *   - [DescribeSwitchError](https://www.tencentcloud.com/search/?wd=DescribeSwitchError&type=document&lang=en)
+ *   - [ModifyClusterVpcFwSwitch](https://www.tencentcloud.com/search/?wd=ModifyClusterVpcFwSwitch&type=document&lang=en)
  */
 export class ClusterVpcFwSwitch extends pulumi.CustomResource {
     /**

@@ -78,6 +78,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [DescribeTasks](https://www.tencentcloud.com/document/api/409/78807)
+//   - [RestoreDBInstanceObjects](https://www.tencentcloud.com/document/api/409/60785)
 type RestoreDbInstanceObjectsOperation struct {
 	pulumi.CustomResourceState
 

@@ -51,6 +51,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeClusterNodePools](https://www.tencentcloud.com/document/api/457/38777)
         /// </summary>
         public static Task<GetClusterNodePoolsResult> InvokeAsync(GetClusterNodePoolsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetClusterNodePoolsResult>("tencentcloud:Kubernetes/getClusterNodePools:getClusterNodePools", args ?? new GetClusterNodePoolsArgs(), options.WithDefaults());
@@ -94,6 +100,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeClusterNodePools](https://www.tencentcloud.com/document/api/457/38777)
         /// </summary>
         public static Output<GetClusterNodePoolsResult> Invoke(GetClusterNodePoolsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetClusterNodePoolsResult>("tencentcloud:Kubernetes/getClusterNodePools:getClusterNodePools", args ?? new GetClusterNodePoolsInvokeArgs(), options.WithDefaults());
@@ -137,6 +149,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeClusterNodePools](https://www.tencentcloud.com/document/api/457/38777)
         /// </summary>
         public static Output<GetClusterNodePoolsResult> Invoke(GetClusterNodePoolsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetClusterNodePoolsResult>("tencentcloud:Kubernetes/getClusterNodePools:getClusterNodePools", args ?? new GetClusterNodePoolsInvokeArgs(), options.WithDefaults());

@@ -409,6 +409,15 @@ class OwaspWhiteRule(pulumi.CustomResource):
             status=1)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateOwaspWhiteRule](https://www.tencentcloud.com/document/api/627/73186)
+        * Read: [DescribeOwaspWhiteRules](https://www.tencentcloud.com/document/api/627/73181)
+        * Update: [ModifyOwaspWhiteRule](https://www.tencentcloud.com/document/api/627/73176)
+        * Delete: [DeleteOwaspWhiteRule](https://www.tencentcloud.com/document/api/627/73184)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -486,6 +495,15 @@ class OwaspWhiteRule(pulumi.CustomResource):
             expire_time=0,
             status=1)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateOwaspWhiteRule](https://www.tencentcloud.com/document/api/627/73186)
+        * Read: [DescribeOwaspWhiteRules](https://www.tencentcloud.com/document/api/627/73181)
+        * Update: [ModifyOwaspWhiteRule](https://www.tencentcloud.com/document/api/627/73176)
+        * Delete: [DeleteOwaspWhiteRule](https://www.tencentcloud.com/document/api/627/73184)
 
 
         :param str resource_name: The name of the resource.

@@ -98,6 +98,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateDlcDeliver](https://www.tencentcloud.com/document/api/614/80552)
+    /// * Read: [DescribeDlcDelivers](https://www.tencentcloud.com/document/api/614/80550)
+    /// * Update: [ModifyDlcDeliver](https://www.tencentcloud.com/document/api/614/80549)
+    /// * Delete: [DeleteDlcDeliver](https://www.tencentcloud.com/document/api/614/80551)
+    /// 
     /// ## Import
     /// 
     /// CLS dcl deliver can be imported using the id (topicId#taskId), e.g.

@@ -18,6 +18,12 @@ import * as utilities from "../utilities";
  *     apiAppKey: "APID6JmG21yRCc03h4z16hlsTqj1wpO3dB3ZQcUP",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [UpdateApiAppKey](https://www.tencentcloud.com/search/?wd=UpdateApiAppKey&type=document&lang=en)
  */
 export class UpdateApiAppKey extends pulumi.CustomResource {
     /**

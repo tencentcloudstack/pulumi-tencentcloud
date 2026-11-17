@@ -11,11 +11,11 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
 {
     /// <summary>
-    /// Provides a resource to create a tdmq ProfessionalCluster
+    /// Provides a resource to create a TDMQ professional cluster
     /// 
     /// ## Example Usage
     /// 
-    /// ### single-zone Professional Cluster
+    /// ### Single-zone Professional Cluster
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
@@ -25,24 +25,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var professionalCluster = new Tencentcloud.Tdmq.ProfessionalCluster("professional_cluster", new()
+    ///     var example = new Tencentcloud.Tdmq.ProfessionalCluster("example", new()
     ///     {
     ///         AutoRenewFlag = 1,
-    ///         ClusterName = "single_zone_cluster",
-    ///         ProductName = "PULSAR.P1.MINI2",
+    ///         ClusterName = "tf_example",
+    ///         ProductName = "PULSAR.P2.SMALL4",
     ///         StorageSize = 600,
-    ///         Tags = 
-    ///         {
-    ///             { "createby", "terrafrom" },
-    ///         },
+    ///         InstanceVersion = "2.9.2",
     ///         ZoneIds = new[]
     ///         {
-    ///             100004,
+    ///             100006,
     ///         },
     ///         Vpc = new Tencentcloud.Tdmq.Inputs.ProfessionalClusterVpcArgs
     ///         {
-    ///             SubnetId = "subnet-xxxx",
-    ///             VpcId = "vpc-xxxx",
+    ///             VpcId = "vpc-i5yyodl9",
+    ///             SubnetId = "subnet-hhi88a58",
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "createby", "Terrafrom" },
     ///         },
     ///     });
     /// 
@@ -59,39 +60,55 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var professionalCluster = new Tencentcloud.Tdmq.ProfessionalCluster("professional_cluster", new()
+    ///     var example = new Tencentcloud.Tdmq.ProfessionalCluster("example", new()
     ///     {
     ///         AutoRenewFlag = 1,
-    ///         ClusterName = "multi_zone_cluster",
-    ///         ProductName = "PULSAR.P1.MINI2",
-    ///         StorageSize = 200,
-    ///         Tags = 
-    ///         {
-    ///             { "key", "value1" },
-    ///             { "key2", "value2" },
-    ///         },
+    ///         ClusterName = "tf_example",
+    ///         ProductName = "PULSAR.P2.SMALL4",
+    ///         StorageSize = 600,
+    ///         InstanceVersion = "3.0.0",
     ///         ZoneIds = new[]
     ///         {
-    ///             330001,
-    ///             330002,
-    ///             330003,
+    ///             100006,
+    ///             100007,
     ///         },
     ///         Vpc = new Tencentcloud.Tdmq.Inputs.ProfessionalClusterVpcArgs
     ///         {
-    ///             SubnetId = "subnet-xxxx",
-    ///             VpcId = "vpc-xxxx",
+    ///             VpcId = "vpc-i5yyodl9",
+    ///             SubnetId = "subnet-hhi88a58",
+    ///         },
+    ///         Tags = 
+    ///         {
+    ///             { "createby", "Terrafrom" },
     ///         },
     ///     });
     /// 
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateProCluster](https://www.tencentcloud.com/search/?wd=CreateProCluster&amp;type=document&amp;lang=en)
+    ///   - [DescribePulsarProInstances](https://www.tencentcloud.com/search/?wd=DescribePulsarProInstances&amp;type=document&amp;lang=en)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    /// * Read:
+    ///   - [DescribePulsarProInstanceDetail](https://www.tencentcloud.com/search/?wd=DescribePulsarProInstanceDetail&amp;type=document&amp;lang=en)
+    ///   - [DescribePulsarProInstances](https://www.tencentcloud.com/search/?wd=DescribePulsarProInstances&amp;type=document&amp;lang=en)
+    ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+    /// * Update:
+    ///   - [ModifyCluster](https://www.tencentcloud.com/search/?wd=ModifyCluster&amp;type=document&amp;lang=en)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    /// * Delete: [DeleteProCluster](https://www.tencentcloud.com/search/?wd=DeleteProCluster&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
-    /// tdmq ProfessionalCluster can be imported using the id, e.g.
+    /// TDMQ professional cluster can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Tdmq/professionalCluster:ProfessionalCluster professional_cluster professional_cluster_id
+    /// $ pulumi import tencentcloud:Tdmq/professionalCluster:ProfessionalCluster example pulsar-x4r939zkwmm2
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tdmq/professionalCluster:ProfessionalCluster")]
@@ -110,10 +127,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public Output<int> AutoVoucher { get; private set; } = null!;
 
         /// <summary>
+        /// Id of cluster.
+        /// </summary>
+        [Output("clusterId")]
+        public Output<string> ClusterId { get; private set; } = null!;
+
+        /// <summary>
         /// Name of cluster. It does not support Chinese characters and special characters except dashes and underscores and cannot exceed 64 characters.
         /// </summary>
         [Output("clusterName")]
         public Output<string> ClusterName { get; private set; } = null!;
+
+        /// <summary>
+        /// Cluster version information. User can specify a version when creating the cluster.
+        /// </summary>
+        [Output("instanceVersion")]
+        public Output<string> InstanceVersion { get; private set; } = null!;
 
         /// <summary>
         /// Cluster specification code. Reference[Professional Cluster Specifications](https://cloud.tencent.com/document/product/1179/83705).
@@ -217,6 +246,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public Input<string> ClusterName { get; set; } = null!;
 
         /// <summary>
+        /// Cluster version information. User can specify a version when creating the cluster.
+        /// </summary>
+        [Input("instanceVersion")]
+        public Input<string>? InstanceVersion { get; set; }
+
+        /// <summary>
         /// Cluster specification code. Reference[Professional Cluster Specifications](https://cloud.tencent.com/document/product/1179/83705).
         /// </summary>
         [Input("productName", required: true)]
@@ -285,10 +320,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         public Input<int>? AutoVoucher { get; set; }
 
         /// <summary>
+        /// Id of cluster.
+        /// </summary>
+        [Input("clusterId")]
+        public Input<string>? ClusterId { get; set; }
+
+        /// <summary>
         /// Name of cluster. It does not support Chinese characters and special characters except dashes and underscores and cannot exceed 64 characters.
         /// </summary>
         [Input("clusterName")]
         public Input<string>? ClusterName { get; set; }
+
+        /// <summary>
+        /// Cluster version information. User can specify a version when creating the cluster.
+        /// </summary>
+        [Input("instanceVersion")]
+        public Input<string>? InstanceVersion { get; set; }
 
         /// <summary>
         /// Cluster specification code. Reference[Professional Cluster Specifications](https://cloud.tencent.com/document/product/1179/83705).

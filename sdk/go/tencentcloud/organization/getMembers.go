@@ -65,6 +65,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeOrganizationMembers](https://www.tencentcloud.com/document/api/1031/52062)
 func GetMembers(ctx *pulumi.Context, args *GetMembersArgs, opts ...pulumi.InvokeOption) (*GetMembersResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetMembersResult

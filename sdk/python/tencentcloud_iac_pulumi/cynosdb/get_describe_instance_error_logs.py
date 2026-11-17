@@ -165,6 +165,12 @@ def get_describe_instance_error_logs(end_time: Optional[_builtins.str] = None,
         key_words=["Aborted"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstanceErrorLogs](https://www.tencentcloud.com/document/api/1098/55902)
+
 
     :param _builtins.str end_time: End time.
     :param _builtins.str instance_id: Instance Id.
@@ -227,6 +233,12 @@ def get_describe_instance_error_logs_output(end_time: pulumi.Input[Optional[Opti
         ],
         key_words=["Aborted"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstanceErrorLogs](https://www.tencentcloud.com/document/api/1098/55902)
 
 
     :param _builtins.str end_time: End time.

@@ -14,6 +14,8 @@ import (
 
 // Provides a resource to confirm TEO origin ACL update for a zone. When the origin IP ranges of TEO change, you can use this resource to confirm that the latest origin IP ranges have been updated to the origin firewall, and the change notification will stop being pushed.
 //
+// > **NOTE:** Suggest using action resource `tencentcloudTeoConfirmOriginAclUpdate` instead
+//
 // ## Example Usage
 //
 // ```go
@@ -29,7 +31,7 @@ import (
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
 //			_, err := teo.NewConfirmOriginAclUpdateOperation(ctx, "example", &teo.ConfirmOriginAclUpdateOperationArgs{
-//				ZoneId: pulumi.String("zone-12345678"),
+//				ZoneId: pulumi.String("zone-3fkff38fyw8s"),
 //			})
 //			if err != nil {
 //				return err
@@ -39,6 +41,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [ConfirmOriginACLUpdate](https://www.tencentcloud.com/document/api/1145/71119)
 type ConfirmOriginAclUpdateOperation struct {
 	pulumi.CustomResourceState
 

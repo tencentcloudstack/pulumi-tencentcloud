@@ -32,6 +32,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateWorkflowFolder](https://www.tencentcloud.com/document/api/1174/73883)
+    /// * Read: [ListWorkflowFolders](https://www.tencentcloud.com/document/api/1174/73866)
+    /// * Update: [UpdateWorkflowFolder](https://www.tencentcloud.com/document/api/1174/73859)
+    /// * Delete: [DeleteWorkflowFolder](https://www.tencentcloud.com/document/api/1174/73878)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Wedata/workflowFolder:WorkflowFolder")]
     public partial class WorkflowFolder : global::Pulumi.CustomResource

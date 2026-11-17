@@ -51,6 +51,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeShareUnitNodes](https://www.tencentcloud.com/document/api/1031/78347)
         /// </summary>
         public static Task<GetOrgShareUnitNodesResult> InvokeAsync(GetOrgShareUnitNodesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetOrgShareUnitNodesResult>("tencentcloud:Organization/getOrgShareUnitNodes:getOrgShareUnitNodes", args ?? new GetOrgShareUnitNodesArgs(), options.WithDefaults());
@@ -94,6 +100,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeShareUnitNodes](https://www.tencentcloud.com/document/api/1031/78347)
         /// </summary>
         public static Output<GetOrgShareUnitNodesResult> Invoke(GetOrgShareUnitNodesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetOrgShareUnitNodesResult>("tencentcloud:Organization/getOrgShareUnitNodes:getOrgShareUnitNodes", args ?? new GetOrgShareUnitNodesInvokeArgs(), options.WithDefaults());
@@ -137,6 +149,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeShareUnitNodes](https://www.tencentcloud.com/document/api/1031/78347)
         /// </summary>
         public static Output<GetOrgShareUnitNodesResult> Invoke(GetOrgShareUnitNodesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetOrgShareUnitNodesResult>("tencentcloud:Organization/getOrgShareUnitNodes:getOrgShareUnitNodes", args ?? new GetOrgShareUnitNodesInvokeArgs(), options.WithDefaults());

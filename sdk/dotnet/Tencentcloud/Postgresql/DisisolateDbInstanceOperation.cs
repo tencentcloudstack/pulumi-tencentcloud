@@ -35,6 +35,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeDBInstanceAttribute](https://www.tencentcloud.com/document/api/409/16772)
+    ///   - [DisIsolateDBInstances](https://www.tencentcloud.com/document/api/409/40110)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Postgresql/disisolateDbInstanceOperation:DisisolateDbInstanceOperation")]
     public partial class DisisolateDbInstanceOperation : global::Pulumi.CustomResource

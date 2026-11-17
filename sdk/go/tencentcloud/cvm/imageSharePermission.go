@@ -43,6 +43,17 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [ModifyImageSharePermission](https://www.tencentcloud.com/document/api/213/33268)
+// * Read: [DescribeImageSharePermission](https://www.tencentcloud.com/document/api/213/33273)
+// * Update: [ModifyImageSharePermission](https://www.tencentcloud.com/document/api/213/33268)
+// * Delete:
+//   - [DescribeImageSharePermission](https://www.tencentcloud.com/document/api/213/33273)
+//   - [ModifyImageSharePermission](https://www.tencentcloud.com/document/api/213/33268)
+//
 // ## Import
 //
 // CVM image share permission can be imported using the id, e.g.

@@ -261,6 +261,14 @@ class TmpTkeGlobalNotification(pulumi.CustomResource):
             opts = pulumi.ResourceOptions(depends_on=[foo_tmp_tke_cluster_agent]))
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Read: [DescribePrometheusGlobalNotification](https://www.tencentcloud.com/document/api/248/53768)
+        * Update: [ModifyPrometheusGlobalNotification](https://www.tencentcloud.com/document/api/248/53764)
+        * Delete: [ModifyPrometheusGlobalNotification](https://www.tencentcloud.com/document/api/248/53764)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -426,6 +434,14 @@ class TmpTkeGlobalNotification(pulumi.CustomResource):
             },
             opts = pulumi.ResourceOptions(depends_on=[foo_tmp_tke_cluster_agent]))
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Read: [DescribePrometheusGlobalNotification](https://www.tencentcloud.com/document/api/248/53768)
+        * Update: [ModifyPrometheusGlobalNotification](https://www.tencentcloud.com/document/api/248/53764)
+        * Delete: [ModifyPrometheusGlobalNotification](https://www.tencentcloud.com/document/api/248/53764)
 
 
         :param str resource_name: The name of the resource.

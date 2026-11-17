@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     instanceId: "cdb-fitq5t9h",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBSwitchRecords](https://www.tencentcloud.com/document/api/236/17490)
  */
 export function getSwitchRecord(args: GetSwitchRecordArgs, opts?: pulumi.InvokeOptions): Promise<GetSwitchRecordResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetSwitchRecordResult {
  *     instanceId: "cdb-fitq5t9h",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBSwitchRecords](https://www.tencentcloud.com/document/api/236/17490)
  */
 export function getSwitchRecordOutput(args: GetSwitchRecordOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSwitchRecordResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

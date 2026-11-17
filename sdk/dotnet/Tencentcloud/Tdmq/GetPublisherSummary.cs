@@ -34,6 +34,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePublisherSummary](https://www.tencentcloud.com/search/?wd=DescribePublisherSummary&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetPublisherSummaryResult> InvokeAsync(GetPublisherSummaryArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetPublisherSummaryResult>("tencentcloud:Tdmq/getPublisherSummary:getPublisherSummary", args ?? new GetPublisherSummaryArgs(), options.WithDefaults());
@@ -60,6 +66,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePublisherSummary](https://www.tencentcloud.com/search/?wd=DescribePublisherSummary&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetPublisherSummaryResult> Invoke(GetPublisherSummaryInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetPublisherSummaryResult>("tencentcloud:Tdmq/getPublisherSummary:getPublisherSummary", args ?? new GetPublisherSummaryInvokeArgs(), options.WithDefaults());
@@ -86,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePublisherSummary](https://www.tencentcloud.com/search/?wd=DescribePublisherSummary&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetPublisherSummaryResult> Invoke(GetPublisherSummaryInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetPublisherSummaryResult>("tencentcloud:Tdmq/getPublisherSummary:getPublisherSummary", args ?? new GetPublisherSummaryInvokeArgs(), options.WithDefaults());

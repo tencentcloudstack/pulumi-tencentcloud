@@ -126,6 +126,14 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [ModifyReadOnlyGroupDetails](https://www.tencentcloud.com/document/api/238/72737)
+// * Read: [DescribeReadOnlyGroupDetails](https://www.tencentcloud.com/document/api/238/72739)
+// * Update: [ModifyReadOnlyGroupDetails](https://www.tencentcloud.com/document/api/238/72737)
+//
 // ## Import
 //
 // sqlserver configInstanceRoGroup can be imported using the id, e.g.

@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     accessRuleId: "rule-qcndbqzj",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCfsRules](https://www.tencentcloud.com/document/api/582/34504)
  */
 export function getAccessRules(args: GetAccessRulesArgs, opts?: pulumi.InvokeOptions): Promise<GetAccessRulesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -81,6 +87,12 @@ export interface GetAccessRulesResult {
  *     accessRuleId: "rule-qcndbqzj",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCfsRules](https://www.tencentcloud.com/document/api/582/34504)
  */
 export function getAccessRulesOutput(args: GetAccessRulesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAccessRulesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

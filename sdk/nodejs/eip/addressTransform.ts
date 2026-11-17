@@ -51,6 +51,14 @@ import * as utilities from "../utilities";
  * });
  * const exampleAddressTransform = new tencentcloud.eip.AddressTransform("example", {instanceId: example.id});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeTaskResult](https://www.tencentcloud.com/document/api/215/34772)
+ *   - [TransformAddress](https://www.tencentcloud.com/document/api/215/16706)
  */
 export class AddressTransform extends pulumi.CustomResource {
     /**

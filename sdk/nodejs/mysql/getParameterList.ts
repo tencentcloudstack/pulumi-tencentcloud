@@ -21,6 +21,14 @@ import * as utilities from "../utilities";
  *     resultOutputFile: "mytestpath",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeDefaultParams](https://www.tencentcloud.com/document/api/236/34469)
+ *   - [DescribeInstanceParams](https://www.tencentcloud.com/document/api/236/34467)
  */
 export function getParameterList(args?: GetParameterListArgs, opts?: pulumi.InvokeOptions): Promise<GetParameterListResult> {
     args = args || {};
@@ -81,6 +89,14 @@ export interface GetParameterListResult {
  *     resultOutputFile: "mytestpath",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeDefaultParams](https://www.tencentcloud.com/document/api/236/34469)
+ *   - [DescribeInstanceParams](https://www.tencentcloud.com/document/api/236/34467)
  */
 export function getParameterListOutput(args?: GetParameterListOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetParameterListResult> {
     args = args || {};

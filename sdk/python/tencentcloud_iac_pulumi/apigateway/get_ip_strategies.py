@@ -129,6 +129,14 @@ def get_ip_strategies(result_output_file: Optional[_builtins.str] = None,
         strategy_name=test.strategy_name)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeIPStrategy](https://www.tencentcloud.com/search/?wd=DescribeIPStrategy&type=document&lang=en)
+      - [DescribeIPStrategysStatus](https://www.tencentcloud.com/search/?wd=DescribeIPStrategysStatus&type=document&lang=en)
+
 
     :param _builtins.str result_output_file: Used to save results.
     :param _builtins.str service_id: The service ID to be queried.
@@ -179,6 +187,14 @@ def get_ip_strategies_output(result_output_file: pulumi.Input[Optional[Optional[
     name = tencentcloud.apigateway.get_ip_strategies_output(service_id=test.service_id,
         strategy_name=test.strategy_name)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeIPStrategy](https://www.tencentcloud.com/search/?wd=DescribeIPStrategy&type=document&lang=en)
+      - [DescribeIPStrategysStatus](https://www.tencentcloud.com/search/?wd=DescribeIPStrategysStatus&type=document&lang=en)
 
 
     :param _builtins.str result_output_file: Used to save results.

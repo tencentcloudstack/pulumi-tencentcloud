@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     keyId: "244dab8c-6dad-11ea-80c6-5254006d0810",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeWhiteBoxDeviceFingerprints](https://www.tencentcloud.com/search/?wd=DescribeWhiteBoxDeviceFingerprints&type=document&lang=en)
  */
 export function getWhiteBoxDeviceFingerprints(args: GetWhiteBoxDeviceFingerprintsArgs, opts?: pulumi.InvokeOptions): Promise<GetWhiteBoxDeviceFingerprintsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetWhiteBoxDeviceFingerprintsResult {
  *     keyId: "244dab8c-6dad-11ea-80c6-5254006d0810",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeWhiteBoxDeviceFingerprints](https://www.tencentcloud.com/search/?wd=DescribeWhiteBoxDeviceFingerprints&type=document&lang=en)
  */
 export function getWhiteBoxDeviceFingerprintsOutput(args: GetWhiteBoxDeviceFingerprintsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetWhiteBoxDeviceFingerprintsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

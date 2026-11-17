@@ -57,6 +57,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [GetOpsAsyncJob](https://www.tencentcloud.com/document/api/1174/73832)
+    ///   - [RerunTriggerWorkflowRunAsync](https://www.tencentcloud.com/document/api/1174/77884)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Wedata/rerunTriggerWorkflowRunAsync:RerunTriggerWorkflowRunAsync")]
     public partial class RerunTriggerWorkflowRunAsync : global::Pulumi.CustomResource

@@ -125,6 +125,12 @@ def get_http_domains(domain: Optional[_builtins.str] = None,
         domain=foo_http_domain.domain)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRules](https://www.tencentcloud.com/document/api/608/33041)
+
 
     :param _builtins.str domain: Forward domain of the layer7 listener to be queried.
     :param _builtins.str listener_id: ID of the layer7 listener to be queried.
@@ -174,6 +180,12 @@ def get_http_domains_output(domain: pulumi.Input[Optional[_builtins.str]] = None
     foo = tencentcloud.gaap.get_http_domains_output(listener_id=foo_layer7_listener.id,
         domain=foo_http_domain.domain)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRules](https://www.tencentcloud.com/document/api/608/33041)
 
 
     :param _builtins.str domain: Forward domain of the layer7 listener to be queried.

@@ -247,6 +247,12 @@ class CompleteLifecycle(pulumi.CustomResource):
             lifecycle_action_result="CONTINUE")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CompleteLifecycleAction](https://www.tencentcloud.com/document/api/377/33200)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -336,6 +342,12 @@ class CompleteLifecycle(pulumi.CustomResource):
             instance_id=example_instance.id,
             lifecycle_action_result="CONTINUE")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CompleteLifecycleAction](https://www.tencentcloud.com/document/api/377/33200)
 
 
         :param str resource_name: The name of the resource.

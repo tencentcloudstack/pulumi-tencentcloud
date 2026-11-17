@@ -195,6 +195,12 @@ def get_upgrade_price(add_shard_config: Optional[Union['GetUpgradePriceAddShardC
         amount_unit="pent")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDCDBUpgradePrice](https://www.tencentcloud.com/search/?wd=DescribeDCDBUpgradePrice&type=document&lang=en)
+
 
     :param Union['GetUpgradePriceAddShardConfigArgs', 'GetUpgradePriceAddShardConfigArgsDict'] add_shard_config: Config for adding new shard.
     :param _builtins.str amount_unit: Price unit. Valid values: `pent` (cent), `microPent` (microcent).
@@ -271,6 +277,12 @@ def get_upgrade_price_output(add_shard_config: pulumi.Input[Optional[Optional[Un
         },
         amount_unit="pent")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDCDBUpgradePrice](https://www.tencentcloud.com/search/?wd=DescribeDCDBUpgradePrice&type=document&lang=en)
 
 
     :param Union['GetUpgradePriceAddShardConfigArgs', 'GetUpgradePriceAddShardConfigArgsDict'] add_shard_config: Config for adding new shard.

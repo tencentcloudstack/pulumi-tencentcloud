@@ -161,6 +161,14 @@ class ConfigInstanceParam(pulumi.CustomResource):
             }])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyInstanceParam](https://www.tencentcloud.com/document/api/238/41637)
+        * Read: [DescribeInstanceParams](https://www.tencentcloud.com/document/api/238/41641)
+        * Update: [ModifyInstanceParam](https://www.tencentcloud.com/document/api/238/41637)
+
         ## Import
 
         sqlserver config_instance_param can be imported using the id, e.g.
@@ -233,6 +241,14 @@ class ConfigInstanceParam(pulumi.CustomResource):
                 "current_value": "90",
             }])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyInstanceParam](https://www.tencentcloud.com/document/api/238/41637)
+        * Read: [DescribeInstanceParams](https://www.tencentcloud.com/document/api/238/41641)
+        * Update: [ModifyInstanceParam](https://www.tencentcloud.com/document/api/238/41637)
 
         ## Import
 

@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *     instanceId: "mssql-qelbzgwf",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCrossRegionZone](https://www.tencentcloud.com/document/api/238/72758)
  */
 export function getCrossRegionZone(args: GetCrossRegionZoneArgs, opts?: pulumi.InvokeOptions): Promise<GetCrossRegionZoneResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -72,6 +78,12 @@ export interface GetCrossRegionZoneResult {
  *     instanceId: "mssql-qelbzgwf",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCrossRegionZone](https://www.tencentcloud.com/document/api/238/72758)
  */
 export function getCrossRegionZoneOutput(args: GetCrossRegionZoneOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetCrossRegionZoneResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

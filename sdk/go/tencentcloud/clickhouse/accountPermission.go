@@ -65,6 +65,15 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [ModifyUserNewPrivilege](https://www.tencentcloud.com/search/?wd=ModifyUserNewPrivilege&type=document&lang=en)
+// * Read: [DescribeCkSqlApis](https://www.tencentcloud.com/search/?wd=DescribeCkSqlApis&type=document&lang=en)
+// * Update: [ModifyUserNewPrivilege](https://www.tencentcloud.com/search/?wd=ModifyUserNewPrivilege&type=document&lang=en)
+// * Delete: [DescribeCkSqlApis](https://www.tencentcloud.com/search/?wd=DescribeCkSqlApis&type=document&lang=en)
+//
 // ## Import
 //
 // clickhouse accountPermission can be imported using the id, e.g.

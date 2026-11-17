@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Identity
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListUsers](https://www.tencentcloud.com/document/api/1031/63560)
         /// </summary>
         public static Task<GetCenterUsersResult> InvokeAsync(GetCenterUsersArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetCenterUsersResult>("tencentcloud:Identity/getCenterUsers:getCenterUsers", args ?? new GetCenterUsersArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Identity
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListUsers](https://www.tencentcloud.com/document/api/1031/63560)
         /// </summary>
         public static Output<GetCenterUsersResult> Invoke(GetCenterUsersInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetCenterUsersResult>("tencentcloud:Identity/getCenterUsers:getCenterUsers", args ?? new GetCenterUsersInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Identity
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListUsers](https://www.tencentcloud.com/document/api/1031/63560)
         /// </summary>
         public static Output<GetCenterUsersResult> Invoke(GetCenterUsersInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetCenterUsersResult>("tencentcloud:Identity/getCenterUsers:getCenterUsers", args ?? new GetCenterUsersInvokeArgs(), options.WithDefaults());

@@ -45,6 +45,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeApiKeysStatus](https://www.tencentcloud.com/search/?wd=DescribeApiKeysStatus&type=document&lang=en)
 func GetApiKeys(ctx *pulumi.Context, args *GetApiKeysArgs, opts ...pulumi.InvokeOption) (*GetApiKeysResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetApiKeysResult

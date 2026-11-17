@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBandwidthPackageBillUsage](https://www.tencentcloud.com/document/api/215/38531)
         /// </summary>
         public static Task<GetBandwidthPackageBillUsageResult> InvokeAsync(GetBandwidthPackageBillUsageArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetBandwidthPackageBillUsageResult>("tencentcloud:Vpc/getBandwidthPackageBillUsage:getBandwidthPackageBillUsage", args ?? new GetBandwidthPackageBillUsageArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBandwidthPackageBillUsage](https://www.tencentcloud.com/document/api/215/38531)
         /// </summary>
         public static Output<GetBandwidthPackageBillUsageResult> Invoke(GetBandwidthPackageBillUsageInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetBandwidthPackageBillUsageResult>("tencentcloud:Vpc/getBandwidthPackageBillUsage:getBandwidthPackageBillUsage", args ?? new GetBandwidthPackageBillUsageInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBandwidthPackageBillUsage](https://www.tencentcloud.com/document/api/215/38531)
         /// </summary>
         public static Output<GetBandwidthPackageBillUsageResult> Invoke(GetBandwidthPackageBillUsageInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetBandwidthPackageBillUsageResult>("tencentcloud:Vpc/getBandwidthPackageBillUsage:getBandwidthPackageBillUsage", args ?? new GetBandwidthPackageBillUsageInvokeArgs(), options.WithDefaults());

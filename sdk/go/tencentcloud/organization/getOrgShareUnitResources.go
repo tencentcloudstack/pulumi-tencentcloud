@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeShareUnitResources](https://www.tencentcloud.com/document/api/1031/68229)
 func GetOrgShareUnitResources(ctx *pulumi.Context, args *GetOrgShareUnitResourcesArgs, opts ...pulumi.InvokeOption) (*GetOrgShareUnitResourcesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetOrgShareUnitResourcesResult

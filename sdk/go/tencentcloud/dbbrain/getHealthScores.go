@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeHealthScore](https://www.tencentcloud.com/document/api/1035/41194)
 func GetHealthScores(ctx *pulumi.Context, args *GetHealthScoresArgs, opts ...pulumi.InvokeOption) (*GetHealthScoresResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetHealthScoresResult

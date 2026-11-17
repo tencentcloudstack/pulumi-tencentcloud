@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     roleDisplayName: "tf_example",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListProjectRoles](https://www.tencentcloud.com/document/api/1174/77864)
  */
 export function getProjectRoles(args: GetProjectRolesArgs, opts?: pulumi.InvokeOptions): Promise<GetProjectRolesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -81,6 +87,12 @@ export interface GetProjectRolesResult {
  *     roleDisplayName: "tf_example",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListProjectRoles](https://www.tencentcloud.com/document/api/1174/77864)
  */
 export function getProjectRolesOutput(args: GetProjectRolesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetProjectRolesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

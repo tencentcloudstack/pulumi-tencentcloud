@@ -40,6 +40,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateBoundIP](https://www.tencentcloud.com/document/api/1213/61350)
+    ///   - [DescribeListBGPInstances](https://www.tencentcloud.com/document/api/1213/61347)
+    /// * Read: [DescribeListBGPInstances](https://www.tencentcloud.com/document/api/1213/61347)
+    /// * Delete:
+    ///   - [CreateBoundIP](https://www.tencentcloud.com/document/api/1213/61350)
+    ///   - [DescribeListBGPInstances](https://www.tencentcloud.com/document/api/1213/61347)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dayu/ddosIpAttachmentV2:DdosIpAttachmentV2")]
     public partial class DdosIpAttachmentV2 : global::Pulumi.CustomResource

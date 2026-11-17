@@ -137,6 +137,12 @@ def get_task_instance_log(instance_key: Optional[_builtins.str] = None,
         instance_key="20250324192240178_2025-10-13 11:50:00")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetTaskInstanceLog](https://www.tencentcloud.com/document/api/1174/73827)
+
 
     :param _builtins.str instance_key: Unique instance identifier.
     :param _builtins.int life_round_num: Instance lifecycle number, identifying a specific execution of the instance. For example: the first run of a periodic instance is 0, if manually rerun the second execution is 1; defaults to the latest execution.
@@ -183,6 +189,12 @@ def get_task_instance_log_output(instance_key: pulumi.Input[Optional[_builtins.s
     wedata_task_instance_log = tencentcloud.wedata.get_task_instance_log(project_id="1859317240494305280",
         instance_key="20250324192240178_2025-10-13 11:50:00")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetTaskInstanceLog](https://www.tencentcloud.com/document/api/1174/73827)
 
 
     :param _builtins.str instance_key: Unique instance identifier.

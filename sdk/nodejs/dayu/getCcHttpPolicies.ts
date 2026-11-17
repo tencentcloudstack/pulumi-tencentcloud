@@ -26,6 +26,12 @@ import * as utilities from "../utilities";
  *     name: testPolicy.name,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCCSelfDefinePolicy](https://www.tencentcloud.com/search/?wd=DescribeCCSelfDefinePolicy&type=document&lang=en)
  */
 export function getCcHttpPolicies(args: GetCcHttpPoliciesArgs, opts?: pulumi.InvokeOptions): Promise<GetCcHttpPoliciesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -114,6 +120,12 @@ export interface GetCcHttpPoliciesResult {
  *     name: testPolicy.name,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCCSelfDefinePolicy](https://www.tencentcloud.com/search/?wd=DescribeCCSelfDefinePolicy&type=document&lang=en)
  */
 export function getCcHttpPoliciesOutput(args: GetCcHttpPoliciesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetCcHttpPoliciesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

@@ -97,6 +97,12 @@ def get_binding_objects(group_id: Optional[_builtins.int] = None,
     objects = tencentcloud.monitor.get_binding_objects(group_id=name.lists[0].group_id)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBindingPolicyObjectList](https://www.tencentcloud.com/document/api/248/35980)
+
 
     :param _builtins.int group_id: Policy group ID for query.
     :param _builtins.str result_output_file: Used to store results.
@@ -127,6 +133,12 @@ def get_binding_objects_output(group_id: pulumi.Input[Optional[_builtins.int]] =
     name = tencentcloud.monitor.get_policy_groups(name="test")
     objects = tencentcloud.monitor.get_binding_objects(group_id=name.lists[0].group_id)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBindingPolicyObjectList](https://www.tencentcloud.com/document/api/248/35980)
 
 
     :param _builtins.int group_id: Policy group ID for query.

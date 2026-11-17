@@ -94,6 +94,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [StartInstanceXEvent](https://www.tencentcloud.com/document/api/238/54813)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Sqlserver/startXevent:StartXevent")]
     public partial class StartXevent : global::Pulumi.CustomResource

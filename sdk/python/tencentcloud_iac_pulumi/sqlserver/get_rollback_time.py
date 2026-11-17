@@ -107,6 +107,12 @@ def get_rollback_time(dbs: Optional[Sequence[_builtins.str]] = None,
         dbs=["keep_pubsub_db"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRollbackTime](https://www.tencentcloud.com/document/api/238/32110)
+
 
     :param Sequence[_builtins.str] dbs: List of databases to be queried.
     :param _builtins.str instance_id: Instance ID.
@@ -141,6 +147,12 @@ def get_rollback_time_output(dbs: pulumi.Input[Optional[Sequence[_builtins.str]]
     example = tencentcloud.sqlserver.get_rollback_time(instance_id="mssql-qelbzgwf",
         dbs=["keep_pubsub_db"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRollbackTime](https://www.tencentcloud.com/document/api/238/32110)
 
 
     :param Sequence[_builtins.str] dbs: List of databases to be queried.

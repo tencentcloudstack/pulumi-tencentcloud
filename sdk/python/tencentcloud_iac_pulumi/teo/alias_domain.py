@@ -347,6 +347,24 @@ class AliasDomain(pulumi.CustomResource):
             paused=True)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateAliasDomain](https://www.tencentcloud.com/document/api/1145/51740)
+          - [DescribeAliasDomains](https://www.tencentcloud.com/document/api/1145/51738)
+          - [ModifyAliasDomainStatus](https://www.tencentcloud.com/document/api/1145/51736)
+        * Read: [DescribeAliasDomains](https://www.tencentcloud.com/document/api/1145/51738)
+        * Update:
+          - [DescribeAliasDomains](https://www.tencentcloud.com/document/api/1145/51738)
+          - [ModifyAliasDomain](https://www.tencentcloud.com/document/api/1145/51737)
+          - [ModifyAliasDomainStatus](https://www.tencentcloud.com/document/api/1145/51736)
+        * Delete:
+          - [DeleteAliasDomain](https://www.tencentcloud.com/document/api/1145/51739)
+          - [DescribeAliasDomains](https://www.tencentcloud.com/document/api/1145/51738)
+          - [ModifyAliasDomainStatus](https://www.tencentcloud.com/document/api/1145/51736)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -408,6 +426,24 @@ class AliasDomain(pulumi.CustomResource):
             cert_type="none",
             paused=True)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateAliasDomain](https://www.tencentcloud.com/document/api/1145/51740)
+          - [DescribeAliasDomains](https://www.tencentcloud.com/document/api/1145/51738)
+          - [ModifyAliasDomainStatus](https://www.tencentcloud.com/document/api/1145/51736)
+        * Read: [DescribeAliasDomains](https://www.tencentcloud.com/document/api/1145/51738)
+        * Update:
+          - [DescribeAliasDomains](https://www.tencentcloud.com/document/api/1145/51738)
+          - [ModifyAliasDomain](https://www.tencentcloud.com/document/api/1145/51737)
+          - [ModifyAliasDomainStatus](https://www.tencentcloud.com/document/api/1145/51736)
+        * Delete:
+          - [DeleteAliasDomain](https://www.tencentcloud.com/document/api/1145/51739)
+          - [DescribeAliasDomains](https://www.tencentcloud.com/document/api/1145/51738)
+          - [ModifyAliasDomainStatus](https://www.tencentcloud.com/document/api/1145/51736)
 
 
         :param str resource_name: The name of the resource.

@@ -15,6 +15,11 @@ export type Budget = import("./budget").Budget;
 export const Budget: typeof import("./budget").Budget = null as any;
 utilities.lazyLoad(exports, ["Budget"], () => require("./budget"));
 
+export { GetBillDetailArgs, GetBillDetailResult, GetBillDetailOutputArgs } from "./getBillDetail";
+export const getBillDetail: typeof import("./getBillDetail").getBillDetail = null as any;
+export const getBillDetailOutput: typeof import("./getBillDetail").getBillDetailOutput = null as any;
+utilities.lazyLoad(exports, ["getBillDetail","getBillDetailOutput"], () => require("./getBillDetail"));
+
 export { GetBudgetOperationLogArgs, GetBudgetOperationLogResult, GetBudgetOperationLogOutputArgs } from "./getBudgetOperationLog";
 export const getBudgetOperationLog: typeof import("./getBudgetOperationLog").getBudgetOperationLog = null as any;
 export const getBudgetOperationLogOutput: typeof import("./getBudgetOperationLog").getBudgetOperationLogOutput = null as any;

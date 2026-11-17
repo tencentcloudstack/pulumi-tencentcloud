@@ -63,6 +63,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeTasks](https://www.tencentcloud.com/document/api/409/78807)
+    ///   - [RestoreDBInstanceObjects](https://www.tencentcloud.com/document/api/409/60785)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Postgresql/restoreDbInstanceObjectsOperation:RestoreDbInstanceObjectsOperation")]
     public partial class RestoreDbInstanceObjectsOperation : global::Pulumi.CustomResource

@@ -174,6 +174,12 @@ def get_bgp_biz_trend(business: Optional[_builtins.str] = None,
         flag=0)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBgpBizTrend](https://www.tencentcloud.com/document/api/1213/61343)
+
 
     :param _builtins.str business: Dayu sub product code (bgpip represents advanced defense IP; net represents professional version of advanced defense IP).
     :param _builtins.str end_time: Statistic end time.
@@ -230,6 +236,12 @@ def get_bgp_biz_trend_output(business: pulumi.Input[Optional[_builtins.str]] = N
         instance_id="bgp-00000ry7",
         flag=0)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBgpBizTrend](https://www.tencentcloud.com/document/api/1213/61343)
 
 
     :param _builtins.str business: Dayu sub product code (bgpip represents advanced defense IP; net represents professional version of advanced defense IP).

@@ -129,6 +129,12 @@ def get_dedicated_cluster_orders(action_type: Optional[_builtins.str] = None,
         action_type="CREATE")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDedicatedClusterOrders](https://www.tencentcloud.com/document/api/1226/66391)
+
 
     :param _builtins.str action_type: Filter by Dedicated Cluster Order Action Type. Allow filter value: CREATE, EXTEND.
     :param Sequence[_builtins.str] dedicated_cluster_ids: Filter by Dedicated Cluster ID.
@@ -179,6 +185,12 @@ def get_dedicated_cluster_orders_output(action_type: pulumi.Input[Optional[Optio
     orders3 = tencentcloud.cdc.get_dedicated_cluster_orders(status="PENDING",
         action_type="CREATE")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDedicatedClusterOrders](https://www.tencentcloud.com/document/api/1226/66391)
 
 
     :param _builtins.str action_type: Filter by Dedicated Cluster Order Action Type. Allow filter value: CREATE, EXTEND.

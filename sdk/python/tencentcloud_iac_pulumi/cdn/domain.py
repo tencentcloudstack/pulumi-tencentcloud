@@ -1929,6 +1929,50 @@ class Domain(pulumi.CustomResource):
             })
         ```
 
+        ### Example Usage of CDN domain with origin path rewrite rules
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.cdn.Domain("example",
+            domain="example.com",
+            service_type="web",
+            area="mainland",
+            origin={
+                "origin_type": "ip",
+                "origin_lists": ["127.0.0.1"],
+                "origin_pull_protocol": "follow",
+                "path_rules": [{
+                    "full_match": False,
+                    "path": "/api/*",
+                    "server_name": "origin.example.com",
+                    "forward_uri": "/v2/$1",
+                }],
+            })
+        ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [AddCdnDomain](https://www.tencentcloud.com/document/api/228/34015)
+          - [DescribeDomainsConfig](https://www.tencentcloud.com/document/api/228/34019)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribeDomainsConfig](https://www.tencentcloud.com/document/api/228/34019)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [DescribeDomainsConfig](https://www.tencentcloud.com/document/api/228/34019)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+          - [UpdateDomainConfig](https://www.tencentcloud.com/document/api/228/34018)
+        * Delete:
+          - [DeleteCdnDomain](https://www.tencentcloud.com/document/api/228/34014)
+          - [DescribeDomainsConfig](https://www.tencentcloud.com/document/api/228/34019)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+          - [StopCdnDomain](https://www.tencentcloud.com/document/api/228/34012)
+
         ## Import
 
         CDN domain can be imported using the id, e.g.
@@ -2177,6 +2221,50 @@ class Domain(pulumi.CustomResource):
                 }],
             })
         ```
+
+        ### Example Usage of CDN domain with origin path rewrite rules
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.cdn.Domain("example",
+            domain="example.com",
+            service_type="web",
+            area="mainland",
+            origin={
+                "origin_type": "ip",
+                "origin_lists": ["127.0.0.1"],
+                "origin_pull_protocol": "follow",
+                "path_rules": [{
+                    "full_match": False,
+                    "path": "/api/*",
+                    "server_name": "origin.example.com",
+                    "forward_uri": "/v2/$1",
+                }],
+            })
+        ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [AddCdnDomain](https://www.tencentcloud.com/document/api/228/34015)
+          - [DescribeDomainsConfig](https://www.tencentcloud.com/document/api/228/34019)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribeDomainsConfig](https://www.tencentcloud.com/document/api/228/34019)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [DescribeDomainsConfig](https://www.tencentcloud.com/document/api/228/34019)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+          - [UpdateDomainConfig](https://www.tencentcloud.com/document/api/228/34018)
+        * Delete:
+          - [DeleteCdnDomain](https://www.tencentcloud.com/document/api/228/34014)
+          - [DescribeDomainsConfig](https://www.tencentcloud.com/document/api/228/34019)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+          - [StopCdnDomain](https://www.tencentcloud.com/document/api/228/34012)
 
         ## Import
 

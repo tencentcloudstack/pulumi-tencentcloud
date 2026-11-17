@@ -195,6 +195,18 @@ class TagRetentionExecutionConfig(pulumi.CustomResource):
             dry_run=False)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateTagRetentionExecution](https://www.tencentcloud.com/document/api/1051/50691)
+          - [DescribeTagRetentionExecution](https://www.tencentcloud.com/document/api/1051/50688)
+        * Read: [DescribeTagRetentionExecution](https://www.tencentcloud.com/document/api/1051/50688)
+        * Update:
+          - [CreateTagRetentionExecution](https://www.tencentcloud.com/document/api/1051/50691)
+          - [DescribeTagRetentionExecution](https://www.tencentcloud.com/document/api/1051/50688)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -248,6 +260,18 @@ class TagRetentionExecutionConfig(pulumi.CustomResource):
             retention_id=example_tag_retention_rule.retention_id,
             dry_run=False)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateTagRetentionExecution](https://www.tencentcloud.com/document/api/1051/50691)
+          - [DescribeTagRetentionExecution](https://www.tencentcloud.com/document/api/1051/50688)
+        * Read: [DescribeTagRetentionExecution](https://www.tencentcloud.com/document/api/1051/50688)
+        * Update:
+          - [CreateTagRetentionExecution](https://www.tencentcloud.com/document/api/1051/50691)
+          - [DescribeTagRetentionExecution](https://www.tencentcloud.com/document/api/1051/50688)
 
 
         :param str resource_name: The name of the resource.

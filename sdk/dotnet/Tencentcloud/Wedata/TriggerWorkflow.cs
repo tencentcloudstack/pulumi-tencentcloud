@@ -79,6 +79,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateTriggerWorkflow](https://www.tencentcloud.com/document/api/1174/77936)
+    /// * Read: [GetTriggerWorkflow](https://www.tencentcloud.com/document/api/1174/77924)
+    /// * Update: [UpdateTriggerWorkflow](https://www.tencentcloud.com/document/api/1174/77910)
+    /// * Delete: [DeleteTriggerWorkflow](https://www.tencentcloud.com/document/api/1174/77932)
+    /// 
     /// ## Import
     /// 
     /// wedata TriggerWorkflow can be imported using the id, e.g.

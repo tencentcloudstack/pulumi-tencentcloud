@@ -40,6 +40,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [ApplyInstanceSnapshot](https://www.tencentcloud.com/document/api/1103/42465)
+//   - [DescribeSnapshots](https://www.tencentcloud.com/document/api/1103/42462)
 type ApplyInstanceSnapshot struct {
 	pulumi.CustomResourceState
 

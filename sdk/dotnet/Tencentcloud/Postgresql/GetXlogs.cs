@@ -34,6 +34,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBXlogs](https://www.tencentcloud.com/document/api/409/18091)
         /// </summary>
         public static Task<GetXlogsResult> InvokeAsync(GetXlogsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetXlogsResult>("tencentcloud:Postgresql/getXlogs:getXlogs", args ?? new GetXlogsArgs(), options.WithDefaults());
@@ -60,6 +66,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBXlogs](https://www.tencentcloud.com/document/api/409/18091)
         /// </summary>
         public static Output<GetXlogsResult> Invoke(GetXlogsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetXlogsResult>("tencentcloud:Postgresql/getXlogs:getXlogs", args ?? new GetXlogsInvokeArgs(), options.WithDefaults());
@@ -86,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBXlogs](https://www.tencentcloud.com/document/api/409/18091)
         /// </summary>
         public static Output<GetXlogsResult> Invoke(GetXlogsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetXlogsResult>("tencentcloud:Postgresql/getXlogs:getXlogs", args ?? new GetXlogsInvokeArgs(), options.WithDefaults());

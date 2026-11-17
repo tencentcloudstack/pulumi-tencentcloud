@@ -44,6 +44,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [RebalanceReadOnlyGroup](https://www.tencentcloud.com/document/api/409/39722)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Postgresql/rebalanceReadonlyGroupOperation:RebalanceReadonlyGroupOperation")]
     public partial class RebalanceReadonlyGroupOperation : global::Pulumi.CustomResource

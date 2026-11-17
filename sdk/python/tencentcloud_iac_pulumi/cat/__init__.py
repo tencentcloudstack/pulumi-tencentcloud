@@ -3,7 +3,11 @@
 
 # Export this package's modules as members:
 from ._inputs import *
+from .get_instant_tasks import *
 from .get_metric_data import *
 from .get_node import *
+from .get_node_groups import *
 from .get_probe_data import *
+from .get_probe_metric_tag_values import *
+from .get_probe_tasks import *
 from .task_set import *

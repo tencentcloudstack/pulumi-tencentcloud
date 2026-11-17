@@ -44,6 +44,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeProxies](https://www.tencentcloud.com/document/api/608/33101)
         /// </summary>
         public static Task<GetProxiesResult> InvokeAsync(GetProxiesArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetProxiesResult>("tencentcloud:Gaap/getProxies:getProxies", args ?? new GetProxiesArgs(), options.WithDefaults());
@@ -80,6 +86,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeProxies](https://www.tencentcloud.com/document/api/608/33101)
         /// </summary>
         public static Output<GetProxiesResult> Invoke(GetProxiesInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetProxiesResult>("tencentcloud:Gaap/getProxies:getProxies", args ?? new GetProxiesInvokeArgs(), options.WithDefaults());
@@ -116,6 +128,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeProxies](https://www.tencentcloud.com/document/api/608/33101)
         /// </summary>
         public static Output<GetProxiesResult> Invoke(GetProxiesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetProxiesResult>("tencentcloud:Gaap/getProxies:getProxies", args ?? new GetProxiesInvokeArgs(), options.WithDefaults());

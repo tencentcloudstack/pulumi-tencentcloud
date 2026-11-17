@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetServiceStatus](https://www.tencentcloud.com/document/api/1030/32186)
         /// </summary>
         public static Task<GetServiceStatusResult> InvokeAsync(GetServiceStatusArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetServiceStatusResult>("tencentcloud:Kms/getServiceStatus:getServiceStatus", args ?? new GetServiceStatusArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetServiceStatus](https://www.tencentcloud.com/document/api/1030/32186)
         /// </summary>
         public static Output<GetServiceStatusResult> Invoke(GetServiceStatusInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetServiceStatusResult>("tencentcloud:Kms/getServiceStatus:getServiceStatus", args ?? new GetServiceStatusInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetServiceStatus](https://www.tencentcloud.com/document/api/1030/32186)
         /// </summary>
         public static Output<GetServiceStatusResult> Invoke(GetServiceStatusInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetServiceStatusResult>("tencentcloud:Kms/getServiceStatus:getServiceStatus", args ?? new GetServiceStatusInvokeArgs(), options.WithDefaults());

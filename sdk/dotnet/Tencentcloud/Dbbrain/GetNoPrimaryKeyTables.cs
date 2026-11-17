@@ -34,6 +34,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeNoPrimaryKeyTables](https://www.tencentcloud.com/search/?wd=DescribeNoPrimaryKeyTables&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetNoPrimaryKeyTablesResult> InvokeAsync(GetNoPrimaryKeyTablesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetNoPrimaryKeyTablesResult>("tencentcloud:Dbbrain/getNoPrimaryKeyTables:getNoPrimaryKeyTables", args ?? new GetNoPrimaryKeyTablesArgs(), options.WithDefaults());
@@ -60,6 +66,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeNoPrimaryKeyTables](https://www.tencentcloud.com/search/?wd=DescribeNoPrimaryKeyTables&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetNoPrimaryKeyTablesResult> Invoke(GetNoPrimaryKeyTablesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetNoPrimaryKeyTablesResult>("tencentcloud:Dbbrain/getNoPrimaryKeyTables:getNoPrimaryKeyTables", args ?? new GetNoPrimaryKeyTablesInvokeArgs(), options.WithDefaults());
@@ -86,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeNoPrimaryKeyTables](https://www.tencentcloud.com/search/?wd=DescribeNoPrimaryKeyTables&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetNoPrimaryKeyTablesResult> Invoke(GetNoPrimaryKeyTablesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetNoPrimaryKeyTablesResult>("tencentcloud:Dbbrain/getNoPrimaryKeyTables:getNoPrimaryKeyTables", args ?? new GetNoPrimaryKeyTablesInvokeArgs(), options.WithDefaults());

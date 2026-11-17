@@ -36,6 +36,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [SwitchBackupStream](https://www.tencentcloud.com/search/?wd=SwitchBackupStream&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeBackupStreamList](https://www.tencentcloud.com/search/?wd=DescribeBackupStreamList&amp;type=document&amp;lang=en)
+    /// * Update: [SwitchBackupStream](https://www.tencentcloud.com/search/?wd=SwitchBackupStream&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// css BackupStream can be imported using the id, e.g.

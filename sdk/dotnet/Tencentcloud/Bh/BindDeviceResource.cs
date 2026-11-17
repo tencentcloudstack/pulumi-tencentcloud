@@ -64,6 +64,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bh
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [BindDeviceResource](https://www.tencentcloud.com/search/?wd=BindDeviceResource&amp;type=document&amp;lang=en)
+    ///   - [DescribeDevices](https://www.tencentcloud.com/search/?wd=DescribeDevices&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeDevices](https://www.tencentcloud.com/search/?wd=DescribeDevices&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [BindDeviceResource](https://www.tencentcloud.com/search/?wd=BindDeviceResource&amp;type=document&amp;lang=en)
+    ///   - [DescribeDevices](https://www.tencentcloud.com/search/?wd=DescribeDevices&amp;type=document&amp;lang=en)
+    /// * Delete:
+    ///   - [BindDeviceResource](https://www.tencentcloud.com/search/?wd=BindDeviceResource&amp;type=document&amp;lang=en)
+    ///   - [DescribeDevices](https://www.tencentcloud.com/search/?wd=DescribeDevices&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// BH bind device resource can be imported using the resource_id, e.g.

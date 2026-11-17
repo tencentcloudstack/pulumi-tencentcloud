@@ -110,6 +110,14 @@ def get_users(account_name: Optional[_builtins.str] = None,
         account_name="test")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeInstanceAttributes](https://www.tencentcloud.com/document/api/597/35358)
+      - [DescribeUser](https://www.tencentcloud.com/document/api/597/35363)
+
 
     :param _builtins.str account_name: Account name used when query ckafka users' infos. Could be a substr of user name.
     :param _builtins.str instance_id: Id of the ckafka instance.
@@ -144,6 +152,14 @@ def get_users_output(account_name: pulumi.Input[Optional[Optional[_builtins.str]
     foo = tencentcloud.ckafka.get_users(instance_id="ckafka-f9ife4zz",
         account_name="test")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeInstanceAttributes](https://www.tencentcloud.com/document/api/597/35358)
+      - [DescribeUser](https://www.tencentcloud.com/document/api/597/35363)
 
 
     :param _builtins.str account_name: Account name used when query ckafka users' infos. Could be a substr of user name.

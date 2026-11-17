@@ -171,6 +171,12 @@ def get_rules(compliance_results: Optional[Sequence[_builtins.str]] = None,
         order_type="desc")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListConfigRules](https://www.tencentcloud.com/document/api/1164/66767)
+
 
     :param Sequence[_builtins.str] compliance_results: Compliance result list for filtering. Valid values: COMPLIANT, NON_COMPLIANT.
     :param _builtins.str order_type: Sort type by rule name. Valid values: desc (descending), asc (ascending).
@@ -242,6 +248,12 @@ def get_rules_output(compliance_results: pulumi.Input[Optional[Optional[Sequence
         compliance_results=["NON_COMPLIANT"],
         order_type="desc")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListConfigRules](https://www.tencentcloud.com/document/api/1164/66767)
 
 
     :param Sequence[_builtins.str] compliance_results: Compliance result list for filtering. Valid values: COMPLIANT, NON_COMPLIANT.

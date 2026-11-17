@@ -120,6 +120,17 @@ class DiskBackup(pulumi.CustomResource):
             disk_backup_name="disk-backup")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateDiskBackup](https://www.tencentcloud.com/search/?wd=CreateDiskBackup&type=document&lang=en)
+          - [DescribeDiskBackups](https://www.tencentcloud.com/search/?wd=DescribeDiskBackups&type=document&lang=en)
+        * Read: [DescribeDiskBackups](https://www.tencentcloud.com/search/?wd=DescribeDiskBackups&type=document&lang=en)
+        * Update: [ModifyDiskBackupsAttribute](https://www.tencentcloud.com/search/?wd=ModifyDiskBackupsAttribute&type=document&lang=en)
+        * Delete: [DeleteDiskBackups](https://www.tencentcloud.com/search/?wd=DeleteDiskBackups&type=document&lang=en)
+
         ## Import
 
         lighthouse disk_backup can be imported using the id, e.g.
@@ -153,6 +164,17 @@ class DiskBackup(pulumi.CustomResource):
             disk_id="lhdisk-xxxxx",
             disk_backup_name="disk-backup")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateDiskBackup](https://www.tencentcloud.com/search/?wd=CreateDiskBackup&type=document&lang=en)
+          - [DescribeDiskBackups](https://www.tencentcloud.com/search/?wd=DescribeDiskBackups&type=document&lang=en)
+        * Read: [DescribeDiskBackups](https://www.tencentcloud.com/search/?wd=DescribeDiskBackups&type=document&lang=en)
+        * Update: [ModifyDiskBackupsAttribute](https://www.tencentcloud.com/search/?wd=ModifyDiskBackupsAttribute&type=document&lang=en)
+        * Delete: [DeleteDiskBackups](https://www.tencentcloud.com/search/?wd=DeleteDiskBackups&type=document&lang=en)
 
         ## Import
 

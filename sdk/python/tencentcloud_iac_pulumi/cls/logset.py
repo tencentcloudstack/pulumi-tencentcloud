@@ -3,8 +3,9 @@
 
 import builtins as _builtins
 import sys
-from collections.abc import Mapping
-from typing import Optional, overload
+import warnings
+from collections.abc import Mapping, Sequence
+from typing import Optional, Union, overload
 
 import pulumi
 import pulumi.runtime
@@ -14,6 +15,8 @@ if sys.version_info >= (3, 11):
 else:
     pass
 from .. import _utilities
+from . import outputs
+from ._inputs import *
 
 __all__ = ['Logset', 'LogsetArgs']
 
@@ -21,14 +24,21 @@ __all__ = ['Logset', 'LogsetArgs']
 class LogsetArgs:
     def __init__(__self__, *,
                  logset_name: pulumi.Input[_builtins.str],
+                 tag_lists: pulumi.Input[Optional[Sequence[pulumi.Input['LogsetTagListArgs']]]] = None,
                  tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None):
         """
         The set of arguments for constructing a Logset resource.
 
         :param pulumi.Input[_builtins.str] logset_name: Logset name, which must be unique.
-        :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: Tag description list.
+        :param pulumi.Input[Sequence[pulumi.Input['LogsetTagListArgs']]] tag_lists: Tag description list. The CLS API supports up to 10 tag key-value pairs, and duplicate keys are not allowed.
+        :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: It is recommended to use `tag_list` because the current `tags` field is binding resources by calling the tag API. Tag description list.
         """
         pulumi.set(__self__, "logset_name", logset_name)
+        if tag_lists is not None:
+            pulumi.set(__self__, "tag_lists", tag_lists)
+        if tags is not None:
+            warnings.warn("""It is recommended to use `tag_list` because the current `tags` field is binding resources by calling the tag API.""", DeprecationWarning)
+            pulumi.log.warn("""tags is deprecated: It is recommended to use `tag_list` because the current `tags` field is binding resources by calling the tag API.""")
         if tags is not None:
             pulumi.set(__self__, "tags", tags)
 
@@ -45,10 +55,23 @@ class LogsetArgs:
         pulumi.set(self, "logset_name", value)
 
     @_builtins.property
+    @pulumi.getter(name="tagLists")
+    def tag_lists(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['LogsetTagListArgs']]]]:
+        """
+        Tag description list. The CLS API supports up to 10 tag key-value pairs, and duplicate keys are not allowed.
+        """
+        return pulumi.get(self, "tag_lists")
+
+    @tag_lists.setter
+    def tag_lists(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['LogsetTagListArgs']]]]):
+        pulumi.set(self, "tag_lists", value)
+
+    @_builtins.property
     @pulumi.getter
+    @_utilities.deprecated("""It is recommended to use `tag_list` because the current `tags` field is binding resources by calling the tag API.""")
     def tags(self) -> pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]]:
         """
-        Tag description list.
+        It is recommended to use `tag_list` because the current `tags` field is binding resources by calling the tag API. Tag description list.
         """
         return pulumi.get(self, "tags")
 
@@ -63,6 +86,7 @@ class _LogsetState:
                  create_time: pulumi.Input[Optional[_builtins.str]] = None,
                  logset_name: pulumi.Input[Optional[_builtins.str]] = None,
                  role_name: pulumi.Input[Optional[_builtins.str]] = None,
+                 tag_lists: pulumi.Input[Optional[Sequence[pulumi.Input['LogsetTagListArgs']]]] = None,
                  tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
                  topic_count: pulumi.Input[Optional[_builtins.int]] = None):
         """
@@ -71,7 +95,8 @@ class _LogsetState:
         :param pulumi.Input[_builtins.str] create_time: Creation time.
         :param pulumi.Input[_builtins.str] logset_name: Logset name, which must be unique.
         :param pulumi.Input[_builtins.str] role_name: If assumer_uin is not empty, it indicates the service provider who creates the logset.
-        :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: Tag description list.
+        :param pulumi.Input[Sequence[pulumi.Input['LogsetTagListArgs']]] tag_lists: Tag description list. The CLS API supports up to 10 tag key-value pairs, and duplicate keys are not allowed.
+        :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: It is recommended to use `tag_list` because the current `tags` field is binding resources by calling the tag API. Tag description list.
         :param pulumi.Input[_builtins.int] topic_count: Number of log topics in logset.
         """
         if create_time is not None:
@@ -80,6 +105,11 @@ class _LogsetState:
             pulumi.set(__self__, "logset_name", logset_name)
         if role_name is not None:
             pulumi.set(__self__, "role_name", role_name)
+        if tag_lists is not None:
+            pulumi.set(__self__, "tag_lists", tag_lists)
+        if tags is not None:
+            warnings.warn("""It is recommended to use `tag_list` because the current `tags` field is binding resources by calling the tag API.""", DeprecationWarning)
+            pulumi.log.warn("""tags is deprecated: It is recommended to use `tag_list` because the current `tags` field is binding resources by calling the tag API.""")
         if tags is not None:
             pulumi.set(__self__, "tags", tags)
         if topic_count is not None:
@@ -122,10 +152,23 @@ class _LogsetState:
         pulumi.set(self, "role_name", value)
 
     @_builtins.property
+    @pulumi.getter(name="tagLists")
+    def tag_lists(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['LogsetTagListArgs']]]]:
+        """
+        Tag description list. The CLS API supports up to 10 tag key-value pairs, and duplicate keys are not allowed.
+        """
+        return pulumi.get(self, "tag_lists")
+
+    @tag_lists.setter
+    def tag_lists(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['LogsetTagListArgs']]]]):
+        pulumi.set(self, "tag_lists", value)
+
+    @_builtins.property
     @pulumi.getter
+    @_utilities.deprecated("""It is recommended to use `tag_list` because the current `tags` field is binding resources by calling the tag API.""")
     def tags(self) -> pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]]:
         """
-        Tag description list.
+        It is recommended to use `tag_list` because the current `tags` field is binding resources by calling the tag API. Tag description list.
         """
         return pulumi.get(self, "tags")
 
@@ -153,6 +196,7 @@ class Logset(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  logset_name: pulumi.Input[Optional[_builtins.str]] = None,
+                 tag_lists: pulumi.Input[Optional[Sequence[pulumi.Input[Union['LogsetTagListArgs', 'LogsetTagListArgsDict']]]]] = None,
                  tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
                  __props__=None):
         """
@@ -166,10 +210,26 @@ class Logset(pulumi.CustomResource):
 
         example = tencentcloud.cls.Logset("example",
             logset_name="tf-example",
-            tags={
-                "createdBy": "Terraform",
-            })
+            tag_lists=[{
+                "key": "createdBy",
+                "value": "Terraform",
+            }])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateLogset](https://www.tencentcloud.com/document/api/614/42780)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribeLogsets](https://www.tencentcloud.com/document/api/614/42778)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [ModifyLogset](https://www.tencentcloud.com/document/api/614/42777)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Delete: [DeleteLogset](https://www.tencentcloud.com/document/api/614/42779)
 
         ## Import
 
@@ -182,7 +242,8 @@ class Logset(pulumi.CustomResource):
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
         :param pulumi.Input[_builtins.str] logset_name: Logset name, which must be unique.
-        :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: Tag description list.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['LogsetTagListArgs', 'LogsetTagListArgsDict']]]] tag_lists: Tag description list. The CLS API supports up to 10 tag key-value pairs, and duplicate keys are not allowed.
+        :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: It is recommended to use `tag_list` because the current `tags` field is binding resources by calling the tag API. Tag description list.
         """
         ...
     @overload
@@ -201,10 +262,26 @@ class Logset(pulumi.CustomResource):
 
         example = tencentcloud.cls.Logset("example",
             logset_name="tf-example",
-            tags={
-                "createdBy": "Terraform",
-            })
+            tag_lists=[{
+                "key": "createdBy",
+                "value": "Terraform",
+            }])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateLogset](https://www.tencentcloud.com/document/api/614/42780)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribeLogsets](https://www.tencentcloud.com/document/api/614/42778)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [ModifyLogset](https://www.tencentcloud.com/document/api/614/42777)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Delete: [DeleteLogset](https://www.tencentcloud.com/document/api/614/42779)
 
         ## Import
 
@@ -230,6 +307,7 @@ class Logset(pulumi.CustomResource):
                  resource_name: str,
                  opts: Optional[pulumi.ResourceOptions] = None,
                  logset_name: pulumi.Input[Optional[_builtins.str]] = None,
+                 tag_lists: pulumi.Input[Optional[Sequence[pulumi.Input[Union['LogsetTagListArgs', 'LogsetTagListArgsDict']]]]] = None,
                  tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
                  __props__=None):
         opts = pulumi.ResourceOptions.merge(_utilities.get_resource_opts_defaults(), opts)
@@ -243,6 +321,7 @@ class Logset(pulumi.CustomResource):
             if logset_name is None and not opts.urn:
                 raise TypeError("Missing required property 'logset_name'")
             __props__.__dict__["logset_name"] = logset_name
+            __props__.__dict__["tag_lists"] = tag_lists
             __props__.__dict__["tags"] = tags
             __props__.__dict__["create_time"] = None
             __props__.__dict__["role_name"] = None
@@ -260,6 +339,7 @@ class Logset(pulumi.CustomResource):
             create_time: pulumi.Input[Optional[_builtins.str]] = None,
             logset_name: pulumi.Input[Optional[_builtins.str]] = None,
             role_name: pulumi.Input[Optional[_builtins.str]] = None,
+            tag_lists: pulumi.Input[Optional[Sequence[pulumi.Input[Union['LogsetTagListArgs', 'LogsetTagListArgsDict']]]]] = None,
             tags: pulumi.Input[Optional[Mapping[str, pulumi.Input[_builtins.str]]]] = None,
             topic_count: pulumi.Input[Optional[_builtins.int]] = None) -> 'Logset':
         """
@@ -272,7 +352,8 @@ class Logset(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] create_time: Creation time.
         :param pulumi.Input[_builtins.str] logset_name: Logset name, which must be unique.
         :param pulumi.Input[_builtins.str] role_name: If assumer_uin is not empty, it indicates the service provider who creates the logset.
-        :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: Tag description list.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['LogsetTagListArgs', 'LogsetTagListArgsDict']]]] tag_lists: Tag description list. The CLS API supports up to 10 tag key-value pairs, and duplicate keys are not allowed.
+        :param pulumi.Input[Mapping[str, pulumi.Input[_builtins.str]]] tags: It is recommended to use `tag_list` because the current `tags` field is binding resources by calling the tag API. Tag description list.
         :param pulumi.Input[_builtins.int] topic_count: Number of log topics in logset.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
@@ -282,6 +363,7 @@ class Logset(pulumi.CustomResource):
         __props__.__dict__["create_time"] = create_time
         __props__.__dict__["logset_name"] = logset_name
         __props__.__dict__["role_name"] = role_name
+        __props__.__dict__["tag_lists"] = tag_lists
         __props__.__dict__["tags"] = tags
         __props__.__dict__["topic_count"] = topic_count
         return Logset(resource_name, opts=opts, __props__=__props__)
@@ -311,10 +393,19 @@ class Logset(pulumi.CustomResource):
         return pulumi.get(self, "role_name")
 
     @_builtins.property
+    @pulumi.getter(name="tagLists")
+    def tag_lists(self) -> pulumi.Output[Sequence['outputs.LogsetTagList']]:
+        """
+        Tag description list. The CLS API supports up to 10 tag key-value pairs, and duplicate keys are not allowed.
+        """
+        return pulumi.get(self, "tag_lists")
+
+    @_builtins.property
     @pulumi.getter
+    @_utilities.deprecated("""It is recommended to use `tag_list` because the current `tags` field is binding resources by calling the tag API.""")
     def tags(self) -> pulumi.Output[Optional[Mapping[str, _builtins.str]]]:
         """
-        Tag description list.
+        It is recommended to use `tag_list` because the current `tags` field is binding resources by calling the tag API. Tag description list.
         """
         return pulumi.get(self, "tags")
 

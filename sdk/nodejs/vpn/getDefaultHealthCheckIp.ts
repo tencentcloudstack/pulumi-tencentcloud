@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *     vpnGatewayId: "vpngw-gt8bianl",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GenerateVpnConnectionDefaultHealthCheckIp](https://www.tencentcloud.com/document/api/215/56575)
  */
 export function getDefaultHealthCheckIp(args: GetDefaultHealthCheckIpArgs, opts?: pulumi.InvokeOptions): Promise<GetDefaultHealthCheckIpResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -72,6 +78,12 @@ export interface GetDefaultHealthCheckIpResult {
  *     vpnGatewayId: "vpngw-gt8bianl",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GenerateVpnConnectionDefaultHealthCheckIp](https://www.tencentcloud.com/document/api/215/56575)
  */
 export function getDefaultHealthCheckIpOutput(args: GetDefaultHealthCheckIpOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDefaultHealthCheckIpResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

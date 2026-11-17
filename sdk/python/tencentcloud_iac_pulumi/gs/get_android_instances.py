@@ -165,6 +165,12 @@ def get_android_instances(android_instance_ids: Optional[Sequence[_builtins.str]
         }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAndroidInstances](https://www.tencentcloud.com/search/?wd=DescribeAndroidInstances&type=document&lang=en)
+
 
     :param Sequence[_builtins.str] android_instance_ids: List of instance IDs to query. Up to 100 per request.
     :param _builtins.str android_instance_region: Instance region. Aggregated query across regions is not currently supported.
@@ -232,6 +238,12 @@ def get_android_instances_output(android_instance_ids: pulumi.Input[Optional[Opt
             "values": ["tf-example"],
         }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAndroidInstances](https://www.tencentcloud.com/search/?wd=DescribeAndroidInstances&type=document&lang=en)
 
 
     :param Sequence[_builtins.str] android_instance_ids: List of instance IDs to query. Up to 100 per request.

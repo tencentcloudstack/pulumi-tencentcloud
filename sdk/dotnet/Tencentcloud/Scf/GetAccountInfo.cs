@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetAccount](https://www.tencentcloud.com/document/api/583/39873)
         /// </summary>
         public static Task<GetAccountInfoResult> InvokeAsync(GetAccountInfoArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetAccountInfoResult>("tencentcloud:Scf/getAccountInfo:getAccountInfo", args ?? new GetAccountInfoArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetAccount](https://www.tencentcloud.com/document/api/583/39873)
         /// </summary>
         public static Output<GetAccountInfoResult> Invoke(GetAccountInfoInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetAccountInfoResult>("tencentcloud:Scf/getAccountInfo:getAccountInfo", args ?? new GetAccountInfoInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetAccount](https://www.tencentcloud.com/document/api/583/39873)
         /// </summary>
         public static Output<GetAccountInfoResult> Invoke(GetAccountInfoInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetAccountInfoResult>("tencentcloud:Scf/getAccountInfo:getAccountInfo", args ?? new GetAccountInfoInvokeArgs(), options.WithDefaults());

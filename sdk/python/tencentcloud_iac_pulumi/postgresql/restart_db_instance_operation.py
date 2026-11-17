@@ -85,6 +85,14 @@ class RestartDbInstanceOperation(pulumi.CustomResource):
         restart_db_instance_operation = tencentcloud.postgresql.RestartDbInstanceOperation("restart_db_instance_operation", db_instance_id=pgsql_id)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeDBInstanceAttribute](https://www.tencentcloud.com/document/api/409/16772)
+          - [RestartDBInstance](https://www.tencentcloud.com/document/api/409/18097)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -107,6 +115,14 @@ class RestartDbInstanceOperation(pulumi.CustomResource):
 
         restart_db_instance_operation = tencentcloud.postgresql.RestartDbInstanceOperation("restart_db_instance_operation", db_instance_id=pgsql_id)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeDBInstanceAttribute](https://www.tencentcloud.com/document/api/409/16772)
+          - [RestartDBInstance](https://www.tencentcloud.com/document/api/409/18097)
 
 
         :param str resource_name: The name of the resource.

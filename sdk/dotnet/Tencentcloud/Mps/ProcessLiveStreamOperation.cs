@@ -65,6 +65,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ProcessLiveStream](https://www.tencentcloud.com/document/api/1041/33641)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mps/processLiveStreamOperation:ProcessLiveStreamOperation")]
     public partial class ProcessLiveStreamOperation : global::Pulumi.CustomResource

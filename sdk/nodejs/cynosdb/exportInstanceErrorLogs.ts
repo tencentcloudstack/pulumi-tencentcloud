@@ -26,6 +26,12 @@ import * as utilities from "../utilities";
  *     orderByType: "ASC",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [ExportInstanceErrorLogs](https://www.tencentcloud.com/document/api/1098/55901)
  */
 export class ExportInstanceErrorLogs extends pulumi.CustomResource {
     /**

@@ -58,6 +58,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [AttachDataMaskPolicy](https://www.tencentcloud.com/document/api/1155/73720)
+    /// * Read: [DescribeTable](https://www.tencentcloud.com/search/?wd=DescribeTable&amp;type=document&amp;lang=en)
+    /// * Delete: [AttachDataMaskPolicy](https://www.tencentcloud.com/document/api/1155/73720)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dlc/attachDataMaskPolicy:AttachDataMaskPolicy")]
     public partial class AttachDataMaskPolicy : global::Pulumi.CustomResource

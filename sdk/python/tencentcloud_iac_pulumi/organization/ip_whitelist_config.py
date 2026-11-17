@@ -124,6 +124,15 @@ class IpWhitelistConfig(pulumi.CustomResource):
             ])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [UpdateIPWhitelist](https://www.tencentcloud.com/search/?wd=UpdateIPWhitelist&type=document&lang=en)
+        * Read: [GetIPWhitelist](https://www.tencentcloud.com/search/?wd=GetIPWhitelist&type=document&lang=en)
+        * Update: [UpdateIPWhitelist](https://www.tencentcloud.com/search/?wd=UpdateIPWhitelist&type=document&lang=en)
+        * Delete: [UpdateIPWhitelist](https://www.tencentcloud.com/search/?wd=UpdateIPWhitelist&type=document&lang=en)
+
         ## Import
 
         Organization IP whitelist config can be imported using the zoneId, e.g.
@@ -161,6 +170,15 @@ class IpWhitelistConfig(pulumi.CustomResource):
                 "172.16.10.0/24",
             ])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [UpdateIPWhitelist](https://www.tencentcloud.com/search/?wd=UpdateIPWhitelist&type=document&lang=en)
+        * Read: [GetIPWhitelist](https://www.tencentcloud.com/search/?wd=GetIPWhitelist&type=document&lang=en)
+        * Update: [UpdateIPWhitelist](https://www.tencentcloud.com/search/?wd=UpdateIPWhitelist&type=document&lang=en)
+        * Delete: [UpdateIPWhitelist](https://www.tencentcloud.com/search/?wd=UpdateIPWhitelist&type=document&lang=en)
 
         ## Import
 

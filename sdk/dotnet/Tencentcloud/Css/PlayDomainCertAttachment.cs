@@ -41,6 +41,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ModifyLiveDomainCertBindings](https://www.tencentcloud.com/document/api/267/49644)
+    /// * Read: [DescribeLiveDomainCertBindings](https://www.tencentcloud.com/document/api/267/49645)
+    /// * Delete: [UnBindLiveDomainCert](https://www.tencentcloud.com/document/api/267/30774)
+    /// 
     /// ## Import
     /// 
     /// css PlayDomainCertAttachment can be imported using the id, e.g.

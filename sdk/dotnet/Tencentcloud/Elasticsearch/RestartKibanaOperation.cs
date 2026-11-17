@@ -30,6 +30,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeInstances](https://www.tencentcloud.com/document/api/845/32214)
+    ///   - [RestartKibana](https://www.tencentcloud.com/document/api/845/38995)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Elasticsearch/restartKibanaOperation:RestartKibanaOperation")]
     public partial class RestartKibanaOperation : global::Pulumi.CustomResource

@@ -138,6 +138,12 @@ def get_check_savepoint(job_id: Optional[_builtins.str] = None,
         work_space_id="space-2idq8wbr")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [CheckSavepoint](https://www.tencentcloud.com/search/?wd=CheckSavepoint&type=document&lang=en)
+
 
     :param _builtins.str job_id: Job id.
     :param _builtins.int record_type: Snapshot type. 1:savepoint; 2:checkpoint; 3:cancelWithSavepoint.
@@ -187,6 +193,12 @@ def get_check_savepoint_output(job_id: pulumi.Input[Optional[_builtins.str]] = N
         savepoint_path="cosn://52xkpymp-12345/12345/10000/cql-12345/2/flink-savepoints/savepoint-000000-12334",
         work_space_id="space-2idq8wbr")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [CheckSavepoint](https://www.tencentcloud.com/search/?wd=CheckSavepoint&type=document&lang=en)
 
 
     :param _builtins.str job_id: Job id.

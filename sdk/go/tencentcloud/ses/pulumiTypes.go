@@ -702,6 +702,112 @@ func (o DomainAttributeArrayOutput) Index(i pulumi.IntInput) DomainAttributeOutp
 	}).(DomainAttributeOutput)
 }
 
+type DomainTagList struct {
+	// Tag key.
+	TagKey string `pulumi:"tagKey"`
+	// Tag value.
+	TagValue string `pulumi:"tagValue"`
+}
+
+// DomainTagListInput is an input type that accepts DomainTagListArgs and DomainTagListOutput values.
+// You can construct a concrete instance of `DomainTagListInput` via:
+//
+//	DomainTagListArgs{...}
+type DomainTagListInput interface {
+	pulumi.Input
+
+	ToDomainTagListOutput() DomainTagListOutput
+	ToDomainTagListOutputWithContext(context.Context) DomainTagListOutput
+}
+
+type DomainTagListArgs struct {
+	// Tag key.
+	TagKey pulumi.StringInput `pulumi:"tagKey"`
+	// Tag value.
+	TagValue pulumi.StringInput `pulumi:"tagValue"`
+}
+
+func (DomainTagListArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainTagList)(nil)).Elem()
+}
+
+func (i DomainTagListArgs) ToDomainTagListOutput() DomainTagListOutput {
+	return i.ToDomainTagListOutputWithContext(context.Background())
+}
+
+func (i DomainTagListArgs) ToDomainTagListOutputWithContext(ctx context.Context) DomainTagListOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainTagListOutput)
+}
+
+// DomainTagListArrayInput is an input type that accepts DomainTagListArray and DomainTagListArrayOutput values.
+// You can construct a concrete instance of `DomainTagListArrayInput` via:
+//
+//	DomainTagListArray{ DomainTagListArgs{...} }
+type DomainTagListArrayInput interface {
+	pulumi.Input
+
+	ToDomainTagListArrayOutput() DomainTagListArrayOutput
+	ToDomainTagListArrayOutputWithContext(context.Context) DomainTagListArrayOutput
+}
+
+type DomainTagListArray []DomainTagListInput
+
+func (DomainTagListArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DomainTagList)(nil)).Elem()
+}
+
+func (i DomainTagListArray) ToDomainTagListArrayOutput() DomainTagListArrayOutput {
+	return i.ToDomainTagListArrayOutputWithContext(context.Background())
+}
+
+func (i DomainTagListArray) ToDomainTagListArrayOutputWithContext(ctx context.Context) DomainTagListArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainTagListArrayOutput)
+}
+
+type DomainTagListOutput struct{ *pulumi.OutputState }
+
+func (DomainTagListOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainTagList)(nil)).Elem()
+}
+
+func (o DomainTagListOutput) ToDomainTagListOutput() DomainTagListOutput {
+	return o
+}
+
+func (o DomainTagListOutput) ToDomainTagListOutputWithContext(ctx context.Context) DomainTagListOutput {
+	return o
+}
+
+// Tag key.
+func (o DomainTagListOutput) TagKey() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainTagList) string { return v.TagKey }).(pulumi.StringOutput)
+}
+
+// Tag value.
+func (o DomainTagListOutput) TagValue() pulumi.StringOutput {
+	return o.ApplyT(func(v DomainTagList) string { return v.TagValue }).(pulumi.StringOutput)
+}
+
+type DomainTagListArrayOutput struct{ *pulumi.OutputState }
+
+func (DomainTagListArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DomainTagList)(nil)).Elem()
+}
+
+func (o DomainTagListArrayOutput) ToDomainTagListArrayOutput() DomainTagListArrayOutput {
+	return o
+}
+
+func (o DomainTagListArrayOutput) ToDomainTagListArrayOutputWithContext(ctx context.Context) DomainTagListArrayOutput {
+	return o
+}
+
+func (o DomainTagListArrayOutput) Index(i pulumi.IntInput) DomainTagListOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DomainTagList {
+		return vs[0].([]DomainTagList)[vs[1].(int)]
+	}).(DomainTagListOutput)
+}
+
 type ReceiverData struct {
 	// Recipient email addresses.
 	Email string `pulumi:"email"`
@@ -2684,6 +2790,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*BatchSendEmailTimedParamPtrInput)(nil)).Elem(), BatchSendEmailTimedParamArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DomainAttributeInput)(nil)).Elem(), DomainAttributeArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DomainAttributeArrayInput)(nil)).Elem(), DomainAttributeArray{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainTagListInput)(nil)).Elem(), DomainTagListArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainTagListArrayInput)(nil)).Elem(), DomainTagListArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ReceiverDataInput)(nil)).Elem(), ReceiverDataArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*ReceiverDataArrayInput)(nil)).Elem(), ReceiverDataArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*SendEmailAttachmentInput)(nil)).Elem(), SendEmailAttachmentArgs{})
@@ -2722,6 +2830,8 @@ func init() {
 	pulumi.RegisterOutputType(BatchSendEmailTimedParamPtrOutput{})
 	pulumi.RegisterOutputType(DomainAttributeOutput{})
 	pulumi.RegisterOutputType(DomainAttributeArrayOutput{})
+	pulumi.RegisterOutputType(DomainTagListOutput{})
+	pulumi.RegisterOutputType(DomainTagListArrayOutput{})
 	pulumi.RegisterOutputType(ReceiverDataOutput{})
 	pulumi.RegisterOutputType(ReceiverDataArrayOutput{})
 	pulumi.RegisterOutputType(SendEmailAttachmentOutput{})

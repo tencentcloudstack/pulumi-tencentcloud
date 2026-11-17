@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Image
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeImageFromFamily](https://www.tencentcloud.com/document/api/213/64971)
         /// </summary>
         public static Task<GetFromFamilyResult> InvokeAsync(GetFromFamilyArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetFromFamilyResult>("tencentcloud:Image/getFromFamily:getFromFamily", args ?? new GetFromFamilyArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Image
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeImageFromFamily](https://www.tencentcloud.com/document/api/213/64971)
         /// </summary>
         public static Output<GetFromFamilyResult> Invoke(GetFromFamilyInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetFromFamilyResult>("tencentcloud:Image/getFromFamily:getFromFamily", args ?? new GetFromFamilyInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Image
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeImageFromFamily](https://www.tencentcloud.com/document/api/213/64971)
         /// </summary>
         public static Output<GetFromFamilyResult> Invoke(GetFromFamilyInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetFromFamilyResult>("tencentcloud:Image/getFromFamily:getFromFamily", args ?? new GetFromFamilyInvokeArgs(), options.WithDefaults());

@@ -36,6 +36,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Read:
+    ///   - [DescribeClusters](https://www.tencentcloud.com/search/?wd=DescribeClusters&amp;type=document&amp;lang=en)
+    ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+    /// * Update:
+    ///   - [ModifyCluster](https://www.tencentcloud.com/search/?wd=ModifyCluster&amp;type=document&amp;lang=en)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    /// * Delete: [DeleteCluster](https://www.tencentcloud.com/search/?wd=DeleteCluster&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// Tdmq instance can be imported, e.g.

@@ -153,6 +153,12 @@ def get_alarm_all_namespaces(ids: Optional[Sequence[_builtins.str]] = None,
         ids=["qaap_tunnel_l4_listeners"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAllNamespaces](https://www.tencentcloud.com/document/api/248/39319)
+
 
     :param Sequence[_builtins.str] ids: Filter based on the Id of the namespace without filling in the default query for all.
     :param _builtins.str module: Fixed value, as `monitor`.
@@ -199,6 +205,12 @@ def get_alarm_all_namespaces_output(ids: pulumi.Input[Optional[Optional[Sequence
         monitor_types=["MT_QCE"],
         ids=["qaap_tunnel_l4_listeners"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAllNamespaces](https://www.tencentcloud.com/document/api/248/39319)
 
 
     :param Sequence[_builtins.str] ids: Filter based on the Id of the namespace without filling in the default query for all.

@@ -34,6 +34,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBSpaceStatus](https://www.tencentcloud.com/document/api/1035/41196)
         /// </summary>
         public static Task<GetDbSpaceStatusResult> InvokeAsync(GetDbSpaceStatusArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDbSpaceStatusResult>("tencentcloud:Dbbrain/getDbSpaceStatus:getDbSpaceStatus", args ?? new GetDbSpaceStatusArgs(), options.WithDefaults());
@@ -60,6 +66,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBSpaceStatus](https://www.tencentcloud.com/document/api/1035/41196)
         /// </summary>
         public static Output<GetDbSpaceStatusResult> Invoke(GetDbSpaceStatusInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDbSpaceStatusResult>("tencentcloud:Dbbrain/getDbSpaceStatus:getDbSpaceStatus", args ?? new GetDbSpaceStatusInvokeArgs(), options.WithDefaults());
@@ -86,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBSpaceStatus](https://www.tencentcloud.com/document/api/1035/41196)
         /// </summary>
         public static Output<GetDbSpaceStatusResult> Invoke(GetDbSpaceStatusInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDbSpaceStatusResult>("tencentcloud:Dbbrain/getDbSpaceStatus:getDbSpaceStatus", args ?? new GetDbSpaceStatusInvokeArgs(), options.WithDefaults());

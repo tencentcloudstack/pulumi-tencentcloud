@@ -62,6 +62,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [RegisterLineage](https://www.tencentcloud.com/document/api/1174/77943)
+// * Read: [ListLineage](https://www.tencentcloud.com/document/api/1174/77947)
+// * Delete: [DeleteLineage](https://www.tencentcloud.com/document/api/1174/77953)
 type LineageAttachment struct {
 	pulumi.CustomResourceState
 

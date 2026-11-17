@@ -111,6 +111,12 @@ def get_chc_hosts(chc_ids: Optional[Sequence[_builtins.str]] = None,
         }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeChcHosts](https://www.tencentcloud.com/document/api/213/48899)
+
 
     :param Sequence[_builtins.str] chc_ids: CHC host ID. Up to 100 instances per request is allowed. ChcIds and Filters cannot be specified at the same time.
     :param Sequence[Union['GetChcHostsFilterArgs', 'GetChcHostsFilterArgsDict']] filters: `zone` Filter by the availability zone, such as ap-guangzhou-1. Valid values: See [Regions and Availability Zones](https://www.tencentcloud.com/document/product/213/6091?from_cn_redirect=1).
@@ -153,6 +159,12 @@ def get_chc_hosts_output(chc_ids: pulumi.Input[Optional[Optional[Sequence[_built
             "values": ["ap-guangzhou-7"],
         }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeChcHosts](https://www.tencentcloud.com/document/api/213/48899)
 
 
     :param Sequence[_builtins.str] chc_ids: CHC host ID. Up to 100 instances per request is allowed. ChcIds and Filters cannot be specified at the same time.

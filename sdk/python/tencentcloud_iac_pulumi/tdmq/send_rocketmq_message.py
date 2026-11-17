@@ -253,6 +253,12 @@ class SendRocketmqMessage(pulumi.CustomResource):
             msg_tag="msg value")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [SendRocketMQMessage](https://www.tencentcloud.com/search/?wd=SendRocketMQMessage&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -286,6 +292,12 @@ class SendRocketmqMessage(pulumi.CustomResource):
             msg_key="msg tag",
             msg_tag="msg value")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [SendRocketMQMessage](https://www.tencentcloud.com/search/?wd=SendRocketMQMessage&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

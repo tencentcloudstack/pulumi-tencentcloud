@@ -137,6 +137,12 @@ def get_l4_rules(name: Optional[_builtins.str] = None,
         rule_id=test_rule["ruleId"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribleL4Rules](https://www.tencentcloud.com/search/?wd=DescribleL4Rules&type=document&lang=en)
+
 
     :param _builtins.str name: Name of the layer 4 rule to be queried.
     :param _builtins.str resource_id: Id of the resource that the layer 4 rule works for.
@@ -183,6 +189,12 @@ def get_l4_rules_output(name: pulumi.Input[Optional[Optional[_builtins.str]]] = 
         resource_id=test_rule["resourceId"],
         rule_id=test_rule["ruleId"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribleL4Rules](https://www.tencentcloud.com/search/?wd=DescribleL4Rules&type=document&lang=en)
 
 
     :param _builtins.str name: Name of the layer 4 rule to be queried.

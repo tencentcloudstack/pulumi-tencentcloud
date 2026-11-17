@@ -134,6 +134,16 @@ class LogSet(pulumi.CustomResource):
         foo = tencentcloud.clb.LogSet("foo", period=7)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateClsLogSet](https://www.tencentcloud.com/document/api/214/37821)
+          - [DescribeClsLogSet](https://www.tencentcloud.com/document/api/214/37819)
+        * Read: [DescribeLogsets](https://www.tencentcloud.com/document/api/614/42778)
+        * Delete: [DeleteLogset](https://www.tencentcloud.com/document/api/614/42779)
+
         ## Import
 
         CLB log set can be imported using the id, e.g.
@@ -164,6 +174,16 @@ class LogSet(pulumi.CustomResource):
 
         foo = tencentcloud.clb.LogSet("foo", period=7)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateClsLogSet](https://www.tencentcloud.com/document/api/214/37821)
+          - [DescribeClsLogSet](https://www.tencentcloud.com/document/api/214/37819)
+        * Read: [DescribeLogsets](https://www.tencentcloud.com/document/api/614/42778)
+        * Delete: [DeleteLogset](https://www.tencentcloud.com/document/api/614/42779)
 
         ## Import
 

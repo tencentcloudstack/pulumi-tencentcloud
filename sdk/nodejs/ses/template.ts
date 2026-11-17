@@ -43,6 +43,15 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateEmailTemplate](https://www.tencentcloud.com/document/api/1084/39400)
+ * * Read: [GetEmailTemplate](https://www.tencentcloud.com/document/api/1084/39398)
+ * * Update: [UpdateEmailTemplate](https://www.tencentcloud.com/document/api/1084/39396)
+ * * Delete: [DeleteEmailTemplate](https://www.tencentcloud.com/document/api/1084/39399)
+ *
  * ## Import
  *
  * ses template can be imported using the id, e.g.

@@ -119,6 +119,14 @@ class OrgShareUnitNode(pulumi.CustomResource):
             node_id=123456)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AddShareUnitNode](https://www.tencentcloud.com/document/api/1031/78350)
+        * Read: [DescribeShareUnitNodes](https://www.tencentcloud.com/document/api/1031/78347)
+        * Delete: [DeleteShareUnitNode](https://www.tencentcloud.com/document/api/1031/78349)
+
         ## Import
 
         organization org share unit node can be imported using the id, e.g.
@@ -152,6 +160,14 @@ class OrgShareUnitNode(pulumi.CustomResource):
             unit_id="us-xxxxx",
             node_id=123456)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AddShareUnitNode](https://www.tencentcloud.com/document/api/1031/78350)
+        * Read: [DescribeShareUnitNodes](https://www.tencentcloud.com/document/api/1031/78347)
+        * Delete: [DeleteShareUnitNode](https://www.tencentcloud.com/document/api/1031/78349)
 
         ## Import
 

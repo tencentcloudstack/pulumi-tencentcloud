@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     ruleId: "rule-hddrxgpd",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCustomHeader](https://www.tencentcloud.com/document/api/608/41732)
  */
 export function getCustomHeader(args: GetCustomHeaderArgs, opts?: pulumi.InvokeOptions): Promise<GetCustomHeaderResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetCustomHeaderResult {
  *     ruleId: "rule-hddrxgpd",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCustomHeader](https://www.tencentcloud.com/document/api/608/41732)
  */
 export function getCustomHeaderOutput(args: GetCustomHeaderOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetCustomHeaderResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

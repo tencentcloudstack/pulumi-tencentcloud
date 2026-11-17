@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDedicatedClusterInstanceTypes](https://www.tencentcloud.com/document/api/1226/66392)
 func GetDedicatedClusterInstanceTypes(ctx *pulumi.Context, args *GetDedicatedClusterInstanceTypesArgs, opts ...pulumi.InvokeOption) (*GetDedicatedClusterInstanceTypesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDedicatedClusterInstanceTypesResult

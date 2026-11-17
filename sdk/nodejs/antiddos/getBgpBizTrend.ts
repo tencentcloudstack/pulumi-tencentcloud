@@ -22,6 +22,12 @@ import * as utilities from "../utilities";
  *     flag: 0,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeBgpBizTrend](https://www.tencentcloud.com/document/api/1213/61343)
  */
 export function getBgpBizTrend(args: GetBgpBizTrendArgs, opts?: pulumi.InvokeOptions): Promise<GetBgpBizTrendResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -116,6 +122,12 @@ export interface GetBgpBizTrendResult {
  *     flag: 0,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeBgpBizTrend](https://www.tencentcloud.com/document/api/1213/61343)
  */
 export function getBgpBizTrendOutput(args: GetBgpBizTrendOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetBgpBizTrendResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

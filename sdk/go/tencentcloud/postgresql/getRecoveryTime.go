@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeAvailableRecoveryTime](https://www.tencentcloud.com/document/api/409/45152)
 func GetRecoveryTime(ctx *pulumi.Context, args *GetRecoveryTimeArgs, opts ...pulumi.InvokeOption) (*GetRecoveryTimeResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetRecoveryTimeResult

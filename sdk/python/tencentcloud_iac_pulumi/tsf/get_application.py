@@ -134,6 +134,12 @@ def get_application(application_id_lists: Optional[Sequence[_builtins.str]] = No
         application_id_lists=["application-a24x29xv"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeApplications](https://www.tencentcloud.com/search/?wd=DescribeApplications&type=document&lang=en)
+
 
     :param Sequence[_builtins.str] application_id_lists: Id list.
     :param Sequence[_builtins.str] application_resource_type_lists: An array of application resource types.
@@ -177,6 +183,12 @@ def get_application_output(application_id_lists: pulumi.Input[Optional[Optional[
         microservice_type="N",
         application_id_lists=["application-a24x29xv"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeApplications](https://www.tencentcloud.com/search/?wd=DescribeApplications&type=document&lang=en)
 
 
     :param Sequence[_builtins.str] application_id_lists: Id list.

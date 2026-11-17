@@ -210,6 +210,22 @@ class SecretVersion(pulumi.CustomResource):
             secret_binary="MTIzMTIzMTIzMTIzMTIzQQ==")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [PutSecretValue](https://www.tencentcloud.com/document/api/1078/38645)
+        * Read:
+          - [DescribeSecret](https://www.tencentcloud.com/document/api/1078/38653)
+          - [GetSecretValue](https://www.tencentcloud.com/document/api/1078/38649)
+          - [ListSecretVersionIds](https://www.tencentcloud.com/document/api/1078/38647)
+        * Update:
+          - [DescribeSecret](https://www.tencentcloud.com/document/api/1078/38653)
+          - [UpdateSecret](https://www.tencentcloud.com/document/api/1078/38642)
+        * Delete:
+          - [DeleteSecretVersion](https://www.tencentcloud.com/document/api/1078/38654)
+          - [GetSecretValue](https://www.tencentcloud.com/document/api/1078/38649)
+
         ## Import
 
         SSM secret version can be imported using the secretName#versionId, e.g.
@@ -269,6 +285,22 @@ class SecretVersion(pulumi.CustomResource):
             version_id="v2",
             secret_binary="MTIzMTIzMTIzMTIzMTIzQQ==")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [PutSecretValue](https://www.tencentcloud.com/document/api/1078/38645)
+        * Read:
+          - [DescribeSecret](https://www.tencentcloud.com/document/api/1078/38653)
+          - [GetSecretValue](https://www.tencentcloud.com/document/api/1078/38649)
+          - [ListSecretVersionIds](https://www.tencentcloud.com/document/api/1078/38647)
+        * Update:
+          - [DescribeSecret](https://www.tencentcloud.com/document/api/1078/38653)
+          - [UpdateSecret](https://www.tencentcloud.com/document/api/1078/38642)
+        * Delete:
+          - [DeleteSecretVersion](https://www.tencentcloud.com/document/api/1078/38654)
+          - [GetSecretValue](https://www.tencentcloud.com/document/api/1078/38649)
 
         ## Import
 

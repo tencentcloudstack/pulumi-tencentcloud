@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [StopSQLScriptRun](https://www.tencentcloud.com/document/api/1174/73843)
 type StopSqlScriptRunOperation struct {
 	pulumi.CustomResourceState
 

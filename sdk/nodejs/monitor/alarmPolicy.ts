@@ -294,6 +294,56 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ### alarm policy binding all objects
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const foo = new tencentcloud.monitor.AlarmPolicy("foo", {
+ *     policyName: "tf-policy-bind-all",
+ *     monitorType: "MT_QCE",
+ *     enable: 1,
+ *     projectId: 0,
+ *     namespace: "cvm_device",
+ *     isBindAll: 1,
+ *     conditions: {
+ *         isUnionRule: 1,
+ *         rules: [{
+ *             metricName: "CpuUsage",
+ *             period: 60,
+ *             operator: "ge",
+ *             value: "89.9",
+ *             continuePeriod: 1,
+ *             noticeFrequency: 3600,
+ *             isPowerNotice: 0,
+ *         }],
+ *     },
+ *     eventConditions: [{
+ *         metricName: "ping_unreachable",
+ *     }],
+ *     noticeIds: [fooTencentcloudMonitorAlarmNotice.id],
+ * });
+ * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [BindingPolicyTag](https://www.tencentcloud.com/search/?wd=BindingPolicyTag&type=document&lang=en)
+ *   - [CreateAlarmPolicy](https://www.tencentcloud.com/document/api/248/39326)
+ *   - [DescribeAlarmPolicy](https://www.tencentcloud.com/document/api/248/39320)
+ * * Read: [DescribeAlarmPolicy](https://www.tencentcloud.com/document/api/248/39320)
+ * * Update:
+ *   - [DescribeAlarmPolicy](https://www.tencentcloud.com/document/api/248/39320)
+ *   - [ModifyAlarmPolicyCondition](https://www.tencentcloud.com/document/api/248/39317)
+ *   - [ModifyAlarmPolicyInfo](https://www.tencentcloud.com/document/api/248/39316)
+ *   - [ModifyAlarmPolicyNotice](https://www.tencentcloud.com/document/api/248/39315)
+ *   - [ModifyAlarmPolicyStatus](https://www.tencentcloud.com/document/api/248/39314)
+ *   - [ModifyAlarmPolicyTasks](https://www.tencentcloud.com/document/api/248/39313)
+ * * Delete: [DeleteAlarmPolicy](https://www.tencentcloud.com/document/api/248/39325)
+ *
  * ## Import
  *
  * Alarm policy instance can be imported, e.g.
@@ -363,6 +413,10 @@ export class AlarmPolicy extends pulumi.CustomResource {
      */
     declare public readonly hierarchicalNotices: pulumi.Output<outputs.Monitor.AlarmPolicyHierarchicalNotice[]>;
     /**
+     * Whether to bind all objects. If yes, no need to pass `filter` or call `BindPolicyObject`. Valid values: `0` (no, default), `1` (yes). Not all policy types support binding all objects. Immutable after creation.
+     */
+    declare public readonly isBindAll: pulumi.Output<number>;
+    /**
      * The type of monitor.
      */
     declare public readonly monitorType: pulumi.Output<string>;
@@ -424,6 +478,7 @@ export class AlarmPolicy extends pulumi.CustomResource {
             resourceInputs["filter"] = state?.filter;
             resourceInputs["groupBies"] = state?.groupBies;
             resourceInputs["hierarchicalNotices"] = state?.hierarchicalNotices;
+            resourceInputs["isBindAll"] = state?.isBindAll;
             resourceInputs["monitorType"] = state?.monitorType;
             resourceInputs["namespace"] = state?.namespace;
             resourceInputs["noticeContentTmplBindInfos"] = state?.noticeContentTmplBindInfos;
@@ -452,6 +507,7 @@ export class AlarmPolicy extends pulumi.CustomResource {
             resourceInputs["filter"] = args?.filter;
             resourceInputs["groupBies"] = args?.groupBies;
             resourceInputs["hierarchicalNotices"] = args?.hierarchicalNotices;
+            resourceInputs["isBindAll"] = args?.isBindAll;
             resourceInputs["monitorType"] = args?.monitorType;
             resourceInputs["namespace"] = args?.namespace;
             resourceInputs["noticeContentTmplBindInfos"] = args?.noticeContentTmplBindInfos;
@@ -505,6 +561,10 @@ export interface AlarmPolicyState {
      * Alarm hierarchical notice rules configuration.
      */
     hierarchicalNotices?: pulumi.Input<pulumi.Input<inputs.Monitor.AlarmPolicyHierarchicalNotice>[] | undefined>;
+    /**
+     * Whether to bind all objects. If yes, no need to pass `filter` or call `BindPolicyObject`. Valid values: `0` (no, default), `1` (yes). Not all policy types support binding all objects. Immutable after creation.
+     */
+    isBindAll?: pulumi.Input<number | undefined>;
     /**
      * The type of monitor.
      */
@@ -579,6 +639,10 @@ export interface AlarmPolicyArgs {
      * Alarm hierarchical notice rules configuration.
      */
     hierarchicalNotices?: pulumi.Input<pulumi.Input<inputs.Monitor.AlarmPolicyHierarchicalNotice>[] | undefined>;
+    /**
+     * Whether to bind all objects. If yes, no need to pass `filter` or call `BindPolicyObject`. Valid values: `0` (no, default), `1` (yes). Not all policy types support binding all objects. Immutable after creation.
+     */
+    isBindAll?: pulumi.Input<number | undefined>;
     /**
      * The type of monitor.
      */

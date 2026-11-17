@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const region = tencentcloud.ckafka.getRegion({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRegion](https://www.tencentcloud.com/document/api/597/40317)
  */
 export function getRegion(args?: GetRegionArgs, opts?: pulumi.InvokeOptions): Promise<GetRegionResult> {
     args = args || {};
@@ -61,6 +67,12 @@ export interface GetRegionResult {
  *
  * const region = tencentcloud.ckafka.getRegion({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRegion](https://www.tencentcloud.com/document/api/597/40317)
  */
 export function getRegionOutput(args?: GetRegionOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRegionResult> {
     args = args || {};

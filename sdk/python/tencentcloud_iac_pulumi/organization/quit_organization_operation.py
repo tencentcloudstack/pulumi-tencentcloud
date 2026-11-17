@@ -85,6 +85,12 @@ class QuitOrganizationOperation(pulumi.CustomResource):
         quit_organization_operation = tencentcloud.organization.QuitOrganizationOperation("quit_organization_operation", org_id=45155)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [QuitOrganization](https://www.tencentcloud.com/document/api/1031/66413)
+
         ## Import
 
         organization quit_organization_operation can be imported using the id, e.g.
@@ -115,6 +121,12 @@ class QuitOrganizationOperation(pulumi.CustomResource):
 
         quit_organization_operation = tencentcloud.organization.QuitOrganizationOperation("quit_organization_operation", org_id=45155)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [QuitOrganization](https://www.tencentcloud.com/document/api/1031/66413)
 
         ## Import
 

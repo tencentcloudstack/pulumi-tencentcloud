@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     reportType: "log",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDataReportCount](https://www.tencentcloud.com/document/api/1131/45321)
  */
 export function getReportCount(args: GetReportCountArgs, opts?: pulumi.InvokeOptions): Promise<GetReportCountResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -98,6 +104,12 @@ export interface GetReportCountResult {
  *     reportType: "log",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDataReportCount](https://www.tencentcloud.com/document/api/1131/45321)
  */
 export function getReportCountOutput(args: GetReportCountOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetReportCountResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

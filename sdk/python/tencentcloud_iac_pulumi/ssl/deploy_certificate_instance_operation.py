@@ -190,6 +190,12 @@ class DeployCertificateInstanceOperation(pulumi.CustomResource):
             resource_type="cdn")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [DeployCertificateInstance](https://www.tencentcloud.com/search/?wd=DeployCertificateInstance&type=document&lang=en)
+
         ## Import
 
         ssl deploy_certificate_instance can be imported using the id, e.g.
@@ -229,6 +235,12 @@ class DeployCertificateInstanceOperation(pulumi.CustomResource):
             ],
             resource_type="cdn")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [DeployCertificateInstance](https://www.tencentcloud.com/search/?wd=DeployCertificateInstance&type=document&lang=en)
 
         ## Import
 

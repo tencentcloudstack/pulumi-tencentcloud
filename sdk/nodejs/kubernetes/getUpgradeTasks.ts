@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const example = tencentcloud.kubernetes.getUpgradeTasks({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeUpgradeTasks](https://www.tencentcloud.com/search/?wd=DescribeUpgradeTasks&type=document&lang=en)
  */
 export function getUpgradeTasks(args?: GetUpgradeTasksArgs, opts?: pulumi.InvokeOptions): Promise<GetUpgradeTasksResult> {
     args = args || {};
@@ -61,6 +67,12 @@ export interface GetUpgradeTasksResult {
  *
  * const example = tencentcloud.kubernetes.getUpgradeTasks({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeUpgradeTasks](https://www.tencentcloud.com/search/?wd=DescribeUpgradeTasks&type=document&lang=en)
  */
 export function getUpgradeTasksOutput(args?: GetUpgradeTasksOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetUpgradeTasksResult> {
     args = args || {};

@@ -185,6 +185,15 @@ class EndPointServiceWhiteList(pulumi.CustomResource):
             description="terraform for test")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateVpcEndPointServiceWhiteList](https://www.tencentcloud.com/document/api/215/40157)
+        * Read: [DescribeVpcEndPointServiceWhiteList](https://www.tencentcloud.com/document/api/215/40151)
+        * Update: [ModifyVpcEndPointServiceWhiteList](https://www.tencentcloud.com/document/api/215/40146)
+        * Delete: [DeleteVpcEndPointServiceWhiteList](https://www.tencentcloud.com/document/api/215/40154)
+
         ## Import
 
         vpc end_point_service_white_list can be imported using the id, e.g.
@@ -220,6 +229,15 @@ class EndPointServiceWhiteList(pulumi.CustomResource):
             end_point_service_id="vpcsvc-69y13tdb",
             description="terraform for test")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateVpcEndPointServiceWhiteList](https://www.tencentcloud.com/document/api/215/40157)
+        * Read: [DescribeVpcEndPointServiceWhiteList](https://www.tencentcloud.com/document/api/215/40151)
+        * Update: [ModifyVpcEndPointServiceWhiteList](https://www.tencentcloud.com/document/api/215/40146)
+        * Delete: [DeleteVpcEndPointServiceWhiteList](https://www.tencentcloud.com/document/api/215/40154)
 
         ## Import
 

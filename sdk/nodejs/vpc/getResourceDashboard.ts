@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     vpcIds: ["vpc-4owdpnwr"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeVpcResourceDashboard](https://www.tencentcloud.com/document/api/215/36076)
  */
 export function getResourceDashboard(args: GetResourceDashboardArgs, opts?: pulumi.InvokeOptions): Promise<GetResourceDashboardResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetResourceDashboardResult {
  *     vpcIds: ["vpc-4owdpnwr"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeVpcResourceDashboard](https://www.tencentcloud.com/document/api/215/36076)
  */
 export function getResourceDashboardOutput(args: GetResourceDashboardOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetResourceDashboardResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

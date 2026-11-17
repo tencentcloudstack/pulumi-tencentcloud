@@ -47,6 +47,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeImageSpriteTemplates](https://www.tencentcloud.com/document/api/266/34148)
         /// </summary>
         public static Task<GetImageSpriteTemplatesResult> InvokeAsync(GetImageSpriteTemplatesArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetImageSpriteTemplatesResult>("tencentcloud:Vod/getImageSpriteTemplates:getImageSpriteTemplates", args ?? new GetImageSpriteTemplatesArgs(), options.WithDefaults());
@@ -86,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeImageSpriteTemplates](https://www.tencentcloud.com/document/api/266/34148)
         /// </summary>
         public static Output<GetImageSpriteTemplatesResult> Invoke(GetImageSpriteTemplatesInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetImageSpriteTemplatesResult>("tencentcloud:Vod/getImageSpriteTemplates:getImageSpriteTemplates", args ?? new GetImageSpriteTemplatesInvokeArgs(), options.WithDefaults());
@@ -125,6 +137,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeImageSpriteTemplates](https://www.tencentcloud.com/document/api/266/34148)
         /// </summary>
         public static Output<GetImageSpriteTemplatesResult> Invoke(GetImageSpriteTemplatesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetImageSpriteTemplatesResult>("tencentcloud:Vod/getImageSpriteTemplates:getImageSpriteTemplates", args ?? new GetImageSpriteTemplatesInvokeArgs(), options.WithDefaults());

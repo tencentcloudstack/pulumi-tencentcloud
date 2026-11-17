@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeConfigGroupVersions](https://www.tencentcloud.com/document/api/1145/57974)
         /// </summary>
         public static Task<GetConfigGroupVersionsResult> InvokeAsync(GetConfigGroupVersionsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetConfigGroupVersionsResult>("tencentcloud:Teo/getConfigGroupVersions:getConfigGroupVersions", args ?? new GetConfigGroupVersionsArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeConfigGroupVersions](https://www.tencentcloud.com/document/api/1145/57974)
         /// </summary>
         public static Output<GetConfigGroupVersionsResult> Invoke(GetConfigGroupVersionsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetConfigGroupVersionsResult>("tencentcloud:Teo/getConfigGroupVersions:getConfigGroupVersions", args ?? new GetConfigGroupVersionsInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeConfigGroupVersions](https://www.tencentcloud.com/document/api/1145/57974)
         /// </summary>
         public static Output<GetConfigGroupVersionsResult> Invoke(GetConfigGroupVersionsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetConfigGroupVersionsResult>("tencentcloud:Teo/getConfigGroupVersions:getConfigGroupVersions", args ?? new GetConfigGroupVersionsInvokeArgs(), options.WithDefaults());

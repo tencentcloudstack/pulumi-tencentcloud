@@ -120,6 +120,12 @@ def get_cluster_native_node_pools(cluster_id: Optional[_builtins.str] = None,
         ])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeNodePools](https://www.tencentcloud.com/document/api/457/66311)
+
 
     :param _builtins.str cluster_id: ID of the cluster.
     :param Sequence[Union['GetClusterNativeNodePoolsFilterArgs', 'GetClusterNativeNodePoolsFilterArgsDict']] filters: Query filter conditions: NodePoolsName, Filter according to the node pool name, type: String, required: no. NodePoolsId, Filter according to the node pool ID, type: String, required: no. tags, Filter according to the label key value pairs, type: String, required: no. tag:tag-key, Filter according to the label key value pairs, type: String, required: no.
@@ -163,6 +169,12 @@ def get_cluster_native_node_pools_output(cluster_id: pulumi.Input[Optional[_buil
             },
         ])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeNodePools](https://www.tencentcloud.com/document/api/457/66311)
 
 
     :param _builtins.str cluster_id: ID of the cluster.

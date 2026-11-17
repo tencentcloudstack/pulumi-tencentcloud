@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [GetTriggerTaskVersion](https://www.tencentcloud.com/document/api/1174/77925)
 func GetTriggerTaskVersion(ctx *pulumi.Context, args *GetTriggerTaskVersionArgs, opts ...pulumi.InvokeOption) (*GetTriggerTaskVersionResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetTriggerTaskVersionResult

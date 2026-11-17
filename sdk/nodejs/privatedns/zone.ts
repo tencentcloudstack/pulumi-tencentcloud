@@ -44,6 +44,10 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {
+ *     name: "vpc-example",
+ *     cidrBlock: "10.0.0.0/16",
+ * });
  * const example = new tencentcloud.privatedns.Zone("example", {
  *     domain: "domain.com",
  *     remark: "remark.",
@@ -55,7 +59,6 @@ import * as utilities from "../utilities";
  *         uin: "123456789",
  *         uniqVpcId: "vpc-adsebmya",
  *         region: "ap-guangzhou",
- *         vpcName: "vpc-name",
  *     }],
  *     dnsForwardStatus: "DISABLED",
  *     cnameSpeedupStatus: "ENABLED",
@@ -65,9 +68,29 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreatePrivateZone](https://www.tencentcloud.com/document/api/1097/42123)
+ *   - [DescribePrivateZone](https://www.tencentcloud.com/document/api/1097/42117)
+ *   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+ *   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+ * * Read:
+ *   - [DescribePrivateZone](https://www.tencentcloud.com/document/api/1097/42117)
+ *   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+ * * Update:
+ *   - [DescribePrivateZone](https://www.tencentcloud.com/document/api/1097/42117)
+ *   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+ *   - [ModifyPrivateZone](https://www.tencentcloud.com/document/api/1097/42112)
+ *   - [ModifyPrivateZoneVpc](https://www.tencentcloud.com/document/api/1097/42110)
+ *   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+ * * Delete: [DeletePrivateZone](https://www.tencentcloud.com/document/api/1097/42121)
+ *
  * ## Import
  *
- * Private Dns Zone can be imported, e.g.
+ * Private Dns Zone can be imported by id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:PrivateDns/zone:Zone example zone-6xg5xgky

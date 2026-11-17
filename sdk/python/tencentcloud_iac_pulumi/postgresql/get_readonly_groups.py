@@ -134,6 +134,12 @@ def get_readonly_groups(filters: Optional[Sequence[Union['GetReadonlyGroupsFilte
         order_by_type="asc")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeReadOnlyGroups](https://www.tencentcloud.com/document/api/409/39725)
+
 
     :param Sequence[Union['GetReadonlyGroupsFilterArgs', 'GetReadonlyGroupsFilterArgsDict']] filters: Filter condition. The primary ID must be specified in the format of db-master-instance-id to filter results, or else null will be returned.
     :param _builtins.str order_by: Sorting criterion. Valid values:ROGroupId, CreateTime, Name.
@@ -188,6 +194,12 @@ def get_readonly_groups_output(filters: pulumi.Input[Optional[Optional[Sequence[
         order_by="CreateTime",
         order_by_type="asc")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeReadOnlyGroups](https://www.tencentcloud.com/document/api/409/39725)
 
 
     :param Sequence[Union['GetReadonlyGroupsFilterArgs', 'GetReadonlyGroupsFilterArgsDict']] filters: Filter condition. The primary ID must be specified in the format of db-master-instance-id to filter results, or else null will be returned.

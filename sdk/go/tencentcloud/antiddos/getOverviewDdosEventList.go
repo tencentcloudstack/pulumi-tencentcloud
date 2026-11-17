@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeOverviewDDoSEventList](https://www.tencentcloud.com/document/api/1213/61338)
 func GetOverviewDdosEventList(ctx *pulumi.Context, args *GetOverviewDdosEventListArgs, opts ...pulumi.InvokeOption) (*GetOverviewDdosEventListResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetOverviewDdosEventListResult

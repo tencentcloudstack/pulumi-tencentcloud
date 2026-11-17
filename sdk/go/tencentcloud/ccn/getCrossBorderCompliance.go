@@ -43,6 +43,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeCrossBorderCompliance](https://www.tencentcloud.com/document/api/215/38275)
 func GetCrossBorderCompliance(ctx *pulumi.Context, args *GetCrossBorderComplianceArgs, opts ...pulumi.InvokeOption) (*GetCrossBorderComplianceResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetCrossBorderComplianceResult

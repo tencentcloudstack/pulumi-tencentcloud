@@ -45,6 +45,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeRuleTemplates](https://www.tencentcloud.com/document/api/1174/61110)
 func GetRuleTemplates(ctx *pulumi.Context, args *GetRuleTemplatesArgs, opts ...pulumi.InvokeOption) (*GetRuleTemplatesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetRuleTemplatesResult

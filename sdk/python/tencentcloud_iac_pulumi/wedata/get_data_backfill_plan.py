@@ -117,6 +117,12 @@ def get_data_backfill_plan(data_backfill_plan_id: Optional[_builtins.str] = None
         data_backfill_plan_id="deb71ea1-f708-47ab-8eb6-491ce5b9c011")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetDataBackfillPlan](https://www.tencentcloud.com/document/api/1174/77891)
+
 
     :param _builtins.str data_backfill_plan_id: Backfill Plan ID.
     :param _builtins.str project_id: Project ID.
@@ -155,6 +161,12 @@ def get_data_backfill_plan_output(data_backfill_plan_id: pulumi.Input[Optional[_
     wedata_data_backfill_plan = tencentcloud.wedata.get_data_backfill_plan(project_id="1859317240494305280",
         data_backfill_plan_id="deb71ea1-f708-47ab-8eb6-491ce5b9c011")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetDataBackfillPlan](https://www.tencentcloud.com/document/api/1174/77891)
 
 
     :param _builtins.str data_backfill_plan_id: Backfill Plan ID.

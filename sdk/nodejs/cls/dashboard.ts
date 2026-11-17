@@ -35,6 +35,15 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateDashboard](https://www.tencentcloud.com/document/api/614/80547)
+ * * Read: [DescribeDashboards](https://www.tencentcloud.com/document/api/614/82371)
+ * * Update: [ModifyDashboard](https://www.tencentcloud.com/document/api/614/82370)
+ * * Delete: [DeleteDashboard](https://www.tencentcloud.com/document/api/614/80546)
+ *
  * ## Import
  *
  * CLS dashboard can be imported using the id, e.g.

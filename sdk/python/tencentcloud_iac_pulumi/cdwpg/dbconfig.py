@@ -127,6 +127,20 @@ class Dbconfig(pulumi.CustomResource):
             }])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeDBParams](https://www.tencentcloud.com/document/api/1138/69317)
+          - [DescribeInstanceState](https://www.tencentcloud.com/document/api/1138/68302)
+          - [ModifyDBParameters](https://www.tencentcloud.com/document/api/1138/69330)
+        * Read: [DescribeDBParams](https://www.tencentcloud.com/document/api/1138/69317)
+        * Update:
+          - [DescribeDBParams](https://www.tencentcloud.com/document/api/1138/69317)
+          - [DescribeInstanceState](https://www.tencentcloud.com/document/api/1138/68302)
+          - [ModifyDBParameters](https://www.tencentcloud.com/document/api/1138/69330)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -156,6 +170,20 @@ class Dbconfig(pulumi.CustomResource):
                 "parameter_value": "10001",
             }])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeDBParams](https://www.tencentcloud.com/document/api/1138/69317)
+          - [DescribeInstanceState](https://www.tencentcloud.com/document/api/1138/68302)
+          - [ModifyDBParameters](https://www.tencentcloud.com/document/api/1138/69330)
+        * Read: [DescribeDBParams](https://www.tencentcloud.com/document/api/1138/69317)
+        * Update:
+          - [DescribeDBParams](https://www.tencentcloud.com/document/api/1138/69317)
+          - [DescribeInstanceState](https://www.tencentcloud.com/document/api/1138/68302)
+          - [ModifyDBParameters](https://www.tencentcloud.com/document/api/1138/69330)
 
 
         :param str resource_name: The name of the resource.

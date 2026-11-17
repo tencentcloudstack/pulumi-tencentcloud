@@ -163,6 +163,14 @@ class RestartInstanceOperation(pulumi.CustomResource):
         restart_instance_operation = tencentcloud.elasticsearch.RestartInstanceOperation("restart_instance_operation", instance_id="es-xxxxxx")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeInstances](https://www.tencentcloud.com/document/api/845/32214)
+          - [RestartInstance](https://www.tencentcloud.com/document/api/845/32213)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -190,6 +198,14 @@ class RestartInstanceOperation(pulumi.CustomResource):
 
         restart_instance_operation = tencentcloud.elasticsearch.RestartInstanceOperation("restart_instance_operation", instance_id="es-xxxxxx")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeInstances](https://www.tencentcloud.com/document/api/845/32214)
+          - [RestartInstance](https://www.tencentcloud.com/document/api/845/32213)
 
 
         :param str resource_name: The name of the resource.

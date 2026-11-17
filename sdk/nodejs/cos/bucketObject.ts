@@ -38,6 +38,13 @@ import * as utilities from "../utilities";
  *     content: "the content that you want to upload.",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [GetSecretValue](https://www.tencentcloud.com/document/api/1078/38649)
+ * * Update: [GetSecretValue](https://www.tencentcloud.com/document/api/1078/38649)
  */
 export class BucketObject extends pulumi.CustomResource {
     /**

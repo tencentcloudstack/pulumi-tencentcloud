@@ -255,6 +255,25 @@ class Pair(pulumi.CustomResource):
             public_key="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDjd8fTnp7Dcuj4mLaQxf9Zs/ORgUL9fQxRCNKkPgP1paTy1I513maMX126i36Lxxl3+FUB52oVbo/FgwlIfX8hyCnv8MCxqnuSDozf1CD0/wRYHcTWAtgHQHBPCC2nJtod6cVC3kB18KeV4U7zsxmwFeBIxojMOOmcOBuh7+trRw==")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateKeyPair](https://www.tencentcloud.com/document/api/213/33231)
+          - [ImportKeyPair](https://www.tencentcloud.com/document/api/213/33227)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribeKeyPairs](https://www.tencentcloud.com/document/api/213/33229)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [ModifyKeyPairAttribute](https://www.tencentcloud.com/document/api/213/33226)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Delete:
+          - [DeleteKeyPairs](https://www.tencentcloud.com/document/api/213/33230)
+          - [DescribeKeyPairs](https://www.tencentcloud.com/document/api/213/33229)
+          - [DisassociateInstancesKeyPairs](https://www.tencentcloud.com/document/api/213/33228)
+
         ## Import
 
         Key pair can be imported using the id, e.g.
@@ -294,6 +313,25 @@ class Pair(pulumi.CustomResource):
             key_name="terraform_test",
             public_key="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQDjd8fTnp7Dcuj4mLaQxf9Zs/ORgUL9fQxRCNKkPgP1paTy1I513maMX126i36Lxxl3+FUB52oVbo/FgwlIfX8hyCnv8MCxqnuSDozf1CD0/wRYHcTWAtgHQHBPCC2nJtod6cVC3kB18KeV4U7zsxmwFeBIxojMOOmcOBuh7+trRw==")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateKeyPair](https://www.tencentcloud.com/document/api/213/33231)
+          - [ImportKeyPair](https://www.tencentcloud.com/document/api/213/33227)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribeKeyPairs](https://www.tencentcloud.com/document/api/213/33229)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [ModifyKeyPairAttribute](https://www.tencentcloud.com/document/api/213/33226)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Delete:
+          - [DeleteKeyPairs](https://www.tencentcloud.com/document/api/213/33230)
+          - [DescribeKeyPairs](https://www.tencentcloud.com/document/api/213/33229)
+          - [DisassociateInstancesKeyPairs](https://www.tencentcloud.com/document/api/213/33228)
 
         ## Import
 

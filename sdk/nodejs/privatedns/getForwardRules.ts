@@ -55,6 +55,12 @@ import * as utilities from "../utilities";
  *     ],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeForwardRuleList](https://www.tencentcloud.com/document/api/1097/65935)
  */
 export function getForwardRules(args?: GetForwardRulesArgs, opts?: pulumi.InvokeOptions): Promise<GetForwardRulesResult> {
     args = args || {};
@@ -143,6 +149,12 @@ export interface GetForwardRulesResult {
  *     ],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeForwardRuleList](https://www.tencentcloud.com/document/api/1097/65935)
  */
 export function getForwardRulesOutput(args?: GetForwardRulesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetForwardRulesResult> {
     args = args || {};

@@ -142,6 +142,14 @@ def get_customer_gateways(id: Optional[_builtins.str] = None,
         })
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeCustomerGateways](https://www.tencentcloud.com/document/api/215/17516)
+      - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+
 
     :param _builtins.str id: ID of the VPN customer gateway.
     :param _builtins.str name: Name of the customer gateway. The length of character is limited to 1-60.
@@ -198,6 +206,14 @@ def get_customer_gateways_output(id: pulumi.Input[Optional[Optional[_builtins.st
             "createBy": "Terraform",
         })
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeCustomerGateways](https://www.tencentcloud.com/document/api/215/17516)
+      - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
 
 
     :param _builtins.str id: ID of the VPN customer gateway.

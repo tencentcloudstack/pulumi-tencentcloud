@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     excludeCancelledActivity: true,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAutoScalingGroupLastActivities](https://www.tencentcloud.com/document/api/377/33204)
  */
 export function getLastActivity(args: GetLastActivityArgs, opts?: pulumi.InvokeOptions): Promise<GetLastActivityResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -78,6 +84,12 @@ export interface GetLastActivityResult {
  *     excludeCancelledActivity: true,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAutoScalingGroupLastActivities](https://www.tencentcloud.com/document/api/377/33204)
  */
 export function getLastActivityOutput(args: GetLastActivityOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetLastActivityResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     storageType: "CLOUD_HSSD",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeProductConfig](https://www.tencentcloud.com/document/api/409/16776)
  */
 export function getSpecinfos(args: GetSpecinfosArgs, opts?: pulumi.InvokeOptions): Promise<GetSpecinfosResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -78,6 +84,12 @@ export interface GetSpecinfosResult {
  *     storageType: "CLOUD_HSSD",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeProductConfig](https://www.tencentcloud.com/document/api/409/16776)
  */
 export function getSpecinfosOutput(args: GetSpecinfosOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSpecinfosResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

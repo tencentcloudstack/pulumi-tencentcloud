@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const bundle = tencentcloud.lighthouse.getBundle({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeBundles](https://www.tencentcloud.com/document/api/1103/42472)
  */
 export function getBundle(args?: GetBundleArgs, opts?: pulumi.InvokeOptions): Promise<GetBundleResult> {
     args = args || {};
@@ -96,6 +102,12 @@ export interface GetBundleResult {
  *
  * const bundle = tencentcloud.lighthouse.getBundle({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeBundles](https://www.tencentcloud.com/document/api/1103/42472)
  */
 export function getBundleOutput(args?: GetBundleOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetBundleResult> {
     args = args || {};

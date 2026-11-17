@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const regions = tencentcloud.postgresql.getRegions({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRegions](https://www.tencentcloud.com/document/api/409/16768)
  */
 export function getRegions(args?: GetRegionsArgs, opts?: pulumi.InvokeOptions): Promise<GetRegionsResult> {
     args = args || {};
@@ -61,6 +67,12 @@ export interface GetRegionsResult {
  *
  * const regions = tencentcloud.postgresql.getRegions({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRegions](https://www.tencentcloud.com/document/api/409/16768)
  */
 export function getRegionsOutput(args?: GetRegionsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRegionsResult> {
     args = args || {};

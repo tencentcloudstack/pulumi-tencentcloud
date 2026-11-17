@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeOIDCConfig](https://www.tencentcloud.com/document/api/598/47113)
 func GetOidcConfig(ctx *pulumi.Context, args *GetOidcConfigArgs, opts ...pulumi.InvokeOption) (*GetOidcConfigResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetOidcConfigResult

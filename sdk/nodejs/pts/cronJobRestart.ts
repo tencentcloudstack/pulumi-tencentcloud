@@ -18,6 +18,12 @@ import * as utilities from "../utilities";
  *     cronJobId: "job-dtm93vx0",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [RestartCronJobs](https://www.tencentcloud.com/document/api/1249/68500)
  */
 export class CronJobRestart extends pulumi.CustomResource {
     /**

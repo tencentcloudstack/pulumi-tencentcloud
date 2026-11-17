@@ -72,6 +72,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateUserVpcConnection](https://www.tencentcloud.com/search/?wd=CreateUserVpcConnection&type=document&lang=en)
+// * Read: [DescribeUserVpcConnection](https://www.tencentcloud.com/search/?wd=DescribeUserVpcConnection&type=document&lang=en)
+// * Delete: [DeleteUserVpcConnection](https://www.tencentcloud.com/search/?wd=DeleteUserVpcConnection&type=document&lang=en)
 type UserVpcConnection struct {
 	pulumi.CustomResourceState
 

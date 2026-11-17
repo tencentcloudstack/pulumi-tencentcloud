@@ -85,6 +85,14 @@ class StopInstance(pulumi.CustomResource):
         stop_instance = tencentcloud.lighthouse.StopInstance("stop_instance", instance_id="lhins-xxxxxx")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeInstances](https://www.tencentcloud.com/document/api/1103/42498)
+          - [StopInstances](https://www.tencentcloud.com/document/api/1103/42487)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -107,6 +115,14 @@ class StopInstance(pulumi.CustomResource):
 
         stop_instance = tencentcloud.lighthouse.StopInstance("stop_instance", instance_id="lhins-xxxxxx")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeInstances](https://www.tencentcloud.com/document/api/1103/42498)
+          - [StopInstances](https://www.tencentcloud.com/document/api/1103/42487)
 
 
         :param str resource_name: The name of the resource.

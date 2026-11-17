@@ -48,6 +48,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSecurityAuditLogDownloadUrls](https://www.tencentcloud.com/document/api/1035/41192)
         /// </summary>
         public static Task<GetSecurityAuditLogDownloadUrlsResult> InvokeAsync(GetSecurityAuditLogDownloadUrlsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSecurityAuditLogDownloadUrlsResult>("tencentcloud:Dbbrain/getSecurityAuditLogDownloadUrls:getSecurityAuditLogDownloadUrls", args ?? new GetSecurityAuditLogDownloadUrlsArgs(), options.WithDefaults());
@@ -88,6 +94,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSecurityAuditLogDownloadUrls](https://www.tencentcloud.com/document/api/1035/41192)
         /// </summary>
         public static Output<GetSecurityAuditLogDownloadUrlsResult> Invoke(GetSecurityAuditLogDownloadUrlsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSecurityAuditLogDownloadUrlsResult>("tencentcloud:Dbbrain/getSecurityAuditLogDownloadUrls:getSecurityAuditLogDownloadUrls", args ?? new GetSecurityAuditLogDownloadUrlsInvokeArgs(), options.WithDefaults());
@@ -128,6 +140,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSecurityAuditLogDownloadUrls](https://www.tencentcloud.com/document/api/1035/41192)
         /// </summary>
         public static Output<GetSecurityAuditLogDownloadUrlsResult> Invoke(GetSecurityAuditLogDownloadUrlsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetSecurityAuditLogDownloadUrlsResult>("tencentcloud:Dbbrain/getSecurityAuditLogDownloadUrls:getSecurityAuditLogDownloadUrls", args ?? new GetSecurityAuditLogDownloadUrlsInvokeArgs(), options.WithDefaults());

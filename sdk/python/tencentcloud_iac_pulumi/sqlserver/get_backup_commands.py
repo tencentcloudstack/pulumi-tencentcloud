@@ -128,6 +128,12 @@ def get_backup_commands(backup_file_type: Optional[_builtins.str] = None,
         is_recovery="NO")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBackupCommand](https://www.tencentcloud.com/document/api/238/39839)
+
 
     :param _builtins.str backup_file_type: Backup file type. Full: full backup. FULL_LOG: full backup which needs log increments. FULL_DIFF: full backup which needs differential increments. LOG: log backup. DIFF: differential backup.
     :param _builtins.str data_base_name: Database name.
@@ -171,6 +177,12 @@ def get_backup_commands_output(backup_file_type: pulumi.Input[Optional[_builtins
         data_base_name="keep-publish-instance",
         is_recovery="NO")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBackupCommand](https://www.tencentcloud.com/document/api/238/39839)
 
 
     :param _builtins.str backup_file_type: Backup file type. Full: full backup. FULL_LOG: full backup which needs log increments. FULL_DIFF: full backup which needs differential increments. LOG: log backup. DIFF: differential backup.

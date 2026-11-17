@@ -23,7 +23,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// </summary>
         public readonly string AttesterSource;
         /// <summary>
-        /// ID of the resource.
+        /// Client attester ID, e.g. `attest-xxxxxxxx`.
         /// </summary>
         public readonly string? Id;
         /// <summary>

@@ -41,6 +41,14 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [EnablePolicyType](https://www.tencentcloud.com/document/api/1031/78356)
+// * Read: [DescribePolicyConfig](https://www.tencentcloud.com/document/api/1031/78359)
+// * Delete: [DisablePolicyType](https://www.tencentcloud.com/document/api/1031/78357)
+//
 // ## Import
 //
 // organization orgManagePolicyConfig can be imported using the id, e.g.

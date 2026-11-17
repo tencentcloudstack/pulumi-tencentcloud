@@ -43,6 +43,14 @@ class SyncAsset(pulumi.CustomResource):
         example = tencentcloud.cfw.SyncAsset("example")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeAssetSync](https://www.tencentcloud.com/search/?wd=DescribeAssetSync&type=document&lang=en)
+          - [ModifyAssetSync](https://www.tencentcloud.com/search/?wd=ModifyAssetSync&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -64,6 +72,14 @@ class SyncAsset(pulumi.CustomResource):
 
         example = tencentcloud.cfw.SyncAsset("example")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeAssetSync](https://www.tencentcloud.com/search/?wd=DescribeAssetSync&type=document&lang=en)
+          - [ModifyAssetSync](https://www.tencentcloud.com/search/?wd=ModifyAssetSync&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

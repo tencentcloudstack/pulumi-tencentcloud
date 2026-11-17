@@ -18,6 +18,12 @@ import * as utilities from "../utilities";
  *     filePath: "/cos_backup/test.txt",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeFileDownloadUrl](https://www.tencentcloud.com/document/api/237/44248)
  */
 export function getFileDownloadUrl(args: GetFileDownloadUrlArgs, opts?: pulumi.InvokeOptions): Promise<GetFileDownloadUrlResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -76,6 +82,12 @@ export interface GetFileDownloadUrlResult {
  *     filePath: "/cos_backup/test.txt",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeFileDownloadUrl](https://www.tencentcloud.com/document/api/237/44248)
  */
 export function getFileDownloadUrlOutput(args: GetFileDownloadUrlOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetFileDownloadUrlResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

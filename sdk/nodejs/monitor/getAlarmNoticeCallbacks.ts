@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const alarmNoticeCallbacks = tencentcloud.monitor.getAlarmNoticeCallbacks({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAlarmNoticeCallbacks](https://www.tencentcloud.com/document/api/248/39301)
  */
 export function getAlarmNoticeCallbacks(args?: GetAlarmNoticeCallbacksArgs, opts?: pulumi.InvokeOptions): Promise<GetAlarmNoticeCallbacksResult> {
     args = args || {};
@@ -67,6 +73,12 @@ export interface GetAlarmNoticeCallbacksResult {
  *
  * const alarmNoticeCallbacks = tencentcloud.monitor.getAlarmNoticeCallbacks({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAlarmNoticeCallbacks](https://www.tencentcloud.com/document/api/248/39301)
  */
 export function getAlarmNoticeCallbacksOutput(args?: GetAlarmNoticeCallbacksOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAlarmNoticeCallbacksResult> {
     args = args || {};

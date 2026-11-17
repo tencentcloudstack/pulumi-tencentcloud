@@ -23,7 +23,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Outputs
         /// </summary>
         public readonly bool? DeleteWithInstance;
         /// <summary>
-        /// Data disk ID.
+        /// System disk ID.
         /// </summary>
         public readonly string? DiskId;
         /// <summary>

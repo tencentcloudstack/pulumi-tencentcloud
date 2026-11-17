@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const datahubGroupOffsets = tencentcloud.ckafka.getDatahubGroupOffsets({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDatahubGroupOffsets](https://www.tencentcloud.com/search/?wd=DescribeDatahubGroupOffsets&type=document&lang=en)
  */
 export function getDatahubGroupOffsets(args: GetDatahubGroupOffsetsArgs, opts?: pulumi.InvokeOptions): Promise<GetDatahubGroupOffsetsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -78,6 +84,12 @@ export interface GetDatahubGroupOffsetsResult {
  *
  * const datahubGroupOffsets = tencentcloud.ckafka.getDatahubGroupOffsets({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDatahubGroupOffsets](https://www.tencentcloud.com/search/?wd=DescribeDatahubGroupOffsets&type=document&lang=en)
  */
 export function getDatahubGroupOffsetsOutput(args: GetDatahubGroupOffsetsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDatahubGroupOffsetsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

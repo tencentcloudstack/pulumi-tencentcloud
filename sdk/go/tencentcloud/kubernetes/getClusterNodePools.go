@@ -52,6 +52,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeClusterNodePools](https://www.tencentcloud.com/document/api/457/38777)
 func GetClusterNodePools(ctx *pulumi.Context, args *GetClusterNodePoolsArgs, opts ...pulumi.InvokeOption) (*GetClusterNodePoolsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetClusterNodePoolsResult

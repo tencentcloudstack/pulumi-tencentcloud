@@ -13,36 +13,74 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const mongodb = new tencentcloud.mongodb.Instance("mongodb", {
- *     instanceName: "tf-mongodb-test",
+ * const example = new tencentcloud.mongodb.Instance("example", {
+ *     instanceName: "tf-example",
+ *     cpu: 2,
  *     memory: 4,
  *     volume: 100,
- *     engineVersion: "MONGO_40_WT",
- *     machineType: "HIO10G",
- *     availableZone: availabilityZone,
+ *     engineVersion: "MONGO_80_WT",
+ *     machineType: "GE.LD.T1",
+ *     availableZone: "ap-guangzhou-6",
+ *     vpcId: "vpc-i5yyodl9",
+ *     subnetId: "subnet-hhi88a58",
  *     projectId: 0,
- *     password: "test1234",
- *     tags: {
- *         test: "test",
- *     },
+ *     password: "Password@2026",
+ *     dataEncryption: "TDE",
+ *     encryptionKeySource: "manual",
+ *     keyId: "KMS-MONGODB",
+ *     kmsRegion: "ap-guangzhou",
  * });
- * const mongodbStandbyInstance = new tencentcloud.mongodb.StandbyInstance("mongodb", {
- *     instanceName: "tf-mongodb-standby-test",
+ * const exampleStandbyInstance = new tencentcloud.mongodb.StandbyInstance("example", {
+ *     instanceName: "tf-example",
+ *     cpu: 2,
  *     memory: 4,
  *     volume: 100,
- *     availableZone: "ap-shanghai-2",
+ *     availableZone: "ap-guangzhou-7",
+ *     vpcId: "vpc-i5yyodl9",
+ *     subnetId: "subnet-d4umunpy",
  *     projectId: 0,
- *     fatherInstanceId: mongodb.id,
+ *     fatherInstanceId: example.id,
  *     fatherInstanceRegion: "ap-guangzhou",
+ *     dataEncryption: "TDE",
+ *     encryptionKeySource: "manual",
+ *     keyId: "KMS-MONGODB",
+ *     kmsRegion: "ap-guangzhou",
  *     tags: {
- *         test: "test",
+ *         createBy: "Terraform",
  *     },
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateDBInstance](https://www.tencentcloud.com/search/?wd=CreateDBInstance&type=document&lang=en)
+ *   - [CreateDBInstanceHour](https://www.tencentcloud.com/document/api/240/34704)
+ *   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/240/34702)
+ *   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+ *   - [RenameInstance](https://www.tencentcloud.com/document/api/240/34697)
+ * * Read:
+ *   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/240/34702)
+ *   - [DescribeSecurityGroup](https://www.tencentcloud.com/document/api/240/40341)
+ *   - [DescribeTransparentDataEncryptionStatus](https://www.tencentcloud.com/search/?wd=DescribeTransparentDataEncryptionStatus&type=document&lang=en)
+ * * Update:
+ *   - [AssignProject](https://www.tencentcloud.com/document/api/240/34705)
+ *   - [DescribeDBInstanceDeal](https://www.tencentcloud.com/document/api/240/37330)
+ *   - [ModifyDBInstanceSecurityGroup](https://www.tencentcloud.com/document/api/240/45894)
+ *   - [ModifyDBInstanceSpec](https://www.tencentcloud.com/document/api/240/34699)
+ *   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+ *   - [RenameInstance](https://www.tencentcloud.com/document/api/240/34697)
+ *   - [RenewDBInstances](https://www.tencentcloud.com/document/api/240/37326)
+ * * Delete:
+ *   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/240/34702)
+ *   - [IsolateDBInstance](https://www.tencentcloud.com/document/api/240/34700)
+ *   - [OfflineIsolatedDBInstance](https://www.tencentcloud.com/document/api/240/34698)
+ *
  * ## Import
  *
- * Mongodb instance can be imported using the id, e.g.
+ * Mongodb standby instance can be imported using the id, e.g.
  *
  * ```sh
  * $ pulumi import tencentcloud:Mongodb/standbyInstance:StandbyInstance mongodb cmgo-41s6jwy4
@@ -89,9 +127,21 @@ export class StandbyInstance extends pulumi.CustomResource {
      */
     declare public readonly chargeType: pulumi.Output<string | undefined>;
     /**
+     * The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.
+     */
+    declare public readonly cpu: pulumi.Output<number>;
+    /**
      * Creation time of the Mongodb instance.
      */
     declare public /*out*/ readonly createTime: pulumi.Output<string>;
+    /**
+     * Database storage encryption setting. `No_Encryption`: Storage encryption is not used. `TDE`: Enables TDE storage encryption. Note: this field does not support update, please recreate the resource if you need to change it.
+     */
+    declare public readonly dataEncryption: pulumi.Output<string>;
+    /**
+     * If TDE storage encryption is selected, the key source must be specified. `auto`: Automatically generate the key. `manual`: Manually specify the key. Note: this field does not support update, please recreate the resource if you need to change it.
+     */
+    declare public readonly encryptionKeySource: pulumi.Output<string | undefined>;
     /**
      * Version of the standby Mongodb instance and must be same as the version of main instance.
      */
@@ -115,6 +165,14 @@ export class StandbyInstance extends pulumi.CustomResource {
      * Name of the Mongodb instance.
      */
     declare public readonly instanceName: pulumi.Output<string>;
+    /**
+     * Please note that this field is the CMK name, corresponding to the `alias` field in KMS. Key ID. If `manual` is selected as the key resource, you must enter the specified key ID. Note: this field does not support update, please recreate the resource if you need to change it.
+     */
+    declare public readonly keyId: pulumi.Output<string>;
+    /**
+     * Key ID. If `manual` is selected as the key resource, you must enter the specified key region. Note: this field does not support update, please recreate the resource if you need to change it.
+     */
+    declare public readonly kmsRegion: pulumi.Output<string>;
     /**
      * Type of standby Mongodb instance and must be same as the type of main instance.
      */
@@ -180,12 +238,17 @@ export class StandbyInstance extends pulumi.CustomResource {
             resourceInputs["autoRenewFlag"] = state?.autoRenewFlag;
             resourceInputs["availableZone"] = state?.availableZone;
             resourceInputs["chargeType"] = state?.chargeType;
+            resourceInputs["cpu"] = state?.cpu;
             resourceInputs["createTime"] = state?.createTime;
+            resourceInputs["dataEncryption"] = state?.dataEncryption;
+            resourceInputs["encryptionKeySource"] = state?.encryptionKeySource;
             resourceInputs["engineVersion"] = state?.engineVersion;
             resourceInputs["fatherInstanceId"] = state?.fatherInstanceId;
             resourceInputs["fatherInstanceRegion"] = state?.fatherInstanceRegion;
             resourceInputs["inMaintenance"] = state?.inMaintenance;
             resourceInputs["instanceName"] = state?.instanceName;
+            resourceInputs["keyId"] = state?.keyId;
+            resourceInputs["kmsRegion"] = state?.kmsRegion;
             resourceInputs["machineType"] = state?.machineType;
             resourceInputs["memory"] = state?.memory;
             resourceInputs["prepaidPeriod"] = state?.prepaidPeriod;
@@ -221,10 +284,15 @@ export class StandbyInstance extends pulumi.CustomResource {
             resourceInputs["autoRenewFlag"] = args?.autoRenewFlag;
             resourceInputs["availableZone"] = args?.availableZone;
             resourceInputs["chargeType"] = args?.chargeType;
+            resourceInputs["cpu"] = args?.cpu;
+            resourceInputs["dataEncryption"] = args?.dataEncryption;
+            resourceInputs["encryptionKeySource"] = args?.encryptionKeySource;
             resourceInputs["fatherInstanceId"] = args?.fatherInstanceId;
             resourceInputs["fatherInstanceRegion"] = args?.fatherInstanceRegion;
             resourceInputs["inMaintenance"] = args?.inMaintenance;
             resourceInputs["instanceName"] = args?.instanceName;
+            resourceInputs["keyId"] = args?.keyId;
+            resourceInputs["kmsRegion"] = args?.kmsRegion;
             resourceInputs["memory"] = args?.memory;
             resourceInputs["prepaidPeriod"] = args?.prepaidPeriod;
             resourceInputs["projectId"] = args?.projectId;
@@ -262,9 +330,21 @@ export interface StandbyInstanceState {
      */
     chargeType?: pulumi.Input<string | undefined>;
     /**
+     * The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.
+     */
+    cpu?: pulumi.Input<number | undefined>;
+    /**
      * Creation time of the Mongodb instance.
      */
     createTime?: pulumi.Input<string | undefined>;
+    /**
+     * Database storage encryption setting. `No_Encryption`: Storage encryption is not used. `TDE`: Enables TDE storage encryption. Note: this field does not support update, please recreate the resource if you need to change it.
+     */
+    dataEncryption?: pulumi.Input<string | undefined>;
+    /**
+     * If TDE storage encryption is selected, the key source must be specified. `auto`: Automatically generate the key. `manual`: Manually specify the key. Note: this field does not support update, please recreate the resource if you need to change it.
+     */
+    encryptionKeySource?: pulumi.Input<string | undefined>;
     /**
      * Version of the standby Mongodb instance and must be same as the version of main instance.
      */
@@ -288,6 +368,14 @@ export interface StandbyInstanceState {
      * Name of the Mongodb instance.
      */
     instanceName?: pulumi.Input<string | undefined>;
+    /**
+     * Please note that this field is the CMK name, corresponding to the `alias` field in KMS. Key ID. If `manual` is selected as the key resource, you must enter the specified key ID. Note: this field does not support update, please recreate the resource if you need to change it.
+     */
+    keyId?: pulumi.Input<string | undefined>;
+    /**
+     * Key ID. If `manual` is selected as the key resource, you must enter the specified key region. Note: this field does not support update, please recreate the resource if you need to change it.
+     */
+    kmsRegion?: pulumi.Input<string | undefined>;
     /**
      * Type of standby Mongodb instance and must be same as the type of main instance.
      */
@@ -355,6 +443,18 @@ export interface StandbyInstanceArgs {
      */
     chargeType?: pulumi.Input<string | undefined>;
     /**
+     * The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.
+     */
+    cpu?: pulumi.Input<number | undefined>;
+    /**
+     * Database storage encryption setting. `No_Encryption`: Storage encryption is not used. `TDE`: Enables TDE storage encryption. Note: this field does not support update, please recreate the resource if you need to change it.
+     */
+    dataEncryption?: pulumi.Input<string | undefined>;
+    /**
+     * If TDE storage encryption is selected, the key source must be specified. `auto`: Automatically generate the key. `manual`: Manually specify the key. Note: this field does not support update, please recreate the resource if you need to change it.
+     */
+    encryptionKeySource?: pulumi.Input<string | undefined>;
+    /**
      * Indicates the main instance ID of standby instances.
      */
     fatherInstanceId: pulumi.Input<string>;
@@ -373,6 +473,14 @@ export interface StandbyInstanceArgs {
      * Name of the Mongodb instance.
      */
     instanceName: pulumi.Input<string>;
+    /**
+     * Please note that this field is the CMK name, corresponding to the `alias` field in KMS. Key ID. If `manual` is selected as the key resource, you must enter the specified key ID. Note: this field does not support update, please recreate the resource if you need to change it.
+     */
+    keyId?: pulumi.Input<string | undefined>;
+    /**
+     * Key ID. If `manual` is selected as the key resource, you must enter the specified key region. Note: this field does not support update, please recreate the resource if you need to change it.
+     */
+    kmsRegion?: pulumi.Input<string | undefined>;
     /**
      * Memory size. The minimum value is 2, and unit is GB. Memory and volume must be upgraded or degraded simultaneously.
      */

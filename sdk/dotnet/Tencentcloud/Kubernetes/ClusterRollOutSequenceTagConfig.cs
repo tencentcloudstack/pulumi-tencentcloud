@@ -44,6 +44,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ModifyClusterRollOutSequenceTags](https://www.tencentcloud.com/search/?wd=ModifyClusterRollOutSequenceTags&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeClusterRollOutSequenceTags](https://www.tencentcloud.com/search/?wd=DescribeClusterRollOutSequenceTags&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyClusterRollOutSequenceTags](https://www.tencentcloud.com/search/?wd=ModifyClusterRollOutSequenceTags&amp;type=document&amp;lang=en)
+    /// * Delete: [ModifyClusterRollOutSequenceTags](https://www.tencentcloud.com/search/?wd=ModifyClusterRollOutSequenceTags&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// TKE kubernetes cluster roll out sequence tag config can be imported using the cluster_id, e.g.

@@ -38,6 +38,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Route
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateRouteTable](https://www.tencentcloud.com/document/api/215/15768)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    /// * Read:
+    ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+    ///   - [DescribeRouteTables](https://www.tencentcloud.com/document/api/215/15763)
+    /// * Update:
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    ///   - [ModifyRouteTableAttribute](https://www.tencentcloud.com/document/api/215/15766)
+    /// * Delete: [DeleteRouteTable](https://www.tencentcloud.com/document/api/215/15771)
+    /// 
     /// ## Import
     /// 
     /// Vpc routetable instance can be imported, e.g.

@@ -109,6 +109,12 @@ def get_db_custom_cluster_node_resources(cluster_id: Optional[_builtins.str] = N
         node_ids=["dbcn-vvkg2xls"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBCustomClusterNodeResources](https://www.tencentcloud.com/search/?wd=DescribeDBCustomClusterNodeResources&type=document&lang=en)
+
 
     :param _builtins.str cluster_id: DB Custom cluster ID.
     :param Sequence[_builtins.str] node_ids: Node ID list. Up to 50 node IDs per request (enforced by the cloud API).
@@ -145,6 +151,12 @@ def get_db_custom_cluster_node_resources_output(cluster_id: pulumi.Input[Optiona
     example = tencentcloud.dbdc.get_db_custom_cluster_node_resources(cluster_id="dbcc-b2arjlee",
         node_ids=["dbcn-vvkg2xls"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBCustomClusterNodeResources](https://www.tencentcloud.com/search/?wd=DescribeDBCustomClusterNodeResources&type=document&lang=en)
 
 
     :param _builtins.str cluster_id: DB Custom cluster ID.

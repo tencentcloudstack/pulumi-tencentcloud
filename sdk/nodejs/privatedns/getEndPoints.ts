@@ -47,6 +47,12 @@ import * as utilities from "../utilities";
  *     ],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeEndPointList](https://www.tencentcloud.com/document/api/1097/65934)
  */
 export function getEndPoints(args?: GetEndPointsArgs, opts?: pulumi.InvokeOptions): Promise<GetEndPointsResult> {
     args = args || {};
@@ -128,6 +134,12 @@ export interface GetEndPointsResult {
  *     ],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeEndPointList](https://www.tencentcloud.com/document/api/1097/65934)
  */
 export function getEndPointsOutput(args?: GetEndPointsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetEndPointsResult> {
     args = args || {};

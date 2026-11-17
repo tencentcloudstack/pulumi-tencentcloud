@@ -18,6 +18,12 @@ import * as utilities from "../utilities";
  *     functionArg: "arg1",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [ExecuteFunction](https://www.tencentcloud.com/document/api/1041/38515)
  */
 export class ExecuteFunctionOperation extends pulumi.CustomResource {
     /**

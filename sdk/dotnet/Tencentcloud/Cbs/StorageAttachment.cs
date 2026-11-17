@@ -32,6 +32,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [AttachDisks](https://www.tencentcloud.com/document/api/362/16313)
+    ///   - [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+    /// * Read: [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+    /// * Delete:
+    ///   - [DescribeDisks](https://www.tencentcloud.com/document/api/362/16315)
+    ///   - [DetachDisks](https://www.tencentcloud.com/document/api/362/16316)
+    /// 
     /// ## Import
     /// 
     /// CBS storage attachment can be imported using the id, e.g.

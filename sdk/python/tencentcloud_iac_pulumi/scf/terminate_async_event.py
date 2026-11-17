@@ -187,6 +187,12 @@ class TerminateAsyncEvent(pulumi.CustomResource):
             grace_shutdown=True)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [TerminateAsyncEvent](https://www.tencentcloud.com/document/api/583/39733)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -216,6 +222,12 @@ class TerminateAsyncEvent(pulumi.CustomResource):
             namespace="default",
             grace_shutdown=True)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [TerminateAsyncEvent](https://www.tencentcloud.com/document/api/583/39733)
 
 
         :param str resource_name: The name of the resource.

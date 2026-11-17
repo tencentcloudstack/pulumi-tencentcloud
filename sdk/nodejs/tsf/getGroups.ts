@@ -27,6 +27,12 @@ import * as utilities from "../utilities";
  *     groupIdLists: ["group-yrjkln9v"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeGroups](https://www.tencentcloud.com/search/?wd=DescribeGroups&type=document&lang=en)
  */
 export function getGroups(args?: GetGroupsArgs, opts?: pulumi.InvokeOptions): Promise<GetGroupsResult> {
     args = args || {};
@@ -144,6 +150,12 @@ export interface GetGroupsResult {
  *     groupIdLists: ["group-yrjkln9v"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeGroups](https://www.tencentcloud.com/search/?wd=DescribeGroups&type=document&lang=en)
  */
 export function getGroupsOutput(args?: GetGroupsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetGroupsResult> {
     args = args || {};

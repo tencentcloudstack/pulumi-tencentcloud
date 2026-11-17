@@ -100,6 +100,12 @@ def get_listeners_by_targets(backends: Optional[Sequence[Union['GetListenersByTa
     }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeLBListeners](https://www.tencentcloud.com/document/api/214/43272)
+
 
     :param Sequence[Union['GetListenersByTargetsBackendArgs', 'GetListenersByTargetsBackendArgsDict']] backends: List of private network IPs to be queried.
     :param _builtins.str result_output_file: Used to save results.
@@ -132,6 +138,12 @@ def get_listeners_by_targets_output(backends: pulumi.Input[Optional[Sequence[Uni
         "private_ip": "106.52.160.211",
     }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeLBListeners](https://www.tencentcloud.com/document/api/214/43272)
 
 
     :param Sequence[Union['GetListenersByTargetsBackendArgs', 'GetListenersByTargetsBackendArgsDict']] backends: List of private network IPs to be queried.

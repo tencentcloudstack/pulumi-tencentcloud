@@ -117,6 +117,12 @@ def get_task_versions(project_id: Optional[_builtins.str] = None,
         task_id="20251015164958429")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListTaskVersions](https://www.tencentcloud.com/document/api/1174/73869)
+
 
     :param _builtins.str project_id: Project ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -157,6 +163,12 @@ def get_task_versions_output(project_id: pulumi.Input[Optional[_builtins.str]] =
     wedata_task_versions = tencentcloud.wedata.get_task_versions(project_id="2905622749543821312",
         task_id="20251015164958429")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListTaskVersions](https://www.tencentcloud.com/document/api/1174/73869)
 
 
     :param _builtins.str project_id: Project ID.

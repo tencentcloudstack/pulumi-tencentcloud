@@ -186,6 +186,15 @@ class MigrateJobStartOperation(pulumi.CustomResource):
         example_migrate_job_start_operation = tencentcloud.dts.MigrateJobStartOperation("example", job_id=example_migrate_job.id)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeMigrationCheckJob](https://www.tencentcloud.com/document/api/571/51814)
+          - [DescribeMigrationDetail](https://www.tencentcloud.com/document/api/571/51813)
+          - [StartMigrateJob](https://www.tencentcloud.com/document/api/571/51801)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -309,6 +318,15 @@ class MigrateJobStartOperation(pulumi.CustomResource):
             })
         example_migrate_job_start_operation = tencentcloud.dts.MigrateJobStartOperation("example", job_id=example_migrate_job.id)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeMigrationCheckJob](https://www.tencentcloud.com/document/api/571/51814)
+          - [DescribeMigrationDetail](https://www.tencentcloud.com/document/api/571/51813)
+          - [StartMigrateJob](https://www.tencentcloud.com/document/api/571/51801)
 
 
         :param str resource_name: The name of the resource.

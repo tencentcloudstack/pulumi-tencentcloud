@@ -94,6 +94,12 @@ def get_describe_user_type(result_output_file: Optional[_builtins.str] = None,
     example = tencentcloud.dlc.get_describe_user_type(user_id="100021240183")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeUserType](https://www.tencentcloud.com/document/api/1155/62669)
+
 
     :param _builtins.str result_output_file: Used to save results.
     :param _builtins.str user_id: User ID (UIN). If it is not specified, it will be the sub-UIN of the caller by default.
@@ -123,6 +129,12 @@ def get_describe_user_type_output(result_output_file: pulumi.Input[Optional[Opti
 
     example = tencentcloud.dlc.get_describe_user_type(user_id="100021240183")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeUserType](https://www.tencentcloud.com/document/api/1155/62669)
 
 
     :param _builtins.str result_output_file: Used to save results.

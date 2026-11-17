@@ -100,6 +100,12 @@ def get_disk_config(filters: Optional[Sequence[Union['GetDiskConfigFilterArgs', 
     }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDiskConfigs](https://www.tencentcloud.com/document/api/1103/44575)
+
 
     :param Sequence[Union['GetDiskConfigFilterArgs', 'GetDiskConfigFilterArgsDict']] filters: Filter list.zoneFilter by availability zone.Type: StringRequired: no.
     :param _builtins.str result_output_file: Used to save results.
@@ -132,6 +138,12 @@ def get_disk_config_output(filters: pulumi.Input[Optional[Optional[Sequence[Unio
         "values": ["ap-guangzhou-3"],
     }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDiskConfigs](https://www.tencentcloud.com/document/api/1103/44575)
 
 
     :param Sequence[Union['GetDiskConfigFilterArgs', 'GetDiskConfigFilterArgsDict']] filters: Filter list.zoneFilter by availability zone.Type: StringRequired: no.

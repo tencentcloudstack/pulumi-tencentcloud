@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSlowLogs](https://www.tencentcloud.com/document/api/236/15845)
         /// </summary>
         public static Task<GetSlowLogResult> InvokeAsync(GetSlowLogArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSlowLogResult>("tencentcloud:Mysql/getSlowLog:getSlowLog", args ?? new GetSlowLogArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSlowLogs](https://www.tencentcloud.com/document/api/236/15845)
         /// </summary>
         public static Output<GetSlowLogResult> Invoke(GetSlowLogInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSlowLogResult>("tencentcloud:Mysql/getSlowLog:getSlowLog", args ?? new GetSlowLogInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSlowLogs](https://www.tencentcloud.com/document/api/236/15845)
         /// </summary>
         public static Output<GetSlowLogResult> Invoke(GetSlowLogInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetSlowLogResult>("tencentcloud:Mysql/getSlowLog:getSlowLog", args ?? new GetSlowLogInvokeArgs(), options.WithDefaults());

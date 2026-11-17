@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     realServerIds: ["rs-3mlpbuut"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRealServersStatus](https://www.tencentcloud.com/document/api/608/33059)
  */
 export function getRealServersStatus(args: GetRealServersStatusArgs, opts?: pulumi.InvokeOptions): Promise<GetRealServersStatusResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetRealServersStatusResult {
  *     realServerIds: ["rs-3mlpbuut"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRealServersStatus](https://www.tencentcloud.com/document/api/608/33059)
  */
 export function getRealServersStatusOutput(args: GetRealServersStatusOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRealServersStatusResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

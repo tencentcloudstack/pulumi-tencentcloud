@@ -390,6 +390,17 @@ class IntegrationTaskNode(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateIntegrationNode](https://www.tencentcloud.com/document/api/1174/61069)
+          - [ModifyIntegrationNode](https://www.tencentcloud.com/document/api/1174/61022)
+        * Read: [DescribeIntegrationNode](https://www.tencentcloud.com/document/api/1174/61051)
+        * Update: [ModifyIntegrationNode](https://www.tencentcloud.com/document/api/1174/61022)
+        * Delete: [DeleteIntegrationNode](https://www.tencentcloud.com/document/api/1174/61065)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -481,6 +492,17 @@ class IntegrationTaskNode(pulumi.CustomResource):
                 ],
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateIntegrationNode](https://www.tencentcloud.com/document/api/1174/61069)
+          - [ModifyIntegrationNode](https://www.tencentcloud.com/document/api/1174/61022)
+        * Read: [DescribeIntegrationNode](https://www.tencentcloud.com/document/api/1174/61051)
+        * Update: [ModifyIntegrationNode](https://www.tencentcloud.com/document/api/1174/61022)
+        * Delete: [DeleteIntegrationNode](https://www.tencentcloud.com/document/api/1174/61065)
 
 
         :param str resource_name: The name of the resource.

@@ -233,6 +233,12 @@ def get_attack_overview(appid: Optional[_builtins.int] = None,
         instance_id="waf_2kxtlbky00b2v1fn")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAttackOverview](https://www.tencentcloud.com/document/api/627/66357)
+
 
     :param _builtins.int appid: App id.
     :param _builtins.str domain: Domain.
@@ -305,6 +311,12 @@ def get_attack_overview_output(appid: pulumi.Input[Optional[Optional[_builtins.i
         edition="clb-waf",
         instance_id="waf_2kxtlbky00b2v1fn")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAttackOverview](https://www.tencentcloud.com/document/api/627/66357)
 
 
     :param _builtins.int appid: App id.

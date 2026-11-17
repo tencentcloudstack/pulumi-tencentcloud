@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [ExecuteFunction](https://www.tencentcloud.com/document/api/1041/38515)
 type ExecuteFunctionOperation struct {
 	pulumi.CustomResourceState
 

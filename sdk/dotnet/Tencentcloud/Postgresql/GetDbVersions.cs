@@ -51,6 +51,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBVersions](https://www.tencentcloud.com/document/api/409/54337)
         /// </summary>
         public static Task<GetDbVersionsResult> InvokeAsync(GetDbVersionsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDbVersionsResult>("tencentcloud:Postgresql/getDbVersions:getDbVersions", args ?? new GetDbVersionsArgs(), options.WithDefaults());
@@ -94,6 +100,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBVersions](https://www.tencentcloud.com/document/api/409/54337)
         /// </summary>
         public static Output<GetDbVersionsResult> Invoke(GetDbVersionsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDbVersionsResult>("tencentcloud:Postgresql/getDbVersions:getDbVersions", args ?? new GetDbVersionsInvokeArgs(), options.WithDefaults());
@@ -137,6 +149,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBVersions](https://www.tencentcloud.com/document/api/409/54337)
         /// </summary>
         public static Output<GetDbVersionsResult> Invoke(GetDbVersionsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDbVersionsResult>("tencentcloud:Postgresql/getDbVersions:getDbVersions", args ?? new GetDbVersionsInvokeArgs(), options.WithDefaults());

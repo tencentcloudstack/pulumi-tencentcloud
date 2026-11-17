@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     shardInstanceIds: ["shard1_id"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDCDBShards](https://www.tencentcloud.com/document/api/1042/34441)
  */
 export function getShards(args: GetShardsArgs, opts?: pulumi.InvokeOptions): Promise<GetShardsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -81,6 +87,12 @@ export interface GetShardsResult {
  *     shardInstanceIds: ["shard1_id"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDCDBShards](https://www.tencentcloud.com/document/api/1042/34441)
  */
 export function getShardsOutput(args: GetShardsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetShardsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

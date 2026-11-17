@@ -88,6 +88,14 @@ import * as utilities from "../utilities";
  *     stoppedMode: "STOP_CHARGING",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeAutoScalingActivities](https://www.tencentcloud.com/document/api/377/31014)
+ *   - [StopAutoScalingInstances](https://www.tencentcloud.com/document/api/377/37503)
  */
 export class StopInstances extends pulumi.CustomResource {
     /**

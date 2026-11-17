@@ -15,6 +15,13 @@ import * as utilities from "../utilities";
  *
  * const releaseApiGroup = new tencentcloud.tsf.ReleaseApiGroup("release_api_group", {groupId: "grp-qp0rj3zi"});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [ReleaseApiGroup](https://www.tencentcloud.com/search/?wd=ReleaseApiGroup&type=document&lang=en)
+ * * Read: [DescribeApiGroup](https://www.tencentcloud.com/search/?wd=DescribeApiGroup&type=document&lang=en)
  */
 export class ReleaseApiGroup extends pulumi.CustomResource {
     /**

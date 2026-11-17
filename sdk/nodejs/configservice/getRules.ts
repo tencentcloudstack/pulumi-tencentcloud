@@ -47,6 +47,12 @@ import * as utilities from "../utilities";
  *     orderType: "desc",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListConfigRules](https://www.tencentcloud.com/document/api/1164/66767)
  */
 export function getRules(args?: GetRulesArgs, opts?: pulumi.InvokeOptions): Promise<GetRulesResult> {
     args = args || {};
@@ -160,6 +166,12 @@ export interface GetRulesResult {
  *     orderType: "desc",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListConfigRules](https://www.tencentcloud.com/document/api/1164/66767)
  */
 export function getRulesOutput(args?: GetRulesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRulesResult> {
     args = args || {};

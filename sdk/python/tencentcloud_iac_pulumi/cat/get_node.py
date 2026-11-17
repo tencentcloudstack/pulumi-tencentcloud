@@ -141,6 +141,14 @@ def get_node(is_ipv6: Optional[_builtins.bool] = None,
         is_ipv6=False)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeNodes](https://www.tencentcloud.com/search/?wd=DescribeNodes&type=document&lang=en)
+      - [DescribeProbeNodes](https://www.tencentcloud.com/search/?wd=DescribeProbeNodes&type=document&lang=en)
+
 
     :param _builtins.bool is_ipv6: is IPv6.
     :param _builtins.int location: Node area:1=Chinese Mainland,2=Hong Kong, Macao and Taiwan,3=Overseas.
@@ -188,6 +196,14 @@ def get_node_output(is_ipv6: pulumi.Input[Optional[Optional[_builtins.bool]]] = 
         location=2,
         is_ipv6=False)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeNodes](https://www.tencentcloud.com/search/?wd=DescribeNodes&type=document&lang=en)
+      - [DescribeProbeNodes](https://www.tencentcloud.com/search/?wd=DescribeProbeNodes&type=document&lang=en)
 
 
     :param _builtins.bool is_ipv6: is IPv6.

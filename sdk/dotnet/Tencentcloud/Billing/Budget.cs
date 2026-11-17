@@ -89,6 +89,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Billing
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateBudget](https://www.tencentcloud.com/search/?wd=CreateBudget&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeBudget](https://www.tencentcloud.com/search/?wd=DescribeBudget&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyBudget](https://www.tencentcloud.com/search/?wd=ModifyBudget&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteBudget](https://www.tencentcloud.com/search/?wd=DeleteBudget&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// billing BillingBudget can be imported using the id, e.g.

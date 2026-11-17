@@ -41,6 +41,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeTopicFlowRanking](https://www.tencentcloud.com/search/?wd=DescribeTopicFlowRanking&type=document&lang=en)
 func LookupTopicFlowRanking(ctx *pulumi.Context, args *LookupTopicFlowRankingArgs, opts ...pulumi.InvokeOption) (*LookupTopicFlowRankingResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupTopicFlowRankingResult

@@ -30,6 +30,12 @@ import * as utilities from "../utilities";
  *     ],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCrossBorderCcnRegionBandwidthLimits](https://www.tencentcloud.com/search/?wd=DescribeCrossBorderCcnRegionBandwidthLimits&type=document&lang=en)
  */
 export function getCrossBorderRegionBandwidthLimits(args?: GetCrossBorderRegionBandwidthLimitsArgs, opts?: pulumi.InvokeOptions): Promise<GetCrossBorderRegionBandwidthLimitsResult> {
     args = args || {};
@@ -93,6 +99,12 @@ export interface GetCrossBorderRegionBandwidthLimitsResult {
  *     ],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCrossBorderCcnRegionBandwidthLimits](https://www.tencentcloud.com/search/?wd=DescribeCrossBorderCcnRegionBandwidthLimits&type=document&lang=en)
  */
 export function getCrossBorderRegionBandwidthLimitsOutput(args?: GetCrossBorderRegionBandwidthLimitsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetCrossBorderRegionBandwidthLimitsResult> {
     args = args || {};

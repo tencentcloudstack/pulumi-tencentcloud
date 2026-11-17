@@ -112,6 +112,12 @@ def get_owasp_rule_types(domain: Optional[_builtins.str] = None,
         }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeOwaspRuleTypes](https://www.tencentcloud.com/document/api/627/73183)
+
 
     :param _builtins.str domain: Domain names to be queried.
     :param Sequence[Union['GetOwaspRuleTypesFilterArgs', 'GetOwaspRuleTypesFilterArgsDict']] filters: Filter conditions. supports RuleId, CveID, and Desc.
@@ -150,6 +156,12 @@ def get_owasp_rule_types_output(domain: pulumi.Input[Optional[_builtins.str]] = 
             "exact_match": True,
         }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeOwaspRuleTypes](https://www.tencentcloud.com/document/api/627/73183)
 
 
     :param _builtins.str domain: Domain names to be queried.

@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeIndexList](https://www.tencentcloud.com/document/api/845/47607)
         /// </summary>
         public static Task<GetDescribeIndexListResult> InvokeAsync(GetDescribeIndexListArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDescribeIndexListResult>("tencentcloud:Elasticsearch/getDescribeIndexList:getDescribeIndexList", args ?? new GetDescribeIndexListArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeIndexList](https://www.tencentcloud.com/document/api/845/47607)
         /// </summary>
         public static Output<GetDescribeIndexListResult> Invoke(GetDescribeIndexListInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDescribeIndexListResult>("tencentcloud:Elasticsearch/getDescribeIndexList:getDescribeIndexList", args ?? new GetDescribeIndexListInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeIndexList](https://www.tencentcloud.com/document/api/845/47607)
         /// </summary>
         public static Output<GetDescribeIndexListResult> Invoke(GetDescribeIndexListInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDescribeIndexListResult>("tencentcloud:Elasticsearch/getDescribeIndexList:getDescribeIndexList", args ?? new GetDescribeIndexListInvokeArgs(), options.WithDefaults());

@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeRecordLineList](https://www.tencentcloud.com/document/api/1157/53834)
 func GetRecordLineList(ctx *pulumi.Context, args *GetRecordLineListArgs, opts ...pulumi.InvokeOption) (*GetRecordLineListResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetRecordLineListResult

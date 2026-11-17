@@ -20,7 +20,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         public Input<string> EndAt { get; set; } = null!;
 
         /// <summary>
-        /// ID of the resource.
+        /// Maintenance exclusion ID.
         /// </summary>
         [Input("id")]
         public Input<int>? Id { get; set; }

@@ -37,6 +37,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBindingPolicyObjectList](https://www.tencentcloud.com/document/api/248/35980)
         /// </summary>
         public static Task<GetBindingObjectsResult> InvokeAsync(GetBindingObjectsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetBindingObjectsResult>("tencentcloud:Monitor/getBindingObjects:getBindingObjects", args ?? new GetBindingObjectsArgs(), options.WithDefaults());
@@ -66,6 +72,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBindingPolicyObjectList](https://www.tencentcloud.com/document/api/248/35980)
         /// </summary>
         public static Output<GetBindingObjectsResult> Invoke(GetBindingObjectsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetBindingObjectsResult>("tencentcloud:Monitor/getBindingObjects:getBindingObjects", args ?? new GetBindingObjectsInvokeArgs(), options.WithDefaults());
@@ -95,6 +107,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBindingPolicyObjectList](https://www.tencentcloud.com/document/api/248/35980)
         /// </summary>
         public static Output<GetBindingObjectsResult> Invoke(GetBindingObjectsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetBindingObjectsResult>("tencentcloud:Monitor/getBindingObjects:getBindingObjects", args ?? new GetBindingObjectsInvokeArgs(), options.WithDefaults());

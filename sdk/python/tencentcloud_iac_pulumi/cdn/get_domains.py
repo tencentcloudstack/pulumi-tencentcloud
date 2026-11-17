@@ -155,6 +155,14 @@ def get_domains(domain: Optional[_builtins.str] = None,
         https_switch="on")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeDomainsConfig](https://www.tencentcloud.com/document/api/228/34019)
+      - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+
 
     :param _builtins.str domain: Acceleration domain name.
     :param _builtins.bool full_url_cache: Whether to enable full-path cache.
@@ -204,6 +212,14 @@ def get_domains_output(domain: pulumi.Input[Optional[Optional[_builtins.str]]] =
         origin_pull_protocol="follow",
         https_switch="on")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeDomainsConfig](https://www.tencentcloud.com/document/api/228/34019)
+      - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
 
 
     :param _builtins.str domain: Acceleration domain name.

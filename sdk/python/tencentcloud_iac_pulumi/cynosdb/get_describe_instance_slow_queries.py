@@ -121,6 +121,12 @@ def get_describe_instance_slow_queries(cluster_id: Optional[_builtins.str] = Non
         end_time="2023-06-19 14:00:00")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBinlogs](https://www.tencentcloud.com/document/api/1098/48594)
+
 
     :param _builtins.str cluster_id: Cluster ID.
     :param _builtins.str end_time: End time.
@@ -160,6 +166,12 @@ def get_describe_instance_slow_queries_output(cluster_id: pulumi.Input[Optional[
         start_time="2023-06-01 12:00:00",
         end_time="2023-06-19 14:00:00")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBinlogs](https://www.tencentcloud.com/document/api/1098/48594)
 
 
     :param _builtins.str cluster_id: Cluster ID.

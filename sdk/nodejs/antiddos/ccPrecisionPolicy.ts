@@ -38,6 +38,17 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateCCPrecisionPolicy](https://www.tencentcloud.com/document/api/1213/61396)
+ *   - [DescribeCCPrecisionPlyList](https://www.tencentcloud.com/document/api/1213/61388)
+ * * Read: [DescribeCCPrecisionPlyList](https://www.tencentcloud.com/document/api/1213/61388)
+ * * Update: [ModifyCCPrecisionPolicy](https://www.tencentcloud.com/document/api/1213/61386)
+ * * Delete: [DeleteCCPrecisionPolicy](https://www.tencentcloud.com/document/api/1213/61393)
+ *
  * ## Import
  *
  * antiddos ccPrecisionPolicy can be imported using the id, e.g.

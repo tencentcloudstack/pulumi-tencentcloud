@@ -45,6 +45,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [RunCommand](https://www.tencentcloud.com/document/api/1147/46686)
+    /// * Read: [DescribeInvocations](https://www.tencentcloud.com/document/api/1147/46695)
+    /// * Delete: [CancelInvocation](https://www.tencentcloud.com/document/api/1147/46703)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tat/invocationCommandAttachment:InvocationCommandAttachment")]
     public partial class InvocationCommandAttachment : global::Pulumi.CustomResource

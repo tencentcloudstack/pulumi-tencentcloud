@@ -20,18 +20,18 @@ import * as utilities from "../utilities";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const example = new tencentcloud.vdb.Instance("example", {
- *     vpcId: "vpc-xxxxxxxx",
- *     subnetId: "subnet-xxxxxxxx",
+ *     vpcId: "vpc-i5yyodl9",
+ *     subnetId: "subnet-hhi88a58",
  *     payMode: 0,
- *     securityGroupIds: ["sg-xxxxxxxx"],
+ *     securityGroupIds: ["sg-4rd5741x"],
  *     instanceName: "tf-example",
  *     instanceType: "single",
- *     nodeType: "normal",
+ *     nodeType: "store",
  *     cpu: 2,
- *     memory: 4,
+ *     memory: 16,
  *     diskSize: 50,
  *     workerNodeNum: 1,
- *     forceDelete: false,
+ *     forceDelete: true,
  * });
  * ```
  *
@@ -42,12 +42,13 @@ import * as utilities from "../utilities";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
  * const cluster = new tencentcloud.vdb.Instance("cluster", {
- *     vpcId: "vpc-xxxxxxxx",
- *     subnetId: "subnet-xxxxxxxx",
+ *     vpcId: "vpc-i5yyodl9",
+ *     subnetId: "subnet-hhi88a58",
+ *     securityGroupIds: ["sg-4rd5741x"],
  *     payMode: 1,
  *     payPeriod: 1,
  *     autoRenew: 1,
- *     instanceName: "tf-example-cluster",
+ *     instanceName: "tf-example",
  *     instanceType: "cluster",
  *     mode: "two",
  *     productType: 0,
@@ -58,26 +59,32 @@ import * as utilities from "../utilities";
  *     workerNodeNum: 2,
  *     params: "{\"key\":\"value\"}",
  *     forceDelete: true,
- *     securityGroupIds: ["sg-xxxxxxxx"],
- *     resourceTags: [
- *         {
- *             tagKey: "env",
- *             tagValue: "test",
- *         },
- *         {
- *             tagKey: "project",
- *             tagValue: "demo",
- *         },
- *     ],
+ *     resourceTags: [{
+ *         tagKey: "createBy",
+ *         tagValue: "Terraform",
+ *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateInstance](https://www.tencentcloud.com/search/?wd=CreateInstance&type=document&lang=en)
+ * * Update:
+ *   - [ModifyDBInstanceSecurityGroups](https://www.tencentcloud.com/search/?wd=ModifyDBInstanceSecurityGroups&type=document&lang=en)
+ *   - [ScaleOutInstance](https://www.tencentcloud.com/search/?wd=ScaleOutInstance&type=document&lang=en)
+ *   - [ScaleUpInstance](https://www.tencentcloud.com/search/?wd=ScaleUpInstance&type=document&lang=en)
+ * * Delete:
+ *   - [DestroyInstances](https://www.tencentcloud.com/search/?wd=DestroyInstances&type=document&lang=en)
+ *   - [IsolateInstance](https://www.tencentcloud.com/search/?wd=IsolateInstance&type=document&lang=en)
  *
  * ## Import
  *
  * VDB instance can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Vdb/instance:Instance example vdb-xxxxxxxx
+ * $ pulumi import tencentcloud:Vdb/instance:Instance example vdb-oft69wcm
  * ```
  */
 export class Instance extends pulumi.CustomResource {
@@ -115,7 +122,7 @@ export class Instance extends pulumi.CustomResource {
     /**
      * Auto-renew flag. 0: disabled, 1: enabled.
      */
-    declare public readonly autoRenew: pulumi.Output<number | undefined>;
+    declare public readonly autoRenew: pulumi.Output<number>;
     /**
      * CPU cores.
      */
@@ -149,9 +156,13 @@ export class Instance extends pulumi.CustomResource {
      */
     declare public readonly forceDelete: pulumi.Output<boolean | undefined>;
     /**
+     * Instance ID.
+     */
+    declare public /*out*/ readonly instanceId: pulumi.Output<string>;
+    /**
      * Instance name. Supports up to 60 characters.
      */
-    declare public readonly instanceName: pulumi.Output<string | undefined>;
+    declare public readonly instanceName: pulumi.Output<string>;
     /**
      * Instance type. Valid values: base, single, cluster.
      */
@@ -179,7 +190,7 @@ export class Instance extends pulumi.CustomResource {
     /**
      * Node type. Valid values: compute, normal, store.
      */
-    declare public readonly nodeType: pulumi.Output<string | undefined>;
+    declare public readonly nodeType: pulumi.Output<string>;
     /**
      * Instance node list.
      */
@@ -203,7 +214,7 @@ export class Instance extends pulumi.CustomResource {
     /**
      * Product version. 0: standard, 1: capacity-enhanced.
      */
-    declare public readonly productType: pulumi.Output<number | undefined>;
+    declare public readonly productType: pulumi.Output<number>;
     /**
      * Region.
      */
@@ -272,6 +283,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["expiredAt"] = state?.expiredAt;
             resourceInputs["extend"] = state?.extend;
             resourceInputs["forceDelete"] = state?.forceDelete;
+            resourceInputs["instanceId"] = state?.instanceId;
             resourceInputs["instanceName"] = state?.instanceName;
             resourceInputs["instanceType"] = state?.instanceType;
             resourceInputs["isNoExpired"] = state?.isNoExpired;
@@ -335,6 +347,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["engineVersion"] = undefined /*out*/;
             resourceInputs["expiredAt"] = undefined /*out*/;
             resourceInputs["extend"] = undefined /*out*/;
+            resourceInputs["instanceId"] = undefined /*out*/;
             resourceInputs["isNoExpired"] = undefined /*out*/;
             resourceInputs["isolateAt"] = undefined /*out*/;
             resourceInputs["networks"] = undefined /*out*/;
@@ -396,6 +409,10 @@ export interface InstanceState {
      * Whether to force delete (destroy) the instance. If false, only isolate to recycle bin. If true, isolate then destroy. Default is false.
      */
     forceDelete?: pulumi.Input<boolean | undefined>;
+    /**
+     * Instance ID.
+     */
+    instanceId?: pulumi.Input<string | undefined>;
     /**
      * Instance name. Supports up to 60 characters.
      */

@@ -49,6 +49,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [IdentifyZone](https://www.tencentcloud.com/document/api/1145/50480)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Teo/identifyZoneOperation:IdentifyZoneOperation")]
     public partial class IdentifyZoneOperation : global::Pulumi.CustomResource

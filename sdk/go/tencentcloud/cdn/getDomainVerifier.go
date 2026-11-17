@@ -44,6 +44,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read:
+//   - [CreateVerifyRecord](https://www.tencentcloud.com/search/?wd=CreateVerifyRecord&type=document&lang=en)
+//   - [VerifyDomainRecord](https://www.tencentcloud.com/search/?wd=VerifyDomainRecord&type=document&lang=en)
 func GetDomainVerifier(ctx *pulumi.Context, args *GetDomainVerifierArgs, opts ...pulumi.InvokeOption) (*GetDomainVerifierResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDomainVerifierResult

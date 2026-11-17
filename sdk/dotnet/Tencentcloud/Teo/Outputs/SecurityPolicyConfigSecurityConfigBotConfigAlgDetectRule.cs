@@ -39,7 +39,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// </summary>
         public readonly string? Switch;
         /// <summary>
-        /// Update time.
+        /// Update time. Output-only.
         /// </summary>
         public readonly string? UpdateTime;
 

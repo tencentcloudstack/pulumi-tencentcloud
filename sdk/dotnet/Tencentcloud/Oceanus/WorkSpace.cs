@@ -32,6 +32,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateWorkSpace](https://www.tencentcloud.com/search/?wd=CreateWorkSpace&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeWorkSpaces](https://www.tencentcloud.com/search/?wd=DescribeWorkSpaces&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyWorkSpace](https://www.tencentcloud.com/search/?wd=ModifyWorkSpace&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteWorkSpace](https://www.tencentcloud.com/search/?wd=DeleteWorkSpace&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// oceanus WorkSpace can be imported using the id, e.g.

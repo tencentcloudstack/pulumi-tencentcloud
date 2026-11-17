@@ -52,6 +52,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [StartStreamLinkFlow](https://www.tencentcloud.com/search/?wd=StartStreamLinkFlow&amp;type=document&amp;lang=en)
+    ///   - [StopStreamLinkFlow](https://www.tencentcloud.com/search/?wd=StopStreamLinkFlow&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mps/startFlowOperation:StartFlowOperation")]
     public partial class StartFlowOperation : global::Pulumi.CustomResource

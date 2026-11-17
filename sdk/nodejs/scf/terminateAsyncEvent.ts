@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     graceShutdown: true,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [TerminateAsyncEvent](https://www.tencentcloud.com/document/api/583/39733)
  */
 export class TerminateAsyncEvent extends pulumi.CustomResource {
     /**

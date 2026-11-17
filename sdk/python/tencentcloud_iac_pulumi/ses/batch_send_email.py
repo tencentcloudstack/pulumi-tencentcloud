@@ -433,6 +433,12 @@ class BatchSendEmail(pulumi.CustomResource):
             ad_location=0)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [BatchSendEmail](https://www.tencentcloud.com/document/api/1084/43052)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -483,6 +489,12 @@ class BatchSendEmail(pulumi.CustomResource):
             unsubscribe="0",
             ad_location=0)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [BatchSendEmail](https://www.tencentcloud.com/document/api/1084/43052)
 
 
         :param str resource_name: The name of the resource.

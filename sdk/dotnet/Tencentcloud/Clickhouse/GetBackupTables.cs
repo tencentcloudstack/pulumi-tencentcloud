@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBackUpTables](https://www.tencentcloud.com/search/?wd=DescribeBackUpTables&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetBackupTablesResult> InvokeAsync(GetBackupTablesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetBackupTablesResult>("tencentcloud:Clickhouse/getBackupTables:getBackupTables", args ?? new GetBackupTablesArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBackUpTables](https://www.tencentcloud.com/search/?wd=DescribeBackUpTables&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetBackupTablesResult> Invoke(GetBackupTablesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetBackupTablesResult>("tencentcloud:Clickhouse/getBackupTables:getBackupTables", args ?? new GetBackupTablesInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBackUpTables](https://www.tencentcloud.com/search/?wd=DescribeBackUpTables&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetBackupTablesResult> Invoke(GetBackupTablesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetBackupTablesResult>("tencentcloud:Clickhouse/getBackupTables:getBackupTables", args ?? new GetBackupTablesInvokeArgs(), options.WithDefaults());

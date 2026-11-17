@@ -154,6 +154,16 @@ class SnapshotPolicyAttachment(pulumi.CustomResource):
             }])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AttachSnapshotInstances](https://www.tencentcloud.com/document/api/215/55060)
+        * Read: [DescribeSnapshotAttachedInstances](https://www.tencentcloud.com/document/api/215/55056)
+        * Delete:
+          - [DescribeSnapshotAttachedInstances](https://www.tencentcloud.com/document/api/215/55056)
+          - [DetachSnapshotInstances](https://www.tencentcloud.com/document/api/215/55053)
+
         ## Import
 
         vpc snapshot_policy_attachment can be imported using the id, e.g.
@@ -219,6 +229,16 @@ class SnapshotPolicyAttachment(pulumi.CustomResource):
                 "instance_region": "ap-guangzhou",
             }])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AttachSnapshotInstances](https://www.tencentcloud.com/document/api/215/55060)
+        * Read: [DescribeSnapshotAttachedInstances](https://www.tencentcloud.com/document/api/215/55056)
+        * Delete:
+          - [DescribeSnapshotAttachedInstances](https://www.tencentcloud.com/document/api/215/55056)
+          - [DetachSnapshotInstances](https://www.tencentcloud.com/document/api/215/55053)
 
         ## Import
 

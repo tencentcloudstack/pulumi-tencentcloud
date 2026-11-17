@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     resultOutputFile: "mytestpath",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCdbZoneConfig](https://www.tencentcloud.com/document/api/236/50285)
  */
 export function getZoneConfig(args?: GetZoneConfigArgs, opts?: pulumi.InvokeOptions): Promise<GetZoneConfigResult> {
     args = args || {};
@@ -73,6 +79,12 @@ export interface GetZoneConfigResult {
  *     resultOutputFile: "mytestpath",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCdbZoneConfig](https://www.tencentcloud.com/document/api/236/50285)
  */
 export function getZoneConfigOutput(args?: GetZoneConfigOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetZoneConfigResult> {
     args = args || {};

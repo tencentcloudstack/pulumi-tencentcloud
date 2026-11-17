@@ -19,6 +19,18 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeGrafanaInstances](https://www.tencentcloud.com/document/api/248/49759)
+ *   - [UpgradeGrafanaInstance](https://www.tencentcloud.com/document/api/248/49739)
+ * * Read: [DescribeGrafanaInstances](https://www.tencentcloud.com/document/api/248/49759)
+ * * Update:
+ *   - [DescribeGrafanaInstances](https://www.tencentcloud.com/document/api/248/49759)
+ *   - [UpgradeGrafanaInstance](https://www.tencentcloud.com/document/api/248/49739)
+ *
  * ## Import
  *
  * monitor grafanaVersionUpgrade can be imported using the id, e.g.

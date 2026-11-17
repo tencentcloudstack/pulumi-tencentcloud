@@ -317,6 +317,21 @@ class RocketmqConsumerGroup(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateConsumerGroup](https://www.tencentcloud.com/document/api/1113/74657)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribeConsumerGroup](https://www.tencentcloud.com/document/api/1113/74653)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [ModifyConsumerGroup](https://www.tencentcloud.com/document/api/1113/74651)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Delete: [DeleteConsumerGroup](https://www.tencentcloud.com/document/api/1113/74656)
+
         ## Import
 
         TROCKET rocketmq consumer group can be imported using the id, e.g.
@@ -390,6 +405,21 @@ class RocketmqConsumerGroup(pulumi.CustomResource):
                 "createBy": "Terraform",
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateConsumerGroup](https://www.tencentcloud.com/document/api/1113/74657)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribeConsumerGroup](https://www.tencentcloud.com/document/api/1113/74653)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [ModifyConsumerGroup](https://www.tencentcloud.com/document/api/1113/74651)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Delete: [DeleteConsumerGroup](https://www.tencentcloud.com/document/api/1113/74656)
 
         ## Import
 

@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCcnRouteTableInputPolicys](https://www.tencentcloud.com/search/?wd=DescribeCcnRouteTableInputPolicys&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetRouteTableInputPoliciesResult> InvokeAsync(GetRouteTableInputPoliciesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetRouteTableInputPoliciesResult>("tencentcloud:Ccn/getRouteTableInputPolicies:getRouteTableInputPolicies", args ?? new GetRouteTableInputPoliciesArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCcnRouteTableInputPolicys](https://www.tencentcloud.com/search/?wd=DescribeCcnRouteTableInputPolicys&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetRouteTableInputPoliciesResult> Invoke(GetRouteTableInputPoliciesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetRouteTableInputPoliciesResult>("tencentcloud:Ccn/getRouteTableInputPolicies:getRouteTableInputPolicies", args ?? new GetRouteTableInputPoliciesInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCcnRouteTableInputPolicys](https://www.tencentcloud.com/search/?wd=DescribeCcnRouteTableInputPolicys&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetRouteTableInputPoliciesResult> Invoke(GetRouteTableInputPoliciesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetRouteTableInputPoliciesResult>("tencentcloud:Ccn/getRouteTableInputPolicies:getRouteTableInputPolicies", args ?? new GetRouteTableInputPoliciesInvokeArgs(), options.WithDefaults());

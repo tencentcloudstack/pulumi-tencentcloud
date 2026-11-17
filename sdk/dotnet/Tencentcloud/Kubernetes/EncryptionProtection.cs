@@ -66,6 +66,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [EnableEncryptionProtection](https://www.tencentcloud.com/document/api/457/56946)
+    /// * Read: [DescribeEncryptionStatus](https://www.tencentcloud.com/document/api/457/56948)
+    /// * Delete: [DisableEncryptionProtection](https://www.tencentcloud.com/document/api/457/56947)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Kubernetes/encryptionProtection:EncryptionProtection")]
     public partial class EncryptionProtection : global::Pulumi.CustomResource

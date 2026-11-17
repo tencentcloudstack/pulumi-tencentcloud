@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMySqlProcessList](https://www.tencentcloud.com/document/api/1035/41193)
         /// </summary>
         public static Task<GetMysqlProcessListResult> InvokeAsync(GetMysqlProcessListArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetMysqlProcessListResult>("tencentcloud:Dbbrain/getMysqlProcessList:getMysqlProcessList", args ?? new GetMysqlProcessListArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMySqlProcessList](https://www.tencentcloud.com/document/api/1035/41193)
         /// </summary>
         public static Output<GetMysqlProcessListResult> Invoke(GetMysqlProcessListInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetMysqlProcessListResult>("tencentcloud:Dbbrain/getMysqlProcessList:getMysqlProcessList", args ?? new GetMysqlProcessListInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMySqlProcessList](https://www.tencentcloud.com/document/api/1035/41193)
         /// </summary>
         public static Output<GetMysqlProcessListResult> Invoke(GetMysqlProcessListInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetMysqlProcessListResult>("tencentcloud:Dbbrain/getMysqlProcessList:getMysqlProcessList", args ?? new GetMysqlProcessListInvokeArgs(), options.WithDefaults());

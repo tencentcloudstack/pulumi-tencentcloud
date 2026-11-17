@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     snapshotPolicyName: "test",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAutoSnapshotPolicies](https://www.tencentcloud.com/document/api/362/32165)
  */
 export function getSnapshotPolicies(args?: GetSnapshotPoliciesArgs, opts?: pulumi.InvokeOptions): Promise<GetSnapshotPoliciesResult> {
     args = args || {};
@@ -85,6 +91,12 @@ export interface GetSnapshotPoliciesResult {
  *     snapshotPolicyName: "test",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAutoSnapshotPolicies](https://www.tencentcloud.com/document/api/362/32165)
  */
 export function getSnapshotPoliciesOutput(args?: GetSnapshotPoliciesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSnapshotPoliciesResult> {
     args = args || {};

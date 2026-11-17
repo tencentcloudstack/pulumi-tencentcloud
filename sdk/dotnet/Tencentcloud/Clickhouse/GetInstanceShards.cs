@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstanceShards](https://www.tencentcloud.com/search/?wd=DescribeInstanceShards&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetInstanceShardsResult> InvokeAsync(GetInstanceShardsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceShardsResult>("tencentcloud:Clickhouse/getInstanceShards:getInstanceShards", args ?? new GetInstanceShardsArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstanceShards](https://www.tencentcloud.com/search/?wd=DescribeInstanceShards&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetInstanceShardsResult> Invoke(GetInstanceShardsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceShardsResult>("tencentcloud:Clickhouse/getInstanceShards:getInstanceShards", args ?? new GetInstanceShardsInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clickhouse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstanceShards](https://www.tencentcloud.com/search/?wd=DescribeInstanceShards&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetInstanceShardsResult> Invoke(GetInstanceShardsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceShardsResult>("tencentcloud:Clickhouse/getInstanceShards:getInstanceShards", args ?? new GetInstanceShardsInvokeArgs(), options.WithDefaults());

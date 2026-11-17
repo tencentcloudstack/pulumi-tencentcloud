@@ -352,6 +352,15 @@ class SnapshotPolicy(pulumi.CustomResource):
             ])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateSnapshotPolicies](https://www.tencentcloud.com/document/api/215/55059)
+        * Read: [DescribeSnapshotPolicies](https://www.tencentcloud.com/document/api/215/55054)
+        * Update: [ModifySnapshotPolicies](https://www.tencentcloud.com/document/api/215/55050)
+        * Delete: [DeleteSnapshotPolicies](https://www.tencentcloud.com/document/api/215/55058)
+
         ## Import
 
         vpc snapshot_policy can be imported using the id, e.g.
@@ -411,6 +420,15 @@ class SnapshotPolicy(pulumi.CustomResource):
                 },
             ])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateSnapshotPolicies](https://www.tencentcloud.com/document/api/215/55059)
+        * Read: [DescribeSnapshotPolicies](https://www.tencentcloud.com/document/api/215/55054)
+        * Update: [ModifySnapshotPolicies](https://www.tencentcloud.com/document/api/215/55050)
+        * Delete: [DeleteSnapshotPolicies](https://www.tencentcloud.com/document/api/215/55058)
 
         ## Import
 

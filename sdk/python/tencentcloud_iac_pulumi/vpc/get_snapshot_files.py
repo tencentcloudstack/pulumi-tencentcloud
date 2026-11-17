@@ -132,6 +132,12 @@ def get_snapshot_files(business_type: Optional[_builtins.str] = None,
         end_date="2023-10-30 19:00:00")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSnapshotFiles](https://www.tencentcloud.com/document/api/215/55055)
+
 
     :param _builtins.str business_type: Business type, currently supports security group:securitygroup.
     :param _builtins.str end_date: End date in the format %Y-%m-%d %H:%M:%S.
@@ -176,6 +182,12 @@ def get_snapshot_files_output(business_type: pulumi.Input[Optional[_builtins.str
         start_date="2022-10-10 00:00:00",
         end_date="2023-10-30 19:00:00")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSnapshotFiles](https://www.tencentcloud.com/document/api/215/55055)
 
 
     :param _builtins.str business_type: Business type, currently supports security group:securitygroup.

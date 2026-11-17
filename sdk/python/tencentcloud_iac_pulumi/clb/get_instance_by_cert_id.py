@@ -96,6 +96,12 @@ def get_instance_by_cert_id(cert_ids: Optional[Sequence[_builtins.str]] = None,
     instance_by_cert_id = tencentcloud.clb.get_instance_by_cert_id(cert_ids=["3a6B5y8v"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeLoadBalancerListByCertId](https://www.tencentcloud.com/document/api/214/33800)
+
 
     :param Sequence[_builtins.str] cert_ids: Server or client certificate ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_instance_by_cert_id_output(cert_ids: pulumi.Input[Optional[Sequence[_bui
 
     instance_by_cert_id = tencentcloud.clb.get_instance_by_cert_id(cert_ids=["3a6B5y8v"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeLoadBalancerListByCertId](https://www.tencentcloud.com/document/api/214/33800)
 
 
     :param Sequence[_builtins.str] cert_ids: Server or client certificate ID.

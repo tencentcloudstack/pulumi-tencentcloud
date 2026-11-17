@@ -79,6 +79,14 @@ import * as utilities from "../utilities";
  *     cosBucket: "autotest-gz-bucket-1257058945",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateJobConfig](https://www.tencentcloud.com/search/?wd=CreateJobConfig&type=document&lang=en)
+ * * Read: [DescribeJobConfigs](https://www.tencentcloud.com/search/?wd=DescribeJobConfigs&type=document&lang=en)
+ * * Delete: [DeleteJobConfigs](https://www.tencentcloud.com/search/?wd=DeleteJobConfigs&type=document&lang=en)
  */
 export class JobConfig extends pulumi.CustomResource {
     /**

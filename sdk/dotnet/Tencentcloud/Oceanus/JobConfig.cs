@@ -113,6 +113,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Oceanus
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateJobConfig](https://www.tencentcloud.com/search/?wd=CreateJobConfig&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeJobConfigs](https://www.tencentcloud.com/search/?wd=DescribeJobConfigs&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteJobConfigs](https://www.tencentcloud.com/search/?wd=DeleteJobConfigs&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Oceanus/jobConfig:JobConfig")]
     public partial class JobConfig : global::Pulumi.CustomResource

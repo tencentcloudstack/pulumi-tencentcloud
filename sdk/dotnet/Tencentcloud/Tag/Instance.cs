@@ -32,6 +32,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tag
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateTag](https://www.tencentcloud.com/document/api/651/33015)
+    /// * Read: [GetTags](https://www.tencentcloud.com/document/api/651/46536)
+    /// * Delete: [DeleteTag](https://www.tencentcloud.com/document/api/651/33013)
+    /// 
     /// ## Import
     /// 
     /// Tag can be imported using the tagKey#tagValue, e.g.

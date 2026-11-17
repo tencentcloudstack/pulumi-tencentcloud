@@ -100,6 +100,12 @@ def get_cvm_instances(filters: Optional[Sequence[Union['GetCvmInstancesFilterArg
     }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeVpcInstances](https://www.tencentcloud.com/document/api/215/36078)
+
 
     :param Sequence[Union['GetCvmInstancesFilterArgs', 'GetCvmInstancesFilterArgsDict']] filters: Filter condition. `RouteTableIds` and `Filters` cannot be specified at the same time. vpc-id - String - (Filter condition) VPC instance ID, such as `vpc-f49l6u0z`;instance-type - String - (Filter condition) CVM instance ID;instance-name - String - (Filter condition) CVM name.
     :param _builtins.str result_output_file: Used to save results.
@@ -132,6 +138,12 @@ def get_cvm_instances_output(filters: pulumi.Input[Optional[Sequence[Union['GetC
         "values": ["vpc-lh4nqig9"],
     }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeVpcInstances](https://www.tencentcloud.com/document/api/215/36078)
 
 
     :param Sequence[Union['GetCvmInstancesFilterArgs', 'GetCvmInstancesFilterArgsDict']] filters: Filter condition. `RouteTableIds` and `Filters` cannot be specified at the same time. vpc-id - String - (Filter condition) VPC instance ID, such as `vpc-f49l6u0z`;instance-type - String - (Filter condition) CVM instance ID;instance-name - String - (Filter condition) CVM name.

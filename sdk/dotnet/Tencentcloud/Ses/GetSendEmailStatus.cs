@@ -34,6 +34,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetSendEmailStatus](https://www.tencentcloud.com/document/api/1084/39502)
         /// </summary>
         public static Task<GetSendEmailStatusResult> InvokeAsync(GetSendEmailStatusArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSendEmailStatusResult>("tencentcloud:Ses/getSendEmailStatus:getSendEmailStatus", args ?? new GetSendEmailStatusArgs(), options.WithDefaults());
@@ -60,6 +66,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetSendEmailStatus](https://www.tencentcloud.com/document/api/1084/39502)
         /// </summary>
         public static Output<GetSendEmailStatusResult> Invoke(GetSendEmailStatusInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSendEmailStatusResult>("tencentcloud:Ses/getSendEmailStatus:getSendEmailStatus", args ?? new GetSendEmailStatusInvokeArgs(), options.WithDefaults());
@@ -86,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ses
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetSendEmailStatus](https://www.tencentcloud.com/document/api/1084/39502)
         /// </summary>
         public static Output<GetSendEmailStatusResult> Invoke(GetSendEmailStatusInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetSendEmailStatusResult>("tencentcloud:Ses/getSendEmailStatus:getSendEmailStatus", args ?? new GetSendEmailStatusInvokeArgs(), options.WithDefaults());

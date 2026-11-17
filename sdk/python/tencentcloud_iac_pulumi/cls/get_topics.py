@@ -145,6 +145,12 @@ def get_topics(biz_type: Optional[_builtins.int] = None,
     ])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTopics](https://www.tencentcloud.com/document/api/614/42783)
+
 
     :param _builtins.int biz_type: Topic type
            - 0 (default): Log topic.
@@ -216,6 +222,12 @@ def get_topics_output(biz_type: pulumi.Input[Optional[Optional[_builtins.int]]] 
         },
     ])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTopics](https://www.tencentcloud.com/document/api/614/42783)
 
 
     :param _builtins.int biz_type: Topic type

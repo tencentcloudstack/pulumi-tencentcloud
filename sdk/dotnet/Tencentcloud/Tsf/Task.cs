@@ -50,6 +50,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateTask](https://www.tencentcloud.com/search/?wd=CreateTask&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeTaskDetail](https://www.tencentcloud.com/search/?wd=DescribeTaskDetail&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyTask](https://www.tencentcloud.com/search/?wd=ModifyTask&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteTask](https://www.tencentcloud.com/search/?wd=DeleteTask&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// tsf task can be imported using the id, e.g.

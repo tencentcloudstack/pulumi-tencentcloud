@@ -225,6 +225,22 @@ class EventBus(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateEventBus](https://www.tencentcloud.com/document/api/1108/45829)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+          - [GetEventBus](https://www.tencentcloud.com/document/api/1108/45827)
+        * Update:
+          - [GetEventBus](https://www.tencentcloud.com/document/api/1108/45827)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+          - [UpdateEventBus](https://www.tencentcloud.com/document/api/1108/45825)
+        * Delete: [DeleteEventBus](https://www.tencentcloud.com/document/api/1108/45828)
+
         ## Import
 
         eb event_bus can be imported using the id, e.g.
@@ -266,6 +282,22 @@ class EventBus(pulumi.CustomResource):
                 "createdBy": "terraform",
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateEventBus](https://www.tencentcloud.com/document/api/1108/45829)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+          - [GetEventBus](https://www.tencentcloud.com/document/api/1108/45827)
+        * Update:
+          - [GetEventBus](https://www.tencentcloud.com/document/api/1108/45827)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+          - [UpdateEventBus](https://www.tencentcloud.com/document/api/1108/45825)
+        * Delete: [DeleteEventBus](https://www.tencentcloud.com/document/api/1108/45828)
 
         ## Import
 

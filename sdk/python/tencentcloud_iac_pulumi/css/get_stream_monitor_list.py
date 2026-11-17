@@ -86,6 +86,12 @@ def get_stream_monitor_list(result_output_file: Optional[_builtins.str] = None,
     stream_monitor_list = tencentcloud.css.get_stream_monitor_list()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeLiveStreamMonitorList](https://www.tencentcloud.com/search/?wd=DescribeLiveStreamMonitorList&type=document&lang=en)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -111,6 +117,12 @@ def get_stream_monitor_list_output(result_output_file: pulumi.Input[Optional[Opt
 
     stream_monitor_list = tencentcloud.css.get_stream_monitor_list()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeLiveStreamMonitorList](https://www.tencentcloud.com/search/?wd=DescribeLiveStreamMonitorList&type=document&lang=en)
 
 
     :param _builtins.str result_output_file: Used to save results.

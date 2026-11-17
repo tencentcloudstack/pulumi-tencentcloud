@@ -106,6 +106,29 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CreateStandardEngineResourceGroup](https://www.tencentcloud.com/search/?wd=CreateStandardEngineResourceGroup&type=document&lang=en)
+//   - [DescribeStandardEngineResourceGroups](https://www.tencentcloud.com/search/?wd=DescribeStandardEngineResourceGroups&type=document&lang=en)
+//   - [PauseStandardEngineResourceGroups](https://www.tencentcloud.com/search/?wd=PauseStandardEngineResourceGroups&type=document&lang=en)
+//
+// * Read: [DescribeStandardEngineResourceGroups](https://www.tencentcloud.com/search/?wd=DescribeStandardEngineResourceGroups&type=document&lang=en)
+// * Update:
+//   - [DescribeStandardEngineResourceGroups](https://www.tencentcloud.com/search/?wd=DescribeStandardEngineResourceGroups&type=document&lang=en)
+//   - [LaunchStandardEngineResourceGroups](https://www.tencentcloud.com/search/?wd=LaunchStandardEngineResourceGroups&type=document&lang=en)
+//   - [PauseStandardEngineResourceGroups](https://www.tencentcloud.com/search/?wd=PauseStandardEngineResourceGroups&type=document&lang=en)
+//   - [UpdateEngineResourceGroupNetworkConfigInfo](https://www.tencentcloud.com/search/?wd=UpdateEngineResourceGroupNetworkConfigInfo&type=document&lang=en)
+//   - [UpdateStandardEngineResourceGroupBaseInfo](https://www.tencentcloud.com/search/?wd=UpdateStandardEngineResourceGroupBaseInfo&type=document&lang=en)
+//   - [UpdateStandardEngineResourceGroupResourceInfo](https://www.tencentcloud.com/search/?wd=UpdateStandardEngineResourceGroupResourceInfo&type=document&lang=en)
+//
+// * Delete:
+//   - [DeleteStandardEngineResourceGroup](https://www.tencentcloud.com/search/?wd=DeleteStandardEngineResourceGroup&type=document&lang=en)
+//   - [DescribeStandardEngineResourceGroups](https://www.tencentcloud.com/search/?wd=DescribeStandardEngineResourceGroups&type=document&lang=en)
+//   - [PauseStandardEngineResourceGroups](https://www.tencentcloud.com/search/?wd=PauseStandardEngineResourceGroups&type=document&lang=en)
 type StandardEngineResourceGroup struct {
 	pulumi.CustomResourceState
 

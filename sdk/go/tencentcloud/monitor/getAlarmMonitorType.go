@@ -36,6 +36,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeMonitorTypes](https://www.tencentcloud.com/document/api/248/39318)
 func GetAlarmMonitorType(ctx *pulumi.Context, args *GetAlarmMonitorTypeArgs, opts ...pulumi.InvokeOption) (*GetAlarmMonitorTypeResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetAlarmMonitorTypeResult

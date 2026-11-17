@@ -109,6 +109,12 @@ def get_layer_versions(compatible_runtimes: Optional[Sequence[_builtins.str]] = 
     layer_versions = tencentcloud.scf.get_layer_versions(layer_name="tf-test")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListLayerVersions](https://www.tencentcloud.com/document/api/583/36318)
+
 
     :param Sequence[_builtins.str] compatible_runtimes: Compatible runtimes.
     :param _builtins.str layer_name: Layer name.
@@ -142,6 +148,12 @@ def get_layer_versions_output(compatible_runtimes: pulumi.Input[Optional[Optiona
 
     layer_versions = tencentcloud.scf.get_layer_versions(layer_name="tf-test")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListLayerVersions](https://www.tencentcloud.com/document/api/583/36318)
 
 
     :param Sequence[_builtins.str] compatible_runtimes: Compatible runtimes.

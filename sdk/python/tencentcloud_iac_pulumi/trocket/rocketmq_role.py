@@ -295,6 +295,15 @@ class RocketmqRole(pulumi.CustomResource):
         pulumi.export("secretKey", rocketmq_role.secret_key)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateRole](https://www.tencentcloud.com/document/api/1113/74632)
+        * Read: [DescribeRoleList](https://www.tencentcloud.com/document/api/1113/74630)
+        * Update: [ModifyRole](https://www.tencentcloud.com/document/api/1113/74629)
+        * Delete: [DeleteRole](https://www.tencentcloud.com/document/api/1113/74631)
+
         ## Import
 
         trocket rocketmq_role can be imported using the id, e.g.
@@ -347,6 +356,15 @@ class RocketmqRole(pulumi.CustomResource):
         pulumi.export("accessKey", rocketmq_role.access_key)
         pulumi.export("secretKey", rocketmq_role.secret_key)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateRole](https://www.tencentcloud.com/document/api/1113/74632)
+        * Read: [DescribeRoleList](https://www.tencentcloud.com/document/api/1113/74630)
+        * Update: [ModifyRole](https://www.tencentcloud.com/document/api/1113/74629)
+        * Delete: [DeleteRole](https://www.tencentcloud.com/document/api/1113/74631)
 
         ## Import
 

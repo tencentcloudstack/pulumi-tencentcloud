@@ -166,6 +166,12 @@ def get_instance(filters: Optional[Sequence[Union['GetInstanceFilterArgs', 'GetI
     example = tencentcloud.image.get_instance(image_name_regex="^Windows\\\\s.*$")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeImages](https://www.tencentcloud.com/document/api/213/33272)
+
 
     :param Sequence[Union['GetInstanceFilterArgs', 'GetInstanceFilterArgsDict']] filters: One or more name/value pairs to filter.
     :param _builtins.str image_name_regex: A regex string to apply to the image list returned by TencentCloud. **NOTE**: it is not wildcard, should look like `image_name_regex = "^CentOS\\s+6\\.8\\s+64\\w*"`.
@@ -241,6 +247,12 @@ def get_instance_output(filters: pulumi.Input[Optional[Optional[Sequence[Union['
 
     example = tencentcloud.image.get_instance(image_name_regex="^Windows\\\\s.*$")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeImages](https://www.tencentcloud.com/document/api/213/33272)
 
 
     :param Sequence[Union['GetInstanceFilterArgs', 'GetInstanceFilterArgsDict']] filters: One or more name/value pairs to filter.

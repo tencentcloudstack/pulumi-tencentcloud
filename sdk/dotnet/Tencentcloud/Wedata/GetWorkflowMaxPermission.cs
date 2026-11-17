@@ -34,6 +34,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetMyWorkflowMaxPermission](https://www.tencentcloud.com/document/api/1174/77930)
         /// </summary>
         public static Task<GetWorkflowMaxPermissionResult> InvokeAsync(GetWorkflowMaxPermissionArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetWorkflowMaxPermissionResult>("tencentcloud:Wedata/getWorkflowMaxPermission:getWorkflowMaxPermission", args ?? new GetWorkflowMaxPermissionArgs(), options.WithDefaults());
@@ -60,6 +66,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetMyWorkflowMaxPermission](https://www.tencentcloud.com/document/api/1174/77930)
         /// </summary>
         public static Output<GetWorkflowMaxPermissionResult> Invoke(GetWorkflowMaxPermissionInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetWorkflowMaxPermissionResult>("tencentcloud:Wedata/getWorkflowMaxPermission:getWorkflowMaxPermission", args ?? new GetWorkflowMaxPermissionInvokeArgs(), options.WithDefaults());
@@ -86,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetMyWorkflowMaxPermission](https://www.tencentcloud.com/document/api/1174/77930)
         /// </summary>
         public static Output<GetWorkflowMaxPermissionResult> Invoke(GetWorkflowMaxPermissionInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetWorkflowMaxPermissionResult>("tencentcloud:Wedata/getWorkflowMaxPermission:getWorkflowMaxPermission", args ?? new GetWorkflowMaxPermissionInvokeArgs(), options.WithDefaults());

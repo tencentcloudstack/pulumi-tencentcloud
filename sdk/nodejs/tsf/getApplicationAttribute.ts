@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     applicationId: "application-a24x29xv",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeApplicationAttribute](https://www.tencentcloud.com/search/?wd=DescribeApplicationAttribute&type=document&lang=en)
  */
 export function getApplicationAttribute(args: GetApplicationAttributeArgs, opts?: pulumi.InvokeOptions): Promise<GetApplicationAttributeResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetApplicationAttributeResult {
  *     applicationId: "application-a24x29xv",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeApplicationAttribute](https://www.tencentcloud.com/search/?wd=DescribeApplicationAttribute&type=document&lang=en)
  */
 export function getApplicationAttributeOutput(args: GetApplicationAttributeOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetApplicationAttributeResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

@@ -143,6 +143,12 @@ def get_find_domains(by: Optional[_builtins.str] = None,
         order="asc")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeFindDomainList](https://www.tencentcloud.com/document/api/627/64548)
+
 
     :param _builtins.str by: Sorting parameter, eg: FindTime.
     :param _builtins.str is_waf_domain: Whether access to waf or not.
@@ -198,6 +204,12 @@ def get_find_domains_output(by: pulumi.Input[Optional[Optional[_builtins.str]]] 
         by="FindTime",
         order="asc")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeFindDomainList](https://www.tencentcloud.com/document/api/627/64548)
 
 
     :param _builtins.str by: Sorting parameter, eg: FindTime.

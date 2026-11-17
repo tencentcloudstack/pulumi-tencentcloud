@@ -23,6 +23,15 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateLivePadTemplate](https://www.tencentcloud.com/document/api/267/71831)
+ * * Read: [DescribeLivePadTemplate](https://www.tencentcloud.com/search/?wd=DescribeLivePadTemplate&type=document&lang=en)
+ * * Update: [ModifyLivePadTemplate](https://www.tencentcloud.com/search/?wd=ModifyLivePadTemplate&type=document&lang=en)
+ * * Delete: [DeleteLivePadTemplate](https://www.tencentcloud.com/search/?wd=DeleteLivePadTemplate&type=document&lang=en)
+ *
  * ## Import
  *
  * css padTemplate can be imported using the id, e.g.

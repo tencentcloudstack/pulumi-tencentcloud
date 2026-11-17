@@ -52,6 +52,12 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListDiscoveredResources](https://www.tencentcloud.com/document/api/1164/66770)
  */
 export function getDiscoveredResources(args?: GetDiscoveredResourcesArgs, opts?: pulumi.InvokeOptions): Promise<GetDiscoveredResourcesResult> {
     args = args || {};
@@ -152,6 +158,12 @@ export interface GetDiscoveredResourcesResult {
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListDiscoveredResources](https://www.tencentcloud.com/document/api/1164/66770)
  */
 export function getDiscoveredResourcesOutput(args?: GetDiscoveredResourcesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDiscoveredResourcesResult> {
     args = args || {};

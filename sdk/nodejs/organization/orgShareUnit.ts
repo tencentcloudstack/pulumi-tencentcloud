@@ -20,6 +20,15 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [AddShareUnit](https://www.tencentcloud.com/document/api/1031/68237)
+ * * Read: [DescribeShareUnits](https://www.tencentcloud.com/document/api/1031/68228)
+ * * Update: [UpdateShareUnit](https://www.tencentcloud.com/document/api/1031/68226)
+ * * Delete: [DeleteShareUnit](https://www.tencentcloud.com/document/api/1031/68234)
+ *
  * ## Import
  *
  * organization orgShareUnit can be imported using the id, e.g.

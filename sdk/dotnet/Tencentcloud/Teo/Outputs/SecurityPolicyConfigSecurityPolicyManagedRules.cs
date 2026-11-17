@@ -27,6 +27,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
         /// </summary>
         public readonly string Enabled;
         /// <summary>
+        /// High-frequency scan protection configuration option. When a visitor's frequent requests hit the managed rule configured as block within a period of time, all requests from that visitor are blocked.
+        /// </summary>
+        public readonly Outputs.SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtection? FrequentScanningProtection;
+        /// <summary>
         /// Configuration of the managed rule group. if this structure is passed as an empty array or the GroupId is not included in the list, it will be processed based on the default method.
         /// </summary>
         public readonly ImmutableArray<Outputs.SecurityPolicyConfigSecurityPolicyManagedRulesManagedRuleGroup> ManagedRuleGroups;
@@ -43,6 +47,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
 
             string enabled,
 
+            Outputs.SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtection? frequentScanningProtection,
+
             ImmutableArray<Outputs.SecurityPolicyConfigSecurityPolicyManagedRulesManagedRuleGroup> managedRuleGroups,
 
             string? semanticAnalysis)
@@ -50,6 +56,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Outputs
             AutoUpdate = autoUpdate;
             DetectionOnly = detectionOnly;
             Enabled = enabled;
+            FrequentScanningProtection = frequentScanningProtection;
             ManagedRuleGroups = managedRuleGroups;
             SemanticAnalysis = semanticAnalysis;
         }

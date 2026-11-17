@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [GetDataBackfillPlan](https://www.tencentcloud.com/document/api/1174/77891)
 func LookupDataBackfillPlan(ctx *pulumi.Context, args *LookupDataBackfillPlanArgs, opts ...pulumi.InvokeOption) (*LookupDataBackfillPlanResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupDataBackfillPlanResult

@@ -642,6 +642,25 @@ class Instance(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateEngine](https://www.tencentcloud.com/search/?wd=CreateEngine&type=document&lang=en)
+          - [DescribeSREInstances](https://www.tencentcloud.com/search/?wd=DescribeSREInstances&type=document&lang=en)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+          - [DescribeSREInstances](https://www.tencentcloud.com/search/?wd=DescribeSREInstances&type=document&lang=en)
+        * Update:
+          - [DescribeSREInstances](https://www.tencentcloud.com/search/?wd=DescribeSREInstances&type=document&lang=en)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+          - [UpdateEngineInternetAccess](https://www.tencentcloud.com/search/?wd=UpdateEngineInternetAccess&type=document&lang=en)
+        * Delete:
+          - [DeleteEngine](https://www.tencentcloud.com/search/?wd=DeleteEngine&type=document&lang=en)
+          - [DescribeSREInstances](https://www.tencentcloud.com/search/?wd=DescribeSREInstances&type=document&lang=en)
+
         ## Import
 
         tse instance can be imported using the id, e.g.
@@ -783,6 +802,25 @@ class Instance(pulumi.CustomResource):
                 "createdBy": "terraform",
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateEngine](https://www.tencentcloud.com/search/?wd=CreateEngine&type=document&lang=en)
+          - [DescribeSREInstances](https://www.tencentcloud.com/search/?wd=DescribeSREInstances&type=document&lang=en)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+          - [DescribeSREInstances](https://www.tencentcloud.com/search/?wd=DescribeSREInstances&type=document&lang=en)
+        * Update:
+          - [DescribeSREInstances](https://www.tencentcloud.com/search/?wd=DescribeSREInstances&type=document&lang=en)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+          - [UpdateEngineInternetAccess](https://www.tencentcloud.com/search/?wd=UpdateEngineInternetAccess&type=document&lang=en)
+        * Delete:
+          - [DeleteEngine](https://www.tencentcloud.com/search/?wd=DeleteEngine&type=document&lang=en)
+          - [DescribeSREInstances](https://www.tencentcloud.com/search/?wd=DescribeSREInstances&type=document&lang=en)
 
         ## Import
 

@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     dataEngineId: "DataEngine-public-1308726196",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDataEngineSessionParameters](https://www.tencentcloud.com/search/?wd=DescribeDataEngineSessionParameters&type=document&lang=en)
  */
 export function getDataEngineSessionParameters(args: GetDataEngineSessionParametersArgs, opts?: pulumi.InvokeOptions): Promise<GetDataEngineSessionParametersResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -76,6 +82,12 @@ export interface GetDataEngineSessionParametersResult {
  *     dataEngineId: "DataEngine-public-1308726196",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDataEngineSessionParameters](https://www.tencentcloud.com/search/?wd=DescribeDataEngineSessionParameters&type=document&lang=en)
  */
 export function getDataEngineSessionParametersOutput(args: GetDataEngineSessionParametersOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDataEngineSessionParametersResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

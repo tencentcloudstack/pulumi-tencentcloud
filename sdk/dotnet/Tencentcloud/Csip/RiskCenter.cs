@@ -157,6 +157,17 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Csip
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateRiskCenterScanTask](https://www.tencentcloud.com/search/?wd=CreateRiskCenterScanTask&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeScanTaskList](https://www.tencentcloud.com/search/?wd=DescribeScanTaskList&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyRiskCenterScanTask](https://www.tencentcloud.com/search/?wd=ModifyRiskCenterScanTask&amp;type=document&amp;lang=en)
+    /// * Delete:
+    ///   - [DeleteRiskScanTask](https://www.tencentcloud.com/search/?wd=DeleteRiskScanTask&amp;type=document&amp;lang=en)
+    ///   - [StopRiskCenterTask](https://www.tencentcloud.com/search/?wd=StopRiskCenterTask&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Csip/riskCenter:RiskCenter")]
     public partial class RiskCenter : global::Pulumi.CustomResource

@@ -119,6 +119,14 @@ class LaunchTemplateDefaultVersion(pulumi.CustomResource):
             default_version=2)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyLaunchTemplateDefaultVersion](https://www.tencentcloud.com/document/api/213/45356)
+        * Read: [DescribeLaunchTemplateVersions](https://www.tencentcloud.com/document/api/213/45358)
+        * Update: [ModifyLaunchTemplateDefaultVersion](https://www.tencentcloud.com/document/api/213/45356)
+
         ## Import
 
         cvm launch_template_default_version can be imported using the id, e.g.
@@ -152,6 +160,14 @@ class LaunchTemplateDefaultVersion(pulumi.CustomResource):
             launch_template_id="lt-34vaef8fe",
             default_version=2)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyLaunchTemplateDefaultVersion](https://www.tencentcloud.com/document/api/213/45356)
+        * Read: [DescribeLaunchTemplateVersions](https://www.tencentcloud.com/document/api/213/45358)
+        * Update: [ModifyLaunchTemplateDefaultVersion](https://www.tencentcloud.com/document/api/213/45356)
 
         ## Import
 

@@ -18,6 +18,12 @@ import * as utilities from "../utilities";
  *     logBackupId: "local.pg_log_backup_id",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [DeleteLogBackup](https://www.tencentcloud.com/document/api/409/54347)
  */
 export class DeleteLogBackupOperation extends pulumi.CustomResource {
     /**

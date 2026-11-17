@@ -210,6 +210,18 @@ class ControlPlaneLog(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeControlPlaneLogs](https://www.tencentcloud.com/document/api/457/75764)
+          - [EnableControlPlaneLogs](https://www.tencentcloud.com/document/api/457/75760)
+        * Read: [DescribeControlPlaneLogs](https://www.tencentcloud.com/document/api/457/75764)
+        * Delete:
+          - [DescribeControlPlaneLogs](https://www.tencentcloud.com/document/api/457/75764)
+          - [DisableControlPlaneLogs](https://www.tencentcloud.com/document/api/457/75762)
+
         ## Import
 
         TKE kubernetes control plane log can be imported using the clusterId#clusterType#componentName, e.g.
@@ -269,6 +281,18 @@ class ControlPlaneLog(pulumi.CustomResource):
                 "topic_region": "ap-guangzhou",
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeControlPlaneLogs](https://www.tencentcloud.com/document/api/457/75764)
+          - [EnableControlPlaneLogs](https://www.tencentcloud.com/document/api/457/75760)
+        * Read: [DescribeControlPlaneLogs](https://www.tencentcloud.com/document/api/457/75764)
+        * Delete:
+          - [DescribeControlPlaneLogs](https://www.tencentcloud.com/document/api/457/75764)
+          - [DisableControlPlaneLogs](https://www.tencentcloud.com/document/api/457/75762)
 
         ## Import
 

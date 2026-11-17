@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSqlTemplate](https://www.tencentcloud.com/search/?wd=DescribeSqlTemplate&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetSqlTemplatesResult> InvokeAsync(GetSqlTemplatesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSqlTemplatesResult>("tencentcloud:Dbbrain/getSqlTemplates:getSqlTemplates", args ?? new GetSqlTemplatesArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSqlTemplate](https://www.tencentcloud.com/search/?wd=DescribeSqlTemplate&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetSqlTemplatesResult> Invoke(GetSqlTemplatesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSqlTemplatesResult>("tencentcloud:Dbbrain/getSqlTemplates:getSqlTemplates", args ?? new GetSqlTemplatesInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSqlTemplate](https://www.tencentcloud.com/search/?wd=DescribeSqlTemplate&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetSqlTemplatesResult> Invoke(GetSqlTemplatesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetSqlTemplatesResult>("tencentcloud:Dbbrain/getSqlTemplates:getSqlTemplates", args ?? new GetSqlTemplatesInvokeArgs(), options.WithDefaults());

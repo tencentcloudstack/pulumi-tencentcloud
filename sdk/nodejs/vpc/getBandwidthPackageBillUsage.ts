@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     bandwidthPackageId: "bwp-234rfgt5",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeBandwidthPackageBillUsage](https://www.tencentcloud.com/document/api/215/38531)
  */
 export function getBandwidthPackageBillUsage(args: GetBandwidthPackageBillUsageArgs, opts?: pulumi.InvokeOptions): Promise<GetBandwidthPackageBillUsageResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetBandwidthPackageBillUsageResult {
  *     bandwidthPackageId: "bwp-234rfgt5",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeBandwidthPackageBillUsage](https://www.tencentcloud.com/document/api/215/38531)
  */
 export function getBandwidthPackageBillUsageOutput(args: GetBandwidthPackageBillUsageOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetBandwidthPackageBillUsageResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

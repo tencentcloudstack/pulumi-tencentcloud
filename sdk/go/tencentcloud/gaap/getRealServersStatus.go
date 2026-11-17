@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeRealServersStatus](https://www.tencentcloud.com/document/api/608/33059)
 func GetRealServersStatus(ctx *pulumi.Context, args *GetRealServersStatusArgs, opts ...pulumi.InvokeOption) (*GetRealServersStatusResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetRealServersStatusResult

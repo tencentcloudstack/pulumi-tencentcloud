@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeHostTeoInstanceList](https://www.tencentcloud.com/document/api/1007/57016)
         /// </summary>
         public static Task<GetDescribeHostTeoInstanceListResult> InvokeAsync(GetDescribeHostTeoInstanceListArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDescribeHostTeoInstanceListResult>("tencentcloud:Ssl/getDescribeHostTeoInstanceList:getDescribeHostTeoInstanceList", args ?? new GetDescribeHostTeoInstanceListArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeHostTeoInstanceList](https://www.tencentcloud.com/document/api/1007/57016)
         /// </summary>
         public static Output<GetDescribeHostTeoInstanceListResult> Invoke(GetDescribeHostTeoInstanceListInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDescribeHostTeoInstanceListResult>("tencentcloud:Ssl/getDescribeHostTeoInstanceList:getDescribeHostTeoInstanceList", args ?? new GetDescribeHostTeoInstanceListInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeHostTeoInstanceList](https://www.tencentcloud.com/document/api/1007/57016)
         /// </summary>
         public static Output<GetDescribeHostTeoInstanceListResult> Invoke(GetDescribeHostTeoInstanceListInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDescribeHostTeoInstanceListResult>("tencentcloud:Ssl/getDescribeHostTeoInstanceList:getDescribeHostTeoInstanceList", args ?? new GetDescribeHostTeoInstanceListInvokeArgs(), options.WithDefaults());

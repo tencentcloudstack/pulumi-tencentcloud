@@ -21,6 +21,12 @@ import * as utilities from "../utilities";
  *     instanceNames: ["keep_preset_mysql"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDiagDBInstances](https://www.tencentcloud.com/document/api/1035/41195)
  */
 export function getDiagDbInstances(args: GetDiagDbInstancesArgs, opts?: pulumi.InvokeOptions): Promise<GetDiagDbInstancesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -108,6 +114,12 @@ export interface GetDiagDbInstancesResult {
  *     instanceNames: ["keep_preset_mysql"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDiagDBInstances](https://www.tencentcloud.com/document/api/1035/41195)
  */
 export function getDiagDbInstancesOutput(args: GetDiagDbInstancesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDiagDbInstancesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

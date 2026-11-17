@@ -24,6 +24,12 @@ import * as utilities from "../utilities";
  *     ],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeIPRegion](https://www.tencentcloud.com/document/api/1145/59030)
  */
 export function getIpRegion(args: GetIpRegionArgs, opts?: pulumi.InvokeOptions): Promise<GetIpRegionResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -80,6 +86,12 @@ export interface GetIpRegionResult {
  *     ],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeIPRegion](https://www.tencentcloud.com/document/api/1145/59030)
  */
 export function getIpRegionOutput(args: GetIpRegionOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetIpRegionResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

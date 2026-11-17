@@ -138,7 +138,9 @@ class Attachment(pulumi.CustomResource):
                  tag_value: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         """
-        Provides a resource to create a tag attachment
+        Provides a resource to create a tag attachment. This is the v1 resource; changing `tag_value` destroys and recreates the binding. To update `tag_value` in place, use `Tag.AttachmentV2`.
+
+        > **NOTE**: This is the v1 resource, where changing `tag_value` forces the binding to be destroyed and recreated (the field is `ForceNew`). If you need to update `tag_value` **in place** without destroying the binding, please use the v2 resource `Tag.AttachmentV2` instead.
 
         ## Example Usage
 
@@ -151,6 +153,14 @@ class Attachment(pulumi.CustomResource):
             tag_value="Terraform3",
             resource="qcs::cvm:ap-guangzhou:uin/100020512675:instance/ins-kfrlvcp4")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AddResourceTag](https://www.tencentcloud.com/document/api/651/33016)
+        * Read: [GetResources](https://www.tencentcloud.com/document/api/651/46539)
+        * Delete: [DeleteResourceTag](https://www.tencentcloud.com/document/api/651/33014)
 
         ## Import
 
@@ -174,7 +184,9 @@ class Attachment(pulumi.CustomResource):
                  args: AttachmentArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Provides a resource to create a tag attachment
+        Provides a resource to create a tag attachment. This is the v1 resource; changing `tag_value` destroys and recreates the binding. To update `tag_value` in place, use `Tag.AttachmentV2`.
+
+        > **NOTE**: This is the v1 resource, where changing `tag_value` forces the binding to be destroyed and recreated (the field is `ForceNew`). If you need to update `tag_value` **in place** without destroying the binding, please use the v2 resource `Tag.AttachmentV2` instead.
 
         ## Example Usage
 
@@ -187,6 +199,14 @@ class Attachment(pulumi.CustomResource):
             tag_value="Terraform3",
             resource="qcs::cvm:ap-guangzhou:uin/100020512675:instance/ins-kfrlvcp4")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AddResourceTag](https://www.tencentcloud.com/document/api/651/33016)
+        * Read: [GetResources](https://www.tencentcloud.com/document/api/651/46539)
+        * Delete: [DeleteResourceTag](https://www.tencentcloud.com/document/api/651/33014)
 
         ## Import
 

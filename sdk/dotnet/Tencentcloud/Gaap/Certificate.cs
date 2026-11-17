@@ -33,6 +33,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateCertificate](https://www.tencentcloud.com/document/api/608/33118)
+    /// * Read: [DescribeCertificateDetail](https://www.tencentcloud.com/document/api/608/33116)
+    /// * Update: [ModifyCertificateAttributes](https://www.tencentcloud.com/document/api/608/33114)
+    /// * Delete: [DeleteCertificate](https://www.tencentcloud.com/document/api/608/33117)
+    /// 
     /// ## Import
     /// 
     /// GAAP certificate can be imported using the id, e.g.

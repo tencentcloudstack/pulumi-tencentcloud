@@ -119,6 +119,14 @@ class BinlogSaveDays(pulumi.CustomResource):
             binlog_save_days=7)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyBinlogSaveDays](https://www.tencentcloud.com/document/api/1098/55922)
+        * Read: [DescribeBinlogSaveDays](https://www.tencentcloud.com/document/api/1098/48595)
+        * Update: [ModifyBinlogSaveDays](https://www.tencentcloud.com/document/api/1098/55922)
+
         ## Import
 
         cynosdb binlog_save_days can be imported using the id, e.g.
@@ -152,6 +160,14 @@ class BinlogSaveDays(pulumi.CustomResource):
             cluster_id="cynosdbmysql-123",
             binlog_save_days=7)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyBinlogSaveDays](https://www.tencentcloud.com/document/api/1098/55922)
+        * Read: [DescribeBinlogSaveDays](https://www.tencentcloud.com/document/api/1098/48595)
+        * Update: [ModifyBinlogSaveDays](https://www.tencentcloud.com/document/api/1098/55922)
 
         ## Import
 

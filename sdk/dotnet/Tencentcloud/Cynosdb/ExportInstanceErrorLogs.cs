@@ -43,6 +43,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ExportInstanceErrorLogs](https://www.tencentcloud.com/document/api/1098/55901)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cynosdb/exportInstanceErrorLogs:ExportInstanceErrorLogs")]
     public partial class ExportInstanceErrorLogs : global::Pulumi.CustomResource

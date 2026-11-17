@@ -85,6 +85,13 @@ class ReleaseApiGroup(pulumi.CustomResource):
         release_api_group = tencentcloud.tsf.ReleaseApiGroup("release_api_group", group_id="grp-qp0rj3zi")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ReleaseApiGroup](https://www.tencentcloud.com/search/?wd=ReleaseApiGroup&type=document&lang=en)
+        * Read: [DescribeApiGroup](https://www.tencentcloud.com/search/?wd=DescribeApiGroup&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -107,6 +114,13 @@ class ReleaseApiGroup(pulumi.CustomResource):
 
         release_api_group = tencentcloud.tsf.ReleaseApiGroup("release_api_group", group_id="grp-qp0rj3zi")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ReleaseApiGroup](https://www.tencentcloud.com/search/?wd=ReleaseApiGroup&type=document&lang=en)
+        * Read: [DescribeApiGroup](https://www.tencentcloud.com/search/?wd=DescribeApiGroup&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

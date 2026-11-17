@@ -19,6 +19,11 @@ __all__ = [
     'BudgetDimensionsRangeTag',
     'BudgetWarnJson',
     'BudgetWaveThresholdJson',
+    'GetBillDetailDetailSetAssociatedOrderResult',
+    'GetBillDetailDetailSetComponentSetComponentConfigResult',
+    'GetBillDetailDetailSetComponentSetResult',
+    'GetBillDetailDetailSetResult',
+    'GetBillDetailDetailSetTagResult',
     'GetBudgetOperationLogRecordDiffValueResult',
     'GetBudgetOperationLogRecordResult',
 ]
@@ -412,6 +417,888 @@ class BudgetWaveThresholdJson(dict):
         ACTUAL: actual amount, FORECAST: forecast amount.
         """
         return pulumi.get(self, "warn_type")
+
+
+@pulumi.output_type
+class GetBillDetailDetailSetResult(dict):
+    def __init__(__self__, *,
+                 action_type: _builtins.str,
+                 action_type_name: _builtins.str,
+                 associated_orders: Sequence['outputs.GetBillDetailDetailSetAssociatedOrderResult'],
+                 bill_day: _builtins.str,
+                 bill_id: _builtins.str,
+                 bill_month: _builtins.str,
+                 business_code: _builtins.str,
+                 business_code_name: _builtins.str,
+                 component_sets: Sequence['outputs.GetBillDetailDetailSetComponentSetResult'],
+                 discount_content: _builtins.str,
+                 discount_object: _builtins.str,
+                 discount_type: _builtins.str,
+                 fee_begin_time: _builtins.str,
+                 fee_end_time: _builtins.str,
+                 formula: _builtins.str,
+                 formula_url: _builtins.str,
+                 id: _builtins.str,
+                 operate_uin: _builtins.str,
+                 order_id: _builtins.str,
+                 owner_uin: _builtins.str,
+                 pay_mode_name: _builtins.str,
+                 pay_time: _builtins.str,
+                 payer_uin: _builtins.str,
+                 price_infos: Sequence[_builtins.str],
+                 product_code: _builtins.str,
+                 product_code_name: _builtins.str,
+                 project_id: _builtins.int,
+                 project_name: _builtins.str,
+                 region_id: _builtins.str,
+                 region_name: _builtins.str,
+                 region_type: _builtins.str,
+                 region_type_name: _builtins.str,
+                 reserve_detail: _builtins.str,
+                 resource_id: _builtins.str,
+                 resource_name: _builtins.str,
+                 tags: Sequence['outputs.GetBillDetailDetailSetTagResult'],
+                 zone_name: _builtins.str):
+        """
+        :param _builtins.str action_type: Transaction type name, such as prepay purchase, prepay renew, postpay deduction, etc.
+        :param _builtins.str action_type_name: Transaction type.
+        :param Sequence['GetBillDetailDetailSetAssociatedOrderArgs'] associated_orders: Associated transaction order.
+        :param _builtins.str bill_day: Bill day.
+        :param _builtins.str bill_id: Transaction ID.
+        :param _builtins.str bill_month: Bill month.
+        :param _builtins.str business_code: Product name code.
+        :param _builtins.str business_code_name: Product name.
+        :param Sequence['GetBillDetailDetailSetComponentSetArgs'] component_sets: Component list.
+        :param _builtins.str discount_content: Discount content.
+        :param _builtins.str discount_object: Discount object.
+        :param _builtins.str discount_type: Discount type.
+        :param _builtins.str fee_begin_time: Start time of use.
+        :param _builtins.str fee_end_time: End time of use.
+        :param _builtins.str formula: Calculation description.
+        :param _builtins.str formula_url: Billing rule link.
+        :param _builtins.str id: Bill record ID.
+        :param _builtins.str operate_uin: Operator UIN.
+        :param _builtins.str order_id: Order ID.
+        :param _builtins.str owner_uin: Owner UIN.
+        :param _builtins.str pay_mode_name: Billing mode.
+        :param _builtins.str pay_time: Deduction time.
+        :param _builtins.str payer_uin: Payer account ID (the account ID is the user's unique account identifier on Tencent Cloud). Defaults to querying the current account's bill.
+        :param Sequence[_builtins.str] price_infos: Price attributes.
+        :param _builtins.str product_code: Sub-product code.
+        :param _builtins.str product_code_name: Sub-product name.
+        :param _builtins.int project_id: Project ID.
+        :param _builtins.str project_name: Project name.
+        :param _builtins.str region_id: Region ID.
+        :param _builtins.str region_name: Region.
+        :param _builtins.str region_type: Domestic/International code.
+        :param _builtins.str region_type_name: Domestic/International name.
+        :param _builtins.str reserve_detail: Reserve detail (instance config).
+        :param _builtins.str resource_id: Resource ID.
+        :param _builtins.str resource_name: Resource alias.
+        :param Sequence['GetBillDetailDetailSetTagArgs'] tags: Tag information list.
+        :param _builtins.str zone_name: Zone.
+        """
+        pulumi.set(__self__, "action_type", action_type)
+        pulumi.set(__self__, "action_type_name", action_type_name)
+        pulumi.set(__self__, "associated_orders", associated_orders)
+        pulumi.set(__self__, "bill_day", bill_day)
+        pulumi.set(__self__, "bill_id", bill_id)
+        pulumi.set(__self__, "bill_month", bill_month)
+        pulumi.set(__self__, "business_code", business_code)
+        pulumi.set(__self__, "business_code_name", business_code_name)
+        pulumi.set(__self__, "component_sets", component_sets)
+        pulumi.set(__self__, "discount_content", discount_content)
+        pulumi.set(__self__, "discount_object", discount_object)
+        pulumi.set(__self__, "discount_type", discount_type)
+        pulumi.set(__self__, "fee_begin_time", fee_begin_time)
+        pulumi.set(__self__, "fee_end_time", fee_end_time)
+        pulumi.set(__self__, "formula", formula)
+        pulumi.set(__self__, "formula_url", formula_url)
+        pulumi.set(__self__, "id", id)
+        pulumi.set(__self__, "operate_uin", operate_uin)
+        pulumi.set(__self__, "order_id", order_id)
+        pulumi.set(__self__, "owner_uin", owner_uin)
+        pulumi.set(__self__, "pay_mode_name", pay_mode_name)
+        pulumi.set(__self__, "pay_time", pay_time)
+        pulumi.set(__self__, "payer_uin", payer_uin)
+        pulumi.set(__self__, "price_infos", price_infos)
+        pulumi.set(__self__, "product_code", product_code)
+        pulumi.set(__self__, "product_code_name", product_code_name)
+        pulumi.set(__self__, "project_id", project_id)
+        pulumi.set(__self__, "project_name", project_name)
+        pulumi.set(__self__, "region_id", region_id)
+        pulumi.set(__self__, "region_name", region_name)
+        pulumi.set(__self__, "region_type", region_type)
+        pulumi.set(__self__, "region_type_name", region_type_name)
+        pulumi.set(__self__, "reserve_detail", reserve_detail)
+        pulumi.set(__self__, "resource_id", resource_id)
+        pulumi.set(__self__, "resource_name", resource_name)
+        pulumi.set(__self__, "tags", tags)
+        pulumi.set(__self__, "zone_name", zone_name)
+
+    @_builtins.property
+    @pulumi.getter(name="actionType")
+    def action_type(self) -> _builtins.str:
+        """
+        Transaction type name, such as prepay purchase, prepay renew, postpay deduction, etc.
+        """
+        return pulumi.get(self, "action_type")
+
+    @_builtins.property
+    @pulumi.getter(name="actionTypeName")
+    def action_type_name(self) -> _builtins.str:
+        """
+        Transaction type.
+        """
+        return pulumi.get(self, "action_type_name")
+
+    @_builtins.property
+    @pulumi.getter(name="associatedOrders")
+    def associated_orders(self) -> Sequence['outputs.GetBillDetailDetailSetAssociatedOrderResult']:
+        """
+        Associated transaction order.
+        """
+        return pulumi.get(self, "associated_orders")
+
+    @_builtins.property
+    @pulumi.getter(name="billDay")
+    def bill_day(self) -> _builtins.str:
+        """
+        Bill day.
+        """
+        return pulumi.get(self, "bill_day")
+
+    @_builtins.property
+    @pulumi.getter(name="billId")
+    def bill_id(self) -> _builtins.str:
+        """
+        Transaction ID.
+        """
+        return pulumi.get(self, "bill_id")
+
+    @_builtins.property
+    @pulumi.getter(name="billMonth")
+    def bill_month(self) -> _builtins.str:
+        """
+        Bill month.
+        """
+        return pulumi.get(self, "bill_month")
+
+    @_builtins.property
+    @pulumi.getter(name="businessCode")
+    def business_code(self) -> _builtins.str:
+        """
+        Product name code.
+        """
+        return pulumi.get(self, "business_code")
+
+    @_builtins.property
+    @pulumi.getter(name="businessCodeName")
+    def business_code_name(self) -> _builtins.str:
+        """
+        Product name.
+        """
+        return pulumi.get(self, "business_code_name")
+
+    @_builtins.property
+    @pulumi.getter(name="componentSets")
+    def component_sets(self) -> Sequence['outputs.GetBillDetailDetailSetComponentSetResult']:
+        """
+        Component list.
+        """
+        return pulumi.get(self, "component_sets")
+
+    @_builtins.property
+    @pulumi.getter(name="discountContent")
+    def discount_content(self) -> _builtins.str:
+        """
+        Discount content.
+        """
+        return pulumi.get(self, "discount_content")
+
+    @_builtins.property
+    @pulumi.getter(name="discountObject")
+    def discount_object(self) -> _builtins.str:
+        """
+        Discount object.
+        """
+        return pulumi.get(self, "discount_object")
+
+    @_builtins.property
+    @pulumi.getter(name="discountType")
+    def discount_type(self) -> _builtins.str:
+        """
+        Discount type.
+        """
+        return pulumi.get(self, "discount_type")
+
+    @_builtins.property
+    @pulumi.getter(name="feeBeginTime")
+    def fee_begin_time(self) -> _builtins.str:
+        """
+        Start time of use.
+        """
+        return pulumi.get(self, "fee_begin_time")
+
+    @_builtins.property
+    @pulumi.getter(name="feeEndTime")
+    def fee_end_time(self) -> _builtins.str:
+        """
+        End time of use.
+        """
+        return pulumi.get(self, "fee_end_time")
+
+    @_builtins.property
+    @pulumi.getter
+    def formula(self) -> _builtins.str:
+        """
+        Calculation description.
+        """
+        return pulumi.get(self, "formula")
+
+    @_builtins.property
+    @pulumi.getter(name="formulaUrl")
+    def formula_url(self) -> _builtins.str:
+        """
+        Billing rule link.
+        """
+        return pulumi.get(self, "formula_url")
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> _builtins.str:
+        """
+        Bill record ID.
+        """
+        return pulumi.get(self, "id")
+
+    @_builtins.property
+    @pulumi.getter(name="operateUin")
+    def operate_uin(self) -> _builtins.str:
+        """
+        Operator UIN.
+        """
+        return pulumi.get(self, "operate_uin")
+
+    @_builtins.property
+    @pulumi.getter(name="orderId")
+    def order_id(self) -> _builtins.str:
+        """
+        Order ID.
+        """
+        return pulumi.get(self, "order_id")
+
+    @_builtins.property
+    @pulumi.getter(name="ownerUin")
+    def owner_uin(self) -> _builtins.str:
+        """
+        Owner UIN.
+        """
+        return pulumi.get(self, "owner_uin")
+
+    @_builtins.property
+    @pulumi.getter(name="payModeName")
+    def pay_mode_name(self) -> _builtins.str:
+        """
+        Billing mode.
+        """
+        return pulumi.get(self, "pay_mode_name")
+
+    @_builtins.property
+    @pulumi.getter(name="payTime")
+    def pay_time(self) -> _builtins.str:
+        """
+        Deduction time.
+        """
+        return pulumi.get(self, "pay_time")
+
+    @_builtins.property
+    @pulumi.getter(name="payerUin")
+    def payer_uin(self) -> _builtins.str:
+        """
+        Payer account ID (the account ID is the user's unique account identifier on Tencent Cloud). Defaults to querying the current account's bill.
+        """
+        return pulumi.get(self, "payer_uin")
+
+    @_builtins.property
+    @pulumi.getter(name="priceInfos")
+    def price_infos(self) -> Sequence[_builtins.str]:
+        """
+        Price attributes.
+        """
+        return pulumi.get(self, "price_infos")
+
+    @_builtins.property
+    @pulumi.getter(name="productCode")
+    def product_code(self) -> _builtins.str:
+        """
+        Sub-product code.
+        """
+        return pulumi.get(self, "product_code")
+
+    @_builtins.property
+    @pulumi.getter(name="productCodeName")
+    def product_code_name(self) -> _builtins.str:
+        """
+        Sub-product name.
+        """
+        return pulumi.get(self, "product_code_name")
+
+    @_builtins.property
+    @pulumi.getter(name="projectId")
+    def project_id(self) -> _builtins.int:
+        """
+        Project ID.
+        """
+        return pulumi.get(self, "project_id")
+
+    @_builtins.property
+    @pulumi.getter(name="projectName")
+    def project_name(self) -> _builtins.str:
+        """
+        Project name.
+        """
+        return pulumi.get(self, "project_name")
+
+    @_builtins.property
+    @pulumi.getter(name="regionId")
+    def region_id(self) -> _builtins.str:
+        """
+        Region ID.
+        """
+        return pulumi.get(self, "region_id")
+
+    @_builtins.property
+    @pulumi.getter(name="regionName")
+    def region_name(self) -> _builtins.str:
+        """
+        Region.
+        """
+        return pulumi.get(self, "region_name")
+
+    @_builtins.property
+    @pulumi.getter(name="regionType")
+    def region_type(self) -> _builtins.str:
+        """
+        Domestic/International code.
+        """
+        return pulumi.get(self, "region_type")
+
+    @_builtins.property
+    @pulumi.getter(name="regionTypeName")
+    def region_type_name(self) -> _builtins.str:
+        """
+        Domestic/International name.
+        """
+        return pulumi.get(self, "region_type_name")
+
+    @_builtins.property
+    @pulumi.getter(name="reserveDetail")
+    def reserve_detail(self) -> _builtins.str:
+        """
+        Reserve detail (instance config).
+        """
+        return pulumi.get(self, "reserve_detail")
+
+    @_builtins.property
+    @pulumi.getter(name="resourceId")
+    def resource_id(self) -> _builtins.str:
+        """
+        Resource ID.
+        """
+        return pulumi.get(self, "resource_id")
+
+    @_builtins.property
+    @pulumi.getter(name="resourceName")
+    def resource_name(self) -> _builtins.str:
+        """
+        Resource alias.
+        """
+        return pulumi.get(self, "resource_name")
+
+    @_builtins.property
+    @pulumi.getter
+    def tags(self) -> Sequence['outputs.GetBillDetailDetailSetTagResult']:
+        """
+        Tag information list.
+        """
+        return pulumi.get(self, "tags")
+
+    @_builtins.property
+    @pulumi.getter(name="zoneName")
+    def zone_name(self) -> _builtins.str:
+        """
+        Zone.
+        """
+        return pulumi.get(self, "zone_name")
+
+
+@pulumi.output_type
+class GetBillDetailDetailSetAssociatedOrderResult(dict):
+    def __init__(__self__, *,
+                 new_order: _builtins.str,
+                 original: _builtins.str,
+                 prepay_modify_up: _builtins.str,
+                 prepay_purchase: _builtins.str,
+                 prepay_renew: _builtins.str,
+                 reverse_order: _builtins.str):
+        """
+        :param _builtins.str new_order: Adjusted order after discount.
+        :param _builtins.str original: Original order before discount adjustment.
+        :param _builtins.str prepay_modify_up: Upgrade order.
+        :param _builtins.str prepay_purchase: New purchase order.
+        :param _builtins.str prepay_renew: Renewal order.
+        :param _builtins.str reverse_order: Reverse order.
+        """
+        pulumi.set(__self__, "new_order", new_order)
+        pulumi.set(__self__, "original", original)
+        pulumi.set(__self__, "prepay_modify_up", prepay_modify_up)
+        pulumi.set(__self__, "prepay_purchase", prepay_purchase)
+        pulumi.set(__self__, "prepay_renew", prepay_renew)
+        pulumi.set(__self__, "reverse_order", reverse_order)
+
+    @_builtins.property
+    @pulumi.getter(name="newOrder")
+    def new_order(self) -> _builtins.str:
+        """
+        Adjusted order after discount.
+        """
+        return pulumi.get(self, "new_order")
+
+    @_builtins.property
+    @pulumi.getter
+    def original(self) -> _builtins.str:
+        """
+        Original order before discount adjustment.
+        """
+        return pulumi.get(self, "original")
+
+    @_builtins.property
+    @pulumi.getter(name="prepayModifyUp")
+    def prepay_modify_up(self) -> _builtins.str:
+        """
+        Upgrade order.
+        """
+        return pulumi.get(self, "prepay_modify_up")
+
+    @_builtins.property
+    @pulumi.getter(name="prepayPurchase")
+    def prepay_purchase(self) -> _builtins.str:
+        """
+        New purchase order.
+        """
+        return pulumi.get(self, "prepay_purchase")
+
+    @_builtins.property
+    @pulumi.getter(name="prepayRenew")
+    def prepay_renew(self) -> _builtins.str:
+        """
+        Renewal order.
+        """
+        return pulumi.get(self, "prepay_renew")
+
+    @_builtins.property
+    @pulumi.getter(name="reverseOrder")
+    def reverse_order(self) -> _builtins.str:
+        """
+        Reverse order.
+        """
+        return pulumi.get(self, "reverse_order")
+
+
+@pulumi.output_type
+class GetBillDetailDetailSetComponentSetResult(dict):
+    def __init__(__self__, *,
+                 blended_discount: _builtins.str,
+                 cash_pay_amount: _builtins.str,
+                 component_code: _builtins.str,
+                 component_code_name: _builtins.str,
+                 component_configs: Sequence['outputs.GetBillDetailDetailSetComponentSetComponentConfigResult'],
+                 contract_price: _builtins.str,
+                 cost: _builtins.str,
+                 deducted_measure: _builtins.str,
+                 discount: _builtins.str,
+                 incentive_pay_amount: _builtins.str,
+                 instance_type: _builtins.str,
+                 item_code: _builtins.str,
+                 item_code_name: _builtins.str,
+                 original_cost_with_ri: _builtins.str,
+                 original_cost_with_sp: _builtins.str,
+                 price_unit: _builtins.str,
+                 real_cost: _builtins.str,
+                 real_total_measure: _builtins.str,
+                 reduce_type: _builtins.str,
+                 ri_time_span: _builtins.str,
+                 single_price: _builtins.str,
+                 sp_deduction: _builtins.str,
+                 sp_deduction_rate: _builtins.str,
+                 specified_price: _builtins.str,
+                 time_span: _builtins.str,
+                 time_unit_name: _builtins.str,
+                 transfer_pay_amount: _builtins.str,
+                 used_amount: _builtins.str,
+                 used_amount_unit: _builtins.str,
+                 voucher_pay_amount: _builtins.str):
+        """
+        :param _builtins.str blended_discount: Blended discount rate.
+        :param _builtins.str cash_pay_amount: Cash account payment amount.
+        :param _builtins.str component_code: Component name code.
+        :param _builtins.str component_code_name: Component type.
+        :param Sequence['GetBillDetailDetailSetComponentSetComponentConfigArgs'] component_configs: Component config description list.
+        :param _builtins.str contract_price: Component unit price after discount.
+        :param _builtins.str cost: Component original price.
+        :param _builtins.str deducted_measure: Deducted usage/duration (including resource pack).
+        :param _builtins.str discount: Discount rate.
+        :param _builtins.str incentive_pay_amount: Incentive account payment amount.
+        :param _builtins.str instance_type: Instance type.
+        :param _builtins.str item_code: Component type code.
+        :param _builtins.str item_code_name: Component name.
+        :param _builtins.str original_cost_with_ri: Reserved instance deducted component original price.
+        :param _builtins.str original_cost_with_sp: Savings plan deducted component original price.
+        :param _builtins.str price_unit: Component price unit.
+        :param _builtins.str real_cost: Discounted total price.
+        :param _builtins.str real_total_measure: Original usage/duration before resource pack deduction.
+        :param _builtins.str reduce_type: Discount type.
+        :param _builtins.str ri_time_span: Reserved instance deducted usage duration.
+        :param _builtins.str single_price: Component list price.
+        :param _builtins.str sp_deduction: Savings plan deduction amount. Deprecated.
+        :param _builtins.str sp_deduction_rate: Savings plan deduction rate.
+        :param _builtins.str specified_price: Component specified price. Deprecated.
+        :param _builtins.str time_span: Usage duration.
+        :param _builtins.str time_unit_name: Duration unit.
+        :param _builtins.str transfer_pay_amount: Transfer account payment amount.
+        :param _builtins.str used_amount: Component usage.
+        :param _builtins.str used_amount_unit: Component usage unit.
+        :param _builtins.str voucher_pay_amount: Voucher payment amount.
+        """
+        pulumi.set(__self__, "blended_discount", blended_discount)
+        pulumi.set(__self__, "cash_pay_amount", cash_pay_amount)
+        pulumi.set(__self__, "component_code", component_code)
+        pulumi.set(__self__, "component_code_name", component_code_name)
+        pulumi.set(__self__, "component_configs", component_configs)
+        pulumi.set(__self__, "contract_price", contract_price)
+        pulumi.set(__self__, "cost", cost)
+        pulumi.set(__self__, "deducted_measure", deducted_measure)
+        pulumi.set(__self__, "discount", discount)
+        pulumi.set(__self__, "incentive_pay_amount", incentive_pay_amount)
+        pulumi.set(__self__, "instance_type", instance_type)
+        pulumi.set(__self__, "item_code", item_code)
+        pulumi.set(__self__, "item_code_name", item_code_name)
+        pulumi.set(__self__, "original_cost_with_ri", original_cost_with_ri)
+        pulumi.set(__self__, "original_cost_with_sp", original_cost_with_sp)
+        pulumi.set(__self__, "price_unit", price_unit)
+        pulumi.set(__self__, "real_cost", real_cost)
+        pulumi.set(__self__, "real_total_measure", real_total_measure)
+        pulumi.set(__self__, "reduce_type", reduce_type)
+        pulumi.set(__self__, "ri_time_span", ri_time_span)
+        pulumi.set(__self__, "single_price", single_price)
+        pulumi.set(__self__, "sp_deduction", sp_deduction)
+        pulumi.set(__self__, "sp_deduction_rate", sp_deduction_rate)
+        pulumi.set(__self__, "specified_price", specified_price)
+        pulumi.set(__self__, "time_span", time_span)
+        pulumi.set(__self__, "time_unit_name", time_unit_name)
+        pulumi.set(__self__, "transfer_pay_amount", transfer_pay_amount)
+        pulumi.set(__self__, "used_amount", used_amount)
+        pulumi.set(__self__, "used_amount_unit", used_amount_unit)
+        pulumi.set(__self__, "voucher_pay_amount", voucher_pay_amount)
+
+    @_builtins.property
+    @pulumi.getter(name="blendedDiscount")
+    def blended_discount(self) -> _builtins.str:
+        """
+        Blended discount rate.
+        """
+        return pulumi.get(self, "blended_discount")
+
+    @_builtins.property
+    @pulumi.getter(name="cashPayAmount")
+    def cash_pay_amount(self) -> _builtins.str:
+        """
+        Cash account payment amount.
+        """
+        return pulumi.get(self, "cash_pay_amount")
+
+    @_builtins.property
+    @pulumi.getter(name="componentCode")
+    def component_code(self) -> _builtins.str:
+        """
+        Component name code.
+        """
+        return pulumi.get(self, "component_code")
+
+    @_builtins.property
+    @pulumi.getter(name="componentCodeName")
+    def component_code_name(self) -> _builtins.str:
+        """
+        Component type.
+        """
+        return pulumi.get(self, "component_code_name")
+
+    @_builtins.property
+    @pulumi.getter(name="componentConfigs")
+    def component_configs(self) -> Sequence['outputs.GetBillDetailDetailSetComponentSetComponentConfigResult']:
+        """
+        Component config description list.
+        """
+        return pulumi.get(self, "component_configs")
+
+    @_builtins.property
+    @pulumi.getter(name="contractPrice")
+    def contract_price(self) -> _builtins.str:
+        """
+        Component unit price after discount.
+        """
+        return pulumi.get(self, "contract_price")
+
+    @_builtins.property
+    @pulumi.getter
+    def cost(self) -> _builtins.str:
+        """
+        Component original price.
+        """
+        return pulumi.get(self, "cost")
+
+    @_builtins.property
+    @pulumi.getter(name="deductedMeasure")
+    def deducted_measure(self) -> _builtins.str:
+        """
+        Deducted usage/duration (including resource pack).
+        """
+        return pulumi.get(self, "deducted_measure")
+
+    @_builtins.property
+    @pulumi.getter
+    def discount(self) -> _builtins.str:
+        """
+        Discount rate.
+        """
+        return pulumi.get(self, "discount")
+
+    @_builtins.property
+    @pulumi.getter(name="incentivePayAmount")
+    def incentive_pay_amount(self) -> _builtins.str:
+        """
+        Incentive account payment amount.
+        """
+        return pulumi.get(self, "incentive_pay_amount")
+
+    @_builtins.property
+    @pulumi.getter(name="instanceType")
+    def instance_type(self) -> _builtins.str:
+        """
+        Instance type.
+        """
+        return pulumi.get(self, "instance_type")
+
+    @_builtins.property
+    @pulumi.getter(name="itemCode")
+    def item_code(self) -> _builtins.str:
+        """
+        Component type code.
+        """
+        return pulumi.get(self, "item_code")
+
+    @_builtins.property
+    @pulumi.getter(name="itemCodeName")
+    def item_code_name(self) -> _builtins.str:
+        """
+        Component name.
+        """
+        return pulumi.get(self, "item_code_name")
+
+    @_builtins.property
+    @pulumi.getter(name="originalCostWithRi")
+    def original_cost_with_ri(self) -> _builtins.str:
+        """
+        Reserved instance deducted component original price.
+        """
+        return pulumi.get(self, "original_cost_with_ri")
+
+    @_builtins.property
+    @pulumi.getter(name="originalCostWithSp")
+    def original_cost_with_sp(self) -> _builtins.str:
+        """
+        Savings plan deducted component original price.
+        """
+        return pulumi.get(self, "original_cost_with_sp")
+
+    @_builtins.property
+    @pulumi.getter(name="priceUnit")
+    def price_unit(self) -> _builtins.str:
+        """
+        Component price unit.
+        """
+        return pulumi.get(self, "price_unit")
+
+    @_builtins.property
+    @pulumi.getter(name="realCost")
+    def real_cost(self) -> _builtins.str:
+        """
+        Discounted total price.
+        """
+        return pulumi.get(self, "real_cost")
+
+    @_builtins.property
+    @pulumi.getter(name="realTotalMeasure")
+    def real_total_measure(self) -> _builtins.str:
+        """
+        Original usage/duration before resource pack deduction.
+        """
+        return pulumi.get(self, "real_total_measure")
+
+    @_builtins.property
+    @pulumi.getter(name="reduceType")
+    def reduce_type(self) -> _builtins.str:
+        """
+        Discount type.
+        """
+        return pulumi.get(self, "reduce_type")
+
+    @_builtins.property
+    @pulumi.getter(name="riTimeSpan")
+    def ri_time_span(self) -> _builtins.str:
+        """
+        Reserved instance deducted usage duration.
+        """
+        return pulumi.get(self, "ri_time_span")
+
+    @_builtins.property
+    @pulumi.getter(name="singlePrice")
+    def single_price(self) -> _builtins.str:
+        """
+        Component list price.
+        """
+        return pulumi.get(self, "single_price")
+
+    @_builtins.property
+    @pulumi.getter(name="spDeduction")
+    def sp_deduction(self) -> _builtins.str:
+        """
+        Savings plan deduction amount. Deprecated.
+        """
+        return pulumi.get(self, "sp_deduction")
+
+    @_builtins.property
+    @pulumi.getter(name="spDeductionRate")
+    def sp_deduction_rate(self) -> _builtins.str:
+        """
+        Savings plan deduction rate.
+        """
+        return pulumi.get(self, "sp_deduction_rate")
+
+    @_builtins.property
+    @pulumi.getter(name="specifiedPrice")
+    def specified_price(self) -> _builtins.str:
+        """
+        Component specified price. Deprecated.
+        """
+        return pulumi.get(self, "specified_price")
+
+    @_builtins.property
+    @pulumi.getter(name="timeSpan")
+    def time_span(self) -> _builtins.str:
+        """
+        Usage duration.
+        """
+        return pulumi.get(self, "time_span")
+
+    @_builtins.property
+    @pulumi.getter(name="timeUnitName")
+    def time_unit_name(self) -> _builtins.str:
+        """
+        Duration unit.
+        """
+        return pulumi.get(self, "time_unit_name")
+
+    @_builtins.property
+    @pulumi.getter(name="transferPayAmount")
+    def transfer_pay_amount(self) -> _builtins.str:
+        """
+        Transfer account payment amount.
+        """
+        return pulumi.get(self, "transfer_pay_amount")
+
+    @_builtins.property
+    @pulumi.getter(name="usedAmount")
+    def used_amount(self) -> _builtins.str:
+        """
+        Component usage.
+        """
+        return pulumi.get(self, "used_amount")
+
+    @_builtins.property
+    @pulumi.getter(name="usedAmountUnit")
+    def used_amount_unit(self) -> _builtins.str:
+        """
+        Component usage unit.
+        """
+        return pulumi.get(self, "used_amount_unit")
+
+    @_builtins.property
+    @pulumi.getter(name="voucherPayAmount")
+    def voucher_pay_amount(self) -> _builtins.str:
+        """
+        Voucher payment amount.
+        """
+        return pulumi.get(self, "voucher_pay_amount")
+
+
+@pulumi.output_type
+class GetBillDetailDetailSetComponentSetComponentConfigResult(dict):
+    def __init__(__self__, *,
+                 name: _builtins.str,
+                 value: _builtins.str):
+        """
+        :param _builtins.str name: Config description name.
+        :param _builtins.str value: Config description value.
+        """
+        pulumi.set(__self__, "name", name)
+        pulumi.set(__self__, "value", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> _builtins.str:
+        """
+        Config description name.
+        """
+        return pulumi.get(self, "name")
+
+    @_builtins.property
+    @pulumi.getter
+    def value(self) -> _builtins.str:
+        """
+        Config description value.
+        """
+        return pulumi.get(self, "value")
+
+
+@pulumi.output_type
+class GetBillDetailDetailSetTagResult(dict):
+    def __init__(__self__, *,
+                 tag_key: _builtins.str,
+                 tag_value: _builtins.str):
+        """
+        :param _builtins.str tag_key: Tag key.
+        :param _builtins.str tag_value: Tag value.
+        """
+        pulumi.set(__self__, "tag_key", tag_key)
+        pulumi.set(__self__, "tag_value", tag_value)
+
+    @_builtins.property
+    @pulumi.getter(name="tagKey")
+    def tag_key(self) -> _builtins.str:
+        """
+        Tag key.
+        """
+        return pulumi.get(self, "tag_key")
+
+    @_builtins.property
+    @pulumi.getter(name="tagValue")
+    def tag_value(self) -> _builtins.str:
+        """
+        Tag value.
+        """
+        return pulumi.get(self, "tag_value")
 
 
 @pulumi.output_type

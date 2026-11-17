@@ -356,6 +356,15 @@ class SampleSnapshotTemplate(pulumi.CustomResource):
             width=140)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateSampleSnapshotTemplate](https://www.tencentcloud.com/document/api/1041/33673)
+        * Read: [DescribeSampleSnapshotTemplates](https://www.tencentcloud.com/document/api/1041/33657)
+        * Update: [ModifySampleSnapshotTemplate](https://www.tencentcloud.com/document/api/1041/33649)
+        * Delete: [DeleteSampleSnapshotTemplate](https://www.tencentcloud.com/document/api/1041/33665)
+
         ## Import
 
         mps sample_snapshot_template can be imported using the id, e.g.
@@ -402,6 +411,15 @@ class SampleSnapshotTemplate(pulumi.CustomResource):
             sample_type="Percent",
             width=140)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateSampleSnapshotTemplate](https://www.tencentcloud.com/document/api/1041/33673)
+        * Read: [DescribeSampleSnapshotTemplates](https://www.tencentcloud.com/document/api/1041/33657)
+        * Update: [ModifySampleSnapshotTemplate](https://www.tencentcloud.com/document/api/1041/33649)
+        * Delete: [DeleteSampleSnapshotTemplate](https://www.tencentcloud.com/document/api/1041/33665)
 
         ## Import
 

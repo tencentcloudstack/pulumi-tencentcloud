@@ -96,6 +96,12 @@ def get_policy_detail(policy_id: Optional[_builtins.int] = None,
     example = tencentcloud.cam.get_policy_detail(policy_id=236245899)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetPolicy](https://www.tencentcloud.com/document/api/598/32244)
+
 
     :param _builtins.int policy_id: Policy ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_policy_detail_output(policy_id: pulumi.Input[Optional[_builtins.int]] = 
 
     example = tencentcloud.cam.get_policy_detail(policy_id=236245899)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetPolicy](https://www.tencentcloud.com/document/api/598/32244)
 
 
     :param _builtins.int policy_id: Policy ID.

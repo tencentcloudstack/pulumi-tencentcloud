@@ -444,6 +444,12 @@ class ProcessLiveStreamOperation(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ProcessLiveStream](https://www.tencentcloud.com/document/api/1041/33641)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -504,6 +510,12 @@ class ProcessLiveStreamOperation(pulumi.CustomResource):
                 "definition": 10,
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ProcessLiveStream](https://www.tencentcloud.com/document/api/1041/33641)
 
 
         :param str resource_name: The name of the resource.

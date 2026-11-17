@@ -56,6 +56,18 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribePrometheusInstanceInitStatus](https://www.tencentcloud.com/document/api/248/53321)
+ *   - [ModifyRemoteURLs](https://www.tencentcloud.com/search/?wd=ModifyRemoteURLs&type=document&lang=en)
+ *   - [RunPrometheusInstance](https://www.tencentcloud.com/document/api/248/53315)
+ * * Read: [DescribeRemoteURLs](https://www.tencentcloud.com/search/?wd=DescribeRemoteURLs&type=document&lang=en)
+ * * Update: [ModifyRemoteURLs](https://www.tencentcloud.com/search/?wd=ModifyRemoteURLs&type=document&lang=en)
+ * * Delete: [ModifyRemoteURLs](https://www.tencentcloud.com/search/?wd=ModifyRemoteURLs&type=document&lang=en)
+ *
  * ## Import
  *
  * monitor multiple writes list can be imported using the id, e.g.

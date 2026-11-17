@@ -14,7 +14,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
     public sealed class SecurityPolicyConfigSecurityPolicyCustomRulesPreciseMatchRuleGetArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
-        /// Execution actions for custom rules. the Name parameter value of SecurityAction supports: &lt;li&gt;Deny: block;&lt;/li&gt; &lt;li&gt;Monitor: observe;&lt;/li&gt; &lt;li&gt;ReturnCustomPage: block using a specified page;&lt;/li&gt; &lt;li&gt;Redirect: Redirect to URL;&lt;/li&gt; &lt;li&gt;BlockIP: IP blocking;&lt;/li&gt; &lt;li&gt;JSChallenge: JavaScript challenge;&lt;/li&gt; &lt;li&gt;ManagedChallenge: managed challenge;&lt;/li&gt; &lt;li&gt;Allow: Allow.&lt;/li&gt;.
+        /// Execution actions for custom rules. the Name parameter value of SecurityAction supports: &lt;li&gt;Allow: allow, where AllowActionParameters supports MinDelayTime and MaxDelayTime configuration;&lt;/li&gt; &lt;li&gt;Deny: block, where DenyActionParameters supports BlockIp, ReturnCustomPage, and Stall configuration;&lt;/li&gt; &lt;li&gt;Monitor: observe;&lt;/li&gt; &lt;li&gt;Challenge: challenge, where ChallengeActionParameters.ChallengeOption supports JSChallenge and ManagedChallenge;&lt;/li&gt; &lt;li&gt;Redirect: redirect to a URL.&lt;/li&gt;.
         /// </summary>
         [Input("action", required: true)]
         public Input<Inputs.SecurityPolicyConfigSecurityPolicyCustomRulesPreciseMatchRuleActionGetArgs> Action { get; set; } = null!;
@@ -32,7 +32,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public Input<string> Enabled { get; set; } = null!;
 
         /// <summary>
-        /// ID of the resource.
+        /// Template ID. Output-only.
         /// </summary>
         [Input("id")]
         public Input<string>? Id { get; set; }

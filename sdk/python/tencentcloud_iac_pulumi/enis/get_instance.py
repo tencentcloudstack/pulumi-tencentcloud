@@ -194,6 +194,12 @@ def get_instance(description: Optional[_builtins.str] = None,
     name = tencentcloud.enis.get_instance(name="test eni")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeNetworkInterfaces](https://www.tencentcloud.com/document/api/215/15817)
+
 
     :param _builtins.str description: Description of the ENI. Conflict with `ids`.
     :param Sequence[_builtins.str] ids: ID of the ENIs to be queried. Conflict with `vpc_id`,`subnet_id`,`instance_id`,`security_group`,`name`,`ipv4` and `tags`.
@@ -255,6 +261,12 @@ def get_instance_output(description: pulumi.Input[Optional[Optional[_builtins.st
 
     name = tencentcloud.enis.get_instance(name="test eni")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeNetworkInterfaces](https://www.tencentcloud.com/document/api/215/15817)
 
 
     :param _builtins.str description: Description of the ENI. Conflict with `ids`.

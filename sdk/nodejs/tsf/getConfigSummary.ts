@@ -24,6 +24,12 @@ import * as utilities from "../utilities";
  *     configIdLists: ["dcfg-y54wzk3a"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeConfigSummary](https://www.tencentcloud.com/search/?wd=DescribeConfigSummary&type=document&lang=en)
  */
 export function getConfigSummary(args?: GetConfigSummaryArgs, opts?: pulumi.InvokeOptions): Promise<GetConfigSummaryResult> {
     args = args || {};
@@ -120,6 +126,12 @@ export interface GetConfigSummaryResult {
  *     configIdLists: ["dcfg-y54wzk3a"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeConfigSummary](https://www.tencentcloud.com/search/?wd=DescribeConfigSummary&type=document&lang=en)
  */
 export function getConfigSummaryOutput(args?: GetConfigSummaryOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetConfigSummaryResult> {
     args = args || {};

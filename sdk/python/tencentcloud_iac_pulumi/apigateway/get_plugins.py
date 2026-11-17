@@ -179,6 +179,12 @@ def get_plugins(environment_name: Optional[_builtins.str] = None,
         environment_name="release")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAllPluginApis](https://www.tencentcloud.com/search/?wd=DescribeAllPluginApis&type=document&lang=en)
+
 
     :param _builtins.str environment_name: Environmental information.
     :param _builtins.str plugin_id: The plugin ID to query.
@@ -279,6 +285,12 @@ def get_plugins_output(environment_name: pulumi.Input[Optional[_builtins.str]] =
         plugin_id=example_plugin.id,
         environment_name="release")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAllPluginApis](https://www.tencentcloud.com/search/?wd=DescribeAllPluginApis&type=document&lang=en)
 
 
     :param _builtins.str environment_name: Environmental information.

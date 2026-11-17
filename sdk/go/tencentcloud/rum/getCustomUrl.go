@@ -41,6 +41,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDataCustomUrl](https://www.tencentcloud.com/document/api/1131/45332)
 func GetCustomUrl(ctx *pulumi.Context, args *GetCustomUrlArgs, opts ...pulumi.InvokeOption) (*GetCustomUrlResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetCustomUrlResult

@@ -21,6 +21,16 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateLiveSnapshotRule](https://www.tencentcloud.com/document/api/267/30835)
+ * * Read: [DescribeLiveSnapshotRules](https://www.tencentcloud.com/document/api/267/30831)
+ * * Delete:
+ *   - [DeleteLiveSnapshotRule](https://www.tencentcloud.com/document/api/267/30833)
+ *   - [DescribeLiveSnapshotRules](https://www.tencentcloud.com/document/api/267/30831)
+ *
  * ## Import
  *
  * css snapshotRule can be imported using the id, e.g.

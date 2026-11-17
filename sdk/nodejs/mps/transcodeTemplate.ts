@@ -40,6 +40,15 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateTranscodeTemplate](https://www.tencentcloud.com/document/api/1041/33671)
+ * * Read: [DescribeTranscodeTemplates](https://www.tencentcloud.com/document/api/1041/33655)
+ * * Update: [ModifyTranscodeTemplate](https://www.tencentcloud.com/document/api/1041/33647)
+ * * Delete: [DeleteTranscodeTemplate](https://www.tencentcloud.com/document/api/1041/33663)
+ *
  * ## Import
  *
  * MPS transcode template can be imported using the id, e.g.

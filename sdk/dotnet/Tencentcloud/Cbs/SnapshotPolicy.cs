@@ -11,9 +11,13 @@ using Pulumi;
 namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
 {
     /// <summary>
-    /// Provides a snapshot policy resource.
+    /// Provides a CBS snapshot policy resource.
+    /// 
+    /// &gt; **NOTE:** `RepeatWeekdays`/`RepeatMonths`/`IntervalDays` are mutually exclusive rules, required and only one policy rule can be set. If mutually exclusive rules are passed in at the same time, only one will take effect, with priority in the order listed above: for example, if all three rules are set, only `RepeatWeekdays` will take effect
     /// 
     /// ## Example Usage
+    /// 
+    /// ### Create policy by RepeatWeekdays
     /// 
     /// ```csharp
     /// using System.Collections.Generic;
@@ -23,40 +27,101 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
     /// 
     /// return await Deployment.RunAsync(() =&gt; 
     /// {
-    ///     var snapshotPolicy = new Tencentcloud.Cbs.SnapshotPolicy("snapshot_policy", new()
+    ///     var example = new Tencentcloud.Cbs.SnapshotPolicy("example", new()
     ///     {
-    ///         SnapshotPolicyName = "mysnapshotpolicyname",
+    ///         SnapshotPolicyName = "tf-example",
+    ///         RepeatHours = new[]
+    ///         {
+    ///             1,
+    ///         },
     ///         RepeatWeekdays = new[]
     ///         {
     ///             1,
     ///             4,
     ///         },
-    ///         RepeatHours = new[]
-    ///         {
-    ///             1,
-    ///         },
+    ///         IsActivated = true,
+    ///         IsPermanent = false,
     ///         RetentionDays = 7,
     ///     });
     /// 
     /// });
     /// ```
     /// 
+    /// ### Create policy by IntervalDays
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Cbs.SnapshotPolicy("example", new()
+    ///     {
+    ///         SnapshotPolicyName = "tf-example",
+    ///         RepeatHours = new[]
+    ///         {
+    ///             1,
+    ///         },
+    ///         IntervalDays = 30,
+    ///         IsActivated = true,
+    ///         IsPermanent = false,
+    ///         RetentionDays = 7,
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateAutoSnapshotPolicy](https://www.tencentcloud.com/document/api/362/32167)
+    /// * Read: [DescribeAutoSnapshotPolicies](https://www.tencentcloud.com/document/api/362/32165)
+    /// * Update: [ModifyAutoSnapshotPolicyAttribute](https://www.tencentcloud.com/document/api/362/32162)
+    /// * Delete: [DeleteAutoSnapshotPolicies](https://www.tencentcloud.com/document/api/362/32166)
+    /// 
     /// ## Import
     /// 
     /// CBS snapshot policy can be imported using the id, e.g.
     /// 
     /// ```sh
-    /// $ pulumi import tencentcloud:Cbs/snapshotPolicy:SnapshotPolicy snapshot_policy asp-jliex1tn
+    /// $ pulumi import tencentcloud:Cbs/snapshotPolicy:SnapshotPolicy example asp-jliex1tn
     /// ```
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cbs/snapshotPolicy:SnapshotPolicy")]
     public partial class SnapshotPolicy : global::Pulumi.CustomResource
     {
         /// <summary>
+        /// Specifies the interval in days for creating scheduled snapshots. Valid value ranges: [1, 365]. For example, setting it to 5 means a scheduled snapshot is created every 5 days. Note: when backing up by days, theoretically the first backup is on the day the policy is created; if the policy creation time is later than the configured backup time on that day, the first backup will be in the next backup cycle.
+        /// </summary>
+        [Output("intervalDays")]
+        public Output<int?> IntervalDays { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether the snapshot policy is activated. Default is true.
+        /// </summary>
+        [Output("isActivated")]
+        public Output<bool> IsActivated { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether snapshots created by this policy are retained permanently. Default is false. Note: if this parameter is set to true, RetentionDays must not be specified, otherwise a conflict error will be returned by the API.
+        /// </summary>
+        [Output("isPermanent")]
+        public Output<bool> IsPermanent { get; private set; } = null!;
+
+        /// <summary>
         /// Trigger times of periodic snapshot. Valid value ranges: (0~23). The 0 means 00:00, and so on.
         /// </summary>
         [Output("repeatHours")]
         public Output<ImmutableArray<int>> RepeatHours { get; private set; } = null!;
+
+        /// <summary>
+        /// Specifies the days of the month on which scheduled snapshots are triggered. Valid value ranges: [1, 31]. For example, 5 means triggering snapshots on the 5th day of each month. Note: if a date such as 29, 30 or 31 does not exist in some months, those months will be skipped.
+        /// </summary>
+        [Output("repeatMonths")]
+        public Output<ImmutableArray<int>> RepeatMonths { get; private set; } = null!;
 
         /// <summary>
         /// Periodic snapshot is enabled. Valid values: [0, 1, 2, 3, 4, 5, 6]. 0 means Sunday, 1-6 means Monday to Saturday.
@@ -68,7 +133,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         /// Retention days of the snapshot, and the default value is 7.
         /// </summary>
         [Output("retentionDays")]
-        public Output<int?> RetentionDays { get; private set; } = null!;
+        public Output<int> RetentionDays { get; private set; } = null!;
 
         /// <summary>
         /// Name of snapshot policy. The maximum length can not exceed 60 bytes.
@@ -123,6 +188,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
 
     public sealed class SnapshotPolicyArgs : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Specifies the interval in days for creating scheduled snapshots. Valid value ranges: [1, 365]. For example, setting it to 5 means a scheduled snapshot is created every 5 days. Note: when backing up by days, theoretically the first backup is on the day the policy is created; if the policy creation time is later than the configured backup time on that day, the first backup will be in the next backup cycle.
+        /// </summary>
+        [Input("intervalDays")]
+        public Input<int>? IntervalDays { get; set; }
+
+        /// <summary>
+        /// Whether the snapshot policy is activated. Default is true.
+        /// </summary>
+        [Input("isActivated")]
+        public Input<bool>? IsActivated { get; set; }
+
+        /// <summary>
+        /// Whether snapshots created by this policy are retained permanently. Default is false. Note: if this parameter is set to true, RetentionDays must not be specified, otherwise a conflict error will be returned by the API.
+        /// </summary>
+        [Input("isPermanent")]
+        public Input<bool>? IsPermanent { get; set; }
+
         [Input("repeatHours", required: true)]
         private InputList<int>? _repeatHours;
 
@@ -135,7 +218,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
             set => _repeatHours = value;
         }
 
-        [Input("repeatWeekdays", required: true)]
+        [Input("repeatMonths")]
+        private InputList<int>? _repeatMonths;
+
+        /// <summary>
+        /// Specifies the days of the month on which scheduled snapshots are triggered. Valid value ranges: [1, 31]. For example, 5 means triggering snapshots on the 5th day of each month. Note: if a date such as 29, 30 or 31 does not exist in some months, those months will be skipped.
+        /// </summary>
+        public InputList<int> RepeatMonths
+        {
+            get => _repeatMonths ?? (_repeatMonths = new InputList<int>());
+            set => _repeatMonths = value;
+        }
+
+        [Input("repeatWeekdays")]
         private InputList<int>? _repeatWeekdays;
 
         /// <summary>
@@ -167,6 +262,24 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
 
     public sealed class SnapshotPolicyState : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Specifies the interval in days for creating scheduled snapshots. Valid value ranges: [1, 365]. For example, setting it to 5 means a scheduled snapshot is created every 5 days. Note: when backing up by days, theoretically the first backup is on the day the policy is created; if the policy creation time is later than the configured backup time on that day, the first backup will be in the next backup cycle.
+        /// </summary>
+        [Input("intervalDays")]
+        public Input<int>? IntervalDays { get; set; }
+
+        /// <summary>
+        /// Whether the snapshot policy is activated. Default is true.
+        /// </summary>
+        [Input("isActivated")]
+        public Input<bool>? IsActivated { get; set; }
+
+        /// <summary>
+        /// Whether snapshots created by this policy are retained permanently. Default is false. Note: if this parameter is set to true, RetentionDays must not be specified, otherwise a conflict error will be returned by the API.
+        /// </summary>
+        [Input("isPermanent")]
+        public Input<bool>? IsPermanent { get; set; }
+
         [Input("repeatHours")]
         private InputList<int>? _repeatHours;
 
@@ -177,6 +290,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         {
             get => _repeatHours ?? (_repeatHours = new InputList<int>());
             set => _repeatHours = value;
+        }
+
+        [Input("repeatMonths")]
+        private InputList<int>? _repeatMonths;
+
+        /// <summary>
+        /// Specifies the days of the month on which scheduled snapshots are triggered. Valid value ranges: [1, 31]. For example, 5 means triggering snapshots on the 5th day of each month. Note: if a date such as 29, 30 or 31 does not exist in some months, those months will be skipped.
+        /// </summary>
+        public InputList<int> RepeatMonths
+        {
+            get => _repeatMonths ?? (_repeatMonths = new InputList<int>());
+            set => _repeatMonths = value;
         }
 
         [Input("repeatWeekdays")]

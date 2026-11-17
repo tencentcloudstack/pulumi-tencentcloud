@@ -142,6 +142,15 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateGrafanaNotificationChannel](https://www.tencentcloud.com/document/api/248/49768)
+// * Read: [DescribeGrafanaChannels](https://www.tencentcloud.com/document/api/248/50845)
+// * Update: [UpdateGrafanaNotificationChannel](https://www.tencentcloud.com/document/api/248/49742)
+// * Delete: [DeleteGrafanaNotificationChannel](https://www.tencentcloud.com/document/api/248/49764)
 type GrafanaNotificationChannel struct {
 	pulumi.CustomResourceState
 

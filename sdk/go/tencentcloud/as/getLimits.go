@@ -36,6 +36,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeAccountLimits](https://www.tencentcloud.com/document/api/377/31003)
 func GetLimits(ctx *pulumi.Context, args *GetLimitsArgs, opts ...pulumi.InvokeOption) (*GetLimitsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetLimitsResult

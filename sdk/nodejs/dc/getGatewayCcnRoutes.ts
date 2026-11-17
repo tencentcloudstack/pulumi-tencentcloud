@@ -54,6 +54,12 @@ import * as utilities from "../utilities";
  *     addressType: "IPv4",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDirectConnectGatewayCcnRoutes](https://www.tencentcloud.com/document/api/215/34775)
  */
 export function getGatewayCcnRoutes(args: GetGatewayCcnRoutesArgs, opts?: pulumi.InvokeOptions): Promise<GetGatewayCcnRoutesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -155,6 +161,12 @@ export interface GetGatewayCcnRoutesResult {
  *     addressType: "IPv4",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDirectConnectGatewayCcnRoutes](https://www.tencentcloud.com/document/api/215/34775)
  */
 export function getGatewayCcnRoutesOutput(args: GetGatewayCcnRoutesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetGatewayCcnRoutesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

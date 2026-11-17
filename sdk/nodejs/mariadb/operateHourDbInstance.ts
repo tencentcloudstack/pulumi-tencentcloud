@@ -18,6 +18,18 @@ import * as utilities from "../utilities";
  *     operate: "activate",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [ActivateHourDBInstance](https://www.tencentcloud.com/document/api/237/45573)
+ *   - [IsolateHourDBInstance](https://www.tencentcloud.com/document/api/237/45572)
+ * * Read: [DescribeDBInstanceDetail](https://www.tencentcloud.com/document/api/237/54563)
+ * * Update:
+ *   - [ActivateHourDBInstance](https://www.tencentcloud.com/document/api/237/45573)
+ *   - [IsolateHourDBInstance](https://www.tencentcloud.com/document/api/237/45572)
  */
 export class OperateHourDbInstance extends pulumi.CustomResource {
     /**

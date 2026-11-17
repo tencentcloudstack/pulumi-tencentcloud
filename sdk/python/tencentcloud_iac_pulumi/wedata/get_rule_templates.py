@@ -142,6 +142,12 @@ def get_rule_templates(project_id: Optional[_builtins.str] = None,
         ])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRuleTemplates](https://www.tencentcloud.com/document/api/1174/61110)
+
 
     :param _builtins.str project_id: Project ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -190,6 +196,12 @@ def get_rule_templates_output(project_id: pulumi.Input[Optional[Optional[_builti
             16,
         ])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRuleTemplates](https://www.tencentcloud.com/document/api/1174/61110)
 
 
     :param _builtins.str project_id: Project ID.

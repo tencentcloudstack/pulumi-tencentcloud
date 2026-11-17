@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeUploadIncrementalInfo](https://www.tencentcloud.com/document/api/238/72765)
 func GetUploadIncrementalInfo(ctx *pulumi.Context, args *GetUploadIncrementalInfoArgs, opts ...pulumi.InvokeOption) (*GetUploadIncrementalInfoResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetUploadIncrementalInfoResult

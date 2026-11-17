@@ -357,6 +357,22 @@ class Disk(pulumi.CustomResource):
             disk_name="test")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateDisks](https://www.tencentcloud.com/document/api/1103/57994)
+          - [DescribeDisks](https://www.tencentcloud.com/document/api/1103/44573)
+        * Read: [DescribeDisks](https://www.tencentcloud.com/document/api/1103/44573)
+        * Update:
+          - [ModifyDisksAttribute](https://www.tencentcloud.com/document/api/1103/44567)
+          - [ModifyDisksRenewFlag](https://www.tencentcloud.com/document/api/1103/44566)
+        * Delete:
+          - [DescribeDisks](https://www.tencentcloud.com/document/api/1103/44573)
+          - [IsolateDisks](https://www.tencentcloud.com/document/api/1103/57993)
+          - [TerminateDisks](https://www.tencentcloud.com/document/api/1103/44565)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -396,6 +412,22 @@ class Disk(pulumi.CustomResource):
             },
             disk_name="test")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateDisks](https://www.tencentcloud.com/document/api/1103/57994)
+          - [DescribeDisks](https://www.tencentcloud.com/document/api/1103/44573)
+        * Read: [DescribeDisks](https://www.tencentcloud.com/document/api/1103/44573)
+        * Update:
+          - [ModifyDisksAttribute](https://www.tencentcloud.com/document/api/1103/44567)
+          - [ModifyDisksRenewFlag](https://www.tencentcloud.com/document/api/1103/44566)
+        * Delete:
+          - [DescribeDisks](https://www.tencentcloud.com/document/api/1103/44573)
+          - [IsolateDisks](https://www.tencentcloud.com/document/api/1103/57993)
+          - [TerminateDisks](https://www.tencentcloud.com/document/api/1103/44565)
 
 
         :param str resource_name: The name of the resource.

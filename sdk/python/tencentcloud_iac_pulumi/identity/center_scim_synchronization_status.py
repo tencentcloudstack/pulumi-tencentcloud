@@ -119,6 +119,14 @@ class CenterScimSynchronizationStatus(pulumi.CustomResource):
             scim_synchronization_status="Enabled")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [UpdateSCIMSynchronizationStatus](https://www.tencentcloud.com/document/api/1031/66418)
+        * Read: [GetSCIMSynchronizationStatus](https://www.tencentcloud.com/document/api/1031/66421)
+        * Update: [UpdateSCIMSynchronizationStatus](https://www.tencentcloud.com/document/api/1031/66418)
+
         ## Import
 
         organization identity_center_scim_synchronization_status can be imported using the id, e.g.
@@ -152,6 +160,14 @@ class CenterScimSynchronizationStatus(pulumi.CustomResource):
             zone_id="z-xxxxxx",
             scim_synchronization_status="Enabled")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [UpdateSCIMSynchronizationStatus](https://www.tencentcloud.com/document/api/1031/66418)
+        * Read: [GetSCIMSynchronizationStatus](https://www.tencentcloud.com/document/api/1031/66421)
+        * Update: [UpdateSCIMSynchronizationStatus](https://www.tencentcloud.com/document/api/1031/66418)
 
         ## Import
 

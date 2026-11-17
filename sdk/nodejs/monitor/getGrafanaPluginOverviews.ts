@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const grafanaPluginOverviews = tencentcloud.monitor.getGrafanaPluginOverviews({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribePluginOverviews](https://www.tencentcloud.com/search/?wd=DescribePluginOverviews&type=document&lang=en)
  */
 export function getGrafanaPluginOverviews(args?: GetGrafanaPluginOverviewsArgs, opts?: pulumi.InvokeOptions): Promise<GetGrafanaPluginOverviewsResult> {
     args = args || {};
@@ -61,6 +67,12 @@ export interface GetGrafanaPluginOverviewsResult {
  *
  * const grafanaPluginOverviews = tencentcloud.monitor.getGrafanaPluginOverviews({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribePluginOverviews](https://www.tencentcloud.com/search/?wd=DescribePluginOverviews&type=document&lang=en)
  */
 export function getGrafanaPluginOverviewsOutput(args?: GetGrafanaPluginOverviewsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetGrafanaPluginOverviewsResult> {
     args = args || {};

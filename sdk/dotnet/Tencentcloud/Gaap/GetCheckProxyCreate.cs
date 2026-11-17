@@ -16,6 +16,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// Use this data source to query detailed information of gaap check proxy create
         /// 
         /// ## Example Usage
+        /// 
+        /// 
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [CheckProxyCreate](https://www.tencentcloud.com/document/api/608/33112)
         /// </summary>
         public static Task<GetCheckProxyCreateResult> InvokeAsync(GetCheckProxyCreateArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetCheckProxyCreateResult>("tencentcloud:Gaap/getCheckProxyCreate:getCheckProxyCreate", args ?? new GetCheckProxyCreateArgs(), options.WithDefaults());
@@ -24,6 +32,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// Use this data source to query detailed information of gaap check proxy create
         /// 
         /// ## Example Usage
+        /// 
+        /// 
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [CheckProxyCreate](https://www.tencentcloud.com/document/api/608/33112)
         /// </summary>
         public static Output<GetCheckProxyCreateResult> Invoke(GetCheckProxyCreateInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetCheckProxyCreateResult>("tencentcloud:Gaap/getCheckProxyCreate:getCheckProxyCreate", args ?? new GetCheckProxyCreateInvokeArgs(), options.WithDefaults());
@@ -32,6 +48,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// Use this data source to query detailed information of gaap check proxy create
         /// 
         /// ## Example Usage
+        /// 
+        /// 
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [CheckProxyCreate](https://www.tencentcloud.com/document/api/608/33112)
         /// </summary>
         public static Output<GetCheckProxyCreateResult> Invoke(GetCheckProxyCreateInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetCheckProxyCreateResult>("tencentcloud:Gaap/getCheckProxyCreate:getCheckProxyCreate", args ?? new GetCheckProxyCreateInvokeArgs(), options.WithDefaults());

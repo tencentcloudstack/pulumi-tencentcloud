@@ -259,6 +259,12 @@ def get_publish_subscribes(instance_id: Optional[_builtins.str] = None,
     example = tencentcloud.sqlserver.get_publish_subscribes_output(instance_id=example_publish_subscribe.publish_instance_id)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribePublishSubscribe](https://www.tencentcloud.com/document/api/238/72746)
+
 
     :param _builtins.str instance_id: ID of the SQL Server instance.
     :param _builtins.str pub_or_sub_instance_id: The subscribe/publish instance ID. It is related to whether the `instance_id` is a publish instance or a subscribe instance. when `instance_id` is a publish instance, this field is filtered according to the subscribe instance ID; when `instance_id` is a subscribe instance, this field is filtering according to the publish instance ID.
@@ -403,6 +409,12 @@ def get_publish_subscribes_output(instance_id: pulumi.Input[Optional[_builtins.s
         }])
     example = tencentcloud.sqlserver.get_publish_subscribes_output(instance_id=example_publish_subscribe.publish_instance_id)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribePublishSubscribe](https://www.tencentcloud.com/document/api/238/72746)
 
 
     :param _builtins.str instance_id: ID of the SQL Server instance.

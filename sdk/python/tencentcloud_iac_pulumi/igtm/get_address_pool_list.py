@@ -112,6 +112,12 @@ def get_address_pool_list(filters: Optional[Sequence[Union['GetAddressPoolListFi
     }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAddressPoolList](https://www.tencentcloud.com/search/?wd=DescribeAddressPoolList&type=document&lang=en)
+
 
     :param Sequence[Union['GetAddressPoolListFilterArgs', 'GetAddressPoolListFilterArgsDict']] filters: Alert filter conditions.
     :param _builtins.str result_output_file: Used to save results.
@@ -156,6 +162,12 @@ def get_address_pool_list_output(filters: pulumi.Input[Optional[Optional[Sequenc
         "fuzzy": True,
     }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAddressPoolList](https://www.tencentcloud.com/search/?wd=DescribeAddressPoolList&type=document&lang=en)
 
 
     :param Sequence[Union['GetAddressPoolListFilterArgs', 'GetAddressPoolListFilterArgsDict']] filters: Alert filter conditions.

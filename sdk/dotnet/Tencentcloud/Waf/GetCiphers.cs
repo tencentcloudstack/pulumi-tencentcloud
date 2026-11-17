@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCiphersDetail](https://www.tencentcloud.com/document/api/627/64566)
         /// </summary>
         public static Task<GetCiphersResult> InvokeAsync(GetCiphersArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetCiphersResult>("tencentcloud:Waf/getCiphers:getCiphers", args ?? new GetCiphersArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCiphersDetail](https://www.tencentcloud.com/document/api/627/64566)
         /// </summary>
         public static Output<GetCiphersResult> Invoke(GetCiphersInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetCiphersResult>("tencentcloud:Waf/getCiphers:getCiphers", args ?? new GetCiphersInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Waf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCiphersDetail](https://www.tencentcloud.com/document/api/627/64566)
         /// </summary>
         public static Output<GetCiphersResult> Invoke(GetCiphersInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetCiphersResult>("tencentcloud:Waf/getCiphers:getCiphers", args ?? new GetCiphersInvokeArgs(), options.WithDefaults());

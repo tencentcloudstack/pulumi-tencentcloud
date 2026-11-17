@@ -34,6 +34,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBackups](https://www.tencentcloud.com/document/api/236/15842)
         /// </summary>
         public static Task<GetBackupListResult> InvokeAsync(GetBackupListArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetBackupListResult>("tencentcloud:Mysql/getBackupList:getBackupList", args ?? new GetBackupListArgs(), options.WithDefaults());
@@ -60,6 +66,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBackups](https://www.tencentcloud.com/document/api/236/15842)
         /// </summary>
         public static Output<GetBackupListResult> Invoke(GetBackupListInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetBackupListResult>("tencentcloud:Mysql/getBackupList:getBackupList", args ?? new GetBackupListInvokeArgs(), options.WithDefaults());
@@ -86,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBackups](https://www.tencentcloud.com/document/api/236/15842)
         /// </summary>
         public static Output<GetBackupListResult> Invoke(GetBackupListInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetBackupListResult>("tencentcloud:Mysql/getBackupList:getBackupList", args ?? new GetBackupListInvokeArgs(), options.WithDefaults());

@@ -223,6 +223,13 @@ class RenewDbInstanceOperation(pulumi.CustomResource):
             modify_pay_type="PREPAID")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [RenewDBInstance](https://www.tencentcloud.com/document/api/236/53308)
+        * Read: [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -288,6 +295,13 @@ class RenewDbInstanceOperation(pulumi.CustomResource):
             time_span=1,
             modify_pay_type="PREPAID")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [RenewDBInstance](https://www.tencentcloud.com/document/api/236/53308)
+        * Read: [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872)
 
 
         :param str resource_name: The name of the resource.

@@ -58,6 +58,14 @@ import * as utilities from "../utilities";
  * const exampleRenewPostpaidDbInstance = new tencentcloud.sqlserver.RenewPostpaidDbInstance("example", {instanceId: exampleConfigTerminateDbInstance.id});
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [RenewPostpaidDBInstance](https://www.tencentcloud.com/document/api/238/72754)
+ * * Read: [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+ * * Update: [RenewPostpaidDBInstance](https://www.tencentcloud.com/document/api/238/72754)
+ *
  * ## Import
  *
  * sqlserver renewPostpaidDbInstance can be imported using the id, e.g.

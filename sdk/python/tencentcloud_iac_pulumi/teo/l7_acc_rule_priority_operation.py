@@ -243,6 +243,12 @@ class L7AccRulePriorityOperation(pulumi.CustomResource):
             ])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyL7AccRulePriority](https://www.tencentcloud.com/document/api/1145/68767)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -391,6 +397,12 @@ class L7AccRulePriorityOperation(pulumi.CustomResource):
                 tencentcloud_teo_l7_acc_rule_v2["rule1"]["ruleId"],
             ])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyL7AccRulePriority](https://www.tencentcloud.com/document/api/1145/68767)
 
 
         :param str resource_name: The name of the resource.

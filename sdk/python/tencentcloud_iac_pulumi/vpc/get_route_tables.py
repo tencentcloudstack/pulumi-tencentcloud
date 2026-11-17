@@ -176,6 +176,14 @@ def get_route_tables(association_main: Optional[_builtins.bool] = None,
     tags_instances = tencentcloud.vpc.get_route_tables_output(tags=route_table.tags)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+      - [DescribeRouteTables](https://www.tencentcloud.com/document/api/215/15763)
+
 
     :param _builtins.bool association_main: Filter the main routing table.
     :param _builtins.str name: Name of the routing table to be queried.
@@ -243,6 +251,14 @@ def get_route_tables_output(association_main: pulumi.Input[Optional[Optional[_bu
         association_main=True)
     tags_instances = tencentcloud.vpc.get_route_tables_output(tags=route_table.tags)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+      - [DescribeRouteTables](https://www.tencentcloud.com/document/api/215/15763)
 
 
     :param _builtins.bool association_main: Filter the main routing table.

@@ -50,6 +50,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.ConfigService
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [StartConfigRuleEvaluation](https://www.tencentcloud.com/document/api/1164/84958)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Config/startConfigRuleEvaluationOperation:StartConfigRuleEvaluationOperation")]
     public partial class StartConfigRuleEvaluationOperation : global::Pulumi.CustomResource

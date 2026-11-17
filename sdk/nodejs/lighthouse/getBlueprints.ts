@@ -64,6 +64,12 @@ import * as utilities from "../utilities";
  *     ],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeBlueprints](https://www.tencentcloud.com/document/api/1103/42503)
  */
 export function getBlueprints(args?: GetBlueprintsArgs, opts?: pulumi.InvokeOptions): Promise<GetBlueprintsResult> {
     args = args || {};
@@ -174,6 +180,12 @@ export interface GetBlueprintsResult {
  *     ],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeBlueprints](https://www.tencentcloud.com/document/api/1103/42503)
  */
 export function getBlueprintsOutput(args?: GetBlueprintsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetBlueprintsResult> {
     args = args || {};

@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     keyStatus: 0,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeWhiteBoxKeyDetails](https://www.tencentcloud.com/search/?wd=DescribeWhiteBoxKeyDetails&type=document&lang=en)
  */
 export function getWhiteBoxKeyDetails(args?: GetWhiteBoxKeyDetailsArgs, opts?: pulumi.InvokeOptions): Promise<GetWhiteBoxKeyDetailsResult> {
     args = args || {};
@@ -71,6 +77,12 @@ export interface GetWhiteBoxKeyDetailsResult {
  *     keyStatus: 0,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeWhiteBoxKeyDetails](https://www.tencentcloud.com/search/?wd=DescribeWhiteBoxKeyDetails&type=document&lang=en)
  */
 export function getWhiteBoxKeyDetailsOutput(args?: GetWhiteBoxKeyDetailsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetWhiteBoxKeyDetailsResult> {
     args = args || {};

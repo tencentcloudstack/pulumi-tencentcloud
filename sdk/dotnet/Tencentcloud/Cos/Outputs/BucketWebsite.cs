@@ -15,6 +15,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Outputs
     public sealed class BucketWebsite
     {
         /// <summary>
+        /// To configure whether to display the 404 public welfare page when the error code is 404, the optional values are `Enabled` or `Disabled`, with the default set to `Disabled`.
+        /// </summary>
+        public readonly string? Charity404;
+        /// <summary>
         /// `Endpoint` of the static website.
         /// </summary>
         public readonly string? Endpoint;
@@ -27,6 +31,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Outputs
         /// </summary>
         public readonly string? IndexDocument;
         /// <summary>
+        /// The HTTP status code for configuring hit error documents, with optional values of `Enabled` or `Disabled`, defaulting to `Enabled`.
+        /// </summary>
+        public readonly string? OriginalHttpStatus;
+        /// <summary>
         /// Redirects all request configurations. Valid values: http, https. Default is `Http`.
         /// </summary>
         public readonly string? RedirectAllRequestsTo;
@@ -37,19 +45,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cos.Outputs
 
         [OutputConstructor]
         private BucketWebsite(
+            string? charity404,
+
             string? endpoint,
 
             string? errorDocument,
 
             string? indexDocument,
 
+            string? originalHttpStatus,
+
             string? redirectAllRequestsTo,
 
             Outputs.BucketWebsiteRoutingRules? routingRules)
         {
+            Charity404 = charity404;
             Endpoint = endpoint;
             ErrorDocument = errorDocument;
             IndexDocument = indexDocument;
+            OriginalHttpStatus = originalHttpStatus;
             RedirectAllRequestsTo = redirectAllRequestsTo;
             RoutingRules = routingRules;
         }

@@ -99,6 +99,12 @@ def get_backup_stream(result_output_file: Optional[_builtins.str] = None,
     backup_stream = tencentcloud.css.get_backup_stream(stream_name="live")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBackupStreamList](https://www.tencentcloud.com/search/?wd=DescribeBackupStreamList&type=document&lang=en)
+
 
     :param _builtins.str result_output_file: Used to save results.
     :param _builtins.str stream_name: Stream id.
@@ -128,6 +134,12 @@ def get_backup_stream_output(result_output_file: pulumi.Input[Optional[Optional[
 
     backup_stream = tencentcloud.css.get_backup_stream(stream_name="live")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBackupStreamList](https://www.tencentcloud.com/search/?wd=DescribeBackupStreamList&type=document&lang=en)
 
 
     :param _builtins.str result_output_file: Used to save results.

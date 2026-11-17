@@ -69,6 +69,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [AuthenticateDomainOwner](https://www.tencentcloud.com/document/api/267/50612)
 type AuthenticateDomainOwnerOperation struct {
 	pulumi.CustomResourceState
 

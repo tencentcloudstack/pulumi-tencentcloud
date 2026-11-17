@@ -99,6 +99,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeForwardRuleList](https://www.tencentcloud.com/document/api/1097/65935)
         /// </summary>
         public static Task<GetForwardRulesResult> InvokeAsync(GetForwardRulesArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetForwardRulesResult>("tencentcloud:PrivateDns/getForwardRules:getForwardRules", args ?? new GetForwardRulesArgs(), options.WithDefaults());
@@ -190,6 +196,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeForwardRuleList](https://www.tencentcloud.com/document/api/1097/65935)
         /// </summary>
         public static Output<GetForwardRulesResult> Invoke(GetForwardRulesInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetForwardRulesResult>("tencentcloud:PrivateDns/getForwardRules:getForwardRules", args ?? new GetForwardRulesInvokeArgs(), options.WithDefaults());
@@ -281,6 +293,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeForwardRuleList](https://www.tencentcloud.com/document/api/1097/65935)
         /// </summary>
         public static Output<GetForwardRulesResult> Invoke(GetForwardRulesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetForwardRulesResult>("tencentcloud:PrivateDns/getForwardRules:getForwardRules", args ?? new GetForwardRulesInvokeArgs(), options.WithDefaults());

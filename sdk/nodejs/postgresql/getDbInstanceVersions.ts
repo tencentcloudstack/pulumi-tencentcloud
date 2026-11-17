@@ -30,6 +30,12 @@ import * as utilities from "../utilities";
  *     storageType: "CLOUD_HSSD",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBVersions](https://www.tencentcloud.com/document/api/409/54337)
  */
 export function getDbInstanceVersions(args?: GetDbInstanceVersionsArgs, opts?: pulumi.InvokeOptions): Promise<GetDbInstanceVersionsResult> {
     args = args || {};
@@ -93,6 +99,12 @@ export interface GetDbInstanceVersionsResult {
  *     storageType: "CLOUD_HSSD",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBVersions](https://www.tencentcloud.com/document/api/409/54337)
  */
 export function getDbInstanceVersionsOutput(args?: GetDbInstanceVersionsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDbInstanceVersionsResult> {
     args = args || {};

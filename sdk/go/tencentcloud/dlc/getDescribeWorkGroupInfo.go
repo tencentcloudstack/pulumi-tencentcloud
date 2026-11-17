@@ -41,6 +41,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeWorkGroupInfo](https://www.tencentcloud.com/document/api/1155/62667)
 func GetDescribeWorkGroupInfo(ctx *pulumi.Context, args *GetDescribeWorkGroupInfoArgs, opts ...pulumi.InvokeOption) (*GetDescribeWorkGroupInfoResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDescribeWorkGroupInfoResult

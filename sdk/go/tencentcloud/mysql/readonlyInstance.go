@@ -117,6 +117,39 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CreateDBInstance](https://www.tencentcloud.com/document/api/236/15871)
+//   - [CreateDBInstanceHour](https://www.tencentcloud.com/document/api/236/15865)
+//   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872)
+//   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+//
+// * Read:
+//   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872)
+//   - [DescribeDBSecurityGroups](https://www.tencentcloud.com/document/api/236/15854)
+//   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+//
+// * Update:
+//   - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+//   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872)
+//   - [DisassociateSecurityGroups](https://www.tencentcloud.com/document/api/236/15851)
+//   - [ModifyAutoRenewFlag](https://www.tencentcloud.com/document/api/236/34479)
+//   - [ModifyDBInstanceName](https://www.tencentcloud.com/document/api/236/15877)
+//   - [ModifyDBInstanceSecurityGroups](https://www.tencentcloud.com/document/api/236/15853)
+//   - [ModifyDBInstanceVipVport](https://www.tencentcloud.com/document/api/236/15867)
+//   - [ModifyInstanceDestroyProtect](https://www.tencentcloud.com/search/?wd=ModifyInstanceDestroyProtect&type=document&lang=en)
+//   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+//   - [UpgradeDBInstance](https://www.tencentcloud.com/document/api/236/15876)
+//   - [UpgradeDBInstanceEngineVersion](https://www.tencentcloud.com/document/api/236/15870)
+//
+// * Delete:
+//   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872)
+//   - [IsolateDBInstance](https://www.tencentcloud.com/document/api/236/15869)
+//   - [OfflineIsolatedInstances](https://www.tencentcloud.com/document/api/236/34475)
+//
 // ## Import
 //
 // mysql read-only database instances can be imported using the id, e.g.
@@ -134,6 +167,8 @@ type ReadonlyInstance struct {
 	ClusterTopology ReadonlyInstanceClusterTopologyOutput `pulumi:"clusterTopology"`
 	// CPU cores.
 	Cpu pulumi.IntOutput `pulumi:"cpu"`
+	// Instance destroy protection status. Valid values: `on` (enable destroy protection), `off` (disable destroy protection).
+	DestroyProtect pulumi.StringOutput `pulumi:"destroyProtect"`
 	// Specify device type, available values:
 	// - `UNIVERSAL` (default): universal instance,
 	// - `EXCLUSIVE`: exclusive instance,
@@ -142,6 +177,8 @@ type ReadonlyInstance struct {
 	// - `CLOUD_NATIVE_CLUSTER_EXCLUSIVE`: cluster version enhanced type.
 	//   If it is not specified, it defaults to a universal instance.
 	DeviceType pulumi.StringOutput `pulumi:"deviceType"`
+	// Whether to enable disk encryption for the CDB instance. Valid value: `on` (enable disk encryption); otherwise disk encryption is not enabled. Only cloud-disk edition instances support this feature. This parameter can only be set at creation time and cannot be modified.
+	DiskEncryption pulumi.StringOutput `pulumi:"diskEncryption"`
 	// Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. `CLOUD_SSD` designates an SSD cloud disk; `CLOUD_HSSD` designates an Enhanced SSD cloud disk; and `CLOUD_PREMIUM` designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to `Regions and Availability Zones` for specific support details.
 	DiskType pulumi.StringOutput `pulumi:"diskType"`
 	// Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
@@ -252,6 +289,8 @@ type readonlyInstanceState struct {
 	ClusterTopology *ReadonlyInstanceClusterTopology `pulumi:"clusterTopology"`
 	// CPU cores.
 	Cpu *int `pulumi:"cpu"`
+	// Instance destroy protection status. Valid values: `on` (enable destroy protection), `off` (disable destroy protection).
+	DestroyProtect *string `pulumi:"destroyProtect"`
 	// Specify device type, available values:
 	// - `UNIVERSAL` (default): universal instance,
 	// - `EXCLUSIVE`: exclusive instance,
@@ -260,6 +299,8 @@ type readonlyInstanceState struct {
 	// - `CLOUD_NATIVE_CLUSTER_EXCLUSIVE`: cluster version enhanced type.
 	//   If it is not specified, it defaults to a universal instance.
 	DeviceType *string `pulumi:"deviceType"`
+	// Whether to enable disk encryption for the CDB instance. Valid value: `on` (enable disk encryption); otherwise disk encryption is not enabled. Only cloud-disk edition instances support this feature. This parameter can only be set at creation time and cannot be modified.
+	DiskEncryption *string `pulumi:"diskEncryption"`
 	// Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. `CLOUD_SSD` designates an SSD cloud disk; `CLOUD_HSSD` designates an Enhanced SSD cloud disk; and `CLOUD_PREMIUM` designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to `Regions and Availability Zones` for specific support details.
 	DiskType *string `pulumi:"diskType"`
 	// Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
@@ -329,6 +370,8 @@ type ReadonlyInstanceState struct {
 	ClusterTopology ReadonlyInstanceClusterTopologyPtrInput
 	// CPU cores.
 	Cpu pulumi.IntPtrInput
+	// Instance destroy protection status. Valid values: `on` (enable destroy protection), `off` (disable destroy protection).
+	DestroyProtect pulumi.StringPtrInput
 	// Specify device type, available values:
 	// - `UNIVERSAL` (default): universal instance,
 	// - `EXCLUSIVE`: exclusive instance,
@@ -337,6 +380,8 @@ type ReadonlyInstanceState struct {
 	// - `CLOUD_NATIVE_CLUSTER_EXCLUSIVE`: cluster version enhanced type.
 	//   If it is not specified, it defaults to a universal instance.
 	DeviceType pulumi.StringPtrInput
+	// Whether to enable disk encryption for the CDB instance. Valid value: `on` (enable disk encryption); otherwise disk encryption is not enabled. Only cloud-disk edition instances support this feature. This parameter can only be set at creation time and cannot be modified.
+	DiskEncryption pulumi.StringPtrInput
 	// Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. `CLOUD_SSD` designates an SSD cloud disk; `CLOUD_HSSD` designates an Enhanced SSD cloud disk; and `CLOUD_PREMIUM` designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to `Regions and Availability Zones` for specific support details.
 	DiskType pulumi.StringPtrInput
 	// Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
@@ -410,6 +455,8 @@ type readonlyInstanceArgs struct {
 	ClusterTopology *ReadonlyInstanceClusterTopology `pulumi:"clusterTopology"`
 	// CPU cores.
 	Cpu *int `pulumi:"cpu"`
+	// Instance destroy protection status. Valid values: `on` (enable destroy protection), `off` (disable destroy protection).
+	DestroyProtect *string `pulumi:"destroyProtect"`
 	// Specify device type, available values:
 	// - `UNIVERSAL` (default): universal instance,
 	// - `EXCLUSIVE`: exclusive instance,
@@ -418,6 +465,8 @@ type readonlyInstanceArgs struct {
 	// - `CLOUD_NATIVE_CLUSTER_EXCLUSIVE`: cluster version enhanced type.
 	//   If it is not specified, it defaults to a universal instance.
 	DeviceType *string `pulumi:"deviceType"`
+	// Whether to enable disk encryption for the CDB instance. Valid value: `on` (enable disk encryption); otherwise disk encryption is not enabled. Only cloud-disk edition instances support this feature. This parameter can only be set at creation time and cannot be modified.
+	DiskEncryption *string `pulumi:"diskEncryption"`
 	// Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. `CLOUD_SSD` designates an SSD cloud disk; `CLOUD_HSSD` designates an Enhanced SSD cloud disk; and `CLOUD_PREMIUM` designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to `Regions and Availability Zones` for specific support details.
 	DiskType *string `pulumi:"diskType"`
 	// Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
@@ -476,6 +525,8 @@ type ReadonlyInstanceArgs struct {
 	ClusterTopology ReadonlyInstanceClusterTopologyPtrInput
 	// CPU cores.
 	Cpu pulumi.IntPtrInput
+	// Instance destroy protection status. Valid values: `on` (enable destroy protection), `off` (disable destroy protection).
+	DestroyProtect pulumi.StringPtrInput
 	// Specify device type, available values:
 	// - `UNIVERSAL` (default): universal instance,
 	// - `EXCLUSIVE`: exclusive instance,
@@ -484,6 +535,8 @@ type ReadonlyInstanceArgs struct {
 	// - `CLOUD_NATIVE_CLUSTER_EXCLUSIVE`: cluster version enhanced type.
 	//   If it is not specified, it defaults to a universal instance.
 	DeviceType pulumi.StringPtrInput
+	// Whether to enable disk encryption for the CDB instance. Valid value: `on` (enable disk encryption); otherwise disk encryption is not enabled. Only cloud-disk edition instances support this feature. This parameter can only be set at creation time and cannot be modified.
+	DiskEncryption pulumi.StringPtrInput
 	// Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. `CLOUD_SSD` designates an SSD cloud disk; `CLOUD_HSSD` designates an Enhanced SSD cloud disk; and `CLOUD_PREMIUM` designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to `Regions and Availability Zones` for specific support details.
 	DiskType pulumi.StringPtrInput
 	// Specify whether to enable fast upgrade when upgrade instance spec, available value: `1` - enabled, `0` - disabled.
@@ -639,6 +692,11 @@ func (o ReadonlyInstanceOutput) Cpu() pulumi.IntOutput {
 	return o.ApplyT(func(v *ReadonlyInstance) pulumi.IntOutput { return v.Cpu }).(pulumi.IntOutput)
 }
 
+// Instance destroy protection status. Valid values: `on` (enable destroy protection), `off` (disable destroy protection).
+func (o ReadonlyInstanceOutput) DestroyProtect() pulumi.StringOutput {
+	return o.ApplyT(func(v *ReadonlyInstance) pulumi.StringOutput { return v.DestroyProtect }).(pulumi.StringOutput)
+}
+
 // Specify device type, available values:
 //   - `UNIVERSAL` (default): universal instance,
 //   - `EXCLUSIVE`: exclusive instance,
@@ -648,6 +706,11 @@ func (o ReadonlyInstanceOutput) Cpu() pulumi.IntOutput {
 //     If it is not specified, it defaults to a universal instance.
 func (o ReadonlyInstanceOutput) DeviceType() pulumi.StringOutput {
 	return o.ApplyT(func(v *ReadonlyInstance) pulumi.StringOutput { return v.DeviceType }).(pulumi.StringOutput)
+}
+
+// Whether to enable disk encryption for the CDB instance. Valid value: `on` (enable disk encryption); otherwise disk encryption is not enabled. Only cloud-disk edition instances support this feature. This parameter can only be set at creation time and cannot be modified.
+func (o ReadonlyInstanceOutput) DiskEncryption() pulumi.StringOutput {
+	return o.ApplyT(func(v *ReadonlyInstance) pulumi.StringOutput { return v.DiskEncryption }).(pulumi.StringOutput)
 }
 
 // Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. `CLOUD_SSD` designates an SSD cloud disk; `CLOUD_HSSD` designates an Enhanced SSD cloud disk; and `CLOUD_PREMIUM` designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to `Regions and Availability Zones` for specific support details.

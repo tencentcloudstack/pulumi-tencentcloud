@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeApplicationAttribute](https://www.tencentcloud.com/search/?wd=DescribeApplicationAttribute&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetApplicationAttributeResult> InvokeAsync(GetApplicationAttributeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetApplicationAttributeResult>("tencentcloud:Tsf/getApplicationAttribute:getApplicationAttribute", args ?? new GetApplicationAttributeArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeApplicationAttribute](https://www.tencentcloud.com/search/?wd=DescribeApplicationAttribute&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetApplicationAttributeResult> Invoke(GetApplicationAttributeInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetApplicationAttributeResult>("tencentcloud:Tsf/getApplicationAttribute:getApplicationAttribute", args ?? new GetApplicationAttributeInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeApplicationAttribute](https://www.tencentcloud.com/search/?wd=DescribeApplicationAttribute&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetApplicationAttributeResult> Invoke(GetApplicationAttributeInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetApplicationAttributeResult>("tencentcloud:Tsf/getApplicationAttribute:getApplicationAttribute", args ?? new GetApplicationAttributeInvokeArgs(), options.WithDefaults());

@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     instanceId: "tdsql-4pzs5b67",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAccounts](https://www.tencentcloud.com/document/api/237/16167)
  */
 export function getAccounts(args: GetAccountsArgs, opts?: pulumi.InvokeOptions): Promise<GetAccountsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetAccountsResult {
  *     instanceId: "tdsql-4pzs5b67",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAccounts](https://www.tencentcloud.com/document/api/237/16167)
  */
 export function getAccountsOutput(args: GetAccountsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAccountsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

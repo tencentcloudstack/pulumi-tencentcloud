@@ -43,6 +43,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeTenantCcns](https://www.tencentcloud.com/search/?wd=DescribeTenantCcns&type=document&lang=en)
 func GetTenantInstances(ctx *pulumi.Context, args *GetTenantInstancesArgs, opts ...pulumi.InvokeOption) (*GetTenantInstancesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetTenantInstancesResult

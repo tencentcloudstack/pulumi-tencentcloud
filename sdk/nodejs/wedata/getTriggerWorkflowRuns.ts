@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     projectId: "1840731342293643264",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListTriggerWorkflowRuns](https://www.tencentcloud.com/document/api/1174/77885)
  */
 export function getTriggerWorkflowRuns(args: GetTriggerWorkflowRunsArgs, opts?: pulumi.InvokeOptions): Promise<GetTriggerWorkflowRunsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -82,6 +88,12 @@ export interface GetTriggerWorkflowRunsResult {
  *     projectId: "1840731342293643264",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListTriggerWorkflowRuns](https://www.tencentcloud.com/document/api/1174/77885)
  */
 export function getTriggerWorkflowRunsOutput(args: GetTriggerWorkflowRunsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetTriggerWorkflowRunsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

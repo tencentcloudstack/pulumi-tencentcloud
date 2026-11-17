@@ -43,6 +43,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDBCustomClusterNodeConfig](https://www.tencentcloud.com/search/?wd=DescribeDBCustomClusterNodeConfig&type=document&lang=en)
 func GetDbCustomClusterNodeConfigList(ctx *pulumi.Context, args *GetDbCustomClusterNodeConfigListArgs, opts ...pulumi.InvokeOption) (*GetDbCustomClusterNodeConfigListResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDbCustomClusterNodeConfigListResult

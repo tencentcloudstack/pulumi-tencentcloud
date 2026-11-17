@@ -43,6 +43,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeRefreshActivities](https://www.tencentcloud.com/document/api/377/59082)
+    ///   - [StartInstanceRefresh](https://www.tencentcloud.com/document/api/377/59079)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:As/startInstanceRefresh:StartInstanceRefresh")]
     public partial class StartInstanceRefresh : global::Pulumi.CustomResource

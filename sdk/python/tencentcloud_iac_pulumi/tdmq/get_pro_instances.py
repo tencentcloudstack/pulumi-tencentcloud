@@ -100,6 +100,12 @@ def get_pro_instances(filters: Optional[Sequence[Union['GetProInstancesFilterArg
     }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribePulsarProInstances](https://www.tencentcloud.com/search/?wd=DescribePulsarProInstances&type=document&lang=en)
+
 
     :param Sequence[Union['GetProInstancesFilterArgs', 'GetProInstancesFilterArgsDict']] filters: query condition filter.
     :param _builtins.str result_output_file: Used to save results.
@@ -132,6 +138,12 @@ def get_pro_instances_output(filters: pulumi.Input[Optional[Optional[Sequence[Un
         "values": ["keep"],
     }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribePulsarProInstances](https://www.tencentcloud.com/search/?wd=DescribePulsarProInstances&type=document&lang=en)
 
 
     :param Sequence[Union['GetProInstancesFilterArgs', 'GetProInstancesFilterArgsDict']] filters: query condition filter.

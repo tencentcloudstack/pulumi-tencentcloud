@@ -43,6 +43,21 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CreateUsagePlan](https://www.tencentcloud.com/search/?wd=CreateUsagePlan&type=document&lang=en)
+//   - [DescribeUsagePlan](https://www.tencentcloud.com/search/?wd=DescribeUsagePlan&type=document&lang=en)
+//
+// * Read:
+//   - [DescribeUsagePlan](https://www.tencentcloud.com/search/?wd=DescribeUsagePlan&type=document&lang=en)
+//   - [DescribeUsagePlanEnvironments](https://www.tencentcloud.com/search/?wd=DescribeUsagePlanEnvironments&type=document&lang=en)
+//
+// * Update: [ModifyUsagePlan](https://www.tencentcloud.com/search/?wd=ModifyUsagePlan&type=document&lang=en)
+// * Delete: [DeleteUsagePlan](https://www.tencentcloud.com/search/?wd=DeleteUsagePlan&type=document&lang=en)
+//
 // ## Import
 //
 // API gateway usage plan can be imported using the id, e.g.

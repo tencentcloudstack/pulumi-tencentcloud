@@ -30,6 +30,12 @@ import * as utilities from "../utilities";
  *     dataEngineConfigCommand: "UpdateSparkSQLResultPath",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeUpdatableDataEngines](https://www.tencentcloud.com/document/api/1155/62691)
  */
 export function getDescribeUpdatableDataEngines(args: GetDescribeUpdatableDataEnginesArgs, opts?: pulumi.InvokeOptions): Promise<GetDescribeUpdatableDataEnginesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -92,6 +98,12 @@ export interface GetDescribeUpdatableDataEnginesResult {
  *     dataEngineConfigCommand: "UpdateSparkSQLResultPath",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeUpdatableDataEngines](https://www.tencentcloud.com/document/api/1155/62691)
  */
 export function getDescribeUpdatableDataEnginesOutput(args: GetDescribeUpdatableDataEnginesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDescribeUpdatableDataEnginesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

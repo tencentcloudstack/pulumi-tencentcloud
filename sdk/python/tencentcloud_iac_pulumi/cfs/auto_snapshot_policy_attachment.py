@@ -119,6 +119,14 @@ class AutoSnapshotPolicyAttachment(pulumi.CustomResource):
             file_system_ids="cfs-4xzkct19,cfs-iobiaxtj")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [BindAutoSnapshotPolicy](https://www.tencentcloud.com/document/api/582/50841)
+        * Read: [DescribeAutoSnapshotPolicies](https://www.tencentcloud.com/document/api/582/50838)
+        * Delete: [UnbindAutoSnapshotPolicy](https://www.tencentcloud.com/document/api/582/50834)
+
         ## Import
 
         cfs auto_snapshot_policy_attachment can be imported using the id, e.g.
@@ -152,6 +160,14 @@ class AutoSnapshotPolicyAttachment(pulumi.CustomResource):
             auto_snapshot_policy_id="asp-basic",
             file_system_ids="cfs-4xzkct19,cfs-iobiaxtj")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [BindAutoSnapshotPolicy](https://www.tencentcloud.com/document/api/582/50841)
+        * Read: [DescribeAutoSnapshotPolicies](https://www.tencentcloud.com/document/api/582/50838)
+        * Delete: [UnbindAutoSnapshotPolicy](https://www.tencentcloud.com/document/api/582/50834)
 
         ## Import
 

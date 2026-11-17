@@ -98,6 +98,12 @@ def get_user_clb_regions(result_output_file: Optional[_builtins.str] = None,
     example = tencentcloud.waf.get_user_clb_regions()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeUserClbWafRegions](https://www.tencentcloud.com/document/api/627/64769)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -124,6 +130,12 @@ def get_user_clb_regions_output(result_output_file: pulumi.Input[Optional[Option
 
     example = tencentcloud.waf.get_user_clb_regions()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeUserClbWafRegions](https://www.tencentcloud.com/document/api/627/64769)
 
 
     :param _builtins.str result_output_file: Used to save results.

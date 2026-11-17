@@ -57,6 +57,18 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CreateJustInTimeTranscodeTemplate](https://www.tencentcloud.com/document/api/1145/72309)
+//   - [DescribeJustInTimeTranscodeTemplates](https://www.tencentcloud.com/document/api/1145/72307)
+//
+// * Read: [DescribeJustInTimeTranscodeTemplates](https://www.tencentcloud.com/document/api/1145/72307)
+// * Update: [DescribeJustInTimeTranscodeTemplates](https://www.tencentcloud.com/document/api/1145/72307)
+// * Delete: [DeleteJustInTimeTranscodeTemplates](https://www.tencentcloud.com/document/api/1145/72308)
+//
 // ## Import
 //
 // TEO just-in-time transcode template can be imported using the joint id "zone_id#template_id", e.g.

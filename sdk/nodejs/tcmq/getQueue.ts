@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     queueName: "queue_name",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCmqQueues](https://www.tencentcloud.com/search/?wd=DescribeCmqQueues&type=document&lang=en)
  */
 export function getQueue(args?: GetQueueArgs, opts?: pulumi.InvokeOptions): Promise<GetQueueResult> {
     args = args || {};
@@ -104,6 +110,12 @@ export interface GetQueueResult {
  *     queueName: "queue_name",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCmqQueues](https://www.tencentcloud.com/search/?wd=DescribeCmqQueues&type=document&lang=en)
  */
 export function getQueueOutput(args?: GetQueueOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetQueueResult> {
     args = args || {};

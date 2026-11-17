@@ -277,6 +277,15 @@ class CngwStrategy(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateAutoScalerResourceStrategy](https://www.tencentcloud.com/document/api/1290/79297)
+        * Read: [DescribeAutoScalerResourceStrategies](https://www.tencentcloud.com/document/api/1290/79271)
+        * Update: [ModifyAutoScalerResourceStrategy](https://www.tencentcloud.com/document/api/1290/79245)
+        * Delete: [DeleteAutoScalerResourceStrategy](https://www.tencentcloud.com/document/api/1290/79284)
+
         ## Import
 
         tse cngw_strategy can be imported using the id, e.g.
@@ -352,6 +361,15 @@ class CngwStrategy(pulumi.CustomResource):
                 }],
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateAutoScalerResourceStrategy](https://www.tencentcloud.com/document/api/1290/79297)
+        * Read: [DescribeAutoScalerResourceStrategies](https://www.tencentcloud.com/document/api/1290/79271)
+        * Update: [ModifyAutoScalerResourceStrategy](https://www.tencentcloud.com/document/api/1290/79245)
+        * Delete: [DeleteAutoScalerResourceStrategy](https://www.tencentcloud.com/document/api/1290/79284)
 
         ## Import
 

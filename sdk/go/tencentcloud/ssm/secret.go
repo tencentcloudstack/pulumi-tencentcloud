@@ -48,6 +48,39 @@ import (
 //
 // ```
 //
+// ### Create user defined secret with soft key encryption
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/ssm"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := ssm.NewSecret(ctx, "example", &ssm.SecretArgs{
+//				SecretName:           pulumi.String("tf-example"),
+//				Description:          pulumi.String("desc."),
+//				IsEnabled:            pulumi.Bool(true),
+//				EncryptType:          pulumi.Int(1),
+//				RecoveryWindowInDays: pulumi.Int(0),
+//				Tags: pulumi.StringMap{
+//					"createBy": pulumi.String("terraform"),
+//				},
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
 // ### Create redis secret
 //
 // ```go
@@ -140,12 +173,58 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CreateSecret](https://www.tencentcloud.com/document/api/1078/38656)
+//   - [DeleteSecretVersion](https://www.tencentcloud.com/document/api/1078/38654)
+//   - [DescribeSecret](https://www.tencentcloud.com/document/api/1078/38653)
+//   - [DisableSecret](https://www.tencentcloud.com/document/api/1078/38652)
+//   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+//
+// * Read:
+//   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+//   - [DescribeSecret](https://www.tencentcloud.com/document/api/1078/38653)
+//
+// * Update:
+//   - [DescribeSecret](https://www.tencentcloud.com/document/api/1078/38653)
+//   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+//   - [UpdateDescription](https://www.tencentcloud.com/document/api/1078/38643)
+//
+// * Delete:
+//   - [DeleteSecret](https://www.tencentcloud.com/document/api/1078/38655)
+//   - [DescribeSecret](https://www.tencentcloud.com/document/api/1078/38653)
+//   - [DisableSecret](https://www.tencentcloud.com/document/api/1078/38652)
+//
 // ## Import
 //
 // SSM secret can be imported using the secretName, e.g.
 // ```sh
 // $ pulumi import tencentcloud:Ssm/secret:Secret foo test
 // ```
+//
+// # Argument Reference
+//
+// The following arguments are supported:
+//
+// * `secretName` - (Required, ForceNew) Name of secret which cannot be repeated in the same region. The maximum length is 128 bytes. The name can only contain English letters, numbers, underscore and hyphen '-'. The first character must be a letter or number.
+// * `description` - (Optional) Description of secret. The maximum is 2048 bytes.
+// * `kmsKeyId` - (Optional, ForceNew, Computed) KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
+// * `secretType` - (Optional, Computed) Type of secret. `0`: user-defined secret. `4`: redis secret. Default is `0`.
+// * `additionalConfig` - (Optional) Additional config for specific secret types in JSON string format.
+// * `encryptType` - (Optional, Computed) Encryption type of secret. `0`: KMS key encryption. `1`: soft key encryption. Default is `0`. Once created, it cannot be modified.
+// * `isEnabled` - (Optional) Specify whether to enable secret. Default value is `true`.
+// * `recoveryWindowInDays` - (Optional) Specify the scheduled deletion date. Default value is `0` that means to delete immediately. 1-30 means the number of days reserved, completely deleted after this date.
+// * `tags` - (Optional) Tags of secret.
+//
+// # Attributes Reference
+//
+// The following attributes are exported:
+//
+// * `status` - Status of secret.
+// * `id` - Secret name.
 type Secret struct {
 	pulumi.CustomResourceState
 
@@ -153,6 +232,8 @@ type Secret struct {
 	AdditionalConfig pulumi.StringPtrOutput `pulumi:"additionalConfig"`
 	// Description of secret. The maximum is 2048 bytes.
 	Description pulumi.StringPtrOutput `pulumi:"description"`
+	// Encryption type of secret. `0`: KMS key encryption. `1`: soft key encryption. Default is `0`. Once created, it cannot be modified.
+	EncryptType pulumi.IntOutput `pulumi:"encryptType"`
 	// Specify whether to enable secret. Default value is `true`.
 	IsEnabled pulumi.BoolPtrOutput `pulumi:"isEnabled"`
 	// KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
@@ -206,6 +287,8 @@ type secretState struct {
 	AdditionalConfig *string `pulumi:"additionalConfig"`
 	// Description of secret. The maximum is 2048 bytes.
 	Description *string `pulumi:"description"`
+	// Encryption type of secret. `0`: KMS key encryption. `1`: soft key encryption. Default is `0`. Once created, it cannot be modified.
+	EncryptType *int `pulumi:"encryptType"`
 	// Specify whether to enable secret. Default value is `true`.
 	IsEnabled *bool `pulumi:"isEnabled"`
 	// KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
@@ -227,6 +310,8 @@ type SecretState struct {
 	AdditionalConfig pulumi.StringPtrInput
 	// Description of secret. The maximum is 2048 bytes.
 	Description pulumi.StringPtrInput
+	// Encryption type of secret. `0`: KMS key encryption. `1`: soft key encryption. Default is `0`. Once created, it cannot be modified.
+	EncryptType pulumi.IntPtrInput
 	// Specify whether to enable secret. Default value is `true`.
 	IsEnabled pulumi.BoolPtrInput
 	// KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
@@ -252,6 +337,8 @@ type secretArgs struct {
 	AdditionalConfig *string `pulumi:"additionalConfig"`
 	// Description of secret. The maximum is 2048 bytes.
 	Description *string `pulumi:"description"`
+	// Encryption type of secret. `0`: KMS key encryption. `1`: soft key encryption. Default is `0`. Once created, it cannot be modified.
+	EncryptType *int `pulumi:"encryptType"`
 	// Specify whether to enable secret. Default value is `true`.
 	IsEnabled *bool `pulumi:"isEnabled"`
 	// KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
@@ -272,6 +359,8 @@ type SecretArgs struct {
 	AdditionalConfig pulumi.StringPtrInput
 	// Description of secret. The maximum is 2048 bytes.
 	Description pulumi.StringPtrInput
+	// Encryption type of secret. `0`: KMS key encryption. `1`: soft key encryption. Default is `0`. Once created, it cannot be modified.
+	EncryptType pulumi.IntPtrInput
 	// Specify whether to enable secret. Default value is `true`.
 	IsEnabled pulumi.BoolPtrInput
 	// KMS keyId used to encrypt secret. If it is empty, it means that the CMK created by SSM for you by default is used for encryption. You can also specify the KMS CMK created by yourself in the same region for encryption.
@@ -381,6 +470,11 @@ func (o SecretOutput) AdditionalConfig() pulumi.StringPtrOutput {
 // Description of secret. The maximum is 2048 bytes.
 func (o SecretOutput) Description() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *Secret) pulumi.StringPtrOutput { return v.Description }).(pulumi.StringPtrOutput)
+}
+
+// Encryption type of secret. `0`: KMS key encryption. `1`: soft key encryption. Default is `0`. Once created, it cannot be modified.
+func (o SecretOutput) EncryptType() pulumi.IntOutput {
+	return o.ApplyT(func(v *Secret) pulumi.IntOutput { return v.EncryptType }).(pulumi.IntOutput)
 }
 
 // Specify whether to enable secret. Default value is `true`.

@@ -170,6 +170,14 @@ def get_connections(customer_gateway_id: Optional[_builtins.str] = None,
         })
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+      - [DescribeVpnConnections](https://www.tencentcloud.com/document/api/215/17515)
+
 
     :param _builtins.str customer_gateway_id: Customer gateway ID of the VPN connection.
     :param _builtins.str id: ID of the VPN connection.
@@ -236,6 +244,14 @@ def get_connections_output(customer_gateway_id: pulumi.Input[Optional[Optional[_
             "createBy": "Terraform",
         })
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+      - [DescribeVpnConnections](https://www.tencentcloud.com/document/api/215/17515)
 
 
     :param _builtins.str customer_gateway_id: Customer gateway ID of the VPN connection.

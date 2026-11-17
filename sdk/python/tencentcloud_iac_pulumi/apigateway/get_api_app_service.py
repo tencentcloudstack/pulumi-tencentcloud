@@ -356,6 +356,12 @@ def get_api_app_service(api_region: Optional[_builtins.str] = None,
         api_region="ap-guangzhou")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeServiceForApiApp](https://www.tencentcloud.com/search/?wd=DescribeServiceForApiApp&type=document&lang=en)
+
 
     :param _builtins.str api_region: Territory to which the service belongs.
     :param _builtins.str result_output_file: Used to save results.
@@ -449,6 +455,12 @@ def get_api_app_service_output(api_region: pulumi.Input[Optional[_builtins.str]]
     example = tencentcloud.apigateway.get_api_app_service_output(service_id=example_api.service_id,
         api_region="ap-guangzhou")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeServiceForApiApp](https://www.tencentcloud.com/search/?wd=DescribeServiceForApiApp&type=document&lang=en)
 
 
     :param _builtins.str api_region: Territory to which the service belongs.

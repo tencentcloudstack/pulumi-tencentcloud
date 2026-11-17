@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [GetResourceGroupMetrics](https://www.tencentcloud.com/document/api/1174/77853)
 func GetResourceGroupMetrics(ctx *pulumi.Context, args *GetResourceGroupMetricsArgs, opts ...pulumi.InvokeOption) (*GetResourceGroupMetricsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetResourceGroupMetricsResult

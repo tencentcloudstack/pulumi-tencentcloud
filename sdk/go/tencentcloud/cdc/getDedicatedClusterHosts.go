@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDedicatedClusterHosts](https://www.tencentcloud.com/document/api/1226/66393)
 func GetDedicatedClusterHosts(ctx *pulumi.Context, args *GetDedicatedClusterHostsArgs, opts ...pulumi.InvokeOption) (*GetDedicatedClusterHostsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDedicatedClusterHostsResult

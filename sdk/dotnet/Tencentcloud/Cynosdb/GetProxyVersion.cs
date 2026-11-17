@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSupportProxyVersion](https://www.tencentcloud.com/document/api/1098/56555)
         /// </summary>
         public static Task<GetProxyVersionResult> InvokeAsync(GetProxyVersionArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetProxyVersionResult>("tencentcloud:Cynosdb/getProxyVersion:getProxyVersion", args ?? new GetProxyVersionArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSupportProxyVersion](https://www.tencentcloud.com/document/api/1098/56555)
         /// </summary>
         public static Output<GetProxyVersionResult> Invoke(GetProxyVersionInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetProxyVersionResult>("tencentcloud:Cynosdb/getProxyVersion:getProxyVersion", args ?? new GetProxyVersionInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSupportProxyVersion](https://www.tencentcloud.com/document/api/1098/56555)
         /// </summary>
         public static Output<GetProxyVersionResult> Invoke(GetProxyVersionInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetProxyVersionResult>("tencentcloud:Cynosdb/getProxyVersion:getProxyVersion", args ?? new GetProxyVersionInvokeArgs(), options.WithDefaults());

@@ -12,7 +12,7 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provides a resource to create a teo config group version
+// Provides a resource to create a TEO (EdgeOne) config group version
 //
 // ## Example Usage
 //
@@ -348,9 +348,10 @@ import (
 //
 // `),
 //
-//				Description: pulumi.String("test version"),
-//				GroupId:     pulumi.String("cg-3lchxitnb5pb"),
-//				ZoneId:      pulumi.String("zone-2xkazzl8yf6k"),
+//				Description:   pulumi.String("test version"),
+//				GroupId:       pulumi.String("cg-3lchxitnb5pb"),
+//				SourceVersion: pulumi.String("ver-2kplomhisdcb"),
+//				ZoneId:        pulumi.String("zone-2xkazzl8yf6k"),
 //			})
 //			if err != nil {
 //				return err
@@ -396,6 +397,20 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateConfigGroupVersion](https://www.tencentcloud.com/document/api/1145/57977)
+// * Read: [DescribeConfigGroupVersionDetail](https://www.tencentcloud.com/document/api/1145/57975)
+//
+// ## Import
+//
+// TEO config group version can be imported using the zoneId#groupId#versionId, e.g.
+// ```sh
+// $ pulumi import tencentcloud:Teo/configGroupVersion:ConfigGroupVersion teo_config_group_version zone-2xkazzl8yf6k#cg-3lchxitnb5pb#ver-2kplomhisdcb
+// ```
 type ConfigGroupVersion struct {
 	pulumi.CustomResourceState
 
@@ -409,6 +424,8 @@ type ConfigGroupVersion struct {
 	GroupId pulumi.StringOutput `pulumi:"groupId"`
 	// Configuration group type. Valid values: l7Acceleration (Layer 7 acceleration configuration group), edgeFunctions (Edge function configuration group).
 	GroupType pulumi.StringOutput `pulumi:"groupType"`
+	// Source version ID. The new version will be derived from the configuration of this source version. If not specified, the currently active production version is used as the source version by default.
+	SourceVersion pulumi.StringOutput `pulumi:"sourceVersion"`
 	// Version status. Valid values: creating (Creating), inactive (Inactive), active (Active).
 	Status pulumi.StringOutput `pulumi:"status"`
 	// Version ID.
@@ -468,6 +485,8 @@ type configGroupVersionState struct {
 	GroupId *string `pulumi:"groupId"`
 	// Configuration group type. Valid values: l7Acceleration (Layer 7 acceleration configuration group), edgeFunctions (Edge function configuration group).
 	GroupType *string `pulumi:"groupType"`
+	// Source version ID. The new version will be derived from the configuration of this source version. If not specified, the currently active production version is used as the source version by default.
+	SourceVersion *string `pulumi:"sourceVersion"`
 	// Version status. Valid values: creating (Creating), inactive (Inactive), active (Active).
 	Status *string `pulumi:"status"`
 	// Version ID.
@@ -489,6 +508,8 @@ type ConfigGroupVersionState struct {
 	GroupId pulumi.StringPtrInput
 	// Configuration group type. Valid values: l7Acceleration (Layer 7 acceleration configuration group), edgeFunctions (Edge function configuration group).
 	GroupType pulumi.StringPtrInput
+	// Source version ID. The new version will be derived from the configuration of this source version. If not specified, the currently active production version is used as the source version by default.
+	SourceVersion pulumi.StringPtrInput
 	// Version status. Valid values: creating (Creating), inactive (Inactive), active (Active).
 	Status pulumi.StringPtrInput
 	// Version ID.
@@ -510,6 +531,8 @@ type configGroupVersionArgs struct {
 	Description *string `pulumi:"description"`
 	// GroupId of the version to be created.
 	GroupId string `pulumi:"groupId"`
+	// Source version ID. The new version will be derived from the configuration of this source version. If not specified, the currently active production version is used as the source version by default.
+	SourceVersion *string `pulumi:"sourceVersion"`
 	// Zone ID.
 	ZoneId string `pulumi:"zoneId"`
 }
@@ -522,6 +545,8 @@ type ConfigGroupVersionArgs struct {
 	Description pulumi.StringPtrInput
 	// GroupId of the version to be created.
 	GroupId pulumi.StringInput
+	// Source version ID. The new version will be derived from the configuration of this source version. If not specified, the currently active production version is used as the source version by default.
+	SourceVersion pulumi.StringPtrInput
 	// Zone ID.
 	ZoneId pulumi.StringInput
 }
@@ -636,6 +661,11 @@ func (o ConfigGroupVersionOutput) GroupId() pulumi.StringOutput {
 // Configuration group type. Valid values: l7Acceleration (Layer 7 acceleration configuration group), edgeFunctions (Edge function configuration group).
 func (o ConfigGroupVersionOutput) GroupType() pulumi.StringOutput {
 	return o.ApplyT(func(v *ConfigGroupVersion) pulumi.StringOutput { return v.GroupType }).(pulumi.StringOutput)
+}
+
+// Source version ID. The new version will be derived from the configuration of this source version. If not specified, the currently active production version is used as the source version by default.
+func (o ConfigGroupVersionOutput) SourceVersion() pulumi.StringOutput {
+	return o.ApplyT(func(v *ConfigGroupVersion) pulumi.StringOutput { return v.SourceVersion }).(pulumi.StringOutput)
 }
 
 // Version status. Valid values: creating (Creating), inactive (Inactive), active (Active).

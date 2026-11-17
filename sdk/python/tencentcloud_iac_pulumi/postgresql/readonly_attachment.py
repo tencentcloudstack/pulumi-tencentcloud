@@ -119,6 +119,14 @@ class ReadonlyAttachment(pulumi.CustomResource):
             read_only_group_id=group["id"])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AddDBInstanceToReadOnlyGroup](https://www.tencentcloud.com/document/api/409/39729)
+        * Read: [DescribeReadOnlyGroups](https://www.tencentcloud.com/document/api/409/39725)
+        * Delete: [RemoveDBInstanceFromReadOnlyGroup](https://www.tencentcloud.com/document/api/409/39721)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -144,6 +152,14 @@ class ReadonlyAttachment(pulumi.CustomResource):
             db_instance_id=foo["id"],
             read_only_group_id=group["id"])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AddDBInstanceToReadOnlyGroup](https://www.tencentcloud.com/document/api/409/39729)
+        * Read: [DescribeReadOnlyGroups](https://www.tencentcloud.com/document/api/409/39725)
+        * Delete: [RemoveDBInstanceFromReadOnlyGroup](https://www.tencentcloud.com/document/api/409/39721)
 
 
         :param str resource_name: The name of the resource.

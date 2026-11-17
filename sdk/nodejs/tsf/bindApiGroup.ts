@@ -19,6 +19,14 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [BindApiGroup](https://www.tencentcloud.com/search/?wd=BindApiGroup&type=document&lang=en)
+ * * Read: [DescribeGroupBindedGateways](https://www.tencentcloud.com/search/?wd=DescribeGroupBindedGateways&type=document&lang=en)
+ * * Delete: [UnbindApiGroup](https://www.tencentcloud.com/search/?wd=UnbindApiGroup&type=document&lang=en)
+ *
  * ## Import
  *
  * tsf bindApiGroup can be imported using the id, e.g.

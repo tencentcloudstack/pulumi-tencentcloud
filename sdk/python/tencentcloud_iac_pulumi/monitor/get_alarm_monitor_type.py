@@ -98,6 +98,12 @@ def get_alarm_monitor_type(result_output_file: Optional[_builtins.str] = None,
     alarm_monitor_type = tencentcloud.monitor.get_alarm_monitor_type()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeMonitorTypes](https://www.tencentcloud.com/document/api/248/39318)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -124,6 +130,12 @@ def get_alarm_monitor_type_output(result_output_file: pulumi.Input[Optional[Opti
 
     alarm_monitor_type = tencentcloud.monitor.get_alarm_monitor_type()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeMonitorTypes](https://www.tencentcloud.com/document/api/248/39318)
 
 
     :param _builtins.str result_output_file: Used to save results.

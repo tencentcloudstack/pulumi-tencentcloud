@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeCertificate](https://www.tencentcloud.com/document/api/1007/36588)
 func LookupDescribeCertificate(ctx *pulumi.Context, args *LookupDescribeCertificateArgs, opts ...pulumi.InvokeOption) (*LookupDescribeCertificateResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupDescribeCertificateResult

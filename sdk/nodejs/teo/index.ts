@@ -85,6 +85,11 @@ export type DnsRecord = import("./dnsRecord").DnsRecord;
 export const DnsRecord: typeof import("./dnsRecord").DnsRecord = null as any;
 utilities.lazyLoad(exports, ["DnsRecord"], () => require("./dnsRecord"));
 
+export { DnsRecordsStatusArgs, DnsRecordsStatusState } from "./dnsRecordsStatus";
+export type DnsRecordsStatus = import("./dnsRecordsStatus").DnsRecordsStatus;
+export const DnsRecordsStatus: typeof import("./dnsRecordsStatus").DnsRecordsStatus = null as any;
+utilities.lazyLoad(exports, ["DnsRecordsStatus"], () => require("./dnsRecordsStatus"));
+
 export { DomainSharedCnameAttachmentArgs, DomainSharedCnameAttachmentState } from "./domainSharedCnameAttachment";
 export type DomainSharedCnameAttachment = import("./domainSharedCnameAttachment").DomainSharedCnameAttachment;
 export const DomainSharedCnameAttachment: typeof import("./domainSharedCnameAttachment").DomainSharedCnameAttachment = null as any;
@@ -130,6 +135,11 @@ export type FunctionRuntimeEnvironment = import("./functionRuntimeEnvironment").
 export const FunctionRuntimeEnvironment: typeof import("./functionRuntimeEnvironment").FunctionRuntimeEnvironment = null as any;
 utilities.lazyLoad(exports, ["FunctionRuntimeEnvironment"], () => require("./functionRuntimeEnvironment"));
 
+export { GetBillingDataArgs, GetBillingDataResult, GetBillingDataOutputArgs } from "./getBillingData";
+export const getBillingData: typeof import("./getBillingData").getBillingData = null as any;
+export const getBillingDataOutput: typeof import("./getBillingData").getBillingDataOutput = null as any;
+utilities.lazyLoad(exports, ["getBillingData","getBillingDataOutput"], () => require("./getBillingData"));
+
 export { GetConfigGroupVersionDetailArgs, GetConfigGroupVersionDetailResult, GetConfigGroupVersionDetailOutputArgs } from "./getConfigGroupVersionDetail";
 export const getConfigGroupVersionDetail: typeof import("./getConfigGroupVersionDetail").getConfigGroupVersionDetail = null as any;
 export const getConfigGroupVersionDetailOutput: typeof import("./getConfigGroupVersionDetail").getConfigGroupVersionDetailOutput = null as any;
@@ -169,6 +179,11 @@ export { GetExportZoneConfigArgs, GetExportZoneConfigResult, GetExportZoneConfig
 export const getExportZoneConfig: typeof import("./getExportZoneConfig").getExportZoneConfig = null as any;
 export const getExportZoneConfigOutput: typeof import("./getExportZoneConfig").getExportZoneConfigOutput = null as any;
 utilities.lazyLoad(exports, ["getExportZoneConfig","getExportZoneConfigOutput"], () => require("./getExportZoneConfig"));
+
+export { GetIpGroupReferencesArgs, GetIpGroupReferencesResult, GetIpGroupReferencesOutputArgs } from "./getIpGroupReferences";
+export const getIpGroupReferences: typeof import("./getIpGroupReferences").getIpGroupReferences = null as any;
+export const getIpGroupReferencesOutput: typeof import("./getIpGroupReferences").getIpGroupReferencesOutput = null as any;
+utilities.lazyLoad(exports, ["getIpGroupReferences","getIpGroupReferencesOutput"], () => require("./getIpGroupReferences"));
 
 export { GetIpRegionArgs, GetIpRegionResult, GetIpRegionOutputArgs } from "./getIpRegion";
 export const getIpRegion: typeof import("./getIpRegion").getIpRegion = null as any;
@@ -417,6 +432,8 @@ const _module = {
                 return new DeployConfigGroupVersion(name, <any>undefined, { urn })
             case "tencentcloud:Teo/dnsRecord:DnsRecord":
                 return new DnsRecord(name, <any>undefined, { urn })
+            case "tencentcloud:Teo/dnsRecordsStatus:DnsRecordsStatus":
+                return new DnsRecordsStatus(name, <any>undefined, { urn })
             case "tencentcloud:Teo/domainSharedCnameAttachment:DomainSharedCnameAttachment":
                 return new DomainSharedCnameAttachment(name, <any>undefined, { urn })
             case "tencentcloud:Teo/edgeKv:EdgeKv":
@@ -518,6 +535,7 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Teo/customizeErrorPage", 
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/ddosProtectionConfig", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/deployConfigGroupVersion", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/dnsRecord", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Teo/dnsRecordsStatus", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/domainSharedCnameAttachment", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/edgeKv", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Teo/edgeKvNamespace", _module)

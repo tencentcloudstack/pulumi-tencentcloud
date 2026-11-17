@@ -41,7 +41,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes.Inputs
         private InputList<string>? _extraArgs;
 
         /// <summary>
-        /// Custom parameter information related to the node. This is a white-list parameter.
+        /// Custom parameter information related to the node. This is a white-list parameter. It can be modified via the `ModifyClusterNodePool` API.
         /// </summary>
         public InputList<string> ExtraArgs
         {

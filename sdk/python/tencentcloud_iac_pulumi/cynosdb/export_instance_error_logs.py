@@ -343,6 +343,12 @@ class ExportInstanceErrorLogs(pulumi.CustomResource):
             order_by_type="ASC")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ExportInstanceErrorLogs](https://www.tencentcloud.com/document/api/1098/55901)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -380,6 +386,12 @@ class ExportInstanceErrorLogs(pulumi.CustomResource):
             order_by="Timestamp",
             order_by_type="ASC")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ExportInstanceErrorLogs](https://www.tencentcloud.com/document/api/1098/55901)
 
 
         :param str resource_name: The name of the resource.

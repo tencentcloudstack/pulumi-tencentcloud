@@ -44,6 +44,23 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ga2
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateGlobalAcceleratorAclPolicy](https://www.tencentcloud.com/document/api/1299/83834)
+    ///   - [DescribeTaskResult](https://www.tencentcloud.com/document/api/1299/83730)
+    ///   - [ModifyGlobalAcceleratorAclPolicy](https://www.tencentcloud.com/document/api/1299/83743)
+    /// * Read: [DescribeGlobalAcceleratorAclPolicies](https://www.tencentcloud.com/document/api/1299/83814)
+    /// * Update:
+    ///   - [DescribeTaskResult](https://www.tencentcloud.com/document/api/1299/83730)
+    ///   - [ModifyGlobalAcceleratorAclPolicy](https://www.tencentcloud.com/document/api/1299/83743)
+    /// * Delete:
+    ///   - [DeleteGlobalAcceleratorAclPolicy](https://www.tencentcloud.com/document/api/1299/83825)
+    ///   - [DescribeTaskResult](https://www.tencentcloud.com/document/api/1299/83730)
+    ///   - [ModifyGlobalAcceleratorAclPolicy](https://www.tencentcloud.com/document/api/1299/83743)
+    /// 
     /// ## Import
     /// 
     /// GA2 global accelerator ACL policy can be imported using the composite id `&lt;global_accelerator_id&gt;#&lt;global_accelerator_acl_policy_id&gt;`, e.g.

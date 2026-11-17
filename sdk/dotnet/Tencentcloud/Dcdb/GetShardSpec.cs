@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeShardSpec](https://www.tencentcloud.com/search/?wd=DescribeShardSpec&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetShardSpecResult> InvokeAsync(GetShardSpecArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetShardSpecResult>("tencentcloud:Dcdb/getShardSpec:getShardSpec", args ?? new GetShardSpecArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeShardSpec](https://www.tencentcloud.com/search/?wd=DescribeShardSpec&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetShardSpecResult> Invoke(GetShardSpecInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetShardSpecResult>("tencentcloud:Dcdb/getShardSpec:getShardSpec", args ?? new GetShardSpecInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeShardSpec](https://www.tencentcloud.com/search/?wd=DescribeShardSpec&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetShardSpecResult> Invoke(GetShardSpecInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetShardSpecResult>("tencentcloud:Dcdb/getShardSpec:getShardSpec", args ?? new GetShardSpecInvokeArgs(), options.WithDefaults());

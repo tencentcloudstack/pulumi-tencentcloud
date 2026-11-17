@@ -115,6 +115,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePrivateZoneList](https://www.tencentcloud.com/document/api/1097/42116)
         /// </summary>
         public static Task<GetPrivateZoneListResult> InvokeAsync(GetPrivateZoneListArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetPrivateZoneListResult>("tencentcloud:PrivateDns/getPrivateZoneList:getPrivateZoneList", args ?? new GetPrivateZoneListArgs(), options.WithDefaults());
@@ -222,6 +228,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePrivateZoneList](https://www.tencentcloud.com/document/api/1097/42116)
         /// </summary>
         public static Output<GetPrivateZoneListResult> Invoke(GetPrivateZoneListInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetPrivateZoneListResult>("tencentcloud:PrivateDns/getPrivateZoneList:getPrivateZoneList", args ?? new GetPrivateZoneListInvokeArgs(), options.WithDefaults());
@@ -329,6 +341,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.PrivateDns
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePrivateZoneList](https://www.tencentcloud.com/document/api/1097/42116)
         /// </summary>
         public static Output<GetPrivateZoneListResult> Invoke(GetPrivateZoneListInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetPrivateZoneListResult>("tencentcloud:PrivateDns/getPrivateZoneList:getPrivateZoneList", args ?? new GetPrivateZoneListInvokeArgs(), options.WithDefaults());

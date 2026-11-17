@@ -32,6 +32,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeDBSyncMode](https://www.tencentcloud.com/document/api/1042/34443)
+    ///   - [ModifyDBSyncMode](https://www.tencentcloud.com/document/api/1042/34432)
+    /// * Read: [DescribeDBSyncMode](https://www.tencentcloud.com/document/api/1042/34443)
+    /// * Update:
+    ///   - [DescribeDBSyncMode](https://www.tencentcloud.com/document/api/1042/34443)
+    ///   - [ModifyDBSyncMode](https://www.tencentcloud.com/document/api/1042/34432)
+    /// 
     /// ## Import
     /// 
     /// dcdb DbSyncModeConfig can be imported using the id, e.g.

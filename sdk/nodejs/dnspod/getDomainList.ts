@@ -35,6 +35,12 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDomainFilterList](https://www.tencentcloud.com/search/?wd=DescribeDomainFilterList&type=document&lang=en)
  */
 export function getDomainList(args: GetDomainListArgs, opts?: pulumi.InvokeOptions): Promise<GetDomainListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -189,6 +195,12 @@ export interface GetDomainListResult {
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDomainFilterList](https://www.tencentcloud.com/search/?wd=DescribeDomainFilterList&type=document&lang=en)
  */
 export function getDomainListOutput(args: GetDomainListOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDomainListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

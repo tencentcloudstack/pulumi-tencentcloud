@@ -34,6 +34,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Elasticsearch
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeInstances](https://www.tencentcloud.com/document/api/845/32214)
+    ///   - [RestartNodes](https://www.tencentcloud.com/document/api/845/38511)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Elasticsearch/restartNodesOperation:RestartNodesOperation")]
     public partial class RestartNodesOperation : global::Pulumi.CustomResource

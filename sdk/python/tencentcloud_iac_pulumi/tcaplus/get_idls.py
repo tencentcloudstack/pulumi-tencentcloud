@@ -96,6 +96,12 @@ def get_idls(cluster_id: Optional[_builtins.str] = None,
     id_test = tencentcloud.tcaplus.get_idls(cluster_id="19162256624")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeIdlFileInfos](https://www.tencentcloud.com/document/api/1016/35037)
+
 
     :param _builtins.str cluster_id: ID of the TcaplusDB cluster to be query.
     :param _builtins.str result_output_file: File for saving results.
@@ -125,6 +131,12 @@ def get_idls_output(cluster_id: pulumi.Input[Optional[_builtins.str]] = None,
 
     id_test = tencentcloud.tcaplus.get_idls(cluster_id="19162256624")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeIdlFileInfos](https://www.tencentcloud.com/document/api/1016/35037)
 
 
     :param _builtins.str cluster_id: ID of the TcaplusDB cluster to be query.

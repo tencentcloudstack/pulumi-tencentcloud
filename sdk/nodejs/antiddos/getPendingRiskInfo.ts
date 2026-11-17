@@ -15,6 +15,12 @@ import * as utilities from "../utilities";
  *
  * const pendingRiskInfo = tencentcloud.antiddos.getPendingRiskInfo({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribePendingRiskInfo](https://www.tencentcloud.com/document/api/1213/61337)
  */
 export function getPendingRiskInfo(args?: GetPendingRiskInfoArgs, opts?: pulumi.InvokeOptions): Promise<GetPendingRiskInfoResult> {
     args = args || {};
@@ -75,6 +81,12 @@ export interface GetPendingRiskInfoResult {
  *
  * const pendingRiskInfo = tencentcloud.antiddos.getPendingRiskInfo({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribePendingRiskInfo](https://www.tencentcloud.com/document/api/1213/61337)
  */
 export function getPendingRiskInfoOutput(args?: GetPendingRiskInfoOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetPendingRiskInfoResult> {
     args = args || {};

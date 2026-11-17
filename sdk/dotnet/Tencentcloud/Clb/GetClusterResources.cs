@@ -42,6 +42,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeClusterResources](https://www.tencentcloud.com/search/?wd=DescribeClusterResources&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetClusterResourcesResult> InvokeAsync(GetClusterResourcesArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetClusterResourcesResult>("tencentcloud:Clb/getClusterResources:getClusterResources", args ?? new GetClusterResourcesArgs(), options.WithDefaults());
@@ -76,6 +82,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeClusterResources](https://www.tencentcloud.com/search/?wd=DescribeClusterResources&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetClusterResourcesResult> Invoke(GetClusterResourcesInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetClusterResourcesResult>("tencentcloud:Clb/getClusterResources:getClusterResources", args ?? new GetClusterResourcesInvokeArgs(), options.WithDefaults());
@@ -110,6 +122,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Clb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeClusterResources](https://www.tencentcloud.com/search/?wd=DescribeClusterResources&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetClusterResourcesResult> Invoke(GetClusterResourcesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetClusterResourcesResult>("tencentcloud:Clb/getClusterResources:getClusterResources", args ?? new GetClusterResourcesInvokeArgs(), options.WithDefaults());

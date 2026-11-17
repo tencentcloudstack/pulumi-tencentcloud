@@ -15,6 +15,12 @@ import * as utilities from "../utilities";
  *
  * const example = new tencentcloud.advisor.AuthorizationOperation("example", {});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateAdvisorAuthorization](https://www.tencentcloud.com/document/api/1079/77120)
  */
 export class AuthorizationOperation extends pulumi.CustomResource {
     /**

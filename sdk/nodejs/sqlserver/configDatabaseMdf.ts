@@ -66,6 +66,18 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+ *   - [ModifyDatabaseMdf](https://www.tencentcloud.com/document/api/238/41638)
+ * * Read: [DescribeDBsNormal](https://www.tencentcloud.com/document/api/238/41643)
+ * * Update:
+ *   - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+ *   - [ModifyDatabaseMdf](https://www.tencentcloud.com/document/api/238/41638)
+ *
  * ## Import
  *
  * sqlserver configDatabaseMdf can be imported using the id, e.g.

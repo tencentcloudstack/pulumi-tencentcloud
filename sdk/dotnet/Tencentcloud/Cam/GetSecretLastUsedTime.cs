@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetSecurityLastUsed](https://www.tencentcloud.com/document/api/598/41082)
         /// </summary>
         public static Task<GetSecretLastUsedTimeResult> InvokeAsync(GetSecretLastUsedTimeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSecretLastUsedTimeResult>("tencentcloud:Cam/getSecretLastUsedTime:getSecretLastUsedTime", args ?? new GetSecretLastUsedTimeArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetSecurityLastUsed](https://www.tencentcloud.com/document/api/598/41082)
         /// </summary>
         public static Output<GetSecretLastUsedTimeResult> Invoke(GetSecretLastUsedTimeInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSecretLastUsedTimeResult>("tencentcloud:Cam/getSecretLastUsedTime:getSecretLastUsedTime", args ?? new GetSecretLastUsedTimeInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetSecurityLastUsed](https://www.tencentcloud.com/document/api/598/41082)
         /// </summary>
         public static Output<GetSecretLastUsedTimeResult> Invoke(GetSecretLastUsedTimeInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetSecretLastUsedTimeResult>("tencentcloud:Cam/getSecretLastUsedTime:getSecretLastUsedTime", args ?? new GetSecretLastUsedTimeInvokeArgs(), options.WithDefaults());

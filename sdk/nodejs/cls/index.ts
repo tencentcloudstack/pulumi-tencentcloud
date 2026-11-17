@@ -65,6 +65,11 @@ export type DataTransform = import("./dataTransform").DataTransform;
 export const DataTransform: typeof import("./dataTransform").DataTransform = null as any;
 utilities.lazyLoad(exports, ["DataTransform"], () => require("./dataTransform"));
 
+export { DeliverTaskArgs, DeliverTaskState } from "./deliverTask";
+export type DeliverTask = import("./deliverTask").DeliverTask;
+export const DeliverTask: typeof import("./deliverTask").DeliverTask = null as any;
+utilities.lazyLoad(exports, ["DeliverTask"], () => require("./deliverTask"));
+
 export { DlcDeliverArgs, DlcDeliverState } from "./dlcDeliver";
 export type DlcDeliver = import("./dlcDeliver").DlcDeliver;
 export const DlcDeliver: typeof import("./dlcDeliver").DlcDeliver = null as any;
@@ -155,10 +160,20 @@ export type OpenServiceOperation = import("./openServiceOperation").OpenServiceO
 export const OpenServiceOperation: typeof import("./openServiceOperation").OpenServiceOperation = null as any;
 utilities.lazyLoad(exports, ["OpenServiceOperation"], () => require("./openServiceOperation"));
 
+export { RemoteWriteTaskArgs, RemoteWriteTaskState } from "./remoteWriteTask";
+export type RemoteWriteTask = import("./remoteWriteTask").RemoteWriteTask;
+export const RemoteWriteTask: typeof import("./remoteWriteTask").RemoteWriteTask = null as any;
+utilities.lazyLoad(exports, ["RemoteWriteTask"], () => require("./remoteWriteTask"));
+
 export { ScheduledSqlArgs, ScheduledSqlState } from "./scheduledSql";
 export type ScheduledSql = import("./scheduledSql").ScheduledSql;
 export const ScheduledSql: typeof import("./scheduledSql").ScheduledSql = null as any;
 utilities.lazyLoad(exports, ["ScheduledSql"], () => require("./scheduledSql"));
+
+export { SplunkDeliverArgs, SplunkDeliverState } from "./splunkDeliver";
+export type SplunkDeliver = import("./splunkDeliver").SplunkDeliver;
+export const SplunkDeliver: typeof import("./splunkDeliver").SplunkDeliver = null as any;
+utilities.lazyLoad(exports, ["SplunkDeliver"], () => require("./splunkDeliver"));
 
 export { TopicArgs, TopicState } from "./topic";
 export type Topic = import("./topic").Topic;
@@ -199,6 +214,8 @@ const _module = {
                 return new Dashboard(name, <any>undefined, { urn })
             case "tencentcloud:Cls/dataTransform:DataTransform":
                 return new DataTransform(name, <any>undefined, { urn })
+            case "tencentcloud:Cls/deliverTask:DeliverTask":
+                return new DeliverTask(name, <any>undefined, { urn })
             case "tencentcloud:Cls/dlcDeliver:DlcDeliver":
                 return new DlcDeliver(name, <any>undefined, { urn })
             case "tencentcloud:Cls/export:Export":
@@ -219,8 +236,12 @@ const _module = {
                 return new NoticeContent(name, <any>undefined, { urn })
             case "tencentcloud:Cls/openServiceOperation:OpenServiceOperation":
                 return new OpenServiceOperation(name, <any>undefined, { urn })
+            case "tencentcloud:Cls/remoteWriteTask:RemoteWriteTask":
+                return new RemoteWriteTask(name, <any>undefined, { urn })
             case "tencentcloud:Cls/scheduledSql:ScheduledSql":
                 return new ScheduledSql(name, <any>undefined, { urn })
+            case "tencentcloud:Cls/splunkDeliver:SplunkDeliver":
+                return new SplunkDeliver(name, <any>undefined, { urn })
             case "tencentcloud:Cls/topic:Topic":
                 return new Topic(name, <any>undefined, { urn })
             case "tencentcloud:Cls/webCallback:WebCallback":
@@ -242,6 +263,7 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Cls/cosRecharge", _module
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/cosShipper", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/dashboard", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/dataTransform", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cls/deliverTask", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/dlcDeliver", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/export", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/index", _module)
@@ -252,6 +274,8 @@ pulumi.runtime.registerResourceModule("tencentcloud", "Cls/machineGroup", _modul
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/metricSubscribe", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/noticeContent", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/openServiceOperation", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cls/remoteWriteTask", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/scheduledSql", _module)
+pulumi.runtime.registerResourceModule("tencentcloud", "Cls/splunkDeliver", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/topic", _module)
 pulumi.runtime.registerResourceModule("tencentcloud", "Cls/webCallback", _module)

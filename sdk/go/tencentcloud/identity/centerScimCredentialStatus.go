@@ -42,6 +42,14 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [UpdateSCIMCredentialStatus](https://www.tencentcloud.com/document/api/1031/66419)
+// * Read: [ListSCIMCredentials](https://www.tencentcloud.com/document/api/1031/66420)
+// * Update: [UpdateSCIMCredentialStatus](https://www.tencentcloud.com/document/api/1031/66419)
+//
 // ## Import
 //
 // organization identityCenterScimCredentialStatus can be imported using the id, e.g.

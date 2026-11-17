@@ -106,6 +106,12 @@ def get_layers(compatible_runtime: Optional[_builtins.str] = None,
     layers = tencentcloud.scf.get_layers()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListLayers](https://www.tencentcloud.com/document/api/583/36317)
+
 
     :param _builtins.str compatible_runtime: Compatible runtimes.
     :param _builtins.str result_output_file: Used to save results.
@@ -139,6 +145,12 @@ def get_layers_output(compatible_runtime: pulumi.Input[Optional[Optional[_builti
 
     layers = tencentcloud.scf.get_layers()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListLayers](https://www.tencentcloud.com/document/api/583/36317)
 
 
     :param _builtins.str compatible_runtime: Compatible runtimes.

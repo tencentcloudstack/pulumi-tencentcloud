@@ -146,6 +146,18 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [AddExistedInstances](https://www.tencentcloud.com/document/api/457/32039)
+// * Read:
+//   - [DescribeClusterInstances](https://www.tencentcloud.com/document/api/457/66315)
+//   - [DescribeClusters](https://www.tencentcloud.com/document/api/457/32025)
+//   - [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258)
+//
+// * Delete: [DeleteClusterInstances](https://www.tencentcloud.com/document/api/457/32038)
 type ClusterAttachment struct {
 	pulumi.CustomResourceState
 
@@ -165,6 +177,10 @@ type ClusterAttachment struct {
 	Password pulumi.StringPtrOutput `pulumi:"password"`
 	// A list of security group IDs after attach to cluster.
 	SecurityGroups pulumi.StringArrayOutput `pulumi:"securityGroups"`
+	// Steps to skip when adding existing instances into the cluster. Default is empty. Valid values: `ResetCVM` (skip CVM reinstallation, make sure the TKE UserData has been written into the CVM), `InstallRuntime` (skip container runtime installation), `ConfigRuntime` (skip container runtime configuration file distribution), `InstallKubelet` (skip kubelet installation), `ConfigKubelet` (skip kubelet configuration file distribution).
+	SkipOptions pulumi.StringArrayOutput `pulumi:"skipOptions"`
+	// Validation rule related options, which can be configured to skip certain validation rules. Currently supported values: `GlobalRouteCIDRCheck` (skip GlobalRouter related validations), `VpcCniCIDRCheck` (skip VpcCni related validations).
+	SkipValidateOptions pulumi.StringArrayOutput `pulumi:"skipValidateOptions"`
 	// State of the node.
 	State pulumi.StringOutput `pulumi:"state"`
 	// Sets whether the joining node participates in the schedule. Default is `0`, which means it participates in scheduling. Non-zero(eg: `1`) number means it does not participate in scheduling.
@@ -234,6 +250,10 @@ type clusterAttachmentState struct {
 	Password *string `pulumi:"password"`
 	// A list of security group IDs after attach to cluster.
 	SecurityGroups []string `pulumi:"securityGroups"`
+	// Steps to skip when adding existing instances into the cluster. Default is empty. Valid values: `ResetCVM` (skip CVM reinstallation, make sure the TKE UserData has been written into the CVM), `InstallRuntime` (skip container runtime installation), `ConfigRuntime` (skip container runtime configuration file distribution), `InstallKubelet` (skip kubelet installation), `ConfigKubelet` (skip kubelet configuration file distribution).
+	SkipOptions []string `pulumi:"skipOptions"`
+	// Validation rule related options, which can be configured to skip certain validation rules. Currently supported values: `GlobalRouteCIDRCheck` (skip GlobalRouter related validations), `VpcCniCIDRCheck` (skip VpcCni related validations).
+	SkipValidateOptions []string `pulumi:"skipValidateOptions"`
 	// State of the node.
 	State *string `pulumi:"state"`
 	// Sets whether the joining node participates in the schedule. Default is `0`, which means it participates in scheduling. Non-zero(eg: `1`) number means it does not participate in scheduling.
@@ -261,6 +281,10 @@ type ClusterAttachmentState struct {
 	Password pulumi.StringPtrInput
 	// A list of security group IDs after attach to cluster.
 	SecurityGroups pulumi.StringArrayInput
+	// Steps to skip when adding existing instances into the cluster. Default is empty. Valid values: `ResetCVM` (skip CVM reinstallation, make sure the TKE UserData has been written into the CVM), `InstallRuntime` (skip container runtime installation), `ConfigRuntime` (skip container runtime configuration file distribution), `InstallKubelet` (skip kubelet installation), `ConfigKubelet` (skip kubelet configuration file distribution).
+	SkipOptions pulumi.StringArrayInput
+	// Validation rule related options, which can be configured to skip certain validation rules. Currently supported values: `GlobalRouteCIDRCheck` (skip GlobalRouter related validations), `VpcCniCIDRCheck` (skip VpcCni related validations).
+	SkipValidateOptions pulumi.StringArrayInput
 	// State of the node.
 	State pulumi.StringPtrInput
 	// Sets whether the joining node participates in the schedule. Default is `0`, which means it participates in scheduling. Non-zero(eg: `1`) number means it does not participate in scheduling.
@@ -292,6 +316,10 @@ type clusterAttachmentArgs struct {
 	Password *string `pulumi:"password"`
 	// A list of security group IDs after attach to cluster.
 	SecurityGroups []string `pulumi:"securityGroups"`
+	// Steps to skip when adding existing instances into the cluster. Default is empty. Valid values: `ResetCVM` (skip CVM reinstallation, make sure the TKE UserData has been written into the CVM), `InstallRuntime` (skip container runtime installation), `ConfigRuntime` (skip container runtime configuration file distribution), `InstallKubelet` (skip kubelet installation), `ConfigKubelet` (skip kubelet configuration file distribution).
+	SkipOptions []string `pulumi:"skipOptions"`
+	// Validation rule related options, which can be configured to skip certain validation rules. Currently supported values: `GlobalRouteCIDRCheck` (skip GlobalRouter related validations), `VpcCniCIDRCheck` (skip VpcCni related validations).
+	SkipValidateOptions []string `pulumi:"skipValidateOptions"`
 	// Sets whether the joining node participates in the schedule. Default is `0`, which means it participates in scheduling. Non-zero(eg: `1`) number means it does not participate in scheduling.
 	Unschedulable *int `pulumi:"unschedulable"`
 	// Deploy the machine configuration information of the 'WORKER', commonly used to attach existing instances.
@@ -318,6 +346,10 @@ type ClusterAttachmentArgs struct {
 	Password pulumi.StringPtrInput
 	// A list of security group IDs after attach to cluster.
 	SecurityGroups pulumi.StringArrayInput
+	// Steps to skip when adding existing instances into the cluster. Default is empty. Valid values: `ResetCVM` (skip CVM reinstallation, make sure the TKE UserData has been written into the CVM), `InstallRuntime` (skip container runtime installation), `ConfigRuntime` (skip container runtime configuration file distribution), `InstallKubelet` (skip kubelet installation), `ConfigKubelet` (skip kubelet configuration file distribution).
+	SkipOptions pulumi.StringArrayInput
+	// Validation rule related options, which can be configured to skip certain validation rules. Currently supported values: `GlobalRouteCIDRCheck` (skip GlobalRouter related validations), `VpcCniCIDRCheck` (skip VpcCni related validations).
+	SkipValidateOptions pulumi.StringArrayInput
 	// Sets whether the joining node participates in the schedule. Default is `0`, which means it participates in scheduling. Non-zero(eg: `1`) number means it does not participate in scheduling.
 	Unschedulable pulumi.IntPtrInput
 	// Deploy the machine configuration information of the 'WORKER', commonly used to attach existing instances.
@@ -451,6 +483,16 @@ func (o ClusterAttachmentOutput) Password() pulumi.StringPtrOutput {
 // A list of security group IDs after attach to cluster.
 func (o ClusterAttachmentOutput) SecurityGroups() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *ClusterAttachment) pulumi.StringArrayOutput { return v.SecurityGroups }).(pulumi.StringArrayOutput)
+}
+
+// Steps to skip when adding existing instances into the cluster. Default is empty. Valid values: `ResetCVM` (skip CVM reinstallation, make sure the TKE UserData has been written into the CVM), `InstallRuntime` (skip container runtime installation), `ConfigRuntime` (skip container runtime configuration file distribution), `InstallKubelet` (skip kubelet installation), `ConfigKubelet` (skip kubelet configuration file distribution).
+func (o ClusterAttachmentOutput) SkipOptions() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *ClusterAttachment) pulumi.StringArrayOutput { return v.SkipOptions }).(pulumi.StringArrayOutput)
+}
+
+// Validation rule related options, which can be configured to skip certain validation rules. Currently supported values: `GlobalRouteCIDRCheck` (skip GlobalRouter related validations), `VpcCniCIDRCheck` (skip VpcCni related validations).
+func (o ClusterAttachmentOutput) SkipValidateOptions() pulumi.StringArrayOutput {
+	return o.ApplyT(func(v *ClusterAttachment) pulumi.StringArrayOutput { return v.SkipValidateOptions }).(pulumi.StringArrayOutput)
 }
 
 // State of the node.

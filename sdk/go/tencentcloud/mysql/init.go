@@ -35,6 +35,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &BackupEncryptionStatus{}
 	case "tencentcloud:Mysql/backupPolicy:BackupPolicy":
 		r = &BackupPolicy{}
+	case "tencentcloud:Mysql/cloneInstance:CloneInstance":
+		r = &CloneInstance{}
 	case "tencentcloud:Mysql/clsLogAttachment:ClsLogAttachment":
 		r = &ClsLogAttachment{}
 	case "tencentcloud:Mysql/database:Database":
@@ -151,6 +153,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Mysql/backupPolicy",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Mysql/cloneInstance",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

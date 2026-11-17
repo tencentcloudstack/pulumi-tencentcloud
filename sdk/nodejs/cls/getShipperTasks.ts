@@ -21,6 +21,12 @@ import * as utilities from "../utilities";
  *     endTime: 160749910800,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeShipperTasks](https://www.tencentcloud.com/document/api/614/42773)
  */
 export function getShipperTasks(args: GetShipperTasksArgs, opts?: pulumi.InvokeOptions): Promise<GetShipperTasksResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -95,6 +101,12 @@ export interface GetShipperTasksResult {
  *     endTime: 160749910800,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeShipperTasks](https://www.tencentcloud.com/document/api/614/42773)
  */
 export function getShipperTasksOutput(args: GetShipperTasksOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetShipperTasksResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

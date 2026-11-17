@@ -31,6 +31,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeFwSyncStatus](https://www.tencentcloud.com/search/?wd=DescribeFwSyncStatus&amp;type=document&amp;lang=en)
+    ///   - [SyncFwOperate](https://www.tencentcloud.com/search/?wd=SyncFwOperate&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cfw/syncRoute:SyncRoute")]
     public partial class SyncRoute : global::Pulumi.CustomResource

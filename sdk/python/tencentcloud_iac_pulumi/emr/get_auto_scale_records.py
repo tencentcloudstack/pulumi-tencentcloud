@@ -111,6 +111,12 @@ def get_auto_scale_records(filters: Optional[Sequence[Union['GetAutoScaleRecords
         }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAutoScaleRecords](https://www.tencentcloud.com/document/api/1026/58396)
+
 
     :param Sequence[Union['GetAutoScaleRecordsFilterArgs', 'GetAutoScaleRecordsFilterArgsDict']] filters: Record filtering parameters, currently only `StartTime`, `EndTime` and `StrategyName` are supported. `StartTime` and `EndTime` support the time format of 2006-01-02 15:04:05 or 2006/01/02 15:04:05.
     :param _builtins.str instance_id: EMR cluster ID.
@@ -148,6 +154,12 @@ def get_auto_scale_records_output(filters: pulumi.Input[Optional[Optional[Sequen
             "value": "2006-01-02 15:04:05",
         }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAutoScaleRecords](https://www.tencentcloud.com/document/api/1026/58396)
 
 
     :param Sequence[Union['GetAutoScaleRecordsFilterArgs', 'GetAutoScaleRecordsFilterArgsDict']] filters: Record filtering parameters, currently only `StartTime`, `EndTime` and `StrategyName` are supported. `StartTime` and `EndTime` support the time format of 2006-01-02 15:04:05 or 2006/01/02 15:04:05.

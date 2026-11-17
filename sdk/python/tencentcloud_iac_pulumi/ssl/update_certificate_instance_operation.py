@@ -402,6 +402,12 @@ class UpdateCertificateInstanceOperation(pulumi.CustomResource):
             resource_types=["cdn"])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [UpdateCertificateInstance](https://www.tencentcloud.com/document/api/1007/57981)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -451,6 +457,12 @@ class UpdateCertificateInstanceOperation(pulumi.CustomResource):
             repeatable=True,
             resource_types=["cdn"])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [UpdateCertificateInstance](https://www.tencentcloud.com/document/api/1007/57981)
 
 
         :param str resource_name: The name of the resource.

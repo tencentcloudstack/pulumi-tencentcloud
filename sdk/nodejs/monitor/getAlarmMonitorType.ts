@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const alarmMonitorType = tencentcloud.monitor.getAlarmMonitorType({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeMonitorTypes](https://www.tencentcloud.com/document/api/248/39318)
  */
 export function getAlarmMonitorType(args?: GetAlarmMonitorTypeArgs, opts?: pulumi.InvokeOptions): Promise<GetAlarmMonitorTypeResult> {
     args = args || {};
@@ -65,6 +71,12 @@ export interface GetAlarmMonitorTypeResult {
  *
  * const alarmMonitorType = tencentcloud.monitor.getAlarmMonitorType({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeMonitorTypes](https://www.tencentcloud.com/document/api/248/39318)
  */
 export function getAlarmMonitorTypeOutput(args?: GetAlarmMonitorTypeOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAlarmMonitorTypeResult> {
     args = args || {};

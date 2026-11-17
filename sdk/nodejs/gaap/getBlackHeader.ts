@@ -15,6 +15,12 @@ import * as utilities from "../utilities";
  *
  * const blackHeader = tencentcloud.gaap.getBlackHeader({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeBlackHeader](https://www.tencentcloud.com/document/api/608/41733)
  */
 export function getBlackHeader(args?: GetBlackHeaderArgs, opts?: pulumi.InvokeOptions): Promise<GetBlackHeaderResult> {
     args = args || {};
@@ -59,6 +65,12 @@ export interface GetBlackHeaderResult {
  *
  * const blackHeader = tencentcloud.gaap.getBlackHeader({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeBlackHeader](https://www.tencentcloud.com/document/api/608/41733)
  */
 export function getBlackHeaderOutput(args?: GetBlackHeaderOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetBlackHeaderResult> {
     args = args || {};

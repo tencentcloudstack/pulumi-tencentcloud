@@ -46,6 +46,15 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateAnimatedGraphicsTemplate](https://www.tencentcloud.com/document/api/1041/33676)
+// * Read: [DescribeAnimatedGraphicsTemplates](https://www.tencentcloud.com/document/api/1041/33660)
+// * Update: [ModifyAnimatedGraphicsTemplate](https://www.tencentcloud.com/document/api/1041/33652)
+// * Delete: [DeleteAnimatedGraphicsTemplate](https://www.tencentcloud.com/document/api/1041/33668)
+//
 // ## Import
 //
 // mps animatedGraphicsTemplate can be imported using the id, e.g.

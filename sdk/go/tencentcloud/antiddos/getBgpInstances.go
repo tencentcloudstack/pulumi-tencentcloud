@@ -49,6 +49,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeBgpInstances](https://www.tencentcloud.com/search/?wd=DescribeBgpInstances&type=document&lang=en)
 func GetBgpInstances(ctx *pulumi.Context, args *GetBgpInstancesArgs, opts ...pulumi.InvokeOption) (*GetBgpInstancesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetBgpInstancesResult

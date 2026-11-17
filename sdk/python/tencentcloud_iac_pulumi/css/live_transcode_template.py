@@ -799,6 +799,15 @@ class LiveTranscodeTemplate(pulumi.CustomResource):
             drm_tracks="SD")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateLiveTranscodeTemplate](https://www.tencentcloud.com/document/api/267/30790)
+        * Read: [DescribeLiveTranscodeTemplate](https://www.tencentcloud.com/document/api/267/30786)
+        * Update: [ModifyLiveTranscodeTemplate](https://www.tencentcloud.com/document/api/267/30784)
+        * Delete: [DeleteLiveTranscodeTemplate](https://www.tencentcloud.com/document/api/267/30788)
+
         ## Import
 
         css live_transcode_template can be imported using the id, e.g.
@@ -871,6 +880,15 @@ class LiveTranscodeTemplate(pulumi.CustomResource):
             drm_type="fairplay",
             drm_tracks="SD")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateLiveTranscodeTemplate](https://www.tencentcloud.com/document/api/267/30790)
+        * Read: [DescribeLiveTranscodeTemplate](https://www.tencentcloud.com/document/api/267/30786)
+        * Update: [ModifyLiveTranscodeTemplate](https://www.tencentcloud.com/document/api/267/30784)
+        * Delete: [DeleteLiveTranscodeTemplate](https://www.tencentcloud.com/document/api/267/30788)
 
         ## Import
 

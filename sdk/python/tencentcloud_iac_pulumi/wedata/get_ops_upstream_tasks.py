@@ -107,6 +107,12 @@ def get_ops_upstream_tasks(project_id: Optional[_builtins.str] = None,
         task_id="20250820150144998")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListUpstreamOpsTasks](https://www.tencentcloud.com/document/api/1174/73816)
+
 
     :param _builtins.str project_id: Project ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -141,6 +147,12 @@ def get_ops_upstream_tasks_output(project_id: pulumi.Input[Optional[_builtins.st
     wedata_ops_upstream_tasks = tencentcloud.wedata.get_ops_upstream_tasks(project_id="1859317240494305280",
         task_id="20250820150144998")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListUpstreamOpsTasks](https://www.tencentcloud.com/document/api/1174/73816)
 
 
     :param _builtins.str project_id: Project ID.

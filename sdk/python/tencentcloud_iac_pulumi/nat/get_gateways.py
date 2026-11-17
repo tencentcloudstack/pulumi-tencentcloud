@@ -115,6 +115,12 @@ def get_gateways(id: Optional[_builtins.str] = None,
         id="nat-xfaq1")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeNatGateways](https://www.tencentcloud.com/document/api/215/34752)
+
 
     :param _builtins.str id: ID of the NAT gateway.
     :param _builtins.str name: Name of the NAT gateway.
@@ -153,6 +159,12 @@ def get_gateways_output(id: pulumi.Input[Optional[Optional[_builtins.str]]] = No
         vpc_id="vpc-xfqag",
         id="nat-xfaq1")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeNatGateways](https://www.tencentcloud.com/document/api/215/34752)
 
 
     :param _builtins.str id: ID of the NAT gateway.

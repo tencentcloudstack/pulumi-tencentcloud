@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBinlogDownloadUrl](https://www.tencentcloud.com/document/api/1098/48596)
         /// </summary>
         public static Task<GetBinlogDownloadUrlResult> InvokeAsync(GetBinlogDownloadUrlArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetBinlogDownloadUrlResult>("tencentcloud:Cynosdb/getBinlogDownloadUrl:getBinlogDownloadUrl", args ?? new GetBinlogDownloadUrlArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBinlogDownloadUrl](https://www.tencentcloud.com/document/api/1098/48596)
         /// </summary>
         public static Output<GetBinlogDownloadUrlResult> Invoke(GetBinlogDownloadUrlInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetBinlogDownloadUrlResult>("tencentcloud:Cynosdb/getBinlogDownloadUrl:getBinlogDownloadUrl", args ?? new GetBinlogDownloadUrlInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBinlogDownloadUrl](https://www.tencentcloud.com/document/api/1098/48596)
         /// </summary>
         public static Output<GetBinlogDownloadUrlResult> Invoke(GetBinlogDownloadUrlInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetBinlogDownloadUrlResult>("tencentcloud:Cynosdb/getBinlogDownloadUrl:getBinlogDownloadUrl", args ?? new GetBinlogDownloadUrlInvokeArgs(), options.WithDefaults());

@@ -117,6 +117,12 @@ class OwnershipVerify(pulumi.CustomResource):
         ownership_verify = tencentcloud.teo.OwnershipVerify("ownership_verify", domain="qq.com")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [VerifyOwnership](https://www.tencentcloud.com/document/api/1145/57426)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -139,6 +145,12 @@ class OwnershipVerify(pulumi.CustomResource):
 
         ownership_verify = tencentcloud.teo.OwnershipVerify("ownership_verify", domain="qq.com")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [VerifyOwnership](https://www.tencentcloud.com/document/api/1145/57426)
 
 
         :param str resource_name: The name of the resource.

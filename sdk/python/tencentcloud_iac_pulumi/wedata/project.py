@@ -205,6 +205,7 @@ class Project(pulumi.CustomResource):
                 "project_name": "tf_example",
                 "display_name": "display_name",
                 "project_model": "SIMPLE",
+                "schedule_mode": "task",
             },
             dlc_info={
                 "compute_resources": ["svmgao_stability"],
@@ -219,6 +220,20 @@ class Project(pulumi.CustomResource):
             ],
             status=1)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateProject](https://www.tencentcloud.com/document/api/1174/77876)
+          - [DisableProject](https://www.tencentcloud.com/document/api/1174/77872)
+        * Read: [GetProject](https://www.tencentcloud.com/document/api/1174/77868)
+        * Update:
+          - [DisableProject](https://www.tencentcloud.com/document/api/1174/77872)
+          - [EnableProject](https://www.tencentcloud.com/document/api/1174/77871)
+          - [UpdateProject](https://www.tencentcloud.com/document/api/1174/77859)
+        * Delete: [DeleteProject](https://www.tencentcloud.com/document/api/1174/77880)
 
 
         :param str resource_name: The name of the resource.
@@ -248,6 +263,7 @@ class Project(pulumi.CustomResource):
                 "project_name": "tf_example",
                 "display_name": "display_name",
                 "project_model": "SIMPLE",
+                "schedule_mode": "task",
             },
             dlc_info={
                 "compute_resources": ["svmgao_stability"],
@@ -262,6 +278,20 @@ class Project(pulumi.CustomResource):
             ],
             status=1)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateProject](https://www.tencentcloud.com/document/api/1174/77876)
+          - [DisableProject](https://www.tencentcloud.com/document/api/1174/77872)
+        * Read: [GetProject](https://www.tencentcloud.com/document/api/1174/77868)
+        * Update:
+          - [DisableProject](https://www.tencentcloud.com/document/api/1174/77872)
+          - [EnableProject](https://www.tencentcloud.com/document/api/1174/77871)
+          - [UpdateProject](https://www.tencentcloud.com/document/api/1174/77859)
+        * Delete: [DeleteProject](https://www.tencentcloud.com/document/api/1174/77880)
 
 
         :param str resource_name: The name of the resource.

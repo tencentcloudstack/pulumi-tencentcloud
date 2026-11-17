@@ -131,6 +131,12 @@ def get_microservice(microservice_id_lists: Optional[Sequence[_builtins.str]] = 
         microservice_name_lists=["provider-demo"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeMicroservices](https://www.tencentcloud.com/search/?wd=DescribeMicroservices&type=document&lang=en)
+
 
     :param Sequence[_builtins.str] microservice_id_lists: microservice id list.
     :param Sequence[_builtins.str] microservice_name_lists: List of service names for search.
@@ -174,6 +180,12 @@ def get_microservice_output(microservice_id_lists: pulumi.Input[Optional[Optiona
         microservice_id_lists=["ms-yq3jo6jd"],
         microservice_name_lists=["provider-demo"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeMicroservices](https://www.tencentcloud.com/search/?wd=DescribeMicroservices&type=document&lang=en)
 
 
     :param Sequence[_builtins.str] microservice_id_lists: microservice id list.

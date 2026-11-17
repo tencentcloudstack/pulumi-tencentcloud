@@ -369,6 +369,18 @@ class TmpTkeBasicConfig(pulumi.CustomResource):
             opts = pulumi.ResourceOptions(depends_on=[foo_tmp_tke_cluster_agent]))
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribePrometheusConfig](https://www.tencentcloud.com/document/api/248/53332)
+          - [ModifyPrometheusConfig](https://www.tencentcloud.com/document/api/248/53761)
+        * Read: [DescribePrometheusConfig](https://www.tencentcloud.com/document/api/248/53332)
+        * Update:
+          - [DescribePrometheusConfig](https://www.tencentcloud.com/document/api/248/53332)
+          - [ModifyPrometheusConfig](https://www.tencentcloud.com/document/api/248/53761)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -517,6 +529,18 @@ class TmpTkeBasicConfig(pulumi.CustomResource):
             metrics_names=["kube_job_status_succeeded"],
             opts = pulumi.ResourceOptions(depends_on=[foo_tmp_tke_cluster_agent]))
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribePrometheusConfig](https://www.tencentcloud.com/document/api/248/53332)
+          - [ModifyPrometheusConfig](https://www.tencentcloud.com/document/api/248/53761)
+        * Read: [DescribePrometheusConfig](https://www.tencentcloud.com/document/api/248/53332)
+        * Update:
+          - [DescribePrometheusConfig](https://www.tencentcloud.com/document/api/248/53332)
+          - [ModifyPrometheusConfig](https://www.tencentcloud.com/document/api/248/53761)
 
 
         :param str resource_name: The name of the resource.

@@ -87,6 +87,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+    ///   - [OpenInterCommunication](https://www.tencentcloud.com/document/api/238/50605)
+    /// * Read: [DescribeDBInstanceInter](https://www.tencentcloud.com/document/api/238/50606)
+    /// * Delete:
+    ///   - [CloseInterCommunication](https://www.tencentcloud.com/document/api/238/50611)
+    ///   - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+    /// 
     /// ## Import
     /// 
     /// sqlserver GeneralCommunication can be imported using the id, e.g.

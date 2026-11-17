@@ -338,6 +338,12 @@ class EmbedTokenApply(pulumi.CustomResource):
             user_id="100024664626")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateEmbedToken](https://www.tencentcloud.com/document/api/1270/72621)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -372,6 +378,12 @@ class EmbedTokenApply(pulumi.CustomResource):
             user_corp_id="100022975249",
             user_id="100024664626")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateEmbedToken](https://www.tencentcloud.com/document/api/1270/72621)
 
 
         :param str resource_name: The name of the resource.

@@ -18,6 +18,12 @@ import * as utilities from "../utilities";
  *     operate: "suspend",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [SuspendResumeDataEngine](https://www.tencentcloud.com/document/api/1155/53307)
  */
 export class SuspendResumeDataEngine extends pulumi.CustomResource {
     /**

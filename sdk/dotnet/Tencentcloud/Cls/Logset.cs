@@ -26,14 +26,33 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
     ///     var example = new Tencentcloud.Cls.Logset("example", new()
     ///     {
     ///         LogsetName = "tf-example",
-    ///         Tags = 
+    ///         TagLists = new[]
     ///         {
-    ///             { "createdBy", "Terraform" },
+    ///             new Tencentcloud.Cls.Inputs.LogsetTagListArgs
+    ///             {
+    ///                 Key = "createdBy",
+    ///                 Value = "Terraform",
+    ///             },
     ///         },
     ///     });
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateLogset](https://www.tencentcloud.com/document/api/614/42780)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    /// * Read:
+    ///   - [DescribeLogsets](https://www.tencentcloud.com/document/api/614/42778)
+    ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+    /// * Update:
+    ///   - [ModifyLogset](https://www.tencentcloud.com/document/api/614/42777)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    /// * Delete: [DeleteLogset](https://www.tencentcloud.com/document/api/614/42779)
     /// 
     /// ## Import
     /// 
@@ -64,7 +83,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         public Output<string> RoleName { get; private set; } = null!;
 
         /// <summary>
-        /// Tag description list.
+        /// Tag description list. The CLS API supports up to 10 tag key-value pairs, and duplicate keys are not allowed.
+        /// </summary>
+        [Output("tagLists")]
+        public Output<ImmutableArray<Outputs.LogsetTagList>> TagLists { get; private set; } = null!;
+
+        /// <summary>
+        /// It is recommended to use `TagList` because the current `Tags` field is binding resources by calling the tag API. Tag description list.
         /// </summary>
         [Output("tags")]
         public Output<ImmutableDictionary<string, string>?> Tags { get; private set; } = null!;
@@ -128,12 +153,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         [Input("logsetName", required: true)]
         public Input<string> LogsetName { get; set; } = null!;
 
+        [Input("tagLists")]
+        private InputList<Inputs.LogsetTagListArgs>? _tagLists;
+
+        /// <summary>
+        /// Tag description list. The CLS API supports up to 10 tag key-value pairs, and duplicate keys are not allowed.
+        /// </summary>
+        public InputList<Inputs.LogsetTagListArgs> TagLists
+        {
+            get => _tagLists ?? (_tagLists = new InputList<Inputs.LogsetTagListArgs>());
+            set => _tagLists = value;
+        }
+
         [Input("tags")]
         private InputMap<string>? _tags;
 
         /// <summary>
-        /// Tag description list.
+        /// It is recommended to use `TagList` because the current `Tags` field is binding resources by calling the tag API. Tag description list.
         /// </summary>
+        [Obsolete(@"It is recommended to use `TagList` because the current `Tags` field is binding resources by calling the tag API.")]
         public InputMap<string> Tags
         {
             get => _tags ?? (_tags = new InputMap<string>());
@@ -166,12 +204,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         [Input("roleName")]
         public Input<string>? RoleName { get; set; }
 
+        [Input("tagLists")]
+        private InputList<Inputs.LogsetTagListGetArgs>? _tagLists;
+
+        /// <summary>
+        /// Tag description list. The CLS API supports up to 10 tag key-value pairs, and duplicate keys are not allowed.
+        /// </summary>
+        public InputList<Inputs.LogsetTagListGetArgs> TagLists
+        {
+            get => _tagLists ?? (_tagLists = new InputList<Inputs.LogsetTagListGetArgs>());
+            set => _tagLists = value;
+        }
+
         [Input("tags")]
         private InputMap<string>? _tags;
 
         /// <summary>
-        /// Tag description list.
+        /// It is recommended to use `TagList` because the current `Tags` field is binding resources by calling the tag API. Tag description list.
         /// </summary>
+        [Obsolete(@"It is recommended to use `TagList` because the current `Tags` field is binding resources by calling the tag API.")]
         public InputMap<string> Tags
         {
             get => _tags ?? (_tags = new InputMap<string>());

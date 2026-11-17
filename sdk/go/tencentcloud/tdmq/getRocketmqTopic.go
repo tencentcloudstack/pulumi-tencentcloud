@@ -62,6 +62,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeRocketMQTopics](https://www.tencentcloud.com/search/?wd=DescribeRocketMQTopics&type=document&lang=en)
 func LookupRocketmqTopic(ctx *pulumi.Context, args *LookupRocketmqTopicArgs, opts ...pulumi.InvokeOption) (*LookupRocketmqTopicResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupRocketmqTopicResult

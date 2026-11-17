@@ -140,6 +140,12 @@ def get_gateway_snats(description: Optional[_builtins.str] = None,
         result_output_file="./snat.txt")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeNatGatewaySourceIpTranslationNatRules](https://www.tencentcloud.com/document/api/215/39644)
+
 
     :param _builtins.str description: Description.
     :param _builtins.str instance_id: Instance ID.
@@ -189,6 +195,12 @@ def get_gateway_snats_output(description: pulumi.Input[Optional[Optional[_builti
         description="snat demo",
         result_output_file="./snat.txt")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeNatGatewaySourceIpTranslationNatRules](https://www.tencentcloud.com/document/api/215/39644)
 
 
     :param _builtins.str description: Description.

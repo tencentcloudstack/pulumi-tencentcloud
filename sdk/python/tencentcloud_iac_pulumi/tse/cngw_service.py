@@ -419,6 +419,22 @@ class CngwService(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateCloudNativeAPIGatewayService](https://www.tencentcloud.com/document/api/1290/79290)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribeOneCloudNativeAPIGatewayService](https://www.tencentcloud.com/document/api/1290/79251)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [DescribeOneCloudNativeAPIGatewayService](https://www.tencentcloud.com/document/api/1290/79251)
+          - [ModifyCloudNativeAPIGatewayService](https://www.tencentcloud.com/document/api/1290/79239)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Delete: [DeleteCloudNativeAPIGatewayService](https://www.tencentcloud.com/document/api/1290/79276)
+
         ## Import
 
         tse cngw_service can be imported using the id, e.g.
@@ -505,6 +521,22 @@ class CngwService(pulumi.CustomResource):
                 "slow_start": 0,
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateCloudNativeAPIGatewayService](https://www.tencentcloud.com/document/api/1290/79290)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribeOneCloudNativeAPIGatewayService](https://www.tencentcloud.com/document/api/1290/79251)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [DescribeOneCloudNativeAPIGatewayService](https://www.tencentcloud.com/document/api/1290/79251)
+          - [ModifyCloudNativeAPIGatewayService](https://www.tencentcloud.com/document/api/1290/79239)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Delete: [DeleteCloudNativeAPIGatewayService](https://www.tencentcloud.com/document/api/1290/79276)
 
         ## Import
 

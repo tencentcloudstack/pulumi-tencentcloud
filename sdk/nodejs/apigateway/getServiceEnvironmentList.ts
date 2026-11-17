@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     serviceId: "service-nxz6yync",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeServiceEnvironmentList](https://www.tencentcloud.com/search/?wd=DescribeServiceEnvironmentList&type=document&lang=en)
  */
 export function getServiceEnvironmentList(args: GetServiceEnvironmentListArgs, opts?: pulumi.InvokeOptions): Promise<GetServiceEnvironmentListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetServiceEnvironmentListResult {
  *     serviceId: "service-nxz6yync",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeServiceEnvironmentList](https://www.tencentcloud.com/search/?wd=DescribeServiceEnvironmentList&type=document&lang=en)
  */
 export function getServiceEnvironmentListOutput(args: GetServiceEnvironmentListOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetServiceEnvironmentListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

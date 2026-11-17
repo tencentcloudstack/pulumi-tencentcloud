@@ -199,6 +199,12 @@ def get_mysql_process_list(command: Optional[_builtins.str] = None,
         product="mysql")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeMySqlProcessList](https://www.tencentcloud.com/document/api/1035/41193)
+
 
     :param _builtins.str command: The execution type of the thread, used to filter the thread list.
     :param _builtins.str db: The threads operations database, used to filter the thread list.
@@ -264,6 +270,12 @@ def get_mysql_process_list_output(command: pulumi.Input[Optional[Optional[_built
     mysql_process_list = tencentcloud.dbbrain.get_mysql_process_list(instance_id=mysql_id,
         product="mysql")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeMySqlProcessList](https://www.tencentcloud.com/document/api/1035/41193)
 
 
     :param _builtins.str command: The execution type of the thread, used to filter the thread list.

@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeManagerDetail](https://www.tencentcloud.com/search/?wd=DescribeManagerDetail&type=document&lang=en)
 func GetDescribeManagerDetail(ctx *pulumi.Context, args *GetDescribeManagerDetailArgs, opts ...pulumi.InvokeOption) (*GetDescribeManagerDetailResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDescribeManagerDetailResult

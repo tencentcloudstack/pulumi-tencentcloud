@@ -34,6 +34,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeUserRoles](https://www.tencentcloud.com/document/api/1155/56962)
         /// </summary>
         public static Task<GetDescribeUserRolesResult> InvokeAsync(GetDescribeUserRolesArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDescribeUserRolesResult>("tencentcloud:Dlc/getDescribeUserRoles:getDescribeUserRoles", args ?? new GetDescribeUserRolesArgs(), options.WithDefaults());
@@ -60,6 +66,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeUserRoles](https://www.tencentcloud.com/document/api/1155/56962)
         /// </summary>
         public static Output<GetDescribeUserRolesResult> Invoke(GetDescribeUserRolesInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDescribeUserRolesResult>("tencentcloud:Dlc/getDescribeUserRoles:getDescribeUserRoles", args ?? new GetDescribeUserRolesInvokeArgs(), options.WithDefaults());
@@ -86,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeUserRoles](https://www.tencentcloud.com/document/api/1155/56962)
         /// </summary>
         public static Output<GetDescribeUserRolesResult> Invoke(GetDescribeUserRolesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDescribeUserRolesResult>("tencentcloud:Dlc/getDescribeUserRoles:getDescribeUserRoles", args ?? new GetDescribeUserRolesInvokeArgs(), options.WithDefaults());

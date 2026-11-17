@@ -96,6 +96,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.As
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateScheduledAction](https://www.tencentcloud.com/document/api/377/30996)
+    /// * Read: [DescribeScheduledActions](https://www.tencentcloud.com/document/api/377/30994)
+    /// * Update: [ModifyScheduledAction](https://www.tencentcloud.com/document/api/377/30993)
+    /// * Delete: [DeleteScheduledAction](https://www.tencentcloud.com/document/api/377/30995)
+    /// 
     /// ## Import
     /// 
     /// AS schedule can be imported using the id, e.g.

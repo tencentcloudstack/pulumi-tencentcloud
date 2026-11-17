@@ -37,6 +37,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateMicroservice](https://www.tencentcloud.com/search/?wd=CreateMicroservice&amp;type=document&amp;lang=en)
+    ///   - [DescribeMicroservices](https://www.tencentcloud.com/search/?wd=DescribeMicroservices&amp;type=document&amp;lang=en)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    /// * Read:
+    ///   - [DescribeMicroservices](https://www.tencentcloud.com/search/?wd=DescribeMicroservices&amp;type=document&amp;lang=en)
+    ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+    /// * Update:
+    ///   - [ModifyMicroservice](https://www.tencentcloud.com/search/?wd=ModifyMicroservice&amp;type=document&amp;lang=en)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    /// * Delete: [DeleteMicroservice](https://www.tencentcloud.com/search/?wd=DeleteMicroservice&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// tsf microservice can be imported using the namespaceId#microserviceId, e.g.

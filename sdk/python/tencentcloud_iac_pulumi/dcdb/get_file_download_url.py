@@ -116,6 +116,12 @@ def get_file_download_url(file_path: Optional[_builtins.str] = None,
         file_path="/cos_backup/test.txt")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeFileDownloadUrl](https://www.tencentcloud.com/document/api/1042/44288)
+
 
     :param _builtins.str file_path: Unsigned file path.
     :param _builtins.str instance_id: Instance ID.
@@ -155,6 +161,12 @@ def get_file_download_url_output(file_path: pulumi.Input[Optional[_builtins.str]
         shard_id="shard-1b5r04az",
         file_path="/cos_backup/test.txt")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeFileDownloadUrl](https://www.tencentcloud.com/document/api/1042/44288)
 
 
     :param _builtins.str file_path: Unsigned file path.

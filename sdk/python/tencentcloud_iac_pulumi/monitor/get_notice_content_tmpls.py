@@ -160,6 +160,12 @@ def get_notice_content_tmpls(monitor_type: Optional[_builtins.str] = None,
         monitor_type="MT_QCE")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeNoticeContentTmpl](https://www.tencentcloud.com/search/?wd=DescribeNoticeContentTmpl&type=document&lang=en)
+
 
     :param _builtins.str monitor_type: Monitor type for query. Valid value: `MT_QCE`.
     :param _builtins.str notice_id: Notice template ID for query.
@@ -220,6 +226,12 @@ def get_notice_content_tmpls_output(monitor_type: pulumi.Input[Optional[Optional
         tmpl_language="en",
         monitor_type="MT_QCE")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeNoticeContentTmpl](https://www.tencentcloud.com/search/?wd=DescribeNoticeContentTmpl&type=document&lang=en)
 
 
     :param _builtins.str monitor_type: Monitor type for query. Valid value: `MT_QCE`.

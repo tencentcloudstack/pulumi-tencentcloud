@@ -150,6 +150,12 @@ def get_queue(filters: Optional[Sequence[Union['GetQueueFilterArgs', 'GetQueueFi
     queue = tencentcloud.tcmq.get_queue(queue_name="queue_name")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCmqQueues](https://www.tencentcloud.com/search/?wd=DescribeCmqQueues&type=document&lang=en)
+
 
     :param Sequence[Union['GetQueueFilterArgs', 'GetQueueFilterArgsDict']] filters: Filter. Currently, you can filter by tag. The tag name must be prefixed with `tag:`, such as `tag: owner`, `tag: environment`, or `tag: business`.
     :param _builtins.bool is_tag_filter: For filtering by tag, this parameter must be set to `true`.
@@ -199,6 +205,12 @@ def get_queue_output(filters: pulumi.Input[Optional[Optional[Sequence[Union['Get
 
     queue = tencentcloud.tcmq.get_queue(queue_name="queue_name")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCmqQueues](https://www.tencentcloud.com/search/?wd=DescribeCmqQueues&type=document&lang=en)
 
 
     :param Sequence[Union['GetQueueFilterArgs', 'GetQueueFilterArgsDict']] filters: Filter. Currently, you can filter by tag. The tag name must be prefixed with `tag:`, such as `tag: owner`, `tag: environment`, or `tag: business`.

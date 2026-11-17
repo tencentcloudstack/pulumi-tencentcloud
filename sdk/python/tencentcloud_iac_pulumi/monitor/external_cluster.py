@@ -281,6 +281,18 @@ class ExternalCluster(pulumi.CustomResource):
             enable_external=False)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateExternalCluster](https://www.tencentcloud.com/search/?wd=CreateExternalCluster&type=document&lang=en)
+          - [DescribePrometheusClusterAgents](https://www.tencentcloud.com/document/api/248/53770)
+        * Read: [DescribePrometheusClusterAgents](https://www.tencentcloud.com/document/api/248/53770)
+        * Delete:
+          - [DeletePrometheusClusterAgent](https://www.tencentcloud.com/document/api/248/53771)
+          - [DescribePrometheusClusterAgents](https://www.tencentcloud.com/document/api/248/53770)
+
         ## Import
 
         Monitor external cluster can be imported using the instanceId#clusterId, e.g.
@@ -329,6 +341,18 @@ class ExternalCluster(pulumi.CustomResource):
             ],
             enable_external=False)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateExternalCluster](https://www.tencentcloud.com/search/?wd=CreateExternalCluster&type=document&lang=en)
+          - [DescribePrometheusClusterAgents](https://www.tencentcloud.com/document/api/248/53770)
+        * Read: [DescribePrometheusClusterAgents](https://www.tencentcloud.com/document/api/248/53770)
+        * Delete:
+          - [DeletePrometheusClusterAgent](https://www.tencentcloud.com/document/api/248/53771)
+          - [DescribePrometheusClusterAgents](https://www.tencentcloud.com/document/api/248/53770)
 
         ## Import
 

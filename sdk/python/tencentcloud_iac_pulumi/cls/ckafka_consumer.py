@@ -243,6 +243,15 @@ class CkafkaConsumer(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateConsumer](https://www.tencentcloud.com/document/api/614/44253)
+        * Read: [DescribeConsumer](https://www.tencentcloud.com/document/api/614/44251)
+        * Update: [ModifyConsumer](https://www.tencentcloud.com/document/api/614/44250)
+        * Delete: [DeleteConsumer](https://www.tencentcloud.com/document/api/614/44252)
+
         ## Import
 
         cls ckafka_consumer can be imported using the id, e.g.
@@ -301,6 +310,15 @@ class CkafkaConsumer(pulumi.CustomResource):
                 "json_type": 1,
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateConsumer](https://www.tencentcloud.com/document/api/614/44253)
+        * Read: [DescribeConsumer](https://www.tencentcloud.com/document/api/614/44251)
+        * Update: [ModifyConsumer](https://www.tencentcloud.com/document/api/614/44250)
+        * Delete: [DeleteConsumer](https://www.tencentcloud.com/document/api/614/44252)
 
         ## Import
 

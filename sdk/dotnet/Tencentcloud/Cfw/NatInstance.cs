@@ -82,6 +82,20 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateNatFwInstanceWithDomain](https://www.tencentcloud.com/document/api/1160/51348)
+    ///   - [DescribeNatFwInstancesInfo](https://www.tencentcloud.com/document/api/1160/51384)
+    /// * Read:
+    ///   - [DescribeCfwEips](https://www.tencentcloud.com/search/?wd=DescribeCfwEips&amp;type=document&amp;lang=en)
+    ///   - [DescribeNatFwInstancesInfo](https://www.tencentcloud.com/document/api/1160/51384)
+    ///   - [DescribeNatFwVpcDnsLst](https://www.tencentcloud.com/document/api/1160/51383)
+    /// * Update: [ModifyNatInstance](https://www.tencentcloud.com/search/?wd=ModifyNatInstance&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteNatFwInstance](https://www.tencentcloud.com/search/?wd=DeleteNatFwInstance&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// CFW nat instance can be imported using the id, e.g.

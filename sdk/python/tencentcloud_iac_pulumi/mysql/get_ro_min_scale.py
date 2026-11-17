@@ -116,6 +116,12 @@ def get_ro_min_scale(master_instance_id: Optional[_builtins.str] = None,
     ro_min_scale = tencentcloud.mysql.get_ro_min_scale(master_instance_id="cdb-fitq5t9h")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRoMinScale](https://www.tencentcloud.com/document/api/236/37727)
+
 
     :param _builtins.str master_instance_id: The primary instance ID, in the format: cdb-c1nl9rpv, is the same as the instance ID displayed on the cloud database console page. This parameter and the RoInstanceId parameter cannot be empty at the same time. Note that when the input parameter contains RoInstanceId, the return value is the minimum specification when the read-only instance is upgraded; when the input parameter only contains MasterInstanceId, the return value is the minimum specification when the read-only instance is purchased.
     :param _builtins.str result_output_file: Used to save results.
@@ -150,6 +156,12 @@ def get_ro_min_scale_output(master_instance_id: pulumi.Input[Optional[Optional[_
 
     ro_min_scale = tencentcloud.mysql.get_ro_min_scale(master_instance_id="cdb-fitq5t9h")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRoMinScale](https://www.tencentcloud.com/document/api/236/37727)
 
 
     :param _builtins.str master_instance_id: The primary instance ID, in the format: cdb-c1nl9rpv, is the same as the instance ID displayed on the cloud database console page. This parameter and the RoInstanceId parameter cannot be empty at the same time. Note that when the input parameter contains RoInstanceId, the return value is the minimum specification when the read-only instance is upgraded; when the input parameter only contains MasterInstanceId, the return value is the minimum specification when the read-only instance is purchased.

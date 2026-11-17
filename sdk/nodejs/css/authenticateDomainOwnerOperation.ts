@@ -32,6 +32,12 @@ import * as utilities from "../utilities";
  *     verifyType: "fileCheck",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [AuthenticateDomainOwner](https://www.tencentcloud.com/document/api/267/50612)
  */
 export class AuthenticateDomainOwnerOperation extends pulumi.CustomResource {
     /**

@@ -96,6 +96,12 @@ def get_image_share_permission(image_id: Optional[_builtins.str] = None,
     example = tencentcloud.cvm.get_image_share_permission(image_id="img-0elsru2u")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeImageSharePermission](https://www.tencentcloud.com/document/api/213/33273)
+
 
     :param _builtins.str image_id: The ID of the image to be shared.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_image_share_permission_output(image_id: pulumi.Input[Optional[_builtins.
 
     example = tencentcloud.cvm.get_image_share_permission(image_id="img-0elsru2u")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeImageSharePermission](https://www.tencentcloud.com/document/api/213/33273)
 
 
     :param _builtins.str image_id: The ID of the image to be shared.

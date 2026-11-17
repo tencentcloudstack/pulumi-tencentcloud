@@ -117,6 +117,12 @@ def get_db_custom_node_types(filters: Optional[Sequence[Union['GetDbCustomNodeTy
     ])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBCustomNodeTypes](https://www.tencentcloud.com/search/?wd=DescribeDBCustomNodeTypes&type=document&lang=en)
+
 
     :param Sequence[Union['GetDbCustomNodeTypesFilterArgs', 'GetDbCustomNodeTypesFilterArgsDict']] filters: Filter conditions. Supported filter names: region, zone, node-family, node-type.
     :param _builtins.str result_output_file: Used to save results.
@@ -166,6 +172,12 @@ def get_db_custom_node_types_output(filters: pulumi.Input[Optional[Optional[Sequ
         },
     ])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBCustomNodeTypes](https://www.tencentcloud.com/search/?wd=DescribeDBCustomNodeTypes&type=document&lang=en)
 
 
     :param Sequence[Union['GetDbCustomNodeTypesFilterArgs', 'GetDbCustomNodeTypesFilterArgsDict']] filters: Filter conditions. Supported filter names: region, zone, node-family, node-type.

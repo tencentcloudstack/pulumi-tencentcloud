@@ -42,6 +42,22 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CreateSharedCNAME](https://www.tencentcloud.com/document/api/1145/57422)
+//   - [DescribeSharedCNAME](https://www.tencentcloud.com/document/api/1145/78836)
+//   - [ModifySharedCNAME](https://www.tencentcloud.com/document/api/1145/78835)
+//
+// * Read: [DescribeSharedCNAME](https://www.tencentcloud.com/document/api/1145/78836)
+// * Update:
+//   - [DescribeSharedCNAME](https://www.tencentcloud.com/document/api/1145/78836)
+//   - [ModifySharedCNAME](https://www.tencentcloud.com/document/api/1145/78835)
+//
+// * Delete: [DeleteSharedCNAME](https://www.tencentcloud.com/document/api/1145/57468)
+//
 // ## Import
 //
 // TEO shared CNAME can be imported using the composite id (zone_id#shared_cname), e.g.

@@ -52,6 +52,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeMachineGroupConfigs](https://www.tencentcloud.com/document/api/614/42808)
 func GetMachineGroupConfigs(ctx *pulumi.Context, args *GetMachineGroupConfigsArgs, opts ...pulumi.InvokeOption) (*GetMachineGroupConfigsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetMachineGroupConfigsResult

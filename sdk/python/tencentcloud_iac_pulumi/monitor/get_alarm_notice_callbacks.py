@@ -96,6 +96,12 @@ def get_alarm_notice_callbacks(result_output_file: Optional[_builtins.str] = Non
     alarm_notice_callbacks = tencentcloud.monitor.get_alarm_notice_callbacks()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAlarmNoticeCallbacks](https://www.tencentcloud.com/document/api/248/39301)
+
 
     :param _builtins.str result_output_file: Used to save results.
     :param Mapping[str, _builtins.str] tags: Tag description list.
@@ -125,6 +131,12 @@ def get_alarm_notice_callbacks_output(result_output_file: pulumi.Input[Optional[
 
     alarm_notice_callbacks = tencentcloud.monitor.get_alarm_notice_callbacks()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAlarmNoticeCallbacks](https://www.tencentcloud.com/document/api/248/39301)
 
 
     :param _builtins.str result_output_file: Used to save results.

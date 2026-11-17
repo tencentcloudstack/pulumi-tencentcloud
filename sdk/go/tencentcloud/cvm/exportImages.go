@@ -41,6 +41,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [DescribeImages](https://www.tencentcloud.com/document/api/213/33272)
+//   - [ExportImages](https://www.tencentcloud.com/document/api/213/47833)
 type ExportImages struct {
 	pulumi.CustomResourceState
 

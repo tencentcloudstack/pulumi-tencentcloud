@@ -259,6 +259,19 @@ class AntiInfoLeak(pulumi.CustomResource):
             status=1)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [AddAntiInfoLeakRules](https://www.tencentcloud.com/document/api/627/64531)
+          - [ModifyAntiInfoLeakRuleStatus](https://www.tencentcloud.com/document/api/627/64515)
+        * Read: [DescribeAntiInfoLeakageRules](https://www.tencentcloud.com/document/api/627/64526)
+        * Update:
+          - [ModifyAntiInfoLeakRuleStatus](https://www.tencentcloud.com/document/api/627/64515)
+          - [ModifyAntiInfoLeakRules](https://www.tencentcloud.com/document/api/627/64514)
+        * Delete: [DeleteAntiInfoLeakRule](https://www.tencentcloud.com/document/api/627/64552)
+
         ## Import
 
         waf anti_info_leak can be imported using the id, e.g.
@@ -303,6 +316,19 @@ class AntiInfoLeak(pulumi.CustomResource):
             uri="/anti_info_leak_url",
             status=1)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [AddAntiInfoLeakRules](https://www.tencentcloud.com/document/api/627/64531)
+          - [ModifyAntiInfoLeakRuleStatus](https://www.tencentcloud.com/document/api/627/64515)
+        * Read: [DescribeAntiInfoLeakageRules](https://www.tencentcloud.com/document/api/627/64526)
+        * Update:
+          - [ModifyAntiInfoLeakRuleStatus](https://www.tencentcloud.com/document/api/627/64515)
+          - [ModifyAntiInfoLeakRules](https://www.tencentcloud.com/document/api/627/64514)
+        * Delete: [DeleteAntiInfoLeakRule](https://www.tencentcloud.com/document/api/627/64552)
 
         ## Import
 

@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeIdleLoadBalancers](https://www.tencentcloud.com/document/api/214/50740)
 func GetIdleInstances(ctx *pulumi.Context, args *GetIdleInstancesArgs, opts ...pulumi.InvokeOption) (*GetIdleInstancesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetIdleInstancesResult

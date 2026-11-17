@@ -96,6 +96,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+        ///   - [DescribeDBs](https://www.tencentcloud.com/document/api/238/32114)
         /// </summary>
         public static Task<GetDbsResult> InvokeAsync(GetDbsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDbsResult>("tencentcloud:Sqlserver/getDbs:getDbs", args ?? new GetDbsArgs(), options.WithDefaults());
@@ -184,6 +192,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+        ///   - [DescribeDBs](https://www.tencentcloud.com/document/api/238/32114)
         /// </summary>
         public static Output<GetDbsResult> Invoke(GetDbsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDbsResult>("tencentcloud:Sqlserver/getDbs:getDbs", args ?? new GetDbsInvokeArgs(), options.WithDefaults());
@@ -272,6 +288,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+        ///   - [DescribeDBs](https://www.tencentcloud.com/document/api/238/32114)
         /// </summary>
         public static Output<GetDbsResult> Invoke(GetDbsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDbsResult>("tencentcloud:Sqlserver/getDbs:getDbs", args ?? new GetDbsInvokeArgs(), options.WithDefaults());

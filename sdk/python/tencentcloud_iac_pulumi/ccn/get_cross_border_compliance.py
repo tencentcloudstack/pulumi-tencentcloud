@@ -237,6 +237,12 @@ def get_cross_border_compliance(business_address: Optional[_builtins.str] = None
         state="APPROVED")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCrossBorderCompliance](https://www.tencentcloud.com/document/api/215/38275)
+
 
     :param _builtins.str business_address: (Fuzzy query) business license address.
     :param _builtins.str company: (Fuzzy query) Company name.
@@ -330,6 +336,12 @@ def get_cross_border_compliance_output(business_address: pulumi.Input[Optional[O
         service_end_date="2021-07-29",
         state="APPROVED")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCrossBorderCompliance](https://www.tencentcloud.com/document/api/215/38275)
 
 
     :param _builtins.str business_address: (Fuzzy query) business license address.

@@ -9,113 +9,84 @@ import * as utilities from "../utilities";
  *
  * ## Example Usage
  *
+ * ### If resourceType is SUBNET
+ *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const zones = tencentcloud.availability.getZonesByProduct({
- *     product: "nat",
- * });
- * const image = tencentcloud.images.getInstance({
- *     osName: "centos",
- * });
- * const instanceTypes = zones.then(zones => tencentcloud.instance.getTypes({
- *     filters: [
- *         {
- *             name: "zone",
- *             values: [zones.zones?.[0]?.name],
- *         },
- *         {
- *             name: "instance-family",
- *             values: ["S5"],
- *         },
- *     ],
- *     cpuCoreCount: 2,
- *     excludeSoldOut: true,
- * }));
- * const vpc = new tencentcloud.vpc.Instance("vpc", {
- *     name: "vpc-example",
- *     cidrBlock: "10.0.0.0/16",
- * });
- * // Create route_table and entry
- * const routeTable = new tencentcloud.route.Table("route_table", {
- *     vpcId: vpc.id,
- *     name: "tf_example",
- * });
- * const subnet = new tencentcloud.subnet.Instance("subnet", {
- *     vpcId: vpc.id,
- *     name: "subnet-example",
- *     cidrBlock: "10.0.0.0/16",
- *     availabilityZone: zones.then(zones => zones.zones?.[0]?.name),
- *     routeTableId: routeTable.id,
- * });
- * const eipExample1 = new tencentcloud.eip.Instance("eip_example1", {name: "eip_example1"});
- * const eipExample2 = new tencentcloud.eip.Instance("eip_example2", {name: "eip_example2"});
- * // Create NAT Gateway
- * const myNat = new tencentcloud.nat.Gateway("my_nat", {
- *     vpcId: vpc.id,
- *     name: "tf_example_nat_gateway",
- *     maxConcurrent: 3000000,
- *     bandwidth: 500,
- *     assignedEipSets: [
- *         eipExample1.publicIp,
- *         eipExample2.publicIp,
- *     ],
- * });
- * const routeEntry = new tencentcloud.route.TableEntry("route_entry", {
- *     routeTableId: routeTable.id,
- *     destinationCidrBlock: "10.0.0.0/8",
- *     nextType: "NAT",
- *     nextHub: myNat.id,
- * });
- * // Subnet Nat gateway snat
- * const subnetSnat = new tencentcloud.nat.GatewaySnat("subnet_snat", {
- *     natGatewayId: myNat.id,
+ * const example = new tencentcloud.nat.GatewaySnat("example", {
+ *     natGatewayId: "nat-jmf9955g",
  *     resourceType: "SUBNET",
- *     subnetId: subnet.id,
- *     subnetCidrBlock: subnet.cidrBlock,
- *     description: "terraform test",
- *     publicIpAddrs: [
- *         eipExample1.publicIp,
- *         eipExample2.publicIp,
- *     ],
- * });
- * // Create instance
- * const example = new tencentcloud.instance.Instance("example", {
- *     instanceName: "tf_example",
- *     availabilityZone: zones.then(zones => zones.zones?.[0]?.name),
- *     imageId: image.then(image => image.images?.[0]?.imageId),
- *     instanceType: instanceTypes.then(instanceTypes => instanceTypes.instanceTypes?.[0]?.instanceType),
- *     systemDiskType: "CLOUD_PREMIUM",
- *     systemDiskSize: 50,
- *     hostname: "user",
- *     projectId: 0,
- *     vpcId: vpc.id,
- *     subnetId: subnet.id,
- * });
- * // NetWorkInterface Nat gateway snat
- * const myInstanceSnat = new tencentcloud.nat.GatewaySnat("my_instance_snat", {
- *     natGatewayId: myNat.id,
- *     resourceType: "NETWORKINTERFACE",
- *     instanceId: example.id,
- *     instancePrivateIpAddr: example.privateIp,
- *     description: "terraform test",
- *     publicIpAddrs: [eipExample1.publicIp],
+ *     subnetId: "subnet-hhi88a58",
+ *     subnetCidrBlock: "10.0.30.0/24",
+ *     description: "remark.",
+ *     publicIpAddrs: ["106.55.167.123"],
  * });
  * ```
+ *
+ * ### If resourceType is NETWORKINTERFACE
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.nat.GatewaySnat("example", {
+ *     natGatewayId: "nat-jmf9955g",
+ *     resourceType: "NETWORKINTERFACE",
+ *     instanceId: "ins-p97oyxt6",
+ *     instancePrivateIpAddr: "10.0.30.62",
+ *     description: "remark.",
+ *     publicIpAddrs: ["106.55.167.123"],
+ * });
+ * ```
+ *
+ * ### If resourceType is USERDEFINED
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.nat.GatewaySnat("example", {
+ *     natGatewayId: "nat-jmf9955g",
+ *     resourceType: "USERDEFINED",
+ *     instancePrivateIpAddr: "10.0.40.0/24",
+ *     description: "remark.",
+ *     publicIpAddrs: ["106.55.167.123"],
+ * });
+ * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateNatGatewaySourceIpTranslationNatRule](https://www.tencentcloud.com/document/api/215/39646)
+ *   - [DescribeNatGatewaySourceIpTranslationNatRules](https://www.tencentcloud.com/document/api/215/39644)
+ * * Read: [DescribeNatGatewaySourceIpTranslationNatRules](https://www.tencentcloud.com/document/api/215/39644)
+ * * Update: [ModifyNatGatewaySourceIpTranslationNatRule](https://www.tencentcloud.com/document/api/215/39643)
+ * * Delete: [DeleteNatGatewaySourceIpTranslationNatRule](https://www.tencentcloud.com/document/api/215/39645)
  *
  * ## Import
  *
- * VPN gateway route can be imported using the id, the id format must be '{nat_gateway_id}#{resource_id}', resourceId range `subnetId`, `instanceId`, e.g.
+ * VPN gateway route can be imported using the id, the id format must be '{nat_gateway_id}#{resource_id}', resourceId range `subnetId`, `instanceId` and `""`, e.g.
  *
  * SUBNET SNat
+ *
  * ```sh
- * $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat my_snat nat-r4ip1cwt#subnet-2ap74y35
+ * $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat example nat-jmf9955g#subnet-hhi88a58
  * ```
  *
  * NETWORKINTERFACT SNat
+ *
  * ```sh
- * $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat my_snat nat-r4ip1cwt#ins-da412f5a
+ * $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat example nat-jmf9955g#ins-p97oyxt6
+ * ```
+ *
+ * USERDEFINED SNat
+ *
+ * ```sh
+ * $ pulumi import tencentcloud:Nat/gatewaySnat:GatewaySnat example nat-jmf9955g#
  * ```
  */
 export class GatewaySnat extends pulumi.CustomResource {
@@ -159,7 +130,7 @@ export class GatewaySnat extends pulumi.CustomResource {
      */
     declare public readonly instanceId: pulumi.Output<string | undefined>;
     /**
-     * Private IPs of the instance's primary ENI, required when `resourceType` is NETWORKINTERFACE.
+     * Private IPs of the instance's primary ENI, required when `resourceType` is NETWORKINTERFACE or USERDEFINED.
      */
     declare public readonly instancePrivateIpAddr: pulumi.Output<string | undefined>;
     /**
@@ -171,7 +142,7 @@ export class GatewaySnat extends pulumi.CustomResource {
      */
     declare public readonly publicIpAddrs: pulumi.Output<string[]>;
     /**
-     * Resource type. Valid values: SUBNET, NETWORKINTERFACE.
+     * Resource type. Valid values: SUBNET, NETWORKINTERFACE, USERDEFINED.
      */
     declare public readonly resourceType: pulumi.Output<string>;
     /**
@@ -257,7 +228,7 @@ export interface GatewaySnatState {
      */
     instanceId?: pulumi.Input<string | undefined>;
     /**
-     * Private IPs of the instance's primary ENI, required when `resourceType` is NETWORKINTERFACE.
+     * Private IPs of the instance's primary ENI, required when `resourceType` is NETWORKINTERFACE or USERDEFINED.
      */
     instancePrivateIpAddr?: pulumi.Input<string | undefined>;
     /**
@@ -269,7 +240,7 @@ export interface GatewaySnatState {
      */
     publicIpAddrs?: pulumi.Input<pulumi.Input<string>[] | undefined>;
     /**
-     * Resource type. Valid values: SUBNET, NETWORKINTERFACE.
+     * Resource type. Valid values: SUBNET, NETWORKINTERFACE, USERDEFINED.
      */
     resourceType?: pulumi.Input<string | undefined>;
     /**
@@ -299,7 +270,7 @@ export interface GatewaySnatArgs {
      */
     instanceId?: pulumi.Input<string | undefined>;
     /**
-     * Private IPs of the instance's primary ENI, required when `resourceType` is NETWORKINTERFACE.
+     * Private IPs of the instance's primary ENI, required when `resourceType` is NETWORKINTERFACE or USERDEFINED.
      */
     instancePrivateIpAddr?: pulumi.Input<string | undefined>;
     /**
@@ -311,7 +282,7 @@ export interface GatewaySnatArgs {
      */
     publicIpAddrs: pulumi.Input<pulumi.Input<string>[]>;
     /**
-     * Resource type. Valid values: SUBNET, NETWORKINTERFACE.
+     * Resource type. Valid values: SUBNET, NETWORKINTERFACE, USERDEFINED.
      */
     resourceType: pulumi.Input<string>;
     /**

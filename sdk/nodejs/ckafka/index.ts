@@ -90,6 +90,11 @@ export const getRegion: typeof import("./getRegion").getRegion = null as any;
 export const getRegionOutput: typeof import("./getRegion").getRegionOutput = null as any;
 utilities.lazyLoad(exports, ["getRegion","getRegionOutput"], () => require("./getRegion"));
 
+export { GetRoutesArgs, GetRoutesResult, GetRoutesOutputArgs } from "./getRoutes";
+export const getRoutes: typeof import("./getRoutes").getRoutes = null as any;
+export const getRoutesOutput: typeof import("./getRoutes").getRoutesOutput = null as any;
+utilities.lazyLoad(exports, ["getRoutes","getRoutesOutput"], () => require("./getRoutes"));
+
 export { GetTaskStatusArgs, GetTaskStatusResult, GetTaskStatusOutputArgs } from "./getTaskStatus";
 export const getTaskStatus: typeof import("./getTaskStatus").getTaskStatus = null as any;
 export const getTaskStatusOutput: typeof import("./getTaskStatus").getTaskStatusOutput = null as any;

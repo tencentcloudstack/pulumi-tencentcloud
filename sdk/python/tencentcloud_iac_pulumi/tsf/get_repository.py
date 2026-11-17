@@ -110,6 +110,12 @@ def get_repository(repository_type: Optional[_builtins.str] = None,
         repository_type="default")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRepositories](https://www.tencentcloud.com/search/?wd=DescribeRepositories&type=document&lang=en)
+
 
     :param _builtins.str repository_type: Repository type (default Repository: default, private Repository: private).
     :param _builtins.str result_output_file: Used to save results.
@@ -144,6 +150,12 @@ def get_repository_output(repository_type: pulumi.Input[Optional[Optional[_built
     repository = tencentcloud.tsf.get_repository(search_word="test",
         repository_type="default")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRepositories](https://www.tencentcloud.com/search/?wd=DescribeRepositories&type=document&lang=en)
 
 
     :param _builtins.str repository_type: Repository type (default Repository: default, private Repository: private).

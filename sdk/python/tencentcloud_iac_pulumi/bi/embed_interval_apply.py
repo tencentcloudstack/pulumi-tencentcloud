@@ -189,6 +189,12 @@ class EmbedIntervalApply(pulumi.CustomResource):
             scope="page")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ApplyEmbedInterval](https://www.tencentcloud.com/document/api/1270/72253)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -218,6 +224,12 @@ class EmbedIntervalApply(pulumi.CustomResource):
             bi_token="4192d65b-d674-4117-9a59-xxxxxxxxx",
             scope="page")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ApplyEmbedInterval](https://www.tencentcloud.com/document/api/1270/72253)
 
 
         :param str resource_name: The name of the resource.

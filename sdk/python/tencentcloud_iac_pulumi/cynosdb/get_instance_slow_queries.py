@@ -217,6 +217,12 @@ def get_instance_slow_queries(database: Optional[_builtins.str] = None,
         order_by_type="desc")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstanceSlowQueries](https://www.tencentcloud.com/document/api/1098/48590)
+
 
     :param _builtins.str database: Database name.
     :param _builtins.str end_time: Latest transaction start time.
@@ -322,6 +328,12 @@ def get_instance_slow_queries_output(database: pulumi.Input[Optional[Optional[_b
         order_by="QueryTime",
         order_by_type="desc")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstanceSlowQueries](https://www.tencentcloud.com/document/api/1098/48590)
 
 
     :param _builtins.str database: Database name.

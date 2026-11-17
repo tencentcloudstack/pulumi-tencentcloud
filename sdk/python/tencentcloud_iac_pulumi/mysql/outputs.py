@@ -18,6 +18,10 @@ __all__ = [
     'AuditLogFileFilter',
     'BackupBackupDbTableList',
     'BackupDownloadRestrictionLimitVpc',
+    'CloneInstanceClusterTopology',
+    'CloneInstanceClusterTopologyReadOnlyNode',
+    'CloneInstanceClusterTopologyReadWriteNode',
+    'CloneInstanceResourceTag',
     'GetBackupListListResult',
     'GetBackupSummariesItemResult',
     'GetBinLogItemRemoteInfoResult',
@@ -307,6 +311,196 @@ class BackupDownloadRestrictionLimitVpc(dict):
         List of vpcs to limit downloads.
         """
         return pulumi.get(self, "vpc_lists")
+
+
+@pulumi.output_type
+class CloneInstanceClusterTopology(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "readOnlyNodes":
+            suggest = "read_only_nodes"
+        elif key == "readWriteNode":
+            suggest = "read_write_node"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in CloneInstanceClusterTopology. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        CloneInstanceClusterTopology.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        CloneInstanceClusterTopology.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 read_only_nodes: Optional[Sequence['outputs.CloneInstanceClusterTopologyReadOnlyNode']] = None,
+                 read_write_node: Optional['outputs.CloneInstanceClusterTopologyReadWriteNode'] = None):
+        """
+        :param Sequence['CloneInstanceClusterTopologyReadOnlyNodeArgs'] read_only_nodes: RO node topology list.
+        :param 'CloneInstanceClusterTopologyReadWriteNodeArgs' read_write_node: RW node topology.
+        """
+        if read_only_nodes is not None:
+            pulumi.set(__self__, "read_only_nodes", read_only_nodes)
+        if read_write_node is not None:
+            pulumi.set(__self__, "read_write_node", read_write_node)
+
+    @_builtins.property
+    @pulumi.getter(name="readOnlyNodes")
+    def read_only_nodes(self) -> Optional[Sequence['outputs.CloneInstanceClusterTopologyReadOnlyNode']]:
+        """
+        RO node topology list.
+        """
+        return pulumi.get(self, "read_only_nodes")
+
+    @_builtins.property
+    @pulumi.getter(name="readWriteNode")
+    def read_write_node(self) -> Optional['outputs.CloneInstanceClusterTopologyReadWriteNode']:
+        """
+        RW node topology.
+        """
+        return pulumi.get(self, "read_write_node")
+
+
+@pulumi.output_type
+class CloneInstanceClusterTopologyReadOnlyNode(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "isRandomZone":
+            suggest = "is_random_zone"
+        elif key == "nodeId":
+            suggest = "node_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in CloneInstanceClusterTopologyReadOnlyNode. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        CloneInstanceClusterTopologyReadOnlyNode.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        CloneInstanceClusterTopologyReadOnlyNode.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 is_random_zone: Optional[_builtins.str] = None,
+                 node_id: Optional[_builtins.str] = None,
+                 zone: Optional[_builtins.str] = None):
+        """
+        :param _builtins.str is_random_zone: Whether distributed in a random zone. YES - random zone.
+        :param _builtins.str node_id: Node ID.
+        :param _builtins.str zone: RO node zone.
+        """
+        if is_random_zone is not None:
+            pulumi.set(__self__, "is_random_zone", is_random_zone)
+        if node_id is not None:
+            pulumi.set(__self__, "node_id", node_id)
+        if zone is not None:
+            pulumi.set(__self__, "zone", zone)
+
+    @_builtins.property
+    @pulumi.getter(name="isRandomZone")
+    def is_random_zone(self) -> Optional[_builtins.str]:
+        """
+        Whether distributed in a random zone. YES - random zone.
+        """
+        return pulumi.get(self, "is_random_zone")
+
+    @_builtins.property
+    @pulumi.getter(name="nodeId")
+    def node_id(self) -> Optional[_builtins.str]:
+        """
+        Node ID.
+        """
+        return pulumi.get(self, "node_id")
+
+    @_builtins.property
+    @pulumi.getter
+    def zone(self) -> Optional[_builtins.str]:
+        """
+        RO node zone.
+        """
+        return pulumi.get(self, "zone")
+
+
+@pulumi.output_type
+class CloneInstanceClusterTopologyReadWriteNode(dict):
+    @staticmethod
+    def __key_warning(key: str):
+        suggest = None
+        if key == "nodeId":
+            suggest = "node_id"
+
+        if suggest:
+            pulumi.log.warn(f"Key '{key}' not found in CloneInstanceClusterTopologyReadWriteNode. Access the value via the '{suggest}' property getter instead.")
+
+    def __getitem__(self, key: str) -> Any:
+        CloneInstanceClusterTopologyReadWriteNode.__key_warning(key)
+        return super().__getitem__(key)
+
+    def get(self, key: str, default = None) -> Any:
+        CloneInstanceClusterTopologyReadWriteNode.__key_warning(key)
+        return super().get(key, default)
+
+    def __init__(__self__, *,
+                 node_id: Optional[_builtins.str] = None,
+                 zone: Optional[_builtins.str] = None):
+        """
+        :param _builtins.str node_id: Node ID.
+        :param _builtins.str zone: RW node zone.
+        """
+        if node_id is not None:
+            pulumi.set(__self__, "node_id", node_id)
+        if zone is not None:
+            pulumi.set(__self__, "zone", zone)
+
+    @_builtins.property
+    @pulumi.getter(name="nodeId")
+    def node_id(self) -> Optional[_builtins.str]:
+        """
+        Node ID.
+        """
+        return pulumi.get(self, "node_id")
+
+    @_builtins.property
+    @pulumi.getter
+    def zone(self) -> Optional[_builtins.str]:
+        """
+        RW node zone.
+        """
+        return pulumi.get(self, "zone")
+
+
+@pulumi.output_type
+class CloneInstanceResourceTag(dict):
+    def __init__(__self__, *,
+                 key: _builtins.str,
+                 value: Optional[_builtins.str] = None):
+        """
+        :param _builtins.str key: Tag key.
+        :param _builtins.str value: Tag value.
+        """
+        pulumi.set(__self__, "key", key)
+        if value is not None:
+            pulumi.set(__self__, "value", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def key(self) -> _builtins.str:
+        """
+        Tag key.
+        """
+        return pulumi.get(self, "key")
+
+    @_builtins.property
+    @pulumi.getter
+    def value(self) -> Optional[_builtins.str]:
+        """
+        Tag value.
+        """
+        return pulumi.get(self, "value")
 
 
 @pulumi.output_type

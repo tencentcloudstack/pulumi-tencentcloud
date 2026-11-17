@@ -22,6 +22,12 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribePulsarProInstances](https://www.tencentcloud.com/search/?wd=DescribePulsarProInstances&type=document&lang=en)
  */
 export function getProInstances(args?: GetProInstancesArgs, opts?: pulumi.InvokeOptions): Promise<GetProInstancesResult> {
     args = args || {};
@@ -77,6 +83,12 @@ export interface GetProInstancesResult {
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribePulsarProInstances](https://www.tencentcloud.com/search/?wd=DescribePulsarProInstances&type=document&lang=en)
  */
 export function getProInstancesOutput(args?: GetProInstancesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetProInstancesResult> {
     args = args || {};

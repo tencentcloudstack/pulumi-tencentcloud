@@ -20,6 +20,7 @@ from .get_group_info import *
 from .get_group_offsets import *
 from .get_instances import *
 from .get_region import *
+from .get_routes import *
 from .get_task_status import *
 from .get_topic_flow_ranking import *
 from .get_topic_produce_connection import *

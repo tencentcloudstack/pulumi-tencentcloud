@@ -144,6 +144,21 @@ class BindingReceiver(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribePolicyGroupList](https://www.tencentcloud.com/document/api/248/35977)
+          - [ModifyAlarmReceivers](https://www.tencentcloud.com/document/api/248/35975)
+        * Read: [DescribePolicyGroupList](https://www.tencentcloud.com/document/api/248/35977)
+        * Update:
+          - [DescribePolicyGroupList](https://www.tencentcloud.com/document/api/248/35977)
+          - [ModifyAlarmReceivers](https://www.tencentcloud.com/document/api/248/35975)
+        * Delete:
+          - [DescribePolicyGroupList](https://www.tencentcloud.com/document/api/248/35977)
+          - [ModifyAlarmReceivers](https://www.tencentcloud.com/document/api/248/35975)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -191,6 +206,21 @@ class BindingReceiver(pulumi.CustomResource):
                 "receive_language": "en-US",
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribePolicyGroupList](https://www.tencentcloud.com/document/api/248/35977)
+          - [ModifyAlarmReceivers](https://www.tencentcloud.com/document/api/248/35975)
+        * Read: [DescribePolicyGroupList](https://www.tencentcloud.com/document/api/248/35977)
+        * Update:
+          - [DescribePolicyGroupList](https://www.tencentcloud.com/document/api/248/35977)
+          - [ModifyAlarmReceivers](https://www.tencentcloud.com/document/api/248/35975)
+        * Delete:
+          - [DescribePolicyGroupList](https://www.tencentcloud.com/document/api/248/35977)
+          - [ModifyAlarmReceivers](https://www.tencentcloud.com/document/api/248/35975)
 
 
         :param str resource_name: The name of the resource.

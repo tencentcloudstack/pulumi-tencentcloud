@@ -146,6 +146,12 @@ def get_describe_user_info(filters: Optional[Sequence[Union['GetDescribeUserInfo
         sorting="desc")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeUserInfo](https://www.tencentcloud.com/document/api/1155/62670)
+
 
     :param Sequence[Union['GetDescribeUserInfoFilterArgs', 'GetDescribeUserInfoFilterArgsDict']] filters: Filter criteria that are queriedWhen the type is Group, the fuzzy search is supported as the key is workgroup-name.When the type is DataAuth, the keys supported are:policy-type: types of permissions;policy-source: data sources;data-name: fuzzy search of the database and table.When the type is EngineAuth, the keys supported are:policy-type: types of permissions;policy-source: data sources;engine-name: fuzzy search of the database and table.
     :param _builtins.str result_output_file: Used to save results.
@@ -194,6 +200,12 @@ def get_describe_user_info_output(filters: pulumi.Input[Optional[Optional[Sequen
         sort_by="create-time",
         sorting="desc")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeUserInfo](https://www.tencentcloud.com/document/api/1155/62670)
 
 
     :param Sequence[Union['GetDescribeUserInfoFilterArgs', 'GetDescribeUserInfoFilterArgsDict']] filters: Filter criteria that are queriedWhen the type is Group, the fuzzy search is supported as the key is workgroup-name.When the type is DataAuth, the keys supported are:policy-type: types of permissions;policy-source: data sources;data-name: fuzzy search of the database and table.When the type is EngineAuth, the keys supported are:policy-type: types of permissions;policy-source: data sources;engine-name: fuzzy search of the database and table.

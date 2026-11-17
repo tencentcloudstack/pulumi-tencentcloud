@@ -128,6 +128,12 @@ def get_trigger_workflow_run(filters: Optional[Sequence[Union['GetTriggerWorkflo
         workflow_execution_id="82c15b04-a6ef-4075-bed2-d20d23457297")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetTriggerWorkflowRun](https://www.tencentcloud.com/document/api/1174/77888)
+
 
     :param Sequence[Union['GetTriggerWorkflowRunFilterArgs', 'GetTriggerWorkflowRunFilterArgsDict']] filters: Filter conditions.
     :param Sequence[Union['GetTriggerWorkflowRunOrderFieldArgs', 'GetTriggerWorkflowRunOrderFieldArgsDict']] order_fields: Sort conditions.
@@ -170,6 +176,12 @@ def get_trigger_workflow_run_output(filters: pulumi.Input[Optional[Optional[Sequ
     trigger_workflow_run = tencentcloud.wedata.get_trigger_workflow_run(project_id="1840731342293087232",
         workflow_execution_id="82c15b04-a6ef-4075-bed2-d20d23457297")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetTriggerWorkflowRun](https://www.tencentcloud.com/document/api/1174/77888)
 
 
     :param Sequence[Union['GetTriggerWorkflowRunFilterArgs', 'GetTriggerWorkflowRunFilterArgsDict']] filters: Filter conditions.

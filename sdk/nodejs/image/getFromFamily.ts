@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     imageFamily: "business-daily-update",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeImageFromFamily](https://www.tencentcloud.com/document/api/213/64971)
  */
 export function getFromFamily(args: GetFromFamilyArgs, opts?: pulumi.InvokeOptions): Promise<GetFromFamilyResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetFromFamilyResult {
  *     imageFamily: "business-daily-update",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeImageFromFamily](https://www.tencentcloud.com/document/api/213/64971)
  */
 export function getFromFamilyOutput(args: GetFromFamilyOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetFromFamilyResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

@@ -58,6 +58,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeAlarmHistories](https://www.tencentcloud.com/document/api/248/39323)
 func GetAlarmHistory(ctx *pulumi.Context, args *GetAlarmHistoryArgs, opts ...pulumi.InvokeOption) (*GetAlarmHistoryResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetAlarmHistoryResult

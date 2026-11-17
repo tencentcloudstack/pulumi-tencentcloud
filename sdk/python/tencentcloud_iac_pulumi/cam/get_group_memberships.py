@@ -99,6 +99,12 @@ def get_group_memberships(group_id: Optional[_builtins.str] = None,
     foo = tencentcloud.cam.get_group_memberships(group_id=foo_tencentcloud_cam_group["id"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListUsersForGroup](https://www.tencentcloud.com/document/api/598/32255)
+
 
     :param _builtins.str group_id: ID of CAM group to be queried.
     :param _builtins.str result_output_file: Used to save results.
@@ -128,6 +134,12 @@ def get_group_memberships_output(group_id: pulumi.Input[Optional[Optional[_built
 
     foo = tencentcloud.cam.get_group_memberships(group_id=foo_tencentcloud_cam_group["id"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListUsersForGroup](https://www.tencentcloud.com/document/api/598/32255)
 
 
     :param _builtins.str group_id: ID of CAM group to be queried.

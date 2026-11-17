@@ -22,6 +22,12 @@ import * as utilities from "../utilities";
  *     userId: "100024664626",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateEmbedToken](https://www.tencentcloud.com/document/api/1270/72621)
  */
 export class EmbedTokenApply extends pulumi.CustomResource {
     /**

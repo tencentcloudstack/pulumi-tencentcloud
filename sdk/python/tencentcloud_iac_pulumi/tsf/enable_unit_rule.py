@@ -119,6 +119,18 @@ class EnableUnitRule(pulumi.CustomResource):
             switch="enabled")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DisableUnitRule](https://www.tencentcloud.com/search/?wd=DisableUnitRule&type=document&lang=en)
+          - [EnableUnitRule](https://www.tencentcloud.com/search/?wd=EnableUnitRule&type=document&lang=en)
+        * Read: [DescribeUnitRule](https://www.tencentcloud.com/search/?wd=DescribeUnitRule&type=document&lang=en)
+        * Update:
+          - [DisableUnitRule](https://www.tencentcloud.com/search/?wd=DisableUnitRule&type=document&lang=en)
+          - [EnableUnitRule](https://www.tencentcloud.com/search/?wd=EnableUnitRule&type=document&lang=en)
+
         ## Import
 
         tsf enable_unit_rule can be imported using the id, e.g.
@@ -152,6 +164,18 @@ class EnableUnitRule(pulumi.CustomResource):
             rule_id="unit-rl-is9m4nxz",
             switch="enabled")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DisableUnitRule](https://www.tencentcloud.com/search/?wd=DisableUnitRule&type=document&lang=en)
+          - [EnableUnitRule](https://www.tencentcloud.com/search/?wd=EnableUnitRule&type=document&lang=en)
+        * Read: [DescribeUnitRule](https://www.tencentcloud.com/search/?wd=DescribeUnitRule&type=document&lang=en)
+        * Update:
+          - [DisableUnitRule](https://www.tencentcloud.com/search/?wd=DisableUnitRule&type=document&lang=en)
+          - [EnableUnitRule](https://www.tencentcloud.com/search/?wd=EnableUnitRule&type=document&lang=en)
 
         ## Import
 

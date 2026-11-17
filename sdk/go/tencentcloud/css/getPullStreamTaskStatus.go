@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeLivePullStreamTaskStatus](https://www.tencentcloud.com/search/?wd=DescribeLivePullStreamTaskStatus&type=document&lang=en)
 func GetPullStreamTaskStatus(ctx *pulumi.Context, args *GetPullStreamTaskStatusArgs, opts ...pulumi.InvokeOption) (*GetPullStreamTaskStatusResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetPullStreamTaskStatusResult

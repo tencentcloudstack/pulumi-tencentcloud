@@ -121,6 +121,12 @@ def get_config_group_versions(filters: Optional[Sequence[Union['GetConfigGroupVe
         group_id="group-2quhspyeq8r6")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeConfigGroupVersions](https://www.tencentcloud.com/document/api/1145/57974)
+
 
     :param Sequence[Union['GetConfigGroupVersionsFilterArgs', 'GetConfigGroupVersionsFilterArgsDict']] filters: Filtering condition. The maximum value of Filters.Values is 20. If this parameter is not specified, all version information for the selected configuration group is returned. Detailed filtering conditions: version-id (Filter by version ID).
     :param _builtins.str group_id: Configuraration group ID.
@@ -159,6 +165,12 @@ def get_config_group_versions_output(filters: pulumi.Input[Optional[Optional[Seq
     teo_config_group_versions = tencentcloud.teo.get_config_group_versions(zone_id="zone-2qtuhspy7cr6",
         group_id="group-2quhspyeq8r6")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeConfigGroupVersions](https://www.tencentcloud.com/document/api/1145/57974)
 
 
     :param Sequence[Union['GetConfigGroupVersionsFilterArgs', 'GetConfigGroupVersionsFilterArgsDict']] filters: Filtering condition. The maximum value of Filters.Values is 20. If this parameter is not specified, all version information for the selected configuration group is returned. Detailed filtering conditions: version-id (Filter by version ID).

@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeOverviewIndex](https://www.tencentcloud.com/search/?wd=DescribeOverviewIndex&type=document&lang=en)
 func GetOverviewIndex(ctx *pulumi.Context, args *GetOverviewIndexArgs, opts ...pulumi.InvokeOption) (*GetOverviewIndexResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetOverviewIndexResult

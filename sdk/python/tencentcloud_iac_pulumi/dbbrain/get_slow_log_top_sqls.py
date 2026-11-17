@@ -162,6 +162,12 @@ def get_slow_log_top_sqls(end_time: Optional[_builtins.str] = None,
         product="mysql")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSlowLogTopSqls](https://www.tencentcloud.com/document/api/1035/41183)
+
 
     :param _builtins.str end_time: The deadline, such as `2019-09-11 10:13:14`, the interval between the deadline and the start time is less than 7 days.
     :param _builtins.str instance_id: instance id.
@@ -220,6 +226,12 @@ def get_slow_log_top_sqls_output(end_time: pulumi.Input[Optional[_builtins.str]]
         order_by="ASC",
         product="mysql")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSlowLogTopSqls](https://www.tencentcloud.com/document/api/1035/41183)
 
 
     :param _builtins.str end_time: The deadline, such as `2019-09-11 10:13:14`, the interval between the deadline and the start time is less than 7 days.

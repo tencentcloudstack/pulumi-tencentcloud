@@ -31,6 +31,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [RenewCkafkaInstance](https://www.tencentcloud.com/search/?wd=RenewCkafkaInstance&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Ckafka/renewInstance:RenewInstance")]
     public partial class RenewInstance : global::Pulumi.CustomResource

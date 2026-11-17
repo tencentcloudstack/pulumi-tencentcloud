@@ -36,6 +36,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeRegions](https://www.tencentcloud.com/document/api/1103/42468)
 func GetRegion(ctx *pulumi.Context, args *GetRegionArgs, opts ...pulumi.InvokeOption) (*GetRegionResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetRegionResult

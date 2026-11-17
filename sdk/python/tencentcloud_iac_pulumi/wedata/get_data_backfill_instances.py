@@ -118,6 +118,12 @@ def get_data_backfill_instances(data_backfill_plan_id: Optional[_builtins.str] =
         task_id="20231011152006462")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListDataBackfillInstances](https://www.tencentcloud.com/document/api/1174/73824)
+
 
     :param _builtins.str data_backfill_plan_id: Backfill plan Id.
     :param _builtins.str project_id: Project ID.
@@ -157,6 +163,12 @@ def get_data_backfill_instances_output(data_backfill_plan_id: pulumi.Input[Optio
         data_backfill_plan_id="deb71ea1-f708-47ab-8eb6-491ce5b9c011",
         task_id="20231011152006462")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListDataBackfillInstances](https://www.tencentcloud.com/document/api/1174/73824)
 
 
     :param _builtins.str data_backfill_plan_id: Backfill plan Id.

@@ -42,6 +42,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [ModifySpartaProtectionMode](https://www.tencentcloud.com/document/api/627/64507)
+// * Read: [DescribeSpartaProtectionInfo](https://www.tencentcloud.com/document/api/627/64518)
+// * Update: [ModifySpartaProtectionMode](https://www.tencentcloud.com/document/api/627/64507)
 type ProtectionMode struct {
 	pulumi.CustomResourceState
 

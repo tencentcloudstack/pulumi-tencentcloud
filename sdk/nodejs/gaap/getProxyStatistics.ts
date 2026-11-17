@@ -35,6 +35,12 @@ import * as utilities from "../utilities";
  *     granularity: 300,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeProxyStatistics](https://www.tencentcloud.com/document/api/608/33052)
  */
 export function getProxyStatistics(args: GetProxyStatisticsArgs, opts?: pulumi.InvokeOptions): Promise<GetProxyStatisticsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -132,6 +138,12 @@ export interface GetProxyStatisticsResult {
  *     granularity: 300,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeProxyStatistics](https://www.tencentcloud.com/document/api/608/33052)
  */
 export function getProxyStatisticsOutput(args: GetProxyStatisticsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetProxyStatisticsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

@@ -506,6 +506,15 @@ class LifecycleHook(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateLifecycleHook](https://www.tencentcloud.com/document/api/377/33199)
+        * Read: [DescribeLifecycleHooks](https://www.tencentcloud.com/document/api/377/33197)
+        * Update: [UpgradeLifecycleHook](https://www.tencentcloud.com/document/api/377/33196)
+        * Delete: [DeleteLifecycleHook](https://www.tencentcloud.com/document/api/377/33198)
+
         ## Import
 
         lifecycle hook can be imported using the id, e.g.
@@ -637,6 +646,15 @@ class LifecycleHook(pulumi.CustomResource):
                 "command_id": "cmd-xxxx",
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateLifecycleHook](https://www.tencentcloud.com/document/api/377/33199)
+        * Read: [DescribeLifecycleHooks](https://www.tencentcloud.com/document/api/377/33197)
+        * Update: [UpgradeLifecycleHook](https://www.tencentcloud.com/document/api/377/33196)
+        * Delete: [DeleteLifecycleHook](https://www.tencentcloud.com/document/api/377/33198)
 
         ## Import
 

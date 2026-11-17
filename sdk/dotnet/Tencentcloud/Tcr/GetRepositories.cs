@@ -16,6 +16,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         /// Use this data source to query detailed information of TCR repositories.
         /// 
         /// ## Example Usage
+        /// 
+        /// 
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeInstances](https://www.tencentcloud.com/document/api/1051/50703)
+        ///   - [DescribeRepositories](https://www.tencentcloud.com/document/api/1051/50720)
         /// </summary>
         public static Task<GetRepositoriesResult> InvokeAsync(GetRepositoriesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetRepositoriesResult>("tencentcloud:Tcr/getRepositories:getRepositories", args ?? new GetRepositoriesArgs(), options.WithDefaults());
@@ -24,6 +34,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         /// Use this data source to query detailed information of TCR repositories.
         /// 
         /// ## Example Usage
+        /// 
+        /// 
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeInstances](https://www.tencentcloud.com/document/api/1051/50703)
+        ///   - [DescribeRepositories](https://www.tencentcloud.com/document/api/1051/50720)
         /// </summary>
         public static Output<GetRepositoriesResult> Invoke(GetRepositoriesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetRepositoriesResult>("tencentcloud:Tcr/getRepositories:getRepositories", args ?? new GetRepositoriesInvokeArgs(), options.WithDefaults());
@@ -32,6 +52,16 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         /// Use this data source to query detailed information of TCR repositories.
         /// 
         /// ## Example Usage
+        /// 
+        /// 
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeInstances](https://www.tencentcloud.com/document/api/1051/50703)
+        ///   - [DescribeRepositories](https://www.tencentcloud.com/document/api/1051/50720)
         /// </summary>
         public static Output<GetRepositoriesResult> Invoke(GetRepositoriesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetRepositoriesResult>("tencentcloud:Tcr/getRepositories:getRepositories", args ?? new GetRepositoriesInvokeArgs(), options.WithDefaults());

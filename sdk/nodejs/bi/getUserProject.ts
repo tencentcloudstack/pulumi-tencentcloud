@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     allPage: true,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeUserProjectList](https://www.tencentcloud.com/document/api/1270/72616)
  */
 export function getUserProject(args?: GetUserProjectArgs, opts?: pulumi.InvokeOptions): Promise<GetUserProjectResult> {
     args = args || {};
@@ -79,6 +85,12 @@ export interface GetUserProjectResult {
  *     allPage: true,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeUserProjectList](https://www.tencentcloud.com/document/api/1270/72616)
  */
 export function getUserProjectOutput(args?: GetUserProjectOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetUserProjectResult> {
     args = args || {};

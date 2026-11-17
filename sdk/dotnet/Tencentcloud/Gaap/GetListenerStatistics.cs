@@ -43,6 +43,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeListenerStatistics](https://www.tencentcloud.com/document/api/608/33054)
         /// </summary>
         public static Task<GetListenerStatisticsResult> InvokeAsync(GetListenerStatisticsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetListenerStatisticsResult>("tencentcloud:Gaap/getListenerStatistics:getListenerStatistics", args ?? new GetListenerStatisticsArgs(), options.WithDefaults());
@@ -78,6 +84,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeListenerStatistics](https://www.tencentcloud.com/document/api/608/33054)
         /// </summary>
         public static Output<GetListenerStatisticsResult> Invoke(GetListenerStatisticsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetListenerStatisticsResult>("tencentcloud:Gaap/getListenerStatistics:getListenerStatistics", args ?? new GetListenerStatisticsInvokeArgs(), options.WithDefaults());
@@ -113,6 +125,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeListenerStatistics](https://www.tencentcloud.com/document/api/608/33054)
         /// </summary>
         public static Output<GetListenerStatisticsResult> Invoke(GetListenerStatisticsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetListenerStatisticsResult>("tencentcloud:Gaap/getListenerStatistics:getListenerStatistics", args ?? new GetListenerStatisticsInvokeArgs(), options.WithDefaults());

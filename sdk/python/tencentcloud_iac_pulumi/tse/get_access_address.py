@@ -221,6 +221,12 @@ def get_access_address(engine_region: Optional[_builtins.str] = None,
         engine_region="ap-guangzhou")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSREInstanceAccessAddress](https://www.tencentcloud.com/search/?wd=DescribeSREInstanceAccessAddress&type=document&lang=en)
+
 
     :param _builtins.str engine_region: Deploy region.
     :param _builtins.str instance_id: engine instance Id.
@@ -274,6 +280,12 @@ def get_access_address_output(engine_region: pulumi.Input[Optional[Optional[_bui
     access_address = tencentcloud.tse.get_access_address(instance_id="ins-7eb7eea7",
         engine_region="ap-guangzhou")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSREInstanceAccessAddress](https://www.tencentcloud.com/search/?wd=DescribeSREInstanceAccessAddress&type=document&lang=en)
 
 
     :param _builtins.str engine_region: Deploy region.

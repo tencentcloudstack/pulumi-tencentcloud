@@ -35,6 +35,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [BindClusterResourcePackages](https://www.tencentcloud.com/document/api/1098/55900)
+    /// * Read: [DescribeClusterDetail](https://www.tencentcloud.com/document/api/1098/40752)
+    /// * Delete: [UnbindClusterResourcePackages](https://www.tencentcloud.com/document/api/1098/55892)
+    /// 
     /// ## Import
     /// 
     /// cynosdb ClusterResourcePackagesAttachment can be imported using the id, e.g.

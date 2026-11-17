@@ -209,6 +209,12 @@ def get_alarm_basic_alarms(alarm_statuses: Optional[Sequence[_builtins.int]] = N
         metric_names=["cpu_usage"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBasicAlarmList](https://www.tencentcloud.com/document/api/248/35981)
+
 
     :param Sequence[_builtins.int] alarm_statuses: Filter based on alarm status.
     :param _builtins.int end_time: End time, default to current timestamp.
@@ -283,6 +289,12 @@ def get_alarm_basic_alarms_output(alarm_statuses: pulumi.Input[Optional[Optional
         instance_group_ids=[5497073],
         metric_names=["cpu_usage"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBasicAlarmList](https://www.tencentcloud.com/document/api/248/35981)
 
 
     :param Sequence[_builtins.int] alarm_statuses: Filter based on alarm status.

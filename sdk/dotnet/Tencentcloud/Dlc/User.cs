@@ -29,10 +29,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
     ///         UserType = "COMMON",
     ///         UserAlias = "terraform-test",
     ///         UserDescription = "for terraform test",
+    ///         AccountType = "UserAccount",
     ///     });
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateUser](https://www.tencentcloud.com/document/api/1155/62675)
+    /// * Read: [DescribeUsers](https://www.tencentcloud.com/document/api/1155/62668)
+    /// * Update:
+    ///   - [ModifyUser](https://www.tencentcloud.com/document/api/1155/62663)
+    ///   - [ModifyUserType](https://www.tencentcloud.com/document/api/1155/62662)
+    /// * Delete: [DeleteUser](https://www.tencentcloud.com/document/api/1155/62673)
     /// 
     /// ## Import
     /// 
@@ -45,6 +57,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
     [TencentcloudResourceType("tencentcloud:Dlc/user:User")]
     public partial class User : global::Pulumi.CustomResource
     {
+        /// <summary>
+        /// Account type. Valid values: `UserAccount` (user account), `RoleAccount` (role account). Default is `UserAccount`.
+        /// </summary>
+        [Output("accountType")]
+        public Output<string> AccountType { get; private set; } = null!;
+
         /// <summary>
         /// User alias, and its characters are less than 50.
         /// </summary>
@@ -67,7 +85,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// Types of users. ADMIN: administrators; COMMON: general users. When the type of user is administrator, the collections of permissions and bound working groups cannot be set. Administrators own all the permissions by default. If the parameter is not filled in, it will be COMMON by default.
         /// </summary>
         [Output("userType")]
-        public Output<string?> UserType { get; private set; } = null!;
+        public Output<string> UserType { get; private set; } = null!;
 
         /// <summary>
         /// Collection of IDs of working groups bound to users.
@@ -123,6 +141,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
     public sealed class UserArgs : global::Pulumi.ResourceArgs
     {
         /// <summary>
+        /// Account type. Valid values: `UserAccount` (user account), `RoleAccount` (role account). Default is `UserAccount`.
+        /// </summary>
+        [Input("accountType")]
+        public Input<string>? AccountType { get; set; }
+
+        /// <summary>
         /// User alias, and its characters are less than 50.
         /// </summary>
         [Input("userAlias")]
@@ -154,6 +178,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
 
     public sealed class UserState : global::Pulumi.ResourceArgs
     {
+        /// <summary>
+        /// Account type. Valid values: `UserAccount` (user account), `RoleAccount` (role account). Default is `UserAccount`.
+        /// </summary>
+        [Input("accountType")]
+        public Input<string>? AccountType { get; set; }
+
         /// <summary>
         /// User alias, and its characters are less than 50.
         /// </summary>

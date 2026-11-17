@@ -61,6 +61,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeAuditInstanceList](https://www.tencentcloud.com/document/api/236/77031)
+    ///   - [OpenAuditService](https://www.tencentcloud.com/document/api/236/48576)
+    /// * Read: [DescribeAuditInstanceList](https://www.tencentcloud.com/document/api/236/77031)
+    /// * Update: [ModifyAuditService](https://www.tencentcloud.com/document/api/236/77025)
+    /// * Delete:
+    ///   - [CloseAuditService](https://www.tencentcloud.com/document/api/236/77038)
+    ///   - [DescribeAuditInstanceList](https://www.tencentcloud.com/document/api/236/77031)
+    /// 
     /// ## Import
     /// 
     /// Mysql audit service can be imported using the id, e.g.

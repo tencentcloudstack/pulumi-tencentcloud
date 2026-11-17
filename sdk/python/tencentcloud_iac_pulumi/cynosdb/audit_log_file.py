@@ -345,6 +345,16 @@ class AuditLogFile(pulumi.CustomResource):
             end_time="2022-08-12 10:29:20")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateAuditLogFile](https://www.tencentcloud.com/search/?wd=CreateAuditLogFile&type=document&lang=en)
+          - [DescribeAuditLogFiles](https://www.tencentcloud.com/search/?wd=DescribeAuditLogFiles&type=document&lang=en)
+        * Read: [DescribeAuditLogFiles](https://www.tencentcloud.com/search/?wd=DescribeAuditLogFiles&type=document&lang=en)
+        * Delete: [DeleteAuditLogFile](https://www.tencentcloud.com/search/?wd=DeleteAuditLogFile&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -378,6 +388,16 @@ class AuditLogFile(pulumi.CustomResource):
             start_time="2022-07-12 10:29:20",
             end_time="2022-08-12 10:29:20")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateAuditLogFile](https://www.tencentcloud.com/search/?wd=CreateAuditLogFile&type=document&lang=en)
+          - [DescribeAuditLogFiles](https://www.tencentcloud.com/search/?wd=DescribeAuditLogFiles&type=document&lang=en)
+        * Read: [DescribeAuditLogFiles](https://www.tencentcloud.com/search/?wd=DescribeAuditLogFiles&type=document&lang=en)
+        * Delete: [DeleteAuditLogFile](https://www.tencentcloud.com/search/?wd=DeleteAuditLogFile&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

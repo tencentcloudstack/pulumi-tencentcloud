@@ -107,6 +107,12 @@ def get_trigger_task_code(project_id: Optional[_builtins.str] = None,
         task_id="20250109174507653")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetTriggerTaskCode](https://www.tencentcloud.com/document/api/1174/77926)
+
 
     :param _builtins.str project_id: project id.
     :param _builtins.str result_output_file: Used to save results.
@@ -141,6 +147,12 @@ def get_trigger_task_code_output(project_id: pulumi.Input[Optional[_builtins.str
     wedata_trigger_task_code = tencentcloud.wedata.get_trigger_task_code(project_id="3108707295180644352",
         task_id="20250109174507653")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetTriggerTaskCode](https://www.tencentcloud.com/document/api/1174/77926)
 
 
     :param _builtins.str project_id: project id.

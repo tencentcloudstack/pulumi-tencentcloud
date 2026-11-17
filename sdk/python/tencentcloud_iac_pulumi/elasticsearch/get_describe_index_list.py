@@ -173,6 +173,12 @@ def get_describe_index_list(index_name: Optional[_builtins.str] = None,
         instance_id="es-nni6pm4s")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeIndexList](https://www.tencentcloud.com/document/api/845/47607)
+
 
     :param _builtins.str index_name: Index name. If you fill in the blanks, get all indexes.
     :param Sequence[_builtins.str] index_status_lists: Index status list.
@@ -231,6 +237,12 @@ def get_describe_index_list_output(index_name: pulumi.Input[Optional[Optional[_b
     describe_index_list = tencentcloud.elasticsearch.get_describe_index_list(index_type="normal",
         instance_id="es-nni6pm4s")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeIndexList](https://www.tencentcloud.com/document/api/845/47607)
 
 
     :param _builtins.str index_name: Index name. If you fill in the blanks, get all indexes.

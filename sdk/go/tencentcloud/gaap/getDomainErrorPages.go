@@ -82,6 +82,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDomainErrorPageInfo](https://www.tencentcloud.com/document/api/608/33135)
 func GetDomainErrorPages(ctx *pulumi.Context, args *GetDomainErrorPagesArgs, opts ...pulumi.InvokeOption) (*GetDomainErrorPagesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDomainErrorPagesResult

@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [StopCompare](https://www.tencentcloud.com/document/api/571/51800)
 type CompareTaskStopOperation struct {
 	pulumi.CustomResourceState
 

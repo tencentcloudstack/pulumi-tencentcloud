@@ -119,6 +119,20 @@ class OperateContainerGroup(pulumi.CustomResource):
             operate="stop")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeContainerGroupAttribute](https://www.tencentcloud.com/search/?wd=DescribeContainerGroupAttribute&type=document&lang=en)
+          - [StartContainerGroup](https://www.tencentcloud.com/search/?wd=StartContainerGroup&type=document&lang=en)
+          - [StopContainerGroup](https://www.tencentcloud.com/search/?wd=StopContainerGroup&type=document&lang=en)
+        * Read: [DescribeContainerGroupAttribute](https://www.tencentcloud.com/search/?wd=DescribeContainerGroupAttribute&type=document&lang=en)
+        * Update:
+          - [DescribeContainerGroupAttribute](https://www.tencentcloud.com/search/?wd=DescribeContainerGroupAttribute&type=document&lang=en)
+          - [StartContainerGroup](https://www.tencentcloud.com/search/?wd=StartContainerGroup&type=document&lang=en)
+          - [StopContainerGroup](https://www.tencentcloud.com/search/?wd=StopContainerGroup&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -144,6 +158,20 @@ class OperateContainerGroup(pulumi.CustomResource):
             group_id="group-ynd95rea",
             operate="stop")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeContainerGroupAttribute](https://www.tencentcloud.com/search/?wd=DescribeContainerGroupAttribute&type=document&lang=en)
+          - [StartContainerGroup](https://www.tencentcloud.com/search/?wd=StartContainerGroup&type=document&lang=en)
+          - [StopContainerGroup](https://www.tencentcloud.com/search/?wd=StopContainerGroup&type=document&lang=en)
+        * Read: [DescribeContainerGroupAttribute](https://www.tencentcloud.com/search/?wd=DescribeContainerGroupAttribute&type=document&lang=en)
+        * Update:
+          - [DescribeContainerGroupAttribute](https://www.tencentcloud.com/search/?wd=DescribeContainerGroupAttribute&type=document&lang=en)
+          - [StartContainerGroup](https://www.tencentcloud.com/search/?wd=StartContainerGroup&type=document&lang=en)
+          - [StopContainerGroup](https://www.tencentcloud.com/search/?wd=StopContainerGroup&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

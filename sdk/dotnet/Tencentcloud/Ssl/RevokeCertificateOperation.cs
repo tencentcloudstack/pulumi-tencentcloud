@@ -31,6 +31,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [RevokeCertificate](https://www.tencentcloud.com/document/api/1007/79958)
+    /// 
     /// ## Import
     /// 
     /// ssl RevokeCertificate can be imported using the id, e.g.

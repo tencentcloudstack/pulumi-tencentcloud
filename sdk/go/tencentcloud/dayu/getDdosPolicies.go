@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDDoSPolicy](https://www.tencentcloud.com/search/?wd=DescribeDDoSPolicy&type=document&lang=en)
 func GetDdosPolicies(ctx *pulumi.Context, args *GetDdosPoliciesArgs, opts ...pulumi.InvokeOption) (*GetDdosPoliciesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDdosPoliciesResult

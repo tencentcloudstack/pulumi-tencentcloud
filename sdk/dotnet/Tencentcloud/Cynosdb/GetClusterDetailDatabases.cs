@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeClusterDetailDatabases](https://www.tencentcloud.com/document/api/1098/55912)
         /// </summary>
         public static Task<GetClusterDetailDatabasesResult> InvokeAsync(GetClusterDetailDatabasesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetClusterDetailDatabasesResult>("tencentcloud:Cynosdb/getClusterDetailDatabases:getClusterDetailDatabases", args ?? new GetClusterDetailDatabasesArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeClusterDetailDatabases](https://www.tencentcloud.com/document/api/1098/55912)
         /// </summary>
         public static Output<GetClusterDetailDatabasesResult> Invoke(GetClusterDetailDatabasesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetClusterDetailDatabasesResult>("tencentcloud:Cynosdb/getClusterDetailDatabases:getClusterDetailDatabases", args ?? new GetClusterDetailDatabasesInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeClusterDetailDatabases](https://www.tencentcloud.com/document/api/1098/55912)
         /// </summary>
         public static Output<GetClusterDetailDatabasesResult> Invoke(GetClusterDetailDatabasesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetClusterDetailDatabasesResult>("tencentcloud:Cynosdb/getClusterDetailDatabases:getClusterDetailDatabases", args ?? new GetClusterDetailDatabasesInvokeArgs(), options.WithDefaults());

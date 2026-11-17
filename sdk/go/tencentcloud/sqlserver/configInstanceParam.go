@@ -108,6 +108,14 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [ModifyInstanceParam](https://www.tencentcloud.com/document/api/238/41637)
+// * Read: [DescribeInstanceParams](https://www.tencentcloud.com/document/api/238/41641)
+// * Update: [ModifyInstanceParam](https://www.tencentcloud.com/document/api/238/41637)
+//
 // ## Import
 //
 // sqlserver configInstanceParam can be imported using the id, e.g.

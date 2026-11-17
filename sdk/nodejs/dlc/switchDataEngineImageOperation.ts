@@ -18,6 +18,15 @@ import * as utilities from "../utilities";
  *     newImageVersionId: "344ba1c6-b7a9-403a-a255-422fffed6d38",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeDataEngine](https://www.tencentcloud.com/document/api/1155/62693)
+ *   - [DescribeDataEngines](https://www.tencentcloud.com/search/?wd=DescribeDataEngines&type=document&lang=en)
+ *   - [SwitchDataEngineImage](https://www.tencentcloud.com/document/api/1155/62646)
  */
 export class SwitchDataEngineImageOperation extends pulumi.CustomResource {
     /**

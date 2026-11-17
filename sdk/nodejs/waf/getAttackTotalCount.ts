@@ -36,6 +36,12 @@ import * as utilities from "../utilities";
  *     queryString: "method:GET",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GetAttackTotalCount](https://www.tencentcloud.com/document/api/627/64555)
  */
 export function getAttackTotalCount(args: GetAttackTotalCountArgs, opts?: pulumi.InvokeOptions): Promise<GetAttackTotalCountResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -124,6 +130,12 @@ export interface GetAttackTotalCountResult {
  *     queryString: "method:GET",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GetAttackTotalCount](https://www.tencentcloud.com/document/api/627/64555)
  */
 export function getAttackTotalCountOutput(args: GetAttackTotalCountOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAttackTotalCountResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

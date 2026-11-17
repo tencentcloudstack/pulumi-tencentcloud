@@ -92,6 +92,17 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateLaunchTemplate](https://www.tencentcloud.com/document/api/213/45362)
+// * Read:
+//   - [DescribeLaunchTemplateVersions](https://www.tencentcloud.com/document/api/213/45358)
+//   - [DescribeLaunchTemplates](https://www.tencentcloud.com/document/api/213/45357)
+//
+// * Delete: [DeleteLaunchTemplate](https://www.tencentcloud.com/document/api/213/45360)
 type LaunchTemplate struct {
 	pulumi.CustomResourceState
 

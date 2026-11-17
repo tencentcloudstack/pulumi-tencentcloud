@@ -136,6 +136,12 @@ def get_clusters(cluster_id: Optional[_builtins.str] = None,
     id = tencentcloud.kubernetes.get_clusters(cluster_id="cls-godovr32")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeClusters](https://www.tencentcloud.com/document/api/457/32025)
+
 
     :param _builtins.str cluster_id: ID of the cluster. Conflict with cluster_name, can not be set at the same time.
     :param _builtins.str cluster_name: Name of the cluster. Conflict with cluster_id, can not be set at the same time.
@@ -178,6 +184,12 @@ def get_clusters_output(cluster_id: pulumi.Input[Optional[Optional[_builtins.str
     name = tencentcloud.kubernetes.get_clusters(cluster_name="terraform")
     id = tencentcloud.kubernetes.get_clusters(cluster_id="cls-godovr32")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeClusters](https://www.tencentcloud.com/document/api/457/32025)
 
 
     :param _builtins.str cluster_id: ID of the cluster. Conflict with cluster_name, can not be set at the same time.

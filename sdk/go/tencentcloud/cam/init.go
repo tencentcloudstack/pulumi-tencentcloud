@@ -61,6 +61,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &SetPolicyVersionConfig{}
 	case "tencentcloud:Cam/tagRoleAttachment:TagRoleAttachment":
 		r = &TagRoleAttachment{}
+	case "tencentcloud:Cam/updatePasswordRuleConfig:UpdatePasswordRuleConfig":
+		r = &UpdatePasswordRuleConfig{}
 	case "tencentcloud:Cam/user:User":
 		r = &User{}
 	case "tencentcloud:Cam/userPermissionBoundaryAttachment:UserPermissionBoundaryAttachment":
@@ -180,6 +182,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Cam/tagRoleAttachment",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Cam/updatePasswordRuleConfig",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

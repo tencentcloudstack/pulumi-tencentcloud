@@ -50,6 +50,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMachineGroupConfigs](https://www.tencentcloud.com/document/api/614/42808)
         /// </summary>
         public static Task<GetMachineGroupConfigsResult> InvokeAsync(GetMachineGroupConfigsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetMachineGroupConfigsResult>("tencentcloud:Cls/getMachineGroupConfigs:getMachineGroupConfigs", args ?? new GetMachineGroupConfigsArgs(), options.WithDefaults());
@@ -92,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMachineGroupConfigs](https://www.tencentcloud.com/document/api/614/42808)
         /// </summary>
         public static Output<GetMachineGroupConfigsResult> Invoke(GetMachineGroupConfigsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetMachineGroupConfigsResult>("tencentcloud:Cls/getMachineGroupConfigs:getMachineGroupConfigs", args ?? new GetMachineGroupConfigsInvokeArgs(), options.WithDefaults());
@@ -134,6 +146,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMachineGroupConfigs](https://www.tencentcloud.com/document/api/614/42808)
         /// </summary>
         public static Output<GetMachineGroupConfigsResult> Invoke(GetMachineGroupConfigsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetMachineGroupConfigsResult>("tencentcloud:Cls/getMachineGroupConfigs:getMachineGroupConfigs", args ?? new GetMachineGroupConfigsInvokeArgs(), options.WithDefaults());

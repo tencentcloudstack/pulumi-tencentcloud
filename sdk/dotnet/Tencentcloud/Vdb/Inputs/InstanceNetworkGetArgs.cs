@@ -20,6 +20,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vdb.Inputs
         public Input<string>? ExpireTime { get; set; }
 
         /// <summary>
+        /// Whether it is an SSL network.
+        /// </summary>
+        [Input("isSsl")]
+        public Input<bool>? IsSsl { get; set; }
+
+        /// <summary>
         /// Internal port.
         /// </summary>
         [Input("port")]

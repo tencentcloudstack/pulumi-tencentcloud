@@ -23,6 +23,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr.Outputs
         /// </summary>
         public readonly string DestNamespace;
         /// <summary>
+        /// Whether to enable the rule.
+        /// </summary>
+        public readonly bool? Enabled;
+        /// <summary>
         /// Synchronization filters.
         /// </summary>
         public readonly ImmutableArray<Outputs.ReplicationRuleFilter> Filters;
@@ -41,6 +45,8 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr.Outputs
 
             string destNamespace,
 
+            bool? enabled,
+
             ImmutableArray<Outputs.ReplicationRuleFilter> filters,
 
             string name,
@@ -49,6 +55,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr.Outputs
         {
             Deletion = deletion;
             DestNamespace = destNamespace;
+            Enabled = enabled;
             Filters = filters;
             Name = name;
             Override = @override;

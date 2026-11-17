@@ -129,6 +129,12 @@ class RunJob(pulumi.CustomResource):
             work_space_id="space-2idq8wbr")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [RunJobs](https://www.tencentcloud.com/search/?wd=RunJobs&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -160,6 +166,12 @@ class RunJob(pulumi.CustomResource):
             }],
             work_space_id="space-2idq8wbr")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [RunJobs](https://www.tencentcloud.com/search/?wd=RunJobs&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

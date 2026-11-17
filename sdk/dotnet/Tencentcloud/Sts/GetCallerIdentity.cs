@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sts
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetCallerIdentity](https://www.tencentcloud.com/document/api/1150/49453)
         /// </summary>
         public static Task<GetCallerIdentityResult> InvokeAsync(GetCallerIdentityArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetCallerIdentityResult>("tencentcloud:Sts/getCallerIdentity:getCallerIdentity", args ?? new GetCallerIdentityArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sts
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetCallerIdentity](https://www.tencentcloud.com/document/api/1150/49453)
         /// </summary>
         public static Output<GetCallerIdentityResult> Invoke(GetCallerIdentityInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetCallerIdentityResult>("tencentcloud:Sts/getCallerIdentity:getCallerIdentity", args ?? new GetCallerIdentityInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sts
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetCallerIdentity](https://www.tencentcloud.com/document/api/1150/49453)
         /// </summary>
         public static Output<GetCallerIdentityResult> Invoke(GetCallerIdentityInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetCallerIdentityResult>("tencentcloud:Sts/getCallerIdentity:getCallerIdentity", args ?? new GetCallerIdentityInvokeArgs(), options.WithDefaults());

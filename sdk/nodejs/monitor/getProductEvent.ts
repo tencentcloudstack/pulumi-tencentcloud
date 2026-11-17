@@ -21,6 +21,12 @@ import * as utilities from "../utilities";
  *     productNames: ["cvm"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeProductEventList](https://www.tencentcloud.com/document/api/248/35976)
  */
 export function getProductEvent(args?: GetProductEventArgs, opts?: pulumi.InvokeOptions): Promise<GetProductEventResult> {
     args = args || {};
@@ -162,6 +168,12 @@ export interface GetProductEventResult {
  *     productNames: ["cvm"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeProductEventList](https://www.tencentcloud.com/document/api/248/35976)
  */
 export function getProductEventOutput(args?: GetProductEventOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetProductEventResult> {
     args = args || {};

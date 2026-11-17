@@ -47,6 +47,14 @@ import * as utilities from "../utilities";
  *     listenerId: fooLayer4Listener.id,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeTCPListeners](https://www.tencentcloud.com/document/api/608/33068)
+ *   - [DescribeUDPListeners](https://www.tencentcloud.com/document/api/608/33067)
  */
 export function getLayer4Listeners(args: GetLayer4ListenersArgs, opts?: pulumi.InvokeOptions): Promise<GetLayer4ListenersResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -159,6 +167,14 @@ export interface GetLayer4ListenersResult {
  *     listenerId: fooLayer4Listener.id,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeTCPListeners](https://www.tencentcloud.com/document/api/608/33068)
+ *   - [DescribeUDPListeners](https://www.tencentcloud.com/document/api/608/33067)
  */
 export function getLayer4ListenersOutput(args: GetLayer4ListenersOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetLayer4ListenersResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

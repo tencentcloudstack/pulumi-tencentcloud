@@ -120,6 +120,14 @@ class SyncRoute(pulumi.CustomResource):
             fw_type="nat")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeFwSyncStatus](https://www.tencentcloud.com/search/?wd=DescribeFwSyncStatus&type=document&lang=en)
+          - [SyncFwOperate](https://www.tencentcloud.com/search/?wd=SyncFwOperate&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -145,6 +153,14 @@ class SyncRoute(pulumi.CustomResource):
             sync_type="Route",
             fw_type="nat")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeFwSyncStatus](https://www.tencentcloud.com/search/?wd=DescribeFwSyncStatus&type=document&lang=en)
+          - [SyncFwOperate](https://www.tencentcloud.com/search/?wd=SyncFwOperate&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

@@ -40,6 +40,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMicroservices](https://www.tencentcloud.com/search/?wd=DescribeMicroservices&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetMicroserviceResult> InvokeAsync(GetMicroserviceArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetMicroserviceResult>("tencentcloud:Tsf/getMicroservice:getMicroservice", args ?? new GetMicroserviceArgs(), options.WithDefaults());
@@ -72,6 +78,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMicroservices](https://www.tencentcloud.com/search/?wd=DescribeMicroservices&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetMicroserviceResult> Invoke(GetMicroserviceInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetMicroserviceResult>("tencentcloud:Tsf/getMicroservice:getMicroservice", args ?? new GetMicroserviceInvokeArgs(), options.WithDefaults());
@@ -104,6 +116,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeMicroservices](https://www.tencentcloud.com/search/?wd=DescribeMicroservices&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetMicroserviceResult> Invoke(GetMicroserviceInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetMicroserviceResult>("tencentcloud:Tsf/getMicroservice:getMicroservice", args ?? new GetMicroserviceInvokeArgs(), options.WithDefaults());

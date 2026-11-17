@@ -77,6 +77,8 @@ __all__ = [
     'FunctionRuleFunctionRuleConditionRuleConditionArgsDict',
     'FunctionRuntimeEnvironmentEnvironmentVariableArgs',
     'FunctionRuntimeEnvironmentEnvironmentVariableArgsDict',
+    'GetBillingDataFilterArgs',
+    'GetBillingDataFilterArgsDict',
     'GetConfigGroupVersionsFilterArgs',
     'GetConfigGroupVersionsFilterArgsDict',
     'GetDefaultCertificateFilterArgs',
@@ -2803,6 +2805,28 @@ __all__ = [
     'SecurityPolicyConfigSecurityPolicyBotManagementBrowserImpersonationDetectionArgsDict',
     'SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleArgs',
     'SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleArgsDict',
+    'SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArgs',
+    'SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArgsDict',
+    'SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersArgs',
+    'SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersArgsDict',
+    'SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionArgs',
+    'SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionArgsDict',
+    'SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersArgs',
+    'SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersArgsDict',
+    'SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersArgs',
+    'SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersArgsDict',
+    'SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersArgs',
+    'SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersArgsDict',
+    'SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersArgs',
+    'SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersArgsDict',
+    'SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionArgs',
+    'SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionArgsDict',
+    'SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersArgs',
+    'SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersArgsDict',
+    'SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersArgs',
+    'SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersArgsDict',
+    'SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersArgs',
+    'SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersArgsDict',
     'SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleInvalidAttestationActionAllowActionParametersArgs',
     'SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleInvalidAttestationActionAllowActionParametersArgsDict',
     'SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleInvalidAttestationActionArgs',
@@ -2951,6 +2975,18 @@ __all__ = [
     'SecurityPolicyConfigSecurityPolicyManagedRulesArgsDict',
     'SecurityPolicyConfigSecurityPolicyManagedRulesAutoUpdateArgs',
     'SecurityPolicyConfigSecurityPolicyManagedRulesAutoUpdateArgsDict',
+    'SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersArgs',
+    'SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersArgsDict',
+    'SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionArgs',
+    'SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionArgsDict',
+    'SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersArgs',
+    'SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersArgsDict',
+    'SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersArgs',
+    'SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersArgsDict',
+    'SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersArgs',
+    'SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersArgsDict',
+    'SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionArgs',
+    'SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionArgsDict',
     'SecurityPolicyConfigSecurityPolicyManagedRulesManagedRuleGroupActionArgs',
     'SecurityPolicyConfigSecurityPolicyManagedRulesManagedRuleGroupActionArgsDict',
     'SecurityPolicyConfigSecurityPolicyManagedRulesManagedRuleGroupActionBlockIpActionParametersArgs',
@@ -3383,6 +3419,20 @@ __all__ = [
     'WebSecurityTemplateSecurityPolicyBotManagementCustomRulesRuleActionSecurityActionReturnCustomPageActionParametersArgsDict',
     'WebSecurityTemplateSecurityPolicyBotManagementCustomRulesRuleArgs',
     'WebSecurityTemplateSecurityPolicyBotManagementCustomRulesRuleArgsDict',
+    'WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersArgs',
+    'WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersArgsDict',
+    'WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionArgs',
+    'WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionArgsDict',
+    'WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersArgs',
+    'WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersArgsDict',
+    'WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersArgs',
+    'WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersArgsDict',
+    'WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionArgs',
+    'WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionArgsDict',
+    'WebSecurityTemplateSecurityPolicyBotManagementLiteArgs',
+    'WebSecurityTemplateSecurityPolicyBotManagementLiteArgsDict',
+    'WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeArgs',
+    'WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeArgsDict',
     'WebSecurityTemplateSecurityPolicyCustomRulesArgs',
     'WebSecurityTemplateSecurityPolicyCustomRulesArgsDict',
     'WebSecurityTemplateSecurityPolicyCustomRulesRuleActionAllowActionParametersArgs',
@@ -3849,7 +3899,7 @@ class CertificateConfigClientCertInfoCertInfoArgsDict(TypedDict):
     """
     type: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
-    Type of the certificate. Values: `default`: Default certificate; `upload`: Specified certificate; `managed`: Tencent Cloud-managed certificate.
+    Type of the certificate.
     """
 
 @pulumi.input_type
@@ -3869,7 +3919,7 @@ class CertificateConfigClientCertInfoCertInfoArgs:
         :param pulumi.Input[_builtins.str] expire_time: The certificate expiration time.
         :param pulumi.Input[_builtins.str] sign_algo: Signature algorithm.
         :param pulumi.Input[_builtins.str] status: Certificate status.
-        :param pulumi.Input[_builtins.str] type: Type of the certificate. Values: `default`: Default certificate; `upload`: Specified certificate; `managed`: Tencent Cloud-managed certificate.
+        :param pulumi.Input[_builtins.str] type: Type of the certificate.
         """
         if alias is not None:
             pulumi.set(__self__, "alias", alias)
@@ -3962,7 +4012,7 @@ class CertificateConfigClientCertInfoCertInfoArgs:
     @pulumi.getter
     def type(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Type of the certificate. Values: `default`: Default certificate; `upload`: Specified certificate; `managed`: Tencent Cloud-managed certificate.
+        Type of the certificate.
         """
         return pulumi.get(self, "type")
 
@@ -4447,7 +4497,7 @@ class CertificateConfigUpstreamCertInfoUpstreamMutualTlsCertInfoArgsDict(TypedDi
     """
     type: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
-    Type of the certificate. Values: `default`: Default certificate `upload`: Specified certificate `managed`: Tencent Cloud-managed certificate.
+    Type of the certificate.
     """
 
 @pulumi.input_type
@@ -4467,7 +4517,7 @@ class CertificateConfigUpstreamCertInfoUpstreamMutualTlsCertInfoArgs:
         :param pulumi.Input[_builtins.str] expire_time: The certificate expiration time.
         :param pulumi.Input[_builtins.str] sign_algo: Signature algorithm.
         :param pulumi.Input[_builtins.str] status: Certificate status.
-        :param pulumi.Input[_builtins.str] type: Type of the certificate. Values: `default`: Default certificate `upload`: Specified certificate `managed`: Tencent Cloud-managed certificate.
+        :param pulumi.Input[_builtins.str] type: Type of the certificate.
         """
         if alias is not None:
             pulumi.set(__self__, "alias", alias)
@@ -4560,7 +4610,7 @@ class CertificateConfigUpstreamCertInfoUpstreamMutualTlsCertInfoArgs:
     @pulumi.getter
     def type(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Type of the certificate. Values: `default`: Default certificate `upload`: Specified certificate `managed`: Tencent Cloud-managed certificate.
+        Type of the certificate.
         """
         return pulumi.get(self, "type")
 
@@ -5378,7 +5428,7 @@ class DeployConfigGroupVersionConfigGroupVersionInfoArgsDict(TypedDict):
     """
     status: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
-    Deploy status. Valid values: deploying (Deploying), failure (Deploy failed), success (Deploy successful).
+    Version status. Valid values: creating (Being created), inactive (Not effective), active (Effective).
     """
     version_number: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
@@ -5403,7 +5453,7 @@ class DeployConfigGroupVersionConfigGroupVersionInfoArgs:
         :param pulumi.Input[_builtins.str] group_id: Configuraration group ID.
         :param pulumi.Input[_builtins.str] group_type: Configuration group type. Valid values: l7_acceleration (L7 acceleration configuration group), edge_functions (Edge function configuration group).
         :param pulumi.Input[_builtins.str] source_version: Source version ID. The version ID from which this version was derived. Read-only.
-        :param pulumi.Input[_builtins.str] status: Deploy status. Valid values: deploying (Deploying), failure (Deploy failed), success (Deploy successful).
+        :param pulumi.Input[_builtins.str] status: Version status. Valid values: creating (Being created), inactive (Not effective), active (Effective).
         :param pulumi.Input[_builtins.str] version_number: Version No.
         """
         pulumi.set(__self__, "version_id", version_id)
@@ -5498,7 +5548,7 @@ class DeployConfigGroupVersionConfigGroupVersionInfoArgs:
     @pulumi.getter
     def status(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Deploy status. Valid values: deploying (Deploying), failure (Deploy failed), success (Deploy successful).
+        Version status. Valid values: creating (Being created), inactive (Not effective), active (Effective).
         """
         return pulumi.get(self, "status")
 
@@ -87866,6 +87916,10 @@ class LoadBalancerHealthCheckerArgsDict(TypedDict):
     """
     Number of consecutive healthy results to mark the origin as healthy. Default: 3, minimum: 1.
     """
+    host_header_policy: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Probe request Host Header policy, valid when `type` is `HTTP` or `HTTPS` and the instance type is HTTP-specific (V2). Valid values: `FollowCheckURL` (follow the Host specified by the probe URL, i.e., the Host part of `path`); `FollowOriginGroup` (follow the origin group configured origin Host Header); `FollowOrigin` (follow the origin address). Default: `FollowCheckURL`.
+    """
     interval: NotRequired[pulumi.Input[Optional[_builtins.int]]]
     """
     Check interval in seconds. Valid values: `30`, `60`, `180`, `300`, `600`.
@@ -87881,6 +87935,10 @@ class LoadBalancerHealthCheckerArgsDict(TypedDict):
     port: NotRequired[pulumi.Input[Optional[_builtins.int]]]
     """
     Check port. Required when `type` is `HTTP`, `HTTPS`, `TCP`, or `UDP`.
+    """
+    probe_cluster: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Probe cluster region scope for health checks. Valid values: `global`, `mainland_china`, `overseas`. Default: `global`. Only supported when load balancer instance type is `HTTP_V2`.
     """
     recv_context: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
@@ -87904,10 +87962,12 @@ class LoadBalancerHealthCheckerArgs:
                  follow_redirect: pulumi.Input[Optional[_builtins.str]] = None,
                  headers: pulumi.Input[Optional[Sequence[pulumi.Input['LoadBalancerHealthCheckerHeaderArgs']]]] = None,
                  health_threshold: pulumi.Input[Optional[_builtins.int]] = None,
+                 host_header_policy: pulumi.Input[Optional[_builtins.str]] = None,
                  interval: pulumi.Input[Optional[_builtins.int]] = None,
                  method: pulumi.Input[Optional[_builtins.str]] = None,
                  path: pulumi.Input[Optional[_builtins.str]] = None,
                  port: pulumi.Input[Optional[_builtins.int]] = None,
+                 probe_cluster: pulumi.Input[Optional[_builtins.str]] = None,
                  recv_context: pulumi.Input[Optional[_builtins.str]] = None,
                  send_context: pulumi.Input[Optional[_builtins.str]] = None,
                  timeout: pulumi.Input[Optional[_builtins.int]] = None):
@@ -87918,10 +87978,12 @@ class LoadBalancerHealthCheckerArgs:
         :param pulumi.Input[_builtins.str] follow_redirect: Whether to follow 301/302 redirects, valid when `type` is `HTTP` or `HTTPS`. Valid values: `true`, `false`.
         :param pulumi.Input[Sequence[pulumi.Input['LoadBalancerHealthCheckerHeaderArgs']]] headers: Custom HTTP request headers (up to 10), valid when `type` is `HTTP` or `HTTPS`.
         :param pulumi.Input[_builtins.int] health_threshold: Number of consecutive healthy results to mark the origin as healthy. Default: 3, minimum: 1.
+        :param pulumi.Input[_builtins.str] host_header_policy: Probe request Host Header policy, valid when `type` is `HTTP` or `HTTPS` and the instance type is HTTP-specific (V2). Valid values: `FollowCheckURL` (follow the Host specified by the probe URL, i.e., the Host part of `path`); `FollowOriginGroup` (follow the origin group configured origin Host Header); `FollowOrigin` (follow the origin address). Default: `FollowCheckURL`.
         :param pulumi.Input[_builtins.int] interval: Check interval in seconds. Valid values: `30`, `60`, `180`, `300`, `600`.
         :param pulumi.Input[_builtins.str] method: Request method, valid when `type` is `HTTP` or `HTTPS`. Valid values: `GET`, `HEAD`.
         :param pulumi.Input[_builtins.str] path: Probe path, valid when `type` is `HTTP` or `HTTPS`. Full host/path without protocol, e.g., `www.example.com/test`.
         :param pulumi.Input[_builtins.int] port: Check port. Required when `type` is `HTTP`, `HTTPS`, `TCP`, or `UDP`.
+        :param pulumi.Input[_builtins.str] probe_cluster: Probe cluster region scope for health checks. Valid values: `global`, `mainland_china`, `overseas`. Default: `global`. Only supported when load balancer instance type is `HTTP_V2`.
         :param pulumi.Input[_builtins.str] recv_context: Expected response content from origin, valid when `type` is `UDP`. Only ASCII visible characters allowed, max length 500.
         :param pulumi.Input[_builtins.str] send_context: Content to send during health check, valid when `type` is `UDP`. Only ASCII visible characters allowed, max length 500.
         :param pulumi.Input[_builtins.int] timeout: Timeout in seconds for each health check. Must be less than `interval`. Default: 5.
@@ -87937,6 +87999,8 @@ class LoadBalancerHealthCheckerArgs:
             pulumi.set(__self__, "headers", headers)
         if health_threshold is not None:
             pulumi.set(__self__, "health_threshold", health_threshold)
+        if host_header_policy is not None:
+            pulumi.set(__self__, "host_header_policy", host_header_policy)
         if interval is not None:
             pulumi.set(__self__, "interval", interval)
         if method is not None:
@@ -87945,6 +88009,8 @@ class LoadBalancerHealthCheckerArgs:
             pulumi.set(__self__, "path", path)
         if port is not None:
             pulumi.set(__self__, "port", port)
+        if probe_cluster is not None:
+            pulumi.set(__self__, "probe_cluster", probe_cluster)
         if recv_context is not None:
             pulumi.set(__self__, "recv_context", recv_context)
         if send_context is not None:
@@ -88025,6 +88091,18 @@ class LoadBalancerHealthCheckerArgs:
         pulumi.set(self, "health_threshold", value)
 
     @_builtins.property
+    @pulumi.getter(name="hostHeaderPolicy")
+    def host_header_policy(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Probe request Host Header policy, valid when `type` is `HTTP` or `HTTPS` and the instance type is HTTP-specific (V2). Valid values: `FollowCheckURL` (follow the Host specified by the probe URL, i.e., the Host part of `path`); `FollowOriginGroup` (follow the origin group configured origin Host Header); `FollowOrigin` (follow the origin address). Default: `FollowCheckURL`.
+        """
+        return pulumi.get(self, "host_header_policy")
+
+    @host_header_policy.setter
+    def host_header_policy(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "host_header_policy", value)
+
+    @_builtins.property
     @pulumi.getter
     def interval(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
@@ -88071,6 +88149,18 @@ class LoadBalancerHealthCheckerArgs:
     @port.setter
     def port(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "port", value)
+
+    @_builtins.property
+    @pulumi.getter(name="probeCluster")
+    def probe_cluster(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Probe cluster region scope for health checks. Valid values: `global`, `mainland_china`, `overseas`. Default: `global`. Only supported when load balancer instance type is `HTTP_V2`.
+        """
+        return pulumi.get(self, "probe_cluster")
+
+    @probe_cluster.setter
+    def probe_cluster(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "probe_cluster", value)
 
     @_builtins.property
     @pulumi.getter(name="recvContext")
@@ -91209,7 +91299,7 @@ class SecurityApiResourceApiResourcesArgsDict(TypedDict):
     """
     id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
-    ID of the resource.
+    API resource ID, e.g. `apires-xxxxxxxx`.
     """
     methods: NotRequired[pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]]
     """
@@ -91233,7 +91323,7 @@ class SecurityApiResourceApiResourcesArgs:
         :param pulumi.Input[_builtins.str] name: API resource name.
         :param pulumi.Input[_builtins.str] path: API resource path, e.g. `/ava`.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] api_service_ids: Associated API service ID list.
-        :param pulumi.Input[_builtins.str] id: ID of the resource.
+        :param pulumi.Input[_builtins.str] id: API resource ID, e.g. `apires-xxxxxxxx`.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] methods: Allowed HTTP methods. Valid values: `GET`, `POST`, `PUT`, `HEAD`, `PATCH`, `OPTIONS`, `DELETE`.
         :param pulumi.Input[_builtins.str] request_constraint: Request content matching rule expression.
         """
@@ -91288,7 +91378,7 @@ class SecurityApiResourceApiResourcesArgs:
     @pulumi.getter
     def id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        ID of the resource.
+        API resource ID, e.g. `apires-xxxxxxxx`.
         """
         return pulumi.get(self, "id")
 
@@ -91332,7 +91422,7 @@ class SecurityApiServiceApiServicesArgsDict(TypedDict):
     """
     id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
-    ID of the resource.
+    API service ID, e.g. `apisrv-xxxxxxxx`.
     """
 
 @pulumi.input_type
@@ -91344,7 +91434,7 @@ class SecurityApiServiceApiServicesArgs:
         """
         :param pulumi.Input[_builtins.str] base_path: API service base path, e.g. `/tt`.
         :param pulumi.Input[_builtins.str] name: API service name.
-        :param pulumi.Input[_builtins.str] id: ID of the resource.
+        :param pulumi.Input[_builtins.str] id: API service ID, e.g. `apisrv-xxxxxxxx`.
         """
         pulumi.set(__self__, "base_path", base_path)
         pulumi.set(__self__, "name", name)
@@ -91379,7 +91469,7 @@ class SecurityApiServiceApiServicesArgs:
     @pulumi.getter
     def id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        ID of the resource.
+        API service ID, e.g. `apisrv-xxxxxxxx`.
         """
         return pulumi.get(self, "id")
 
@@ -91403,7 +91493,7 @@ class SecurityClientAttesterClientAttestersArgsDict(TypedDict):
     """
     id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
-    ID of the resource.
+    Client attester ID, e.g. `attest-xxxxxxxx`.
     """
     tc_captcha_option: NotRequired[pulumi.Input[Optional['SecurityClientAttesterClientAttestersTcCaptchaOptionArgsDict']]]
     """
@@ -91437,7 +91527,7 @@ class SecurityClientAttesterClientAttestersArgs:
         :param pulumi.Input[_builtins.str] attester_source: Authentication method. Valid values: `TC-RCE` (Tencent Cloud RCE), `TC-CAPTCHA` (Tencent CAPTCHA), `TC-EO-CAPTCHA` (EdgeOne CAPTCHA).
         :param pulumi.Input[_builtins.str] name: Attester name.
         :param pulumi.Input[_builtins.str] attester_duration: Authentication validity duration. Default `60s`. Supported units: `s` (60-43200), `m` (1-720), `h` (1-12). e.g. `300s`, `5m`, `1h`.
-        :param pulumi.Input[_builtins.str] id: ID of the resource.
+        :param pulumi.Input[_builtins.str] id: Client attester ID, e.g. `attest-xxxxxxxx`.
         :param pulumi.Input['SecurityClientAttesterClientAttestersTcCaptchaOptionArgs'] tc_captcha_option: TC-CAPTCHA authentication configuration. Required when `attester_source` is `TC-CAPTCHA`.
         :param pulumi.Input['SecurityClientAttesterClientAttestersTcEoCaptchaOptionArgs'] tc_eo_captcha_option: TC-EO-CAPTCHA authentication configuration. Required when `attester_source` is `TC-EO-CAPTCHA`.
         :param pulumi.Input['SecurityClientAttesterClientAttestersTcRceOptionArgs'] tc_rce_option: TC-RCE authentication configuration. Required when `attester_source` is `TC-RCE`.
@@ -91498,7 +91588,7 @@ class SecurityClientAttesterClientAttestersArgs:
     @pulumi.getter
     def id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        ID of the resource.
+        Client attester ID, e.g. `attest-xxxxxxxx`.
         """
         return pulumi.get(self, "id")
 
@@ -91869,7 +91959,7 @@ class SecurityPolicyConfigSecurityConfigArgsDict(TypedDict):
     """
     except_config: NotRequired[pulumi.Input[Optional['SecurityPolicyConfigSecurityConfigExceptConfigArgsDict']]]
     """
-    Exception rules configuration.
+    Exception rule configuration.
     """
     ip_table_config: NotRequired[pulumi.Input[Optional['SecurityPolicyConfigSecurityConfigIpTableConfigArgsDict']]]
     """
@@ -91885,7 +91975,7 @@ class SecurityPolicyConfigSecurityConfigArgsDict(TypedDict):
     """
     switch_config: NotRequired[pulumi.Input[Optional['SecurityPolicyConfigSecurityConfigSwitchConfigArgsDict']]]
     """
-    Layer-7 protection master switch.
+    Security switch configuration.
     """
     template_configs: NotRequired[pulumi.Input[Optional[Sequence[pulumi.Input['SecurityPolicyConfigSecurityConfigTemplateConfigArgsDict']]]]]
     """
@@ -91915,11 +92005,11 @@ class SecurityPolicyConfigSecurityConfigArgs:
         :param pulumi.Input['SecurityPolicyConfigSecurityConfigBotConfigArgs'] bot_config: Bot configuration.
         :param pulumi.Input[Sequence[pulumi.Input['SecurityPolicyConfigSecurityConfigDetectLengthLimitConfigArgs']]] detect_length_limit_configs: Detect length limit configuration.
         :param pulumi.Input['SecurityPolicyConfigSecurityConfigDropPageConfigArgs'] drop_page_config: Drop page configuration.
-        :param pulumi.Input['SecurityPolicyConfigSecurityConfigExceptConfigArgs'] except_config: Exception rules configuration.
+        :param pulumi.Input['SecurityPolicyConfigSecurityConfigExceptConfigArgs'] except_config: Exception rule configuration.
         :param pulumi.Input['SecurityPolicyConfigSecurityConfigIpTableConfigArgs'] ip_table_config: Basic access control.
         :param pulumi.Input['SecurityPolicyConfigSecurityConfigRateLimitConfigArgs'] rate_limit_config: Rate limit configuration.
         :param pulumi.Input['SecurityPolicyConfigSecurityConfigSlowPostConfigArgs'] slow_post_config: Slow attack configuration.
-        :param pulumi.Input['SecurityPolicyConfigSecurityConfigSwitchConfigArgs'] switch_config: Layer-7 protection master switch.
+        :param pulumi.Input['SecurityPolicyConfigSecurityConfigSwitchConfigArgs'] switch_config: Security switch configuration.
         :param pulumi.Input[Sequence[pulumi.Input['SecurityPolicyConfigSecurityConfigTemplateConfigArgs']]] template_configs: Template configuration.
         :param pulumi.Input['SecurityPolicyConfigSecurityConfigWafConfigArgs'] waf_config: Managed rules configuration.
         """
@@ -91998,7 +92088,7 @@ class SecurityPolicyConfigSecurityConfigArgs:
     @pulumi.getter(name="exceptConfig")
     def except_config(self) -> pulumi.Input[Optional['SecurityPolicyConfigSecurityConfigExceptConfigArgs']]:
         """
-        Exception rules configuration.
+        Exception rule configuration.
         """
         return pulumi.get(self, "except_config")
 
@@ -92046,7 +92136,7 @@ class SecurityPolicyConfigSecurityConfigArgs:
     @pulumi.getter(name="switchConfig")
     def switch_config(self) -> pulumi.Input[Optional['SecurityPolicyConfigSecurityConfigSwitchConfigArgs']]:
         """
-        Layer-7 protection master switch.
+        Security switch configuration.
         """
         return pulumi.get(self, "switch_config")
 
@@ -93080,7 +93170,7 @@ class SecurityPolicyConfigSecurityConfigBotConfigAlgDetectRuleArgsDict(TypedDict
     """
     update_time: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
-    Update time.
+    Update time. Output-only.
     """
 
 @pulumi.input_type
@@ -93100,7 +93190,7 @@ class SecurityPolicyConfigSecurityConfigBotConfigAlgDetectRuleArgs:
         :param pulumi.Input[_builtins.int] rule_id: Rule ID. Output-only.
         :param pulumi.Input[_builtins.str] rule_name: Rule name.
         :param pulumi.Input[_builtins.str] switch: Rule switch.
-        :param pulumi.Input[_builtins.str] update_time: Update time.
+        :param pulumi.Input[_builtins.str] update_time: Update time. Output-only.
         """
         if alg_conditions is not None:
             pulumi.set(__self__, "alg_conditions", alg_conditions)
@@ -93193,7 +93283,7 @@ class SecurityPolicyConfigSecurityConfigBotConfigAlgDetectRuleArgs:
     @pulumi.getter(name="updateTime")
     def update_time(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Update time.
+        Update time. Output-only.
         """
         return pulumi.get(self, "update_time")
 
@@ -95293,7 +95383,7 @@ class SecurityPolicyConfigSecurityConfigExceptConfigExceptUserRuleArgsDict(Typed
     """
     update_time: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
-    Update time.
+    Update time. Output-only.
     """
 
 @pulumi.input_type
@@ -95315,7 +95405,7 @@ class SecurityPolicyConfigSecurityConfigExceptConfigExceptUserRuleArgs:
         :param pulumi.Input[_builtins.str] rule_name: Rule name (no Chinese characters).
         :param pulumi.Input[_builtins.int] rule_priority: Priority (0-100). Default 0.
         :param pulumi.Input[_builtins.str] rule_status: Rule status. Valid values: `on`, `off`.
-        :param pulumi.Input[_builtins.str] update_time: Update time.
+        :param pulumi.Input[_builtins.str] update_time: Update time. Output-only.
         """
         if action is not None:
             pulumi.set(__self__, "action", action)
@@ -95422,7 +95512,7 @@ class SecurityPolicyConfigSecurityConfigExceptConfigExceptUserRuleArgs:
     @pulumi.getter(name="updateTime")
     def update_time(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Update time.
+        Update time. Output-only.
         """
         return pulumi.get(self, "update_time")
 
@@ -96693,11 +96783,11 @@ class SecurityPolicyConfigSecurityConfigRateLimitConfigRateLimitTemplateArgs:
 class SecurityPolicyConfigSecurityConfigRateLimitConfigRateLimitTemplateRateLimitTemplateDetailArgsDict(TypedDict):
     action: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
-    Template action. Output-only.
+    Action. Valid values: `skip`, `scan`. Output-only.
     """
     id: NotRequired[pulumi.Input[Optional[_builtins.int]]]
     """
-    ID of the resource.
+    Template ID. Output-only.
     """
     mode: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
@@ -96726,8 +96816,8 @@ class SecurityPolicyConfigSecurityConfigRateLimitConfigRateLimitTemplateRateLimi
                  punish_time: pulumi.Input[Optional[_builtins.int]] = None,
                  threshold: pulumi.Input[Optional[_builtins.int]] = None):
         """
-        :param pulumi.Input[_builtins.str] action: Template action. Output-only.
-        :param pulumi.Input[_builtins.int] id: ID of the resource.
+        :param pulumi.Input[_builtins.str] action: Action. Valid values: `skip`, `scan`. Output-only.
+        :param pulumi.Input[_builtins.int] id: Template ID. Output-only.
         :param pulumi.Input[_builtins.str] mode: Template level. Output-only.
         :param pulumi.Input[_builtins.int] period: Statistical period in seconds. Output-only.
         :param pulumi.Input[_builtins.int] punish_time: Penalty time in seconds. Output-only.
@@ -96750,7 +96840,7 @@ class SecurityPolicyConfigSecurityConfigRateLimitConfigRateLimitTemplateRateLimi
     @pulumi.getter
     def action(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Template action. Output-only.
+        Action. Valid values: `skip`, `scan`. Output-only.
         """
         return pulumi.get(self, "action")
 
@@ -96762,7 +96852,7 @@ class SecurityPolicyConfigSecurityConfigRateLimitConfigRateLimitTemplateRateLimi
     @pulumi.getter
     def id(self) -> pulumi.Input[Optional[_builtins.int]]:
         """
-        ID of the resource.
+        Template ID. Output-only.
         """
         return pulumi.get(self, "id")
 
@@ -98167,7 +98257,7 @@ class SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsBotIntellig
     """
     id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
-    ID of the resource.
+    Template ID. Output-only.
     """
 
 @pulumi.input_type
@@ -98179,7 +98269,7 @@ class SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsBotIntellig
         """
         :param pulumi.Input['SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsBotIntelligenceBotRatingsArgs'] bot_ratings: Bot ratings configuration.
         :param pulumi.Input[_builtins.str] enabled: Whether bot intelligence is enabled. Valid values: `on`, `off`.
-        :param pulumi.Input[_builtins.str] id: ID of the resource.
+        :param pulumi.Input[_builtins.str] id: Template ID. Output-only.
         """
         if bot_ratings is not None:
             pulumi.set(__self__, "bot_ratings", bot_ratings)
@@ -98216,7 +98306,7 @@ class SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsBotIntellig
     @pulumi.getter
     def id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        ID of the resource.
+        Template ID. Output-only.
         """
         return pulumi.get(self, "id")
 
@@ -99945,39 +100035,39 @@ class SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsIpReputatio
 
 
 class SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsIpReputationIpReputationGroupActionOverrideArgsDict(TypedDict):
-    rule_id: pulumi.Input[_builtins.str]
-    """
-    Rule ID or category ID for action override.
-    """
     action: NotRequired[pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsIpReputationIpReputationGroupActionOverrideActionArgsDict']]]
     """
     Action override configuration.
+    """
+    rule_id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    It has been deprecated from version 1.83.31. Please use `rule_ids` instead. A single bot rule ID (or category ID) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids. Deprecated: use `rule_ids` to support one or more IDs.
+    """
+    rule_ids: NotRequired[pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]]
+    """
+    One or more bot rule IDs (or category IDs) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids ([]*string). If both `rule_ids` and `rule_id` are set, `rule_ids` takes precedence.
     """
 
 @pulumi.input_type
 class SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsIpReputationIpReputationGroupActionOverrideArgs:
     def __init__(__self__, *,
-                 rule_id: pulumi.Input[_builtins.str],
-                 action: pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsIpReputationIpReputationGroupActionOverrideActionArgs']] = None):
+                 action: pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsIpReputationIpReputationGroupActionOverrideActionArgs']] = None,
+                 rule_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 rule_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None):
         """
-        :param pulumi.Input[_builtins.str] rule_id: Rule ID or category ID for action override.
         :param pulumi.Input['SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsIpReputationIpReputationGroupActionOverrideActionArgs'] action: Action override configuration.
+        :param pulumi.Input[_builtins.str] rule_id: It has been deprecated from version 1.83.31. Please use `rule_ids` instead. A single bot rule ID (or category ID) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids. Deprecated: use `rule_ids` to support one or more IDs.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] rule_ids: One or more bot rule IDs (or category IDs) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids ([]*string). If both `rule_ids` and `rule_id` are set, `rule_ids` takes precedence.
         """
-        pulumi.set(__self__, "rule_id", rule_id)
         if action is not None:
             pulumi.set(__self__, "action", action)
-
-    @_builtins.property
-    @pulumi.getter(name="ruleId")
-    def rule_id(self) -> pulumi.Input[_builtins.str]:
-        """
-        Rule ID or category ID for action override.
-        """
-        return pulumi.get(self, "rule_id")
-
-    @rule_id.setter
-    def rule_id(self, value: pulumi.Input[_builtins.str]):
-        pulumi.set(self, "rule_id", value)
+        if rule_id is not None:
+            warnings.warn("""It has been deprecated from version 1.83.31. Please use `rule_ids` instead.""", DeprecationWarning)
+            pulumi.log.warn("""rule_id is deprecated: It has been deprecated from version 1.83.31. Please use `rule_ids` instead.""")
+        if rule_id is not None:
+            pulumi.set(__self__, "rule_id", rule_id)
+        if rule_ids is not None:
+            pulumi.set(__self__, "rule_ids", rule_ids)
 
     @_builtins.property
     @pulumi.getter
@@ -99990,6 +100080,31 @@ class SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsIpReputatio
     @action.setter
     def action(self, value: pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsIpReputationIpReputationGroupActionOverrideActionArgs']]):
         pulumi.set(self, "action", value)
+
+    @_builtins.property
+    @pulumi.getter(name="ruleId")
+    @_utilities.deprecated("""It has been deprecated from version 1.83.31. Please use `rule_ids` instead.""")
+    def rule_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        It has been deprecated from version 1.83.31. Please use `rule_ids` instead. A single bot rule ID (or category ID) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids. Deprecated: use `rule_ids` to support one or more IDs.
+        """
+        return pulumi.get(self, "rule_id")
+
+    @rule_id.setter
+    def rule_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "rule_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="ruleIds")
+    def rule_ids(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
+        """
+        One or more bot rule IDs (or category IDs) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids ([]*string). If both `rule_ids` and `rule_id` are set, `rule_ids` takes precedence.
+        """
+        return pulumi.get(self, "rule_ids")
+
+    @rule_ids.setter
+    def rule_ids(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "rule_ids", value)
 
 
 class SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsIpReputationIpReputationGroupActionOverrideActionArgsDict(TypedDict):
@@ -100838,39 +100953,39 @@ class SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsKnownBotCat
 
 
 class SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsKnownBotCategoriesActionOverrideArgsDict(TypedDict):
-    rule_id: pulumi.Input[_builtins.str]
-    """
-    Rule ID or category ID for action override.
-    """
     action: NotRequired[pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsKnownBotCategoriesActionOverrideActionArgsDict']]]
     """
     Action override configuration.
+    """
+    rule_id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    It has been deprecated from version 1.83.31. Please use `rule_ids` instead. A single bot rule ID (or category ID) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids. Deprecated: use `rule_ids` to support one or more IDs.
+    """
+    rule_ids: NotRequired[pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]]
+    """
+    One or more bot rule IDs (or category IDs) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids ([]*string). If both `rule_ids` and `rule_id` are set, `rule_ids` takes precedence.
     """
 
 @pulumi.input_type
 class SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsKnownBotCategoriesActionOverrideArgs:
     def __init__(__self__, *,
-                 rule_id: pulumi.Input[_builtins.str],
-                 action: pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsKnownBotCategoriesActionOverrideActionArgs']] = None):
+                 action: pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsKnownBotCategoriesActionOverrideActionArgs']] = None,
+                 rule_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 rule_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None):
         """
-        :param pulumi.Input[_builtins.str] rule_id: Rule ID or category ID for action override.
         :param pulumi.Input['SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsKnownBotCategoriesActionOverrideActionArgs'] action: Action override configuration.
+        :param pulumi.Input[_builtins.str] rule_id: It has been deprecated from version 1.83.31. Please use `rule_ids` instead. A single bot rule ID (or category ID) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids. Deprecated: use `rule_ids` to support one or more IDs.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] rule_ids: One or more bot rule IDs (or category IDs) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids ([]*string). If both `rule_ids` and `rule_id` are set, `rule_ids` takes precedence.
         """
-        pulumi.set(__self__, "rule_id", rule_id)
         if action is not None:
             pulumi.set(__self__, "action", action)
-
-    @_builtins.property
-    @pulumi.getter(name="ruleId")
-    def rule_id(self) -> pulumi.Input[_builtins.str]:
-        """
-        Rule ID or category ID for action override.
-        """
-        return pulumi.get(self, "rule_id")
-
-    @rule_id.setter
-    def rule_id(self, value: pulumi.Input[_builtins.str]):
-        pulumi.set(self, "rule_id", value)
+        if rule_id is not None:
+            warnings.warn("""It has been deprecated from version 1.83.31. Please use `rule_ids` instead.""", DeprecationWarning)
+            pulumi.log.warn("""rule_id is deprecated: It has been deprecated from version 1.83.31. Please use `rule_ids` instead.""")
+        if rule_id is not None:
+            pulumi.set(__self__, "rule_id", rule_id)
+        if rule_ids is not None:
+            pulumi.set(__self__, "rule_ids", rule_ids)
 
     @_builtins.property
     @pulumi.getter
@@ -100883,6 +100998,31 @@ class SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsKnownBotCat
     @action.setter
     def action(self, value: pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsKnownBotCategoriesActionOverrideActionArgs']]):
         pulumi.set(self, "action", value)
+
+    @_builtins.property
+    @pulumi.getter(name="ruleId")
+    @_utilities.deprecated("""It has been deprecated from version 1.83.31. Please use `rule_ids` instead.""")
+    def rule_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        It has been deprecated from version 1.83.31. Please use `rule_ids` instead. A single bot rule ID (or category ID) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids. Deprecated: use `rule_ids` to support one or more IDs.
+        """
+        return pulumi.get(self, "rule_id")
+
+    @rule_id.setter
+    def rule_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "rule_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="ruleIds")
+    def rule_ids(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
+        """
+        One or more bot rule IDs (or category IDs) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids ([]*string). If both `rule_ids` and `rule_id` are set, `rule_ids` takes precedence.
+        """
+        return pulumi.get(self, "rule_ids")
+
+    @rule_ids.setter
+    def rule_ids(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "rule_ids", value)
 
 
 class SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsKnownBotCategoriesActionOverrideActionArgsDict(TypedDict):
@@ -101731,39 +101871,39 @@ class SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSearchEngin
 
 
 class SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSearchEngineBotsActionOverrideArgsDict(TypedDict):
-    rule_id: pulumi.Input[_builtins.str]
-    """
-    Rule ID or category ID for action override.
-    """
     action: NotRequired[pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSearchEngineBotsActionOverrideActionArgsDict']]]
     """
     Action override configuration.
+    """
+    rule_id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    It has been deprecated from version 1.83.31. Please use `rule_ids` instead. A single bot rule ID (or category ID) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids. Deprecated: use `rule_ids` to support one or more IDs.
+    """
+    rule_ids: NotRequired[pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]]
+    """
+    One or more bot rule IDs (or category IDs) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids ([]*string). If both `rule_ids` and `rule_id` are set, `rule_ids` takes precedence.
     """
 
 @pulumi.input_type
 class SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSearchEngineBotsActionOverrideArgs:
     def __init__(__self__, *,
-                 rule_id: pulumi.Input[_builtins.str],
-                 action: pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSearchEngineBotsActionOverrideActionArgs']] = None):
+                 action: pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSearchEngineBotsActionOverrideActionArgs']] = None,
+                 rule_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 rule_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None):
         """
-        :param pulumi.Input[_builtins.str] rule_id: Rule ID or category ID for action override.
         :param pulumi.Input['SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSearchEngineBotsActionOverrideActionArgs'] action: Action override configuration.
+        :param pulumi.Input[_builtins.str] rule_id: It has been deprecated from version 1.83.31. Please use `rule_ids` instead. A single bot rule ID (or category ID) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids. Deprecated: use `rule_ids` to support one or more IDs.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] rule_ids: One or more bot rule IDs (or category IDs) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids ([]*string). If both `rule_ids` and `rule_id` are set, `rule_ids` takes precedence.
         """
-        pulumi.set(__self__, "rule_id", rule_id)
         if action is not None:
             pulumi.set(__self__, "action", action)
-
-    @_builtins.property
-    @pulumi.getter(name="ruleId")
-    def rule_id(self) -> pulumi.Input[_builtins.str]:
-        """
-        Rule ID or category ID for action override.
-        """
-        return pulumi.get(self, "rule_id")
-
-    @rule_id.setter
-    def rule_id(self, value: pulumi.Input[_builtins.str]):
-        pulumi.set(self, "rule_id", value)
+        if rule_id is not None:
+            warnings.warn("""It has been deprecated from version 1.83.31. Please use `rule_ids` instead.""", DeprecationWarning)
+            pulumi.log.warn("""rule_id is deprecated: It has been deprecated from version 1.83.31. Please use `rule_ids` instead.""")
+        if rule_id is not None:
+            pulumi.set(__self__, "rule_id", rule_id)
+        if rule_ids is not None:
+            pulumi.set(__self__, "rule_ids", rule_ids)
 
     @_builtins.property
     @pulumi.getter
@@ -101776,6 +101916,31 @@ class SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSearchEngin
     @action.setter
     def action(self, value: pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSearchEngineBotsActionOverrideActionArgs']]):
         pulumi.set(self, "action", value)
+
+    @_builtins.property
+    @pulumi.getter(name="ruleId")
+    @_utilities.deprecated("""It has been deprecated from version 1.83.31. Please use `rule_ids` instead.""")
+    def rule_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        It has been deprecated from version 1.83.31. Please use `rule_ids` instead. A single bot rule ID (or category ID) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids. Deprecated: use `rule_ids` to support one or more IDs.
+        """
+        return pulumi.get(self, "rule_id")
+
+    @rule_id.setter
+    def rule_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "rule_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="ruleIds")
+    def rule_ids(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
+        """
+        One or more bot rule IDs (or category IDs) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids ([]*string). If both `rule_ids` and `rule_id` are set, `rule_ids` takes precedence.
+        """
+        return pulumi.get(self, "rule_ids")
+
+    @rule_ids.setter
+    def rule_ids(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "rule_ids", value)
 
 
 class SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSearchEngineBotsActionOverrideActionArgsDict(TypedDict):
@@ -102624,39 +102789,39 @@ class SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSourceIdcAr
 
 
 class SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSourceIdcActionOverrideArgsDict(TypedDict):
-    rule_id: pulumi.Input[_builtins.str]
-    """
-    Rule ID or category ID for action override.
-    """
     action: NotRequired[pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSourceIdcActionOverrideActionArgsDict']]]
     """
     Action override configuration.
+    """
+    rule_id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    It has been deprecated from version 1.83.31. Please use `rule_ids` instead. A single bot rule ID (or category ID) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids. Deprecated: use `rule_ids` to support one or more IDs.
+    """
+    rule_ids: NotRequired[pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]]
+    """
+    One or more bot rule IDs (or category IDs) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids ([]*string). If both `rule_ids` and `rule_id` are set, `rule_ids` takes precedence.
     """
 
 @pulumi.input_type
 class SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSourceIdcActionOverrideArgs:
     def __init__(__self__, *,
-                 rule_id: pulumi.Input[_builtins.str],
-                 action: pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSourceIdcActionOverrideActionArgs']] = None):
+                 action: pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSourceIdcActionOverrideActionArgs']] = None,
+                 rule_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 rule_ids: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None):
         """
-        :param pulumi.Input[_builtins.str] rule_id: Rule ID or category ID for action override.
         :param pulumi.Input['SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSourceIdcActionOverrideActionArgs'] action: Action override configuration.
+        :param pulumi.Input[_builtins.str] rule_id: It has been deprecated from version 1.83.31. Please use `rule_ids` instead. A single bot rule ID (or category ID) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids. Deprecated: use `rule_ids` to support one or more IDs.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] rule_ids: One or more bot rule IDs (or category IDs) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids ([]*string). If both `rule_ids` and `rule_id` are set, `rule_ids` takes precedence.
         """
-        pulumi.set(__self__, "rule_id", rule_id)
         if action is not None:
             pulumi.set(__self__, "action", action)
-
-    @_builtins.property
-    @pulumi.getter(name="ruleId")
-    def rule_id(self) -> pulumi.Input[_builtins.str]:
-        """
-        Rule ID or category ID for action override.
-        """
-        return pulumi.get(self, "rule_id")
-
-    @rule_id.setter
-    def rule_id(self, value: pulumi.Input[_builtins.str]):
-        pulumi.set(self, "rule_id", value)
+        if rule_id is not None:
+            warnings.warn("""It has been deprecated from version 1.83.31. Please use `rule_ids` instead.""", DeprecationWarning)
+            pulumi.log.warn("""rule_id is deprecated: It has been deprecated from version 1.83.31. Please use `rule_ids` instead.""")
+        if rule_id is not None:
+            pulumi.set(__self__, "rule_id", rule_id)
+        if rule_ids is not None:
+            pulumi.set(__self__, "rule_ids", rule_ids)
 
     @_builtins.property
     @pulumi.getter
@@ -102669,6 +102834,31 @@ class SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSourceIdcAc
     @action.setter
     def action(self, value: pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSourceIdcActionOverrideActionArgs']]):
         pulumi.set(self, "action", value)
+
+    @_builtins.property
+    @pulumi.getter(name="ruleId")
+    @_utilities.deprecated("""It has been deprecated from version 1.83.31. Please use `rule_ids` instead.""")
+    def rule_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        It has been deprecated from version 1.83.31. Please use `rule_ids` instead. A single bot rule ID (or category ID) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids. Deprecated: use `rule_ids` to support one or more IDs.
+        """
+        return pulumi.get(self, "rule_id")
+
+    @rule_id.setter
+    def rule_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "rule_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="ruleIds")
+    def rule_ids(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
+        """
+        One or more bot rule IDs (or category IDs) whose action is overridden. Maps to the cloud API field BotManagementActionOverrides.Ids ([]*string). If both `rule_ids` and `rule_id` are set, `rule_ids` takes precedence.
+        """
+        return pulumi.get(self, "rule_ids")
+
+    @rule_ids.setter
+    def rule_ids(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "rule_ids", value)
 
 
 class SecurityPolicyConfigSecurityPolicyBotManagementBasicBotSettingsSourceIdcActionOverrideActionArgsDict(TypedDict):
@@ -107099,6 +107289,10 @@ class SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleArgsDi
     """
     Client authentication method ID.
     """
+    device_profiles: NotRequired[pulumi.Input[Optional[Sequence[pulumi.Input['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArgsDict']]]]]
+    """
+    Client device configurations. One profile per client type.
+    """
     id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
     Rule ID.
@@ -107119,6 +107313,7 @@ class SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleArgs:
                  enabled: pulumi.Input[_builtins.str],
                  name: pulumi.Input[_builtins.str],
                  attester_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 device_profiles: pulumi.Input[Optional[Sequence[pulumi.Input['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArgs']]]] = None,
                  id: pulumi.Input[Optional[_builtins.str]] = None,
                  invalid_attestation_action: pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleInvalidAttestationActionArgs']] = None,
                  priority: pulumi.Input[Optional[_builtins.int]] = None):
@@ -107127,6 +107322,7 @@ class SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleArgs:
         :param pulumi.Input[_builtins.str] enabled: Whether the rule is enabled. Valid values: `on`, `off`.
         :param pulumi.Input[_builtins.str] name: Action name. Valid values: `Deny`, `Monitor`, `Allow`, `Challenge`, `Disabled`.
         :param pulumi.Input[_builtins.str] attester_id: Client authentication method ID.
+        :param pulumi.Input[Sequence[pulumi.Input['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArgs']]] device_profiles: Client device configurations. One profile per client type.
         :param pulumi.Input[_builtins.str] id: Rule ID.
         :param pulumi.Input['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleInvalidAttestationActionArgs'] invalid_attestation_action: Action when attestation is invalid.
         :param pulumi.Input[_builtins.int] priority: Rule priority (0-100).
@@ -107136,6 +107332,8 @@ class SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleArgs:
         pulumi.set(__self__, "name", name)
         if attester_id is not None:
             pulumi.set(__self__, "attester_id", attester_id)
+        if device_profiles is not None:
+            pulumi.set(__self__, "device_profiles", device_profiles)
         if id is not None:
             pulumi.set(__self__, "id", id)
         if invalid_attestation_action is not None:
@@ -107192,6 +107390,18 @@ class SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleArgs:
         pulumi.set(self, "attester_id", value)
 
     @_builtins.property
+    @pulumi.getter(name="deviceProfiles")
+    def device_profiles(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArgs']]]]:
+        """
+        Client device configurations. One profile per client type.
+        """
+        return pulumi.get(self, "device_profiles")
+
+    @device_profiles.setter
+    def device_profiles(self, value: pulumi.Input[Optional[Sequence[pulumi.Input['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArgs']]]]):
+        pulumi.set(self, "device_profiles", value)
+
+    @_builtins.property
     @pulumi.getter
     def id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
@@ -107226,6 +107436,880 @@ class SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleArgs:
     @priority.setter
     def priority(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "priority", value)
+
+
+class SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArgsDict(TypedDict):
+    client_type: pulumi.Input[_builtins.str]
+    """
+    Client device type. Valid values: `iOS`, `Android`, `WebView`, `WeChatMiniProgram`.
+    """
+    high_risk_min_score: NotRequired[pulumi.Input[Optional[_builtins.int]]]
+    """
+    Minimum score (1-99) for judging a request as high risk. Default 50.
+    """
+    high_risk_request_action: NotRequired[pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionArgsDict']]]
+    """
+    Action for high-risk requests, using the shared SecurityAction schema (Name supports `Deny`, `Monitor`, `Redirect`, `Challenge`; default `Monitor`).
+    """
+    medium_risk_min_score: NotRequired[pulumi.Input[Optional[_builtins.int]]]
+    """
+    Minimum score (1-99) for judging a request as medium risk. Default 15.
+    """
+    medium_risk_request_action: NotRequired[pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionArgsDict']]]
+    """
+    Action for medium-risk requests, using the shared SecurityAction schema (default `Monitor`).
+    """
+
+@pulumi.input_type
+class SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileArgs:
+    def __init__(__self__, *,
+                 client_type: pulumi.Input[_builtins.str],
+                 high_risk_min_score: pulumi.Input[Optional[_builtins.int]] = None,
+                 high_risk_request_action: pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionArgs']] = None,
+                 medium_risk_min_score: pulumi.Input[Optional[_builtins.int]] = None,
+                 medium_risk_request_action: pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionArgs']] = None):
+        """
+        :param pulumi.Input[_builtins.str] client_type: Client device type. Valid values: `iOS`, `Android`, `WebView`, `WeChatMiniProgram`.
+        :param pulumi.Input[_builtins.int] high_risk_min_score: Minimum score (1-99) for judging a request as high risk. Default 50.
+        :param pulumi.Input['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionArgs'] high_risk_request_action: Action for high-risk requests, using the shared SecurityAction schema (Name supports `Deny`, `Monitor`, `Redirect`, `Challenge`; default `Monitor`).
+        :param pulumi.Input[_builtins.int] medium_risk_min_score: Minimum score (1-99) for judging a request as medium risk. Default 15.
+        :param pulumi.Input['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionArgs'] medium_risk_request_action: Action for medium-risk requests, using the shared SecurityAction schema (default `Monitor`).
+        """
+        pulumi.set(__self__, "client_type", client_type)
+        if high_risk_min_score is not None:
+            pulumi.set(__self__, "high_risk_min_score", high_risk_min_score)
+        if high_risk_request_action is not None:
+            pulumi.set(__self__, "high_risk_request_action", high_risk_request_action)
+        if medium_risk_min_score is not None:
+            pulumi.set(__self__, "medium_risk_min_score", medium_risk_min_score)
+        if medium_risk_request_action is not None:
+            pulumi.set(__self__, "medium_risk_request_action", medium_risk_request_action)
+
+    @_builtins.property
+    @pulumi.getter(name="clientType")
+    def client_type(self) -> pulumi.Input[_builtins.str]:
+        """
+        Client device type. Valid values: `iOS`, `Android`, `WebView`, `WeChatMiniProgram`.
+        """
+        return pulumi.get(self, "client_type")
+
+    @client_type.setter
+    def client_type(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "client_type", value)
+
+    @_builtins.property
+    @pulumi.getter(name="highRiskMinScore")
+    def high_risk_min_score(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Minimum score (1-99) for judging a request as high risk. Default 50.
+        """
+        return pulumi.get(self, "high_risk_min_score")
+
+    @high_risk_min_score.setter
+    def high_risk_min_score(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "high_risk_min_score", value)
+
+    @_builtins.property
+    @pulumi.getter(name="highRiskRequestAction")
+    def high_risk_request_action(self) -> pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionArgs']]:
+        """
+        Action for high-risk requests, using the shared SecurityAction schema (Name supports `Deny`, `Monitor`, `Redirect`, `Challenge`; default `Monitor`).
+        """
+        return pulumi.get(self, "high_risk_request_action")
+
+    @high_risk_request_action.setter
+    def high_risk_request_action(self, value: pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionArgs']]):
+        pulumi.set(self, "high_risk_request_action", value)
+
+    @_builtins.property
+    @pulumi.getter(name="mediumRiskMinScore")
+    def medium_risk_min_score(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Minimum score (1-99) for judging a request as medium risk. Default 15.
+        """
+        return pulumi.get(self, "medium_risk_min_score")
+
+    @medium_risk_min_score.setter
+    def medium_risk_min_score(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "medium_risk_min_score", value)
+
+    @_builtins.property
+    @pulumi.getter(name="mediumRiskRequestAction")
+    def medium_risk_request_action(self) -> pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionArgs']]:
+        """
+        Action for medium-risk requests, using the shared SecurityAction schema (default `Monitor`).
+        """
+        return pulumi.get(self, "medium_risk_request_action")
+
+    @medium_risk_request_action.setter
+    def medium_risk_request_action(self, value: pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionArgs']]):
+        pulumi.set(self, "medium_risk_request_action", value)
+
+
+class SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionArgsDict(TypedDict):
+    allow_action_parameters: NotRequired[pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersArgsDict']]]
+    """
+    Additional parameters when Name is Allow.
+    """
+    challenge_action_parameters: NotRequired[pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersArgsDict']]]
+    """
+    Additional parameters when Name is Challenge.
+    """
+    deny_action_parameters: NotRequired[pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersArgsDict']]]
+    """
+    Additional parameters when Name is Deny.
+    """
+    name: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Action name. Valid values: `Deny`, `Monitor`, `Allow`, `Challenge`, `Disabled`.
+    """
+    redirect_action_parameters: NotRequired[pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersArgsDict']]]
+    """
+    Additional parameters when Name is Redirect.
+    """
+
+@pulumi.input_type
+class SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionArgs:
+    def __init__(__self__, *,
+                 allow_action_parameters: pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersArgs']] = None,
+                 challenge_action_parameters: pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersArgs']] = None,
+                 deny_action_parameters: pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersArgs']] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 redirect_action_parameters: pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersArgs']] = None):
+        """
+        :param pulumi.Input['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersArgs'] allow_action_parameters: Additional parameters when Name is Allow.
+        :param pulumi.Input['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersArgs'] challenge_action_parameters: Additional parameters when Name is Challenge.
+        :param pulumi.Input['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersArgs'] deny_action_parameters: Additional parameters when Name is Deny.
+        :param pulumi.Input[_builtins.str] name: Action name. Valid values: `Deny`, `Monitor`, `Allow`, `Challenge`, `Disabled`.
+        :param pulumi.Input['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersArgs'] redirect_action_parameters: Additional parameters when Name is Redirect.
+        """
+        if allow_action_parameters is not None:
+            pulumi.set(__self__, "allow_action_parameters", allow_action_parameters)
+        if challenge_action_parameters is not None:
+            pulumi.set(__self__, "challenge_action_parameters", challenge_action_parameters)
+        if deny_action_parameters is not None:
+            pulumi.set(__self__, "deny_action_parameters", deny_action_parameters)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if redirect_action_parameters is not None:
+            pulumi.set(__self__, "redirect_action_parameters", redirect_action_parameters)
+
+    @_builtins.property
+    @pulumi.getter(name="allowActionParameters")
+    def allow_action_parameters(self) -> pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersArgs']]:
+        """
+        Additional parameters when Name is Allow.
+        """
+        return pulumi.get(self, "allow_action_parameters")
+
+    @allow_action_parameters.setter
+    def allow_action_parameters(self, value: pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersArgs']]):
+        pulumi.set(self, "allow_action_parameters", value)
+
+    @_builtins.property
+    @pulumi.getter(name="challengeActionParameters")
+    def challenge_action_parameters(self) -> pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersArgs']]:
+        """
+        Additional parameters when Name is Challenge.
+        """
+        return pulumi.get(self, "challenge_action_parameters")
+
+    @challenge_action_parameters.setter
+    def challenge_action_parameters(self, value: pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersArgs']]):
+        pulumi.set(self, "challenge_action_parameters", value)
+
+    @_builtins.property
+    @pulumi.getter(name="denyActionParameters")
+    def deny_action_parameters(self) -> pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersArgs']]:
+        """
+        Additional parameters when Name is Deny.
+        """
+        return pulumi.get(self, "deny_action_parameters")
+
+    @deny_action_parameters.setter
+    def deny_action_parameters(self, value: pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersArgs']]):
+        pulumi.set(self, "deny_action_parameters", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Action name. Valid values: `Deny`, `Monitor`, `Allow`, `Challenge`, `Disabled`.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "name", value)
+
+    @_builtins.property
+    @pulumi.getter(name="redirectActionParameters")
+    def redirect_action_parameters(self) -> pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersArgs']]:
+        """
+        Additional parameters when Name is Redirect.
+        """
+        return pulumi.get(self, "redirect_action_parameters")
+
+    @redirect_action_parameters.setter
+    def redirect_action_parameters(self, value: pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersArgs']]):
+        pulumi.set(self, "redirect_action_parameters", value)
+
+
+class SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersArgsDict(TypedDict):
+    max_delay_time: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Maximum delay response time. Supported unit: seconds, range 5-10.
+    """
+    min_delay_time: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Minimum delay response time. Supported unit: seconds, range 0-5.
+    """
+
+@pulumi.input_type
+class SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionAllowActionParametersArgs:
+    def __init__(__self__, *,
+                 max_delay_time: pulumi.Input[Optional[_builtins.str]] = None,
+                 min_delay_time: pulumi.Input[Optional[_builtins.str]] = None):
+        """
+        :param pulumi.Input[_builtins.str] max_delay_time: Maximum delay response time. Supported unit: seconds, range 5-10.
+        :param pulumi.Input[_builtins.str] min_delay_time: Minimum delay response time. Supported unit: seconds, range 0-5.
+        """
+        if max_delay_time is not None:
+            pulumi.set(__self__, "max_delay_time", max_delay_time)
+        if min_delay_time is not None:
+            pulumi.set(__self__, "min_delay_time", min_delay_time)
+
+    @_builtins.property
+    @pulumi.getter(name="maxDelayTime")
+    def max_delay_time(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Maximum delay response time. Supported unit: seconds, range 5-10.
+        """
+        return pulumi.get(self, "max_delay_time")
+
+    @max_delay_time.setter
+    def max_delay_time(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "max_delay_time", value)
+
+    @_builtins.property
+    @pulumi.getter(name="minDelayTime")
+    def min_delay_time(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Minimum delay response time. Supported unit: seconds, range 0-5.
+        """
+        return pulumi.get(self, "min_delay_time")
+
+    @min_delay_time.setter
+    def min_delay_time(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "min_delay_time", value)
+
+
+class SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersArgsDict(TypedDict):
+    challenge_option: pulumi.Input[_builtins.str]
+    """
+    The specific challenge action to be executed safely. Valid values: `InterstitialChallenge`, `InlineChallenge`, `JSChallenge`, `ManagedChallenge`.
+    """
+    attester_id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Client authentication method ID.
+    """
+    interval: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The time interval for repeating the challenge.
+    """
+
+@pulumi.input_type
+class SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionChallengeActionParametersArgs:
+    def __init__(__self__, *,
+                 challenge_option: pulumi.Input[_builtins.str],
+                 attester_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 interval: pulumi.Input[Optional[_builtins.str]] = None):
+        """
+        :param pulumi.Input[_builtins.str] challenge_option: The specific challenge action to be executed safely. Valid values: `InterstitialChallenge`, `InlineChallenge`, `JSChallenge`, `ManagedChallenge`.
+        :param pulumi.Input[_builtins.str] attester_id: Client authentication method ID.
+        :param pulumi.Input[_builtins.str] interval: The time interval for repeating the challenge.
+        """
+        pulumi.set(__self__, "challenge_option", challenge_option)
+        if attester_id is not None:
+            pulumi.set(__self__, "attester_id", attester_id)
+        if interval is not None:
+            pulumi.set(__self__, "interval", interval)
+
+    @_builtins.property
+    @pulumi.getter(name="challengeOption")
+    def challenge_option(self) -> pulumi.Input[_builtins.str]:
+        """
+        The specific challenge action to be executed safely. Valid values: `InterstitialChallenge`, `InlineChallenge`, `JSChallenge`, `ManagedChallenge`.
+        """
+        return pulumi.get(self, "challenge_option")
+
+    @challenge_option.setter
+    def challenge_option(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "challenge_option", value)
+
+    @_builtins.property
+    @pulumi.getter(name="attesterId")
+    def attester_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Client authentication method ID.
+        """
+        return pulumi.get(self, "attester_id")
+
+    @attester_id.setter
+    def attester_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "attester_id", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def interval(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The time interval for repeating the challenge.
+        """
+        return pulumi.get(self, "interval")
+
+    @interval.setter
+    def interval(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "interval", value)
+
+
+class SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersArgsDict(TypedDict):
+    block_ip: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Whether to extend the blocking of source IP. Valid values: `on`, `off`.
+    """
+    block_ip_duration: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    IP blocking duration when BlockIP is on.
+    """
+    error_page_id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The PageId of the custom page.
+    """
+    response_code: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Customize the status code of the page.
+    """
+    return_custom_page: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Whether to use custom pages. Valid values: `on`, `off`.
+    """
+    stall: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Whether to ignore the request source suspension. Valid values: `on`, `off`.
+    """
+
+@pulumi.input_type
+class SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionDenyActionParametersArgs:
+    def __init__(__self__, *,
+                 block_ip: pulumi.Input[Optional[_builtins.str]] = None,
+                 block_ip_duration: pulumi.Input[Optional[_builtins.str]] = None,
+                 error_page_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 response_code: pulumi.Input[Optional[_builtins.str]] = None,
+                 return_custom_page: pulumi.Input[Optional[_builtins.str]] = None,
+                 stall: pulumi.Input[Optional[_builtins.str]] = None):
+        """
+        :param pulumi.Input[_builtins.str] block_ip: Whether to extend the blocking of source IP. Valid values: `on`, `off`.
+        :param pulumi.Input[_builtins.str] block_ip_duration: IP blocking duration when BlockIP is on.
+        :param pulumi.Input[_builtins.str] error_page_id: The PageId of the custom page.
+        :param pulumi.Input[_builtins.str] response_code: Customize the status code of the page.
+        :param pulumi.Input[_builtins.str] return_custom_page: Whether to use custom pages. Valid values: `on`, `off`.
+        :param pulumi.Input[_builtins.str] stall: Whether to ignore the request source suspension. Valid values: `on`, `off`.
+        """
+        if block_ip is not None:
+            pulumi.set(__self__, "block_ip", block_ip)
+        if block_ip_duration is not None:
+            pulumi.set(__self__, "block_ip_duration", block_ip_duration)
+        if error_page_id is not None:
+            pulumi.set(__self__, "error_page_id", error_page_id)
+        if response_code is not None:
+            pulumi.set(__self__, "response_code", response_code)
+        if return_custom_page is not None:
+            pulumi.set(__self__, "return_custom_page", return_custom_page)
+        if stall is not None:
+            pulumi.set(__self__, "stall", stall)
+
+    @_builtins.property
+    @pulumi.getter(name="blockIp")
+    def block_ip(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Whether to extend the blocking of source IP. Valid values: `on`, `off`.
+        """
+        return pulumi.get(self, "block_ip")
+
+    @block_ip.setter
+    def block_ip(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "block_ip", value)
+
+    @_builtins.property
+    @pulumi.getter(name="blockIpDuration")
+    def block_ip_duration(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        IP blocking duration when BlockIP is on.
+        """
+        return pulumi.get(self, "block_ip_duration")
+
+    @block_ip_duration.setter
+    def block_ip_duration(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "block_ip_duration", value)
+
+    @_builtins.property
+    @pulumi.getter(name="errorPageId")
+    def error_page_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The PageId of the custom page.
+        """
+        return pulumi.get(self, "error_page_id")
+
+    @error_page_id.setter
+    def error_page_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "error_page_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="responseCode")
+    def response_code(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Customize the status code of the page.
+        """
+        return pulumi.get(self, "response_code")
+
+    @response_code.setter
+    def response_code(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "response_code", value)
+
+    @_builtins.property
+    @pulumi.getter(name="returnCustomPage")
+    def return_custom_page(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Whether to use custom pages. Valid values: `on`, `off`.
+        """
+        return pulumi.get(self, "return_custom_page")
+
+    @return_custom_page.setter
+    def return_custom_page(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "return_custom_page", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def stall(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Whether to ignore the request source suspension. Valid values: `on`, `off`.
+        """
+        return pulumi.get(self, "stall")
+
+    @stall.setter
+    def stall(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "stall", value)
+
+
+class SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersArgsDict(TypedDict):
+    url: pulumi.Input[_builtins.str]
+    """
+    The URL to redirect.
+    """
+
+@pulumi.input_type
+class SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileHighRiskRequestActionRedirectActionParametersArgs:
+    def __init__(__self__, *,
+                 url: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input[_builtins.str] url: The URL to redirect.
+        """
+        pulumi.set(__self__, "url", url)
+
+    @_builtins.property
+    @pulumi.getter
+    def url(self) -> pulumi.Input[_builtins.str]:
+        """
+        The URL to redirect.
+        """
+        return pulumi.get(self, "url")
+
+    @url.setter
+    def url(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "url", value)
+
+
+class SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionArgsDict(TypedDict):
+    allow_action_parameters: NotRequired[pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersArgsDict']]]
+    """
+    Additional parameters when Name is Allow.
+    """
+    challenge_action_parameters: NotRequired[pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersArgsDict']]]
+    """
+    Additional parameters when Name is Challenge.
+    """
+    deny_action_parameters: NotRequired[pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersArgsDict']]]
+    """
+    Additional parameters when Name is Deny.
+    """
+    name: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Action name. Valid values: `Deny`, `Monitor`, `Allow`, `Challenge`, `Disabled`.
+    """
+    redirect_action_parameters: NotRequired[pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersArgsDict']]]
+    """
+    Additional parameters when Name is Redirect.
+    """
+
+@pulumi.input_type
+class SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionArgs:
+    def __init__(__self__, *,
+                 allow_action_parameters: pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersArgs']] = None,
+                 challenge_action_parameters: pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersArgs']] = None,
+                 deny_action_parameters: pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersArgs']] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 redirect_action_parameters: pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersArgs']] = None):
+        """
+        :param pulumi.Input['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersArgs'] allow_action_parameters: Additional parameters when Name is Allow.
+        :param pulumi.Input['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersArgs'] challenge_action_parameters: Additional parameters when Name is Challenge.
+        :param pulumi.Input['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersArgs'] deny_action_parameters: Additional parameters when Name is Deny.
+        :param pulumi.Input[_builtins.str] name: Action name. Valid values: `Deny`, `Monitor`, `Allow`, `Challenge`, `Disabled`.
+        :param pulumi.Input['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersArgs'] redirect_action_parameters: Additional parameters when Name is Redirect.
+        """
+        if allow_action_parameters is not None:
+            pulumi.set(__self__, "allow_action_parameters", allow_action_parameters)
+        if challenge_action_parameters is not None:
+            pulumi.set(__self__, "challenge_action_parameters", challenge_action_parameters)
+        if deny_action_parameters is not None:
+            pulumi.set(__self__, "deny_action_parameters", deny_action_parameters)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if redirect_action_parameters is not None:
+            pulumi.set(__self__, "redirect_action_parameters", redirect_action_parameters)
+
+    @_builtins.property
+    @pulumi.getter(name="allowActionParameters")
+    def allow_action_parameters(self) -> pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersArgs']]:
+        """
+        Additional parameters when Name is Allow.
+        """
+        return pulumi.get(self, "allow_action_parameters")
+
+    @allow_action_parameters.setter
+    def allow_action_parameters(self, value: pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersArgs']]):
+        pulumi.set(self, "allow_action_parameters", value)
+
+    @_builtins.property
+    @pulumi.getter(name="challengeActionParameters")
+    def challenge_action_parameters(self) -> pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersArgs']]:
+        """
+        Additional parameters when Name is Challenge.
+        """
+        return pulumi.get(self, "challenge_action_parameters")
+
+    @challenge_action_parameters.setter
+    def challenge_action_parameters(self, value: pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersArgs']]):
+        pulumi.set(self, "challenge_action_parameters", value)
+
+    @_builtins.property
+    @pulumi.getter(name="denyActionParameters")
+    def deny_action_parameters(self) -> pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersArgs']]:
+        """
+        Additional parameters when Name is Deny.
+        """
+        return pulumi.get(self, "deny_action_parameters")
+
+    @deny_action_parameters.setter
+    def deny_action_parameters(self, value: pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersArgs']]):
+        pulumi.set(self, "deny_action_parameters", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Action name. Valid values: `Deny`, `Monitor`, `Allow`, `Challenge`, `Disabled`.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "name", value)
+
+    @_builtins.property
+    @pulumi.getter(name="redirectActionParameters")
+    def redirect_action_parameters(self) -> pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersArgs']]:
+        """
+        Additional parameters when Name is Redirect.
+        """
+        return pulumi.get(self, "redirect_action_parameters")
+
+    @redirect_action_parameters.setter
+    def redirect_action_parameters(self, value: pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersArgs']]):
+        pulumi.set(self, "redirect_action_parameters", value)
+
+
+class SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersArgsDict(TypedDict):
+    max_delay_time: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Maximum delay response time. Supported unit: seconds, range 5-10.
+    """
+    min_delay_time: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Minimum delay response time. Supported unit: seconds, range 0-5.
+    """
+
+@pulumi.input_type
+class SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionAllowActionParametersArgs:
+    def __init__(__self__, *,
+                 max_delay_time: pulumi.Input[Optional[_builtins.str]] = None,
+                 min_delay_time: pulumi.Input[Optional[_builtins.str]] = None):
+        """
+        :param pulumi.Input[_builtins.str] max_delay_time: Maximum delay response time. Supported unit: seconds, range 5-10.
+        :param pulumi.Input[_builtins.str] min_delay_time: Minimum delay response time. Supported unit: seconds, range 0-5.
+        """
+        if max_delay_time is not None:
+            pulumi.set(__self__, "max_delay_time", max_delay_time)
+        if min_delay_time is not None:
+            pulumi.set(__self__, "min_delay_time", min_delay_time)
+
+    @_builtins.property
+    @pulumi.getter(name="maxDelayTime")
+    def max_delay_time(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Maximum delay response time. Supported unit: seconds, range 5-10.
+        """
+        return pulumi.get(self, "max_delay_time")
+
+    @max_delay_time.setter
+    def max_delay_time(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "max_delay_time", value)
+
+    @_builtins.property
+    @pulumi.getter(name="minDelayTime")
+    def min_delay_time(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Minimum delay response time. Supported unit: seconds, range 0-5.
+        """
+        return pulumi.get(self, "min_delay_time")
+
+    @min_delay_time.setter
+    def min_delay_time(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "min_delay_time", value)
+
+
+class SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersArgsDict(TypedDict):
+    challenge_option: pulumi.Input[_builtins.str]
+    """
+    The specific challenge action to be executed safely. Valid values: `InterstitialChallenge`, `InlineChallenge`, `JSChallenge`, `ManagedChallenge`.
+    """
+    attester_id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Client authentication method ID.
+    """
+    interval: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The time interval for repeating the challenge.
+    """
+
+@pulumi.input_type
+class SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionChallengeActionParametersArgs:
+    def __init__(__self__, *,
+                 challenge_option: pulumi.Input[_builtins.str],
+                 attester_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 interval: pulumi.Input[Optional[_builtins.str]] = None):
+        """
+        :param pulumi.Input[_builtins.str] challenge_option: The specific challenge action to be executed safely. Valid values: `InterstitialChallenge`, `InlineChallenge`, `JSChallenge`, `ManagedChallenge`.
+        :param pulumi.Input[_builtins.str] attester_id: Client authentication method ID.
+        :param pulumi.Input[_builtins.str] interval: The time interval for repeating the challenge.
+        """
+        pulumi.set(__self__, "challenge_option", challenge_option)
+        if attester_id is not None:
+            pulumi.set(__self__, "attester_id", attester_id)
+        if interval is not None:
+            pulumi.set(__self__, "interval", interval)
+
+    @_builtins.property
+    @pulumi.getter(name="challengeOption")
+    def challenge_option(self) -> pulumi.Input[_builtins.str]:
+        """
+        The specific challenge action to be executed safely. Valid values: `InterstitialChallenge`, `InlineChallenge`, `JSChallenge`, `ManagedChallenge`.
+        """
+        return pulumi.get(self, "challenge_option")
+
+    @challenge_option.setter
+    def challenge_option(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "challenge_option", value)
+
+    @_builtins.property
+    @pulumi.getter(name="attesterId")
+    def attester_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Client authentication method ID.
+        """
+        return pulumi.get(self, "attester_id")
+
+    @attester_id.setter
+    def attester_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "attester_id", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def interval(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The time interval for repeating the challenge.
+        """
+        return pulumi.get(self, "interval")
+
+    @interval.setter
+    def interval(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "interval", value)
+
+
+class SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersArgsDict(TypedDict):
+    block_ip: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Whether to extend the blocking of source IP. Valid values: `on`, `off`.
+    """
+    block_ip_duration: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    IP blocking duration when BlockIP is on.
+    """
+    error_page_id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The PageId of the custom page.
+    """
+    response_code: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Customize the status code of the page.
+    """
+    return_custom_page: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Whether to use custom pages. Valid values: `on`, `off`.
+    """
+    stall: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Whether to ignore the request source suspension. Valid values: `on`, `off`.
+    """
+
+@pulumi.input_type
+class SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionDenyActionParametersArgs:
+    def __init__(__self__, *,
+                 block_ip: pulumi.Input[Optional[_builtins.str]] = None,
+                 block_ip_duration: pulumi.Input[Optional[_builtins.str]] = None,
+                 error_page_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 response_code: pulumi.Input[Optional[_builtins.str]] = None,
+                 return_custom_page: pulumi.Input[Optional[_builtins.str]] = None,
+                 stall: pulumi.Input[Optional[_builtins.str]] = None):
+        """
+        :param pulumi.Input[_builtins.str] block_ip: Whether to extend the blocking of source IP. Valid values: `on`, `off`.
+        :param pulumi.Input[_builtins.str] block_ip_duration: IP blocking duration when BlockIP is on.
+        :param pulumi.Input[_builtins.str] error_page_id: The PageId of the custom page.
+        :param pulumi.Input[_builtins.str] response_code: Customize the status code of the page.
+        :param pulumi.Input[_builtins.str] return_custom_page: Whether to use custom pages. Valid values: `on`, `off`.
+        :param pulumi.Input[_builtins.str] stall: Whether to ignore the request source suspension. Valid values: `on`, `off`.
+        """
+        if block_ip is not None:
+            pulumi.set(__self__, "block_ip", block_ip)
+        if block_ip_duration is not None:
+            pulumi.set(__self__, "block_ip_duration", block_ip_duration)
+        if error_page_id is not None:
+            pulumi.set(__self__, "error_page_id", error_page_id)
+        if response_code is not None:
+            pulumi.set(__self__, "response_code", response_code)
+        if return_custom_page is not None:
+            pulumi.set(__self__, "return_custom_page", return_custom_page)
+        if stall is not None:
+            pulumi.set(__self__, "stall", stall)
+
+    @_builtins.property
+    @pulumi.getter(name="blockIp")
+    def block_ip(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Whether to extend the blocking of source IP. Valid values: `on`, `off`.
+        """
+        return pulumi.get(self, "block_ip")
+
+    @block_ip.setter
+    def block_ip(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "block_ip", value)
+
+    @_builtins.property
+    @pulumi.getter(name="blockIpDuration")
+    def block_ip_duration(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        IP blocking duration when BlockIP is on.
+        """
+        return pulumi.get(self, "block_ip_duration")
+
+    @block_ip_duration.setter
+    def block_ip_duration(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "block_ip_duration", value)
+
+    @_builtins.property
+    @pulumi.getter(name="errorPageId")
+    def error_page_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The PageId of the custom page.
+        """
+        return pulumi.get(self, "error_page_id")
+
+    @error_page_id.setter
+    def error_page_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "error_page_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="responseCode")
+    def response_code(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Customize the status code of the page.
+        """
+        return pulumi.get(self, "response_code")
+
+    @response_code.setter
+    def response_code(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "response_code", value)
+
+    @_builtins.property
+    @pulumi.getter(name="returnCustomPage")
+    def return_custom_page(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Whether to use custom pages. Valid values: `on`, `off`.
+        """
+        return pulumi.get(self, "return_custom_page")
+
+    @return_custom_page.setter
+    def return_custom_page(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "return_custom_page", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def stall(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Whether to ignore the request source suspension. Valid values: `on`, `off`.
+        """
+        return pulumi.get(self, "stall")
+
+    @stall.setter
+    def stall(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "stall", value)
+
+
+class SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersArgsDict(TypedDict):
+    url: pulumi.Input[_builtins.str]
+    """
+    The URL to redirect.
+    """
+
+@pulumi.input_type
+class SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleDeviceProfileMediumRiskRequestActionRedirectActionParametersArgs:
+    def __init__(__self__, *,
+                 url: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input[_builtins.str] url: The URL to redirect.
+        """
+        pulumi.set(__self__, "url", url)
+
+    @_builtins.property
+    @pulumi.getter
+    def url(self) -> pulumi.Input[_builtins.str]:
+        """
+        The URL to redirect.
+        """
+        return pulumi.get(self, "url")
+
+    @url.setter
+    def url(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "url", value)
 
 
 class SecurityPolicyConfigSecurityPolicyBotManagementClientAttestationRuleInvalidAttestationActionArgsDict(TypedDict):
@@ -108778,7 +109862,7 @@ class SecurityPolicyConfigSecurityPolicyCustomRulesBasicAccessRuleArgsDict(Typed
     """
     id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
-    ID of the resource.
+    Template ID. Output-only.
     """
     priority: NotRequired[pulumi.Input[Optional[_builtins.int]]]
     """
@@ -108804,7 +109888,7 @@ class SecurityPolicyConfigSecurityPolicyCustomRulesBasicAccessRuleArgs:
         :param pulumi.Input[_builtins.str] condition: The specific content of the custom rule must comply with the expression grammar. please refer to the product document for detailed specifications.
         :param pulumi.Input[_builtins.str] enabled: Indicates whether the custom rule is enabled. valid values: <li>on: enabled</li> <li>off: disabled</li>.
         :param pulumi.Input[_builtins.str] name: The name of the custom rule.
-        :param pulumi.Input[_builtins.str] id: ID of the resource.
+        :param pulumi.Input[_builtins.str] id: Template ID. Output-only.
         :param pulumi.Input[_builtins.int] priority: Customizes the priority of rules. value range: 0-100. it defaults to 0. only supports `rule_type` is `PreciseMatchRule`.
         :param pulumi.Input[_builtins.str] rule_type: Type of custom rule. valid values: <li>BasicAccessRule: basic access control;</li> <li>PreciseMatchRule: exact matching rule, default;</li> <li>ManagedAccessRule: expert customized rule, for output only.</li> the default value is PreciseMatchRule.
         """
@@ -108871,7 +109955,7 @@ class SecurityPolicyConfigSecurityPolicyCustomRulesBasicAccessRuleArgs:
     @pulumi.getter
     def id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        ID of the resource.
+        Template ID. Output-only.
         """
         return pulumi.get(self, "id")
 
@@ -109128,7 +110212,7 @@ class SecurityPolicyConfigSecurityPolicyCustomRulesBasicAccessRuleActionReturnCu
 class SecurityPolicyConfigSecurityPolicyCustomRulesPreciseMatchRuleArgsDict(TypedDict):
     action: pulumi.Input['SecurityPolicyConfigSecurityPolicyCustomRulesPreciseMatchRuleActionArgsDict']
     """
-    Execution actions for custom rules. the Name parameter value of SecurityAction supports: <li>Deny: block;</li> <li>Monitor: observe;</li> <li>ReturnCustomPage: block using a specified page;</li> <li>Redirect: Redirect to URL;</li> <li>BlockIP: IP blocking;</li> <li>JSChallenge: JavaScript challenge;</li> <li>ManagedChallenge: managed challenge;</li> <li>Allow: Allow.</li>.
+    Execution actions for custom rules. the Name parameter value of SecurityAction supports: <li>Allow: allow, where AllowActionParameters supports MinDelayTime and MaxDelayTime configuration;</li> <li>Deny: block, where DenyActionParameters supports BlockIp, ReturnCustomPage, and Stall configuration;</li> <li>Monitor: observe;</li> <li>Challenge: challenge, where ChallengeActionParameters.ChallengeOption supports JSChallenge and ManagedChallenge;</li> <li>Redirect: redirect to a URL.</li>.
     """
     condition: pulumi.Input[_builtins.str]
     """
@@ -109144,7 +110228,7 @@ class SecurityPolicyConfigSecurityPolicyCustomRulesPreciseMatchRuleArgsDict(Type
     """
     id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
-    ID of the resource.
+    Template ID. Output-only.
     """
     priority: NotRequired[pulumi.Input[Optional[_builtins.int]]]
     """
@@ -109166,11 +110250,11 @@ class SecurityPolicyConfigSecurityPolicyCustomRulesPreciseMatchRuleArgs:
                  priority: pulumi.Input[Optional[_builtins.int]] = None,
                  rule_type: pulumi.Input[Optional[_builtins.str]] = None):
         """
-        :param pulumi.Input['SecurityPolicyConfigSecurityPolicyCustomRulesPreciseMatchRuleActionArgs'] action: Execution actions for custom rules. the Name parameter value of SecurityAction supports: <li>Deny: block;</li> <li>Monitor: observe;</li> <li>ReturnCustomPage: block using a specified page;</li> <li>Redirect: Redirect to URL;</li> <li>BlockIP: IP blocking;</li> <li>JSChallenge: JavaScript challenge;</li> <li>ManagedChallenge: managed challenge;</li> <li>Allow: Allow.</li>.
+        :param pulumi.Input['SecurityPolicyConfigSecurityPolicyCustomRulesPreciseMatchRuleActionArgs'] action: Execution actions for custom rules. the Name parameter value of SecurityAction supports: <li>Allow: allow, where AllowActionParameters supports MinDelayTime and MaxDelayTime configuration;</li> <li>Deny: block, where DenyActionParameters supports BlockIp, ReturnCustomPage, and Stall configuration;</li> <li>Monitor: observe;</li> <li>Challenge: challenge, where ChallengeActionParameters.ChallengeOption supports JSChallenge and ManagedChallenge;</li> <li>Redirect: redirect to a URL.</li>.
         :param pulumi.Input[_builtins.str] condition: The specific content of the custom rule must comply with the expression grammar. please refer to the product document for detailed specifications.
         :param pulumi.Input[_builtins.str] enabled: Indicates whether the custom rule is enabled. valid values: <li>on: enabled</li> <li>off: disabled</li>.
         :param pulumi.Input[_builtins.str] name: The name of the custom rule.
-        :param pulumi.Input[_builtins.str] id: ID of the resource.
+        :param pulumi.Input[_builtins.str] id: Template ID. Output-only.
         :param pulumi.Input[_builtins.int] priority: Customizes the priority of rules. value range: 0-100. it defaults to 0. only supports `rule_type` is `PreciseMatchRule`.
         :param pulumi.Input[_builtins.str] rule_type: Type of custom rule. valid values: <li>BasicAccessRule: basic access control;</li> <li>PreciseMatchRule: exact matching rule, default;</li> <li>ManagedAccessRule: expert customized rule, for output only.</li> the default value is PreciseMatchRule.
         """
@@ -109189,7 +110273,7 @@ class SecurityPolicyConfigSecurityPolicyCustomRulesPreciseMatchRuleArgs:
     @pulumi.getter
     def action(self) -> pulumi.Input['SecurityPolicyConfigSecurityPolicyCustomRulesPreciseMatchRuleActionArgs']:
         """
-        Execution actions for custom rules. the Name parameter value of SecurityAction supports: <li>Deny: block;</li> <li>Monitor: observe;</li> <li>ReturnCustomPage: block using a specified page;</li> <li>Redirect: Redirect to URL;</li> <li>BlockIP: IP blocking;</li> <li>JSChallenge: JavaScript challenge;</li> <li>ManagedChallenge: managed challenge;</li> <li>Allow: Allow.</li>.
+        Execution actions for custom rules. the Name parameter value of SecurityAction supports: <li>Allow: allow, where AllowActionParameters supports MinDelayTime and MaxDelayTime configuration;</li> <li>Deny: block, where DenyActionParameters supports BlockIp, ReturnCustomPage, and Stall configuration;</li> <li>Monitor: observe;</li> <li>Challenge: challenge, where ChallengeActionParameters.ChallengeOption supports JSChallenge and ManagedChallenge;</li> <li>Redirect: redirect to a URL.</li>.
         """
         return pulumi.get(self, "action")
 
@@ -109237,7 +110321,7 @@ class SecurityPolicyConfigSecurityPolicyCustomRulesPreciseMatchRuleArgs:
     @pulumi.getter
     def id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        ID of the resource.
+        Template ID. Output-only.
         """
         return pulumi.get(self, "id")
 
@@ -109494,7 +110578,7 @@ class SecurityPolicyConfigSecurityPolicyCustomRulesPreciseMatchRuleActionReturnC
 class SecurityPolicyConfigSecurityPolicyCustomRulesRuleArgsDict(TypedDict):
     action: pulumi.Input['SecurityPolicyConfigSecurityPolicyCustomRulesRuleActionArgsDict']
     """
-    The precise rate limit handling method. The values are: <li>Monitor: Observe; </li><li>Deny: Intercept, where DenyActionParameters.Name supports Deny and ReturnCustomPage; </li><li>Challenge: Challenge, where ChallengeActionParameters.Name supports JSChallenge and ManagedChallenge; </li><li>Redirect: Redirect to URL; </li>.
+    The precise rate limit handling method. The values are: <li>Allow: allow, where AllowActionParameters supports MinDelayTime and MaxDelayTime configuration; </li><li>Deny: block, where DenyActionParameters supports ReturnCustomPage and Stall configuration; </li><li>Monitor: observe; </li><li>Challenge: challenge, where ChallengeActionParameters.ChallengeOption supports JSChallenge and ManagedChallenge; </li><li>Redirect: redirect to a URL.</li>.
     """
     condition: pulumi.Input[_builtins.str]
     """
@@ -109532,7 +110616,7 @@ class SecurityPolicyConfigSecurityPolicyCustomRulesRuleArgs:
                  priority: pulumi.Input[Optional[_builtins.int]] = None,
                  rule_type: pulumi.Input[Optional[_builtins.str]] = None):
         """
-        :param pulumi.Input['SecurityPolicyConfigSecurityPolicyCustomRulesRuleActionArgs'] action: The precise rate limit handling method. The values are: <li>Monitor: Observe; </li><li>Deny: Intercept, where DenyActionParameters.Name supports Deny and ReturnCustomPage; </li><li>Challenge: Challenge, where ChallengeActionParameters.Name supports JSChallenge and ManagedChallenge; </li><li>Redirect: Redirect to URL; </li>.
+        :param pulumi.Input['SecurityPolicyConfigSecurityPolicyCustomRulesRuleActionArgs'] action: The precise rate limit handling method. The values are: <li>Allow: allow, where AllowActionParameters supports MinDelayTime and MaxDelayTime configuration; </li><li>Deny: block, where DenyActionParameters supports ReturnCustomPage and Stall configuration; </li><li>Monitor: observe; </li><li>Challenge: challenge, where ChallengeActionParameters.ChallengeOption supports JSChallenge and ManagedChallenge; </li><li>Redirect: redirect to a URL.</li>.
         :param pulumi.Input[_builtins.str] condition: The specific content of the precise rate limit must conform to the expression syntax. For detailed specifications, see the product documentation.
         :param pulumi.Input[_builtins.str] enabled: Whether the precise rate limit rule is enabled. The possible values are: <li>on: enabled; </li><li>off: disabled. </li>.
         :param pulumi.Input[_builtins.str] name: The name of the precise rate limit.
@@ -109555,7 +110639,7 @@ class SecurityPolicyConfigSecurityPolicyCustomRulesRuleArgs:
     @pulumi.getter
     def action(self) -> pulumi.Input['SecurityPolicyConfigSecurityPolicyCustomRulesRuleActionArgs']:
         """
-        The precise rate limit handling method. The values are: <li>Monitor: Observe; </li><li>Deny: Intercept, where DenyActionParameters.Name supports Deny and ReturnCustomPage; </li><li>Challenge: Challenge, where ChallengeActionParameters.Name supports JSChallenge and ManagedChallenge; </li><li>Redirect: Redirect to URL; </li>.
+        The precise rate limit handling method. The values are: <li>Allow: allow, where AllowActionParameters supports MinDelayTime and MaxDelayTime configuration; </li><li>Deny: block, where DenyActionParameters supports ReturnCustomPage and Stall configuration; </li><li>Monitor: observe; </li><li>Challenge: challenge, where ChallengeActionParameters.ChallengeOption supports JSChallenge and ManagedChallenge; </li><li>Redirect: redirect to a URL.</li>.
         """
         return pulumi.get(self, "action")
 
@@ -110234,6 +111318,10 @@ class SecurityPolicyConfigSecurityPolicyExceptionRulesRuleArgsDict(TypedDict):
     """
     Specifies the security protection module for the exception rule. It is valid only when SkipScope is WebSecurityModules. The possible values are: <li>websec-mod-managed-rules: managed rules; </li><li>websec-mod-rate-limiting: rate limiting; </li><li>websec-mod-custom-rules: custom rules; </li><li>websec-mod-adaptive-control: adaptive frequency control, intelligent client filtering, slow attack protection, traffic theft protection; </li><li>websec-mod-bot: Bot management. </li>.
     """
+    web_security_submodules_for_exceptions: NotRequired[pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]]
+    """
+    Specifies the security protection submodule for the exception rule. It is valid only when SkipScope is WebSecuritySubmodules. The possible values are: <ul><li>ManagedRules module: <ul><li>websec-mod-managed-rules/managed-rule-groups: rule set; </li><li>websec-mod-managed-rules/frequent-scanning-protection: high-frequency scanning protection; </li></ul></li><li>RateLimitingRules module: <ul><li>websec-mod-rate-limiting-rules: rate limiting rule; </li></ul></li><li>CustomRules module: <ul><li>websec-mod-custom-rules: custom rule; </li></ul></li><li>HttpDDoSProtection module: <ul><li>websec-mod-http-ddos-protection/adaptive-frequency-control: adaptive frequency control; </li><li>websec-mod-http-ddos-protection/client-filtering: intelligent client filtering; </li><li>websec-mod-http-ddos-protection/bandwidth-abuse-defense: traffic theft protection; </li></ul></li><li>BotManagement module: <ul><li>websec-mod-bot-management/basic-feature: basic feature management; </li><li>websec-mod-bot-management/ip-reputation: client portrait analysis; </li><li>websec-mod-bot-management/bot-intelligence: intelligent Bot analysis; </li><li>websec-mod-bot-management/custom-rules: custom rule; </li><li>websec-mod-bot-management/browser-impersonation-detection: active feature recognition; </li><li>websec-mod-bot-management/client-attestation-rules: client authentication; </li></ul></li><li>BotManagementLite module: <ul><li>websec-mod-bot-management-lite/ai-crawler-detection: AI crawler disposal; </li><li>websec-mod-bot-management-lite/captcha-page-challenge: human verification page. </li></ul></li></ul>.
+    """
 
 @pulumi.input_type
 class SecurityPolicyConfigSecurityPolicyExceptionRulesRuleArgs:
@@ -110247,7 +111335,8 @@ class SecurityPolicyConfigSecurityPolicyExceptionRulesRuleArgs:
                  request_fields_for_exceptions: pulumi.Input[Optional[Sequence[pulumi.Input['SecurityPolicyConfigSecurityPolicyExceptionRulesRuleRequestFieldsForExceptionArgs']]]] = None,
                  skip_option: pulumi.Input[Optional[_builtins.str]] = None,
                  skip_scope: pulumi.Input[Optional[_builtins.str]] = None,
-                 web_security_modules_for_exceptions: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None):
+                 web_security_modules_for_exceptions: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None,
+                 web_security_submodules_for_exceptions: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None):
         """
         :param pulumi.Input[_builtins.str] condition: The specific content of the precise rate limit must conform to the expression syntax. For detailed specifications, see the product documentation.
         :param pulumi.Input[_builtins.str] enabled: Whether the precise rate limit rule is enabled. The possible values are: <li>on: enabled; </li><li>off: disabled. </li>.
@@ -110259,6 +111348,7 @@ class SecurityPolicyConfigSecurityPolicyExceptionRulesRuleArgs:
         :param pulumi.Input[_builtins.str] skip_option: The specific type of the skipped request. The possible values are: <li>SkipOnAllRequestFields: skip all requests; </li><li>SkipOnSpecifiedRequestFields: skip specified request fields. </li>. This option is only valid when SkipScope is ManagedRules.
         :param pulumi.Input[_builtins.str] skip_scope: Exception rule execution options, the values are: <li>WebSecurityModules: Specifies the security protection module for the exception rule. </li>.<li>ManagedRules: Specifies the managed rules. </li>.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] web_security_modules_for_exceptions: Specifies the security protection module for the exception rule. It is valid only when SkipScope is WebSecurityModules. The possible values are: <li>websec-mod-managed-rules: managed rules; </li><li>websec-mod-rate-limiting: rate limiting; </li><li>websec-mod-custom-rules: custom rules; </li><li>websec-mod-adaptive-control: adaptive frequency control, intelligent client filtering, slow attack protection, traffic theft protection; </li><li>websec-mod-bot: Bot management. </li>.
+        :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] web_security_submodules_for_exceptions: Specifies the security protection submodule for the exception rule. It is valid only when SkipScope is WebSecuritySubmodules. The possible values are: <ul><li>ManagedRules module: <ul><li>websec-mod-managed-rules/managed-rule-groups: rule set; </li><li>websec-mod-managed-rules/frequent-scanning-protection: high-frequency scanning protection; </li></ul></li><li>RateLimitingRules module: <ul><li>websec-mod-rate-limiting-rules: rate limiting rule; </li></ul></li><li>CustomRules module: <ul><li>websec-mod-custom-rules: custom rule; </li></ul></li><li>HttpDDoSProtection module: <ul><li>websec-mod-http-ddos-protection/adaptive-frequency-control: adaptive frequency control; </li><li>websec-mod-http-ddos-protection/client-filtering: intelligent client filtering; </li><li>websec-mod-http-ddos-protection/bandwidth-abuse-defense: traffic theft protection; </li></ul></li><li>BotManagement module: <ul><li>websec-mod-bot-management/basic-feature: basic feature management; </li><li>websec-mod-bot-management/ip-reputation: client portrait analysis; </li><li>websec-mod-bot-management/bot-intelligence: intelligent Bot analysis; </li><li>websec-mod-bot-management/custom-rules: custom rule; </li><li>websec-mod-bot-management/browser-impersonation-detection: active feature recognition; </li><li>websec-mod-bot-management/client-attestation-rules: client authentication; </li></ul></li><li>BotManagementLite module: <ul><li>websec-mod-bot-management-lite/ai-crawler-detection: AI crawler disposal; </li><li>websec-mod-bot-management-lite/captcha-page-challenge: human verification page. </li></ul></li></ul>.
         """
         if condition is not None:
             pulumi.set(__self__, "condition", condition)
@@ -110280,6 +111370,8 @@ class SecurityPolicyConfigSecurityPolicyExceptionRulesRuleArgs:
             pulumi.set(__self__, "skip_scope", skip_scope)
         if web_security_modules_for_exceptions is not None:
             pulumi.set(__self__, "web_security_modules_for_exceptions", web_security_modules_for_exceptions)
+        if web_security_submodules_for_exceptions is not None:
+            pulumi.set(__self__, "web_security_submodules_for_exceptions", web_security_submodules_for_exceptions)
 
     @_builtins.property
     @pulumi.getter
@@ -110400,6 +111492,18 @@ class SecurityPolicyConfigSecurityPolicyExceptionRulesRuleArgs:
     @web_security_modules_for_exceptions.setter
     def web_security_modules_for_exceptions(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
         pulumi.set(self, "web_security_modules_for_exceptions", value)
+
+    @_builtins.property
+    @pulumi.getter(name="webSecuritySubmodulesForExceptions")
+    def web_security_submodules_for_exceptions(self) -> pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]:
+        """
+        Specifies the security protection submodule for the exception rule. It is valid only when SkipScope is WebSecuritySubmodules. The possible values are: <ul><li>ManagedRules module: <ul><li>websec-mod-managed-rules/managed-rule-groups: rule set; </li><li>websec-mod-managed-rules/frequent-scanning-protection: high-frequency scanning protection; </li></ul></li><li>RateLimitingRules module: <ul><li>websec-mod-rate-limiting-rules: rate limiting rule; </li></ul></li><li>CustomRules module: <ul><li>websec-mod-custom-rules: custom rule; </li></ul></li><li>HttpDDoSProtection module: <ul><li>websec-mod-http-ddos-protection/adaptive-frequency-control: adaptive frequency control; </li><li>websec-mod-http-ddos-protection/client-filtering: intelligent client filtering; </li><li>websec-mod-http-ddos-protection/bandwidth-abuse-defense: traffic theft protection; </li></ul></li><li>BotManagement module: <ul><li>websec-mod-bot-management/basic-feature: basic feature management; </li><li>websec-mod-bot-management/ip-reputation: client portrait analysis; </li><li>websec-mod-bot-management/bot-intelligence: intelligent Bot analysis; </li><li>websec-mod-bot-management/custom-rules: custom rule; </li><li>websec-mod-bot-management/browser-impersonation-detection: active feature recognition; </li><li>websec-mod-bot-management/client-attestation-rules: client authentication; </li></ul></li><li>BotManagementLite module: <ul><li>websec-mod-bot-management-lite/ai-crawler-detection: AI crawler disposal; </li><li>websec-mod-bot-management-lite/captcha-page-challenge: human verification page. </li></ul></li></ul>.
+        """
+        return pulumi.get(self, "web_security_submodules_for_exceptions")
+
+    @web_security_submodules_for_exceptions.setter
+    def web_security_submodules_for_exceptions(self, value: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]):
+        pulumi.set(self, "web_security_submodules_for_exceptions", value)
 
 
 class SecurityPolicyConfigSecurityPolicyExceptionRulesRuleRequestFieldsForExceptionArgsDict(TypedDict):
@@ -112809,6 +113913,10 @@ class SecurityPolicyConfigSecurityPolicyManagedRulesArgsDict(TypedDict):
     """
     Managed rule automatic update option.
     """
+    frequent_scanning_protection: NotRequired[pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionArgsDict']]]
+    """
+    High-frequency scan protection configuration option. When a visitor's frequent requests hit the managed rule configured as block within a period of time, all requests from that visitor are blocked.
+    """
     managed_rule_groups: NotRequired[pulumi.Input[Optional[Sequence[pulumi.Input['SecurityPolicyConfigSecurityPolicyManagedRulesManagedRuleGroupArgsDict']]]]]
     """
     Configuration of the managed rule group. if this structure is passed as an empty array or the GroupId is not included in the list, it will be processed based on the default method.
@@ -112824,12 +113932,14 @@ class SecurityPolicyConfigSecurityPolicyManagedRulesArgs:
                  detection_only: pulumi.Input[_builtins.str],
                  enabled: pulumi.Input[_builtins.str],
                  auto_update: pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyManagedRulesAutoUpdateArgs']] = None,
+                 frequent_scanning_protection: pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionArgs']] = None,
                  managed_rule_groups: pulumi.Input[Optional[Sequence[pulumi.Input['SecurityPolicyConfigSecurityPolicyManagedRulesManagedRuleGroupArgs']]]] = None,
                  semantic_analysis: pulumi.Input[Optional[_builtins.str]] = None):
         """
         :param pulumi.Input[_builtins.str] detection_only: Indicates whether the evaluation mode is Enabled. it is valid only when the Enabled parameter is set to on. valid values: <li>on: Enabled. all managed rules take effect in observation mode.</li> <li>off: disabled. all managed rules take effect according to the actual configuration.</li>.
         :param pulumi.Input[_builtins.str] enabled: Indicates whether the managed rule is enabled. valid values: <li>on: enabled. all managed rules take effect as configured;</li> <li>off: disabled. all managed rules do not take effect.</li>.
         :param pulumi.Input['SecurityPolicyConfigSecurityPolicyManagedRulesAutoUpdateArgs'] auto_update: Managed rule automatic update option.
+        :param pulumi.Input['SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionArgs'] frequent_scanning_protection: High-frequency scan protection configuration option. When a visitor's frequent requests hit the managed rule configured as block within a period of time, all requests from that visitor are blocked.
         :param pulumi.Input[Sequence[pulumi.Input['SecurityPolicyConfigSecurityPolicyManagedRulesManagedRuleGroupArgs']]] managed_rule_groups: Configuration of the managed rule group. if this structure is passed as an empty array or the GroupId is not included in the list, it will be processed based on the default method.
         :param pulumi.Input[_builtins.str] semantic_analysis: Whether the managed rule semantic analysis option is Enabled is valid only when the Enabled parameter is on. valid values: <li>on: enable. perform semantic analysis on requests before processing them;</li> <li>off: disable. process requests directly without semantic analysis.</li> <br/>default off.
         """
@@ -112837,6 +113947,8 @@ class SecurityPolicyConfigSecurityPolicyManagedRulesArgs:
         pulumi.set(__self__, "enabled", enabled)
         if auto_update is not None:
             pulumi.set(__self__, "auto_update", auto_update)
+        if frequent_scanning_protection is not None:
+            pulumi.set(__self__, "frequent_scanning_protection", frequent_scanning_protection)
         if managed_rule_groups is not None:
             pulumi.set(__self__, "managed_rule_groups", managed_rule_groups)
         if semantic_analysis is not None:
@@ -112877,6 +113989,18 @@ class SecurityPolicyConfigSecurityPolicyManagedRulesArgs:
     @auto_update.setter
     def auto_update(self, value: pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyManagedRulesAutoUpdateArgs']]):
         pulumi.set(self, "auto_update", value)
+
+    @_builtins.property
+    @pulumi.getter(name="frequentScanningProtection")
+    def frequent_scanning_protection(self) -> pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionArgs']]:
+        """
+        High-frequency scan protection configuration option. When a visitor's frequent requests hit the managed rule configured as block within a period of time, all requests from that visitor are blocked.
+        """
+        return pulumi.get(self, "frequent_scanning_protection")
+
+    @frequent_scanning_protection.setter
+    def frequent_scanning_protection(self, value: pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionArgs']]):
+        pulumi.set(self, "frequent_scanning_protection", value)
 
     @_builtins.property
     @pulumi.getter(name="managedRuleGroups")
@@ -112949,6 +114073,568 @@ class SecurityPolicyConfigSecurityPolicyManagedRulesAutoUpdateArgs:
     @ruleset_version.setter
     def ruleset_version(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "ruleset_version", value)
+
+
+class SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionArgsDict(TypedDict):
+    action: NotRequired[pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionArgsDict']]]
+    """
+    The disposal action. Required when `enabled` is `on`. SecurityAction Name supports `Deny`, `Monitor`, `JSChallenge`.
+    """
+    action_duration: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Duration of the disposal action. Range 60-86400, unit seconds (s), e.g. `60s`.
+    """
+    block_threshold: NotRequired[pulumi.Input[Optional[_builtins.int]]]
+    """
+    Cumulative block count threshold within the counting period. Range 1-4294967294.
+    """
+    count_by: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Request statistical matching method. Valid values: `http.request.xff_header_ip`, `http.request.ip`.
+    """
+    counting_period: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Statistics time window. Range 5-1800, unit seconds (s), e.g. `5s`.
+    """
+    enabled: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Whether the high-frequency scan protection rule is enabled. Valid values: `on`, `off`.
+    """
+    id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Template ID. Output-only.
+    """
+
+@pulumi.input_type
+class SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionArgs:
+    def __init__(__self__, *,
+                 action: pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionArgs']] = None,
+                 action_duration: pulumi.Input[Optional[_builtins.str]] = None,
+                 block_threshold: pulumi.Input[Optional[_builtins.int]] = None,
+                 count_by: pulumi.Input[Optional[_builtins.str]] = None,
+                 counting_period: pulumi.Input[Optional[_builtins.str]] = None,
+                 enabled: pulumi.Input[Optional[_builtins.str]] = None,
+                 id: pulumi.Input[Optional[_builtins.str]] = None):
+        """
+        :param pulumi.Input['SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionArgs'] action: The disposal action. Required when `enabled` is `on`. SecurityAction Name supports `Deny`, `Monitor`, `JSChallenge`.
+        :param pulumi.Input[_builtins.str] action_duration: Duration of the disposal action. Range 60-86400, unit seconds (s), e.g. `60s`.
+        :param pulumi.Input[_builtins.int] block_threshold: Cumulative block count threshold within the counting period. Range 1-4294967294.
+        :param pulumi.Input[_builtins.str] count_by: Request statistical matching method. Valid values: `http.request.xff_header_ip`, `http.request.ip`.
+        :param pulumi.Input[_builtins.str] counting_period: Statistics time window. Range 5-1800, unit seconds (s), e.g. `5s`.
+        :param pulumi.Input[_builtins.str] enabled: Whether the high-frequency scan protection rule is enabled. Valid values: `on`, `off`.
+        :param pulumi.Input[_builtins.str] id: Template ID. Output-only.
+        """
+        if action is not None:
+            pulumi.set(__self__, "action", action)
+        if action_duration is not None:
+            pulumi.set(__self__, "action_duration", action_duration)
+        if block_threshold is not None:
+            pulumi.set(__self__, "block_threshold", block_threshold)
+        if count_by is not None:
+            pulumi.set(__self__, "count_by", count_by)
+        if counting_period is not None:
+            pulumi.set(__self__, "counting_period", counting_period)
+        if enabled is not None:
+            pulumi.set(__self__, "enabled", enabled)
+        if id is not None:
+            pulumi.set(__self__, "id", id)
+
+    @_builtins.property
+    @pulumi.getter
+    def action(self) -> pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionArgs']]:
+        """
+        The disposal action. Required when `enabled` is `on`. SecurityAction Name supports `Deny`, `Monitor`, `JSChallenge`.
+        """
+        return pulumi.get(self, "action")
+
+    @action.setter
+    def action(self, value: pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionArgs']]):
+        pulumi.set(self, "action", value)
+
+    @_builtins.property
+    @pulumi.getter(name="actionDuration")
+    def action_duration(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Duration of the disposal action. Range 60-86400, unit seconds (s), e.g. `60s`.
+        """
+        return pulumi.get(self, "action_duration")
+
+    @action_duration.setter
+    def action_duration(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "action_duration", value)
+
+    @_builtins.property
+    @pulumi.getter(name="blockThreshold")
+    def block_threshold(self) -> pulumi.Input[Optional[_builtins.int]]:
+        """
+        Cumulative block count threshold within the counting period. Range 1-4294967294.
+        """
+        return pulumi.get(self, "block_threshold")
+
+    @block_threshold.setter
+    def block_threshold(self, value: pulumi.Input[Optional[_builtins.int]]):
+        pulumi.set(self, "block_threshold", value)
+
+    @_builtins.property
+    @pulumi.getter(name="countBy")
+    def count_by(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Request statistical matching method. Valid values: `http.request.xff_header_ip`, `http.request.ip`.
+        """
+        return pulumi.get(self, "count_by")
+
+    @count_by.setter
+    def count_by(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "count_by", value)
+
+    @_builtins.property
+    @pulumi.getter(name="countingPeriod")
+    def counting_period(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Statistics time window. Range 5-1800, unit seconds (s), e.g. `5s`.
+        """
+        return pulumi.get(self, "counting_period")
+
+    @counting_period.setter
+    def counting_period(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "counting_period", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def enabled(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Whether the high-frequency scan protection rule is enabled. Valid values: `on`, `off`.
+        """
+        return pulumi.get(self, "enabled")
+
+    @enabled.setter
+    def enabled(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "enabled", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Template ID. Output-only.
+        """
+        return pulumi.get(self, "id")
+
+    @id.setter
+    def id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "id", value)
+
+
+class SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionArgsDict(TypedDict):
+    allow_action_parameters: NotRequired[pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersArgsDict']]]
+    """
+    Additional parameters when Name is Allow.
+    """
+    challenge_action_parameters: NotRequired[pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersArgsDict']]]
+    """
+    Additional parameters when Name is Challenge.
+    """
+    deny_action_parameters: NotRequired[pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersArgsDict']]]
+    """
+    Additional parameters when Name is Deny.
+    """
+    name: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The specific action of security execution. The values are:
+    <li>Deny: intercept, block the request to access site resources;</li>
+    <li>Monitor: observe, only record logs;</li>
+    <li>Redirect: redirect to URL;</li>
+    <li>Disabled: disabled, do not enable the specified rule;</li>
+    <li>Allow: allow access, but delay processing requests;</li>
+    <li>Challenge: challenge, respond to challenge content;</li>
+    <li>BlockIP: to be abandoned, IP ban;</li>
+    <li>ReturnCustomPage: to be abandoned, use the specified page to intercept;</li>
+    <li>JSChallenge: to be abandoned, JavaScript challenge;</li>
+    <li>ManagedChallenge: to be abandoned, managed challenge.</li>.
+    """
+    redirect_action_parameters: NotRequired[pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersArgsDict']]]
+    """
+    Additional parameters when Name is Redirect.
+    """
+
+@pulumi.input_type
+class SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionArgs:
+    def __init__(__self__, *,
+                 allow_action_parameters: pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersArgs']] = None,
+                 challenge_action_parameters: pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersArgs']] = None,
+                 deny_action_parameters: pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersArgs']] = None,
+                 name: pulumi.Input[Optional[_builtins.str]] = None,
+                 redirect_action_parameters: pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersArgs']] = None):
+        """
+        :param pulumi.Input['SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersArgs'] allow_action_parameters: Additional parameters when Name is Allow.
+        :param pulumi.Input['SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersArgs'] challenge_action_parameters: Additional parameters when Name is Challenge.
+        :param pulumi.Input['SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersArgs'] deny_action_parameters: Additional parameters when Name is Deny.
+        :param pulumi.Input[_builtins.str] name: The specific action of security execution. The values are:
+               <li>Deny: intercept, block the request to access site resources;</li>
+               <li>Monitor: observe, only record logs;</li>
+               <li>Redirect: redirect to URL;</li>
+               <li>Disabled: disabled, do not enable the specified rule;</li>
+               <li>Allow: allow access, but delay processing requests;</li>
+               <li>Challenge: challenge, respond to challenge content;</li>
+               <li>BlockIP: to be abandoned, IP ban;</li>
+               <li>ReturnCustomPage: to be abandoned, use the specified page to intercept;</li>
+               <li>JSChallenge: to be abandoned, JavaScript challenge;</li>
+               <li>ManagedChallenge: to be abandoned, managed challenge.</li>.
+        :param pulumi.Input['SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersArgs'] redirect_action_parameters: Additional parameters when Name is Redirect.
+        """
+        if allow_action_parameters is not None:
+            pulumi.set(__self__, "allow_action_parameters", allow_action_parameters)
+        if challenge_action_parameters is not None:
+            pulumi.set(__self__, "challenge_action_parameters", challenge_action_parameters)
+        if deny_action_parameters is not None:
+            pulumi.set(__self__, "deny_action_parameters", deny_action_parameters)
+        if name is not None:
+            pulumi.set(__self__, "name", name)
+        if redirect_action_parameters is not None:
+            pulumi.set(__self__, "redirect_action_parameters", redirect_action_parameters)
+
+    @_builtins.property
+    @pulumi.getter(name="allowActionParameters")
+    def allow_action_parameters(self) -> pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersArgs']]:
+        """
+        Additional parameters when Name is Allow.
+        """
+        return pulumi.get(self, "allow_action_parameters")
+
+    @allow_action_parameters.setter
+    def allow_action_parameters(self, value: pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersArgs']]):
+        pulumi.set(self, "allow_action_parameters", value)
+
+    @_builtins.property
+    @pulumi.getter(name="challengeActionParameters")
+    def challenge_action_parameters(self) -> pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersArgs']]:
+        """
+        Additional parameters when Name is Challenge.
+        """
+        return pulumi.get(self, "challenge_action_parameters")
+
+    @challenge_action_parameters.setter
+    def challenge_action_parameters(self, value: pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersArgs']]):
+        pulumi.set(self, "challenge_action_parameters", value)
+
+    @_builtins.property
+    @pulumi.getter(name="denyActionParameters")
+    def deny_action_parameters(self) -> pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersArgs']]:
+        """
+        Additional parameters when Name is Deny.
+        """
+        return pulumi.get(self, "deny_action_parameters")
+
+    @deny_action_parameters.setter
+    def deny_action_parameters(self, value: pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersArgs']]):
+        pulumi.set(self, "deny_action_parameters", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The specific action of security execution. The values are:
+        <li>Deny: intercept, block the request to access site resources;</li>
+        <li>Monitor: observe, only record logs;</li>
+        <li>Redirect: redirect to URL;</li>
+        <li>Disabled: disabled, do not enable the specified rule;</li>
+        <li>Allow: allow access, but delay processing requests;</li>
+        <li>Challenge: challenge, respond to challenge content;</li>
+        <li>BlockIP: to be abandoned, IP ban;</li>
+        <li>ReturnCustomPage: to be abandoned, use the specified page to intercept;</li>
+        <li>JSChallenge: to be abandoned, JavaScript challenge;</li>
+        <li>ManagedChallenge: to be abandoned, managed challenge.</li>.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "name", value)
+
+    @_builtins.property
+    @pulumi.getter(name="redirectActionParameters")
+    def redirect_action_parameters(self) -> pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersArgs']]:
+        """
+        Additional parameters when Name is Redirect.
+        """
+        return pulumi.get(self, "redirect_action_parameters")
+
+    @redirect_action_parameters.setter
+    def redirect_action_parameters(self, value: pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersArgs']]):
+        pulumi.set(self, "redirect_action_parameters", value)
+
+
+class SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersArgsDict(TypedDict):
+    max_delay_time: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Maximum delay response time. Supported unit: seconds, range 5-10.
+    """
+    min_delay_time: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Minimum delay response time. Supported unit: seconds, range 0-5.
+    """
+
+@pulumi.input_type
+class SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionAllowActionParametersArgs:
+    def __init__(__self__, *,
+                 max_delay_time: pulumi.Input[Optional[_builtins.str]] = None,
+                 min_delay_time: pulumi.Input[Optional[_builtins.str]] = None):
+        """
+        :param pulumi.Input[_builtins.str] max_delay_time: Maximum delay response time. Supported unit: seconds, range 5-10.
+        :param pulumi.Input[_builtins.str] min_delay_time: Minimum delay response time. Supported unit: seconds, range 0-5.
+        """
+        if max_delay_time is not None:
+            pulumi.set(__self__, "max_delay_time", max_delay_time)
+        if min_delay_time is not None:
+            pulumi.set(__self__, "min_delay_time", min_delay_time)
+
+    @_builtins.property
+    @pulumi.getter(name="maxDelayTime")
+    def max_delay_time(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Maximum delay response time. Supported unit: seconds, range 5-10.
+        """
+        return pulumi.get(self, "max_delay_time")
+
+    @max_delay_time.setter
+    def max_delay_time(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "max_delay_time", value)
+
+    @_builtins.property
+    @pulumi.getter(name="minDelayTime")
+    def min_delay_time(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Minimum delay response time. Supported unit: seconds, range 0-5.
+        """
+        return pulumi.get(self, "min_delay_time")
+
+    @min_delay_time.setter
+    def min_delay_time(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "min_delay_time", value)
+
+
+class SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersArgsDict(TypedDict):
+    challenge_option: pulumi.Input[_builtins.str]
+    """
+    The specific challenge action to be executed safely. Valid values: `InterstitialChallenge`, `InlineChallenge`, `JSChallenge`, `ManagedChallenge`.
+    """
+    attester_id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Client authentication method ID.
+    """
+    interval: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The time interval for repeating the challenge.
+    """
+
+@pulumi.input_type
+class SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionChallengeActionParametersArgs:
+    def __init__(__self__, *,
+                 challenge_option: pulumi.Input[_builtins.str],
+                 attester_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 interval: pulumi.Input[Optional[_builtins.str]] = None):
+        """
+        :param pulumi.Input[_builtins.str] challenge_option: The specific challenge action to be executed safely. Valid values: `InterstitialChallenge`, `InlineChallenge`, `JSChallenge`, `ManagedChallenge`.
+        :param pulumi.Input[_builtins.str] attester_id: Client authentication method ID.
+        :param pulumi.Input[_builtins.str] interval: The time interval for repeating the challenge.
+        """
+        pulumi.set(__self__, "challenge_option", challenge_option)
+        if attester_id is not None:
+            pulumi.set(__self__, "attester_id", attester_id)
+        if interval is not None:
+            pulumi.set(__self__, "interval", interval)
+
+    @_builtins.property
+    @pulumi.getter(name="challengeOption")
+    def challenge_option(self) -> pulumi.Input[_builtins.str]:
+        """
+        The specific challenge action to be executed safely. Valid values: `InterstitialChallenge`, `InlineChallenge`, `JSChallenge`, `ManagedChallenge`.
+        """
+        return pulumi.get(self, "challenge_option")
+
+    @challenge_option.setter
+    def challenge_option(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "challenge_option", value)
+
+    @_builtins.property
+    @pulumi.getter(name="attesterId")
+    def attester_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Client authentication method ID.
+        """
+        return pulumi.get(self, "attester_id")
+
+    @attester_id.setter
+    def attester_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "attester_id", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def interval(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The time interval for repeating the challenge.
+        """
+        return pulumi.get(self, "interval")
+
+    @interval.setter
+    def interval(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "interval", value)
+
+
+class SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersArgsDict(TypedDict):
+    block_ip: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Whether to extend the blocking of source IP. Valid values: `on`, `off`.
+    """
+    block_ip_duration: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    IP blocking duration when BlockIP is on.
+    """
+    error_page_id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The PageId of the custom page.
+    """
+    response_code: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Customize the status code of the page.
+    """
+    return_custom_page: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Whether to use custom pages. Valid values: `on`, `off`.
+    """
+    stall: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Whether to ignore the request source suspension. Valid values: `on`, `off`.
+    """
+
+@pulumi.input_type
+class SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionDenyActionParametersArgs:
+    def __init__(__self__, *,
+                 block_ip: pulumi.Input[Optional[_builtins.str]] = None,
+                 block_ip_duration: pulumi.Input[Optional[_builtins.str]] = None,
+                 error_page_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 response_code: pulumi.Input[Optional[_builtins.str]] = None,
+                 return_custom_page: pulumi.Input[Optional[_builtins.str]] = None,
+                 stall: pulumi.Input[Optional[_builtins.str]] = None):
+        """
+        :param pulumi.Input[_builtins.str] block_ip: Whether to extend the blocking of source IP. Valid values: `on`, `off`.
+        :param pulumi.Input[_builtins.str] block_ip_duration: IP blocking duration when BlockIP is on.
+        :param pulumi.Input[_builtins.str] error_page_id: The PageId of the custom page.
+        :param pulumi.Input[_builtins.str] response_code: Customize the status code of the page.
+        :param pulumi.Input[_builtins.str] return_custom_page: Whether to use custom pages. Valid values: `on`, `off`.
+        :param pulumi.Input[_builtins.str] stall: Whether to ignore the request source suspension. Valid values: `on`, `off`.
+        """
+        if block_ip is not None:
+            pulumi.set(__self__, "block_ip", block_ip)
+        if block_ip_duration is not None:
+            pulumi.set(__self__, "block_ip_duration", block_ip_duration)
+        if error_page_id is not None:
+            pulumi.set(__self__, "error_page_id", error_page_id)
+        if response_code is not None:
+            pulumi.set(__self__, "response_code", response_code)
+        if return_custom_page is not None:
+            pulumi.set(__self__, "return_custom_page", return_custom_page)
+        if stall is not None:
+            pulumi.set(__self__, "stall", stall)
+
+    @_builtins.property
+    @pulumi.getter(name="blockIp")
+    def block_ip(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Whether to extend the blocking of source IP. Valid values: `on`, `off`.
+        """
+        return pulumi.get(self, "block_ip")
+
+    @block_ip.setter
+    def block_ip(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "block_ip", value)
+
+    @_builtins.property
+    @pulumi.getter(name="blockIpDuration")
+    def block_ip_duration(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        IP blocking duration when BlockIP is on.
+        """
+        return pulumi.get(self, "block_ip_duration")
+
+    @block_ip_duration.setter
+    def block_ip_duration(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "block_ip_duration", value)
+
+    @_builtins.property
+    @pulumi.getter(name="errorPageId")
+    def error_page_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The PageId of the custom page.
+        """
+        return pulumi.get(self, "error_page_id")
+
+    @error_page_id.setter
+    def error_page_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "error_page_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="responseCode")
+    def response_code(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Customize the status code of the page.
+        """
+        return pulumi.get(self, "response_code")
+
+    @response_code.setter
+    def response_code(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "response_code", value)
+
+    @_builtins.property
+    @pulumi.getter(name="returnCustomPage")
+    def return_custom_page(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Whether to use custom pages. Valid values: `on`, `off`.
+        """
+        return pulumi.get(self, "return_custom_page")
+
+    @return_custom_page.setter
+    def return_custom_page(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "return_custom_page", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def stall(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Whether to ignore the request source suspension. Valid values: `on`, `off`.
+        """
+        return pulumi.get(self, "stall")
+
+    @stall.setter
+    def stall(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "stall", value)
+
+
+class SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersArgsDict(TypedDict):
+    url: pulumi.Input[_builtins.str]
+    """
+    The URL to redirect.
+    """
+
+@pulumi.input_type
+class SecurityPolicyConfigSecurityPolicyManagedRulesFrequentScanningProtectionActionRedirectActionParametersArgs:
+    def __init__(__self__, *,
+                 url: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input[_builtins.str] url: The URL to redirect.
+        """
+        pulumi.set(__self__, "url", url)
+
+    @_builtins.property
+    @pulumi.getter
+    def url(self) -> pulumi.Input[_builtins.str]:
+        """
+        The URL to redirect.
+        """
+        return pulumi.get(self, "url")
+
+    @url.setter
+    def url(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "url", value)
 
 
 class SecurityPolicyConfigSecurityPolicyManagedRulesManagedRuleGroupArgsDict(TypedDict):
@@ -113350,7 +115036,7 @@ class SecurityPolicyConfigSecurityPolicyManagedRulesManagedRuleGroupMetaDataArgs
 class SecurityPolicyConfigSecurityPolicyManagedRulesManagedRuleGroupMetaDataRuleDetailArgsDict(TypedDict):
     description: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
-    Rule description.
+    Rule description. Output-only.
     """
     risk_level: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
@@ -113358,7 +115044,7 @@ class SecurityPolicyConfigSecurityPolicyManagedRulesManagedRuleGroupMetaDataRule
     """
     rule_id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
-    Managed rule Id.
+    Rule ID. Output-only.
     """
     rule_version: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
@@ -113378,9 +115064,9 @@ class SecurityPolicyConfigSecurityPolicyManagedRulesManagedRuleGroupMetaDataRule
                  rule_version: pulumi.Input[Optional[_builtins.str]] = None,
                  tags: pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]] = None):
         """
-        :param pulumi.Input[_builtins.str] description: Rule description.
+        :param pulumi.Input[_builtins.str] description: Rule description. Output-only.
         :param pulumi.Input[_builtins.str] risk_level: Protection level of managed rules. valid values: <li>low: low risk. this rule has a relatively low risk and is applicable to access scenarios in a very strict control environment. this level of rule may generate considerable false alarms.</li> <li>medium: medium risk. this means the risk of this rule is normal and it is suitable for protection scenarios with stricter requirements.</li> <li>high: high risk. this indicates that the risk of this rule is relatively high and it will not generate false alarms in most scenarios.</li> <li>extreme: ultra-high risk. this represents that the risk of this rule is extremely high and it will not generate false alarms basically.</li>.
-        :param pulumi.Input[_builtins.str] rule_id: Managed rule Id.
+        :param pulumi.Input[_builtins.str] rule_id: Rule ID. Output-only.
         :param pulumi.Input[_builtins.str] rule_version: Rule ownership version.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] tags: Rule tag. some types of rules do not have tags.
         """
@@ -113399,7 +115085,7 @@ class SecurityPolicyConfigSecurityPolicyManagedRulesManagedRuleGroupMetaDataRule
     @pulumi.getter
     def description(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Rule description.
+        Rule description. Output-only.
         """
         return pulumi.get(self, "description")
 
@@ -113423,7 +115109,7 @@ class SecurityPolicyConfigSecurityPolicyManagedRulesManagedRuleGroupMetaDataRule
     @pulumi.getter(name="ruleId")
     def rule_id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        Managed rule Id.
+        Rule ID. Output-only.
         """
         return pulumi.get(self, "rule_id")
 
@@ -113756,7 +115442,7 @@ class SecurityPolicyConfigSecurityPolicyRateLimitingRulesArgs:
 class SecurityPolicyConfigSecurityPolicyRateLimitingRulesRuleArgsDict(TypedDict):
     action: NotRequired[pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyRateLimitingRulesRuleActionArgsDict']]]
     """
-    The precise rate limit handling method. The values are: <li>Monitor: Observe; </li><li>Deny: Intercept, where DenyActionParameters.Name supports Deny and ReturnCustomPage; </li><li>Challenge: Challenge, where ChallengeActionParameters.Name supports JSChallenge and ManagedChallenge; </li><li>Redirect: Redirect to URL; </li>.
+    The precise rate limit handling method. The values are: <li>Allow: allow, where AllowActionParameters supports MinDelayTime and MaxDelayTime configuration; </li><li>Deny: block, where DenyActionParameters supports ReturnCustomPage and Stall configuration; </li><li>Monitor: observe; </li><li>Challenge: challenge, where ChallengeActionParameters.ChallengeOption supports JSChallenge and ManagedChallenge; </li><li>Redirect: redirect to a URL.</li>.
     """
     action_duration: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
@@ -113809,7 +115495,7 @@ class SecurityPolicyConfigSecurityPolicyRateLimitingRulesRuleArgs:
                  name: pulumi.Input[Optional[_builtins.str]] = None,
                  priority: pulumi.Input[Optional[_builtins.int]] = None):
         """
-        :param pulumi.Input['SecurityPolicyConfigSecurityPolicyRateLimitingRulesRuleActionArgs'] action: The precise rate limit handling method. The values are: <li>Monitor: Observe; </li><li>Deny: Intercept, where DenyActionParameters.Name supports Deny and ReturnCustomPage; </li><li>Challenge: Challenge, where ChallengeActionParameters.Name supports JSChallenge and ManagedChallenge; </li><li>Redirect: Redirect to URL; </li>.
+        :param pulumi.Input['SecurityPolicyConfigSecurityPolicyRateLimitingRulesRuleActionArgs'] action: The precise rate limit handling method. The values are: <li>Allow: allow, where AllowActionParameters supports MinDelayTime and MaxDelayTime configuration; </li><li>Deny: block, where DenyActionParameters supports ReturnCustomPage and Stall configuration; </li><li>Monitor: observe; </li><li>Challenge: challenge, where ChallengeActionParameters.ChallengeOption supports JSChallenge and ManagedChallenge; </li><li>Redirect: redirect to a URL.</li>.
         :param pulumi.Input[_builtins.str] action_duration: Action The duration of the action. The supported units are: <li>s: seconds, with a value of 1 to 120; </li><li>m: minutes, with a value of 1 to 120; </li><li>h: hours, with a value of 1 to 48; </li><li>d: days, with a value of 1 to 30. </li>.
         :param pulumi.Input[_builtins.str] condition: The specific content of the precise rate limit must conform to the expression syntax. For detailed specifications, see the product documentation.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] count_bies: The matching method of the rate threshold request feature. When Enabled is on, this field is required. <br /><br />When there are multiple conditions, multiple conditions will be combined for statistical calculation. The number of conditions cannot exceed 5. The possible values are: <br/><li><b>http.request.ip</b>: client IP; </li><li><b>http.request.xff_header_ip</b>: client IP (matching XFF header first); </li><li><b>http.request.uri.path</b>: requested access path; </li><li><b>http.request.cookies['session']</b>: cookie named session, where session can be replaced by the parameter you specify; </li><li><b>http.request.headers['user-agent']</b>: HTTP header named user-agent, where user-agent can be replaced by the parameter you specify; </li><li><b>http.request.ja3</b>: requested JA3 fingerprint; </li><li><b>http.request.uri.query['test']</b>: URL query parameter named test, where test can be replaced by the parameter you specify. </li>.
@@ -113845,7 +115531,7 @@ class SecurityPolicyConfigSecurityPolicyRateLimitingRulesRuleArgs:
     @pulumi.getter
     def action(self) -> pulumi.Input[Optional['SecurityPolicyConfigSecurityPolicyRateLimitingRulesRuleActionArgs']]:
         """
-        The precise rate limit handling method. The values are: <li>Monitor: Observe; </li><li>Deny: Intercept, where DenyActionParameters.Name supports Deny and ReturnCustomPage; </li><li>Challenge: Challenge, where ChallengeActionParameters.Name supports JSChallenge and ManagedChallenge; </li><li>Redirect: Redirect to URL; </li>.
+        The precise rate limit handling method. The values are: <li>Allow: allow, where AllowActionParameters supports MinDelayTime and MaxDelayTime configuration; </li><li>Deny: block, where DenyActionParameters supports ReturnCustomPage and Stall configuration; </li><li>Monitor: observe; </li><li>Challenge: challenge, where ChallengeActionParameters.ChallengeOption supports JSChallenge and ManagedChallenge; </li><li>Redirect: redirect to a URL.</li>.
         """
         return pulumi.get(self, "action")
 
@@ -114472,6 +116158,10 @@ class WebSecurityTemplateSecurityPolicyArgsDict(TypedDict):
     """
     Bot management configuration.
     """
+    bot_management_lite: NotRequired[pulumi.Input[Optional['WebSecurityTemplateSecurityPolicyBotManagementLiteArgsDict']]]
+    """
+    Basic Bot management configuration.
+    """
     custom_rules: NotRequired[pulumi.Input[Optional['WebSecurityTemplateSecurityPolicyCustomRulesArgsDict']]]
     """
     Custom rules. If the parameter is null or not filled, the configuration last set will be used by default. Note: This field may return null, indicating that no valid value can be obtained.
@@ -114501,6 +116191,7 @@ class WebSecurityTemplateSecurityPolicyArgsDict(TypedDict):
 class WebSecurityTemplateSecurityPolicyArgs:
     def __init__(__self__, *,
                  bot_management: pulumi.Input[Optional['WebSecurityTemplateSecurityPolicyBotManagementArgs']] = None,
+                 bot_management_lite: pulumi.Input[Optional['WebSecurityTemplateSecurityPolicyBotManagementLiteArgs']] = None,
                  custom_rules: pulumi.Input[Optional['WebSecurityTemplateSecurityPolicyCustomRulesArgs']] = None,
                  default_deny_security_action_parameters: pulumi.Input[Optional['WebSecurityTemplateSecurityPolicyDefaultDenySecurityActionParametersArgs']] = None,
                  exception_rules: pulumi.Input[Optional['WebSecurityTemplateSecurityPolicyExceptionRulesArgs']] = None,
@@ -114509,6 +116200,7 @@ class WebSecurityTemplateSecurityPolicyArgs:
                  rate_limiting_rules: pulumi.Input[Optional['WebSecurityTemplateSecurityPolicyRateLimitingRulesArgs']] = None):
         """
         :param pulumi.Input['WebSecurityTemplateSecurityPolicyBotManagementArgs'] bot_management: Bot management configuration.
+        :param pulumi.Input['WebSecurityTemplateSecurityPolicyBotManagementLiteArgs'] bot_management_lite: Basic Bot management configuration.
         :param pulumi.Input['WebSecurityTemplateSecurityPolicyCustomRulesArgs'] custom_rules: Custom rules. If the parameter is null or not filled, the configuration last set will be used by default. Note: This field may return null, indicating that no valid value can be obtained.
         :param pulumi.Input['WebSecurityTemplateSecurityPolicyDefaultDenySecurityActionParametersArgs'] default_deny_security_action_parameters: Default deny security action parameters configuration.
         :param pulumi.Input['WebSecurityTemplateSecurityPolicyExceptionRulesArgs'] exception_rules: Exception rule configuration.
@@ -114518,6 +116210,8 @@ class WebSecurityTemplateSecurityPolicyArgs:
         """
         if bot_management is not None:
             pulumi.set(__self__, "bot_management", bot_management)
+        if bot_management_lite is not None:
+            pulumi.set(__self__, "bot_management_lite", bot_management_lite)
         if custom_rules is not None:
             pulumi.set(__self__, "custom_rules", custom_rules)
         if default_deny_security_action_parameters is not None:
@@ -114542,6 +116236,18 @@ class WebSecurityTemplateSecurityPolicyArgs:
     @bot_management.setter
     def bot_management(self, value: pulumi.Input[Optional['WebSecurityTemplateSecurityPolicyBotManagementArgs']]):
         pulumi.set(self, "bot_management", value)
+
+    @_builtins.property
+    @pulumi.getter(name="botManagementLite")
+    def bot_management_lite(self) -> pulumi.Input[Optional['WebSecurityTemplateSecurityPolicyBotManagementLiteArgs']]:
+        """
+        Basic Bot management configuration.
+        """
+        return pulumi.get(self, "bot_management_lite")
+
+    @bot_management_lite.setter
+    def bot_management_lite(self, value: pulumi.Input[Optional['WebSecurityTemplateSecurityPolicyBotManagementLiteArgs']]):
+        pulumi.set(self, "bot_management_lite", value)
 
     @_builtins.property
     @pulumi.getter(name="customRules")
@@ -121421,7 +123127,7 @@ class WebSecurityTemplateSecurityPolicyBotManagementBrowserImpersonationDetectio
     """
     id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
-    ID of the resource.
+    The ID of precise rate limiting. rule ID supports different rule configuration operations: - add a new rule: leave the ID empty or do not specify the ID parameter. - modify an existing rule: specify the rule ID that needs to be updated/modified. - delete an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.
     """
     name: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
@@ -121440,7 +123146,7 @@ class WebSecurityTemplateSecurityPolicyBotManagementBrowserImpersonationDetectio
         :param pulumi.Input['WebSecurityTemplateSecurityPolicyBotManagementBrowserImpersonationDetectionRuleActionArgs'] action: Precision rate limiting handling methods. valid values: - Monitor: Monitor; - Deny: block, where DenyActionParameters.Name supports Deny and ReturnCustomPage; - Challenge: Challenge, where ChallengeActionParameters.Name supports JSChallenge and ManagedChallenge; - Redirect: Redirect to URL;.
         :param pulumi.Input[_builtins.str] condition: The specific content of precise speed limit shall comply with the expression syntax. for detailed specifications, see the product documentation.
         :param pulumi.Input[_builtins.str] enabled: Whether the precise rate limiting rule is enabled. valid values: - on: enabled; - off: disabled(No other fields are required when closing).
-        :param pulumi.Input[_builtins.str] id: ID of the resource.
+        :param pulumi.Input[_builtins.str] id: The ID of precise rate limiting. rule ID supports different rule configuration operations: - add a new rule: leave the ID empty or do not specify the ID parameter. - modify an existing rule: specify the rule ID that needs to be updated/modified. - delete an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.
         :param pulumi.Input[_builtins.str] name: Specifies the name of the precise rate limit.
         """
         if action is not None:
@@ -121494,7 +123200,7 @@ class WebSecurityTemplateSecurityPolicyBotManagementBrowserImpersonationDetectio
     @pulumi.getter
     def id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        ID of the resource.
+        The ID of precise rate limiting. rule ID supports different rule configuration operations: - add a new rule: leave the ID empty or do not specify the ID parameter. - modify an existing rule: specify the rule ID that needs to be updated/modified. - delete an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.
         """
         return pulumi.get(self, "id")
 
@@ -125984,7 +127690,7 @@ class WebSecurityTemplateSecurityPolicyBotManagementClientAttestationRulesRuleAr
     """
     id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
-    ID of the resource.
+    The ID of precise rate limiting. rule ID supports different rule configuration operations: - add a new rule: leave the ID empty or do not specify the ID parameter. - modify an existing rule: specify the rule ID that needs to be updated/modified. - delete an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.
     """
     invalid_attestation_action: NotRequired[pulumi.Input[Optional['WebSecurityTemplateSecurityPolicyBotManagementClientAttestationRulesRuleInvalidAttestationActionArgsDict']]]
     """
@@ -126015,7 +127721,7 @@ class WebSecurityTemplateSecurityPolicyBotManagementClientAttestationRulesRuleAr
         :param pulumi.Input[_builtins.str] condition: The specific content of precise speed limit shall comply with the expression syntax. for detailed specifications, see the product documentation.
         :param pulumi.Input[Sequence[pulumi.Input['WebSecurityTemplateSecurityPolicyBotManagementClientAttestationRulesRuleDeviceProfileArgs']]] device_profiles: Client device configuration. if the DeviceProfiles parameter value is not specified in the ClientAttestationRules parameter, keep the existing client device configuration and do not modify it.
         :param pulumi.Input[_builtins.str] enabled: Whether the precise rate limiting rule is enabled. valid values: - on: enabled; - off: disabled(No other fields are required when closing).
-        :param pulumi.Input[_builtins.str] id: ID of the resource.
+        :param pulumi.Input[_builtins.str] id: The ID of precise rate limiting. rule ID supports different rule configuration operations: - add a new rule: leave the ID empty or do not specify the ID parameter. - modify an existing rule: specify the rule ID that needs to be updated/modified. - delete an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.
         :param pulumi.Input['WebSecurityTemplateSecurityPolicyBotManagementClientAttestationRulesRuleInvalidAttestationActionArgs'] invalid_attestation_action: Handling method for failed client authentication. valid values for SecurityAction Name: - Deny: block; - Monitor: observation; - Redirect: redirection; - Challenge: Challenge. default value: Monitor.
         :param pulumi.Input[_builtins.str] name: Specifies the name of the precise rate limit.
         :param pulumi.Input[_builtins.int] priority: Precision rate limiting specifies the priority. value range is 0 to 100. default is 0.
@@ -126089,7 +127795,7 @@ class WebSecurityTemplateSecurityPolicyBotManagementClientAttestationRulesRuleAr
     @pulumi.getter
     def id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        ID of the resource.
+        The ID of precise rate limiting. rule ID supports different rule configuration operations: - add a new rule: leave the ID empty or do not specify the ID parameter. - modify an existing rule: specify the rule ID that needs to be updated/modified. - delete an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.
         """
         return pulumi.get(self, "id")
 
@@ -127777,7 +129483,7 @@ class WebSecurityTemplateSecurityPolicyBotManagementCustomRulesRuleArgsDict(Type
     """
     id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
-    ID of the resource.
+    The ID of precise rate limiting. rule ID supports different rule configuration operations: - add a new rule: leave the ID empty or do not specify the ID parameter. - modify an existing rule: specify the rule ID that needs to be updated/modified. - delete an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.
     """
     name: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
@@ -127801,7 +129507,7 @@ class WebSecurityTemplateSecurityPolicyBotManagementCustomRulesRuleArgs:
         :param pulumi.Input[Sequence[pulumi.Input['WebSecurityTemplateSecurityPolicyBotManagementCustomRulesRuleActionArgs']]] actions: Precision rate limiting handling methods. valid values: - Monitor: Monitor; - Deny: block, where DenyActionParameters.Name supports Deny and ReturnCustomPage; - Challenge: Challenge, where ChallengeActionParameters.Name supports JSChallenge and ManagedChallenge; - Redirect: Redirect to URL;.
         :param pulumi.Input[_builtins.str] condition: The specific content of precise speed limit shall comply with the expression syntax. for detailed specifications, see the product documentation.
         :param pulumi.Input[_builtins.str] enabled: Whether the precise rate limiting rule is enabled. valid values: - on: enabled; - off: disabled(No other fields are required when closing).
-        :param pulumi.Input[_builtins.str] id: ID of the resource.
+        :param pulumi.Input[_builtins.str] id: The ID of precise rate limiting. rule ID supports different rule configuration operations: - add a new rule: leave the ID empty or do not specify the ID parameter. - modify an existing rule: specify the rule ID that needs to be updated/modified. - delete an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.
         :param pulumi.Input[_builtins.str] name: Specifies the name of the precise rate limit.
         :param pulumi.Input[_builtins.int] priority: Precision rate limiting specifies the priority. value range is 0 to 100. default is 0.
         """
@@ -127858,7 +129564,7 @@ class WebSecurityTemplateSecurityPolicyBotManagementCustomRulesRuleArgs:
     @pulumi.getter
     def id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        ID of the resource.
+        The ID of precise rate limiting. rule ID supports different rule configuration operations: - add a new rule: leave the ID empty or do not specify the ID parameter. - modify an existing rule: specify the rule ID that needs to be updated/modified. - delete an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.
         """
         return pulumi.get(self, "id")
 
@@ -128437,6 +130143,465 @@ class WebSecurityTemplateSecurityPolicyBotManagementCustomRulesRuleActionSecurit
         pulumi.set(self, "response_code", value)
 
 
+class WebSecurityTemplateSecurityPolicyBotManagementLiteArgsDict(TypedDict):
+    ai_crawler_detection: NotRequired[pulumi.Input[Optional['WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionArgsDict']]]
+    """
+    AI crawler detection configuration.
+    """
+    captcha_page_challenge: NotRequired[pulumi.Input[Optional['WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeArgsDict']]]
+    """
+    CAPTCHA page challenge configuration.
+    """
+
+@pulumi.input_type
+class WebSecurityTemplateSecurityPolicyBotManagementLiteArgs:
+    def __init__(__self__, *,
+                 ai_crawler_detection: pulumi.Input[Optional['WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionArgs']] = None,
+                 captcha_page_challenge: pulumi.Input[Optional['WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeArgs']] = None):
+        """
+        :param pulumi.Input['WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionArgs'] ai_crawler_detection: AI crawler detection configuration.
+        :param pulumi.Input['WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeArgs'] captcha_page_challenge: CAPTCHA page challenge configuration.
+        """
+        if ai_crawler_detection is not None:
+            pulumi.set(__self__, "ai_crawler_detection", ai_crawler_detection)
+        if captcha_page_challenge is not None:
+            pulumi.set(__self__, "captcha_page_challenge", captcha_page_challenge)
+
+    @_builtins.property
+    @pulumi.getter(name="aiCrawlerDetection")
+    def ai_crawler_detection(self) -> pulumi.Input[Optional['WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionArgs']]:
+        """
+        AI crawler detection configuration.
+        """
+        return pulumi.get(self, "ai_crawler_detection")
+
+    @ai_crawler_detection.setter
+    def ai_crawler_detection(self, value: pulumi.Input[Optional['WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionArgs']]):
+        pulumi.set(self, "ai_crawler_detection", value)
+
+    @_builtins.property
+    @pulumi.getter(name="captchaPageChallenge")
+    def captcha_page_challenge(self) -> pulumi.Input[Optional['WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeArgs']]:
+        """
+        CAPTCHA page challenge configuration.
+        """
+        return pulumi.get(self, "captcha_page_challenge")
+
+    @captcha_page_challenge.setter
+    def captcha_page_challenge(self, value: pulumi.Input[Optional['WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeArgs']]):
+        pulumi.set(self, "captcha_page_challenge", value)
+
+
+class WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionArgsDict(TypedDict):
+    enabled: pulumi.Input[_builtins.str]
+    """
+    Whether AI crawler detection is enabled. Valid values: `on`, `off`.
+    """
+    action: NotRequired[pulumi.Input[Optional['WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionArgsDict']]]
+    """
+    Execution action when Enabled is on. When Enabled is on, this field is required. SecurityAction Name value supports: Deny, Monitor, Allow, Challenge.
+    """
+
+@pulumi.input_type
+class WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionArgs:
+    def __init__(__self__, *,
+                 enabled: pulumi.Input[_builtins.str],
+                 action: pulumi.Input[Optional['WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionArgs']] = None):
+        """
+        :param pulumi.Input[_builtins.str] enabled: Whether AI crawler detection is enabled. Valid values: `on`, `off`.
+        :param pulumi.Input['WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionArgs'] action: Execution action when Enabled is on. When Enabled is on, this field is required. SecurityAction Name value supports: Deny, Monitor, Allow, Challenge.
+        """
+        pulumi.set(__self__, "enabled", enabled)
+        if action is not None:
+            pulumi.set(__self__, "action", action)
+
+    @_builtins.property
+    @pulumi.getter
+    def enabled(self) -> pulumi.Input[_builtins.str]:
+        """
+        Whether AI crawler detection is enabled. Valid values: `on`, `off`.
+        """
+        return pulumi.get(self, "enabled")
+
+    @enabled.setter
+    def enabled(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "enabled", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def action(self) -> pulumi.Input[Optional['WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionArgs']]:
+        """
+        Execution action when Enabled is on. When Enabled is on, this field is required. SecurityAction Name value supports: Deny, Monitor, Allow, Challenge.
+        """
+        return pulumi.get(self, "action")
+
+    @action.setter
+    def action(self, value: pulumi.Input[Optional['WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionArgs']]):
+        pulumi.set(self, "action", value)
+
+
+class WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionArgsDict(TypedDict):
+    name: pulumi.Input[_builtins.str]
+    """
+    Specifies the specific actions for safe execution. valid values:. - Deny. specifies to block requests from accessing site resources. - Monitor: observation, only record logs. - Redirect: Redirect to URL. - Disabled: specifies that the rule is not enabled. - Allow: specifies whether to allow access with delayed processing of requests. - Challenge: specifies the challenge content to respond to. - Trans: pass and allow requests to directly access site resources. - BlockIP: to be deprecated. ip block. - ReturnCustomPage: to be deprecated. use specified page for interception. - JSChallenge: to be deprecated, JavaScript challenge;. - ManagedChallenge: to be deprecated. managed challenge.
+    """
+    allow_action_parameters: NotRequired[pulumi.Input[Optional['WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersArgsDict']]]
+    """
+    Additional parameters when Name is Allow.
+    """
+    challenge_action_parameters: NotRequired[pulumi.Input[Optional['WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersArgsDict']]]
+    """
+    Additional parameter when Name is Challenge.
+    """
+    deny_action_parameters: NotRequired[pulumi.Input[Optional['WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersArgsDict']]]
+    """
+    Additional parameters when Name is Deny.
+    """
+
+@pulumi.input_type
+class WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionArgs:
+    def __init__(__self__, *,
+                 name: pulumi.Input[_builtins.str],
+                 allow_action_parameters: pulumi.Input[Optional['WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersArgs']] = None,
+                 challenge_action_parameters: pulumi.Input[Optional['WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersArgs']] = None,
+                 deny_action_parameters: pulumi.Input[Optional['WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersArgs']] = None):
+        """
+        :param pulumi.Input[_builtins.str] name: Specifies the specific actions for safe execution. valid values:. - Deny. specifies to block requests from accessing site resources. - Monitor: observation, only record logs. - Redirect: Redirect to URL. - Disabled: specifies that the rule is not enabled. - Allow: specifies whether to allow access with delayed processing of requests. - Challenge: specifies the challenge content to respond to. - Trans: pass and allow requests to directly access site resources. - BlockIP: to be deprecated. ip block. - ReturnCustomPage: to be deprecated. use specified page for interception. - JSChallenge: to be deprecated, JavaScript challenge;. - ManagedChallenge: to be deprecated. managed challenge.
+        :param pulumi.Input['WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersArgs'] allow_action_parameters: Additional parameters when Name is Allow.
+        :param pulumi.Input['WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersArgs'] challenge_action_parameters: Additional parameter when Name is Challenge.
+        :param pulumi.Input['WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersArgs'] deny_action_parameters: Additional parameters when Name is Deny.
+        """
+        pulumi.set(__self__, "name", name)
+        if allow_action_parameters is not None:
+            pulumi.set(__self__, "allow_action_parameters", allow_action_parameters)
+        if challenge_action_parameters is not None:
+            pulumi.set(__self__, "challenge_action_parameters", challenge_action_parameters)
+        if deny_action_parameters is not None:
+            pulumi.set(__self__, "deny_action_parameters", deny_action_parameters)
+
+    @_builtins.property
+    @pulumi.getter
+    def name(self) -> pulumi.Input[_builtins.str]:
+        """
+        Specifies the specific actions for safe execution. valid values:. - Deny. specifies to block requests from accessing site resources. - Monitor: observation, only record logs. - Redirect: Redirect to URL. - Disabled: specifies that the rule is not enabled. - Allow: specifies whether to allow access with delayed processing of requests. - Challenge: specifies the challenge content to respond to. - Trans: pass and allow requests to directly access site resources. - BlockIP: to be deprecated. ip block. - ReturnCustomPage: to be deprecated. use specified page for interception. - JSChallenge: to be deprecated, JavaScript challenge;. - ManagedChallenge: to be deprecated. managed challenge.
+        """
+        return pulumi.get(self, "name")
+
+    @name.setter
+    def name(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "name", value)
+
+    @_builtins.property
+    @pulumi.getter(name="allowActionParameters")
+    def allow_action_parameters(self) -> pulumi.Input[Optional['WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersArgs']]:
+        """
+        Additional parameters when Name is Allow.
+        """
+        return pulumi.get(self, "allow_action_parameters")
+
+    @allow_action_parameters.setter
+    def allow_action_parameters(self, value: pulumi.Input[Optional['WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersArgs']]):
+        pulumi.set(self, "allow_action_parameters", value)
+
+    @_builtins.property
+    @pulumi.getter(name="challengeActionParameters")
+    def challenge_action_parameters(self) -> pulumi.Input[Optional['WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersArgs']]:
+        """
+        Additional parameter when Name is Challenge.
+        """
+        return pulumi.get(self, "challenge_action_parameters")
+
+    @challenge_action_parameters.setter
+    def challenge_action_parameters(self, value: pulumi.Input[Optional['WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersArgs']]):
+        pulumi.set(self, "challenge_action_parameters", value)
+
+    @_builtins.property
+    @pulumi.getter(name="denyActionParameters")
+    def deny_action_parameters(self) -> pulumi.Input[Optional['WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersArgs']]:
+        """
+        Additional parameters when Name is Deny.
+        """
+        return pulumi.get(self, "deny_action_parameters")
+
+    @deny_action_parameters.setter
+    def deny_action_parameters(self, value: pulumi.Input[Optional['WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersArgs']]):
+        pulumi.set(self, "deny_action_parameters", value)
+
+
+class WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersArgsDict(TypedDict):
+    max_delay_time: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Maximum delayed response time. supported units: - s: seconds, value ranges from 5 to 10.
+    """
+    min_delay_time: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Minimum latency response time. when configured as 0s, it means no delay for direct response. supported units: - s: seconds, value ranges from 0 to 5.
+    """
+
+@pulumi.input_type
+class WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionAllowActionParametersArgs:
+    def __init__(__self__, *,
+                 max_delay_time: pulumi.Input[Optional[_builtins.str]] = None,
+                 min_delay_time: pulumi.Input[Optional[_builtins.str]] = None):
+        """
+        :param pulumi.Input[_builtins.str] max_delay_time: Maximum delayed response time. supported units: - s: seconds, value ranges from 5 to 10.
+        :param pulumi.Input[_builtins.str] min_delay_time: Minimum latency response time. when configured as 0s, it means no delay for direct response. supported units: - s: seconds, value ranges from 0 to 5.
+        """
+        if max_delay_time is not None:
+            pulumi.set(__self__, "max_delay_time", max_delay_time)
+        if min_delay_time is not None:
+            pulumi.set(__self__, "min_delay_time", min_delay_time)
+
+    @_builtins.property
+    @pulumi.getter(name="maxDelayTime")
+    def max_delay_time(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Maximum delayed response time. supported units: - s: seconds, value ranges from 5 to 10.
+        """
+        return pulumi.get(self, "max_delay_time")
+
+    @max_delay_time.setter
+    def max_delay_time(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "max_delay_time", value)
+
+    @_builtins.property
+    @pulumi.getter(name="minDelayTime")
+    def min_delay_time(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Minimum latency response time. when configured as 0s, it means no delay for direct response. supported units: - s: seconds, value ranges from 0 to 5.
+        """
+        return pulumi.get(self, "min_delay_time")
+
+    @min_delay_time.setter
+    def min_delay_time(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "min_delay_time", value)
+
+
+class WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersArgsDict(TypedDict):
+    challenge_option: pulumi.Input[_builtins.str]
+    """
+    Safe execution challenge actions. valid values: -  InterstitialChallenge: interstitial challenge; -  InlineChallenge: embedded challenge; -  JSChallenge: JavaScript challenge; -  ManagedChallenge: managed challenge.
+    """
+    attester_id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Client authentication method ID. this field is required when Name is InterstitialChallenge/InlineChallenge.
+    """
+    interval: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Specifies the time interval for challenge repetition. this field is required when Name is InterstitialChallenge/InlineChallenge. default value is 300s. supported units: - s: second, value ranges from 1 to 60;- m: minute, value ranges from 1 to 60;- h: hour, value ranges from 1 to 24.
+    """
+
+@pulumi.input_type
+class WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionChallengeActionParametersArgs:
+    def __init__(__self__, *,
+                 challenge_option: pulumi.Input[_builtins.str],
+                 attester_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 interval: pulumi.Input[Optional[_builtins.str]] = None):
+        """
+        :param pulumi.Input[_builtins.str] challenge_option: Safe execution challenge actions. valid values: -  InterstitialChallenge: interstitial challenge; -  InlineChallenge: embedded challenge; -  JSChallenge: JavaScript challenge; -  ManagedChallenge: managed challenge.
+        :param pulumi.Input[_builtins.str] attester_id: Client authentication method ID. this field is required when Name is InterstitialChallenge/InlineChallenge.
+        :param pulumi.Input[_builtins.str] interval: Specifies the time interval for challenge repetition. this field is required when Name is InterstitialChallenge/InlineChallenge. default value is 300s. supported units: - s: second, value ranges from 1 to 60;- m: minute, value ranges from 1 to 60;- h: hour, value ranges from 1 to 24.
+        """
+        pulumi.set(__self__, "challenge_option", challenge_option)
+        if attester_id is not None:
+            pulumi.set(__self__, "attester_id", attester_id)
+        if interval is not None:
+            pulumi.set(__self__, "interval", interval)
+
+    @_builtins.property
+    @pulumi.getter(name="challengeOption")
+    def challenge_option(self) -> pulumi.Input[_builtins.str]:
+        """
+        Safe execution challenge actions. valid values: -  InterstitialChallenge: interstitial challenge; -  InlineChallenge: embedded challenge; -  JSChallenge: JavaScript challenge; -  ManagedChallenge: managed challenge.
+        """
+        return pulumi.get(self, "challenge_option")
+
+    @challenge_option.setter
+    def challenge_option(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "challenge_option", value)
+
+    @_builtins.property
+    @pulumi.getter(name="attesterId")
+    def attester_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Client authentication method ID. this field is required when Name is InterstitialChallenge/InlineChallenge.
+        """
+        return pulumi.get(self, "attester_id")
+
+    @attester_id.setter
+    def attester_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "attester_id", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def interval(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Specifies the time interval for challenge repetition. this field is required when Name is InterstitialChallenge/InlineChallenge. default value is 300s. supported units: - s: second, value ranges from 1 to 60;- m: minute, value ranges from 1 to 60;- h: hour, value ranges from 1 to 24.
+        """
+        return pulumi.get(self, "interval")
+
+    @interval.setter
+    def interval(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "interval", value)
+
+
+class WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersArgsDict(TypedDict):
+    block_ip: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Specifies whether to extend the ban on the source IP. valid values. - `on`: Enable;  - off: Disable.  After enabled, continuously blocks client ips that trigger the rule. when this option is enabled, the BlockIpDuration parameter must be simultaneously designated. Note: this option cannot intersect with ReturnCustomPage or Stall.
+    """
+    block_ip_duration: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    The ban duration when BlockIP is on.
+    """
+    error_page_id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Specifies the page id of the custom page.
+    """
+    response_code: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Status code of the custom page.
+    """
+    return_custom_page: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Specifies whether to use a custom page. valid values:. - `on`: Enable;  - off: Disable.  Enabled, use custom page content to intercept requests. when this option is enabled, ResponseCode and ErrorPageId parameters must be specified simultaneously. Note: this option cannot intersect with the BlockIp or Stall option.
+    """
+    stall: NotRequired[pulumi.Input[Optional[_builtins.str]]]
+    """
+    Specifies whether to suspend the request source without processing. valid values:. - `on`: Enable;  - off: Disable.  Enabled, no longer responds to requests in the current connection session and does not actively disconnect. used for crawler combat to consume client connection resources. Note: this option cannot intersect with BlockIp or ReturnCustomPage options.
+    """
+
+@pulumi.input_type
+class WebSecurityTemplateSecurityPolicyBotManagementLiteAiCrawlerDetectionActionDenyActionParametersArgs:
+    def __init__(__self__, *,
+                 block_ip: pulumi.Input[Optional[_builtins.str]] = None,
+                 block_ip_duration: pulumi.Input[Optional[_builtins.str]] = None,
+                 error_page_id: pulumi.Input[Optional[_builtins.str]] = None,
+                 response_code: pulumi.Input[Optional[_builtins.str]] = None,
+                 return_custom_page: pulumi.Input[Optional[_builtins.str]] = None,
+                 stall: pulumi.Input[Optional[_builtins.str]] = None):
+        """
+        :param pulumi.Input[_builtins.str] block_ip: Specifies whether to extend the ban on the source IP. valid values. - `on`: Enable;  - off: Disable.  After enabled, continuously blocks client ips that trigger the rule. when this option is enabled, the BlockIpDuration parameter must be simultaneously designated. Note: this option cannot intersect with ReturnCustomPage or Stall.
+        :param pulumi.Input[_builtins.str] block_ip_duration: The ban duration when BlockIP is on.
+        :param pulumi.Input[_builtins.str] error_page_id: Specifies the page id of the custom page.
+        :param pulumi.Input[_builtins.str] response_code: Status code of the custom page.
+        :param pulumi.Input[_builtins.str] return_custom_page: Specifies whether to use a custom page. valid values:. - `on`: Enable;  - off: Disable.  Enabled, use custom page content to intercept requests. when this option is enabled, ResponseCode and ErrorPageId parameters must be specified simultaneously. Note: this option cannot intersect with the BlockIp or Stall option.
+        :param pulumi.Input[_builtins.str] stall: Specifies whether to suspend the request source without processing. valid values:. - `on`: Enable;  - off: Disable.  Enabled, no longer responds to requests in the current connection session and does not actively disconnect. used for crawler combat to consume client connection resources. Note: this option cannot intersect with BlockIp or ReturnCustomPage options.
+        """
+        if block_ip is not None:
+            pulumi.set(__self__, "block_ip", block_ip)
+        if block_ip_duration is not None:
+            pulumi.set(__self__, "block_ip_duration", block_ip_duration)
+        if error_page_id is not None:
+            pulumi.set(__self__, "error_page_id", error_page_id)
+        if response_code is not None:
+            pulumi.set(__self__, "response_code", response_code)
+        if return_custom_page is not None:
+            pulumi.set(__self__, "return_custom_page", return_custom_page)
+        if stall is not None:
+            pulumi.set(__self__, "stall", stall)
+
+    @_builtins.property
+    @pulumi.getter(name="blockIp")
+    def block_ip(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Specifies whether to extend the ban on the source IP. valid values. - `on`: Enable;  - off: Disable.  After enabled, continuously blocks client ips that trigger the rule. when this option is enabled, the BlockIpDuration parameter must be simultaneously designated. Note: this option cannot intersect with ReturnCustomPage or Stall.
+        """
+        return pulumi.get(self, "block_ip")
+
+    @block_ip.setter
+    def block_ip(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "block_ip", value)
+
+    @_builtins.property
+    @pulumi.getter(name="blockIpDuration")
+    def block_ip_duration(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        The ban duration when BlockIP is on.
+        """
+        return pulumi.get(self, "block_ip_duration")
+
+    @block_ip_duration.setter
+    def block_ip_duration(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "block_ip_duration", value)
+
+    @_builtins.property
+    @pulumi.getter(name="errorPageId")
+    def error_page_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Specifies the page id of the custom page.
+        """
+        return pulumi.get(self, "error_page_id")
+
+    @error_page_id.setter
+    def error_page_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "error_page_id", value)
+
+    @_builtins.property
+    @pulumi.getter(name="responseCode")
+    def response_code(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Status code of the custom page.
+        """
+        return pulumi.get(self, "response_code")
+
+    @response_code.setter
+    def response_code(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "response_code", value)
+
+    @_builtins.property
+    @pulumi.getter(name="returnCustomPage")
+    def return_custom_page(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Specifies whether to use a custom page. valid values:. - `on`: Enable;  - off: Disable.  Enabled, use custom page content to intercept requests. when this option is enabled, ResponseCode and ErrorPageId parameters must be specified simultaneously. Note: this option cannot intersect with the BlockIp or Stall option.
+        """
+        return pulumi.get(self, "return_custom_page")
+
+    @return_custom_page.setter
+    def return_custom_page(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "return_custom_page", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def stall(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Specifies whether to suspend the request source without processing. valid values:. - `on`: Enable;  - off: Disable.  Enabled, no longer responds to requests in the current connection session and does not actively disconnect. used for crawler combat to consume client connection resources. Note: this option cannot intersect with BlockIp or ReturnCustomPage options.
+        """
+        return pulumi.get(self, "stall")
+
+    @stall.setter
+    def stall(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "stall", value)
+
+
+class WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeArgsDict(TypedDict):
+    enabled: pulumi.Input[_builtins.str]
+    """
+    Whether CAPTCHA page challenge is enabled. Valid values: `on`, `off`.
+    """
+
+@pulumi.input_type
+class WebSecurityTemplateSecurityPolicyBotManagementLiteCaptchaPageChallengeArgs:
+    def __init__(__self__, *,
+                 enabled: pulumi.Input[_builtins.str]):
+        """
+        :param pulumi.Input[_builtins.str] enabled: Whether CAPTCHA page challenge is enabled. Valid values: `on`, `off`.
+        """
+        pulumi.set(__self__, "enabled", enabled)
+
+    @_builtins.property
+    @pulumi.getter
+    def enabled(self) -> pulumi.Input[_builtins.str]:
+        """
+        Whether CAPTCHA page challenge is enabled. Valid values: `on`, `off`.
+        """
+        return pulumi.get(self, "enabled")
+
+    @enabled.setter
+    def enabled(self, value: pulumi.Input[_builtins.str]):
+        pulumi.set(self, "enabled", value)
+
+
 class WebSecurityTemplateSecurityPolicyCustomRulesArgsDict(TypedDict):
     rules: NotRequired[pulumi.Input[Optional[Sequence[pulumi.Input['WebSecurityTemplateSecurityPolicyCustomRulesRuleArgsDict']]]]]
     """
@@ -128485,7 +130650,7 @@ class WebSecurityTemplateSecurityPolicyCustomRulesRuleArgsDict(TypedDict):
     """
     id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
-    ID of the resource.
+    The ID of precise rate limiting. rule ID supports different rule configuration operations: - add a new rule: leave the ID empty or do not specify the ID parameter. - modify an existing rule: specify the rule ID that needs to be updated/modified. - delete an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.
     """
     priority: NotRequired[pulumi.Input[Optional[_builtins.int]]]
     """
@@ -128511,7 +130676,7 @@ class WebSecurityTemplateSecurityPolicyCustomRulesRuleArgs:
         :param pulumi.Input[_builtins.str] condition: The specific content of precise speed limit shall comply with the expression syntax. for detailed specifications, see the product documentation.
         :param pulumi.Input[_builtins.str] enabled: Whether the precise rate limiting rule is enabled. valid values: - on: enabled; - off: disabled(No other fields are required when closing).
         :param pulumi.Input[_builtins.str] name: Specifies the name of the precise rate limit.
-        :param pulumi.Input[_builtins.str] id: ID of the resource.
+        :param pulumi.Input[_builtins.str] id: The ID of precise rate limiting. rule ID supports different rule configuration operations: - add a new rule: leave the ID empty or do not specify the ID parameter. - modify an existing rule: specify the rule ID that needs to be updated/modified. - delete an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.
         :param pulumi.Input[_builtins.int] priority: Precision rate limiting specifies the priority. value range is 0 to 100. default is 0.
         :param pulumi.Input[_builtins.str] rule_type: Type of custom rule. Values: - `BasicAccessRule`: basic access control; - `PreciseMatchRule`: exact custom rule, default; - `ManagedAccessRule`: expert customized rule, output parameter only.The default value is PreciseMatchRule.
         """
@@ -128578,7 +130743,7 @@ class WebSecurityTemplateSecurityPolicyCustomRulesRuleArgs:
     @pulumi.getter
     def id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        ID of the resource.
+        The ID of precise rate limiting. rule ID supports different rule configuration operations: - add a new rule: leave the ID empty or do not specify the ID parameter. - modify an existing rule: specify the rule ID that needs to be updated/modified. - delete an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.
         """
         return pulumi.get(self, "id")
 
@@ -129455,7 +131620,7 @@ class WebSecurityTemplateSecurityPolicyExceptionRulesRuleArgsDict(TypedDict):
     """
     id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
-    ID of the resource.
+    The ID of precise rate limiting. rule ID supports different rule configuration operations: - add a new rule: leave the ID empty or do not specify the ID parameter. - modify an existing rule: specify the rule ID that needs to be updated/modified. - delete an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.
     """
     managed_rule_groups_for_exceptions: NotRequired[pulumi.Input[Optional[Sequence[pulumi.Input[_builtins.str]]]]]
     """
@@ -129502,7 +131667,7 @@ class WebSecurityTemplateSecurityPolicyExceptionRulesRuleArgs:
         """
         :param pulumi.Input[_builtins.str] condition: The specific content of precise speed limit shall comply with the expression syntax. for detailed specifications, see the product documentation.
         :param pulumi.Input[_builtins.str] enabled: Whether the precise rate limiting rule is enabled. valid values: - on: enabled; - off: disabled(No other fields are required when closing).
-        :param pulumi.Input[_builtins.str] id: ID of the resource.
+        :param pulumi.Input[_builtins.str] id: The ID of precise rate limiting. rule ID supports different rule configuration operations: - add a new rule: leave the ID empty or do not specify the ID parameter. - modify an existing rule: specify the rule ID that needs to be updated/modified. - delete an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] managed_rule_groups_for_exceptions: A managed rule group with designated exception rules is valid only when SkipScope is ManagedRules, and at this point you cannot specify ManagedRulesForException.
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] managed_rules_for_exceptions: Specifies the managed rule for the exception rule. valid only when SkipScope is ManagedRules. cannot specify ManagedRuleGroupsForException at this time.
         :param pulumi.Input[_builtins.str] name: Specifies the name of the precise rate limit.
@@ -129560,7 +131725,7 @@ class WebSecurityTemplateSecurityPolicyExceptionRulesRuleArgs:
     @pulumi.getter
     def id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        ID of the resource.
+        The ID of precise rate limiting. rule ID supports different rule configuration operations: - add a new rule: leave the ID empty or do not specify the ID parameter. - modify an existing rule: specify the rule ID that needs to be updated/modified. - delete an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.
         """
         return pulumi.get(self, "id")
 
@@ -132998,7 +135163,7 @@ class WebSecurityTemplateSecurityPolicyRateLimitingRulesRuleArgsDict(TypedDict):
     """
     id: NotRequired[pulumi.Input[Optional[_builtins.str]]]
     """
-    ID of the resource.
+    The ID of precise rate limiting. rule ID supports different rule configuration operations: - add a new rule: leave the ID empty or do not specify the ID parameter. - modify an existing rule: specify the rule ID that needs to be updated/modified. - delete an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.
     """
     max_request_threshold: NotRequired[pulumi.Input[Optional[_builtins.int]]]
     """
@@ -133033,7 +135198,7 @@ class WebSecurityTemplateSecurityPolicyRateLimitingRulesRuleArgs:
         :param pulumi.Input[Sequence[pulumi.Input[_builtins.str]]] count_bies: Rate threshold request feature match mode. this field is required when Enabled is on.  when there are multiple conditions, composite multiple conditions will perform statistics count. the maximum number of conditions must not exceed 5. valid values: - http.request.ip: client ip; - http.request.xff_header_ip: client ip (priority match xff header); - http.request.uri.path: request access path; - http.request.cookies['session']: Cookie named session, where session can be replaced with your own specified parameter; - http.request.headers['user-agent']: http header named user-agent, where user-agent can be replaced with your own specified parameter; - http.request.ja3: request ja3 fingerprint; - http.request.uri.query['test']: URL query parameter named test, where test can be replaced with your own specified parameter.
         :param pulumi.Input[_builtins.str] counting_period: Specifies the time window for statistics. valid values: - 1s: 1 second;- 5s: 5 seconds;- 10s: 10 seconds;- 20s: 20 seconds;- 30s: 30 seconds;- 40s: 40 seconds;- 50s: 50 seconds;- 1m: 1 minute;- 2m: 2 minutes;- 5m: 5 minutes;- 10m: 10 minutes;- 1h: 1 hour.
         :param pulumi.Input[_builtins.str] enabled: Whether the precise rate limiting rule is enabled. valid values: - on: enabled; - off: disabled(No other fields are required when closing).
-        :param pulumi.Input[_builtins.str] id: ID of the resource.
+        :param pulumi.Input[_builtins.str] id: The ID of precise rate limiting. rule ID supports different rule configuration operations: - add a new rule: leave the ID empty or do not specify the ID parameter. - modify an existing rule: specify the rule ID that needs to be updated/modified. - delete an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.
         :param pulumi.Input[_builtins.int] max_request_threshold: Precision rate limiting specifies the cumulative number of interceptions within the time range. value ranges from 1 to 100000.
         :param pulumi.Input[_builtins.str] name: Specifies the name of the precise rate limit.
         :param pulumi.Input[_builtins.int] priority: Precision rate limiting specifies the priority. value range is 0 to 100. default is 0.
@@ -133135,7 +135300,7 @@ class WebSecurityTemplateSecurityPolicyRateLimitingRulesRuleArgs:
     @pulumi.getter
     def id(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
-        ID of the resource.
+        The ID of precise rate limiting. rule ID supports different rule configuration operations: - add a new rule: leave the ID empty or do not specify the ID parameter. - modify an existing rule: specify the rule ID that needs to be updated/modified. - delete an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.
         """
         return pulumi.get(self, "id")
 
@@ -133820,6 +135985,53 @@ class ZoneWorkModeInfoArgs:
     @work_mode.setter
     def work_mode(self, value: pulumi.Input[_builtins.str]):
         pulumi.set(self, "work_mode", value)
+
+
+class GetBillingDataFilterArgsDict(TypedDict):
+    type: _builtins.str
+    """
+    Parameter name. Valid values: `host`, `proxy-id`, `region-id`.
+    """
+    value: _builtins.str
+    """
+    Parameter value.
+    """
+
+@pulumi.input_type
+class GetBillingDataFilterArgs:
+    def __init__(__self__, *,
+                 type: _builtins.str,
+                 value: _builtins.str):
+        """
+        :param _builtins.str type: Parameter name. Valid values: `host`, `proxy-id`, `region-id`.
+        :param _builtins.str value: Parameter value.
+        """
+        pulumi.set(__self__, "type", type)
+        pulumi.set(__self__, "value", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def type(self) -> _builtins.str:
+        """
+        Parameter name. Valid values: `host`, `proxy-id`, `region-id`.
+        """
+        return pulumi.get(self, "type")
+
+    @type.setter
+    def type(self, value: _builtins.str):
+        pulumi.set(self, "type", value)
+
+    @_builtins.property
+    @pulumi.getter
+    def value(self) -> _builtins.str:
+        """
+        Parameter value.
+        """
+        return pulumi.get(self, "value")
+
+    @value.setter
+    def value(self, value: _builtins.str):
+        pulumi.set(self, "value", value)
 
 
 class GetConfigGroupVersionsFilterArgsDict(TypedDict):

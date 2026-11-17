@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeClientConnections](https://www.tencentcloud.com/document/api/240/34703)
         /// </summary>
         public static Task<GetInstanceConnectionsResult> InvokeAsync(GetInstanceConnectionsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceConnectionsResult>("tencentcloud:Mongodb/getInstanceConnections:getInstanceConnections", args ?? new GetInstanceConnectionsArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeClientConnections](https://www.tencentcloud.com/document/api/240/34703)
         /// </summary>
         public static Output<GetInstanceConnectionsResult> Invoke(GetInstanceConnectionsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceConnectionsResult>("tencentcloud:Mongodb/getInstanceConnections:getInstanceConnections", args ?? new GetInstanceConnectionsInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeClientConnections](https://www.tencentcloud.com/document/api/240/34703)
         /// </summary>
         public static Output<GetInstanceConnectionsResult> Invoke(GetInstanceConnectionsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceConnectionsResult>("tencentcloud:Mongodb/getInstanceConnections:getInstanceConnections", args ?? new GetInstanceConnectionsInvokeArgs(), options.WithDefaults());

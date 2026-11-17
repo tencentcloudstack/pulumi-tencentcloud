@@ -96,6 +96,12 @@ class RebalanceReadonlyGroupOperation(pulumi.CustomResource):
         rebalance_readonly_group_operation = tencentcloud.postgresql.RebalanceReadonlyGroupOperation("rebalance_readonly_group_operation", read_only_group_id=group_rebalance.id)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [RebalanceReadOnlyGroup](https://www.tencentcloud.com/document/api/409/39722)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -129,6 +135,12 @@ class RebalanceReadonlyGroupOperation(pulumi.CustomResource):
             min_delay_eliminate_reserve=1)
         rebalance_readonly_group_operation = tencentcloud.postgresql.RebalanceReadonlyGroupOperation("rebalance_readonly_group_operation", read_only_group_id=group_rebalance.id)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [RebalanceReadOnlyGroup](https://www.tencentcloud.com/document/api/409/39722)
 
 
         :param str resource_name: The name of the resource.

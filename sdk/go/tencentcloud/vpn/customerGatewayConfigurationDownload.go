@@ -46,6 +46,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [DownloadCustomerGatewayConfiguration](https://www.tencentcloud.com/document/api/215/17513)
 type CustomerGatewayConfigurationDownload struct {
 	pulumi.CustomResourceState
 

@@ -20,6 +20,14 @@ import * as utilities from "../utilities";
  *     accountName: "test",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeInstanceAttributes](https://www.tencentcloud.com/document/api/597/35358)
+ *   - [DescribeUser](https://www.tencentcloud.com/document/api/597/35363)
  */
 export function getUsers(args: GetUsersArgs, opts?: pulumi.InvokeOptions): Promise<GetUsersResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -81,6 +89,14 @@ export interface GetUsersResult {
  *     accountName: "test",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read:
+ *   - [DescribeInstanceAttributes](https://www.tencentcloud.com/document/api/597/35358)
+ *   - [DescribeUser](https://www.tencentcloud.com/document/api/597/35363)
  */
 export function getUsersOutput(args: GetUsersOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetUsersResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

@@ -50,6 +50,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSqlFilters](https://www.tencentcloud.com/search/?wd=DescribeSqlFilters&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetSqlFiltersResult> InvokeAsync(GetSqlFiltersArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSqlFiltersResult>("tencentcloud:Dbbrain/getSqlFilters:getSqlFilters", args ?? new GetSqlFiltersArgs(), options.WithDefaults());
@@ -92,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSqlFilters](https://www.tencentcloud.com/search/?wd=DescribeSqlFilters&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetSqlFiltersResult> Invoke(GetSqlFiltersInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSqlFiltersResult>("tencentcloud:Dbbrain/getSqlFilters:getSqlFilters", args ?? new GetSqlFiltersInvokeArgs(), options.WithDefaults());
@@ -134,6 +146,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeSqlFilters](https://www.tencentcloud.com/search/?wd=DescribeSqlFilters&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetSqlFiltersResult> Invoke(GetSqlFiltersInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetSqlFiltersResult>("tencentcloud:Dbbrain/getSqlFilters:getSqlFilters", args ?? new GetSqlFiltersInvokeArgs(), options.WithDefaults());

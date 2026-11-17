@@ -120,6 +120,12 @@ class UploadRevokeLetterOperation(pulumi.CustomResource):
             revoke_letter=std.filebase64(input="./c.pdf").result)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [UploadRevokeLetter](https://www.tencentcloud.com/search/?wd=UploadRevokeLetter&type=document&lang=en)
+
         ## Import
 
         ssl upload_revoke_letter can be imported using the id, e.g.
@@ -154,6 +160,12 @@ class UploadRevokeLetterOperation(pulumi.CustomResource):
             certificate_id="8xRYdDlc",
             revoke_letter=std.filebase64(input="./c.pdf").result)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [UploadRevokeLetter](https://www.tencentcloud.com/search/?wd=UploadRevokeLetter&type=document&lang=en)
 
         ## Import
 

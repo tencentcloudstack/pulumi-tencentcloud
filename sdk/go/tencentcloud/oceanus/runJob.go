@@ -48,6 +48,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [RunJobs](https://www.tencentcloud.com/search/?wd=RunJobs&type=document&lang=en)
 type RunJob struct {
 	pulumi.CustomResourceState
 

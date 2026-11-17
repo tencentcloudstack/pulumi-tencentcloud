@@ -19,9 +19,25 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Outputs
         /// </summary>
         public readonly int? BizType;
         /// <summary>
+        /// custom metric labels, used to add static dimensions to metrics.
+        /// </summary>
+        public readonly ImmutableArray<Outputs.ScheduledSqlDstResourceCustomMetricLabel> CustomMetricLabels;
+        /// <summary>
+        /// metric timestamp field, the default value is the left boundary time of the SQL query range.
+        /// </summary>
+        public readonly string? CustomTime;
+        /// <summary>
+        /// metric dimensions, time type is not accepted.
+        /// </summary>
+        public readonly ImmutableArray<string> MetricLabels;
+        /// <summary>
         /// metric name.
         /// </summary>
         public readonly string? MetricName;
+        /// <summary>
+        /// metric names, used when BizType is 1 (metric topic) for multi-metric scenarios.
+        /// </summary>
+        public readonly ImmutableArray<string> MetricNames;
         /// <summary>
         /// topic region.
         /// </summary>
@@ -35,14 +51,26 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Outputs
         private ScheduledSqlDstResource(
             int? bizType,
 
+            ImmutableArray<Outputs.ScheduledSqlDstResourceCustomMetricLabel> customMetricLabels,
+
+            string? customTime,
+
+            ImmutableArray<string> metricLabels,
+
             string? metricName,
+
+            ImmutableArray<string> metricNames,
 
             string? region,
 
             string topicId)
         {
             BizType = bizType;
+            CustomMetricLabels = customMetricLabels;
+            CustomTime = customTime;
+            MetricLabels = metricLabels;
             MetricName = metricName;
+            MetricNames = metricNames;
             Region = region;
             TopicId = topicId;
         }

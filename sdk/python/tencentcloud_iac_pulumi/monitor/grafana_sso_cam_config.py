@@ -119,6 +119,14 @@ class GrafanaSsoCamConfig(pulumi.CustomResource):
             enable_sso_cam_check=False)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [EnableSSOCamCheck](https://www.tencentcloud.com/document/api/248/49751)
+        * Read: [DescribeGrafanaInstances](https://www.tencentcloud.com/document/api/248/49759)
+        * Update: [EnableSSOCamCheck](https://www.tencentcloud.com/document/api/248/49751)
+
         ## Import
 
         monitor grafana_sso_cam_config can be imported using the id, e.g.
@@ -152,6 +160,14 @@ class GrafanaSsoCamConfig(pulumi.CustomResource):
             instance_id="grafana-dp2hnnfa",
             enable_sso_cam_check=False)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [EnableSSOCamCheck](https://www.tencentcloud.com/document/api/248/49751)
+        * Read: [DescribeGrafanaInstances](https://www.tencentcloud.com/document/api/248/49759)
+        * Update: [EnableSSOCamCheck](https://www.tencentcloud.com/document/api/248/49751)
 
         ## Import
 

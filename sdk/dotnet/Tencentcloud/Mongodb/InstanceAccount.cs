@@ -42,6 +42,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateAccountUser](https://www.tencentcloud.com/document/api/240/74806)
+    ///   - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/240/37921)
+    /// * Read: [DescribeAccountUsers](https://www.tencentcloud.com/document/api/240/79919)
+    /// * Update:
+    ///   - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/240/37921)
+    ///   - [ResetDBInstancePassword](https://www.tencentcloud.com/document/api/240/37924)
+    ///   - [SetAccountUserPrivilege](https://www.tencentcloud.com/document/api/240/74805)
+    /// * Delete:
+    ///   - [DeleteAccountUser](https://www.tencentcloud.com/document/api/240/74804)
+    ///   - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/240/37921)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mongodb/instanceAccount:InstanceAccount")]
     public partial class InstanceAccount : global::Pulumi.CustomResource

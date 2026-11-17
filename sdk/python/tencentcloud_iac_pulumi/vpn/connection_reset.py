@@ -119,6 +119,12 @@ class ConnectionReset(pulumi.CustomResource):
             vpn_connection_id="vpnx-kme2tx8m")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ResetVpnConnection](https://www.tencentcloud.com/document/api/215/17505)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -144,6 +150,12 @@ class ConnectionReset(pulumi.CustomResource):
             vpn_gateway_id="vpngw-gt8bianl",
             vpn_connection_id="vpnx-kme2tx8m")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ResetVpnConnection](https://www.tencentcloud.com/document/api/215/17505)
 
 
         :param str resource_name: The name of the resource.

@@ -868,6 +868,37 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateCluster](https://www.tencentcloud.com/document/api/457/32027)
+    /// * Read:
+    ///   - [DescribeClusterExtraArgs](https://www.tencentcloud.com/search/?wd=DescribeClusterExtraArgs&amp;type=document&amp;lang=en)
+    ///   - [DescribeClusterInstances](https://www.tencentcloud.com/document/api/457/66315)
+    ///   - [DescribeClusterSecurity](https://www.tencentcloud.com/search/?wd=DescribeClusterSecurity&amp;type=document&amp;lang=en)
+    ///   - [DescribeClusters](https://www.tencentcloud.com/document/api/457/32025)
+    /// * Update:
+    ///   - [AddVpcCniSubnets](https://www.tencentcloud.com/document/api/457/40679)
+    ///   - [DescribeBatchModifyTagsStatus](https://www.tencentcloud.com/search/?wd=DescribeBatchModifyTagsStatus&amp;type=document&amp;lang=en)
+    ///   - [DescribeClusterInstances](https://www.tencentcloud.com/document/api/457/66315)
+    ///   - [DescribeClusters](https://www.tencentcloud.com/document/api/457/32025)
+    ///   - [DescribeIPAMD](https://www.tencentcloud.com/document/api/457/66011)
+    ///   - [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258)
+    ///   - [DescribeTasks](https://www.tencentcloud.com/search/?wd=DescribeTasks&amp;type=document&amp;lang=en)
+    ///   - [DisableVpcCniNetworkType](https://www.tencentcloud.com/search/?wd=DisableVpcCniNetworkType&amp;type=document&amp;lang=en)
+    ///   - [EnableVpcCniNetworkType](https://www.tencentcloud.com/document/api/457/41569)
+    ///   - [ModifyClusterAsGroupOptionAttribute](https://www.tencentcloud.com/document/api/457/39252)
+    ///   - [ModifyClusterAttribute](https://www.tencentcloud.com/document/api/457/35615)
+    ///   - [ModifyClusterEndpointSP](https://www.tencentcloud.com/document/api/457/33864)
+    ///   - [ModifyClusterExtraArgs](https://www.tencentcloud.com/search/?wd=ModifyClusterExtraArgs&amp;type=document&amp;lang=en)
+    ///   - [ModifyClusterImage](https://www.tencentcloud.com/search/?wd=ModifyClusterImage&amp;type=document&amp;lang=en)
+    ///   - [ScaleInClusterMaster](https://www.tencentcloud.com/search/?wd=ScaleInClusterMaster&amp;type=document&amp;lang=en)
+    ///   - [ScaleOutClusterMaster](https://www.tencentcloud.com/search/?wd=ScaleOutClusterMaster&amp;type=document&amp;lang=en)
+    ///   - [Send](https://www.tencentcloud.com/search/?wd=Send&amp;type=document&amp;lang=en)
+    ///   - [UpdateClusterVersion](https://www.tencentcloud.com/document/api/457/39567)
+    /// * Delete: [DeleteCluster](https://www.tencentcloud.com/document/api/457/33870)
+    /// 
     /// ## Import
     /// 
     /// tke cluster can be imported, e.g.

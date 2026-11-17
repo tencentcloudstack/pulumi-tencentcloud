@@ -34,6 +34,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeCfsFileSystems](https://www.tencentcloud.com/document/api/582/34514)
+        ///   - [DescribeMountTargets](https://www.tencentcloud.com/document/api/582/34513)
         /// </summary>
         public static Task<GetFileSystemsResult> InvokeAsync(GetFileSystemsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetFileSystemsResult>("tencentcloud:Cfs/getFileSystems:getFileSystems", args ?? new GetFileSystemsArgs(), options.WithDefaults());
@@ -60,6 +68,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeCfsFileSystems](https://www.tencentcloud.com/document/api/582/34514)
+        ///   - [DescribeMountTargets](https://www.tencentcloud.com/document/api/582/34513)
         /// </summary>
         public static Output<GetFileSystemsResult> Invoke(GetFileSystemsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetFileSystemsResult>("tencentcloud:Cfs/getFileSystems:getFileSystems", args ?? new GetFileSystemsInvokeArgs(), options.WithDefaults());
@@ -86,6 +102,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfs
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeCfsFileSystems](https://www.tencentcloud.com/document/api/582/34514)
+        ///   - [DescribeMountTargets](https://www.tencentcloud.com/document/api/582/34513)
         /// </summary>
         public static Output<GetFileSystemsResult> Invoke(GetFileSystemsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetFileSystemsResult>("tencentcloud:Cfs/getFileSystems:getFileSystems", args ?? new GetFileSystemsInvokeArgs(), options.WithDefaults());

@@ -36,6 +36,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeFwEdgeIps](https://www.tencentcloud.com/search/?wd=DescribeFwEdgeIps&type=document&lang=en)
 func GetEdgeFwSwitches(ctx *pulumi.Context, args *GetEdgeFwSwitchesArgs, opts ...pulumi.InvokeOption) (*GetEdgeFwSwitchesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetEdgeFwSwitchesResult

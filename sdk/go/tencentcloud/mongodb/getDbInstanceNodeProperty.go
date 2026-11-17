@@ -77,6 +77,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDBInstanceNodeProperty](https://www.tencentcloud.com/document/api/240/74083)
 func GetDbInstanceNodeProperty(ctx *pulumi.Context, args *GetDbInstanceNodePropertyArgs, opts ...pulumi.InvokeOption) (*GetDbInstanceNodePropertyResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDbInstanceNodePropertyResult

@@ -38,6 +38,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Identity
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateUserSyncProvisioning](https://www.tencentcloud.com/document/api/1031/63580)
+    ///   - [GetProvisioningTaskStatus](https://www.tencentcloud.com/document/api/1031/63578)
+    /// * Read: [GetUserSyncProvisioning](https://www.tencentcloud.com/document/api/1031/63577)
+    /// * Update: [UpdateUserSyncProvisioning](https://www.tencentcloud.com/document/api/1031/63575)
+    /// * Delete:
+    ///   - [DeleteUserSyncProvisioning](https://www.tencentcloud.com/document/api/1031/63579)
+    ///   - [GetProvisioningTaskStatus](https://www.tencentcloud.com/document/api/1031/63578)
+    /// 
     /// ## Import
     /// 
     /// organization IdentityCenterUserSyncProvisioning can be imported using the id, e.g.

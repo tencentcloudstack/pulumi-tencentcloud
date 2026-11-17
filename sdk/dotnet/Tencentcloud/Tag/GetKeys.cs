@@ -51,6 +51,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tag
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTagKeys](https://www.tencentcloud.com/document/api/651/33020)
         /// </summary>
         public static Task<GetKeysResult> InvokeAsync(GetKeysArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetKeysResult>("tencentcloud:Tag/getKeys:getKeys", args ?? new GetKeysArgs(), options.WithDefaults());
@@ -94,6 +100,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tag
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTagKeys](https://www.tencentcloud.com/document/api/651/33020)
         /// </summary>
         public static Output<GetKeysResult> Invoke(GetKeysInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetKeysResult>("tencentcloud:Tag/getKeys:getKeys", args ?? new GetKeysInvokeArgs(), options.WithDefaults());
@@ -137,6 +149,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tag
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTagKeys](https://www.tencentcloud.com/document/api/651/33020)
         /// </summary>
         public static Output<GetKeysResult> Invoke(GetKeysInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetKeysResult>("tencentcloud:Tag/getKeys:getKeys", args ?? new GetKeysInvokeArgs(), options.WithDefaults());

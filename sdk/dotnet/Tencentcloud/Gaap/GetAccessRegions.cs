@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAccessRegions](https://www.tencentcloud.com/document/api/608/33104)
         /// </summary>
         public static Task<GetAccessRegionsResult> InvokeAsync(GetAccessRegionsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetAccessRegionsResult>("tencentcloud:Gaap/getAccessRegions:getAccessRegions", args ?? new GetAccessRegionsArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAccessRegions](https://www.tencentcloud.com/document/api/608/33104)
         /// </summary>
         public static Output<GetAccessRegionsResult> Invoke(GetAccessRegionsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetAccessRegionsResult>("tencentcloud:Gaap/getAccessRegions:getAccessRegions", args ?? new GetAccessRegionsInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAccessRegions](https://www.tencentcloud.com/document/api/608/33104)
         /// </summary>
         public static Output<GetAccessRegionsResult> Invoke(GetAccessRegionsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetAccessRegionsResult>("tencentcloud:Gaap/getAccessRegions:getAccessRegions", args ?? new GetAccessRegionsInvokeArgs(), options.WithDefaults());

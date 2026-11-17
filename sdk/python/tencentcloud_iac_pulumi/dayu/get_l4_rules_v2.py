@@ -122,6 +122,12 @@ def get_l4_rules_v2(business: Optional[_builtins.str] = None,
     tencentcloud_dayu_l4_rules_v2 = tencentcloud.dayu.get_l4_rules_v2(business="bgpip")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeNewL4Rules](https://www.tencentcloud.com/search/?wd=DescribeNewL4Rules&type=document&lang=en)
+
 
     :param _builtins.str business: Type of the resource that the layer 4 rule works for, valid values are `bgpip`, `bgp`, `bgp-multip` and `net`.
     :param _builtins.str ip: Ip of the resource.
@@ -159,6 +165,12 @@ def get_l4_rules_v2_output(business: pulumi.Input[Optional[_builtins.str]] = Non
 
     tencentcloud_dayu_l4_rules_v2 = tencentcloud.dayu.get_l4_rules_v2(business="bgpip")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeNewL4Rules](https://www.tencentcloud.com/search/?wd=DescribeNewL4Rules&type=document&lang=en)
 
 
     :param _builtins.str business: Type of the resource that the layer 4 rule works for, valid values are `bgpip`, `bgp`, `bgp-multip` and `net`.

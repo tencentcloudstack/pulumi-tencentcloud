@@ -163,6 +163,12 @@ def get_peak_points(domain: Optional[_builtins.str] = None,
         metric_name="access")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribePeakPoints](https://www.tencentcloud.com/document/api/627/64501)
+
 
     :param _builtins.str domain: The domain name to be queried. If all domain name data is queried, this parameter is not filled in.
     :param _builtins.str edition: Only support sparta-waf and clb-waf. If not passed, there will be no filtering.
@@ -229,6 +235,12 @@ def get_peak_points_output(domain: pulumi.Input[Optional[Optional[_builtins.str]
         instance_id="waf_2kxtlbky00b2v1fn",
         metric_name="access")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribePeakPoints](https://www.tencentcloud.com/document/api/627/64501)
 
 
     :param _builtins.str domain: The domain name to be queried. If all domain name data is queried, this parameter is not filled in.

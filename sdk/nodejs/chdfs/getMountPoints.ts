@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     fileSystemId: "f14mpfy5lh4e",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeMountPoints](https://www.tencentcloud.com/document/api/1106/42431)
  */
 export function getMountPoints(args?: GetMountPointsArgs, opts?: pulumi.InvokeOptions): Promise<GetMountPointsResult> {
     args = args || {};
@@ -86,6 +92,12 @@ export interface GetMountPointsResult {
  *     fileSystemId: "f14mpfy5lh4e",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeMountPoints](https://www.tencentcloud.com/document/api/1106/42431)
  */
 export function getMountPointsOutput(args?: GetMountPointsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetMountPointsResult> {
     args = args || {};

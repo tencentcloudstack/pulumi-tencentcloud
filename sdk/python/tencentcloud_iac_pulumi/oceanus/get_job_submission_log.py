@@ -211,6 +211,12 @@ def get_job_submission_log(cursor: Optional[_builtins.str] = None,
         order_type="desc")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeJobSubmissionLog](https://www.tencentcloud.com/search/?wd=DescribeJobSubmissionLog&type=document&lang=en)
+
 
     :param _builtins.str cursor: Cursor, default empty, first request does not need to pass in.
     :param _builtins.int end_time: End time, unix timestamp, in milliseconds.
@@ -272,6 +278,12 @@ def get_job_submission_log_output(cursor: pulumi.Input[Optional[Optional[_builti
         running_order_id=0,
         order_type="desc")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeJobSubmissionLog](https://www.tencentcloud.com/search/?wd=DescribeJobSubmissionLog&type=document&lang=en)
 
 
     :param _builtins.str cursor: Cursor, default empty, first request does not need to pass in.

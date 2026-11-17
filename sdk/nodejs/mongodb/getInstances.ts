@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     clusterType: "REPLSET",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBInstances](https://www.tencentcloud.com/document/api/240/34702)
  */
 export function getInstances(args?: GetInstancesArgs, opts?: pulumi.InvokeOptions): Promise<GetInstancesResult> {
     args = args || {};
@@ -100,6 +106,12 @@ export interface GetInstancesResult {
  *     clusterType: "REPLSET",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBInstances](https://www.tencentcloud.com/document/api/240/34702)
  */
 export function getInstancesOutput(args?: GetInstancesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInstancesResult> {
     args = args || {};

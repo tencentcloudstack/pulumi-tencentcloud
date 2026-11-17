@@ -19,6 +19,14 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [ModifyBinlogSaveDays](https://www.tencentcloud.com/document/api/1098/55922)
+ * * Read: [DescribeBinlogSaveDays](https://www.tencentcloud.com/document/api/1098/48595)
+ * * Update: [ModifyBinlogSaveDays](https://www.tencentcloud.com/document/api/1098/55922)
+ *
  * ## Import
  *
  * cynosdb binlogSaveDays can be imported using the id, e.g.

@@ -21,6 +21,12 @@ import * as utilities from "../utilities";
  *     topics: ["xxxxxx"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [ModifyGroupOffsets](https://www.tencentcloud.com/document/api/597/35355)
  */
 export class ConsumerGroupModifyOffset extends pulumi.CustomResource {
     /**

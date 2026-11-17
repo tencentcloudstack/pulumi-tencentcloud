@@ -315,6 +315,19 @@ class Mesh(pulumi.CustomResource):
             }])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateMesh](https://www.tencentcloud.com/search/?wd=CreateMesh&type=document&lang=en)
+          - [DescribeMesh](https://www.tencentcloud.com/search/?wd=DescribeMesh&type=document&lang=en)
+        * Read: [DescribeMesh](https://www.tencentcloud.com/search/?wd=DescribeMesh&type=document&lang=en)
+        * Update: [ModifyMesh](https://www.tencentcloud.com/search/?wd=ModifyMesh&type=document&lang=en)
+        * Delete:
+          - [DeleteMesh](https://www.tencentcloud.com/search/?wd=DeleteMesh&type=document&lang=en)
+          - [DescribeMesh](https://www.tencentcloud.com/search/?wd=DescribeMesh&type=document&lang=en)
+
         ## Import
 
         tcm mesh can be imported using the id, e.g.
@@ -414,6 +427,19 @@ class Mesh(pulumi.CustomResource):
                 "passthrough": False,
             }])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateMesh](https://www.tencentcloud.com/search/?wd=CreateMesh&type=document&lang=en)
+          - [DescribeMesh](https://www.tencentcloud.com/search/?wd=DescribeMesh&type=document&lang=en)
+        * Read: [DescribeMesh](https://www.tencentcloud.com/search/?wd=DescribeMesh&type=document&lang=en)
+        * Update: [ModifyMesh](https://www.tencentcloud.com/search/?wd=ModifyMesh&type=document&lang=en)
+        * Delete:
+          - [DeleteMesh](https://www.tencentcloud.com/search/?wd=DeleteMesh&type=document&lang=en)
+          - [DescribeMesh](https://www.tencentcloud.com/search/?wd=DescribeMesh&type=document&lang=en)
 
         ## Import
 

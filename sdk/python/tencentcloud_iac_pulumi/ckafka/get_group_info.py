@@ -107,6 +107,12 @@ def get_group_info(group_lists: Optional[Sequence[_builtins.str]] = None,
         group_lists=["xxxxxx"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeGroupInfo](https://www.tencentcloud.com/document/api/597/35360)
+
 
     :param Sequence[_builtins.str] group_lists: Kafka consumption group, Consumer-group, here is an array format, format GroupList.0=xxx&amp;amp;GroupList.1=yyy.
     :param _builtins.str instance_id: InstanceId.
@@ -141,6 +147,12 @@ def get_group_info_output(group_lists: pulumi.Input[Optional[Sequence[_builtins.
     group_info = tencentcloud.ckafka.get_group_info(instance_id="ckafka-xxxxxx",
         group_lists=["xxxxxx"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeGroupInfo](https://www.tencentcloud.com/document/api/597/35360)
 
 
     :param Sequence[_builtins.str] group_lists: Kafka consumption group, Consumer-group, here is an array format, format GroupList.0=xxx&amp;amp;GroupList.1=yyy.

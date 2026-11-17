@@ -46,6 +46,20 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeDataEngine](https://www.tencentcloud.com/document/api/1155/62693)
+    ///   - [DescribeDataEngines](https://www.tencentcloud.com/search/?wd=DescribeDataEngines&amp;type=document&amp;lang=en)
+    ///   - [UpdateUserDataEngineConfig](https://www.tencentcloud.com/document/api/1155/62644)
+    /// * Read: [DescribeUserDataEngineConfig](https://www.tencentcloud.com/document/api/1155/62685)
+    /// * Update:
+    ///   - [DescribeDataEngine](https://www.tencentcloud.com/document/api/1155/62693)
+    ///   - [DescribeDataEngines](https://www.tencentcloud.com/search/?wd=DescribeDataEngines&amp;type=document&amp;lang=en)
+    ///   - [UpdateUserDataEngineConfig](https://www.tencentcloud.com/document/api/1155/62644)
+    /// 
     /// ## Import
     /// 
     /// dlc UserDataEngineConfig can be imported using the id, e.g.

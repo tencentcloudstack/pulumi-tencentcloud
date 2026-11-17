@@ -86,6 +86,12 @@ def get_zones(result_output_file: Optional[_builtins.str] = None,
     zones = tencentcloud.postgresql.get_zones()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeZones](https://www.tencentcloud.com/document/api/409/16769)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -111,6 +117,12 @@ def get_zones_output(result_output_file: pulumi.Input[Optional[Optional[_builtin
 
     zones = tencentcloud.postgresql.get_zones()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeZones](https://www.tencentcloud.com/document/api/409/16769)
 
 
     :param _builtins.str result_output_file: Used to save results.

@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeNamespaces](https://www.tencentcloud.com/document/api/1051/50693)
 func GetNamespaces(ctx *pulumi.Context, args *GetNamespacesArgs, opts ...pulumi.InvokeOption) (*GetNamespacesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetNamespacesResult

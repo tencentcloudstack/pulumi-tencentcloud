@@ -22,6 +22,12 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCrossTargets](https://www.tencentcloud.com/document/api/214/45272)
  */
 export function getCrossTargets(args?: GetCrossTargetsArgs, opts?: pulumi.InvokeOptions): Promise<GetCrossTargetsResult> {
     args = args || {};
@@ -77,6 +83,12 @@ export interface GetCrossTargetsResult {
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeCrossTargets](https://www.tencentcloud.com/document/api/214/45272)
  */
 export function getCrossTargetsOutput(args?: GetCrossTargetsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetCrossTargetsResult> {
     args = args || {};

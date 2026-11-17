@@ -107,6 +107,12 @@ def get_security_groups(instance_id: Optional[_builtins.str] = None,
         product="mariadb")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBSecurityGroups](https://www.tencentcloud.com/document/api/237/39449)
+
 
     :param _builtins.str instance_id: instance id.
     :param _builtins.str product: product name, fixed to mariadb.
@@ -141,6 +147,12 @@ def get_security_groups_output(instance_id: pulumi.Input[Optional[_builtins.str]
     security_groups = tencentcloud.mariadb.get_security_groups(instance_id="tdsql-4pzs5b67",
         product="mariadb")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBSecurityGroups](https://www.tencentcloud.com/document/api/237/39449)
 
 
     :param _builtins.str instance_id: instance id.

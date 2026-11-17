@@ -18,6 +18,12 @@ import * as utilities from "../utilities";
  *     timeSpan: 1,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [RenewCkafkaInstance](https://www.tencentcloud.com/search/?wd=RenewCkafkaInstance&type=document&lang=en)
  */
 export class RenewInstance extends pulumi.CustomResource {
     /**

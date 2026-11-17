@@ -52,6 +52,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCrossBorderCcnRegionBandwidthLimits](https://www.tencentcloud.com/search/?wd=DescribeCrossBorderCcnRegionBandwidthLimits&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetCrossBorderRegionBandwidthLimitsResult> InvokeAsync(GetCrossBorderRegionBandwidthLimitsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetCrossBorderRegionBandwidthLimitsResult>("tencentcloud:Ccn/getCrossBorderRegionBandwidthLimits:getCrossBorderRegionBandwidthLimits", args ?? new GetCrossBorderRegionBandwidthLimitsArgs(), options.WithDefaults());
@@ -96,6 +102,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCrossBorderCcnRegionBandwidthLimits](https://www.tencentcloud.com/search/?wd=DescribeCrossBorderCcnRegionBandwidthLimits&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetCrossBorderRegionBandwidthLimitsResult> Invoke(GetCrossBorderRegionBandwidthLimitsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetCrossBorderRegionBandwidthLimitsResult>("tencentcloud:Ccn/getCrossBorderRegionBandwidthLimits:getCrossBorderRegionBandwidthLimits", args ?? new GetCrossBorderRegionBandwidthLimitsInvokeArgs(), options.WithDefaults());
@@ -140,6 +152,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCrossBorderCcnRegionBandwidthLimits](https://www.tencentcloud.com/search/?wd=DescribeCrossBorderCcnRegionBandwidthLimits&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetCrossBorderRegionBandwidthLimitsResult> Invoke(GetCrossBorderRegionBandwidthLimitsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetCrossBorderRegionBandwidthLimitsResult>("tencentcloud:Ccn/getCrossBorderRegionBandwidthLimits:getCrossBorderRegionBandwidthLimits", args ?? new GetCrossBorderRegionBandwidthLimitsInvokeArgs(), options.WithDefaults());

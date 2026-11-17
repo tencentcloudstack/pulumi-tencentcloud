@@ -29,6 +29,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &BackupConfig{}
 	case "tencentcloud:Redis/backupDownloadRestriction:BackupDownloadRestriction":
 		r = &BackupDownloadRestriction{}
+	case "tencentcloud:Redis/backupEncrypt:BackupEncrypt":
+		r = &BackupEncrypt{}
 	case "tencentcloud:Redis/backupOperation:BackupOperation":
 		r = &BackupOperation{}
 	case "tencentcloud:Redis/clearInstanceOperation:ClearInstanceOperation":
@@ -37,6 +39,8 @@ func (m *module) Construct(ctx *pulumi.Context, name, typ, urn string) (r pulumi
 		r = &ConnectionConfig{}
 	case "tencentcloud:Redis/instance:Instance":
 		r = &Instance{}
+	case "tencentcloud:Redis/instancePasswordPolicyConfig:InstancePasswordPolicyConfig":
+		r = &InstancePasswordPolicyConfig{}
 	case "tencentcloud:Redis/logDelivery:LogDelivery":
 		r = &LogDelivery{}
 	case "tencentcloud:Redis/maintenanceWindow:MaintenanceWindow":
@@ -102,6 +106,11 @@ func init() {
 	)
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
+		"Redis/backupEncrypt",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
 		"Redis/backupOperation",
 		&module{version},
 	)
@@ -118,6 +127,11 @@ func init() {
 	pulumi.RegisterResourceModule(
 		"tencentcloud",
 		"Redis/instance",
+		&module{version},
+	)
+	pulumi.RegisterResourceModule(
+		"tencentcloud",
+		"Redis/instancePasswordPolicyConfig",
 		&module{version},
 	)
 	pulumi.RegisterResourceModule(

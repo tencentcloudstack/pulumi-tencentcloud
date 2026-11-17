@@ -96,6 +96,12 @@ def get_group_and_statistics_proxy(project_id: Optional[_builtins.int] = None,
     group_and_statistics_proxy = tencentcloud.gaap.get_group_and_statistics_proxy(project_id=0)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeGroupAndStatisticsProxy](https://www.tencentcloud.com/document/api/608/33055)
+
 
     :param _builtins.int project_id: Project Id.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_group_and_statistics_proxy_output(project_id: pulumi.Input[Optional[_bui
 
     group_and_statistics_proxy = tencentcloud.gaap.get_group_and_statistics_proxy(project_id=0)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeGroupAndStatisticsProxy](https://www.tencentcloud.com/document/api/608/33055)
 
 
     :param _builtins.int project_id: Project Id.

@@ -86,6 +86,12 @@ def get_bandwidth_package_quota(result_output_file: Optional[_builtins.str] = No
     bandwidth_package_quota = tencentcloud.vpc.get_bandwidth_package_quota()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBandwidthPackageQuota](https://www.tencentcloud.com/document/api/215/36920)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -111,6 +117,12 @@ def get_bandwidth_package_quota_output(result_output_file: pulumi.Input[Optional
 
     bandwidth_package_quota = tencentcloud.vpc.get_bandwidth_package_quota()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBandwidthPackageQuota](https://www.tencentcloud.com/document/api/215/36920)
 
 
     :param _builtins.str result_output_file: Used to save results.

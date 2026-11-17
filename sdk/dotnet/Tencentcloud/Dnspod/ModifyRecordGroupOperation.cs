@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ModifyRecordToGroup](https://www.tencentcloud.com/document/api/1157/53840)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dnspod/modifyRecordGroupOperation:ModifyRecordGroupOperation")]
     public partial class ModifyRecordGroupOperation : global::Pulumi.CustomResource

@@ -117,6 +117,12 @@ def get_ops_alarm_message(alarm_message_id: Optional[_builtins.str] = None,
         alarm_message_id="263840")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetAlarmMessage](https://www.tencentcloud.com/document/api/1174/73834)
+
 
     :param _builtins.str alarm_message_id: Alarm message Id.
     :param _builtins.str project_id: Project ID.
@@ -155,6 +161,12 @@ def get_ops_alarm_message_output(alarm_message_id: pulumi.Input[Optional[_builti
     wedata_ops_alarm_message = tencentcloud.wedata.get_ops_alarm_message(project_id="1859317240494305280",
         alarm_message_id="263840")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetAlarmMessage](https://www.tencentcloud.com/document/api/1174/73834)
 
 
     :param _builtins.str alarm_message_id: Alarm message Id.

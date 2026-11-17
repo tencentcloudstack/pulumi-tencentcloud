@@ -69,6 +69,18 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateUserSAMLConfig](https://www.tencentcloud.com/document/api/598/42741)
+// * Read: [DescribeUserSAMLConfig](https://www.tencentcloud.com/document/api/598/42740)
+// * Update:
+//   - [DescribeUserSAMLConfig](https://www.tencentcloud.com/document/api/598/42740)
+//   - [UpdateUserSAMLConfig](https://www.tencentcloud.com/document/api/598/42739)
+//
+// * Delete: [UpdateUserSAMLConfig](https://www.tencentcloud.com/document/api/598/42739)
+//
 // ## Import
 //
 // CAM user saml config can be imported using the id, e.g.

@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeShipperTasks](https://www.tencentcloud.com/document/api/614/42773)
 func GetShipperTasks(ctx *pulumi.Context, args *GetShipperTasksArgs, opts ...pulumi.InvokeOption) (*GetShipperTasksResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetShipperTasksResult

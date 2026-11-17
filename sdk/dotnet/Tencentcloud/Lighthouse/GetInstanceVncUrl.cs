@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstanceVncUrl](https://www.tencentcloud.com/document/api/1103/42499)
         /// </summary>
         public static Task<GetInstanceVncUrlResult> InvokeAsync(GetInstanceVncUrlArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstanceVncUrlResult>("tencentcloud:Lighthouse/getInstanceVncUrl:getInstanceVncUrl", args ?? new GetInstanceVncUrlArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstanceVncUrl](https://www.tencentcloud.com/document/api/1103/42499)
         /// </summary>
         public static Output<GetInstanceVncUrlResult> Invoke(GetInstanceVncUrlInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceVncUrlResult>("tencentcloud:Lighthouse/getInstanceVncUrl:getInstanceVncUrl", args ?? new GetInstanceVncUrlInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstanceVncUrl](https://www.tencentcloud.com/document/api/1103/42499)
         /// </summary>
         public static Output<GetInstanceVncUrlResult> Invoke(GetInstanceVncUrlInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstanceVncUrlResult>("tencentcloud:Lighthouse/getInstanceVncUrl:getInstanceVncUrl", args ?? new GetInstanceVncUrlInvokeArgs(), options.WithDefaults());

@@ -54,6 +54,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tdmq
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateRabbitMQVipInstance](https://www.tencentcloud.com/search/?wd=CreateRabbitMQVipInstance&amp;type=document&amp;lang=en)
+    ///   - [DescribeRabbitMQVipInstances](https://www.tencentcloud.com/search/?wd=DescribeRabbitMQVipInstances&amp;type=document&amp;lang=en)
+    /// * Read:
+    ///   - [DescribeRabbitMQVipInstance](https://www.tencentcloud.com/search/?wd=DescribeRabbitMQVipInstance&amp;type=document&amp;lang=en)
+    ///   - [DescribeRabbitMQVipInstances](https://www.tencentcloud.com/search/?wd=DescribeRabbitMQVipInstances&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyRabbitMQVipInstance](https://www.tencentcloud.com/search/?wd=ModifyRabbitMQVipInstance&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteRabbitMQVipInstance](https://www.tencentcloud.com/search/?wd=DeleteRabbitMQVipInstance&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// TDMQ rabbitmq vip instance can be imported using the id, e.g.

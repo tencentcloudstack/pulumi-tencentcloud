@@ -98,6 +98,12 @@ def get_origin_acl(result_output_file: Optional[_builtins.str] = None,
     example = tencentcloud.teo.get_origin_acl(zone_id="zone-3fkff38fyw8s")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeOriginACL](https://www.tencentcloud.com/document/api/1145/71118)
+
 
     :param _builtins.str result_output_file: Used to save results.
     :param _builtins.str zone_id: Specifies the site ID.
@@ -129,6 +135,12 @@ def get_origin_acl_output(result_output_file: pulumi.Input[Optional[Optional[_bu
 
     example = tencentcloud.teo.get_origin_acl(zone_id="zone-3fkff38fyw8s")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeOriginACL](https://www.tencentcloud.com/document/api/1145/71118)
 
 
     :param _builtins.str result_output_file: Used to save results.

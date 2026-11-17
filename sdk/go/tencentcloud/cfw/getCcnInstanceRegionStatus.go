@@ -42,6 +42,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeCcnInstanceRegionStatus](https://www.tencentcloud.com/search/?wd=DescribeCcnInstanceRegionStatus&type=document&lang=en)
 func GetCcnInstanceRegionStatus(ctx *pulumi.Context, args *GetCcnInstanceRegionStatusArgs, opts ...pulumi.InvokeOption) (*GetCcnInstanceRegionStatusResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetCcnInstanceRegionStatusResult

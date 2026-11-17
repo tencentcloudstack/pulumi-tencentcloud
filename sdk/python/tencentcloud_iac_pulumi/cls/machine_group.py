@@ -392,6 +392,15 @@ class MachineGroup(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateMachineGroup](https://www.tencentcloud.com/document/api/614/42820)
+        * Read: [DescribeMachineGroups](https://www.tencentcloud.com/document/api/614/42818)
+        * Update: [ModifyMachineGroup](https://www.tencentcloud.com/document/api/614/42816)
+        * Delete: [DeleteMachineGroup](https://www.tencentcloud.com/document/api/614/42819)
+
         ## Import
 
         cls machine group can be imported using the id, e.g.
@@ -471,6 +480,15 @@ class MachineGroup(pulumi.CustomResource):
                 ],
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateMachineGroup](https://www.tencentcloud.com/document/api/614/42820)
+        * Read: [DescribeMachineGroups](https://www.tencentcloud.com/document/api/614/42818)
+        * Update: [ModifyMachineGroup](https://www.tencentcloud.com/document/api/614/42816)
+        * Delete: [DeleteMachineGroup](https://www.tencentcloud.com/document/api/614/42819)
 
         ## Import
 

@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListAliases](https://www.tencentcloud.com/document/api/583/36322)
         /// </summary>
         public static Task<GetFunctionAliasesResult> InvokeAsync(GetFunctionAliasesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetFunctionAliasesResult>("tencentcloud:Scf/getFunctionAliases:getFunctionAliases", args ?? new GetFunctionAliasesArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListAliases](https://www.tencentcloud.com/document/api/583/36322)
         /// </summary>
         public static Output<GetFunctionAliasesResult> Invoke(GetFunctionAliasesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetFunctionAliasesResult>("tencentcloud:Scf/getFunctionAliases:getFunctionAliases", args ?? new GetFunctionAliasesInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Scf
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListAliases](https://www.tencentcloud.com/document/api/583/36322)
         /// </summary>
         public static Output<GetFunctionAliasesResult> Invoke(GetFunctionAliasesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetFunctionAliasesResult>("tencentcloud:Scf/getFunctionAliases:getFunctionAliases", args ?? new GetFunctionAliasesInvokeArgs(), options.WithDefaults());

@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeGatewayFlowQos](https://www.tencentcloud.com/document/api/215/36088)
 func GetGatewayFlowQos(ctx *pulumi.Context, args *GetGatewayFlowQosArgs, opts ...pulumi.InvokeOption) (*GetGatewayFlowQosResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetGatewayFlowQosResult

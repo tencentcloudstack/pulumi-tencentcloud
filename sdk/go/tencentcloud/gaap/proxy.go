@@ -47,6 +47,29 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CloseProxies](https://www.tencentcloud.com/document/api/608/33111)
+//   - [CreateProxy](https://www.tencentcloud.com/document/api/608/33109)
+//   - [DescribeProxies](https://www.tencentcloud.com/document/api/608/33101)
+//
+// * Read: [DescribeProxies](https://www.tencentcloud.com/document/api/608/33101)
+// * Update:
+//   - [CloseProxies](https://www.tencentcloud.com/document/api/608/33111)
+//   - [DescribeProxies](https://www.tencentcloud.com/document/api/608/33101)
+//   - [ModifyProxiesAttribute](https://www.tencentcloud.com/document/api/608/33094)
+//   - [ModifyProxiesProject](https://www.tencentcloud.com/document/api/608/33093)
+//   - [ModifyProxyConfiguration](https://www.tencentcloud.com/document/api/608/33092)
+//   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+//   - [OpenProxies](https://www.tencentcloud.com/document/api/608/33090)
+//
+// * Delete:
+//   - [DescribeProxies](https://www.tencentcloud.com/document/api/608/33101)
+//   - [DestroyProxies](https://www.tencentcloud.com/document/api/608/33096)
+//
 // ## Import
 //
 // GAAP proxy can be imported using the id, e.g.

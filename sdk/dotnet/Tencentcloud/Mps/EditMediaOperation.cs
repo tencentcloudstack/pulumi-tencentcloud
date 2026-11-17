@@ -70,6 +70,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mps
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [EditMedia](https://www.tencentcloud.com/document/api/1041/37460)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mps/editMediaOperation:EditMediaOperation")]
     public partial class EditMediaOperation : global::Pulumi.CustomResource

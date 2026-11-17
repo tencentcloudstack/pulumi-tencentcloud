@@ -6867,12 +6867,16 @@ func (o BucketReplicaRuleSourceSelectionCriteriaSseKmsEncryptedObjectsPtrOutput)
 }
 
 type BucketWebsite struct {
+	// To configure whether to display the 404 public welfare page when the error code is 404, the optional values are `Enabled` or `Disabled`, with the default set to `Disabled`.
+	Charity404 *string `pulumi:"charity404"`
 	// `Endpoint` of the static website.
 	Endpoint *string `pulumi:"endpoint"`
 	// An absolute path to the document to return in case of a 4XX error.
 	ErrorDocument *string `pulumi:"errorDocument"`
 	// COS returns this index document when requests are made to the root domain or any of the subfolders.
 	IndexDocument *string `pulumi:"indexDocument"`
+	// The HTTP status code for configuring hit error documents, with optional values of `Enabled` or `Disabled`, defaulting to `Enabled`.
+	OriginalHttpStatus *string `pulumi:"originalHttpStatus"`
 	// Redirects all request configurations. Valid values: http, https. Default is `http`.
 	RedirectAllRequestsTo *string `pulumi:"redirectAllRequestsTo"`
 	// Routing rule configuration. A RoutingRules container can contain up to 100 RoutingRule elements.
@@ -6891,12 +6895,16 @@ type BucketWebsiteInput interface {
 }
 
 type BucketWebsiteArgs struct {
+	// To configure whether to display the 404 public welfare page when the error code is 404, the optional values are `Enabled` or `Disabled`, with the default set to `Disabled`.
+	Charity404 pulumi.StringPtrInput `pulumi:"charity404"`
 	// `Endpoint` of the static website.
 	Endpoint pulumi.StringPtrInput `pulumi:"endpoint"`
 	// An absolute path to the document to return in case of a 4XX error.
 	ErrorDocument pulumi.StringPtrInput `pulumi:"errorDocument"`
 	// COS returns this index document when requests are made to the root domain or any of the subfolders.
 	IndexDocument pulumi.StringPtrInput `pulumi:"indexDocument"`
+	// The HTTP status code for configuring hit error documents, with optional values of `Enabled` or `Disabled`, defaulting to `Enabled`.
+	OriginalHttpStatus pulumi.StringPtrInput `pulumi:"originalHttpStatus"`
 	// Redirects all request configurations. Valid values: http, https. Default is `http`.
 	RedirectAllRequestsTo pulumi.StringPtrInput `pulumi:"redirectAllRequestsTo"`
 	// Routing rule configuration. A RoutingRules container can contain up to 100 RoutingRule elements.
@@ -6980,6 +6988,11 @@ func (o BucketWebsiteOutput) ToBucketWebsitePtrOutputWithContext(ctx context.Con
 	}).(BucketWebsitePtrOutput)
 }
 
+// To configure whether to display the 404 public welfare page when the error code is 404, the optional values are `Enabled` or `Disabled`, with the default set to `Disabled`.
+func (o BucketWebsiteOutput) Charity404() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BucketWebsite) *string { return v.Charity404 }).(pulumi.StringPtrOutput)
+}
+
 // `Endpoint` of the static website.
 func (o BucketWebsiteOutput) Endpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v BucketWebsite) *string { return v.Endpoint }).(pulumi.StringPtrOutput)
@@ -6993,6 +7006,11 @@ func (o BucketWebsiteOutput) ErrorDocument() pulumi.StringPtrOutput {
 // COS returns this index document when requests are made to the root domain or any of the subfolders.
 func (o BucketWebsiteOutput) IndexDocument() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v BucketWebsite) *string { return v.IndexDocument }).(pulumi.StringPtrOutput)
+}
+
+// The HTTP status code for configuring hit error documents, with optional values of `Enabled` or `Disabled`, defaulting to `Enabled`.
+func (o BucketWebsiteOutput) OriginalHttpStatus() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v BucketWebsite) *string { return v.OriginalHttpStatus }).(pulumi.StringPtrOutput)
 }
 
 // Redirects all request configurations. Valid values: http, https. Default is `http`.
@@ -7029,6 +7047,16 @@ func (o BucketWebsitePtrOutput) Elem() BucketWebsiteOutput {
 	}).(BucketWebsiteOutput)
 }
 
+// To configure whether to display the 404 public welfare page when the error code is 404, the optional values are `Enabled` or `Disabled`, with the default set to `Disabled`.
+func (o BucketWebsitePtrOutput) Charity404() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BucketWebsite) *string {
+		if v == nil {
+			return nil
+		}
+		return v.Charity404
+	}).(pulumi.StringPtrOutput)
+}
+
 // `Endpoint` of the static website.
 func (o BucketWebsitePtrOutput) Endpoint() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *BucketWebsite) *string {
@@ -7056,6 +7084,16 @@ func (o BucketWebsitePtrOutput) IndexDocument() pulumi.StringPtrOutput {
 			return nil
 		}
 		return v.IndexDocument
+	}).(pulumi.StringPtrOutput)
+}
+
+// The HTTP status code for configuring hit error documents, with optional values of `Enabled` or `Disabled`, defaulting to `Enabled`.
+func (o BucketWebsitePtrOutput) OriginalHttpStatus() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *BucketWebsite) *string {
+		if v == nil {
+			return nil
+		}
+		return v.OriginalHttpStatus
 	}).(pulumi.StringPtrOutput)
 }
 

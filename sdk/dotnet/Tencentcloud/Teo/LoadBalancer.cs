@@ -56,6 +56,66 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     /// });
     /// ```
     /// 
+    /// ### Example Usage - HTTP_V2 with ProbeCluster
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Teo.LoadBalancer("example", new()
+    ///     {
+    ///         ZoneId = "zone-3fkff38fyw8s",
+    ///         Name = "tf-example-v2",
+    ///         Type = "HTTP_V2",
+    ///         OriginGroups = new[]
+    ///         {
+    ///             new Tencentcloud.Teo.Inputs.LoadBalancerOriginGroupArgs
+    ///             {
+    ///                 Priority = "priority_1",
+    ///                 OriginGroupId = "og-3w0nrwiw4c6v",
+    ///             },
+    ///         },
+    ///         HealthChecker = new Tencentcloud.Teo.Inputs.LoadBalancerHealthCheckerArgs
+    ///         {
+    ///             Type = "HTTP",
+    ///             Path = "www.example.com/test",
+    ///             Port = 80,
+    ///             Interval = 30,
+    ///             Timeout = 5,
+    ///             HealthThreshold = 3,
+    ///             CriticalThreshold = 2,
+    ///             Method = "HEAD",
+    ///             ExpectedCodes = new[]
+    ///             {
+    ///                 "200",
+    ///             },
+    ///             FollowRedirect = "false",
+    ///             ProbeCluster = "global",
+    ///         },
+    ///         SteeringPolicy = "Pritory",
+    ///         FailoverPolicy = "OtherOriginGroup",
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateLoadBalancer](https://www.tencentcloud.com/document/api/1145/66031)
+    ///   - [DescribeLoadBalancerList](https://www.tencentcloud.com/document/api/1145/66029)
+    /// * Read: [DescribeLoadBalancerList](https://www.tencentcloud.com/document/api/1145/66029)
+    /// * Update:
+    ///   - [DescribeLoadBalancerList](https://www.tencentcloud.com/document/api/1145/66029)
+    ///   - [ModifyLoadBalancer](https://www.tencentcloud.com/document/api/1145/66027)
+    /// * Delete: [DeleteLoadBalancer](https://www.tencentcloud.com/document/api/1145/66030)
+    /// 
     /// ## Import
     /// 
     /// TEO load balancer can be imported using the zoneId#instanceId, e.g.
@@ -104,7 +164,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Output<string?> SteeringPolicy { get; private set; } = null!;
 
         /// <summary>
-        /// Instance type. Valid values: `HTTP` (HTTP-specific, supports HTTP-specific and general origin groups, only referenced by site acceleration services); `GENERAL` (general, only supports general origin groups, can be referenced by site acceleration and Layer-4 proxy).
+        /// Instance type. Valid values: `HTTP_V2` (HTTP-specific V2, supports adding HTTP-specific and general origin groups, only referenced by site acceleration services, supports selecting probe region with lower probe volume but lower sensitivity); `HTTP` (HTTP-specific V1, supports adding HTTP-specific and general origin groups, only referenced by site acceleration services, does not support selecting probe region, higher probe volume but higher sensitivity); `GENERAL` (general, only supports general origin groups, can be referenced by site acceleration and Layer-4 proxy, does not support selecting probe region, higher sensitivity).
         /// </summary>
         [Output("type")]
         public Output<string> Type { get; private set; } = null!;
@@ -199,7 +259,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Input<string>? SteeringPolicy { get; set; }
 
         /// <summary>
-        /// Instance type. Valid values: `HTTP` (HTTP-specific, supports HTTP-specific and general origin groups, only referenced by site acceleration services); `GENERAL` (general, only supports general origin groups, can be referenced by site acceleration and Layer-4 proxy).
+        /// Instance type. Valid values: `HTTP_V2` (HTTP-specific V2, supports adding HTTP-specific and general origin groups, only referenced by site acceleration services, supports selecting probe region with lower probe volume but lower sensitivity); `HTTP` (HTTP-specific V1, supports adding HTTP-specific and general origin groups, only referenced by site acceleration services, does not support selecting probe region, higher probe volume but higher sensitivity); `GENERAL` (general, only supports general origin groups, can be referenced by site acceleration and Layer-4 proxy, does not support selecting probe region, higher sensitivity).
         /// </summary>
         [Input("type", required: true)]
         public Input<string> Type { get; set; } = null!;
@@ -261,7 +321,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         public Input<string>? SteeringPolicy { get; set; }
 
         /// <summary>
-        /// Instance type. Valid values: `HTTP` (HTTP-specific, supports HTTP-specific and general origin groups, only referenced by site acceleration services); `GENERAL` (general, only supports general origin groups, can be referenced by site acceleration and Layer-4 proxy).
+        /// Instance type. Valid values: `HTTP_V2` (HTTP-specific V2, supports adding HTTP-specific and general origin groups, only referenced by site acceleration services, supports selecting probe region with lower probe volume but lower sensitivity); `HTTP` (HTTP-specific V1, supports adding HTTP-specific and general origin groups, only referenced by site acceleration services, does not support selecting probe region, higher probe volume but higher sensitivity); `GENERAL` (general, only supports general origin groups, can be referenced by site acceleration and Layer-4 proxy, does not support selecting probe region, higher sensitivity).
         /// </summary>
         [Input("type")]
         public Input<string>? Type { get; set; }

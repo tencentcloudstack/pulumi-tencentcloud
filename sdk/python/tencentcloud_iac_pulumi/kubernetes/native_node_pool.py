@@ -492,6 +492,7 @@ class NativeNodePool(pulumi.CustomResource):
                     "auto_format_and_mount": True,
                 }],
                 "key_ids": ["skey-9pcs2100"],
+                "custom_image": "img-j9tbqlc2",
             },
             annotations=[
                 {
@@ -504,6 +505,20 @@ class NativeNodePool(pulumi.CustomResource):
                 },
             ])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateNodePool](https://www.tencentcloud.com/document/api/457/66318)
+          - [DescribeNodePools](https://www.tencentcloud.com/document/api/457/66311)
+        * Read: [DescribeNodePools](https://www.tencentcloud.com/document/api/457/66311)
+        * Update: [ModifyNodePool](https://www.tencentcloud.com/document/api/457/66309)
+        * Delete:
+          - [DeleteNodePool](https://www.tencentcloud.com/document/api/457/66316)
+          - [DescribeClusterMachines](https://www.tencentcloud.com/search/?wd=DescribeClusterMachines&type=document&lang=en)
+          - [DescribeNodePools](https://www.tencentcloud.com/document/api/457/66311)
 
         ## Import
 
@@ -622,6 +637,7 @@ class NativeNodePool(pulumi.CustomResource):
                     "auto_format_and_mount": True,
                 }],
                 "key_ids": ["skey-9pcs2100"],
+                "custom_image": "img-j9tbqlc2",
             },
             annotations=[
                 {
@@ -634,6 +650,20 @@ class NativeNodePool(pulumi.CustomResource):
                 },
             ])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateNodePool](https://www.tencentcloud.com/document/api/457/66318)
+          - [DescribeNodePools](https://www.tencentcloud.com/document/api/457/66311)
+        * Read: [DescribeNodePools](https://www.tencentcloud.com/document/api/457/66311)
+        * Update: [ModifyNodePool](https://www.tencentcloud.com/document/api/457/66309)
+        * Delete:
+          - [DeleteNodePool](https://www.tencentcloud.com/document/api/457/66316)
+          - [DescribeClusterMachines](https://www.tencentcloud.com/search/?wd=DescribeClusterMachines&type=document&lang=en)
+          - [DescribeNodePools](https://www.tencentcloud.com/document/api/457/66311)
 
         ## Import
 

@@ -22,6 +22,12 @@ import * as utilities from "../utilities";
  *     toRecordId: example.then(example => example.toRecordId),
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [RollbackDataEngineImage](https://www.tencentcloud.com/document/api/1155/62647)
  */
 export class RollbackDataEngineImageOperation extends pulumi.CustomResource {
     /**

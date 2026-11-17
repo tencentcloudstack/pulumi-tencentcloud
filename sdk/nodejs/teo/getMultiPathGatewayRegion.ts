@@ -21,6 +21,12 @@ import * as utilities from "../utilities";
  *     zoneId: "zone-2noqxz9b6klw",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeMultiPathGatewayRegions](https://www.tencentcloud.com/document/api/1145/72298)
  */
 export function getMultiPathGatewayRegion(args: GetMultiPathGatewayRegionArgs, opts?: pulumi.InvokeOptions): Promise<GetMultiPathGatewayRegionResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -74,6 +80,12 @@ export interface GetMultiPathGatewayRegionResult {
  *     zoneId: "zone-2noqxz9b6klw",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeMultiPathGatewayRegions](https://www.tencentcloud.com/document/api/1145/72298)
  */
 export function getMultiPathGatewayRegionOutput(args: GetMultiPathGatewayRegionOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetMultiPathGatewayRegionResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

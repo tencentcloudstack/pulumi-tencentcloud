@@ -107,6 +107,12 @@ def get_namespaces(instance_id: Optional[_builtins.str] = None,
         namespace_name="test")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeNamespaces](https://www.tencentcloud.com/document/api/1051/50693)
+
 
     :param _builtins.str instance_id: ID of the instance that the namespace belongs to.
     :param _builtins.str namespace_name: ID of the TCR namespace to query.
@@ -141,6 +147,12 @@ def get_namespaces_output(instance_id: pulumi.Input[Optional[_builtins.str]] = N
     name = tencentcloud.tcr.get_namespaces(instance_id="cls-satg5125",
         namespace_name="test")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeNamespaces](https://www.tencentcloud.com/document/api/1051/50693)
 
 
     :param _builtins.str instance_id: ID of the instance that the namespace belongs to.

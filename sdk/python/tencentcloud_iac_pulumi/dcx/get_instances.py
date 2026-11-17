@@ -113,6 +113,12 @@ def get_instances(dcx_id: Optional[_builtins.str] = None,
     id = tencentcloud.dcx.get_instances(dcx_id="dcx-3ikuw30k")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDirectConnectTunnels](https://www.tencentcloud.com/document/api/216/19819)
+
 
     :param _builtins.str dcx_id: ID of the dedicated tunnels to be queried.
     :param _builtins.str name: Name of the dedicated tunnels to be queried.
@@ -147,6 +153,12 @@ def get_instances_output(dcx_id: pulumi.Input[Optional[Optional[_builtins.str]]]
     name_select = tencentcloud.dcx.get_instances(name="main")
     id = tencentcloud.dcx.get_instances(dcx_id="dcx-3ikuw30k")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDirectConnectTunnels](https://www.tencentcloud.com/document/api/216/19819)
 
 
     :param _builtins.str dcx_id: ID of the dedicated tunnels to be queried.

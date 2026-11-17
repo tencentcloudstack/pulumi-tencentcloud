@@ -69,6 +69,12 @@ class PrivateZoneService(pulumi.CustomResource):
         example = tencentcloud.subscribe.PrivateZoneService("example")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [SubscribePrivateZoneService](https://www.tencentcloud.com/document/api/1097/42109)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -90,6 +96,12 @@ class PrivateZoneService(pulumi.CustomResource):
 
         example = tencentcloud.subscribe.PrivateZoneService("example")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [SubscribePrivateZoneService](https://www.tencentcloud.com/document/api/1097/42109)
 
 
         :param str resource_name: The name of the resource.

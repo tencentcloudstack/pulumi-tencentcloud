@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeInstancesDiskNum](https://www.tencentcloud.com/document/api/1103/44563)
 func GetInstanceDiskNum(ctx *pulumi.Context, args *GetInstanceDiskNumArgs, opts ...pulumi.InvokeOption) (*GetInstanceDiskNumResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetInstanceDiskNumResult

@@ -118,6 +118,14 @@ class RestartInstance(pulumi.CustomResource):
         restart_instance = tencentcloud.mariadb.RestartInstance("restart_instance", instance_id="tdsql-9vqvls95")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeFlow](https://www.tencentcloud.com/document/api/237/16177)
+          - [RestartDBInstances](https://www.tencentcloud.com/search/?wd=RestartDBInstances&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -141,6 +149,14 @@ class RestartInstance(pulumi.CustomResource):
 
         restart_instance = tencentcloud.mariadb.RestartInstance("restart_instance", instance_id="tdsql-9vqvls95")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeFlow](https://www.tencentcloud.com/document/api/237/16177)
+          - [RestartDBInstances](https://www.tencentcloud.com/search/?wd=RestartDBInstances&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

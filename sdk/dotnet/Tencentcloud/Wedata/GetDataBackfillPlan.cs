@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetDataBackfillPlan](https://www.tencentcloud.com/document/api/1174/77891)
         /// </summary>
         public static Task<GetDataBackfillPlanResult> InvokeAsync(GetDataBackfillPlanArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDataBackfillPlanResult>("tencentcloud:Wedata/getDataBackfillPlan:getDataBackfillPlan", args ?? new GetDataBackfillPlanArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetDataBackfillPlan](https://www.tencentcloud.com/document/api/1174/77891)
         /// </summary>
         public static Output<GetDataBackfillPlanResult> Invoke(GetDataBackfillPlanInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDataBackfillPlanResult>("tencentcloud:Wedata/getDataBackfillPlan:getDataBackfillPlan", args ?? new GetDataBackfillPlanInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetDataBackfillPlan](https://www.tencentcloud.com/document/api/1174/77891)
         /// </summary>
         public static Output<GetDataBackfillPlanResult> Invoke(GetDataBackfillPlanInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDataBackfillPlanResult>("tencentcloud:Wedata/getDataBackfillPlan:getDataBackfillPlan", args ?? new GetDataBackfillPlanInvokeArgs(), options.WithDefaults());

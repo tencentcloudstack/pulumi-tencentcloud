@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBSwitchRecords](https://www.tencentcloud.com/document/api/236/17490)
         /// </summary>
         public static Task<GetSwitchRecordResult> InvokeAsync(GetSwitchRecordArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSwitchRecordResult>("tencentcloud:Mysql/getSwitchRecord:getSwitchRecord", args ?? new GetSwitchRecordArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBSwitchRecords](https://www.tencentcloud.com/document/api/236/17490)
         /// </summary>
         public static Output<GetSwitchRecordResult> Invoke(GetSwitchRecordInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSwitchRecordResult>("tencentcloud:Mysql/getSwitchRecord:getSwitchRecord", args ?? new GetSwitchRecordInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBSwitchRecords](https://www.tencentcloud.com/document/api/236/17490)
         /// </summary>
         public static Output<GetSwitchRecordResult> Invoke(GetSwitchRecordInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetSwitchRecordResult>("tencentcloud:Mysql/getSwitchRecord:getSwitchRecord", args ?? new GetSwitchRecordInvokeArgs(), options.WithDefaults());

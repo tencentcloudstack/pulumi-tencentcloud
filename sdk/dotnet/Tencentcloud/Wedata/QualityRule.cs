@@ -106,6 +106,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateQualityRule](https://www.tencentcloud.com/search/?wd=CreateQualityRule&amp;type=document&amp;lang=en)
+    /// * Read: [ListQualityRules](https://www.tencentcloud.com/search/?wd=ListQualityRules&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyQualityRule](https://www.tencentcloud.com/search/?wd=ModifyQualityRule&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteQualityRule](https://www.tencentcloud.com/search/?wd=DeleteQualityRule&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Wedata/qualityRule:QualityRule")]
     public partial class QualityRule : global::Pulumi.CustomResource

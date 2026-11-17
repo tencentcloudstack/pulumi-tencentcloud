@@ -173,6 +173,12 @@ def get_describe_host_clb_instance_list(async_cache: Optional[_builtins.int] = N
     describe_host_clb_instance_list = tencentcloud.ssl.get_describe_host_clb_instance_list(certificate_id="8u8DII0l")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeHostClbInstanceList](https://www.tencentcloud.com/search/?wd=DescribeHostClbInstanceList&type=document&lang=en)
+
 
     :param _builtins.int async_cache: Whether to cache asynchronous.
     :param _builtins.str certificate_id: Certificate ID to be deployed.
@@ -221,6 +227,12 @@ def get_describe_host_clb_instance_list_output(async_cache: pulumi.Input[Optiona
 
     describe_host_clb_instance_list = tencentcloud.ssl.get_describe_host_clb_instance_list(certificate_id="8u8DII0l")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeHostClbInstanceList](https://www.tencentcloud.com/search/?wd=DescribeHostClbInstanceList&type=document&lang=en)
 
 
     :param _builtins.int async_cache: Whether to cache asynchronous.

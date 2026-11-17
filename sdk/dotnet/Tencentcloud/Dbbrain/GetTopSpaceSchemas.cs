@@ -34,6 +34,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTopSpaceSchemas](https://www.tencentcloud.com/document/api/1035/41189)
         /// </summary>
         public static Task<GetTopSpaceSchemasResult> InvokeAsync(GetTopSpaceSchemasArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetTopSpaceSchemasResult>("tencentcloud:Dbbrain/getTopSpaceSchemas:getTopSpaceSchemas", args ?? new GetTopSpaceSchemasArgs(), options.WithDefaults());
@@ -60,6 +66,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTopSpaceSchemas](https://www.tencentcloud.com/document/api/1035/41189)
         /// </summary>
         public static Output<GetTopSpaceSchemasResult> Invoke(GetTopSpaceSchemasInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetTopSpaceSchemasResult>("tencentcloud:Dbbrain/getTopSpaceSchemas:getTopSpaceSchemas", args ?? new GetTopSpaceSchemasInvokeArgs(), options.WithDefaults());
@@ -86,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTopSpaceSchemas](https://www.tencentcloud.com/document/api/1035/41189)
         /// </summary>
         public static Output<GetTopSpaceSchemasResult> Invoke(GetTopSpaceSchemasInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetTopSpaceSchemasResult>("tencentcloud:Dbbrain/getTopSpaceSchemas:getTopSpaceSchemas", args ?? new GetTopSpaceSchemasInvokeArgs(), options.WithDefaults());

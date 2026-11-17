@@ -46,6 +46,16 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [PutRolePermissionsBoundary](https://www.tencentcloud.com/document/api/598/37927)
+ * * Read:
+ *   - [GetRole](https://www.tencentcloud.com/document/api/598/33557)
+ *   - [GetRolePermissionBoundary](https://www.tencentcloud.com/search/?wd=GetRolePermissionBoundary&type=document&lang=en)
+ * * Delete: [DeleteRolePermissionsBoundary](https://www.tencentcloud.com/document/api/598/37928)
+ *
  * ## Import
  *
  * CAM role permission boundary attachment can be imported using the id, e.g.

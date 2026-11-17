@@ -96,6 +96,12 @@ def get_white_box_device_fingerprints(key_id: Optional[_builtins.str] = None,
     example = tencentcloud.kms.get_white_box_device_fingerprints(key_id="244dab8c-6dad-11ea-80c6-5254006d0810")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeWhiteBoxDeviceFingerprints](https://www.tencentcloud.com/search/?wd=DescribeWhiteBoxDeviceFingerprints&type=document&lang=en)
+
 
     :param _builtins.str key_id: Globally unique identifier for the white box key.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_white_box_device_fingerprints_output(key_id: pulumi.Input[Optional[_buil
 
     example = tencentcloud.kms.get_white_box_device_fingerprints(key_id="244dab8c-6dad-11ea-80c6-5254006d0810")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeWhiteBoxDeviceFingerprints](https://www.tencentcloud.com/search/?wd=DescribeWhiteBoxDeviceFingerprints&type=document&lang=en)
 
 
     :param _builtins.str key_id: Globally unique identifier for the white box key.

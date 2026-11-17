@@ -24,6 +24,12 @@ import * as utilities from "../utilities";
  *     sortType: "ASC",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListOpsWorkflows](https://www.tencentcloud.com/document/api/1174/73819)
  */
 export function getOpsWorkflows(args: GetOpsWorkflowsArgs, opts?: pulumi.InvokeOptions): Promise<GetOpsWorkflowsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -140,6 +146,12 @@ export interface GetOpsWorkflowsResult {
  *     sortType: "ASC",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListOpsWorkflows](https://www.tencentcloud.com/document/api/1174/73819)
  */
 export function getOpsWorkflowsOutput(args: GetOpsWorkflowsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetOpsWorkflowsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

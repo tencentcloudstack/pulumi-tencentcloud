@@ -63,6 +63,12 @@ import * as utilities from "../utilities";
  *     apiRegion: "ap-guangzhou",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeServiceForApiApp](https://www.tencentcloud.com/search/?wd=DescribeServiceForApiApp&type=document&lang=en)
  */
 export function getApiAppService(args: GetApiAppServiceArgs, opts?: pulumi.InvokeOptions): Promise<GetApiAppServiceResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -235,6 +241,12 @@ export interface GetApiAppServiceResult {
  *     apiRegion: "ap-guangzhou",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeServiceForApiApp](https://www.tencentcloud.com/search/?wd=DescribeServiceForApiApp&type=document&lang=en)
  */
 export function getApiAppServiceOutput(args: GetApiAppServiceOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetApiAppServiceResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

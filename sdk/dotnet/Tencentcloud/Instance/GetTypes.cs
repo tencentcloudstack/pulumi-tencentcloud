@@ -208,6 +208,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         ///     };
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeDiskConfigQuota](https://www.tencentcloud.com/document/api/362/16318)
+        ///   - [DescribeZoneInstanceConfigInfos](https://www.tencentcloud.com/document/api/213/33254)
         /// </summary>
         public static Task<GetTypesResult> InvokeAsync(GetTypesArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetTypesResult>("tencentcloud:Instance/getTypes:getTypes", args ?? new GetTypesArgs(), options.WithDefaults());
@@ -408,6 +416,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         ///     };
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeDiskConfigQuota](https://www.tencentcloud.com/document/api/362/16318)
+        ///   - [DescribeZoneInstanceConfigInfos](https://www.tencentcloud.com/document/api/213/33254)
         /// </summary>
         public static Output<GetTypesResult> Invoke(GetTypesInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetTypesResult>("tencentcloud:Instance/getTypes:getTypes", args ?? new GetTypesInvokeArgs(), options.WithDefaults());
@@ -608,6 +624,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Instance
         ///     };
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeDiskConfigQuota](https://www.tencentcloud.com/document/api/362/16318)
+        ///   - [DescribeZoneInstanceConfigInfos](https://www.tencentcloud.com/document/api/213/33254)
         /// </summary>
         public static Output<GetTypesResult> Invoke(GetTypesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetTypesResult>("tencentcloud:Instance/getTypes:getTypes", args ?? new GetTypesInvokeArgs(), options.WithDefaults());

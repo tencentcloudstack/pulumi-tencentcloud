@@ -46,7 +46,7 @@ class SyncJobArgs:
         :param pulumi.Input[_builtins.str] instance_class: Sync link specification, such as `micro`, `small`, `medium`, `large`. Default is `medium`.
         :param pulumi.Input[_builtins.str] job_name: Sync job name.
         :param pulumi.Input[_builtins.str] specification: Sync job specification. `Standard` indicates the standard edition; currently only `Standard` is supported.
-        :param pulumi.Input[Sequence[pulumi.Input['SyncJobTagArgs']]] tags: Tag information.
+        :param pulumi.Input[Sequence[pulumi.Input['SyncJobTagArgs']]] tags: Tag information.Cannot be modified.
         """
         pulumi.set(__self__, "dst_database_type", dst_database_type)
         pulumi.set(__self__, "dst_region", dst_region)
@@ -190,7 +190,7 @@ class SyncJobArgs:
     @pulumi.getter
     def tags(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['SyncJobTagArgs']]]]:
         """
-        Tag information.
+        Tag information.Cannot be modified.
         """
         return pulumi.get(self, "tags")
 
@@ -228,7 +228,7 @@ class _SyncJobState:
         :param pulumi.Input[_builtins.str] specification: Sync job specification. `Standard` indicates the standard edition; currently only `Standard` is supported.
         :param pulumi.Input[_builtins.str] src_database_type: Source database type, such as `mysql`, `mariadb`, `percona`, `postgresql`, `cynosdbmysql` (TDSQL-C MySQL), `tdpg` (TDSQL for PostgreSQL), `tdsqlmysql`, `tdstore` (TDSQL TDStore), etc.
         :param pulumi.Input[_builtins.str] src_region: The region where the source database resides, such as `ap-guangzhou`.
-        :param pulumi.Input[Sequence[pulumi.Input['SyncJobTagArgs']]] tags: Tag information.
+        :param pulumi.Input[Sequence[pulumi.Input['SyncJobTagArgs']]] tags: Tag information.Cannot be modified.
         """
         if auto_renew is not None:
             pulumi.set(__self__, "auto_renew", auto_renew)
@@ -391,7 +391,7 @@ class _SyncJobState:
     @pulumi.getter
     def tags(self) -> pulumi.Input[Optional[Sequence[pulumi.Input['SyncJobTagArgs']]]]:
         """
-        Tag information.
+        Tag information.Cannot be modified.
         """
         return pulumi.get(self, "tags")
 
@@ -443,6 +443,18 @@ class SyncJob(pulumi.CustomResource):
             }])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateSyncJob](https://www.tencentcloud.com/document/api/571/51795)
+        * Read: [DescribeSyncJobs](https://www.tencentcloud.com/document/api/571/51793)
+        * Update: [ResizeSyncJob](https://www.tencentcloud.com/document/api/571/51789)
+        * Delete:
+          - [DescribeSyncJobs](https://www.tencentcloud.com/document/api/571/51793)
+          - [DestroySyncJob](https://www.tencentcloud.com/document/api/571/51792)
+          - [IsolateSyncJob](https://www.tencentcloud.com/document/api/571/51791)
+
         ## Import
 
         DTS sync job can be imported using the id, e.g.
@@ -464,7 +476,7 @@ class SyncJob(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] specification: Sync job specification. `Standard` indicates the standard edition; currently only `Standard` is supported.
         :param pulumi.Input[_builtins.str] src_database_type: Source database type, such as `mysql`, `mariadb`, `percona`, `postgresql`, `cynosdbmysql` (TDSQL-C MySQL), `tdpg` (TDSQL for PostgreSQL), `tdsqlmysql`, `tdstore` (TDSQL TDStore), etc.
         :param pulumi.Input[_builtins.str] src_region: The region where the source database resides, such as `ap-guangzhou`.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['SyncJobTagArgs', 'SyncJobTagArgsDict']]]] tags: Tag information.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['SyncJobTagArgs', 'SyncJobTagArgsDict']]]] tags: Tag information.Cannot be modified.
         """
         ...
     @overload
@@ -496,6 +508,18 @@ class SyncJob(pulumi.CustomResource):
                 "tag_value": "Terraform",
             }])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateSyncJob](https://www.tencentcloud.com/document/api/571/51795)
+        * Read: [DescribeSyncJobs](https://www.tencentcloud.com/document/api/571/51793)
+        * Update: [ResizeSyncJob](https://www.tencentcloud.com/document/api/571/51789)
+        * Delete:
+          - [DescribeSyncJobs](https://www.tencentcloud.com/document/api/571/51793)
+          - [DestroySyncJob](https://www.tencentcloud.com/document/api/571/51792)
+          - [IsolateSyncJob](https://www.tencentcloud.com/document/api/571/51791)
 
         ## Import
 
@@ -603,7 +627,7 @@ class SyncJob(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] specification: Sync job specification. `Standard` indicates the standard edition; currently only `Standard` is supported.
         :param pulumi.Input[_builtins.str] src_database_type: Source database type, such as `mysql`, `mariadb`, `percona`, `postgresql`, `cynosdbmysql` (TDSQL-C MySQL), `tdpg` (TDSQL for PostgreSQL), `tdsqlmysql`, `tdstore` (TDSQL TDStore), etc.
         :param pulumi.Input[_builtins.str] src_region: The region where the source database resides, such as `ap-guangzhou`.
-        :param pulumi.Input[Sequence[pulumi.Input[Union['SyncJobTagArgs', 'SyncJobTagArgsDict']]]] tags: Tag information.
+        :param pulumi.Input[Sequence[pulumi.Input[Union['SyncJobTagArgs', 'SyncJobTagArgsDict']]]] tags: Tag information.Cannot be modified.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -715,7 +739,7 @@ class SyncJob(pulumi.CustomResource):
     @pulumi.getter
     def tags(self) -> pulumi.Output[Sequence['outputs.SyncJobTag']]:
         """
-        Tag information.
+        Tag information.Cannot be modified.
         """
         return pulumi.get(self, "tags")
 

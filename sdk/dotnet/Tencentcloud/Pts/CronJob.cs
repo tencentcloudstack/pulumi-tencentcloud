@@ -39,6 +39,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Pts
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateCronJob](https://www.tencentcloud.com/document/api/1249/68535)
+    /// * Read: [DescribeCronJobs](https://www.tencentcloud.com/document/api/1249/68519)
+    /// * Update: [UpdateCronJob](https://www.tencentcloud.com/document/api/1249/68498)
+    /// * Delete: [DeleteCronJobs](https://www.tencentcloud.com/document/api/1249/68529)
+    /// 
     /// ## Import
     /// 
     /// pts CronJob can be imported using the projectId#cronJobId, e.g.

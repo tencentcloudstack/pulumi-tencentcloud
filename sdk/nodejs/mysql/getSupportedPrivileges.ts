@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *     instanceId: "cdb-fitq5t9h",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSupportedPrivileges](https://www.tencentcloud.com/document/api/236/34488)
  */
 export function getSupportedPrivileges(args: GetSupportedPrivilegesArgs, opts?: pulumi.InvokeOptions): Promise<GetSupportedPrivilegesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -80,6 +86,12 @@ export interface GetSupportedPrivilegesResult {
  *     instanceId: "cdb-fitq5t9h",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSupportedPrivileges](https://www.tencentcloud.com/document/api/236/34488)
  */
 export function getSupportedPrivilegesOutput(args: GetSupportedPrivilegesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSupportedPrivilegesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

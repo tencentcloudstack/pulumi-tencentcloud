@@ -270,6 +270,14 @@ class PrefetchTaskOperation(pulumi.CustomResource):
             prefetch_media_segments="on")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreatePrefetchTask](https://www.tencentcloud.com/document/api/1145/50537)
+          - [DescribePrefetchTasks](https://www.tencentcloud.com/document/api/1145/50533)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -315,6 +323,14 @@ class PrefetchTaskOperation(pulumi.CustomResource):
             }],
             prefetch_media_segments="on")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreatePrefetchTask](https://www.tencentcloud.com/document/api/1145/50537)
+          - [DescribePrefetchTasks](https://www.tencentcloud.com/document/api/1145/50533)
 
 
         :param str resource_name: The name of the resource.

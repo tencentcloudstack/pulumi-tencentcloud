@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBackupStreamList](https://www.tencentcloud.com/search/?wd=DescribeBackupStreamList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetBackupStreamResult> InvokeAsync(GetBackupStreamArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetBackupStreamResult>("tencentcloud:Css/getBackupStream:getBackupStream", args ?? new GetBackupStreamArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBackupStreamList](https://www.tencentcloud.com/search/?wd=DescribeBackupStreamList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetBackupStreamResult> Invoke(GetBackupStreamInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetBackupStreamResult>("tencentcloud:Css/getBackupStream:getBackupStream", args ?? new GetBackupStreamInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBackupStreamList](https://www.tencentcloud.com/search/?wd=DescribeBackupStreamList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetBackupStreamResult> Invoke(GetBackupStreamInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetBackupStreamResult>("tencentcloud:Css/getBackupStream:getBackupStream", args ?? new GetBackupStreamInvokeArgs(), options.WithDefaults());

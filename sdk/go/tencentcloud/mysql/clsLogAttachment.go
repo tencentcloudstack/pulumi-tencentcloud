@@ -140,6 +140,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [ModifyDBInstanceLogToCLS](https://www.tencentcloud.com/document/api/236/57988)
+// * Read: [DescribeDBInstanceLogToCLS](https://www.tencentcloud.com/document/api/236/57978)
+// * Delete: [ModifyDBInstanceLogToCLS](https://www.tencentcloud.com/document/api/236/57988)
 type ClsLogAttachment struct {
 	pulumi.CustomResourceState
 

@@ -24,6 +24,15 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateRole](https://www.tencentcloud.com/search/?wd=CreateRole&type=document&lang=en)
+ * * Read: [DescribeRoles](https://www.tencentcloud.com/search/?wd=DescribeRoles&type=document&lang=en)
+ * * Update: [ModifyRole](https://www.tencentcloud.com/search/?wd=ModifyRole&type=document&lang=en)
+ * * Delete: [DeleteRoles](https://www.tencentcloud.com/search/?wd=DeleteRoles&type=document&lang=en)
+ *
  * ## Import
  *
  * tdmqRocketmq role can be imported using the id, e.g.

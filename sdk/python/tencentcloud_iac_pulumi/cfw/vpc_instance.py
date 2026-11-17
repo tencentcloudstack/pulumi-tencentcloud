@@ -312,6 +312,17 @@ class VpcInstance(pulumi.CustomResource):
             fw_vpc_cidr="auto")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateVpcFwGroup](https://www.tencentcloud.com/search/?wd=CreateVpcFwGroup&type=document&lang=en)
+          - [DescribeFwGroupInstanceInfo](https://www.tencentcloud.com/search/?wd=DescribeFwGroupInstanceInfo&type=document&lang=en)
+        * Read: [DescribeFwGroupInstanceInfo](https://www.tencentcloud.com/search/?wd=DescribeFwGroupInstanceInfo&type=document&lang=en)
+        * Update: [ModifyVpcFwGroup](https://www.tencentcloud.com/search/?wd=ModifyVpcFwGroup&type=document&lang=en)
+        * Delete: [DeleteVpcFwGroup](https://www.tencentcloud.com/search/?wd=DeleteVpcFwGroup&type=document&lang=en)
+
         ## Import
 
         CFW vpc instance can be imported using the id, e.g.
@@ -392,6 +403,17 @@ class VpcInstance(pulumi.CustomResource):
             switch_mode=1,
             fw_vpc_cidr="auto")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateVpcFwGroup](https://www.tencentcloud.com/search/?wd=CreateVpcFwGroup&type=document&lang=en)
+          - [DescribeFwGroupInstanceInfo](https://www.tencentcloud.com/search/?wd=DescribeFwGroupInstanceInfo&type=document&lang=en)
+        * Read: [DescribeFwGroupInstanceInfo](https://www.tencentcloud.com/search/?wd=DescribeFwGroupInstanceInfo&type=document&lang=en)
+        * Update: [ModifyVpcFwGroup](https://www.tencentcloud.com/search/?wd=ModifyVpcFwGroup&type=document&lang=en)
+        * Delete: [DeleteVpcFwGroup](https://www.tencentcloud.com/search/?wd=DeleteVpcFwGroup&type=document&lang=en)
 
         ## Import
 

@@ -102,6 +102,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [ResetRootAccount](https://www.tencentcloud.com/document/api/236/46757)
 type ResetRootAccount struct {
 	pulumi.CustomResourceState
 

@@ -35,6 +35,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeNetDetectStates](https://www.tencentcloud.com/document/api/215/34743)
         /// </summary>
         public static Task<GetNetDetectStatesResult> InvokeAsync(GetNetDetectStatesArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetNetDetectStatesResult>("tencentcloud:Vpc/getNetDetectStates:getNetDetectStates", args ?? new GetNetDetectStatesArgs(), options.WithDefaults());
@@ -62,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeNetDetectStates](https://www.tencentcloud.com/document/api/215/34743)
         /// </summary>
         public static Output<GetNetDetectStatesResult> Invoke(GetNetDetectStatesInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetNetDetectStatesResult>("tencentcloud:Vpc/getNetDetectStates:getNetDetectStates", args ?? new GetNetDetectStatesInvokeArgs(), options.WithDefaults());
@@ -89,6 +101,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeNetDetectStates](https://www.tencentcloud.com/document/api/215/34743)
         /// </summary>
         public static Output<GetNetDetectStatesResult> Invoke(GetNetDetectStatesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetNetDetectStatesResult>("tencentcloud:Vpc/getNetDetectStates:getNetDetectStates", args ?? new GetNetDetectStatesInvokeArgs(), options.WithDefaults());

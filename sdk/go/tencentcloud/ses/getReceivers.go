@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [ListReceivers](https://www.tencentcloud.com/document/api/1084/44866)
 func GetReceivers(ctx *pulumi.Context, args *GetReceiversArgs, opts ...pulumi.InvokeOption) (*GetReceiversResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetReceiversResult

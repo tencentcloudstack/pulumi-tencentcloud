@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Controlcenter
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListAccountFactoryBaselineItems](https://www.tencentcloud.com/document/api/1220/74851)
         /// </summary>
         public static Task<GetAccountFactoryBaselineItemsResult> InvokeAsync(GetAccountFactoryBaselineItemsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetAccountFactoryBaselineItemsResult>("tencentcloud:Controlcenter/getAccountFactoryBaselineItems:getAccountFactoryBaselineItems", args ?? new GetAccountFactoryBaselineItemsArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Controlcenter
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListAccountFactoryBaselineItems](https://www.tencentcloud.com/document/api/1220/74851)
         /// </summary>
         public static Output<GetAccountFactoryBaselineItemsResult> Invoke(GetAccountFactoryBaselineItemsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetAccountFactoryBaselineItemsResult>("tencentcloud:Controlcenter/getAccountFactoryBaselineItems:getAccountFactoryBaselineItems", args ?? new GetAccountFactoryBaselineItemsInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Controlcenter
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [ListAccountFactoryBaselineItems](https://www.tencentcloud.com/document/api/1220/74851)
         /// </summary>
         public static Output<GetAccountFactoryBaselineItemsResult> Invoke(GetAccountFactoryBaselineItemsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetAccountFactoryBaselineItemsResult>("tencentcloud:Controlcenter/getAccountFactoryBaselineItems:getAccountFactoryBaselineItems", args ?? new GetAccountFactoryBaselineItemsInvokeArgs(), options.WithDefaults());

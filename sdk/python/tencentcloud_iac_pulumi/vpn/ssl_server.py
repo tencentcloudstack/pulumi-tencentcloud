@@ -572,6 +572,25 @@ class SslServer(pulumi.CustomResource):
             access_policy_enabled=True)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateVpnGatewaySslServer](https://www.tencentcloud.com/search/?wd=CreateVpnGatewaySslServer&type=document&lang=en)
+          - [DescribeVpcTaskResult](https://www.tencentcloud.com/document/api/215/41567)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+          - [DescribeVpnGatewaySslServers](https://www.tencentcloud.com/search/?wd=DescribeVpnGatewaySslServers&type=document&lang=en)
+        * Update:
+          - [DescribeVpcTaskResult](https://www.tencentcloud.com/document/api/215/41567)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+          - [ModifyVpnGatewaySslServer](https://www.tencentcloud.com/search/?wd=ModifyVpnGatewaySslServer&type=document&lang=en)
+        * Delete:
+          - [DeleteVpnGatewaySslServer](https://www.tencentcloud.com/search/?wd=DeleteVpnGatewaySslServer&type=document&lang=en)
+          - [DescribeVpcTaskResult](https://www.tencentcloud.com/document/api/215/41567)
+
         ## Import
 
         VPN SSL Server can be imported, e.g.
@@ -673,6 +692,25 @@ class SslServer(pulumi.CustomResource):
             vpn_gateway_id="vpngw-6lq9ayur",
             access_policy_enabled=True)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateVpnGatewaySslServer](https://www.tencentcloud.com/search/?wd=CreateVpnGatewaySslServer&type=document&lang=en)
+          - [DescribeVpcTaskResult](https://www.tencentcloud.com/document/api/215/41567)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+          - [DescribeVpnGatewaySslServers](https://www.tencentcloud.com/search/?wd=DescribeVpnGatewaySslServers&type=document&lang=en)
+        * Update:
+          - [DescribeVpcTaskResult](https://www.tencentcloud.com/document/api/215/41567)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+          - [ModifyVpnGatewaySslServer](https://www.tencentcloud.com/search/?wd=ModifyVpnGatewaySslServer&type=document&lang=en)
+        * Delete:
+          - [DeleteVpnGatewaySslServer](https://www.tencentcloud.com/search/?wd=DeleteVpnGatewaySslServer&type=document&lang=en)
+          - [DescribeVpcTaskResult](https://www.tencentcloud.com/document/api/215/41567)
 
         ## Import
 

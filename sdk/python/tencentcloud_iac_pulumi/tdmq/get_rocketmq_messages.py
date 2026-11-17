@@ -200,6 +200,12 @@ def get_rocketmq_messages(cluster_id: Optional[_builtins.str] = None,
         query_dlq_msg=False)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRocketMQMsg](https://www.tencentcloud.com/search/?wd=DescribeRocketMQMsg&type=document&lang=en)
+
 
     :param _builtins.str cluster_id: Cluster id.
     :param _builtins.str environment_id: Environment.
@@ -254,6 +260,12 @@ def get_rocketmq_messages_output(cluster_id: pulumi.Input[Optional[_builtins.str
         msg_id="A9FE8D0567FE15DB97425FC08EEF0000",
         query_dlq_msg=False)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRocketMQMsg](https://www.tencentcloud.com/search/?wd=DescribeRocketMQMsg&type=document&lang=en)
 
 
     :param _builtins.str cluster_id: Cluster id.

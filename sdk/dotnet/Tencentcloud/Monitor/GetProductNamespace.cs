@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeProductList](https://www.tencentcloud.com/search/?wd=DescribeProductList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetProductNamespaceResult> InvokeAsync(GetProductNamespaceArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetProductNamespaceResult>("tencentcloud:Monitor/getProductNamespace:getProductNamespace", args ?? new GetProductNamespaceArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeProductList](https://www.tencentcloud.com/search/?wd=DescribeProductList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetProductNamespaceResult> Invoke(GetProductNamespaceInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetProductNamespaceResult>("tencentcloud:Monitor/getProductNamespace:getProductNamespace", args ?? new GetProductNamespaceInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeProductList](https://www.tencentcloud.com/search/?wd=DescribeProductList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetProductNamespaceResult> Invoke(GetProductNamespaceInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetProductNamespaceResult>("tencentcloud:Monitor/getProductNamespace:getProductNamespace", args ?? new GetProductNamespaceInvokeArgs(), options.WithDefaults());

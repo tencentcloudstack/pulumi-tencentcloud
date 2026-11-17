@@ -157,6 +157,12 @@ def get_instances(cluster_id: Optional[_builtins.str] = None,
         instance_type="")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeClusterInstances](https://www.tencentcloud.com/search/?wd=DescribeClusterInstances&type=document&lang=en)
+
 
     :param _builtins.str cluster_id: instance id.
     :param _builtins.str instance_id: instance id.
@@ -208,6 +214,12 @@ def get_instances_output(cluster_id: pulumi.Input[Optional[_builtins.str]] = Non
         status="",
         instance_type="")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeClusterInstances](https://www.tencentcloud.com/search/?wd=DescribeClusterInstances&type=document&lang=en)
 
 
     :param _builtins.str cluster_id: instance id.

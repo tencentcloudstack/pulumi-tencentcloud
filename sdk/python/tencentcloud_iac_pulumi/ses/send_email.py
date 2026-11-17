@@ -393,6 +393,12 @@ class SendEmail(pulumi.CustomResource):
             trigger_type=1)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [SendEmail](https://www.tencentcloud.com/document/api/1084/39408)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -434,6 +440,12 @@ class SendEmail(pulumi.CustomResource):
             unsubscribe="1",
             trigger_type=1)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [SendEmail](https://www.tencentcloud.com/document/api/1084/39408)
 
 
         :param str resource_name: The name of the resource.

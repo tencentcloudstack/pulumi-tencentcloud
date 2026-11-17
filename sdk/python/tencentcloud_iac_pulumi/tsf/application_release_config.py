@@ -313,6 +313,14 @@ class ApplicationReleaseConfig(pulumi.CustomResource):
             release_desc="terraform-test")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ReleaseConfigWithDetailResp](https://www.tencentcloud.com/search/?wd=ReleaseConfigWithDetailResp&type=document&lang=en)
+        * Read: [DescribeConfigReleases](https://www.tencentcloud.com/search/?wd=DescribeConfigReleases&type=document&lang=en)
+        * Delete: [RevocationConfig](https://www.tencentcloud.com/search/?wd=RevocationConfig&type=document&lang=en)
+
         ## Import
 
         tsf application_release_config can be imported using the configId#groupId#configReleaseId, e.g.
@@ -348,6 +356,14 @@ class ApplicationReleaseConfig(pulumi.CustomResource):
             group_id="group-yxmz72gv",
             release_desc="terraform-test")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ReleaseConfigWithDetailResp](https://www.tencentcloud.com/search/?wd=ReleaseConfigWithDetailResp&type=document&lang=en)
+        * Read: [DescribeConfigReleases](https://www.tencentcloud.com/search/?wd=DescribeConfigReleases&type=document&lang=en)
+        * Delete: [RevocationConfig](https://www.tencentcloud.com/search/?wd=RevocationConfig&type=document&lang=en)
 
         ## Import
 

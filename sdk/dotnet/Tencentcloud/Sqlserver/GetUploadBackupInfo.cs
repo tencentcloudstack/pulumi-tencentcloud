@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeUploadBackupInfo](https://www.tencentcloud.com/document/api/238/39835)
         /// </summary>
         public static Task<GetUploadBackupInfoResult> InvokeAsync(GetUploadBackupInfoArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetUploadBackupInfoResult>("tencentcloud:Sqlserver/getUploadBackupInfo:getUploadBackupInfo", args ?? new GetUploadBackupInfoArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeUploadBackupInfo](https://www.tencentcloud.com/document/api/238/39835)
         /// </summary>
         public static Output<GetUploadBackupInfoResult> Invoke(GetUploadBackupInfoInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetUploadBackupInfoResult>("tencentcloud:Sqlserver/getUploadBackupInfo:getUploadBackupInfo", args ?? new GetUploadBackupInfoInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeUploadBackupInfo](https://www.tencentcloud.com/document/api/238/39835)
         /// </summary>
         public static Output<GetUploadBackupInfoResult> Invoke(GetUploadBackupInfoInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetUploadBackupInfoResult>("tencentcloud:Sqlserver/getUploadBackupInfo:getUploadBackupInfo", args ?? new GetUploadBackupInfoInvokeArgs(), options.WithDefaults());

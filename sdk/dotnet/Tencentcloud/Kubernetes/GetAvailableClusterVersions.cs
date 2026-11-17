@@ -45,6 +45,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         ///     };
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAvailableClusterVersion](https://www.tencentcloud.com/document/api/457/39569)
         /// </summary>
         public static Task<GetAvailableClusterVersionsResult> InvokeAsync(GetAvailableClusterVersionsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetAvailableClusterVersionsResult>("tencentcloud:Kubernetes/getAvailableClusterVersions:getAvailableClusterVersions", args ?? new GetAvailableClusterVersionsArgs(), options.WithDefaults());
@@ -82,6 +88,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         ///     };
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAvailableClusterVersion](https://www.tencentcloud.com/document/api/457/39569)
         /// </summary>
         public static Output<GetAvailableClusterVersionsResult> Invoke(GetAvailableClusterVersionsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetAvailableClusterVersionsResult>("tencentcloud:Kubernetes/getAvailableClusterVersions:getAvailableClusterVersions", args ?? new GetAvailableClusterVersionsInvokeArgs(), options.WithDefaults());
@@ -119,6 +131,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         ///     };
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAvailableClusterVersion](https://www.tencentcloud.com/document/api/457/39569)
         /// </summary>
         public static Output<GetAvailableClusterVersionsResult> Invoke(GetAvailableClusterVersionsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetAvailableClusterVersionsResult>("tencentcloud:Kubernetes/getAvailableClusterVersions:getAvailableClusterVersions", args ?? new GetAvailableClusterVersionsInvokeArgs(), options.WithDefaults());

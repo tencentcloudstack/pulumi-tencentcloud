@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [SubmitTriggerTask](https://www.tencentcloud.com/document/api/1174/77915)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Wedata/submitTriggerTask:SubmitTriggerTask")]
     public partial class SubmitTriggerTask : global::Pulumi.CustomResource

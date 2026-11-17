@@ -19,6 +19,18 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DisableUnitRule](https://www.tencentcloud.com/search/?wd=DisableUnitRule&type=document&lang=en)
+ *   - [EnableUnitRule](https://www.tencentcloud.com/search/?wd=EnableUnitRule&type=document&lang=en)
+ * * Read: [DescribeUnitRule](https://www.tencentcloud.com/search/?wd=DescribeUnitRule&type=document&lang=en)
+ * * Update:
+ *   - [DisableUnitRule](https://www.tencentcloud.com/search/?wd=DisableUnitRule&type=document&lang=en)
+ *   - [EnableUnitRule](https://www.tencentcloud.com/search/?wd=EnableUnitRule&type=document&lang=en)
+ *
  * ## Import
  *
  * tsf enableUnitRule can be imported using the id, e.g.

@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ModifyDomainOwner](https://www.tencentcloud.com/document/api/1157/53849)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dnspod/modifyDomainOwnerOperation:ModifyDomainOwnerOperation")]
     public partial class ModifyDomainOwnerOperation : global::Pulumi.CustomResource

@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     policyId: testPolicy.policyId,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDDoSPolicy](https://www.tencentcloud.com/search/?wd=DescribeDDoSPolicy&type=document&lang=en)
  */
 export function getDdosPolicies(args: GetDdosPoliciesArgs, opts?: pulumi.InvokeOptions): Promise<GetDdosPoliciesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -81,6 +87,12 @@ export interface GetDdosPoliciesResult {
  *     policyId: testPolicy.policyId,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDDoSPolicy](https://www.tencentcloud.com/search/?wd=DescribeDDoSPolicy&type=document&lang=en)
  */
 export function getDdosPoliciesOutput(args: GetDdosPoliciesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDdosPoliciesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

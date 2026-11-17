@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAutoSnapshotPolicies](https://www.tencentcloud.com/document/api/362/32165)
         /// </summary>
         public static Task<GetSnapshotPoliciesResult> InvokeAsync(GetSnapshotPoliciesArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetSnapshotPoliciesResult>("tencentcloud:Cbs/getSnapshotPolicies:getSnapshotPolicies", args ?? new GetSnapshotPoliciesArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAutoSnapshotPolicies](https://www.tencentcloud.com/document/api/362/32165)
         /// </summary>
         public static Output<GetSnapshotPoliciesResult> Invoke(GetSnapshotPoliciesInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetSnapshotPoliciesResult>("tencentcloud:Cbs/getSnapshotPolicies:getSnapshotPolicies", args ?? new GetSnapshotPoliciesInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cbs
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAutoSnapshotPolicies](https://www.tencentcloud.com/document/api/362/32165)
         /// </summary>
         public static Output<GetSnapshotPoliciesResult> Invoke(GetSnapshotPoliciesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetSnapshotPoliciesResult>("tencentcloud:Cbs/getSnapshotPolicies:getSnapshotPolicies", args ?? new GetSnapshotPoliciesInvokeArgs(), options.WithDefaults());

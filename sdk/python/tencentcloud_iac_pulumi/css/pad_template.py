@@ -255,6 +255,15 @@ class PadTemplate(pulumi.CustomResource):
             wait_duration=2000)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateLivePadTemplate](https://www.tencentcloud.com/document/api/267/71831)
+        * Read: [DescribeLivePadTemplate](https://www.tencentcloud.com/search/?wd=DescribeLivePadTemplate&type=document&lang=en)
+        * Update: [ModifyLivePadTemplate](https://www.tencentcloud.com/search/?wd=ModifyLivePadTemplate&type=document&lang=en)
+        * Delete: [DeleteLivePadTemplate](https://www.tencentcloud.com/search/?wd=DeleteLivePadTemplate&type=document&lang=en)
+
         ## Import
 
         css pad_template can be imported using the id, e.g.
@@ -296,6 +305,15 @@ class PadTemplate(pulumi.CustomResource):
             url="https://livewatermark-1251132611.cos.ap-guangzhou.myqcloud.com/1308919341/watermark_img_1698736540399_1441698123618_.pic.jpg",
             wait_duration=2000)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateLivePadTemplate](https://www.tencentcloud.com/document/api/267/71831)
+        * Read: [DescribeLivePadTemplate](https://www.tencentcloud.com/search/?wd=DescribeLivePadTemplate&type=document&lang=en)
+        * Update: [ModifyLivePadTemplate](https://www.tencentcloud.com/search/?wd=ModifyLivePadTemplate&type=document&lang=en)
+        * Delete: [DeleteLivePadTemplate](https://www.tencentcloud.com/search/?wd=DeleteLivePadTemplate&type=document&lang=en)
 
         ## Import
 

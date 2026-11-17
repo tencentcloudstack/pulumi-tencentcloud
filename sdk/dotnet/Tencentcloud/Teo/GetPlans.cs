@@ -95,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePlans](https://www.tencentcloud.com/document/api/1145/72310)
         /// </summary>
         public static Task<GetPlansResult> InvokeAsync(GetPlansArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetPlansResult>("tencentcloud:Teo/getPlans:getPlans", args ?? new GetPlansArgs(), options.WithDefaults());
@@ -182,6 +188,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePlans](https://www.tencentcloud.com/document/api/1145/72310)
         /// </summary>
         public static Output<GetPlansResult> Invoke(GetPlansInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetPlansResult>("tencentcloud:Teo/getPlans:getPlans", args ?? new GetPlansInvokeArgs(), options.WithDefaults());
@@ -269,6 +281,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePlans](https://www.tencentcloud.com/document/api/1145/72310)
         /// </summary>
         public static Output<GetPlansResult> Invoke(GetPlansInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetPlansResult>("tencentcloud:Teo/getPlans:getPlans", args ?? new GetPlansInvokeArgs(), options.WithDefaults());

@@ -25,6 +25,14 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateDeviceAccount](https://www.tencentcloud.com/search/?wd=CreateDeviceAccount&type=document&lang=en)
+ * * Read: [DescribeDeviceAccounts](https://www.tencentcloud.com/search/?wd=DescribeDeviceAccounts&type=document&lang=en)
+ * * Delete: [DeleteDeviceAccounts](https://www.tencentcloud.com/search/?wd=DeleteDeviceAccounts&type=document&lang=en)
+ *
  * ## Import
  *
  * dasb deviceAccount can be imported using the id, e.g.

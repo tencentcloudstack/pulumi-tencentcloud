@@ -111,6 +111,12 @@ def get_dedicated_clusters(filters: Optional[Sequence[Union['GetDedicatedCluster
     }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDedicatedClusters](https://www.tencentcloud.com/document/api/409/78809)
+
 
     :param Sequence[Union['GetDedicatedClustersFilterArgs', 'GetDedicatedClustersFilterArgsDict']] filters: Querying based on one or more filtering criteria, the currently supported filtering criteria are: dedicated-cluster-id: filtering by dedicated cluster ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -154,6 +160,12 @@ def get_dedicated_clusters_output(filters: pulumi.Input[Optional[Optional[Sequen
         "values": ["cluster-262n63e8"],
     }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDedicatedClusters](https://www.tencentcloud.com/document/api/409/78809)
 
 
     :param Sequence[Union['GetDedicatedClustersFilterArgs', 'GetDedicatedClustersFilterArgsDict']] filters: Querying based on one or more filtering criteria, the currently supported filtering criteria are: dedicated-cluster-id: filtering by dedicated cluster ID.

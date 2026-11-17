@@ -135,6 +135,13 @@ class DomainLock(pulumi.CustomResource):
             lock_days=30)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyDomainLock](https://www.tencentcloud.com/document/api/1157/53850)
+        * Delete: [ModifyDomainUnlock](https://www.tencentcloud.com/document/api/1157/53848)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -160,6 +167,13 @@ class DomainLock(pulumi.CustomResource):
             domain="dnspod.cn",
             lock_days=30)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyDomainLock](https://www.tencentcloud.com/document/api/1157/53850)
+        * Delete: [ModifyDomainUnlock](https://www.tencentcloud.com/document/api/1157/53848)
 
 
         :param str resource_name: The name of the resource.

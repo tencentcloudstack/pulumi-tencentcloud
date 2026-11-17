@@ -34,6 +34,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateDDoSBlackWhiteIpList](https://www.tencentcloud.com/search/?wd=CreateDDoSBlackWhiteIpList&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeDDoSBlackWhiteIpList](https://www.tencentcloud.com/search/?wd=DescribeDDoSBlackWhiteIpList&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyDDoSBlackWhiteIpList](https://www.tencentcloud.com/search/?wd=ModifyDDoSBlackWhiteIpList&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteDDoSBlackWhiteIpList](https://www.tencentcloud.com/search/?wd=DeleteDDoSBlackWhiteIpList&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// antiddos DdosBlackWhiteIp can be imported using the id, e.g.

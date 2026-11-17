@@ -224,6 +224,12 @@ class ProtectInstances(pulumi.CustomResource):
             protected_from_scale_in=False)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [SetInstancesProtection](https://www.tencentcloud.com/document/api/377/33203)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -322,6 +328,12 @@ class ProtectInstances(pulumi.CustomResource):
             instance_ids=attachment["instanceIds"],
             protected_from_scale_in=False)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [SetInstancesProtection](https://www.tencentcloud.com/document/api/377/33203)
 
 
         :param str resource_name: The name of the resource.

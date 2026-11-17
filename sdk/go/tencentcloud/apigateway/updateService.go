@@ -41,6 +41,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [UpdateService](https://www.tencentcloud.com/search/?wd=UpdateService&type=document&lang=en)
 type UpdateService struct {
 	pulumi.CustomResourceState
 

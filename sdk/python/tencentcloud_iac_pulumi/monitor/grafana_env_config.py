@@ -124,6 +124,18 @@ class GrafanaEnvConfig(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeGrafanaInstances](https://www.tencentcloud.com/document/api/248/49759)
+          - [UpdateGrafanaEnvironments](https://www.tencentcloud.com/document/api/248/49744)
+        * Read: [DescribeGrafanaEnvironments](https://www.tencentcloud.com/document/api/248/49760)
+        * Update:
+          - [DescribeGrafanaInstances](https://www.tencentcloud.com/document/api/248/49759)
+          - [UpdateGrafanaEnvironments](https://www.tencentcloud.com/document/api/248/49744)
+
         ## Import
 
         monitor grafana_env_config can be imported using the id, e.g.
@@ -160,6 +172,18 @@ class GrafanaEnvConfig(pulumi.CustomResource):
                 "bbb": "ccc",
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeGrafanaInstances](https://www.tencentcloud.com/document/api/248/49759)
+          - [UpdateGrafanaEnvironments](https://www.tencentcloud.com/document/api/248/49744)
+        * Read: [DescribeGrafanaEnvironments](https://www.tencentcloud.com/document/api/248/49760)
+        * Update:
+          - [DescribeGrafanaInstances](https://www.tencentcloud.com/document/api/248/49759)
+          - [UpdateGrafanaEnvironments](https://www.tencentcloud.com/document/api/248/49744)
 
         ## Import
 

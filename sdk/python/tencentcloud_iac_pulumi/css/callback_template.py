@@ -358,6 +358,15 @@ class CallbackTemplate(pulumi.CustomResource):
             push_exception_notify_url="http://www.yourdomain.com/api/notify?action=pushException")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateLiveCallbackTemplate](https://www.tencentcloud.com/document/api/267/30815)
+        * Read: [DescribeLiveCallbackTemplate](https://www.tencentcloud.com/document/api/267/30811)
+        * Update: [ModifyLiveCallbackTemplate](https://www.tencentcloud.com/document/api/267/30809)
+        * Delete: [DeleteLiveCallbackTemplate](https://www.tencentcloud.com/document/api/267/30813)
+
         ## Import
 
         css callback_template can be imported using the id, e.g.
@@ -405,6 +414,15 @@ class CallbackTemplate(pulumi.CustomResource):
             callback_key="adasda131312",
             push_exception_notify_url="http://www.yourdomain.com/api/notify?action=pushException")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateLiveCallbackTemplate](https://www.tencentcloud.com/document/api/267/30815)
+        * Read: [DescribeLiveCallbackTemplate](https://www.tencentcloud.com/document/api/267/30811)
+        * Update: [ModifyLiveCallbackTemplate](https://www.tencentcloud.com/document/api/267/30809)
+        * Delete: [DeleteLiveCallbackTemplate](https://www.tencentcloud.com/document/api/267/30813)
 
         ## Import
 

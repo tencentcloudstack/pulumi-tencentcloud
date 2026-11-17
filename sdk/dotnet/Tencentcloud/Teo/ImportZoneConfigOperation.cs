@@ -40,6 +40,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeZoneConfigImportResult](https://www.tencentcloud.com/document/api/1145/67243)
+    ///   - [ImportZoneConfig](https://www.tencentcloud.com/document/api/1145/67241)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Teo/importZoneConfigOperation:ImportZoneConfigOperation")]
     public partial class ImportZoneConfigOperation : global::Pulumi.CustomResource

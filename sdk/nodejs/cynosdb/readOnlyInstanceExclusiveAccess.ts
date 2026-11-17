@@ -32,6 +32,14 @@ import * as utilities from "../utilities";
  *     securityGroupIds: [cynosdbClusterSecurityGroupId],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+ *   - [OpenReadOnlyInstanceExclusiveAccess](https://www.tencentcloud.com/document/api/1098/55910)
  */
 export class ReadOnlyInstanceExclusiveAccess extends pulumi.CustomResource {
     /**

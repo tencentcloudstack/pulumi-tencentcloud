@@ -206,6 +206,19 @@ class L7RuleV2(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateNewL7Rules](https://www.tencentcloud.com/search/?wd=CreateNewL7Rules&type=document&lang=en)
+        * Read: [DescribleNewL7Rules](https://www.tencentcloud.com/search/?wd=DescribleNewL7Rules&type=document&lang=en)
+        * Update:
+          - [DescribleNewL7Rules](https://www.tencentcloud.com/search/?wd=DescribleNewL7Rules&type=document&lang=en)
+          - [ModifyNewDomainRules](https://www.tencentcloud.com/search/?wd=ModifyNewDomainRules&type=document&lang=en)
+        * Delete:
+          - [DeleteNewL7Rules](https://www.tencentcloud.com/search/?wd=DeleteNewL7Rules&type=document&lang=en)
+          - [DescribleNewL7Rules](https://www.tencentcloud.com/search/?wd=DescribleNewL7Rules&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -254,6 +267,19 @@ class L7RuleV2(pulumi.CustomResource):
                 "domain": "github.com",
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateNewL7Rules](https://www.tencentcloud.com/search/?wd=CreateNewL7Rules&type=document&lang=en)
+        * Read: [DescribleNewL7Rules](https://www.tencentcloud.com/search/?wd=DescribleNewL7Rules&type=document&lang=en)
+        * Update:
+          - [DescribleNewL7Rules](https://www.tencentcloud.com/search/?wd=DescribleNewL7Rules&type=document&lang=en)
+          - [ModifyNewDomainRules](https://www.tencentcloud.com/search/?wd=ModifyNewDomainRules&type=document&lang=en)
+        * Delete:
+          - [DeleteNewL7Rules](https://www.tencentcloud.com/search/?wd=DeleteNewL7Rules&type=document&lang=en)
+          - [DescribleNewL7Rules](https://www.tencentcloud.com/search/?wd=DescribleNewL7Rules&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

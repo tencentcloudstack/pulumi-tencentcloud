@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     secretIdLists: ["xxxx"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GetSecurityLastUsed](https://www.tencentcloud.com/document/api/598/41082)
  */
 export function getSecretLastUsedTime(args: GetSecretLastUsedTimeArgs, opts?: pulumi.InvokeOptions): Promise<GetSecretLastUsedTimeResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetSecretLastUsedTimeResult {
  *     secretIdLists: ["xxxx"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [GetSecurityLastUsed](https://www.tencentcloud.com/document/api/598/41082)
  */
 export function getSecretLastUsedTimeOutput(args: GetSecretLastUsedTimeOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSecretLastUsedTimeResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

@@ -44,7 +44,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo.Inputs
         public Input<string>? SourceVersion { get; set; }
 
         /// <summary>
-        /// Deploy status. Valid values: deploying (Deploying), failure (Deploy failed), success (Deploy successful).
+        /// Version status. Valid values: creating (Being created), inactive (Not effective), active (Effective).
         /// </summary>
         [Input("status")]
         public Input<string>? Status { get; set; }

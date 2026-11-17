@@ -271,6 +271,12 @@ def get_backup_by_flow_id(flow_id: Optional[_builtins.str] = None,
         flow_id=example_general_backup.flow_id)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBackupByFlowId](https://www.tencentcloud.com/document/api/238/72780)
+
 
     :param _builtins.str flow_id: Create a backup process ID, which can be obtained through the [CreateBackup](https://cloud.tencent.com/document/product/238/19946) interface.
     :param _builtins.str instance_id: Instance ID.
@@ -360,6 +366,12 @@ def get_backup_by_flow_id_output(flow_id: pulumi.Input[Optional[_builtins.str]] 
     example = tencentcloud.sqlserver.get_backup_by_flow_id_output(instance_id=example_general_backup.instance_id,
         flow_id=example_general_backup.flow_id)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeBackupByFlowId](https://www.tencentcloud.com/document/api/238/72780)
 
 
     :param _builtins.str flow_id: Create a backup process ID, which can be obtained through the [CreateBackup](https://cloud.tencent.com/document/product/238/19946) interface.

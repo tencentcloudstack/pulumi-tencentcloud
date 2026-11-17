@@ -170,6 +170,14 @@ class FunctionVersion(pulumi.CustomResource):
             description="for-terraform-test")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [PublishVersion](https://www.tencentcloud.com/document/api/583/34415)
+        * Read: [GetFunction](https://www.tencentcloud.com/search/?wd=GetFunction&type=document&lang=en)
+        * Delete: [DeleteFunction](https://www.tencentcloud.com/document/api/583/18585)
+
         ## Import
 
         scf function_version can be imported using the id, e.g.
@@ -205,6 +213,14 @@ class FunctionVersion(pulumi.CustomResource):
             namespace="default",
             description="for-terraform-test")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [PublishVersion](https://www.tencentcloud.com/document/api/583/34415)
+        * Read: [GetFunction](https://www.tencentcloud.com/search/?wd=GetFunction&type=document&lang=en)
+        * Delete: [DeleteFunction](https://www.tencentcloud.com/document/api/583/18585)
 
         ## Import
 

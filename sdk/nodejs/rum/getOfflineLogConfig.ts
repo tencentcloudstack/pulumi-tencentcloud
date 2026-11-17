@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *     projectKey: "ZEYrYfvaYQ30jRdmPx",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeOfflineLogConfigs](https://www.tencentcloud.com/search/?wd=DescribeOfflineLogConfigs&type=document&lang=en)
  */
 export function getOfflineLogConfig(args: GetOfflineLogConfigArgs, opts?: pulumi.InvokeOptions): Promise<GetOfflineLogConfigResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -72,6 +78,12 @@ export interface GetOfflineLogConfigResult {
  *     projectKey: "ZEYrYfvaYQ30jRdmPx",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeOfflineLogConfigs](https://www.tencentcloud.com/search/?wd=DescribeOfflineLogConfigs&type=document&lang=en)
  */
 export function getOfflineLogConfigOutput(args: GetOfflineLogConfigOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetOfflineLogConfigResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

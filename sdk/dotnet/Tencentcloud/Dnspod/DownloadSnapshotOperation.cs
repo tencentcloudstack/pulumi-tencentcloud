@@ -31,6 +31,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [DownloadSnapshot](https://www.tencentcloud.com/search/?wd=DownloadSnapshot&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Dnspod/downloadSnapshotOperation:DownloadSnapshotOperation")]
     public partial class DownloadSnapshotOperation : global::Pulumi.CustomResource

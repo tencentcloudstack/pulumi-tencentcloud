@@ -268,6 +268,17 @@ class LogPostClsFlow(pulumi.CustomResource):
             log_topic_name="waf_post_logtopic")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreatePostCLSFlow](https://www.tencentcloud.com/search/?wd=CreatePostCLSFlow&type=document&lang=en)
+          - [DescribePostCLSFlows](https://www.tencentcloud.com/search/?wd=DescribePostCLSFlows&type=document&lang=en)
+        * Read: [DescribePostCLSFlows](https://www.tencentcloud.com/search/?wd=DescribePostCLSFlows&type=document&lang=en)
+        * Update: [CreatePostCLSFlow](https://www.tencentcloud.com/search/?wd=CreatePostCLSFlow&type=document&lang=en)
+        * Delete: [DestroyPostCLSFlow](https://www.tencentcloud.com/search/?wd=DestroyPostCLSFlow&type=document&lang=en)
+
         ## Import
 
         WAF log post cls flow can be imported using the id, e.g.
@@ -328,6 +339,17 @@ class LogPostClsFlow(pulumi.CustomResource):
             log_type=2,
             log_topic_name="waf_post_logtopic")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreatePostCLSFlow](https://www.tencentcloud.com/search/?wd=CreatePostCLSFlow&type=document&lang=en)
+          - [DescribePostCLSFlows](https://www.tencentcloud.com/search/?wd=DescribePostCLSFlows&type=document&lang=en)
+        * Read: [DescribePostCLSFlows](https://www.tencentcloud.com/search/?wd=DescribePostCLSFlows&type=document&lang=en)
+        * Update: [CreatePostCLSFlow](https://www.tencentcloud.com/search/?wd=CreatePostCLSFlow&type=document&lang=en)
+        * Delete: [DestroyPostCLSFlow](https://www.tencentcloud.com/search/?wd=DestroyPostCLSFlow&type=document&lang=en)
 
         ## Import
 

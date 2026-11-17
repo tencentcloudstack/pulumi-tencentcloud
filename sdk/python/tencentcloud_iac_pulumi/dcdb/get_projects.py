@@ -86,6 +86,12 @@ def get_projects(result_output_file: Optional[_builtins.str] = None,
     projects = tencentcloud.dcdb.get_projects()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeProjects](https://www.tencentcloud.com/search/?wd=DescribeProjects&type=document&lang=en)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -111,6 +117,12 @@ def get_projects_output(result_output_file: pulumi.Input[Optional[Optional[_buil
 
     projects = tencentcloud.dcdb.get_projects()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeProjects](https://www.tencentcloud.com/search/?wd=DescribeProjects&type=document&lang=en)
 
 
     :param _builtins.str result_output_file: Used to save results.

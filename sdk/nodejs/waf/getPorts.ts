@@ -39,6 +39,12 @@ import * as utilities from "../utilities";
  *     instanceId: "waf_2ka80zly0702e8j3",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribePorts](https://www.tencentcloud.com/document/api/627/64770)
  */
 export function getPorts(args?: GetPortsArgs, opts?: pulumi.InvokeOptions): Promise<GetPortsResult> {
     args = args || {};
@@ -123,6 +129,12 @@ export interface GetPortsResult {
  *     instanceId: "waf_2ka80zly0702e8j3",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribePorts](https://www.tencentcloud.com/document/api/627/64770)
  */
 export function getPortsOutput(args?: GetPortsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetPortsResult> {
     args = args || {};

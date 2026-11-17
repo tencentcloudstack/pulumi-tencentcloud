@@ -85,6 +85,14 @@ class SyncJobIsolateOperation(pulumi.CustomResource):
         sync_job_isolate_operation = tencentcloud.dts.SyncJobIsolateOperation("sync_job_isolate_operation", job_id="sync-werwfs23")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeSyncJobs](https://www.tencentcloud.com/document/api/571/51793)
+          - [IsolateSyncJob](https://www.tencentcloud.com/document/api/571/51791)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -107,6 +115,14 @@ class SyncJobIsolateOperation(pulumi.CustomResource):
 
         sync_job_isolate_operation = tencentcloud.dts.SyncJobIsolateOperation("sync_job_isolate_operation", job_id="sync-werwfs23")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeSyncJobs](https://www.tencentcloud.com/document/api/571/51793)
+          - [IsolateSyncJob](https://www.tencentcloud.com/document/api/571/51791)
 
 
         :param str resource_name: The name of the resource.

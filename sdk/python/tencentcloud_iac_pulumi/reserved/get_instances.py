@@ -126,6 +126,12 @@ def get_instances(availability_zone: Optional[_builtins.str] = None,
         instance_type="S2.MEDIUM8")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeReservedInstances](https://www.tencentcloud.com/document/api/213/68457)
+
 
     :param _builtins.str availability_zone: The available zone that the reserved instance locates at.
     :param _builtins.str instance_type: The type of reserved instance.
@@ -164,6 +170,12 @@ def get_instances_output(availability_zone: pulumi.Input[Optional[Optional[_buil
     instances = tencentcloud.reserved.get_instances(availability_zone="na-siliconvalley-1",
         instance_type="S2.MEDIUM8")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeReservedInstances](https://www.tencentcloud.com/document/api/213/68457)
 
 
     :param _builtins.str availability_zone: The available zone that the reserved instance locates at.

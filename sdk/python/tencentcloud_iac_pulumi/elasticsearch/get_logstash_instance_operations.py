@@ -121,6 +121,12 @@ def get_logstash_instance_operations(end_time: Optional[_builtins.str] = None,
         end_time="2023-10-31 10:12:45")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeLogstashInstanceOperations](https://www.tencentcloud.com/search/?wd=DescribeLogstashInstanceOperations&type=document&lang=en)
+
 
     :param _builtins.str end_time: End time, e.g. 2019-03-30 20:18:03.
     :param _builtins.str instance_id: Instance id.
@@ -160,6 +166,12 @@ def get_logstash_instance_operations_output(end_time: pulumi.Input[Optional[_bui
         start_time="2018-01-01 00:00:00",
         end_time="2023-10-31 10:12:45")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeLogstashInstanceOperations](https://www.tencentcloud.com/search/?wd=DescribeLogstashInstanceOperations&type=document&lang=en)
 
 
     :param _builtins.str end_time: End time, e.g. 2019-03-30 20:18:03.

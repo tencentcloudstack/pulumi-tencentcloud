@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCloneList](https://www.tencentcloud.com/document/api/236/38952)
         /// </summary>
         public static Task<GetCloneListResult> InvokeAsync(GetCloneListArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetCloneListResult>("tencentcloud:Mysql/getCloneList:getCloneList", args ?? new GetCloneListArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCloneList](https://www.tencentcloud.com/document/api/236/38952)
         /// </summary>
         public static Output<GetCloneListResult> Invoke(GetCloneListInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetCloneListResult>("tencentcloud:Mysql/getCloneList:getCloneList", args ?? new GetCloneListInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCloneList](https://www.tencentcloud.com/document/api/236/38952)
         /// </summary>
         public static Output<GetCloneListResult> Invoke(GetCloneListInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetCloneListResult>("tencentcloud:Mysql/getCloneList:getCloneList", args ?? new GetCloneListInvokeArgs(), options.WithDefaults());

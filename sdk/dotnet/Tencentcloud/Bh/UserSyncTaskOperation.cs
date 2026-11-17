@@ -30,6 +30,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bh
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateSyncUserTask](https://www.tencentcloud.com/search/?wd=CreateSyncUserTask&amp;type=document&amp;lang=en)
+    ///   - [DescribeUserSyncStatus](https://www.tencentcloud.com/search/?wd=DescribeUserSyncStatus&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Bh/userSyncTaskOperation:UserSyncTaskOperation")]
     public partial class UserSyncTaskOperation : global::Pulumi.CustomResource

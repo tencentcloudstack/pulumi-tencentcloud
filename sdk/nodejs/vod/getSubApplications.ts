@@ -74,6 +74,12 @@ import * as utilities from "../utilities";
  *     resultOutputFile: "/tmp/vod_apps.json",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSubAppIds](https://www.tencentcloud.com/document/api/266/34177)
  */
 export function getSubApplications(args?: GetSubApplicationsArgs, opts?: pulumi.InvokeOptions): Promise<GetSubApplicationsResult> {
     args = args || {};
@@ -193,6 +199,12 @@ export interface GetSubApplicationsResult {
  *     resultOutputFile: "/tmp/vod_apps.json",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSubAppIds](https://www.tencentcloud.com/document/api/266/34177)
  */
 export function getSubApplicationsOutput(args?: GetSubApplicationsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSubApplicationsResult> {
     args = args || {};

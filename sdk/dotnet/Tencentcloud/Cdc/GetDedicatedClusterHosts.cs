@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDedicatedClusterHosts](https://www.tencentcloud.com/document/api/1226/66393)
         /// </summary>
         public static Task<GetDedicatedClusterHostsResult> InvokeAsync(GetDedicatedClusterHostsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDedicatedClusterHostsResult>("tencentcloud:Cdc/getDedicatedClusterHosts:getDedicatedClusterHosts", args ?? new GetDedicatedClusterHostsArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDedicatedClusterHosts](https://www.tencentcloud.com/document/api/1226/66393)
         /// </summary>
         public static Output<GetDedicatedClusterHostsResult> Invoke(GetDedicatedClusterHostsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDedicatedClusterHostsResult>("tencentcloud:Cdc/getDedicatedClusterHosts:getDedicatedClusterHosts", args ?? new GetDedicatedClusterHostsInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cdc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDedicatedClusterHosts](https://www.tencentcloud.com/document/api/1226/66393)
         /// </summary>
         public static Output<GetDedicatedClusterHostsResult> Invoke(GetDedicatedClusterHostsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDedicatedClusterHostsResult>("tencentcloud:Cdc/getDedicatedClusterHosts:getDedicatedClusterHosts", args ?? new GetDedicatedClusterHostsInvokeArgs(), options.WithDefaults());

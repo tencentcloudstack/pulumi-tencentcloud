@@ -96,6 +96,12 @@ def get_key_alias(region: Optional[_builtins.str] = None,
     all = tencentcloud.audit.get_key_alias(region="ap-hongkong")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListKeyAliasByRegion](https://www.tencentcloud.com/search/?wd=ListKeyAliasByRegion&type=document&lang=en)
+
 
     :param _builtins.str region: Region.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_key_alias_output(region: pulumi.Input[Optional[_builtins.str]] = None,
 
     all = tencentcloud.audit.get_key_alias(region="ap-hongkong")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListKeyAliasByRegion](https://www.tencentcloud.com/search/?wd=ListKeyAliasByRegion&type=document&lang=en)
 
 
     :param _builtins.str region: Region.

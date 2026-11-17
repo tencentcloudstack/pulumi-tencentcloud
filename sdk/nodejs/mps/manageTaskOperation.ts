@@ -18,6 +18,12 @@ import * as utilities from "../utilities";
  *     taskId: "2600010949-LiveScheduleTask-xxxx",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [ManageTask](https://www.tencentcloud.com/document/api/1041/37462)
  */
 export class ManageTaskOperation extends pulumi.CustomResource {
     /**

@@ -51,6 +51,19 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [GrantUserPermissions](https://www.tencentcloud.com/search/?wd=GrantUserPermissions&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeUserPermissions](https://www.tencentcloud.com/search/?wd=DescribeUserPermissions&amp;type=document&amp;lang=en)
+    /// * Update:
+    ///   - [DeleteUserPermissions](https://www.tencentcloud.com/search/?wd=DeleteUserPermissions&amp;type=document&amp;lang=en)
+    ///   - [GrantUserPermissions](https://www.tencentcloud.com/search/?wd=GrantUserPermissions&amp;type=document&amp;lang=en)
+    /// * Delete:
+    ///   - [DeleteUserPermissions](https://www.tencentcloud.com/search/?wd=DeleteUserPermissions&amp;type=document&amp;lang=en)
+    ///   - [DescribeUserPermissions](https://www.tencentcloud.com/search/?wd=DescribeUserPermissions&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// TKE kubernetes user permissions can be imported using the id, e.g.

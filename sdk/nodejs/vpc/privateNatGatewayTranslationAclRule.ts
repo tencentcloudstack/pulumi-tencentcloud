@@ -55,6 +55,15 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreatePrivateNatGatewayTranslationAclRule](https://www.tencentcloud.com/search/?wd=CreatePrivateNatGatewayTranslationAclRule&type=document&lang=en)
+ * * Read: [DescribePrivateNatGatewayTranslationAclRules](https://www.tencentcloud.com/search/?wd=DescribePrivateNatGatewayTranslationAclRules&type=document&lang=en)
+ * * Update: [ModifyPrivateNatGatewayTranslationAclRule](https://www.tencentcloud.com/search/?wd=ModifyPrivateNatGatewayTranslationAclRule&type=document&lang=en)
+ * * Delete: [DeletePrivateNatGatewayTranslationAclRule](https://www.tencentcloud.com/search/?wd=DeletePrivateNatGatewayTranslationAclRule&type=document&lang=en)
+ *
  * ## Import
  *
  * VPC private nat gateway translation acl rule can be imported using the natGatewayId#translationDirection#translationType#translationIp[#originalIp]#aclruleId, e.g.

@@ -128,6 +128,12 @@ def get_parameter_templates(filters: Optional[Sequence[Union['GetParameterTempla
         order_by_type="desc")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeParameterTemplates](https://www.tencentcloud.com/document/api/409/52651)
+
 
     :param Sequence[Union['GetParameterTemplatesFilterArgs', 'GetParameterTemplatesFilterArgsDict']] filters: Filter conditions. Valid values:TemplateName, TemplateId, DBMajorVersion, DBEngine.
     :param _builtins.str order_by: Sorting metric. Valid values:CreateTime, TemplateName, DBMajorVersion.
@@ -176,6 +182,12 @@ def get_parameter_templates_output(filters: pulumi.Input[Optional[Optional[Seque
         order_by="CreateTime",
         order_by_type="desc")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeParameterTemplates](https://www.tencentcloud.com/document/api/409/52651)
 
 
     :param Sequence[Union['GetParameterTemplatesFilterArgs', 'GetParameterTemplatesFilterArgsDict']] filters: Filter conditions. Valid values:TemplateName, TemplateId, DBMajorVersion, DBEngine.

@@ -193,6 +193,12 @@ def get_instances(instance_id: Optional[_builtins.str] = None,
     pulumi.export("firstInstance", len(filtered.instance_lists).apply(lambda length: filtered.instance_lists[0] if length > 0 else None))
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstancesNew](https://www.tencentcloud.com/search/?wd=DescribeInstancesNew&type=document&lang=en)
+
 
     :param _builtins.str instance_id: Search by instance ID, support exact matching.
     :param _builtins.str instance_name: Search by instance name, support fuzzy matching.
@@ -286,6 +292,12 @@ def get_instances_output(instance_id: pulumi.Input[Optional[Optional[_builtins.s
     pulumi.export("instanceCount", len(filtered.instance_lists))
     pulumi.export("firstInstance", len(filtered.instance_lists).apply(lambda length: filtered.instance_lists[0] if length > 0 else None))
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstancesNew](https://www.tencentcloud.com/search/?wd=DescribeInstancesNew&type=document&lang=en)
 
 
     :param _builtins.str instance_id: Search by instance ID, support exact matching.

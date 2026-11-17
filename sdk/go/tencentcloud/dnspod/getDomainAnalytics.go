@@ -41,6 +41,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDomainAnalytics](https://www.tencentcloud.com/search/?wd=DescribeDomainAnalytics&type=document&lang=en)
 func GetDomainAnalytics(ctx *pulumi.Context, args *GetDomainAnalyticsArgs, opts ...pulumi.InvokeOption) (*GetDomainAnalyticsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDomainAnalyticsResult

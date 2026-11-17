@@ -152,6 +152,12 @@ class SubmitTriggerTask(pulumi.CustomResource):
             version_remark="v1")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [SubmitTriggerTask](https://www.tencentcloud.com/document/api/1174/77915)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -179,6 +185,12 @@ class SubmitTriggerTask(pulumi.CustomResource):
             task_id="20251015164958429",
             version_remark="v1")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [SubmitTriggerTask](https://www.tencentcloud.com/document/api/1174/77915)
 
 
         :param str resource_name: The name of the resource.

@@ -96,6 +96,12 @@ def get_instance_urls(instance_id: Optional[_builtins.str] = None,
     mongodb_instance_urls = tencentcloud.mongodb.get_instance_urls(instance_id="cmgo-xxxxxx")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBInstanceURL](https://www.tencentcloud.com/search/?wd=DescribeDBInstanceURL&type=document&lang=en)
+
 
     :param _builtins.str instance_id: Instance id.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_instance_urls_output(instance_id: pulumi.Input[Optional[_builtins.str]] 
 
     mongodb_instance_urls = tencentcloud.mongodb.get_instance_urls(instance_id="cmgo-xxxxxx")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDBInstanceURL](https://www.tencentcloud.com/search/?wd=DescribeDBInstanceURL&type=document&lang=en)
 
 
     :param _builtins.str instance_id: Instance id.

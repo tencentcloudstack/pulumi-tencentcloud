@@ -86,6 +86,12 @@ def get_watermarks(result_output_file: Optional[_builtins.str] = None,
     watermarks = tencentcloud.css.get_watermarks()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeLiveWatermarks](https://www.tencentcloud.com/document/api/267/30820)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -111,6 +117,12 @@ def get_watermarks_output(result_output_file: pulumi.Input[Optional[Optional[_bu
 
     watermarks = tencentcloud.css.get_watermarks()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeLiveWatermarks](https://www.tencentcloud.com/document/api/267/30820)
 
 
     :param _builtins.str result_output_file: Used to save results.

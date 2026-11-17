@@ -45,6 +45,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeJobEvents](https://www.tencentcloud.com/search/?wd=DescribeJobEvents&type=document&lang=en)
 func GetJobEvents(ctx *pulumi.Context, args *GetJobEventsArgs, opts ...pulumi.InvokeOption) (*GetJobEventsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetJobEventsResult

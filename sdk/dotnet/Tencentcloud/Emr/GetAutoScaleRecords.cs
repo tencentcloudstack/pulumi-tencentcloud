@@ -40,6 +40,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAutoScaleRecords](https://www.tencentcloud.com/document/api/1026/58396)
         /// </summary>
         public static Task<GetAutoScaleRecordsResult> InvokeAsync(GetAutoScaleRecordsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetAutoScaleRecordsResult>("tencentcloud:Emr/getAutoScaleRecords:getAutoScaleRecords", args ?? new GetAutoScaleRecordsArgs(), options.WithDefaults());
@@ -72,6 +78,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAutoScaleRecords](https://www.tencentcloud.com/document/api/1026/58396)
         /// </summary>
         public static Output<GetAutoScaleRecordsResult> Invoke(GetAutoScaleRecordsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetAutoScaleRecordsResult>("tencentcloud:Emr/getAutoScaleRecords:getAutoScaleRecords", args ?? new GetAutoScaleRecordsInvokeArgs(), options.WithDefaults());
@@ -104,6 +116,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAutoScaleRecords](https://www.tencentcloud.com/document/api/1026/58396)
         /// </summary>
         public static Output<GetAutoScaleRecordsResult> Invoke(GetAutoScaleRecordsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetAutoScaleRecordsResult>("tencentcloud:Emr/getAutoScaleRecords:getAutoScaleRecords", args ?? new GetAutoScaleRecordsInvokeArgs(), options.WithDefaults());

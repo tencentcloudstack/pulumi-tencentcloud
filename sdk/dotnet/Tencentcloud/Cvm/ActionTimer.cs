@@ -92,6 +92,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ImportInstancesActionTimer](https://www.tencentcloud.com/search/?wd=ImportInstancesActionTimer&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeInstancesActionTimer](https://www.tencentcloud.com/search/?wd=DescribeInstancesActionTimer&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteInstancesActionTimer](https://www.tencentcloud.com/search/?wd=DeleteInstancesActionTimer&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Cvm/actionTimer:ActionTimer")]
     public partial class ActionTimer : global::Pulumi.CustomResource

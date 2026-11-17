@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstanceParamRecords](https://www.tencentcloud.com/document/api/239/32083)
         /// </summary>
         public static Task<GetParamRecordsResult> InvokeAsync(GetParamRecordsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetParamRecordsResult>("tencentcloud:Redis/getParamRecords:getParamRecords", args ?? new GetParamRecordsArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstanceParamRecords](https://www.tencentcloud.com/document/api/239/32083)
         /// </summary>
         public static Output<GetParamRecordsResult> Invoke(GetParamRecordsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetParamRecordsResult>("tencentcloud:Redis/getParamRecords:getParamRecords", args ?? new GetParamRecordsInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Redis
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstanceParamRecords](https://www.tencentcloud.com/document/api/239/32083)
         /// </summary>
         public static Output<GetParamRecordsResult> Invoke(GetParamRecordsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetParamRecordsResult>("tencentcloud:Redis/getParamRecords:getParamRecords", args ?? new GetParamRecordsInvokeArgs(), options.WithDefaults());

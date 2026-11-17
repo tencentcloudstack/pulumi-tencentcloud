@@ -32,6 +32,12 @@ import * as utilities from "../utilities";
  *     groupName: "tf-example",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAccountGroups](https://www.tencentcloud.com/search/?wd=DescribeAccountGroups&type=document&lang=en)
  */
 export function getAccountGroups(args?: GetAccountGroupsArgs, opts?: pulumi.InvokeOptions): Promise<GetAccountGroupsResult> {
     args = args || {};
@@ -118,6 +124,12 @@ export interface GetAccountGroupsResult {
  *     groupName: "tf-example",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAccountGroups](https://www.tencentcloud.com/search/?wd=DescribeAccountGroups&type=document&lang=en)
  */
 export function getAccountGroupsOutput(args?: GetAccountGroupsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAccountGroupsResult> {
     args = args || {};

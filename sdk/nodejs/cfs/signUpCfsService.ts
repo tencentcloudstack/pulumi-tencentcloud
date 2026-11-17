@@ -15,6 +15,15 @@ import * as utilities from "../utilities";
  *
  * const signUpCfsService = new tencentcloud.cfs.SignUpCfsService("sign_up_cfs_service", {});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeCfsServiceStatus](https://www.tencentcloud.com/document/api/582/34499)
+ *   - [SignUpCfsService](https://www.tencentcloud.com/document/api/582/34498)
+ * * Read: [DescribeCfsServiceStatus](https://www.tencentcloud.com/document/api/582/34499)
  */
 export class SignUpCfsService extends pulumi.CustomResource {
     /**

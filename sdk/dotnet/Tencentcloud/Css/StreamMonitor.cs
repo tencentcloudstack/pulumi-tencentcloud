@@ -66,6 +66,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateLiveStreamMonitor](https://www.tencentcloud.com/search/?wd=CreateLiveStreamMonitor&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeLiveStreamMonitor](https://www.tencentcloud.com/search/?wd=DescribeLiveStreamMonitor&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyLiveStreamMonitor](https://www.tencentcloud.com/search/?wd=ModifyLiveStreamMonitor&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteLiveStreamMonitor](https://www.tencentcloud.com/search/?wd=DeleteLiveStreamMonitor&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// css StreamMonitor can be imported using the id, e.g.

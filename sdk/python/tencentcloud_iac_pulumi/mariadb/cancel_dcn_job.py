@@ -85,6 +85,14 @@ class CancelDcnJob(pulumi.CustomResource):
         cancel_dcn_job = tencentcloud.mariadb.CancelDcnJob("cancel_dcn_job", instance_id="tdsql-9vqvls95")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CancelDcnJob](https://www.tencentcloud.com/document/api/237/41520)
+          - [DescribeFlow](https://www.tencentcloud.com/document/api/237/16177)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -107,6 +115,14 @@ class CancelDcnJob(pulumi.CustomResource):
 
         cancel_dcn_job = tencentcloud.mariadb.CancelDcnJob("cancel_dcn_job", instance_id="tdsql-9vqvls95")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CancelDcnJob](https://www.tencentcloud.com/document/api/237/41520)
+          - [DescribeFlow](https://www.tencentcloud.com/document/api/237/16177)
 
 
         :param str resource_name: The name of the resource.

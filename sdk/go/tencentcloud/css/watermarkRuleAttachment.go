@@ -74,6 +74,14 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateLiveWatermarkRule](https://www.tencentcloud.com/document/api/267/30825)
+// * Read: [DescribeLiveWatermarkRules](https://www.tencentcloud.com/document/api/267/30821)
+// * Delete: [DeleteLiveWatermarkRule](https://www.tencentcloud.com/document/api/267/30823)
+//
 // ## Import
 //
 // css watermarkRuleAttachment can be imported using the id, e.g.

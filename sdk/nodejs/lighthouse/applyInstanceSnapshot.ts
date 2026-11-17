@@ -18,6 +18,14 @@ import * as utilities from "../utilities";
  *     snapshotId: "lhsnap-123456",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [ApplyInstanceSnapshot](https://www.tencentcloud.com/document/api/1103/42465)
+ *   - [DescribeSnapshots](https://www.tencentcloud.com/document/api/1103/42462)
  */
 export class ApplyInstanceSnapshot extends pulumi.CustomResource {
     /**

@@ -4033,7 +4033,7 @@ func (o ClusterLogAgentPtrOutput) KubeletRootDir() pulumi.StringPtrOutput {
 type ClusterMaintenanceWindowAndExclusionExclusion struct {
 	// Maintenance exclusion end time.
 	EndAt string `pulumi:"endAt"`
-	// ID of the resource.
+	// Maintenance exclusion ID.
 	Id *int `pulumi:"id"`
 	// Maintenance exclusion name.
 	Name string `pulumi:"name"`
@@ -4055,7 +4055,7 @@ type ClusterMaintenanceWindowAndExclusionExclusionInput interface {
 type ClusterMaintenanceWindowAndExclusionExclusionArgs struct {
 	// Maintenance exclusion end time.
 	EndAt pulumi.StringInput `pulumi:"endAt"`
-	// ID of the resource.
+	// Maintenance exclusion ID.
 	Id pulumi.IntPtrInput `pulumi:"id"`
 	// Maintenance exclusion name.
 	Name pulumi.StringInput `pulumi:"name"`
@@ -4119,7 +4119,7 @@ func (o ClusterMaintenanceWindowAndExclusionExclusionOutput) EndAt() pulumi.Stri
 	return o.ApplyT(func(v ClusterMaintenanceWindowAndExclusionExclusion) string { return v.EndAt }).(pulumi.StringOutput)
 }
 
-// ID of the resource.
+// Maintenance exclusion ID.
 func (o ClusterMaintenanceWindowAndExclusionExclusionOutput) Id() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v ClusterMaintenanceWindowAndExclusionExclusion) *int { return v.Id }).(pulumi.IntPtrOutput)
 }
@@ -8777,7 +8777,7 @@ func (o EncryptionProtectionKmsConfigurationPtrOutput) KmsRegion() pulumi.String
 type GlobalMaintenanceWindowAndExclusionExclusion struct {
 	// Maintenance exclusion end time.
 	EndAt string `pulumi:"endAt"`
-	// ID of the resource.
+	// Maintenance exclusion ID.
 	Id *int `pulumi:"id"`
 	// Maintenance exclusion name.
 	Name string `pulumi:"name"`
@@ -8799,7 +8799,7 @@ type GlobalMaintenanceWindowAndExclusionExclusionInput interface {
 type GlobalMaintenanceWindowAndExclusionExclusionArgs struct {
 	// Maintenance exclusion end time.
 	EndAt pulumi.StringInput `pulumi:"endAt"`
-	// ID of the resource.
+	// Maintenance exclusion ID.
 	Id pulumi.IntPtrInput `pulumi:"id"`
 	// Maintenance exclusion name.
 	Name pulumi.StringInput `pulumi:"name"`
@@ -8863,7 +8863,7 @@ func (o GlobalMaintenanceWindowAndExclusionExclusionOutput) EndAt() pulumi.Strin
 	return o.ApplyT(func(v GlobalMaintenanceWindowAndExclusionExclusion) string { return v.EndAt }).(pulumi.StringOutput)
 }
 
-// ID of the resource.
+// Maintenance exclusion ID.
 func (o GlobalMaintenanceWindowAndExclusionExclusionOutput) Id() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v GlobalMaintenanceWindowAndExclusionExclusion) *int { return v.Id }).(pulumi.IntPtrOutput)
 }
@@ -9228,6 +9228,8 @@ func (o NativeNodePoolLabelArrayOutput) Index(i pulumi.IntInput) NativeNodePoolL
 type NativeNodePoolNative struct {
 	// Whether to enable self-healing ability.
 	AutoRepair *bool `pulumi:"autoRepair"`
+	// Custom image ID.
+	CustomImage *string `pulumi:"customImage"`
 	// Native node pool data disk list.
 	DataDisks []NativeNodePoolNativeDataDisk `pulumi:"dataDisks"`
 	// Whether to enable elastic scaling.
@@ -9282,6 +9284,8 @@ type NativeNodePoolNativeInput interface {
 type NativeNodePoolNativeArgs struct {
 	// Whether to enable self-healing ability.
 	AutoRepair pulumi.BoolPtrInput `pulumi:"autoRepair"`
+	// Custom image ID.
+	CustomImage pulumi.StringPtrInput `pulumi:"customImage"`
 	// Native node pool data disk list.
 	DataDisks NativeNodePoolNativeDataDiskArrayInput `pulumi:"dataDisks"`
 	// Whether to enable elastic scaling.
@@ -9402,6 +9406,11 @@ func (o NativeNodePoolNativeOutput) ToNativeNodePoolNativePtrOutputWithContext(c
 // Whether to enable self-healing ability.
 func (o NativeNodePoolNativeOutput) AutoRepair() pulumi.BoolPtrOutput {
 	return o.ApplyT(func(v NativeNodePoolNative) *bool { return v.AutoRepair }).(pulumi.BoolPtrOutput)
+}
+
+// Custom image ID.
+func (o NativeNodePoolNativeOutput) CustomImage() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v NativeNodePoolNative) *string { return v.CustomImage }).(pulumi.StringPtrOutput)
 }
 
 // Native node pool data disk list.
@@ -9533,6 +9542,16 @@ func (o NativeNodePoolNativePtrOutput) AutoRepair() pulumi.BoolPtrOutput {
 		}
 		return v.AutoRepair
 	}).(pulumi.BoolPtrOutput)
+}
+
+// Custom image ID.
+func (o NativeNodePoolNativePtrOutput) CustomImage() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v *NativeNodePoolNative) *string {
+		if v == nil {
+			return nil
+		}
+		return v.CustomImage
+	}).(pulumi.StringPtrOutput)
 }
 
 // Native node pool data disk list.
@@ -12167,7 +12186,7 @@ type NodePoolNodeConfig struct {
 	DesiredPodNum *int `pulumi:"desiredPodNum"`
 	// Docker graph path. Default is `/var/lib/docker`.
 	DockerGraphPath *string `pulumi:"dockerGraphPath"`
-	// Custom parameter information related to the node. This is a white-list parameter.
+	// Custom parameter information related to the node. This is a white-list parameter. It can be modified via the `ModifyClusterNodePool` API.
 	ExtraArgs []string `pulumi:"extraArgs"`
 	// GPU driver parameters.
 	GpuArgs *NodePoolNodeConfigGpuArgs `pulumi:"gpuArgs"`
@@ -12199,7 +12218,7 @@ type NodePoolNodeConfigArgs struct {
 	DesiredPodNum pulumi.IntPtrInput `pulumi:"desiredPodNum"`
 	// Docker graph path. Default is `/var/lib/docker`.
 	DockerGraphPath pulumi.StringPtrInput `pulumi:"dockerGraphPath"`
-	// Custom parameter information related to the node. This is a white-list parameter.
+	// Custom parameter information related to the node. This is a white-list parameter. It can be modified via the `ModifyClusterNodePool` API.
 	ExtraArgs pulumi.StringArrayInput `pulumi:"extraArgs"`
 	// GPU driver parameters.
 	GpuArgs NodePoolNodeConfigGpuArgsPtrInput `pulumi:"gpuArgs"`
@@ -12305,7 +12324,7 @@ func (o NodePoolNodeConfigOutput) DockerGraphPath() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v NodePoolNodeConfig) *string { return v.DockerGraphPath }).(pulumi.StringPtrOutput)
 }
 
-// Custom parameter information related to the node. This is a white-list parameter.
+// Custom parameter information related to the node. This is a white-list parameter. It can be modified via the `ModifyClusterNodePool` API.
 func (o NodePoolNodeConfigOutput) ExtraArgs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v NodePoolNodeConfig) []string { return v.ExtraArgs }).(pulumi.StringArrayOutput)
 }
@@ -12389,7 +12408,7 @@ func (o NodePoolNodeConfigPtrOutput) DockerGraphPath() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-// Custom parameter information related to the node. This is a white-list parameter.
+// Custom parameter information related to the node. This is a white-list parameter. It can be modified via the `ModifyClusterNodePool` API.
 func (o NodePoolNodeConfigPtrOutput) ExtraArgs() pulumi.StringArrayOutput {
 	return o.ApplyT(func(v *NodePoolNodeConfig) []string {
 		if v == nil {

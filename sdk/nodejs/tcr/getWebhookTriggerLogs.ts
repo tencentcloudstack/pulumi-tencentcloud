@@ -24,6 +24,12 @@ import * as utilities from "../utilities";
  *     },
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeWebhookTriggerLog](https://www.tencentcloud.com/document/api/1051/50680)
  */
 export function getWebhookTriggerLogs(args: GetWebhookTriggerLogsArgs, opts?: pulumi.InvokeOptions): Promise<GetWebhookTriggerLogsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -101,6 +107,12 @@ export interface GetWebhookTriggerLogsResult {
  *     },
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeWebhookTriggerLog](https://www.tencentcloud.com/document/api/1051/50680)
  */
 export function getWebhookTriggerLogsOutput(args: GetWebhookTriggerLogsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetWebhookTriggerLogsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

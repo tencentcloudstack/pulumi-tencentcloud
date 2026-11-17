@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetOpsTriggerWorkflow](https://www.tencentcloud.com/document/api/1174/77890)
         /// </summary>
         public static Task<GetOpsTriggerWorkflowResult> InvokeAsync(GetOpsTriggerWorkflowArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetOpsTriggerWorkflowResult>("tencentcloud:Wedata/getOpsTriggerWorkflow:getOpsTriggerWorkflow", args ?? new GetOpsTriggerWorkflowArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetOpsTriggerWorkflow](https://www.tencentcloud.com/document/api/1174/77890)
         /// </summary>
         public static Output<GetOpsTriggerWorkflowResult> Invoke(GetOpsTriggerWorkflowInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetOpsTriggerWorkflowResult>("tencentcloud:Wedata/getOpsTriggerWorkflow:getOpsTriggerWorkflow", args ?? new GetOpsTriggerWorkflowInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Wedata
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [GetOpsTriggerWorkflow](https://www.tencentcloud.com/document/api/1174/77890)
         /// </summary>
         public static Output<GetOpsTriggerWorkflowResult> Invoke(GetOpsTriggerWorkflowInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetOpsTriggerWorkflowResult>("tencentcloud:Wedata/getOpsTriggerWorkflow:getOpsTriggerWorkflow", args ?? new GetOpsTriggerWorkflowInvokeArgs(), options.WithDefaults());

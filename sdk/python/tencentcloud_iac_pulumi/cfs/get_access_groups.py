@@ -113,6 +113,12 @@ def get_access_groups(access_group_id: Optional[_builtins.str] = None,
         name="test")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCfsPGroups](https://www.tencentcloud.com/document/api/582/34505)
+
 
     :param _builtins.str access_group_id: A specified access group ID used to query.
     :param _builtins.str name: A access group Name used to query.
@@ -147,6 +153,12 @@ def get_access_groups_output(access_group_id: pulumi.Input[Optional[Optional[_bu
     access_groups = tencentcloud.cfs.get_access_groups(access_group_id="pgroup-7nx89k7l",
         name="test")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCfsPGroups](https://www.tencentcloud.com/document/api/582/34505)
 
 
     :param _builtins.str access_group_id: A specified access group ID used to query.

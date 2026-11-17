@@ -44,6 +44,17 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [UpsertIpAccessControl](https://www.tencentcloud.com/search/?wd=UpsertIpAccessControl&type=document&lang=en)
+ * * Read: [DescribeIpAccessControl](https://www.tencentcloud.com/document/api/627/64773)
+ * * Update:
+ *   - [DeleteIpAccessControl](https://www.tencentcloud.com/search/?wd=DeleteIpAccessControl&type=document&lang=en)
+ *   - [UpsertIpAccessControl](https://www.tencentcloud.com/search/?wd=UpsertIpAccessControl&type=document&lang=en)
+ * * Delete: [DeleteIpAccessControl](https://www.tencentcloud.com/search/?wd=DeleteIpAccessControl&type=document&lang=en)
+ *
  * ## Import
  *
  * waf ipAccessControl can be imported using the id, e.g.

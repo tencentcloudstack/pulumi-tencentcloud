@@ -51,6 +51,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTawInstances](https://www.tencentcloud.com/document/api/1131/45302)
         /// </summary>
         public static Task<GetTawInstanceResult> InvokeAsync(GetTawInstanceArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetTawInstanceResult>("tencentcloud:Rum/getTawInstance:getTawInstance", args ?? new GetTawInstanceArgs(), options.WithDefaults());
@@ -94,6 +100,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTawInstances](https://www.tencentcloud.com/document/api/1131/45302)
         /// </summary>
         public static Output<GetTawInstanceResult> Invoke(GetTawInstanceInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetTawInstanceResult>("tencentcloud:Rum/getTawInstance:getTawInstance", args ?? new GetTawInstanceInvokeArgs(), options.WithDefaults());
@@ -137,6 +149,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Rum
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTawInstances](https://www.tencentcloud.com/document/api/1131/45302)
         /// </summary>
         public static Output<GetTawInstanceResult> Invoke(GetTawInstanceInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetTawInstanceResult>("tencentcloud:Rum/getTawInstance:getTawInstance", args ?? new GetTawInstanceInvokeArgs(), options.WithDefaults());

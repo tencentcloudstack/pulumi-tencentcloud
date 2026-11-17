@@ -235,6 +235,17 @@ class Ipv4Address(pulumi.CustomResource):
             ])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AssignPrivateIpAddresses](https://www.tencentcloud.com/document/api/215/15813)
+        * Read: [DescribeNetworkInterfaces](https://www.tencentcloud.com/document/api/215/15817)
+        * Delete:
+          - [DescribeNetworkInterfaces](https://www.tencentcloud.com/document/api/215/15817)
+          - [DescribeVpcTaskResult](https://www.tencentcloud.com/document/api/215/41567)
+          - [UnassignPrivateIpAddresses](https://www.tencentcloud.com/document/api/215/15814)
+
         ## Import
 
         vpc eni ipv4 address can be imported using the id, e.g.
@@ -316,6 +327,17 @@ class Ipv4Address(pulumi.CustomResource):
                 },
             ])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [AssignPrivateIpAddresses](https://www.tencentcloud.com/document/api/215/15813)
+        * Read: [DescribeNetworkInterfaces](https://www.tencentcloud.com/document/api/215/15817)
+        * Delete:
+          - [DescribeNetworkInterfaces](https://www.tencentcloud.com/document/api/215/15817)
+          - [DescribeVpcTaskResult](https://www.tencentcloud.com/document/api/215/41567)
+          - [UnassignPrivateIpAddresses](https://www.tencentcloud.com/document/api/215/15814)
 
         ## Import
 

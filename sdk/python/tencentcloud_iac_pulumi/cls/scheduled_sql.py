@@ -240,7 +240,8 @@ class _ScheduledSqlState:
                  scheduled_sql_content: pulumi.Input[Optional[_builtins.str]] = None,
                  src_topic_id: pulumi.Input[Optional[_builtins.str]] = None,
                  src_topic_region: pulumi.Input[Optional[_builtins.str]] = None,
-                 syntax_rule: pulumi.Input[Optional[_builtins.int]] = None):
+                 syntax_rule: pulumi.Input[Optional[_builtins.int]] = None,
+                 task_id: pulumi.Input[Optional[_builtins.str]] = None):
         """
         Input properties used for looking up and filtering ScheduledSql resources.
 
@@ -257,6 +258,7 @@ class _ScheduledSqlState:
         :param pulumi.Input[_builtins.str] src_topic_id: src topic id.
         :param pulumi.Input[_builtins.str] src_topic_region: src topic region.
         :param pulumi.Input[_builtins.int] syntax_rule: syntax rule.
+        :param pulumi.Input[_builtins.str] task_id: task id.
         """
         if dst_resource is not None:
             pulumi.set(__self__, "dst_resource", dst_resource)
@@ -284,6 +286,8 @@ class _ScheduledSqlState:
             pulumi.set(__self__, "src_topic_region", src_topic_region)
         if syntax_rule is not None:
             pulumi.set(__self__, "syntax_rule", syntax_rule)
+        if task_id is not None:
+            pulumi.set(__self__, "task_id", task_id)
 
     @_builtins.property
     @pulumi.getter(name="dstResource")
@@ -441,6 +445,18 @@ class _ScheduledSqlState:
     def syntax_rule(self, value: pulumi.Input[Optional[_builtins.int]]):
         pulumi.set(self, "syntax_rule", value)
 
+    @_builtins.property
+    @pulumi.getter(name="taskId")
+    def task_id(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        task id.
+        """
+        return pulumi.get(self, "task_id")
+
+    @task_id.setter
+    def task_id(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "task_id", value)
+
 
 @pulumi.type_token("tencentcloud:Cls/scheduledSql:ScheduledSql")
 class ScheduledSql(pulumi.CustomResource):
@@ -463,7 +479,7 @@ class ScheduledSql(pulumi.CustomResource):
                  syntax_rule: pulumi.Input[Optional[_builtins.int]] = None,
                  __props__=None):
         """
-        Provides a resource to create a cls scheduled_sql
+        Provides a resource to create a CLS scheduled sql
 
         ## Example Usage
 
@@ -471,49 +487,68 @@ class ScheduledSql(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        logset = tencentcloud.cls.Logset("logset",
-            logset_name="tf-example-logset",
-            tags={
-                "createdBy": "terraform",
-            })
-        topic = tencentcloud.cls.Topic("topic",
-            topic_name="tf-example-topic",
-            logset_id=logset.id,
-            auto_split=False,
-            max_split_partitions=20,
-            partition_count=1,
-            period=10,
-            storage_type="hot",
-            tags={
-                "test": "test",
-            })
-        scheduled_sql = tencentcloud.cls.ScheduledSql("scheduled_sql",
-            src_topic_id=topic.id,
-            name="tf-example-task",
+        example = tencentcloud.cls.ScheduledSql("example",
+            src_topic_id="2360e4a2-2b9e-4640-9829-72bc5052c9dd",
+            src_topic_region="ap-guangzhou",
+            name="tf-example",
             enable_flag=1,
             dst_resource={
-                "topic_id": topic.id,
+                "topic_id": "3f5cc19d-f601-48b6-9671-9019b7b09bd0",
                 "region": "ap-guangzhou",
-                "biz_type": 0,
-                "metric_name": "test",
+                "biz_type": 1,
+                "metric_names": [
+                    "name1",
+                    "name2",
+                    "name3",
+                ],
+                "metric_labels": [
+                    "lable1",
+                    "lable2",
+                    "lable3",
+                ],
+                "custom_time": "__WindowStartTime__",
+                "custom_metric_labels": [
+                    {
+                        "key": "cmlKey1",
+                        "value": "cmlValue1",
+                    },
+                    {
+                        "key": "cmlKey2",
+                        "value": "cmlValue2",
+                    },
+                    {
+                        "key": "cmlKey3",
+                        "value": "cmlValue3",
+                    },
+                ],
             },
-            scheduled_sql_content="xxx",
-            process_start_time=int(1690515360000),
+            scheduled_sql_content=\"\"\"verb:get AND responseStatus.code>=400
+        | select stageTimestamp, responseStatus.code, objectRef.resource, objectRef.name, objectRef.namespace, user.username, "annotations.authorization.k8s.io/decision" as auth_decision
+          order by stageTimestamp desc
+          limit 50\"\"\",
+            process_start_time=int(1788417300000),
             process_type=1,
-            process_period=10,
-            process_time_window="@m-15m,@m",
-            process_delay=5,
-            src_topic_region="ap-guangzhou",
-            process_end_time=int(1690515360000),
-            syntax_rule=0)
+            process_period=1,
+            process_time_window="@m-1m,@m",
+            process_delay=60,
+            syntax_rule=1)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateScheduledSql](https://www.tencentcloud.com/document/api/614/59901)
+        * Read: [DescribeScheduledSqlInfo](https://www.tencentcloud.com/document/api/614/59899)
+        * Update: [ModifyScheduledSql](https://www.tencentcloud.com/document/api/614/59898)
+        * Delete: [DeleteScheduledSql](https://www.tencentcloud.com/document/api/614/59900)
 
         ## Import
 
-        cls scheduled_sql can be imported using the id, e.g.
+        CLS scheduled sql can be imported using the id, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Cls/scheduledSql:ScheduledSql scheduled_sql scheduled_sql_id
+        $ pulumi import tencentcloud:Cls/scheduledSql:ScheduledSql example aebbad1b-4228-4ccc-8d62-0333c9739452
         ```
 
 
@@ -540,7 +575,7 @@ class ScheduledSql(pulumi.CustomResource):
                  args: ScheduledSqlArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Provides a resource to create a cls scheduled_sql
+        Provides a resource to create a CLS scheduled sql
 
         ## Example Usage
 
@@ -548,49 +583,68 @@ class ScheduledSql(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        logset = tencentcloud.cls.Logset("logset",
-            logset_name="tf-example-logset",
-            tags={
-                "createdBy": "terraform",
-            })
-        topic = tencentcloud.cls.Topic("topic",
-            topic_name="tf-example-topic",
-            logset_id=logset.id,
-            auto_split=False,
-            max_split_partitions=20,
-            partition_count=1,
-            period=10,
-            storage_type="hot",
-            tags={
-                "test": "test",
-            })
-        scheduled_sql = tencentcloud.cls.ScheduledSql("scheduled_sql",
-            src_topic_id=topic.id,
-            name="tf-example-task",
+        example = tencentcloud.cls.ScheduledSql("example",
+            src_topic_id="2360e4a2-2b9e-4640-9829-72bc5052c9dd",
+            src_topic_region="ap-guangzhou",
+            name="tf-example",
             enable_flag=1,
             dst_resource={
-                "topic_id": topic.id,
+                "topic_id": "3f5cc19d-f601-48b6-9671-9019b7b09bd0",
                 "region": "ap-guangzhou",
-                "biz_type": 0,
-                "metric_name": "test",
+                "biz_type": 1,
+                "metric_names": [
+                    "name1",
+                    "name2",
+                    "name3",
+                ],
+                "metric_labels": [
+                    "lable1",
+                    "lable2",
+                    "lable3",
+                ],
+                "custom_time": "__WindowStartTime__",
+                "custom_metric_labels": [
+                    {
+                        "key": "cmlKey1",
+                        "value": "cmlValue1",
+                    },
+                    {
+                        "key": "cmlKey2",
+                        "value": "cmlValue2",
+                    },
+                    {
+                        "key": "cmlKey3",
+                        "value": "cmlValue3",
+                    },
+                ],
             },
-            scheduled_sql_content="xxx",
-            process_start_time=int(1690515360000),
+            scheduled_sql_content=\"\"\"verb:get AND responseStatus.code>=400
+        | select stageTimestamp, responseStatus.code, objectRef.resource, objectRef.name, objectRef.namespace, user.username, "annotations.authorization.k8s.io/decision" as auth_decision
+          order by stageTimestamp desc
+          limit 50\"\"\",
+            process_start_time=int(1788417300000),
             process_type=1,
-            process_period=10,
-            process_time_window="@m-15m,@m",
-            process_delay=5,
-            src_topic_region="ap-guangzhou",
-            process_end_time=int(1690515360000),
-            syntax_rule=0)
+            process_period=1,
+            process_time_window="@m-1m,@m",
+            process_delay=60,
+            syntax_rule=1)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateScheduledSql](https://www.tencentcloud.com/document/api/614/59901)
+        * Read: [DescribeScheduledSqlInfo](https://www.tencentcloud.com/document/api/614/59899)
+        * Update: [ModifyScheduledSql](https://www.tencentcloud.com/document/api/614/59898)
+        * Delete: [DeleteScheduledSql](https://www.tencentcloud.com/document/api/614/59900)
 
         ## Import
 
-        cls scheduled_sql can be imported using the id, e.g.
+        CLS scheduled sql can be imported using the id, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Cls/scheduledSql:ScheduledSql scheduled_sql scheduled_sql_id
+        $ pulumi import tencentcloud:Cls/scheduledSql:ScheduledSql example aebbad1b-4228-4ccc-8d62-0333c9739452
         ```
 
 
@@ -664,6 +718,7 @@ class ScheduledSql(pulumi.CustomResource):
                 raise TypeError("Missing required property 'src_topic_region'")
             __props__.__dict__["src_topic_region"] = src_topic_region
             __props__.__dict__["syntax_rule"] = syntax_rule
+            __props__.__dict__["task_id"] = None
         super(ScheduledSql, __self__).__init__(
             'tencentcloud:Cls/scheduledSql:ScheduledSql',
             resource_name,
@@ -686,7 +741,8 @@ class ScheduledSql(pulumi.CustomResource):
             scheduled_sql_content: pulumi.Input[Optional[_builtins.str]] = None,
             src_topic_id: pulumi.Input[Optional[_builtins.str]] = None,
             src_topic_region: pulumi.Input[Optional[_builtins.str]] = None,
-            syntax_rule: pulumi.Input[Optional[_builtins.int]] = None) -> 'ScheduledSql':
+            syntax_rule: pulumi.Input[Optional[_builtins.int]] = None,
+            task_id: pulumi.Input[Optional[_builtins.str]] = None) -> 'ScheduledSql':
         """
         Get an existing ScheduledSql resource's state with the given name, id, and optional extra
         properties used to qualify the lookup.
@@ -707,6 +763,7 @@ class ScheduledSql(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] src_topic_id: src topic id.
         :param pulumi.Input[_builtins.str] src_topic_region: src topic region.
         :param pulumi.Input[_builtins.int] syntax_rule: syntax rule.
+        :param pulumi.Input[_builtins.str] task_id: task id.
         """
         opts = pulumi.ResourceOptions.merge(opts, pulumi.ResourceOptions(id=id))
 
@@ -725,6 +782,7 @@ class ScheduledSql(pulumi.CustomResource):
         __props__.__dict__["src_topic_id"] = src_topic_id
         __props__.__dict__["src_topic_region"] = src_topic_region
         __props__.__dict__["syntax_rule"] = syntax_rule
+        __props__.__dict__["task_id"] = task_id
         return ScheduledSql(resource_name, opts=opts, __props__=__props__)
 
     @_builtins.property
@@ -830,4 +888,12 @@ class ScheduledSql(pulumi.CustomResource):
         syntax rule.
         """
         return pulumi.get(self, "syntax_rule")
+
+    @_builtins.property
+    @pulumi.getter(name="taskId")
+    def task_id(self) -> pulumi.Output[_builtins.str]:
+        """
+        task id.
+        """
+        return pulumi.get(self, "task_id")
 

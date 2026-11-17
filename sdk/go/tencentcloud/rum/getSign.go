@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeReleaseFileSign](https://www.tencentcloud.com/document/api/1131/45306)
 func GetSign(ctx *pulumi.Context, args *GetSignArgs, opts ...pulumi.InvokeOption) (*GetSignResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSignResult

@@ -106,6 +106,12 @@ def get_data_engine_session_parameters(data_engine_id: Optional[_builtins.str] =
     example = tencentcloud.dlc.get_data_engine_session_parameters(data_engine_id="DataEngine-public-1308726196")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDataEngineSessionParameters](https://www.tencentcloud.com/search/?wd=DescribeDataEngineSessionParameters&type=document&lang=en)
+
 
     :param _builtins.str data_engine_id: DataEngine Id.
     :param _builtins.str data_engine_name: Engine name. When the engine name is specified, the name is used first to obtain the configuration.
@@ -139,6 +145,12 @@ def get_data_engine_session_parameters_output(data_engine_id: pulumi.Input[Optio
 
     example = tencentcloud.dlc.get_data_engine_session_parameters(data_engine_id="DataEngine-public-1308726196")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDataEngineSessionParameters](https://www.tencentcloud.com/search/?wd=DescribeDataEngineSessionParameters&type=document&lang=en)
 
 
     :param _builtins.str data_engine_id: DataEngine Id.

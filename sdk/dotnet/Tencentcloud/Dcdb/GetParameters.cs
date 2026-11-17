@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBParameters](https://www.tencentcloud.com/document/api/1042/34444)
         /// </summary>
         public static Task<GetParametersResult> InvokeAsync(GetParametersArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetParametersResult>("tencentcloud:Dcdb/getParameters:getParameters", args ?? new GetParametersArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBParameters](https://www.tencentcloud.com/document/api/1042/34444)
         /// </summary>
         public static Output<GetParametersResult> Invoke(GetParametersInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetParametersResult>("tencentcloud:Dcdb/getParameters:getParameters", args ?? new GetParametersInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dcdb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBParameters](https://www.tencentcloud.com/document/api/1042/34444)
         /// </summary>
         public static Output<GetParametersResult> Invoke(GetParametersInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetParametersResult>("tencentcloud:Dcdb/getParameters:getParameters", args ?? new GetParametersInvokeArgs(), options.WithDefaults());

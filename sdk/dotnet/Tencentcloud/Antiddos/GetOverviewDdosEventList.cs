@@ -34,6 +34,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeOverviewDDoSEventList](https://www.tencentcloud.com/document/api/1213/61338)
         /// </summary>
         public static Task<GetOverviewDdosEventListResult> InvokeAsync(GetOverviewDdosEventListArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetOverviewDdosEventListResult>("tencentcloud:Antiddos/getOverviewDdosEventList:getOverviewDdosEventList", args ?? new GetOverviewDdosEventListArgs(), options.WithDefaults());
@@ -60,6 +66,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeOverviewDDoSEventList](https://www.tencentcloud.com/document/api/1213/61338)
         /// </summary>
         public static Output<GetOverviewDdosEventListResult> Invoke(GetOverviewDdosEventListInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetOverviewDdosEventListResult>("tencentcloud:Antiddos/getOverviewDdosEventList:getOverviewDdosEventList", args ?? new GetOverviewDdosEventListInvokeArgs(), options.WithDefaults());
@@ -86,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeOverviewDDoSEventList](https://www.tencentcloud.com/document/api/1213/61338)
         /// </summary>
         public static Output<GetOverviewDdosEventListResult> Invoke(GetOverviewDdosEventListInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetOverviewDdosEventListResult>("tencentcloud:Antiddos/getOverviewDdosEventList:getOverviewDdosEventList", args ?? new GetOverviewDdosEventListInvokeArgs(), options.WithDefaults());

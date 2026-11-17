@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAlarmNoticeCallbacks](https://www.tencentcloud.com/document/api/248/39301)
         /// </summary>
         public static Task<GetAlarmNoticeCallbacksResult> InvokeAsync(GetAlarmNoticeCallbacksArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetAlarmNoticeCallbacksResult>("tencentcloud:Monitor/getAlarmNoticeCallbacks:getAlarmNoticeCallbacks", args ?? new GetAlarmNoticeCallbacksArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAlarmNoticeCallbacks](https://www.tencentcloud.com/document/api/248/39301)
         /// </summary>
         public static Output<GetAlarmNoticeCallbacksResult> Invoke(GetAlarmNoticeCallbacksInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetAlarmNoticeCallbacksResult>("tencentcloud:Monitor/getAlarmNoticeCallbacks:getAlarmNoticeCallbacks", args ?? new GetAlarmNoticeCallbacksInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Monitor
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAlarmNoticeCallbacks](https://www.tencentcloud.com/document/api/248/39301)
         /// </summary>
         public static Output<GetAlarmNoticeCallbacksResult> Invoke(GetAlarmNoticeCallbacksInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetAlarmNoticeCallbacksResult>("tencentcloud:Monitor/getAlarmNoticeCallbacks:getAlarmNoticeCallbacks", args ?? new GetAlarmNoticeCallbacksInvokeArgs(), options.WithDefaults());

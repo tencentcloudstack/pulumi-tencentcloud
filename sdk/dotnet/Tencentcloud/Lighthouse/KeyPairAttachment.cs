@@ -32,6 +32,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Lighthouse
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [AssociateInstancesKeyPairs](https://www.tencentcloud.com/document/api/1103/42484)
+    ///   - [DescribeInstances](https://www.tencentcloud.com/document/api/1103/42498)
+    /// * Read: [DescribeKeyPairs](https://www.tencentcloud.com/document/api/1103/42480)
+    /// * Delete:
+    ///   - [DescribeInstances](https://www.tencentcloud.com/document/api/1103/42498)
+    ///   - [DisassociateInstancesKeyPairs](https://www.tencentcloud.com/document/api/1103/42479)
+    /// 
     /// ## Import
     /// 
     /// lighthouse KeyPairAttachment can be imported using the id, e.g.

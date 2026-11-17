@@ -41,6 +41,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBInstances](https://www.tencentcloud.com/document/api/237/16184)
         /// </summary>
         public static Task<GetDbInstancesResult> InvokeAsync(GetDbInstancesArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDbInstancesResult>("tencentcloud:Mariadb/getDbInstances:getDbInstances", args ?? new GetDbInstancesArgs(), options.WithDefaults());
@@ -74,6 +80,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBInstances](https://www.tencentcloud.com/document/api/237/16184)
         /// </summary>
         public static Output<GetDbInstancesResult> Invoke(GetDbInstancesInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDbInstancesResult>("tencentcloud:Mariadb/getDbInstances:getDbInstances", args ?? new GetDbInstancesInvokeArgs(), options.WithDefaults());
@@ -107,6 +119,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDBInstances](https://www.tencentcloud.com/document/api/237/16184)
         /// </summary>
         public static Output<GetDbInstancesResult> Invoke(GetDbInstancesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDbInstancesResult>("tencentcloud:Mariadb/getDbInstances:getDbInstances", args ?? new GetDbInstancesInvokeArgs(), options.WithDefaults());

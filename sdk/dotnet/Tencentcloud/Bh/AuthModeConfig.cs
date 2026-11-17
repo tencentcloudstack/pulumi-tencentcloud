@@ -30,6 +30,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Bh
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ModifyAuthModeSetting](https://www.tencentcloud.com/search/?wd=ModifyAuthModeSetting&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeSecuritySetting](https://www.tencentcloud.com/search/?wd=DescribeSecuritySetting&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyAuthModeSetting](https://www.tencentcloud.com/search/?wd=ModifyAuthModeSetting&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Bh/authModeConfig:AuthModeConfig")]
     public partial class AuthModeConfig : global::Pulumi.CustomResource

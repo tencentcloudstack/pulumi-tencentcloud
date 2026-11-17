@@ -28,6 +28,15 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [AddNatAcRule](https://www.tencentcloud.com/document/api/1160/54832)
+ * * Read: [DescribeNatAcRule](https://www.tencentcloud.com/document/api/1160/54831)
+ * * Update: [ModifyNatAcRule](https://www.tencentcloud.com/document/api/1160/54829)
+ * * Delete: [RemoveNatAcRule](https://www.tencentcloud.com/document/api/1160/54827)
+ *
  * ## Import
  *
  * CFW nat policy can be imported using the id, e.g.

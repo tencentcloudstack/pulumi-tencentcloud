@@ -96,6 +96,12 @@ def get_real_servers_status(real_server_ids: Optional[Sequence[_builtins.str]] =
     real_servers_status = tencentcloud.gaap.get_real_servers_status(real_server_ids=["rs-3mlpbuut"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRealServersStatus](https://www.tencentcloud.com/document/api/608/33059)
+
 
     :param Sequence[_builtins.str] real_server_ids: Real Server Ids.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_real_servers_status_output(real_server_ids: pulumi.Input[Optional[Sequen
 
     real_servers_status = tencentcloud.gaap.get_real_servers_status(real_server_ids=["rs-3mlpbuut"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeRealServersStatus](https://www.tencentcloud.com/document/api/608/33059)
 
 
     :param Sequence[_builtins.str] real_server_ids: Real Server Ids.

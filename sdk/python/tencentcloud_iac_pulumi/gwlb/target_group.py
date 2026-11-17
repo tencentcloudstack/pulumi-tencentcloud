@@ -330,6 +330,17 @@ class TargetGroup(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateTargetGroup](https://www.tencentcloud.com/document/api/1245/66066)
+        * Read:
+          - [DescribeTargetGroupInstances](https://www.tencentcloud.com/document/api/1245/66062)
+          - [DescribeTargetGroupList](https://www.tencentcloud.com/document/api/1245/66061)
+        * Update: [ModifyTargetGroupAttribute](https://www.tencentcloud.com/document/api/1245/66058)
+        * Delete: [DeleteTargetGroups](https://www.tencentcloud.com/document/api/1245/66065)
+
         ## Import
 
         gwlb gwlb_target_group can be imported using the id, e.g.
@@ -384,6 +395,17 @@ class TargetGroup(pulumi.CustomResource):
                 "un_health_num": 3,
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateTargetGroup](https://www.tencentcloud.com/document/api/1245/66066)
+        * Read:
+          - [DescribeTargetGroupInstances](https://www.tencentcloud.com/document/api/1245/66062)
+          - [DescribeTargetGroupList](https://www.tencentcloud.com/document/api/1245/66061)
+        * Update: [ModifyTargetGroupAttribute](https://www.tencentcloud.com/document/api/1245/66058)
+        * Delete: [DeleteTargetGroups](https://www.tencentcloud.com/document/api/1245/66065)
 
         ## Import
 

@@ -34,6 +34,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRecordLineList](https://www.tencentcloud.com/document/api/1157/53834)
         /// </summary>
         public static Task<GetRecordLineListResult> InvokeAsync(GetRecordLineListArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetRecordLineListResult>("tencentcloud:Dnspod/getRecordLineList:getRecordLineList", args ?? new GetRecordLineListArgs(), options.WithDefaults());
@@ -60,6 +66,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRecordLineList](https://www.tencentcloud.com/document/api/1157/53834)
         /// </summary>
         public static Output<GetRecordLineListResult> Invoke(GetRecordLineListInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetRecordLineListResult>("tencentcloud:Dnspod/getRecordLineList:getRecordLineList", args ?? new GetRecordLineListInvokeArgs(), options.WithDefaults());
@@ -86,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dnspod
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRecordLineList](https://www.tencentcloud.com/document/api/1157/53834)
         /// </summary>
         public static Output<GetRecordLineListResult> Invoke(GetRecordLineListInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetRecordLineListResult>("tencentcloud:Dnspod/getRecordLineList:getRecordLineList", args ?? new GetRecordLineListInvokeArgs(), options.WithDefaults());

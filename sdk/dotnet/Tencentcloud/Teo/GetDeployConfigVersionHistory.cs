@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDeployHistory](https://www.tencentcloud.com/document/api/1145/57973)
         /// </summary>
         public static Task<GetDeployConfigVersionHistoryResult> InvokeAsync(GetDeployConfigVersionHistoryArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDeployConfigVersionHistoryResult>("tencentcloud:Teo/getDeployConfigVersionHistory:getDeployConfigVersionHistory", args ?? new GetDeployConfigVersionHistoryArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDeployHistory](https://www.tencentcloud.com/document/api/1145/57973)
         /// </summary>
         public static Output<GetDeployConfigVersionHistoryResult> Invoke(GetDeployConfigVersionHistoryInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDeployConfigVersionHistoryResult>("tencentcloud:Teo/getDeployConfigVersionHistory:getDeployConfigVersionHistory", args ?? new GetDeployConfigVersionHistoryInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDeployHistory](https://www.tencentcloud.com/document/api/1145/57973)
         /// </summary>
         public static Output<GetDeployConfigVersionHistoryResult> Invoke(GetDeployConfigVersionHistoryInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDeployConfigVersionHistoryResult>("tencentcloud:Teo/getDeployConfigVersionHistory:getDeployConfigVersionHistory", args ?? new GetDeployConfigVersionHistoryInvokeArgs(), options.WithDefaults());

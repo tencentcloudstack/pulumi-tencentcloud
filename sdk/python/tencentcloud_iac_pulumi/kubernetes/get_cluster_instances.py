@@ -136,6 +136,12 @@ def get_cluster_instances(cluster_id: Optional[_builtins.str] = None,
         }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeClusterInstances](https://www.tencentcloud.com/document/api/457/66315)
+
 
     :param _builtins.str cluster_id: ID of the cluster.
     :param Sequence[Union['GetClusterInstancesFilterArgs', 'GetClusterInstancesFilterArgsDict']] filters: List of filter conditions. The optional values of Name are `nodepool-id` and `nodepool-instance-type`. Name is `nodepool-id`, which means filtering machines based on node pool id, and Value is the specific node pool id. Name is `nodepool-instance-type`, which indicates how the node is added to the node pool. Value is MANUALLY_ADDED (manually added to the node pool), AUTOSCALING_ADDED (joined by scaling group expansion method), ALL (manually join the node pool and join the node pool through scaling group expansion).
@@ -183,6 +189,12 @@ def get_cluster_instances_output(cluster_id: pulumi.Input[Optional[_builtins.str
             "values": ["np-p4e6whqu"],
         }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeClusterInstances](https://www.tencentcloud.com/document/api/457/66315)
 
 
     :param _builtins.str cluster_id: ID of the cluster.

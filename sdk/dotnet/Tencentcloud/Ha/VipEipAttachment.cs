@@ -32,6 +32,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ha
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeHaVips](https://www.tencentcloud.com/document/api/215/34762)
+    ///   - [HaVipAssociateAddressIp](https://www.tencentcloud.com/document/api/215/34761)
+    /// * Read: [DescribeHaVips](https://www.tencentcloud.com/document/api/215/34762)
+    /// * Delete:
+    ///   - [DescribeHaVips](https://www.tencentcloud.com/document/api/215/34762)
+    ///   - [HaVipDisassociateAddressIp](https://www.tencentcloud.com/document/api/215/34760)
+    /// 
     /// ## Import
     /// 
     /// HA VIP EIP attachment can be imported using the id, e.g.

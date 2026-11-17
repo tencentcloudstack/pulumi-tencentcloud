@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePendingRiskInfo](https://www.tencentcloud.com/document/api/1213/61337)
         /// </summary>
         public static Task<GetPendingRiskInfoResult> InvokeAsync(GetPendingRiskInfoArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetPendingRiskInfoResult>("tencentcloud:Antiddos/getPendingRiskInfo:getPendingRiskInfo", args ?? new GetPendingRiskInfoArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePendingRiskInfo](https://www.tencentcloud.com/document/api/1213/61337)
         /// </summary>
         public static Output<GetPendingRiskInfoResult> Invoke(GetPendingRiskInfoInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetPendingRiskInfoResult>("tencentcloud:Antiddos/getPendingRiskInfo:getPendingRiskInfo", args ?? new GetPendingRiskInfoInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Antiddos
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribePendingRiskInfo](https://www.tencentcloud.com/document/api/1213/61337)
         /// </summary>
         public static Output<GetPendingRiskInfoResult> Invoke(GetPendingRiskInfoInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetPendingRiskInfoResult>("tencentcloud:Antiddos/getPendingRiskInfo:getPendingRiskInfo", args ?? new GetPendingRiskInfoInvokeArgs(), options.WithDefaults());

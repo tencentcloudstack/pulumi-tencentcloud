@@ -144,6 +144,12 @@ def get_account_summary(result_output_file: Optional[_builtins.str] = None,
     account_summary = tencentcloud.cam.get_account_summary()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetAccountSummary](https://www.tencentcloud.com/document/api/598/41292)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -174,6 +180,12 @@ def get_account_summary_output(result_output_file: pulumi.Input[Optional[Optiona
 
     account_summary = tencentcloud.cam.get_account_summary()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [GetAccountSummary](https://www.tencentcloud.com/document/api/598/41292)
 
 
     :param _builtins.str result_output_file: Used to save results.

@@ -37,6 +37,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Gaap
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateGlobalDomain](https://www.tencentcloud.com/search/?wd=CreateGlobalDomain&amp;type=document&amp;lang=en)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    /// * Read:
+    ///   - [DescribeGlobalDomains](https://www.tencentcloud.com/search/?wd=DescribeGlobalDomains&amp;type=document&amp;lang=en)
+    ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+    /// * Update:
+    ///   - [DescribeGlobalDomains](https://www.tencentcloud.com/search/?wd=DescribeGlobalDomains&amp;type=document&amp;lang=en)
+    ///   - [DisableGlobalDomain](https://www.tencentcloud.com/search/?wd=DisableGlobalDomain&amp;type=document&amp;lang=en)
+    ///   - [EnableGlobalDomain](https://www.tencentcloud.com/search/?wd=EnableGlobalDomain&amp;type=document&amp;lang=en)
+    ///   - [ModifyGlobalDomainAttribute](https://www.tencentcloud.com/search/?wd=ModifyGlobalDomainAttribute&amp;type=document&amp;lang=en)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    /// * Delete:
+    ///   - [DeleteGlobalDomain](https://www.tencentcloud.com/search/?wd=DeleteGlobalDomain&amp;type=document&amp;lang=en)
+    ///   - [DescribeGlobalDomains](https://www.tencentcloud.com/search/?wd=DescribeGlobalDomains&amp;type=document&amp;lang=en)
+    ///   - [DisableGlobalDomain](https://www.tencentcloud.com/search/?wd=DisableGlobalDomain&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// gaap GlobalDomain can be imported using the id, e.g.

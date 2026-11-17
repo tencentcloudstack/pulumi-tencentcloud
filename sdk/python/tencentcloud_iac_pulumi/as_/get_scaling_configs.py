@@ -113,6 +113,12 @@ def get_scaling_configs(configuration_id: Optional[_builtins.str] = None,
         result_output_file="my_test_path")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeLaunchConfigurations](https://www.tencentcloud.com/document/api/377/30999)
+
 
     :param _builtins.str configuration_id: Launch configuration ID.
     :param _builtins.str configuration_name: Launch configuration name.
@@ -147,6 +153,12 @@ def get_scaling_configs_output(configuration_id: pulumi.Input[Optional[Optional[
     as_configs = tencentcloud.as_.get_scaling_configs(configuration_id="asc-oqio4yyj",
         result_output_file="my_test_path")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeLaunchConfigurations](https://www.tencentcloud.com/document/api/377/30999)
 
 
     :param _builtins.str configuration_id: Launch configuration ID.

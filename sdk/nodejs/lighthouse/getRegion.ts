@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const region = tencentcloud.lighthouse.getRegion({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRegions](https://www.tencentcloud.com/document/api/1103/42468)
  */
 export function getRegion(args?: GetRegionArgs, opts?: pulumi.InvokeOptions): Promise<GetRegionResult> {
     args = args || {};
@@ -61,6 +67,12 @@ export interface GetRegionResult {
  *
  * const region = tencentcloud.lighthouse.getRegion({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRegions](https://www.tencentcloud.com/document/api/1103/42468)
  */
 export function getRegionOutput(args?: GetRegionOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRegionResult> {
     args = args || {};

@@ -106,6 +106,12 @@ def get_describe_host_update_record(certificate_id: Optional[_builtins.str] = No
     describe_host_update_record = tencentcloud.ssl.get_describe_host_update_record(old_certificate_id="8u8DII0l")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeHostUpdateRecord](https://www.tencentcloud.com/document/api/1007/57983)
+
 
     :param _builtins.str certificate_id: New certificate ID.
     :param _builtins.str old_certificate_id: Original certificate ID.
@@ -139,6 +145,12 @@ def get_describe_host_update_record_output(certificate_id: pulumi.Input[Optional
 
     describe_host_update_record = tencentcloud.ssl.get_describe_host_update_record(old_certificate_id="8u8DII0l")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeHostUpdateRecord](https://www.tencentcloud.com/document/api/1007/57983)
 
 
     :param _builtins.str certificate_id: New certificate ID.

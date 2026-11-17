@@ -42,6 +42,12 @@ import * as utilities from "../utilities";
  *     isExactSubDomain: true,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRecordFilterList](https://www.tencentcloud.com/search/?wd=DescribeRecordFilterList&type=document&lang=en)
  */
 export function getRecordList(args: GetRecordListArgs, opts?: pulumi.InvokeOptions): Promise<GetRecordListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -277,6 +283,12 @@ export interface GetRecordListResult {
  *     isExactSubDomain: true,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRecordFilterList](https://www.tencentcloud.com/search/?wd=DescribeRecordFilterList&type=document&lang=en)
  */
 export function getRecordListOutput(args: GetRecordListOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRecordListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

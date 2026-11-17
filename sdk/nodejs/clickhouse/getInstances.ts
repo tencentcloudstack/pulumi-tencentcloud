@@ -73,6 +73,12 @@ import * as utilities from "../utilities";
  * export const instanceCount = filtered.then(filtered => filtered.instanceLists).length;
  * export const firstInstance = pulumi.all([filtered.then(filtered => filtered.instanceLists).length, filtered]).apply(([length, filtered]) => length > 0 ? filtered.instanceLists?.[0] : null);
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeInstancesNew](https://www.tencentcloud.com/search/?wd=DescribeInstancesNew&type=document&lang=en)
  */
 export function getInstances(args?: GetInstancesArgs, opts?: pulumi.InvokeOptions): Promise<GetInstancesResult> {
     args = args || {};
@@ -212,6 +218,12 @@ export interface GetInstancesResult {
  * export const instanceCount = filtered.then(filtered => filtered.instanceLists).length;
  * export const firstInstance = pulumi.all([filtered.then(filtered => filtered.instanceLists).length, filtered]).apply(([length, filtered]) => length > 0 ? filtered.instanceLists?.[0] : null);
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeInstancesNew](https://www.tencentcloud.com/search/?wd=DescribeInstancesNew&type=document&lang=en)
  */
 export function getInstancesOutput(args?: GetInstancesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInstancesResult> {
     args = args || {};

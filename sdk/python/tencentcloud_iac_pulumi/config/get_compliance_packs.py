@@ -175,6 +175,12 @@ def get_compliance_packs(compliance_pack_name: Optional[_builtins.str] = None,
         order_type="desc")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListCompliancePacks](https://www.tencentcloud.com/document/api/1164/85000)
+
 
     :param _builtins.str compliance_pack_name: Compliance pack name for filtering.
     :param Sequence[_builtins.str] compliance_results: Compliance result list for filtering. Valid values: COMPLIANT, NON_COMPLIANT.
@@ -247,6 +253,12 @@ def get_compliance_packs_output(compliance_pack_name: pulumi.Input[Optional[Opti
         compliance_results=["NON_COMPLIANT"],
         order_type="desc")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListCompliancePacks](https://www.tencentcloud.com/document/api/1164/85000)
 
 
     :param _builtins.str compliance_pack_name: Compliance pack name for filtering.

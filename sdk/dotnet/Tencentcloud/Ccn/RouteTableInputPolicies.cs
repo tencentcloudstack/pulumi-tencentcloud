@@ -107,6 +107,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ReplaceCcnRouteTableInputPolicys](https://www.tencentcloud.com/search/?wd=ReplaceCcnRouteTableInputPolicys&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeCcnRouteTableInputPolicys](https://www.tencentcloud.com/search/?wd=DescribeCcnRouteTableInputPolicys&amp;type=document&amp;lang=en)
+    /// * Update: [ReplaceCcnRouteTableInputPolicys](https://www.tencentcloud.com/search/?wd=ReplaceCcnRouteTableInputPolicys&amp;type=document&amp;lang=en)
+    /// * Delete: [Send](https://www.tencentcloud.com/search/?wd=Send&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// Ccn instance can be imported, e.g.

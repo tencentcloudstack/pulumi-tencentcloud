@@ -19,6 +19,14 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [AssociateResourceGroupToProject](https://www.tencentcloud.com/document/api/1174/77857)
+ * * Read: [ListResourceGroups](https://www.tencentcloud.com/document/api/1174/77852)
+ * * Delete: [DissociateResourceGroupFromProject](https://www.tencentcloud.com/document/api/1174/77854)
+ *
  * ## Import
  *
  * WeData resource group to project attachment can be imported using the resourceGroupId#projectId, e.g.

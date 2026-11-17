@@ -226,6 +226,15 @@ class GrafanaIntegration(pulumi.CustomResource):
             content="{\\"kind\\":\\"tencentcloud-monitor-app\\",\\"spec\\":{\\"dataSourceSpec\\":{\\"authProvider\\":{\\"__anyOf\\":\\"使用密钥\\",\\"useRole\\":true,\\"secretId\\":\\"arunma@tencent.com\\",\\"secretKey\\":\\"12345678\\"},\\"name\\":\\"uint-test\\"},\\"grafanaSpec\\":{\\"organizationIds\\":[]}}}")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateGrafanaIntegration](https://www.tencentcloud.com/document/api/248/49769)
+        * Read: [DescribeGrafanaIntegrations](https://www.tencentcloud.com/document/api/248/49758)
+        * Update: [UpdateGrafanaIntegration](https://www.tencentcloud.com/document/api/248/49743)
+        * Delete: [DeleteGrafanaIntegration](https://www.tencentcloud.com/document/api/248/49765)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -277,6 +286,15 @@ class GrafanaIntegration(pulumi.CustomResource):
             kind="tencentcloud-monitor-app",
             content="{\\"kind\\":\\"tencentcloud-monitor-app\\",\\"spec\\":{\\"dataSourceSpec\\":{\\"authProvider\\":{\\"__anyOf\\":\\"使用密钥\\",\\"useRole\\":true,\\"secretId\\":\\"arunma@tencent.com\\",\\"secretKey\\":\\"12345678\\"},\\"name\\":\\"uint-test\\"},\\"grafanaSpec\\":{\\"organizationIds\\":[]}}}")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateGrafanaIntegration](https://www.tencentcloud.com/document/api/248/49769)
+        * Read: [DescribeGrafanaIntegrations](https://www.tencentcloud.com/document/api/248/49758)
+        * Update: [UpdateGrafanaIntegration](https://www.tencentcloud.com/document/api/248/49743)
+        * Delete: [DeleteGrafanaIntegration](https://www.tencentcloud.com/document/api/248/49765)
 
 
         :param str resource_name: The name of the resource.

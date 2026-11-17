@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     flowId: 123456,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeTaskStatus](https://www.tencentcloud.com/document/api/597/55881)
  */
 export function getTaskStatus(args: GetTaskStatusArgs, opts?: pulumi.InvokeOptions): Promise<GetTaskStatusResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetTaskStatusResult {
  *     flowId: 123456,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeTaskStatus](https://www.tencentcloud.com/document/api/597/55881)
  */
 export function getTaskStatusOutput(args: GetTaskStatusOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetTaskStatusResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

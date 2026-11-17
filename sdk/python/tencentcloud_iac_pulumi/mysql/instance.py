@@ -31,7 +31,9 @@ class InstanceArgs:
                  charge_type: pulumi.Input[Optional[_builtins.str]] = None,
                  cluster_topology: pulumi.Input[Optional['InstanceClusterTopologyArgs']] = None,
                  cpu: pulumi.Input[Optional[_builtins.int]] = None,
+                 destroy_protect: pulumi.Input[Optional[_builtins.str]] = None,
                  device_type: pulumi.Input[Optional[_builtins.str]] = None,
+                 disk_encryption: pulumi.Input[Optional[_builtins.str]] = None,
                  disk_type: pulumi.Input[Optional[_builtins.str]] = None,
                  engine_type: pulumi.Input[Optional[_builtins.str]] = None,
                  engine_version: pulumi.Input[Optional[_builtins.str]] = None,
@@ -68,6 +70,7 @@ class InstanceArgs:
         :param pulumi.Input[_builtins.str] charge_type: Pay type of instance. Valid values:`PREPAID`, `POSTPAID`. Default is `POSTPAID`.
         :param pulumi.Input['InstanceClusterTopologyArgs'] cluster_topology: Cluster Edition node topology configuration. Note: If you purchased a cluster edition instance, this parameter is required. You need to set the RW and RO node topology of the cluster edition instance. The RO node range is 1-5. Please set at least 1 RO node.
         :param pulumi.Input[_builtins.int] cpu: CPU cores.
+        :param pulumi.Input[_builtins.str] destroy_protect: Instance destroy protection status. Valid values: `on` (enable destroy protection), `off` (disable destroy protection).
         :param pulumi.Input[_builtins.str] device_type: Specify device type, available values:
                - `UNIVERSAL` (default): universal instance,
                - `EXCLUSIVE`: exclusive instance,
@@ -75,6 +78,7 @@ class InstanceArgs:
                - `CLOUD_NATIVE_CLUSTER`: cluster version standard type,
                - `CLOUD_NATIVE_CLUSTER_EXCLUSIVE`: cluster version enhanced type.
                  If it is not specified, it defaults to a universal instance.
+        :param pulumi.Input[_builtins.str] disk_encryption: Whether to enable disk encryption for the CDB instance. Valid value: `on` (enable disk encryption); otherwise disk encryption is not enabled. Only cloud-disk edition instances support this feature. This parameter can only be set at creation time and cannot be modified.
         :param pulumi.Input[_builtins.str] disk_type: Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. `CLOUD_SSD` designates an SSD cloud disk; `CLOUD_HSSD` designates an Enhanced SSD cloud disk; and `CLOUD_PREMIUM` designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to `Regions and Availability Zones` for specific support details.
         :param pulumi.Input[_builtins.str] engine_type: Instance engine type. The default value is `InnoDB`. Supported values include `InnoDB` and `RocksDB`.
         :param pulumi.Input[_builtins.str] engine_version: The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0/8.4, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
@@ -114,8 +118,12 @@ class InstanceArgs:
             pulumi.set(__self__, "cluster_topology", cluster_topology)
         if cpu is not None:
             pulumi.set(__self__, "cpu", cpu)
+        if destroy_protect is not None:
+            pulumi.set(__self__, "destroy_protect", destroy_protect)
         if device_type is not None:
             pulumi.set(__self__, "device_type", device_type)
+        if disk_encryption is not None:
+            pulumi.set(__self__, "disk_encryption", disk_encryption)
         if disk_type is not None:
             pulumi.set(__self__, "disk_type", disk_type)
         if engine_type is not None:
@@ -270,6 +278,18 @@ class InstanceArgs:
         pulumi.set(self, "cpu", value)
 
     @_builtins.property
+    @pulumi.getter(name="destroyProtect")
+    def destroy_protect(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Instance destroy protection status. Valid values: `on` (enable destroy protection), `off` (disable destroy protection).
+        """
+        return pulumi.get(self, "destroy_protect")
+
+    @destroy_protect.setter
+    def destroy_protect(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "destroy_protect", value)
+
+    @_builtins.property
     @pulumi.getter(name="deviceType")
     def device_type(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
@@ -286,6 +306,18 @@ class InstanceArgs:
     @device_type.setter
     def device_type(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "device_type", value)
+
+    @_builtins.property
+    @pulumi.getter(name="diskEncryption")
+    def disk_encryption(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Whether to enable disk encryption for the CDB instance. Valid value: `on` (enable disk encryption); otherwise disk encryption is not enabled. Only cloud-disk edition instances support this feature. This parameter can only be set at creation time and cannot be modified.
+        """
+        return pulumi.get(self, "disk_encryption")
+
+    @disk_encryption.setter
+    def disk_encryption(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "disk_encryption", value)
 
     @_builtins.property
     @pulumi.getter(name="diskType")
@@ -598,7 +630,9 @@ class _InstanceState:
                  charge_type: pulumi.Input[Optional[_builtins.str]] = None,
                  cluster_topology: pulumi.Input[Optional['InstanceClusterTopologyArgs']] = None,
                  cpu: pulumi.Input[Optional[_builtins.int]] = None,
+                 destroy_protect: pulumi.Input[Optional[_builtins.str]] = None,
                  device_type: pulumi.Input[Optional[_builtins.str]] = None,
+                 disk_encryption: pulumi.Input[Optional[_builtins.str]] = None,
                  disk_type: pulumi.Input[Optional[_builtins.str]] = None,
                  engine_type: pulumi.Input[Optional[_builtins.str]] = None,
                  engine_version: pulumi.Input[Optional[_builtins.str]] = None,
@@ -642,6 +676,7 @@ class _InstanceState:
         :param pulumi.Input[_builtins.str] charge_type: Pay type of instance. Valid values:`PREPAID`, `POSTPAID`. Default is `POSTPAID`.
         :param pulumi.Input['InstanceClusterTopologyArgs'] cluster_topology: Cluster Edition node topology configuration. Note: If you purchased a cluster edition instance, this parameter is required. You need to set the RW and RO node topology of the cluster edition instance. The RO node range is 1-5. Please set at least 1 RO node.
         :param pulumi.Input[_builtins.int] cpu: CPU cores.
+        :param pulumi.Input[_builtins.str] destroy_protect: Instance destroy protection status. Valid values: `on` (enable destroy protection), `off` (disable destroy protection).
         :param pulumi.Input[_builtins.str] device_type: Specify device type, available values:
                - `UNIVERSAL` (default): universal instance,
                - `EXCLUSIVE`: exclusive instance,
@@ -649,6 +684,7 @@ class _InstanceState:
                - `CLOUD_NATIVE_CLUSTER`: cluster version standard type,
                - `CLOUD_NATIVE_CLUSTER_EXCLUSIVE`: cluster version enhanced type.
                  If it is not specified, it defaults to a universal instance.
+        :param pulumi.Input[_builtins.str] disk_encryption: Whether to enable disk encryption for the CDB instance. Valid value: `on` (enable disk encryption); otherwise disk encryption is not enabled. Only cloud-disk edition instances support this feature. This parameter can only be set at creation time and cannot be modified.
         :param pulumi.Input[_builtins.str] disk_type: Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. `CLOUD_SSD` designates an SSD cloud disk; `CLOUD_HSSD` designates an Enhanced SSD cloud disk; and `CLOUD_PREMIUM` designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to `Regions and Availability Zones` for specific support details.
         :param pulumi.Input[_builtins.str] engine_type: Instance engine type. The default value is `InnoDB`. Supported values include `InnoDB` and `RocksDB`.
         :param pulumi.Input[_builtins.str] engine_version: The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0/8.4, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
@@ -695,8 +731,12 @@ class _InstanceState:
             pulumi.set(__self__, "cluster_topology", cluster_topology)
         if cpu is not None:
             pulumi.set(__self__, "cpu", cpu)
+        if destroy_protect is not None:
+            pulumi.set(__self__, "destroy_protect", destroy_protect)
         if device_type is not None:
             pulumi.set(__self__, "device_type", device_type)
+        if disk_encryption is not None:
+            pulumi.set(__self__, "disk_encryption", disk_encryption)
         if disk_type is not None:
             pulumi.set(__self__, "disk_type", disk_type)
         if engine_type is not None:
@@ -835,6 +875,18 @@ class _InstanceState:
         pulumi.set(self, "cpu", value)
 
     @_builtins.property
+    @pulumi.getter(name="destroyProtect")
+    def destroy_protect(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Instance destroy protection status. Valid values: `on` (enable destroy protection), `off` (disable destroy protection).
+        """
+        return pulumi.get(self, "destroy_protect")
+
+    @destroy_protect.setter
+    def destroy_protect(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "destroy_protect", value)
+
+    @_builtins.property
     @pulumi.getter(name="deviceType")
     def device_type(self) -> pulumi.Input[Optional[_builtins.str]]:
         """
@@ -851,6 +903,18 @@ class _InstanceState:
     @device_type.setter
     def device_type(self, value: pulumi.Input[Optional[_builtins.str]]):
         pulumi.set(self, "device_type", value)
+
+    @_builtins.property
+    @pulumi.getter(name="diskEncryption")
+    def disk_encryption(self) -> pulumi.Input[Optional[_builtins.str]]:
+        """
+        Whether to enable disk encryption for the CDB instance. Valid value: `on` (enable disk encryption); otherwise disk encryption is not enabled. Only cloud-disk edition instances support this feature. This parameter can only be set at creation time and cannot be modified.
+        """
+        return pulumi.get(self, "disk_encryption")
+
+    @disk_encryption.setter
+    def disk_encryption(self, value: pulumi.Input[Optional[_builtins.str]]):
+        pulumi.set(self, "disk_encryption", value)
 
     @_builtins.property
     @pulumi.getter(name="diskType")
@@ -1286,7 +1350,9 @@ class Instance(pulumi.CustomResource):
                  charge_type: pulumi.Input[Optional[_builtins.str]] = None,
                  cluster_topology: pulumi.Input[Optional[Union['InstanceClusterTopologyArgs', 'InstanceClusterTopologyArgsDict']]] = None,
                  cpu: pulumi.Input[Optional[_builtins.int]] = None,
+                 destroy_protect: pulumi.Input[Optional[_builtins.str]] = None,
                  device_type: pulumi.Input[Optional[_builtins.str]] = None,
+                 disk_encryption: pulumi.Input[Optional[_builtins.str]] = None,
                  disk_type: pulumi.Input[Optional[_builtins.str]] = None,
                  engine_type: pulumi.Input[Optional[_builtins.str]] = None,
                  engine_version: pulumi.Input[Optional[_builtins.str]] = None,
@@ -1446,6 +1512,88 @@ class Instance(pulumi.CustomResource):
             })
         ```
 
+        ### Create instance with destroy protect enabled
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.mysql.Instance("example",
+            internet_service=1,
+            engine_version="5.7",
+            charge_type="POSTPAID",
+            root_password="PassWord123",
+            slave_deploy_mode=0,
+            availability_zone=zones["zones"][0]["name"],
+            slave_sync_mode=1,
+            instance_name="tf-example-mysql",
+            mem_size=4000,
+            volume_size=200,
+            vpc_id=vpc["id"],
+            subnet_id=subnet["id"],
+            intranet_port=3306,
+            security_groups=[security_group["id"]],
+            destroy_protect="on",
+            tags={
+                "name": "test",
+            },
+            parameters={
+                "character_set_server": "utf8",
+                "max_connections": "1000",
+            })
+        ```
+
+        ### Create instance with disk encryption enabled
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.mysql.Instance("example",
+            internet_service=1,
+            engine_version="5.7",
+            charge_type="POSTPAID",
+            root_password="PassWord123",
+            slave_deploy_mode=0,
+            availability_zone=zones["zones"][0]["name"],
+            slave_sync_mode=1,
+            instance_name="tf-example-mysql",
+            mem_size=4000,
+            volume_size=200,
+            vpc_id=vpc["id"],
+            subnet_id=subnet["id"],
+            intranet_port=3306,
+            security_groups=[security_group["id"]],
+            disk_type="CLOUD_SSD",
+            disk_encryption="on",
+            tags={
+                "name": "test",
+            },
+            parameters={
+                "character_set_server": "utf8",
+                "max_connections": "1000",
+            })
+        ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateDBInstance](https://www.tencentcloud.com/document/api/236/15871)
+          - [CreateDBInstanceHour](https://www.tencentcloud.com/document/api/236/15865)
+          - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+          - [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+          - [OpenWanService](https://www.tencentcloud.com/document/api/236/15875)
+        * Read:
+          - [DescribeDBInstanceConfig](https://www.tencentcloud.com/document/api/236/17491)
+          - [DescribeInstanceParams](https://www.tencentcloud.com/document/api/236/34467)
+        * Delete:
+          - [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872)
+          - [IsolateDBInstance](https://www.tencentcloud.com/document/api/236/15869)
+          - [OfflineIsolatedInstances](https://www.tencentcloud.com/document/api/236/34475)
+
         ## Import
 
         MySQL instance can be imported using the id, e.g.
@@ -1462,6 +1610,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] charge_type: Pay type of instance. Valid values:`PREPAID`, `POSTPAID`. Default is `POSTPAID`.
         :param pulumi.Input[Union['InstanceClusterTopologyArgs', 'InstanceClusterTopologyArgsDict']] cluster_topology: Cluster Edition node topology configuration. Note: If you purchased a cluster edition instance, this parameter is required. You need to set the RW and RO node topology of the cluster edition instance. The RO node range is 1-5. Please set at least 1 RO node.
         :param pulumi.Input[_builtins.int] cpu: CPU cores.
+        :param pulumi.Input[_builtins.str] destroy_protect: Instance destroy protection status. Valid values: `on` (enable destroy protection), `off` (disable destroy protection).
         :param pulumi.Input[_builtins.str] device_type: Specify device type, available values:
                - `UNIVERSAL` (default): universal instance,
                - `EXCLUSIVE`: exclusive instance,
@@ -1469,6 +1618,7 @@ class Instance(pulumi.CustomResource):
                - `CLOUD_NATIVE_CLUSTER`: cluster version standard type,
                - `CLOUD_NATIVE_CLUSTER_EXCLUSIVE`: cluster version enhanced type.
                  If it is not specified, it defaults to a universal instance.
+        :param pulumi.Input[_builtins.str] disk_encryption: Whether to enable disk encryption for the CDB instance. Valid value: `on` (enable disk encryption); otherwise disk encryption is not enabled. Only cloud-disk edition instances support this feature. This parameter can only be set at creation time and cannot be modified.
         :param pulumi.Input[_builtins.str] disk_type: Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. `CLOUD_SSD` designates an SSD cloud disk; `CLOUD_HSSD` designates an Enhanced SSD cloud disk; and `CLOUD_PREMIUM` designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to `Regions and Availability Zones` for specific support details.
         :param pulumi.Input[_builtins.str] engine_type: Instance engine type. The default value is `InnoDB`. Supported values include `InnoDB` and `RocksDB`.
         :param pulumi.Input[_builtins.str] engine_version: The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0/8.4, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
@@ -1634,6 +1784,88 @@ class Instance(pulumi.CustomResource):
             })
         ```
 
+        ### Create instance with destroy protect enabled
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.mysql.Instance("example",
+            internet_service=1,
+            engine_version="5.7",
+            charge_type="POSTPAID",
+            root_password="PassWord123",
+            slave_deploy_mode=0,
+            availability_zone=zones["zones"][0]["name"],
+            slave_sync_mode=1,
+            instance_name="tf-example-mysql",
+            mem_size=4000,
+            volume_size=200,
+            vpc_id=vpc["id"],
+            subnet_id=subnet["id"],
+            intranet_port=3306,
+            security_groups=[security_group["id"]],
+            destroy_protect="on",
+            tags={
+                "name": "test",
+            },
+            parameters={
+                "character_set_server": "utf8",
+                "max_connections": "1000",
+            })
+        ```
+
+        ### Create instance with disk encryption enabled
+
+        ```python
+        import pulumi
+        import tencentcloud_iac_pulumi as tencentcloud
+
+        example = tencentcloud.mysql.Instance("example",
+            internet_service=1,
+            engine_version="5.7",
+            charge_type="POSTPAID",
+            root_password="PassWord123",
+            slave_deploy_mode=0,
+            availability_zone=zones["zones"][0]["name"],
+            slave_sync_mode=1,
+            instance_name="tf-example-mysql",
+            mem_size=4000,
+            volume_size=200,
+            vpc_id=vpc["id"],
+            subnet_id=subnet["id"],
+            intranet_port=3306,
+            security_groups=[security_group["id"]],
+            disk_type="CLOUD_SSD",
+            disk_encryption="on",
+            tags={
+                "name": "test",
+            },
+            parameters={
+                "character_set_server": "utf8",
+                "max_connections": "1000",
+            })
+        ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateDBInstance](https://www.tencentcloud.com/document/api/236/15871)
+          - [CreateDBInstanceHour](https://www.tencentcloud.com/document/api/236/15865)
+          - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+          - [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+          - [OpenWanService](https://www.tencentcloud.com/document/api/236/15875)
+        * Read:
+          - [DescribeDBInstanceConfig](https://www.tencentcloud.com/document/api/236/17491)
+          - [DescribeInstanceParams](https://www.tencentcloud.com/document/api/236/34467)
+        * Delete:
+          - [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872)
+          - [IsolateDBInstance](https://www.tencentcloud.com/document/api/236/15869)
+          - [OfflineIsolatedInstances](https://www.tencentcloud.com/document/api/236/34475)
+
         ## Import
 
         MySQL instance can be imported using the id, e.g.
@@ -1663,7 +1895,9 @@ class Instance(pulumi.CustomResource):
                  charge_type: pulumi.Input[Optional[_builtins.str]] = None,
                  cluster_topology: pulumi.Input[Optional[Union['InstanceClusterTopologyArgs', 'InstanceClusterTopologyArgsDict']]] = None,
                  cpu: pulumi.Input[Optional[_builtins.int]] = None,
+                 destroy_protect: pulumi.Input[Optional[_builtins.str]] = None,
                  device_type: pulumi.Input[Optional[_builtins.str]] = None,
+                 disk_encryption: pulumi.Input[Optional[_builtins.str]] = None,
                  disk_type: pulumi.Input[Optional[_builtins.str]] = None,
                  engine_type: pulumi.Input[Optional[_builtins.str]] = None,
                  engine_version: pulumi.Input[Optional[_builtins.str]] = None,
@@ -1706,7 +1940,9 @@ class Instance(pulumi.CustomResource):
             __props__.__dict__["charge_type"] = charge_type
             __props__.__dict__["cluster_topology"] = cluster_topology
             __props__.__dict__["cpu"] = cpu
+            __props__.__dict__["destroy_protect"] = destroy_protect
             __props__.__dict__["device_type"] = device_type
+            __props__.__dict__["disk_encryption"] = disk_encryption
             __props__.__dict__["disk_type"] = disk_type
             __props__.__dict__["engine_type"] = engine_type
             __props__.__dict__["engine_version"] = engine_version
@@ -1765,7 +2001,9 @@ class Instance(pulumi.CustomResource):
             charge_type: pulumi.Input[Optional[_builtins.str]] = None,
             cluster_topology: pulumi.Input[Optional[Union['InstanceClusterTopologyArgs', 'InstanceClusterTopologyArgsDict']]] = None,
             cpu: pulumi.Input[Optional[_builtins.int]] = None,
+            destroy_protect: pulumi.Input[Optional[_builtins.str]] = None,
             device_type: pulumi.Input[Optional[_builtins.str]] = None,
+            disk_encryption: pulumi.Input[Optional[_builtins.str]] = None,
             disk_type: pulumi.Input[Optional[_builtins.str]] = None,
             engine_type: pulumi.Input[Optional[_builtins.str]] = None,
             engine_version: pulumi.Input[Optional[_builtins.str]] = None,
@@ -1813,6 +2051,7 @@ class Instance(pulumi.CustomResource):
         :param pulumi.Input[_builtins.str] charge_type: Pay type of instance. Valid values:`PREPAID`, `POSTPAID`. Default is `POSTPAID`.
         :param pulumi.Input[Union['InstanceClusterTopologyArgs', 'InstanceClusterTopologyArgsDict']] cluster_topology: Cluster Edition node topology configuration. Note: If you purchased a cluster edition instance, this parameter is required. You need to set the RW and RO node topology of the cluster edition instance. The RO node range is 1-5. Please set at least 1 RO node.
         :param pulumi.Input[_builtins.int] cpu: CPU cores.
+        :param pulumi.Input[_builtins.str] destroy_protect: Instance destroy protection status. Valid values: `on` (enable destroy protection), `off` (disable destroy protection).
         :param pulumi.Input[_builtins.str] device_type: Specify device type, available values:
                - `UNIVERSAL` (default): universal instance,
                - `EXCLUSIVE`: exclusive instance,
@@ -1820,6 +2059,7 @@ class Instance(pulumi.CustomResource):
                - `CLOUD_NATIVE_CLUSTER`: cluster version standard type,
                - `CLOUD_NATIVE_CLUSTER_EXCLUSIVE`: cluster version enhanced type.
                  If it is not specified, it defaults to a universal instance.
+        :param pulumi.Input[_builtins.str] disk_encryption: Whether to enable disk encryption for the CDB instance. Valid value: `on` (enable disk encryption); otherwise disk encryption is not enabled. Only cloud-disk edition instances support this feature. This parameter can only be set at creation time and cannot be modified.
         :param pulumi.Input[_builtins.str] disk_type: Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. `CLOUD_SSD` designates an SSD cloud disk; `CLOUD_HSSD` designates an Enhanced SSD cloud disk; and `CLOUD_PREMIUM` designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to `Regions and Availability Zones` for specific support details.
         :param pulumi.Input[_builtins.str] engine_type: Instance engine type. The default value is `InnoDB`. Supported values include `InnoDB` and `RocksDB`.
         :param pulumi.Input[_builtins.str] engine_version: The version number of the database engine to use. Supported versions include 5.5/5.6/5.7/8.0/8.4, and default is 5.7. Upgrade the instance engine version to support 5.6/5.7 and switch immediately.
@@ -1865,7 +2105,9 @@ class Instance(pulumi.CustomResource):
         __props__.__dict__["charge_type"] = charge_type
         __props__.__dict__["cluster_topology"] = cluster_topology
         __props__.__dict__["cpu"] = cpu
+        __props__.__dict__["destroy_protect"] = destroy_protect
         __props__.__dict__["device_type"] = device_type
+        __props__.__dict__["disk_encryption"] = disk_encryption
         __props__.__dict__["disk_type"] = disk_type
         __props__.__dict__["engine_type"] = engine_type
         __props__.__dict__["engine_version"] = engine_version
@@ -1944,6 +2186,14 @@ class Instance(pulumi.CustomResource):
         return pulumi.get(self, "cpu")
 
     @_builtins.property
+    @pulumi.getter(name="destroyProtect")
+    def destroy_protect(self) -> pulumi.Output[_builtins.str]:
+        """
+        Instance destroy protection status. Valid values: `on` (enable destroy protection), `off` (disable destroy protection).
+        """
+        return pulumi.get(self, "destroy_protect")
+
+    @_builtins.property
     @pulumi.getter(name="deviceType")
     def device_type(self) -> pulumi.Output[_builtins.str]:
         """
@@ -1956,6 +2206,14 @@ class Instance(pulumi.CustomResource):
           If it is not specified, it defaults to a universal instance.
         """
         return pulumi.get(self, "device_type")
+
+    @_builtins.property
+    @pulumi.getter(name="diskEncryption")
+    def disk_encryption(self) -> pulumi.Output[_builtins.str]:
+        """
+        Whether to enable disk encryption for the CDB instance. Valid value: `on` (enable disk encryption); otherwise disk encryption is not enabled. Only cloud-disk edition instances support this feature. This parameter can only be set at creation time and cannot be modified.
+        """
+        return pulumi.get(self, "disk_encryption")
 
     @_builtins.property
     @pulumi.getter(name="diskType")

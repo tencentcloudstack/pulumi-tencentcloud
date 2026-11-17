@@ -200,6 +200,14 @@ class RenewInstance(pulumi.CustomResource):
             auto_voucher=False)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeInstances](https://www.tencentcloud.com/document/api/1103/42498)
+          - [RenewInstances](https://www.tencentcloud.com/document/api/1103/57991)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -234,6 +242,14 @@ class RenewInstance(pulumi.CustomResource):
             renew_data_disk=True,
             auto_voucher=False)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeInstances](https://www.tencentcloud.com/document/api/1103/42498)
+          - [RenewInstances](https://www.tencentcloud.com/document/api/1103/57991)
 
 
         :param str resource_name: The name of the resource.

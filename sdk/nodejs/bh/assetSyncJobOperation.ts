@@ -15,6 +15,14 @@ import * as utilities from "../utilities";
  *
  * const example = new tencentcloud.bh.AssetSyncJobOperation("example", {category: 1});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateAssetSyncJob](https://www.tencentcloud.com/search/?wd=CreateAssetSyncJob&type=document&lang=en)
+ *   - [DescribeAssetSyncStatus](https://www.tencentcloud.com/search/?wd=DescribeAssetSyncStatus&type=document&lang=en)
  */
 export class AssetSyncJobOperation extends pulumi.CustomResource {
     /**

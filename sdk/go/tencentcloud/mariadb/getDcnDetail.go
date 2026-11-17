@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDcnDetail](https://www.tencentcloud.com/document/api/237/40677)
 func GetDcnDetail(ctx *pulumi.Context, args *GetDcnDetailArgs, opts ...pulumi.InvokeOption) (*GetDcnDetailResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDcnDetailResult

@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [AbortCronJobs](https://www.tencentcloud.com/document/api/1249/68540)
 type CronJobAbort struct {
 	pulumi.CustomResourceState
 

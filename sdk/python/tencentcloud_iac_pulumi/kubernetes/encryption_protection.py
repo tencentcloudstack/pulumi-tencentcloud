@@ -168,6 +168,14 @@ class EncryptionProtection(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [EnableEncryptionProtection](https://www.tencentcloud.com/document/api/457/56946)
+        * Read: [DescribeEncryptionStatus](https://www.tencentcloud.com/document/api/457/56948)
+        * Delete: [DisableEncryptionProtection](https://www.tencentcloud.com/document/api/457/56947)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -224,6 +232,14 @@ class EncryptionProtection(pulumi.CustomResource):
                 "kms_region": example_region,
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [EnableEncryptionProtection](https://www.tencentcloud.com/document/api/457/56946)
+        * Read: [DescribeEncryptionStatus](https://www.tencentcloud.com/document/api/457/56948)
+        * Delete: [DisableEncryptionProtection](https://www.tencentcloud.com/document/api/457/56947)
 
 
         :param str resource_name: The name of the resource.

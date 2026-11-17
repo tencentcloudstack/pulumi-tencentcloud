@@ -50,6 +50,18 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [GetLayerVersion](https://www.tencentcloud.com/document/api/583/36319)
+//   - [GetSecretValue](https://www.tencentcloud.com/document/api/1078/38649)
+//   - [PublishLayerVersion](https://www.tencentcloud.com/document/api/583/36316)
+//
+// * Read: [GetLayerVersion](https://www.tencentcloud.com/document/api/583/36319)
+// * Delete: [DeleteLayerVersion](https://www.tencentcloud.com/document/api/583/36320)
+//
 // ## Import
 //
 // Scf layer can be imported, e.g.

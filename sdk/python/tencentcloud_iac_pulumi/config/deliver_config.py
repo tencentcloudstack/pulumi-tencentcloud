@@ -272,6 +272,14 @@ class DeliverConfig(pulumi.CustomResource):
             deliver_content_type=3)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [UpdateConfigDeliver](https://www.tencentcloud.com/document/api/1164/84990)
+        * Read: [DescribeConfigDeliver](https://www.tencentcloud.com/document/api/1164/84992)
+        * Update: [UpdateConfigDeliver](https://www.tencentcloud.com/document/api/1164/84990)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -305,6 +313,14 @@ class DeliverConfig(pulumi.CustomResource):
             deliver_type="COS",
             deliver_content_type=3)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [UpdateConfigDeliver](https://www.tencentcloud.com/document/api/1164/84990)
+        * Read: [DescribeConfigDeliver](https://www.tencentcloud.com/document/api/1164/84992)
+        * Update: [UpdateConfigDeliver](https://www.tencentcloud.com/document/api/1164/84990)
 
 
         :param str resource_name: The name of the resource.

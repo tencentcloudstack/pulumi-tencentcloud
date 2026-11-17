@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAvailableRecoveryTime](https://www.tencentcloud.com/document/api/409/45152)
         /// </summary>
         public static Task<GetRecoveryTimeResult> InvokeAsync(GetRecoveryTimeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetRecoveryTimeResult>("tencentcloud:Postgresql/getRecoveryTime:getRecoveryTime", args ?? new GetRecoveryTimeArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAvailableRecoveryTime](https://www.tencentcloud.com/document/api/409/45152)
         /// </summary>
         public static Output<GetRecoveryTimeResult> Invoke(GetRecoveryTimeInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetRecoveryTimeResult>("tencentcloud:Postgresql/getRecoveryTime:getRecoveryTime", args ?? new GetRecoveryTimeInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAvailableRecoveryTime](https://www.tencentcloud.com/document/api/409/45152)
         /// </summary>
         public static Output<GetRecoveryTimeResult> Invoke(GetRecoveryTimeInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetRecoveryTimeResult>("tencentcloud:Postgresql/getRecoveryTime:getRecoveryTime", args ?? new GetRecoveryTimeInvokeArgs(), options.WithDefaults());

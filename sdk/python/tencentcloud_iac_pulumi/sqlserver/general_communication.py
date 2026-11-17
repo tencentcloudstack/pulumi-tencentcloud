@@ -121,6 +121,18 @@ class GeneralCommunication(pulumi.CustomResource):
         example_general_communication = tencentcloud.sqlserver.GeneralCommunication("example", instance_id=example.id)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+          - [OpenInterCommunication](https://www.tencentcloud.com/document/api/238/50605)
+        * Read: [DescribeDBInstanceInter](https://www.tencentcloud.com/document/api/238/50606)
+        * Delete:
+          - [CloseInterCommunication](https://www.tencentcloud.com/document/api/238/50611)
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+
         ## Import
 
         sqlserver general_communication can be imported using the id, e.g.
@@ -187,6 +199,18 @@ class GeneralCommunication(pulumi.CustomResource):
             })
         example_general_communication = tencentcloud.sqlserver.GeneralCommunication("example", instance_id=example.id)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+          - [OpenInterCommunication](https://www.tencentcloud.com/document/api/238/50605)
+        * Read: [DescribeDBInstanceInter](https://www.tencentcloud.com/document/api/238/50606)
+        * Delete:
+          - [CloseInterCommunication](https://www.tencentcloud.com/document/api/238/50611)
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
 
         ## Import
 

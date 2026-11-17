@@ -48,6 +48,17 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CreateCcBlackWhiteIpList](https://www.tencentcloud.com/document/api/1213/61383)
+//   - [DescribeCcBlackWhiteIpList](https://www.tencentcloud.com/document/api/1213/61366)
+//
+// * Read: [DescribeCcBlackWhiteIpList](https://www.tencentcloud.com/document/api/1213/61366)
+// * Delete: [DeleteCcBlackWhiteIpList](https://www.tencentcloud.com/document/api/1213/61374)
+//
 // ## Import
 //
 // antiddos ccBlackWhiteIp can be imported using the id, e.g.

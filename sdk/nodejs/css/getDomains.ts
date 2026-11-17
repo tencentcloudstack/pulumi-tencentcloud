@@ -21,6 +21,12 @@ import * as utilities from "../utilities";
  *     isDelayLive: 0,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeLiveDomains](https://www.tencentcloud.com/document/api/267/35186)
  */
 export function getDomains(args?: GetDomainsArgs, opts?: pulumi.InvokeOptions): Promise<GetDomainsResult> {
     args = args || {};
@@ -105,6 +111,12 @@ export interface GetDomainsResult {
  *     isDelayLive: 0,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeLiveDomains](https://www.tencentcloud.com/document/api/267/35186)
  */
 export function getDomainsOutput(args?: GetDomainsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDomainsResult> {
     args = args || {};

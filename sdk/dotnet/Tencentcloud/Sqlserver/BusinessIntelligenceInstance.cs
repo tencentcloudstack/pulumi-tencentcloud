@@ -82,6 +82,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateBusinessDBInstances](https://www.tencentcloud.com/document/api/238/50610)
+    ///   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+    ///   - [ModifyDBInstanceName](https://www.tencentcloud.com/document/api/238/32104)
+    /// * Read:
+    ///   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+    ///   - [DescribeMaintenanceSpan](https://www.tencentcloud.com/document/api/238/69303)
+    /// * Update: [ModifyDBInstanceName](https://www.tencentcloud.com/document/api/238/32104)
+    /// * Delete:
+    ///   - [DeleteDBInstance](https://www.tencentcloud.com/document/api/238/72759)
+    ///   - [TerminateDBInstance](https://www.tencentcloud.com/document/api/238/34685)
+    /// 
     /// ## Import
     /// 
     /// sqlserver BusinessIntelligenceInstance can be imported using the id, e.g.

@@ -16,6 +16,14 @@ import * as utilities from "../utilities";
  * const example = new tencentcloud.bh.AssetSyncFlagConfig("example", {autoSync: true});
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [ModifyAssetSyncFlag](https://www.tencentcloud.com/search/?wd=ModifyAssetSyncFlag&type=document&lang=en)
+ * * Read: [DescribeAssetSyncFlag](https://www.tencentcloud.com/search/?wd=DescribeAssetSyncFlag&type=document&lang=en)
+ * * Update: [ModifyAssetSyncFlag](https://www.tencentcloud.com/search/?wd=ModifyAssetSyncFlag&type=document&lang=en)
+ *
  * ## Import
  *
  * BH asset sync flag config can be imported using the customId(like uuid or base64 string), e.g.

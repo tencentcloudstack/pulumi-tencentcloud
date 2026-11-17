@@ -320,7 +320,7 @@ class IpAddress(pulumi.CustomResource):
                  vpc_id: pulumi.Input[Optional[_builtins.str]] = None,
                  __props__=None):
         """
-        Provides a resource to create a vpc reserve ip addresses
+        Provides a resource to create a VPC reserve ip address
 
         ## Example Usage
 
@@ -328,23 +328,38 @@ class IpAddress(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        reserve_ip = tencentcloud.reserve.IpAddress("reserve_ip",
-            vpc_id="xxxxxx",
-            subnet_id="xxxxxx",
-            ip_address="10.0.0.13",
-            name="reserve-ip-tf",
-            description="description",
+        example = tencentcloud.reserve.IpAddress("example",
+            vpc_id="vpc-i5yyodl9",
+            subnet_id="subnet-hhi88a58",
+            ip_address="10.0.30.27",
+            name="tf-example",
+            description="remark.",
             tags={
-                "test1": "test1",
+                "createBy": "Terraform",
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateReserveIpAddresses](https://www.tencentcloud.com/document/api/215/66342)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribeReserveIpAddresses](https://www.tencentcloud.com/document/api/215/66340)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [ModifyReserveIpAddress](https://www.tencentcloud.com/document/api/215/66339)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Delete: [DeleteReserveIpAddresses](https://www.tencentcloud.com/document/api/215/66341)
+
         ## Import
 
-        vpc reserve_ip_addresses can be imported using the id, e.g.
+        VPC reserve ip address can be imported using the vpcId#reserveIpId, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Reserve/ipAddress:IpAddress reserve_ip_addresses ${vpcId}#${reserveIpId}
+        $ pulumi import tencentcloud:Reserve/ipAddress:IpAddress example vpc-i5yyodl9#rsvip-cz3ces44
         ```
 
 
@@ -364,7 +379,7 @@ class IpAddress(pulumi.CustomResource):
                  args: IpAddressArgs,
                  opts: Optional[pulumi.ResourceOptions] = None):
         """
-        Provides a resource to create a vpc reserve ip addresses
+        Provides a resource to create a VPC reserve ip address
 
         ## Example Usage
 
@@ -372,23 +387,38 @@ class IpAddress(pulumi.CustomResource):
         import pulumi
         import tencentcloud_iac_pulumi as tencentcloud
 
-        reserve_ip = tencentcloud.reserve.IpAddress("reserve_ip",
-            vpc_id="xxxxxx",
-            subnet_id="xxxxxx",
-            ip_address="10.0.0.13",
-            name="reserve-ip-tf",
-            description="description",
+        example = tencentcloud.reserve.IpAddress("example",
+            vpc_id="vpc-i5yyodl9",
+            subnet_id="subnet-hhi88a58",
+            ip_address="10.0.30.27",
+            name="tf-example",
+            description="remark.",
             tags={
-                "test1": "test1",
+                "createBy": "Terraform",
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateReserveIpAddresses](https://www.tencentcloud.com/document/api/215/66342)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Read:
+          - [DescribeReserveIpAddresses](https://www.tencentcloud.com/document/api/215/66340)
+          - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+        * Update:
+          - [ModifyReserveIpAddress](https://www.tencentcloud.com/document/api/215/66339)
+          - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+        * Delete: [DeleteReserveIpAddresses](https://www.tencentcloud.com/document/api/215/66341)
+
         ## Import
 
-        vpc reserve_ip_addresses can be imported using the id, e.g.
+        VPC reserve ip address can be imported using the vpcId#reserveIpId, e.g.
 
         ```sh
-        $ pulumi import tencentcloud:Reserve/ipAddress:IpAddress reserve_ip_addresses ${vpcId}#${reserveIpId}
+        $ pulumi import tencentcloud:Reserve/ipAddress:IpAddress example vpc-i5yyodl9#rsvip-cz3ces44
         ```
 
 
@@ -558,7 +588,7 @@ class IpAddress(pulumi.CustomResource):
 
     @_builtins.property
     @pulumi.getter(name="subnetId")
-    def subnet_id(self) -> pulumi.Output[Optional[_builtins.str]]:
+    def subnet_id(self) -> pulumi.Output[_builtins.str]:
         """
         Subnet ID.
         """

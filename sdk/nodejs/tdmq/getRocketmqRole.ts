@@ -29,6 +29,12 @@ import * as utilities from "../utilities";
  *     clusterId: cluster.clusterId,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRoles](https://www.tencentcloud.com/search/?wd=DescribeRoles&type=document&lang=en)
  */
 export function getRocketmqRole(args: GetRocketmqRoleArgs, opts?: pulumi.InvokeOptions): Promise<GetRocketmqRoleResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -99,6 +105,12 @@ export interface GetRocketmqRoleResult {
  *     clusterId: cluster.clusterId,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRoles](https://www.tencentcloud.com/search/?wd=DescribeRoles&type=document&lang=en)
  */
 export function getRocketmqRoleOutput(args: GetRocketmqRoleOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRocketmqRoleResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

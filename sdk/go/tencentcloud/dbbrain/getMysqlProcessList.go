@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeMySqlProcessList](https://www.tencentcloud.com/document/api/1035/41193)
 func GetMysqlProcessList(ctx *pulumi.Context, args *GetMysqlProcessListArgs, opts ...pulumi.InvokeOption) (*GetMysqlProcessListResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetMysqlProcessListResult

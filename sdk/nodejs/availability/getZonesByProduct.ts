@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     product: "cvm",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeZones](https://www.tencentcloud.com/search/?wd=DescribeZones&type=document&lang=en)
  */
 export function getZonesByProduct(args: GetZonesByProductArgs, opts?: pulumi.InvokeOptions): Promise<GetZonesByProductResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -85,6 +91,12 @@ export interface GetZonesByProductResult {
  *     product: "cvm",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeZones](https://www.tencentcloud.com/search/?wd=DescribeZones&type=document&lang=en)
  */
 export function getZonesByProductOutput(args: GetZonesByProductOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetZonesByProductResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

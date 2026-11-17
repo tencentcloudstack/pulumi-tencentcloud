@@ -109,6 +109,12 @@ def get_access_groups(owner_uin: Optional[_builtins.int] = None,
     access_groups = tencentcloud.chdfs.get_access_groups(vpc_id="vpc-pewdpc0d")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAccessGroups](https://www.tencentcloud.com/document/api/1106/42421)
+
 
     :param _builtins.int owner_uin: get groups belongs to the owner uin, must set but only can use one of VpcId and OwnerUin to get the groups.
     :param _builtins.str result_output_file: Used to save results.
@@ -142,6 +148,12 @@ def get_access_groups_output(owner_uin: pulumi.Input[Optional[Optional[_builtins
 
     access_groups = tencentcloud.chdfs.get_access_groups(vpc_id="vpc-pewdpc0d")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeAccessGroups](https://www.tencentcloud.com/document/api/1106/42421)
 
 
     :param _builtins.int owner_uin: get groups belongs to the owner uin, must set but only can use one of VpcId and OwnerUin to get the groups.

@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCustomerGatewayVendors](https://www.tencentcloud.com/document/api/215/17517)
         /// </summary>
         public static Task<GetCustomerGatewayVendorsResult> InvokeAsync(GetCustomerGatewayVendorsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetCustomerGatewayVendorsResult>("tencentcloud:Vpn/getCustomerGatewayVendors:getCustomerGatewayVendors", args ?? new GetCustomerGatewayVendorsArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCustomerGatewayVendors](https://www.tencentcloud.com/document/api/215/17517)
         /// </summary>
         public static Output<GetCustomerGatewayVendorsResult> Invoke(GetCustomerGatewayVendorsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetCustomerGatewayVendorsResult>("tencentcloud:Vpn/getCustomerGatewayVendors:getCustomerGatewayVendors", args ?? new GetCustomerGatewayVendorsInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpn
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCustomerGatewayVendors](https://www.tencentcloud.com/document/api/215/17517)
         /// </summary>
         public static Output<GetCustomerGatewayVendorsResult> Invoke(GetCustomerGatewayVendorsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetCustomerGatewayVendorsResult>("tencentcloud:Vpn/getCustomerGatewayVendors:getCustomerGatewayVendors", args ?? new GetCustomerGatewayVendorsInvokeArgs(), options.WithDefaults());

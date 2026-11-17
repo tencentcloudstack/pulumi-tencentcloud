@@ -32,6 +32,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cynosdb
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeFlow](https://www.tencentcloud.com/document/api/1098/53463)
+    ///   - [ReloadBalanceProxyNode](https://www.tencentcloud.com/document/api/1098/56552)
+    /// 
     /// ## Import
     /// 
     /// cynosdb ReloadProxyNode can be imported using the id, e.g.

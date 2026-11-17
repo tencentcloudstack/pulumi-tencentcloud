@@ -9,6 +9,12 @@ import * as utilities from "../utilities";
 /**
  * Provides an elasticsearch instance resource.
  *
+ * > **NOTE:** After executing `terraform destroy`, the resource instance will be isolated in the recycle bin(reserved for 24 hours by default). If you need to completely destroy the instance, you can set `forceDelete` to `true`.
+ *
+ * > **NOTE:** Currently, Once the `enableCerebro` field is `true`, it cannot be `false`.
+ *
+ * > **NOTE:** `subProductCode` specifies the sub-product of the instance (e.g. `spEsEnterprise` for enterprise edition). It can only be set at creation time. If omitted, the backend maps it from `licenseType`.
+ *
  * ## Example Usage
  *
  * ### Create a basic version of elasticsearch instance paid by the hour
@@ -102,6 +108,96 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ### Create a elasticsearch instance with Cerebro public access enabled
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.elasticsearch.Instance("example", {
+ *     instanceName: "tf_example",
+ *     availabilityZone: "ap-guangzhou-6",
+ *     version: "7.14.2",
+ *     vpcId: "vpc-i5yyodl9",
+ *     subnetId: "subnet-hhi88a58",
+ *     password: "Password@2026",
+ *     licenseType: "platinum",
+ *     basicSecurityType: 2,
+ *     enableCerebro: true,
+ *     forceDelete: true,
+ *     webNodeTypeInfos: [{
+ *         nodeNum: 1,
+ *         nodeType: "ES.S1.MEDIUM4",
+ *     }],
+ *     nodeInfoLists: [
+ *         {
+ *             type: "dedicatedMaster",
+ *             nodeNum: 3,
+ *             nodeType: "ES.S1.MEDIUM8",
+ *             encrypt: false,
+ *         },
+ *         {
+ *             type: "hotData",
+ *             nodeNum: 2,
+ *             nodeType: "ES.S1.MEDIUM8",
+ *             encrypt: false,
+ *         },
+ *     ],
+ *     esAcl: {
+ *         whiteLists: ["127.0.0.1"],
+ *     },
+ *     tags: {
+ *         createBy: "Terraform",
+ *     },
+ * });
+ * ```
+ *
+ * ### Create a elasticsearch instance with Cerebro private access enabled
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const example = new tencentcloud.elasticsearch.Instance("example", {
+ *     instanceName: "tf_example",
+ *     availabilityZone: "ap-guangzhou-6",
+ *     version: "7.14.2",
+ *     vpcId: "vpc-i5yyodl9",
+ *     subnetId: "subnet-hhi88a58",
+ *     password: "Password@2026",
+ *     licenseType: "platinum",
+ *     basicSecurityType: 2,
+ *     enableCerebro: true,
+ *     cerebroPrivateAccess: "OPEN",
+ *     cerebroPrivateDomain: "http://10.0.30.56:9000",
+ *     forceDelete: true,
+ *     webNodeTypeInfos: [{
+ *         nodeNum: 1,
+ *         nodeType: "ES.S1.MEDIUM4",
+ *     }],
+ *     nodeInfoLists: [
+ *         {
+ *             type: "dedicatedMaster",
+ *             nodeNum: 3,
+ *             nodeType: "ES.S1.MEDIUM8",
+ *             encrypt: false,
+ *         },
+ *         {
+ *             type: "hotData",
+ *             nodeNum: 2,
+ *             nodeType: "ES.S1.MEDIUM8",
+ *             encrypt: false,
+ *         },
+ *     ],
+ *     esAcl: {
+ *         whiteLists: ["127.0.0.1"],
+ *     },
+ *     tags: {
+ *         createBy: "Terraform",
+ *     },
+ * });
+ * ```
+ *
  * ### Create a basic version of elasticsearch instance for multi-availability zone deployment
  *
  * ```typescript
@@ -174,6 +270,85 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ### Create a basic version of elasticsearch instance with dedicated coordinating node
+ *
+ * ```typescript
+ * import * as pulumi from "@pulumi/pulumi";
+ * import * as tencentcloud from "@tencentcloud_iac/pulumi";
+ *
+ * const availabilityZone = tencentcloud.availability.getZonesByProduct({
+ *     product: "es",
+ * });
+ * const vpc = new tencentcloud.vpc.Instance("vpc", {
+ *     cidrBlock: "10.0.0.0/16",
+ *     name: "tf_es_vpc",
+ * });
+ * const subnet = new tencentcloud.subnet.Instance("subnet", {
+ *     vpcId: vpc.id,
+ *     availabilityZone: availabilityZone.then(availabilityZone => availabilityZone.zones?.[0]?.name),
+ *     name: "tf_es_subnet",
+ *     cidrBlock: "10.0.1.0/24",
+ * });
+ * const example = new tencentcloud.elasticsearch.Instance("example", {
+ *     instanceName: "tf_example_es",
+ *     availabilityZone: availabilityZone.then(availabilityZone => availabilityZone.zones?.[0]?.name),
+ *     version: "7.10.1",
+ *     vpcId: vpc.id,
+ *     subnetId: subnet.id,
+ *     password: "Test12345",
+ *     licenseType: "basic",
+ *     basicSecurityType: 2,
+ *     webNodeTypeInfos: [{
+ *         nodeNum: 1,
+ *         nodeType: "ES.S1.MEDIUM4",
+ *     }],
+ *     nodeInfoLists: [
+ *         {
+ *             type: "hotData",
+ *             nodeNum: 2,
+ *             nodeType: "ES.S1.MEDIUM8",
+ *             diskType: "CLOUD_SSD",
+ *             diskSize: 100,
+ *             encrypt: false,
+ *         },
+ *         {
+ *             type: "dedicatedMaster",
+ *             nodeNum: 3,
+ *             nodeType: "ES.S1.MEDIUM4",
+ *             diskType: "CLOUD_SSD",
+ *             diskSize: 50,
+ *             encrypt: false,
+ *         },
+ *         {
+ *             type: "dedicatedCoordinating",
+ *             nodeNum: 2,
+ *             nodeType: "ES.S1.MEDIUM4",
+ *             diskType: "CLOUD_SSD",
+ *             diskSize: 50,
+ *             encrypt: false,
+ *         },
+ *     ],
+ * });
+ * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateInstance](https://www.tencentcloud.com/document/api/845/32218)
+ *   - [DescribeInstances](https://www.tencentcloud.com/document/api/845/32214)
+ *   - [UpdateInstance](https://www.tencentcloud.com/document/api/845/32212)
+ * * Read: [DescribeInstances](https://www.tencentcloud.com/document/api/845/32214)
+ * * Update:
+ *   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+ *   - [UpdateInstance](https://www.tencentcloud.com/document/api/845/32212)
+ *   - [UpgradeInstance](https://www.tencentcloud.com/document/api/845/34396)
+ *   - [UpgradeLicense](https://www.tencentcloud.com/document/api/845/34395)
+ * * Delete:
+ *   - [DeleteInstance](https://www.tencentcloud.com/document/api/845/32217)
+ *   - [DescribeInstances](https://www.tencentcloud.com/document/api/845/32214)
+ *
  * ## Import
  *
  * Elasticsearch instance can be imported using the id, e.g.
@@ -219,6 +394,18 @@ export class Instance extends pulumi.CustomResource {
      */
     declare public readonly basicSecurityType: pulumi.Output<number | undefined>;
     /**
+     * Cerebro private network access status. Valid values are `OPEN` and `CLOSE`. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
+     */
+    declare public readonly cerebroPrivateAccess: pulumi.Output<string>;
+    /**
+     * Cerebro private network custom domain. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
+     */
+    declare public readonly cerebroPrivateDomain: pulumi.Output<string>;
+    /**
+     * Cerebro public network access status. Valid values are `OPEN` and `CLOSE`. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
+     */
+    declare public readonly cerebroPublicAccess: pulumi.Output<string>;
+    /**
      * The tenancy of the prepaid instance, and uint is month. NOTE: it only works when chargeType is set to `PREPAID`.
      */
     declare public readonly chargePeriod: pulumi.Output<number | undefined>;
@@ -251,6 +438,10 @@ export class Instance extends pulumi.CustomResource {
      */
     declare public /*out*/ readonly elasticsearchVip: pulumi.Output<string>;
     /**
+     * Whether to enable Cerebro. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
+     */
+    declare public readonly enableCerebro: pulumi.Output<boolean>;
+    /**
      * Cluster destroy protection status. Valid values are `OPEN` (enable protection) and `CLOSE` (disable protection). NOTE: when destroy protection is `OPEN`, `terraform destroy` will fail at the cloud API `DeleteInstance` call until this field is set to `CLOSE`.
      */
     declare public readonly enableDestroyProtection: pulumi.Output<string>;
@@ -266,6 +457,10 @@ export class Instance extends pulumi.CustomResource {
      * Es public network address.
      */
     declare public /*out*/ readonly esPublicUrl: pulumi.Output<string>;
+    /**
+     * Whether to force delete the instance. Default is `false`. Set it to `true` while deleting the instance.
+     */
+    declare public readonly forceDelete: pulumi.Output<boolean | undefined>;
     /**
      * Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
      */
@@ -319,6 +514,10 @@ export class Instance extends pulumi.CustomResource {
      */
     declare public readonly sceneType: pulumi.Output<number>;
     /**
+     * Sub-product code of the instance. Valid values: `spEsIo2` (open source), `spEsBasic` (basic), `spEsPlatinum` (platinum), `spEsEnterprise` (enterprise), `spEsCdcPlatinum` (CDC platinum), `spEsEnlogging` (logging enhanced), `spEsAisearch` (AI search enhanced), `spTsearchIo2` (tsearch), `spEsLogstash` (logstash). If omitted, the value is mapped from `licenseType` by the backend. NOTE: this field can only be set when creating the instance.
+     */
+    declare public readonly subProductCode: pulumi.Output<string>;
+    /**
      * The ID of a VPC subnetwork. When create multi-az es, this parameter must be the subnet in the primary availability zone.
      */
     declare public readonly subnetId: pulumi.Output<string | undefined>;
@@ -354,6 +553,9 @@ export class Instance extends pulumi.CustomResource {
             const state = argsOrState as InstanceState | undefined;
             resourceInputs["availabilityZone"] = state?.availabilityZone;
             resourceInputs["basicSecurityType"] = state?.basicSecurityType;
+            resourceInputs["cerebroPrivateAccess"] = state?.cerebroPrivateAccess;
+            resourceInputs["cerebroPrivateDomain"] = state?.cerebroPrivateDomain;
+            resourceInputs["cerebroPublicAccess"] = state?.cerebroPublicAccess;
             resourceInputs["chargePeriod"] = state?.chargePeriod;
             resourceInputs["chargeType"] = state?.chargeType;
             resourceInputs["cosBackup"] = state?.cosBackup;
@@ -362,10 +564,12 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["elasticsearchDomain"] = state?.elasticsearchDomain;
             resourceInputs["elasticsearchPort"] = state?.elasticsearchPort;
             resourceInputs["elasticsearchVip"] = state?.elasticsearchVip;
+            resourceInputs["enableCerebro"] = state?.enableCerebro;
             resourceInputs["enableDestroyProtection"] = state?.enableDestroyProtection;
             resourceInputs["esAcl"] = state?.esAcl;
             resourceInputs["esPublicAcl"] = state?.esPublicAcl;
             resourceInputs["esPublicUrl"] = state?.esPublicUrl;
+            resourceInputs["forceDelete"] = state?.forceDelete;
             resourceInputs["instanceName"] = state?.instanceName;
             resourceInputs["kibanaPrivateAccess"] = state?.kibanaPrivateAccess;
             resourceInputs["kibanaPrivateUrl"] = state?.kibanaPrivateUrl;
@@ -379,6 +583,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["publicAccess"] = state?.publicAccess;
             resourceInputs["renewFlag"] = state?.renewFlag;
             resourceInputs["sceneType"] = state?.sceneType;
+            resourceInputs["subProductCode"] = state?.subProductCode;
             resourceInputs["subnetId"] = state?.subnetId;
             resourceInputs["tags"] = state?.tags;
             resourceInputs["version"] = state?.version;
@@ -397,13 +602,18 @@ export class Instance extends pulumi.CustomResource {
             }
             resourceInputs["availabilityZone"] = args?.availabilityZone;
             resourceInputs["basicSecurityType"] = args?.basicSecurityType;
+            resourceInputs["cerebroPrivateAccess"] = args?.cerebroPrivateAccess;
+            resourceInputs["cerebroPrivateDomain"] = args?.cerebroPrivateDomain;
+            resourceInputs["cerebroPublicAccess"] = args?.cerebroPublicAccess;
             resourceInputs["chargePeriod"] = args?.chargePeriod;
             resourceInputs["chargeType"] = args?.chargeType;
             resourceInputs["cosBackup"] = args?.cosBackup;
             resourceInputs["deployMode"] = args?.deployMode;
+            resourceInputs["enableCerebro"] = args?.enableCerebro;
             resourceInputs["enableDestroyProtection"] = args?.enableDestroyProtection;
             resourceInputs["esAcl"] = args?.esAcl;
             resourceInputs["esPublicAcl"] = args?.esPublicAcl;
+            resourceInputs["forceDelete"] = args?.forceDelete;
             resourceInputs["instanceName"] = args?.instanceName;
             resourceInputs["kibanaPrivateAccess"] = args?.kibanaPrivateAccess;
             resourceInputs["kibanaPublicAccess"] = args?.kibanaPublicAccess;
@@ -415,6 +625,7 @@ export class Instance extends pulumi.CustomResource {
             resourceInputs["publicAccess"] = args?.publicAccess;
             resourceInputs["renewFlag"] = args?.renewFlag;
             resourceInputs["sceneType"] = args?.sceneType;
+            resourceInputs["subProductCode"] = args?.subProductCode;
             resourceInputs["subnetId"] = args?.subnetId;
             resourceInputs["tags"] = args?.tags;
             resourceInputs["version"] = args?.version;
@@ -448,6 +659,18 @@ export interface InstanceState {
      */
     basicSecurityType?: pulumi.Input<number | undefined>;
     /**
+     * Cerebro private network access status. Valid values are `OPEN` and `CLOSE`. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
+     */
+    cerebroPrivateAccess?: pulumi.Input<string | undefined>;
+    /**
+     * Cerebro private network custom domain. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
+     */
+    cerebroPrivateDomain?: pulumi.Input<string | undefined>;
+    /**
+     * Cerebro public network access status. Valid values are `OPEN` and `CLOSE`. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
+     */
+    cerebroPublicAccess?: pulumi.Input<string | undefined>;
+    /**
      * The tenancy of the prepaid instance, and uint is month. NOTE: it only works when chargeType is set to `PREPAID`.
      */
     chargePeriod?: pulumi.Input<number | undefined>;
@@ -480,6 +703,10 @@ export interface InstanceState {
      */
     elasticsearchVip?: pulumi.Input<string | undefined>;
     /**
+     * Whether to enable Cerebro. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
+     */
+    enableCerebro?: pulumi.Input<boolean | undefined>;
+    /**
      * Cluster destroy protection status. Valid values are `OPEN` (enable protection) and `CLOSE` (disable protection). NOTE: when destroy protection is `OPEN`, `terraform destroy` will fail at the cloud API `DeleteInstance` call until this field is set to `CLOSE`.
      */
     enableDestroyProtection?: pulumi.Input<string | undefined>;
@@ -495,6 +722,10 @@ export interface InstanceState {
      * Es public network address.
      */
     esPublicUrl?: pulumi.Input<string | undefined>;
+    /**
+     * Whether to force delete the instance. Default is `false`. Set it to `true` while deleting the instance.
+     */
+    forceDelete?: pulumi.Input<boolean | undefined>;
     /**
      * Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
      */
@@ -548,6 +779,10 @@ export interface InstanceState {
      */
     sceneType?: pulumi.Input<number | undefined>;
     /**
+     * Sub-product code of the instance. Valid values: `spEsIo2` (open source), `spEsBasic` (basic), `spEsPlatinum` (platinum), `spEsEnterprise` (enterprise), `spEsCdcPlatinum` (CDC platinum), `spEsEnlogging` (logging enhanced), `spEsAisearch` (AI search enhanced), `spTsearchIo2` (tsearch), `spEsLogstash` (logstash). If omitted, the value is mapped from `licenseType` by the backend. NOTE: this field can only be set when creating the instance.
+     */
+    subProductCode?: pulumi.Input<string | undefined>;
+    /**
      * The ID of a VPC subnetwork. When create multi-az es, this parameter must be the subnet in the primary availability zone.
      */
     subnetId?: pulumi.Input<string | undefined>;
@@ -582,6 +817,18 @@ export interface InstanceArgs {
      */
     basicSecurityType?: pulumi.Input<number | undefined>;
     /**
+     * Cerebro private network access status. Valid values are `OPEN` and `CLOSE`. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
+     */
+    cerebroPrivateAccess?: pulumi.Input<string | undefined>;
+    /**
+     * Cerebro private network custom domain. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
+     */
+    cerebroPrivateDomain?: pulumi.Input<string | undefined>;
+    /**
+     * Cerebro public network access status. Valid values are `OPEN` and `CLOSE`. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
+     */
+    cerebroPublicAccess?: pulumi.Input<string | undefined>;
+    /**
      * The tenancy of the prepaid instance, and uint is month. NOTE: it only works when chargeType is set to `PREPAID`.
      */
     chargePeriod?: pulumi.Input<number | undefined>;
@@ -598,6 +845,10 @@ export interface InstanceArgs {
      */
     deployMode?: pulumi.Input<number | undefined>;
     /**
+     * Whether to enable Cerebro. Note: Cerebro configuration cannot be read back from the API, so Terraform will not detect drift if changed outside of Terraform.
+     */
+    enableCerebro?: pulumi.Input<boolean | undefined>;
+    /**
      * Cluster destroy protection status. Valid values are `OPEN` (enable protection) and `CLOSE` (disable protection). NOTE: when destroy protection is `OPEN`, `terraform destroy` will fail at the cloud API `DeleteInstance` call until this field is set to `CLOSE`.
      */
     enableDestroyProtection?: pulumi.Input<string | undefined>;
@@ -609,6 +860,10 @@ export interface InstanceArgs {
      * Public network access control list.
      */
     esPublicAcl?: pulumi.Input<inputs.Elasticsearch.InstanceEsPublicAcl | undefined>;
+    /**
+     * Whether to force delete the instance. Default is `false`. Set it to `true` while deleting the instance.
+     */
+    forceDelete?: pulumi.Input<boolean | undefined>;
     /**
      * Name of the instance, which can contain 1 to 50 English letters, Chinese characters, digits, dashes(-), or underscores(_).
      */
@@ -653,6 +908,10 @@ export interface InstanceArgs {
      * Scenario based template type. 0: Not enabled; 1: Universal; 2: Log; 3: Search.
      */
     sceneType?: pulumi.Input<number | undefined>;
+    /**
+     * Sub-product code of the instance. Valid values: `spEsIo2` (open source), `spEsBasic` (basic), `spEsPlatinum` (platinum), `spEsEnterprise` (enterprise), `spEsCdcPlatinum` (CDC platinum), `spEsEnlogging` (logging enhanced), `spEsAisearch` (AI search enhanced), `spTsearchIo2` (tsearch), `spEsLogstash` (logstash). If omitted, the value is mapped from `licenseType` by the backend. NOTE: this field can only be set when creating the instance.
+     */
+    subProductCode?: pulumi.Input<string | undefined>;
     /**
      * The ID of a VPC subnetwork. When create multi-az es, this parameter must be the subnet in the primary availability zone.
      */

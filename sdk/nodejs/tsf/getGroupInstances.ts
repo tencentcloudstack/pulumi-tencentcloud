@@ -22,6 +22,12 @@ import * as utilities from "../utilities";
  *     orderType: 0,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeGroupInstances](https://www.tencentcloud.com/search/?wd=DescribeGroupInstances&type=document&lang=en)
  */
 export function getGroupInstances(args: GetGroupInstancesArgs, opts?: pulumi.InvokeOptions): Promise<GetGroupInstancesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -97,6 +103,12 @@ export interface GetGroupInstancesResult {
  *     orderType: 0,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeGroupInstances](https://www.tencentcloud.com/search/?wd=DescribeGroupInstances&type=document&lang=en)
  */
 export function getGroupInstancesOutput(args: GetGroupInstancesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetGroupInstancesResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

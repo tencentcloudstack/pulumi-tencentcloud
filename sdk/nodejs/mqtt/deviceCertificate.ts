@@ -44,6 +44,20 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [RegisterDeviceCertificate](https://www.tencentcloud.com/search/?wd=RegisterDeviceCertificate&type=document&lang=en)
+ * * Read: [DescribeDeviceCertificate](https://www.tencentcloud.com/document/api/1294/79802)
+ * * Update:
+ *   - [ActivateDeviceCertificate](https://www.tencentcloud.com/search/?wd=ActivateDeviceCertificate&type=document&lang=en)
+ *   - [DeactivateDeviceCertificate](https://www.tencentcloud.com/search/?wd=DeactivateDeviceCertificate&type=document&lang=en)
+ * * Delete:
+ *   - [DeactivateDeviceCertificate](https://www.tencentcloud.com/search/?wd=DeactivateDeviceCertificate&type=document&lang=en)
+ *   - [DeleteDeviceCertificate](https://www.tencentcloud.com/search/?wd=DeleteDeviceCertificate&type=document&lang=en)
+ *   - [DescribeDeviceCertificate](https://www.tencentcloud.com/document/api/1294/79802)
+ *
  * ## Import
  *
  * MQTT device certificate can be imported using the id, e.g.

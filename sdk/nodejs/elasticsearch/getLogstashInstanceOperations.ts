@@ -21,6 +21,12 @@ import * as utilities from "../utilities";
  *     endTime: "2023-10-31 10:12:45",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeLogstashInstanceOperations](https://www.tencentcloud.com/search/?wd=DescribeLogstashInstanceOperations&type=document&lang=en)
  */
 export function getLogstashInstanceOperations(args: GetLogstashInstanceOperationsArgs, opts?: pulumi.InvokeOptions): Promise<GetLogstashInstanceOperationsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -89,6 +95,12 @@ export interface GetLogstashInstanceOperationsResult {
  *     endTime: "2023-10-31 10:12:45",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeLogstashInstanceOperations](https://www.tencentcloud.com/search/?wd=DescribeLogstashInstanceOperations&type=document&lang=en)
  */
 export function getLogstashInstanceOperationsOutput(args: GetLogstashInstanceOperationsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetLogstashInstanceOperationsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

@@ -2537,6 +2537,8 @@ class BucketWebsite(dict):
             suggest = "error_document"
         elif key == "indexDocument":
             suggest = "index_document"
+        elif key == "originalHttpStatus":
+            suggest = "original_http_status"
         elif key == "redirectAllRequestsTo":
             suggest = "redirect_all_requests_to"
         elif key == "routingRules":
@@ -2554,28 +2556,44 @@ class BucketWebsite(dict):
         return super().get(key, default)
 
     def __init__(__self__, *,
+                 charity404: Optional[_builtins.str] = None,
                  endpoint: Optional[_builtins.str] = None,
                  error_document: Optional[_builtins.str] = None,
                  index_document: Optional[_builtins.str] = None,
+                 original_http_status: Optional[_builtins.str] = None,
                  redirect_all_requests_to: Optional[_builtins.str] = None,
                  routing_rules: Optional['outputs.BucketWebsiteRoutingRules'] = None):
         """
+        :param _builtins.str charity404: To configure whether to display the 404 public welfare page when the error code is 404, the optional values are `Enabled` or `Disabled`, with the default set to `Disabled`.
         :param _builtins.str endpoint: `Endpoint` of the static website.
         :param _builtins.str error_document: An absolute path to the document to return in case of a 4XX error.
         :param _builtins.str index_document: COS returns this index document when requests are made to the root domain or any of the subfolders.
+        :param _builtins.str original_http_status: The HTTP status code for configuring hit error documents, with optional values of `Enabled` or `Disabled`, defaulting to `Enabled`.
         :param _builtins.str redirect_all_requests_to: Redirects all request configurations. Valid values: http, https. Default is `http`.
         :param 'BucketWebsiteRoutingRulesArgs' routing_rules: Routing rule configuration. A RoutingRules container can contain up to 100 RoutingRule elements.
         """
+        if charity404 is not None:
+            pulumi.set(__self__, "charity404", charity404)
         if endpoint is not None:
             pulumi.set(__self__, "endpoint", endpoint)
         if error_document is not None:
             pulumi.set(__self__, "error_document", error_document)
         if index_document is not None:
             pulumi.set(__self__, "index_document", index_document)
+        if original_http_status is not None:
+            pulumi.set(__self__, "original_http_status", original_http_status)
         if redirect_all_requests_to is not None:
             pulumi.set(__self__, "redirect_all_requests_to", redirect_all_requests_to)
         if routing_rules is not None:
             pulumi.set(__self__, "routing_rules", routing_rules)
+
+    @_builtins.property
+    @pulumi.getter
+    def charity404(self) -> Optional[_builtins.str]:
+        """
+        To configure whether to display the 404 public welfare page when the error code is 404, the optional values are `Enabled` or `Disabled`, with the default set to `Disabled`.
+        """
+        return pulumi.get(self, "charity404")
 
     @_builtins.property
     @pulumi.getter
@@ -2600,6 +2618,14 @@ class BucketWebsite(dict):
         COS returns this index document when requests are made to the root domain or any of the subfolders.
         """
         return pulumi.get(self, "index_document")
+
+    @_builtins.property
+    @pulumi.getter(name="originalHttpStatus")
+    def original_http_status(self) -> Optional[_builtins.str]:
+        """
+        The HTTP status code for configuring hit error documents, with optional values of `Enabled` or `Disabled`, defaulting to `Enabled`.
+        """
+        return pulumi.get(self, "original_http_status")
 
     @_builtins.property
     @pulumi.getter(name="redirectAllRequestsTo")

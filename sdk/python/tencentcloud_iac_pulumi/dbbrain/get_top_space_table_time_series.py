@@ -150,6 +150,12 @@ def get_top_space_table_time_series(end_date: Optional[_builtins.str] = None,
         product="mysql")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTopSpaceTableTimeSeries](https://www.tencentcloud.com/document/api/1035/41188)
+
 
     :param _builtins.str end_date: The deadline, such as 2021-01-01, the earliest is the 29th day before the current day, and the default is the current day.
     :param _builtins.str instance_id: instance id.
@@ -203,6 +209,12 @@ def get_top_space_table_time_series_output(end_date: pulumi.Input[Optional[Optio
         end_date="%s",
         product="mysql")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTopSpaceTableTimeSeries](https://www.tencentcloud.com/document/api/1035/41188)
 
 
     :param _builtins.str end_date: The deadline, such as 2021-01-01, the earliest is the 29th day before the current day, and the default is the current day.

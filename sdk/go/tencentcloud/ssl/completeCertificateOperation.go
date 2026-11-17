@@ -40,6 +40,12 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CompleteCertificate](https://www.tencentcloud.com/search/?wd=CompleteCertificate&type=document&lang=en)
+//
 // ## Import
 //
 // ssl completeCertificate can be imported using the id, e.g.

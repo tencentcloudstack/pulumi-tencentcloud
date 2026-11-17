@@ -135,6 +135,15 @@ class PackageDomain(pulumi.CustomResource):
             domain_id=92435817)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyPackageDomain](https://www.tencentcloud.com/search/?wd=ModifyPackageDomain&type=document&lang=en)
+        * Read: [DescribeDomainVipList](https://www.tencentcloud.com/search/?wd=DescribeDomainVipList&type=document&lang=en)
+        * Update: [ModifyPackageDomain](https://www.tencentcloud.com/search/?wd=ModifyPackageDomain&type=document&lang=en)
+        * Delete: [ModifyPackageDomain](https://www.tencentcloud.com/search/?wd=ModifyPackageDomain&type=document&lang=en)
+
         ## Import
 
         dnspod package_domain can be imported using the id, e.g.
@@ -168,6 +177,15 @@ class PackageDomain(pulumi.CustomResource):
             resource_id="91d8006a",
             domain_id=92435817)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyPackageDomain](https://www.tencentcloud.com/search/?wd=ModifyPackageDomain&type=document&lang=en)
+        * Read: [DescribeDomainVipList](https://www.tencentcloud.com/search/?wd=DescribeDomainVipList&type=document&lang=en)
+        * Update: [ModifyPackageDomain](https://www.tencentcloud.com/search/?wd=ModifyPackageDomain&type=document&lang=en)
+        * Delete: [ModifyPackageDomain](https://www.tencentcloud.com/search/?wd=ModifyPackageDomain&type=document&lang=en)
 
         ## Import
 

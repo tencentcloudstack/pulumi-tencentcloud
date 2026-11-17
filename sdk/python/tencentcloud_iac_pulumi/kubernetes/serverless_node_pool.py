@@ -350,6 +350,19 @@ class ServerlessNodePool(pulumi.CustomResource):
             ])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateClusterVirtualNodePool](https://www.tencentcloud.com/document/api/457/53275)
+          - [DescribeClusterVirtualNodePools](https://www.tencentcloud.com/document/api/457/53271)
+        * Read: [DescribeClusterVirtualNodePools](https://www.tencentcloud.com/document/api/457/53271)
+        * Update: [ModifyClusterVirtualNodePool](https://www.tencentcloud.com/document/api/457/53269)
+        * Delete:
+          - [DeleteClusterVirtualNodePool](https://www.tencentcloud.com/document/api/457/53273)
+          - [DescribeClusterVirtualNodePools](https://www.tencentcloud.com/document/api/457/53271)
+
         ## Import
 
         serverless node pool can be imported using the clusterId#nodePoolId, e.g.
@@ -467,6 +480,19 @@ class ServerlessNodePool(pulumi.CustomResource):
                 },
             ])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateClusterVirtualNodePool](https://www.tencentcloud.com/document/api/457/53275)
+          - [DescribeClusterVirtualNodePools](https://www.tencentcloud.com/document/api/457/53271)
+        * Read: [DescribeClusterVirtualNodePools](https://www.tencentcloud.com/document/api/457/53271)
+        * Update: [ModifyClusterVirtualNodePool](https://www.tencentcloud.com/document/api/457/53269)
+        * Delete:
+          - [DeleteClusterVirtualNodePool](https://www.tencentcloud.com/document/api/457/53273)
+          - [DescribeClusterVirtualNodePools](https://www.tencentcloud.com/document/api/457/53271)
 
         ## Import
 

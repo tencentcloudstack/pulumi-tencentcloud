@@ -146,6 +146,12 @@ def get_machines(filters: Optional[Sequence[Union['GetMachinesFilterArgs', 'GetM
         }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeMachines](https://www.tencentcloud.com/document/api/296/30889)
+
 
     :param Sequence[Union['GetMachinesFilterArgs', 'GetMachinesFilterArgsDict']] filters: Filter criteria
            <li>Ips - String - required: no - query by IP</li>
@@ -218,6 +224,12 @@ def get_machines_output(filters: pulumi.Input[Optional[Optional[Sequence[Union['
             "exact_match": True,
         }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeMachines](https://www.tencentcloud.com/document/api/296/30889)
 
 
     :param Sequence[Union['GetMachinesFilterArgs', 'GetMachinesFilterArgsDict']] filters: Filter criteria

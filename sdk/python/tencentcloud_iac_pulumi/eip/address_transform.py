@@ -118,6 +118,14 @@ class AddressTransform(pulumi.CustomResource):
         example_address_transform = tencentcloud.eip.AddressTransform("example", instance_id=example.id)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeTaskResult](https://www.tencentcloud.com/document/api/215/34772)
+          - [TransformAddress](https://www.tencentcloud.com/document/api/215/16706)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -173,6 +181,14 @@ class AddressTransform(pulumi.CustomResource):
             })
         example_address_transform = tencentcloud.eip.AddressTransform("example", instance_id=example.id)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeTaskResult](https://www.tencentcloud.com/document/api/215/34772)
+          - [TransformAddress](https://www.tencentcloud.com/document/api/215/16706)
 
 
         :param str resource_name: The name of the resource.

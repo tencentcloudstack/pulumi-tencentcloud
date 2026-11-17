@@ -4393,11 +4393,11 @@ func (o DomainHttpsConfigPtrOutput) VerifyClient() pulumi.StringPtrOutput {
 type DomainHttpsConfigClientCertificateConfig struct {
 	// Client Certificate PEM format, requires Base64 encoding.
 	CertificateContent string `pulumi:"certificateContent"`
-	// Client certificate name.
+	// Server certificate name.
 	CertificateName *string `pulumi:"certificateName"`
-	// Deploy time of client certificate.
+	// Deploy time of server certificate.
 	DeployTime *string `pulumi:"deployTime"`
-	// Expire time of client certificate.
+	// Expire time of server certificate.
 	ExpireTime *string `pulumi:"expireTime"`
 }
 
@@ -4415,11 +4415,11 @@ type DomainHttpsConfigClientCertificateConfigInput interface {
 type DomainHttpsConfigClientCertificateConfigArgs struct {
 	// Client Certificate PEM format, requires Base64 encoding.
 	CertificateContent pulumi.StringInput `pulumi:"certificateContent"`
-	// Client certificate name.
+	// Server certificate name.
 	CertificateName pulumi.StringPtrInput `pulumi:"certificateName"`
-	// Deploy time of client certificate.
+	// Deploy time of server certificate.
 	DeployTime pulumi.StringPtrInput `pulumi:"deployTime"`
-	// Expire time of client certificate.
+	// Expire time of server certificate.
 	ExpireTime pulumi.StringPtrInput `pulumi:"expireTime"`
 }
 
@@ -4505,17 +4505,17 @@ func (o DomainHttpsConfigClientCertificateConfigOutput) CertificateContent() pul
 	return o.ApplyT(func(v DomainHttpsConfigClientCertificateConfig) string { return v.CertificateContent }).(pulumi.StringOutput)
 }
 
-// Client certificate name.
+// Server certificate name.
 func (o DomainHttpsConfigClientCertificateConfigOutput) CertificateName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DomainHttpsConfigClientCertificateConfig) *string { return v.CertificateName }).(pulumi.StringPtrOutput)
 }
 
-// Deploy time of client certificate.
+// Deploy time of server certificate.
 func (o DomainHttpsConfigClientCertificateConfigOutput) DeployTime() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DomainHttpsConfigClientCertificateConfig) *string { return v.DeployTime }).(pulumi.StringPtrOutput)
 }
 
-// Expire time of client certificate.
+// Expire time of server certificate.
 func (o DomainHttpsConfigClientCertificateConfigOutput) ExpireTime() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DomainHttpsConfigClientCertificateConfig) *string { return v.ExpireTime }).(pulumi.StringPtrOutput)
 }
@@ -4554,7 +4554,7 @@ func (o DomainHttpsConfigClientCertificateConfigPtrOutput) CertificateContent() 
 	}).(pulumi.StringPtrOutput)
 }
 
-// Client certificate name.
+// Server certificate name.
 func (o DomainHttpsConfigClientCertificateConfigPtrOutput) CertificateName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DomainHttpsConfigClientCertificateConfig) *string {
 		if v == nil {
@@ -4564,7 +4564,7 @@ func (o DomainHttpsConfigClientCertificateConfigPtrOutput) CertificateName() pul
 	}).(pulumi.StringPtrOutput)
 }
 
-// Deploy time of client certificate.
+// Deploy time of server certificate.
 func (o DomainHttpsConfigClientCertificateConfigPtrOutput) DeployTime() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DomainHttpsConfigClientCertificateConfig) *string {
 		if v == nil {
@@ -4574,7 +4574,7 @@ func (o DomainHttpsConfigClientCertificateConfigPtrOutput) DeployTime() pulumi.S
 	}).(pulumi.StringPtrOutput)
 }
 
-// Expire time of client certificate.
+// Expire time of server certificate.
 func (o DomainHttpsConfigClientCertificateConfigPtrOutput) ExpireTime() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DomainHttpsConfigClientCertificateConfig) *string {
 		if v == nil {
@@ -6188,7 +6188,9 @@ type DomainOrigin struct {
 	OriginPullProtocol *string `pulumi:"originPullProtocol"`
 	// Master origin server type. The following types are supported: `domain`: Domain name, `domainv6`: IPv6 domain name, `cos`: COS bucket address, `thirdParty`: Third-party object storage origin, `igtm`: IGTM origin, `ip`: IP address, `ipv6`: One IPv6 address, `ipIpv6`: Multiple IPv4 addresses and one IPv6 address, `ipDomain`: IP addresses and domain names (only available to beta users), `ipDomainv6`: Multiple IPv4 addresses and one IPv6 domain name, `ipv6Domain`: Multiple IPv6 addresses and one domain name, `ipv6Domainv6`: Multiple IPv6 addresses and one IPv6 domain name, `domainDomainv6`: Multiple IPv4 domain names and one IPv6 domain name, `ipIpv6Domain`: Multiple IPv4 and IPv6 addresses and one domain name, `ipIpv6Domainv6`: Multiple IPv4 and IPv6 addresses and one IPv6 domain name, `ipDomainDomainv6`: Multiple IPv4 addresses and IPv4 domain names and one IPv6 domain name, `ipv6DomainDomainv6`: Multiple IPv4 domain names and IPv6 addresses and one IPv6 domain name, `ipIpv6DomainDomainv6`: Multiple IPv4 and IPv6 addresses and IPv4 domain names and one IPv6 domain name.
 	OriginType string `pulumi:"originType"`
-	// Host header used when accessing the master origin server. If left empty, the acceleration domain name will be used by default.
+	// Origin path rewrite rules. Each element configures a path-based origin routing rule.
+	PathRules []DomainOriginPathRule `pulumi:"pathRules"`
+	// Host header used when accessing the origin server on path match. If left empty, the default ServerName is used.
 	ServerName *string `pulumi:"serverName"`
 }
 
@@ -6220,7 +6222,9 @@ type DomainOriginArgs struct {
 	OriginPullProtocol pulumi.StringPtrInput `pulumi:"originPullProtocol"`
 	// Master origin server type. The following types are supported: `domain`: Domain name, `domainv6`: IPv6 domain name, `cos`: COS bucket address, `thirdParty`: Third-party object storage origin, `igtm`: IGTM origin, `ip`: IP address, `ipv6`: One IPv6 address, `ipIpv6`: Multiple IPv4 addresses and one IPv6 address, `ipDomain`: IP addresses and domain names (only available to beta users), `ipDomainv6`: Multiple IPv4 addresses and one IPv6 domain name, `ipv6Domain`: Multiple IPv6 addresses and one domain name, `ipv6Domainv6`: Multiple IPv6 addresses and one IPv6 domain name, `domainDomainv6`: Multiple IPv4 domain names and one IPv6 domain name, `ipIpv6Domain`: Multiple IPv4 and IPv6 addresses and one domain name, `ipIpv6Domainv6`: Multiple IPv4 and IPv6 addresses and one IPv6 domain name, `ipDomainDomainv6`: Multiple IPv4 addresses and IPv4 domain names and one IPv6 domain name, `ipv6DomainDomainv6`: Multiple IPv4 domain names and IPv6 addresses and one IPv6 domain name, `ipIpv6DomainDomainv6`: Multiple IPv4 and IPv6 addresses and IPv4 domain names and one IPv6 domain name.
 	OriginType pulumi.StringInput `pulumi:"originType"`
-	// Host header used when accessing the master origin server. If left empty, the acceleration domain name will be used by default.
+	// Origin path rewrite rules. Each element configures a path-based origin routing rule.
+	PathRules DomainOriginPathRuleArrayInput `pulumi:"pathRules"`
+	// Host header used when accessing the origin server on path match. If left empty, the default ServerName is used.
 	ServerName pulumi.StringPtrInput `pulumi:"serverName"`
 }
 
@@ -6341,7 +6345,12 @@ func (o DomainOriginOutput) OriginType() pulumi.StringOutput {
 	return o.ApplyT(func(v DomainOrigin) string { return v.OriginType }).(pulumi.StringOutput)
 }
 
-// Host header used when accessing the master origin server. If left empty, the acceleration domain name will be used by default.
+// Origin path rewrite rules. Each element configures a path-based origin routing rule.
+func (o DomainOriginOutput) PathRules() DomainOriginPathRuleArrayOutput {
+	return o.ApplyT(func(v DomainOrigin) []DomainOriginPathRule { return v.PathRules }).(DomainOriginPathRuleArrayOutput)
+}
+
+// Host header used when accessing the origin server on path match. If left empty, the default ServerName is used.
 func (o DomainOriginOutput) ServerName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v DomainOrigin) *string { return v.ServerName }).(pulumi.StringPtrOutput)
 }
@@ -6450,7 +6459,17 @@ func (o DomainOriginPtrOutput) OriginType() pulumi.StringPtrOutput {
 	}).(pulumi.StringPtrOutput)
 }
 
-// Host header used when accessing the master origin server. If left empty, the acceleration domain name will be used by default.
+// Origin path rewrite rules. Each element configures a path-based origin routing rule.
+func (o DomainOriginPtrOutput) PathRules() DomainOriginPathRuleArrayOutput {
+	return o.ApplyT(func(v *DomainOrigin) []DomainOriginPathRule {
+		if v == nil {
+			return nil
+		}
+		return v.PathRules
+	}).(DomainOriginPathRuleArrayOutput)
+}
+
+// Host header used when accessing the origin server on path match. If left empty, the default ServerName is used.
 func (o DomainOriginPtrOutput) ServerName() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v *DomainOrigin) *string {
 		if v == nil {
@@ -6595,6 +6614,130 @@ func (o DomainOriginCombinePtrOutput) Switch() pulumi.StringPtrOutput {
 		}
 		return &v.Switch
 	}).(pulumi.StringPtrOutput)
+}
+
+type DomainOriginPathRule struct {
+	// URI path for origin on path match. Must start with `/` and does not include the parameter part. Maximum length is 1024 characters. `$1`-`$5` can be used to capture wildcard `*` in the matched path, up to 10 capture values.
+	ForwardUri *string `pulumi:"forwardUri"`
+	// Whether to use full path match.
+	FullMatch *bool `pulumi:"fullMatch"`
+	// Matched URL path. Only URL path is supported, not parameters. Default is full match. When wildcard `*` matching is enabled, up to 5 wildcards are supported, with a maximum length of 1024 characters.
+	Path *string `pulumi:"path"`
+	// Host header used when accessing the origin server on path match. If left empty, the default ServerName is used.
+	ServerName *string `pulumi:"serverName"`
+}
+
+// DomainOriginPathRuleInput is an input type that accepts DomainOriginPathRuleArgs and DomainOriginPathRuleOutput values.
+// You can construct a concrete instance of `DomainOriginPathRuleInput` via:
+//
+//	DomainOriginPathRuleArgs{...}
+type DomainOriginPathRuleInput interface {
+	pulumi.Input
+
+	ToDomainOriginPathRuleOutput() DomainOriginPathRuleOutput
+	ToDomainOriginPathRuleOutputWithContext(context.Context) DomainOriginPathRuleOutput
+}
+
+type DomainOriginPathRuleArgs struct {
+	// URI path for origin on path match. Must start with `/` and does not include the parameter part. Maximum length is 1024 characters. `$1`-`$5` can be used to capture wildcard `*` in the matched path, up to 10 capture values.
+	ForwardUri pulumi.StringPtrInput `pulumi:"forwardUri"`
+	// Whether to use full path match.
+	FullMatch pulumi.BoolPtrInput `pulumi:"fullMatch"`
+	// Matched URL path. Only URL path is supported, not parameters. Default is full match. When wildcard `*` matching is enabled, up to 5 wildcards are supported, with a maximum length of 1024 characters.
+	Path pulumi.StringPtrInput `pulumi:"path"`
+	// Host header used when accessing the origin server on path match. If left empty, the default ServerName is used.
+	ServerName pulumi.StringPtrInput `pulumi:"serverName"`
+}
+
+func (DomainOriginPathRuleArgs) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainOriginPathRule)(nil)).Elem()
+}
+
+func (i DomainOriginPathRuleArgs) ToDomainOriginPathRuleOutput() DomainOriginPathRuleOutput {
+	return i.ToDomainOriginPathRuleOutputWithContext(context.Background())
+}
+
+func (i DomainOriginPathRuleArgs) ToDomainOriginPathRuleOutputWithContext(ctx context.Context) DomainOriginPathRuleOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainOriginPathRuleOutput)
+}
+
+// DomainOriginPathRuleArrayInput is an input type that accepts DomainOriginPathRuleArray and DomainOriginPathRuleArrayOutput values.
+// You can construct a concrete instance of `DomainOriginPathRuleArrayInput` via:
+//
+//	DomainOriginPathRuleArray{ DomainOriginPathRuleArgs{...} }
+type DomainOriginPathRuleArrayInput interface {
+	pulumi.Input
+
+	ToDomainOriginPathRuleArrayOutput() DomainOriginPathRuleArrayOutput
+	ToDomainOriginPathRuleArrayOutputWithContext(context.Context) DomainOriginPathRuleArrayOutput
+}
+
+type DomainOriginPathRuleArray []DomainOriginPathRuleInput
+
+func (DomainOriginPathRuleArray) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DomainOriginPathRule)(nil)).Elem()
+}
+
+func (i DomainOriginPathRuleArray) ToDomainOriginPathRuleArrayOutput() DomainOriginPathRuleArrayOutput {
+	return i.ToDomainOriginPathRuleArrayOutputWithContext(context.Background())
+}
+
+func (i DomainOriginPathRuleArray) ToDomainOriginPathRuleArrayOutputWithContext(ctx context.Context) DomainOriginPathRuleArrayOutput {
+	return pulumi.ToOutputWithContext(ctx, i).(DomainOriginPathRuleArrayOutput)
+}
+
+type DomainOriginPathRuleOutput struct{ *pulumi.OutputState }
+
+func (DomainOriginPathRuleOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*DomainOriginPathRule)(nil)).Elem()
+}
+
+func (o DomainOriginPathRuleOutput) ToDomainOriginPathRuleOutput() DomainOriginPathRuleOutput {
+	return o
+}
+
+func (o DomainOriginPathRuleOutput) ToDomainOriginPathRuleOutputWithContext(ctx context.Context) DomainOriginPathRuleOutput {
+	return o
+}
+
+// URI path for origin on path match. Must start with `/` and does not include the parameter part. Maximum length is 1024 characters. `$1`-`$5` can be used to capture wildcard `*` in the matched path, up to 10 capture values.
+func (o DomainOriginPathRuleOutput) ForwardUri() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainOriginPathRule) *string { return v.ForwardUri }).(pulumi.StringPtrOutput)
+}
+
+// Whether to use full path match.
+func (o DomainOriginPathRuleOutput) FullMatch() pulumi.BoolPtrOutput {
+	return o.ApplyT(func(v DomainOriginPathRule) *bool { return v.FullMatch }).(pulumi.BoolPtrOutput)
+}
+
+// Matched URL path. Only URL path is supported, not parameters. Default is full match. When wildcard `*` matching is enabled, up to 5 wildcards are supported, with a maximum length of 1024 characters.
+func (o DomainOriginPathRuleOutput) Path() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainOriginPathRule) *string { return v.Path }).(pulumi.StringPtrOutput)
+}
+
+// Host header used when accessing the origin server on path match. If left empty, the default ServerName is used.
+func (o DomainOriginPathRuleOutput) ServerName() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v DomainOriginPathRule) *string { return v.ServerName }).(pulumi.StringPtrOutput)
+}
+
+type DomainOriginPathRuleArrayOutput struct{ *pulumi.OutputState }
+
+func (DomainOriginPathRuleArrayOutput) ElementType() reflect.Type {
+	return reflect.TypeOf((*[]DomainOriginPathRule)(nil)).Elem()
+}
+
+func (o DomainOriginPathRuleArrayOutput) ToDomainOriginPathRuleArrayOutput() DomainOriginPathRuleArrayOutput {
+	return o
+}
+
+func (o DomainOriginPathRuleArrayOutput) ToDomainOriginPathRuleArrayOutputWithContext(ctx context.Context) DomainOriginPathRuleArrayOutput {
+	return o
+}
+
+func (o DomainOriginPathRuleArrayOutput) Index(i pulumi.IntInput) DomainOriginPathRuleOutput {
+	return pulumi.All(o, i).ApplyT(func(vs []interface{}) DomainOriginPathRule {
+		return vs[0].([]DomainOriginPathRule)[vs[1].(int)]
+	}).(DomainOriginPathRuleOutput)
 }
 
 type DomainOriginPullOptimization struct {
@@ -11090,6 +11233,8 @@ func init() {
 	pulumi.RegisterInputType(reflect.TypeOf((*DomainOriginPtrInput)(nil)).Elem(), DomainOriginArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DomainOriginCombineInput)(nil)).Elem(), DomainOriginCombineArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DomainOriginCombinePtrInput)(nil)).Elem(), DomainOriginCombineArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainOriginPathRuleInput)(nil)).Elem(), DomainOriginPathRuleArgs{})
+	pulumi.RegisterInputType(reflect.TypeOf((*DomainOriginPathRuleArrayInput)(nil)).Elem(), DomainOriginPathRuleArray{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DomainOriginPullOptimizationInput)(nil)).Elem(), DomainOriginPullOptimizationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DomainOriginPullOptimizationPtrInput)(nil)).Elem(), DomainOriginPullOptimizationArgs{})
 	pulumi.RegisterInputType(reflect.TypeOf((*DomainOriginPullTimeoutInput)(nil)).Elem(), DomainOriginPullTimeoutArgs{})
@@ -11219,6 +11364,8 @@ func init() {
 	pulumi.RegisterOutputType(DomainOriginPtrOutput{})
 	pulumi.RegisterOutputType(DomainOriginCombineOutput{})
 	pulumi.RegisterOutputType(DomainOriginCombinePtrOutput{})
+	pulumi.RegisterOutputType(DomainOriginPathRuleOutput{})
+	pulumi.RegisterOutputType(DomainOriginPathRuleArrayOutput{})
 	pulumi.RegisterOutputType(DomainOriginPullOptimizationOutput{})
 	pulumi.RegisterOutputType(DomainOriginPullOptimizationPtrOutput{})
 	pulumi.RegisterOutputType(DomainOriginPullTimeoutOutput{})

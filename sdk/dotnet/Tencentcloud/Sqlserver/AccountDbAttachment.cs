@@ -106,6 +106,29 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeAccounts](https://www.tencentcloud.com/document/api/238/32116)
+    ///   - [DescribeDBs](https://www.tencentcloud.com/document/api/238/32114)
+    ///   - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+    ///   - [ModifyAccountPrivilege](https://www.tencentcloud.com/document/api/238/32105)
+    /// * Read:
+    ///   - [DescribeAccounts](https://www.tencentcloud.com/document/api/238/32116)
+    ///   - [DescribeDBs](https://www.tencentcloud.com/document/api/238/32114)
+    /// * Update:
+    ///   - [DescribeAccounts](https://www.tencentcloud.com/document/api/238/32116)
+    ///   - [DescribeDBs](https://www.tencentcloud.com/document/api/238/32114)
+    ///   - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+    ///   - [ModifyAccountPrivilege](https://www.tencentcloud.com/document/api/238/32105)
+    /// * Delete:
+    ///   - [DescribeAccounts](https://www.tencentcloud.com/document/api/238/32116)
+    ///   - [DescribeDBs](https://www.tencentcloud.com/document/api/238/32114)
+    ///   - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+    ///   - [ModifyAccountPrivilege](https://www.tencentcloud.com/document/api/238/32105)
+    /// 
     /// ## Import
     /// 
     /// SQL Server account DB attachment can be imported using the id, e.g.

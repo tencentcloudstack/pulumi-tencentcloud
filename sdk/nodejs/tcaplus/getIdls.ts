@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     clusterId: "19162256624",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeIdlFileInfos](https://www.tencentcloud.com/document/api/1016/35037)
  */
 export function getIdls(args: GetIdlsArgs, opts?: pulumi.InvokeOptions): Promise<GetIdlsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -70,6 +76,12 @@ export interface GetIdlsResult {
  *     clusterId: "19162256624",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeIdlFileInfos](https://www.tencentcloud.com/document/api/1016/35037)
  */
 export function getIdlsOutput(args: GetIdlsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetIdlsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

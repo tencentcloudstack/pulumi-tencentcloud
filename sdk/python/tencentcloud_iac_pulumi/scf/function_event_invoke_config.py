@@ -160,6 +160,14 @@ class FunctionEventInvokeConfig(pulumi.CustomResource):
             })
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [UpdateFunctionEventInvokeConfig](https://www.tencentcloud.com/document/api/583/39920)
+        * Read: [GetFunctionEventInvokeConfig](https://www.tencentcloud.com/document/api/583/39921)
+        * Update: [UpdateFunctionEventInvokeConfig](https://www.tencentcloud.com/document/api/583/39920)
+
         ## Import
 
         scf function_event_invoke_config can be imported using the id, e.g.
@@ -200,6 +208,14 @@ class FunctionEventInvokeConfig(pulumi.CustomResource):
                 "msg_ttl": 24,
             })
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [UpdateFunctionEventInvokeConfig](https://www.tencentcloud.com/document/api/583/39920)
+        * Read: [GetFunctionEventInvokeConfig](https://www.tencentcloud.com/document/api/583/39921)
+        * Update: [UpdateFunctionEventInvokeConfig](https://www.tencentcloud.com/document/api/583/39920)
 
         ## Import
 

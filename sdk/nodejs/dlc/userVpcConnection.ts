@@ -35,6 +35,14 @@ import * as utilities from "../utilities";
  *     userVpcEndpointVip: "10.0.1.10",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateUserVpcConnection](https://www.tencentcloud.com/search/?wd=CreateUserVpcConnection&type=document&lang=en)
+ * * Read: [DescribeUserVpcConnection](https://www.tencentcloud.com/search/?wd=DescribeUserVpcConnection&type=document&lang=en)
+ * * Delete: [DeleteUserVpcConnection](https://www.tencentcloud.com/search/?wd=DeleteUserVpcConnection&type=document&lang=en)
  */
 export class UserVpcConnection extends pulumi.CustomResource {
     /**

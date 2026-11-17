@@ -131,6 +131,12 @@ def get_rocketmq_instances(filters: Optional[Sequence[Union['GetRocketmqInstance
         }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstanceList](https://www.tencentcloud.com/document/api/1113/74662)
+
 
     :param Sequence[Union['GetRocketmqInstancesFilterArgs', 'GetRocketmqInstancesFilterArgsDict']] filters: Filter query criteria list.
     :param _builtins.str result_output_file: Used to save results.
@@ -188,6 +194,12 @@ def get_rocketmq_instances_output(filters: pulumi.Input[Optional[Optional[Sequen
             "tag_values": ["Terraform"],
         }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeInstanceList](https://www.tencentcloud.com/document/api/1113/74662)
 
 
     :param Sequence[Union['GetRocketmqInstancesFilterArgs', 'GetRocketmqInstancesFilterArgsDict']] filters: Filter query criteria list.

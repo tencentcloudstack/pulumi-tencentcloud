@@ -20,10 +20,40 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls.Inputs
         public Input<string> Alias { get; set; } = null!;
 
         /// <summary>
+        /// External ID value, used for cross-account role assumption. Find this in the target account role trust policy.
+        /// </summary>
+        [Input("externalId")]
+        public Input<string>? ExternalId { get; set; }
+
+        /// <summary>
+        /// Whether the destination topic is in another TencentCloud account. `False`: same account (default); `True`: cross-account.
+        /// </summary>
+        [Input("isCrossAccount")]
+        public Input<bool>? IsCrossAccount { get; set; }
+
+        /// <summary>
+        /// Name of the logset that contains the destination topic. Used in cross-account scenario.
+        /// </summary>
+        [Input("logsetName")]
+        public Input<string>? LogsetName { get; set; }
+
+        /// <summary>
+        /// In the cross-account scenario, the Role ARN value. The target account creates a role for the delivering account. Find this in the target account role list.
+        /// </summary>
+        [Input("roleArn")]
+        public Input<string>? RoleArn { get; set; }
+
+        /// <summary>
         /// Dst topic ID.
         /// </summary>
         [Input("topicId", required: true)]
         public Input<string> TopicId { get; set; } = null!;
+
+        /// <summary>
+        /// Name of the destination topic. Used in cross-account scenario.
+        /// </summary>
+        [Input("topicName")]
+        public Input<string>? TopicName { get; set; }
 
         public DataTransformDstResourceArgs()
         {

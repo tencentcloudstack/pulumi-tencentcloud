@@ -187,6 +187,16 @@ class RecordRuleAttachment(pulumi.CustomResource):
             stream_name="ppp")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateLiveRecordRule](https://www.tencentcloud.com/document/api/267/30846)
+        * Read: [DescribeLiveRecordRules](https://www.tencentcloud.com/document/api/267/30841)
+        * Delete:
+          - [DeleteLiveRecordRule](https://www.tencentcloud.com/document/api/267/30843)
+          - [DescribeLiveRecordRules](https://www.tencentcloud.com/document/api/267/30841)
+
         ## Import
 
         css record_rule can be imported using the id, e.g.
@@ -224,6 +234,16 @@ class RecordRuleAttachment(pulumi.CustomResource):
             app_name="qqq",
             stream_name="ppp")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateLiveRecordRule](https://www.tencentcloud.com/document/api/267/30846)
+        * Read: [DescribeLiveRecordRules](https://www.tencentcloud.com/document/api/267/30841)
+        * Delete:
+          - [DeleteLiveRecordRule](https://www.tencentcloud.com/document/api/267/30843)
+          - [DescribeLiveRecordRules](https://www.tencentcloud.com/document/api/267/30841)
 
         ## Import
 

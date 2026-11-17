@@ -33,6 +33,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeInstanceAttributes](https://www.tencentcloud.com/document/api/597/35358)
+        ///   - [DescribeUser](https://www.tencentcloud.com/document/api/597/35363)
         /// </summary>
         public static Task<GetUsersResult> InvokeAsync(GetUsersArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetUsersResult>("tencentcloud:Ckafka/getUsers:getUsers", args ?? new GetUsersArgs(), options.WithDefaults());
@@ -58,6 +66,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeInstanceAttributes](https://www.tencentcloud.com/document/api/597/35358)
+        ///   - [DescribeUser](https://www.tencentcloud.com/document/api/597/35363)
         /// </summary>
         public static Output<GetUsersResult> Invoke(GetUsersInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetUsersResult>("tencentcloud:Ckafka/getUsers:getUsers", args ?? new GetUsersInvokeArgs(), options.WithDefaults());
@@ -83,6 +99,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ckafka
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read:
+        ///   - [DescribeInstanceAttributes](https://www.tencentcloud.com/document/api/597/35358)
+        ///   - [DescribeUser](https://www.tencentcloud.com/document/api/597/35363)
         /// </summary>
         public static Output<GetUsersResult> Invoke(GetUsersInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetUsersResult>("tencentcloud:Ckafka/getUsers:getUsers", args ?? new GetUsersInvokeArgs(), options.WithDefaults());

@@ -41,6 +41,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDataStaticResource](https://www.tencentcloud.com/document/api/1131/45318)
 func GetStaticResource(ctx *pulumi.Context, args *GetStaticResourceArgs, opts ...pulumi.InvokeOption) (*GetStaticResourceResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetStaticResourceResult

@@ -166,6 +166,14 @@ def get_instances(cidr_block: Optional[_builtins.str] = None,
     name_instances = tencentcloud.vpc.get_instances_output(name=foo.name)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeSubnets](https://www.tencentcloud.com/document/api/215/15784)
+      - [DescribeVpcs](https://www.tencentcloud.com/document/api/215/15778)
+
 
     :param _builtins.str cidr_block: Filter VPC with this CIDR.
     :param _builtins.bool is_default: Filter default or no default VPC.
@@ -220,6 +228,14 @@ def get_instances_output(cidr_block: pulumi.Input[Optional[Optional[_builtins.st
     id_instances = tencentcloud.vpc.get_instances_output(vpc_id=foo.id)
     name_instances = tencentcloud.vpc.get_instances_output(name=foo.name)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeSubnets](https://www.tencentcloud.com/document/api/215/15784)
+      - [DescribeVpcs](https://www.tencentcloud.com/document/api/215/15778)
 
 
     :param _builtins.str cidr_block: Filter VPC with this CIDR.

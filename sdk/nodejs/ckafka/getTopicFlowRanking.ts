@@ -22,6 +22,12 @@ import * as utilities from "../utilities";
  *     endDate: "2021-05-29T23:59:59+08:00",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeTopicFlowRanking](https://www.tencentcloud.com/search/?wd=DescribeTopicFlowRanking&type=document&lang=en)
  */
 export function getTopicFlowRanking(args: GetTopicFlowRankingArgs, opts?: pulumi.InvokeOptions): Promise<GetTopicFlowRankingResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -94,6 +100,12 @@ export interface GetTopicFlowRankingResult {
  *     endDate: "2021-05-29T23:59:59+08:00",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeTopicFlowRanking](https://www.tencentcloud.com/search/?wd=DescribeTopicFlowRanking&type=document&lang=en)
  */
 export function getTopicFlowRankingOutput(args: GetTopicFlowRankingOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetTopicFlowRankingResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

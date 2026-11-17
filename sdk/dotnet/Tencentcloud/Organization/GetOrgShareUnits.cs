@@ -33,6 +33,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeShareUnits](https://www.tencentcloud.com/document/api/1031/68228)
         /// </summary>
         public static Task<GetOrgShareUnitsResult> InvokeAsync(GetOrgShareUnitsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetOrgShareUnitsResult>("tencentcloud:Organization/getOrgShareUnits:getOrgShareUnits", args ?? new GetOrgShareUnitsArgs(), options.WithDefaults());
@@ -58,6 +64,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeShareUnits](https://www.tencentcloud.com/document/api/1031/68228)
         /// </summary>
         public static Output<GetOrgShareUnitsResult> Invoke(GetOrgShareUnitsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetOrgShareUnitsResult>("tencentcloud:Organization/getOrgShareUnits:getOrgShareUnits", args ?? new GetOrgShareUnitsInvokeArgs(), options.WithDefaults());
@@ -83,6 +95,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Organization
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeShareUnits](https://www.tencentcloud.com/document/api/1031/68228)
         /// </summary>
         public static Output<GetOrgShareUnitsResult> Invoke(GetOrgShareUnitsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetOrgShareUnitsResult>("tencentcloud:Organization/getOrgShareUnits:getOrgShareUnits", args ?? new GetOrgShareUnitsInvokeArgs(), options.WithDefaults());

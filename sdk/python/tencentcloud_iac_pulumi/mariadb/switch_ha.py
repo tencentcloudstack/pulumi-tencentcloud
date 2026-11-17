@@ -119,6 +119,14 @@ class SwitchHa(pulumi.CustomResource):
             zone="ap-guangzhou-2")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeFlow](https://www.tencentcloud.com/document/api/237/16177)
+          - [SwitchDBInstanceHA](https://www.tencentcloud.com/document/api/237/45097)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -144,6 +152,14 @@ class SwitchHa(pulumi.CustomResource):
             instance_id="tdsql-9vqvls95",
             zone="ap-guangzhou-2")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeFlow](https://www.tencentcloud.com/document/api/237/16177)
+          - [SwitchDBInstanceHA](https://www.tencentcloud.com/document/api/237/45097)
 
 
         :param str resource_name: The name of the resource.

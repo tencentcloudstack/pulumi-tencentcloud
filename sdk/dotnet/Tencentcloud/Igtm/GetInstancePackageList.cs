@@ -60,6 +60,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Igtm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstancePackageList](https://www.tencentcloud.com/search/?wd=DescribeInstancePackageList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetInstancePackageListResult> InvokeAsync(GetInstancePackageListArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetInstancePackageListResult>("tencentcloud:Igtm/getInstancePackageList:getInstancePackageList", args ?? new GetInstancePackageListArgs(), options.WithDefaults());
@@ -112,6 +118,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Igtm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstancePackageList](https://www.tencentcloud.com/search/?wd=DescribeInstancePackageList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetInstancePackageListResult> Invoke(GetInstancePackageListInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstancePackageListResult>("tencentcloud:Igtm/getInstancePackageList:getInstancePackageList", args ?? new GetInstancePackageListInvokeArgs(), options.WithDefaults());
@@ -164,6 +176,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Igtm
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeInstancePackageList](https://www.tencentcloud.com/search/?wd=DescribeInstancePackageList&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetInstancePackageListResult> Invoke(GetInstancePackageListInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetInstancePackageListResult>("tencentcloud:Igtm/getInstancePackageList:getInstancePackageList", args ?? new GetInstancePackageListInvokeArgs(), options.WithDefaults());

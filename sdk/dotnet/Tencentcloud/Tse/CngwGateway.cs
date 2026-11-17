@@ -69,6 +69,27 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tse
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateCloudNativeAPIGateway](https://www.tencentcloud.com/document/api/1290/79296)
+    ///   - [DescribeCloudNativeAPIGateway](https://www.tencentcloud.com/document/api/1290/79269)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    /// * Read:
+    ///   - [DescribeCloudNativeAPIGateway](https://www.tencentcloud.com/document/api/1290/79269)
+    ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+    /// * Update:
+    ///   - [DescribeCloudNativeAPIGateway](https://www.tencentcloud.com/document/api/1290/79269)
+    ///   - [DescribeNativeGatewayServerGroups](https://www.tencentcloud.com/document/api/1290/79253)
+    ///   - [ModifyCloudNativeAPIGateway](https://www.tencentcloud.com/document/api/1290/79244)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    ///   - [UpdateCloudNativeAPIGatewaySpec](https://www.tencentcloud.com/document/api/1290/79228)
+    /// * Delete:
+    ///   - [DeleteCloudNativeAPIGateway](https://www.tencentcloud.com/document/api/1290/79283)
+    ///   - [DescribeCloudNativeAPIGateway](https://www.tencentcloud.com/document/api/1290/79269)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Tse/cngwGateway:CngwGateway")]
     public partial class CngwGateway : global::Pulumi.CustomResource

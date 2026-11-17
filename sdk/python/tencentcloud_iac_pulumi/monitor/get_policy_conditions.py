@@ -100,6 +100,12 @@ def get_policy_conditions(name: Optional[_builtins.str] = None,
         result_output_file="./tencentcloud_monitor_policy_conditions.txt")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribePolicyConditionList](https://www.tencentcloud.com/document/api/248/35979)
+
 
     :param _builtins.str name: Name of the policy name, support partial matching, eg:`Cloud Virtual Machine`,`Virtual`,`Cloud Load Banlancer-Private CLB Listener`.
     :param _builtins.str result_output_file: Used to store results.
@@ -130,6 +136,12 @@ def get_policy_conditions_output(name: pulumi.Input[Optional[Optional[_builtins.
     monitor_policy_conditions = tencentcloud.monitor.get_policy_conditions(name="Cloud Virtual Machine",
         result_output_file="./tencentcloud_monitor_policy_conditions.txt")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribePolicyConditionList](https://www.tencentcloud.com/document/api/248/35979)
 
 
     :param _builtins.str name: Name of the policy name, support partial matching, eg:`Cloud Virtual Machine`,`Virtual`,`Cloud Load Banlancer-Private CLB Listener`.

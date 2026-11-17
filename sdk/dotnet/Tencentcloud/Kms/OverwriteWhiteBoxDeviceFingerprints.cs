@@ -30,6 +30,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kms
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [OverwriteWhiteBoxDeviceFingerprints](https://www.tencentcloud.com/search/?wd=OverwriteWhiteBoxDeviceFingerprints&amp;type=document&amp;lang=en)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Kms/overwriteWhiteBoxDeviceFingerprints:OverwriteWhiteBoxDeviceFingerprints")]
     public partial class OverwriteWhiteBoxDeviceFingerprints : global::Pulumi.CustomResource

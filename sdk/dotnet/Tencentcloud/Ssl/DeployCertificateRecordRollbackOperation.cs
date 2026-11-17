@@ -31,6 +31,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ssl
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [DeployCertificateRecordRollback](https://www.tencentcloud.com/search/?wd=DeployCertificateRecordRollback&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// ssl DeployCertificateRecordRollback can be imported using the id, e.g.

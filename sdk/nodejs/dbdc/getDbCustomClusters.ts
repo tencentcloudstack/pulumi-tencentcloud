@@ -67,6 +67,12 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBCustomClusters](https://www.tencentcloud.com/search/?wd=DescribeDBCustomClusters&type=document&lang=en)
  */
 export function getDbCustomClusters(args?: GetDbCustomClustersArgs, opts?: pulumi.InvokeOptions): Promise<GetDbCustomClustersResult> {
     args = args || {};
@@ -182,6 +188,12 @@ export interface GetDbCustomClustersResult {
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBCustomClusters](https://www.tencentcloud.com/search/?wd=DescribeDBCustomClusters&type=document&lang=en)
  */
 export function getDbCustomClustersOutput(args?: GetDbCustomClustersOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDbCustomClustersResult> {
     args = args || {};

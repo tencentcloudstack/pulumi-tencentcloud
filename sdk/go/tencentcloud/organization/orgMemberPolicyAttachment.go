@@ -45,6 +45,13 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateOrganizationMembersPolicy](https://www.tencentcloud.com/document/api/1031/66410)
+// * Delete: [DeleteOrganizationMembersPolicy](https://www.tencentcloud.com/document/api/1031/66407)
+//
 // ## Import
 //
 // organization orgMemberPolicyAttachment can be imported using the id, e.g.

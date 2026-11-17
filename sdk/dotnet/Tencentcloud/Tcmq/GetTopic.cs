@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcmq
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCmqTopics](https://www.tencentcloud.com/search/?wd=DescribeCmqTopics&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetTopicResult> InvokeAsync(GetTopicArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetTopicResult>("tencentcloud:Tcmq/getTopic:getTopic", args ?? new GetTopicArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcmq
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCmqTopics](https://www.tencentcloud.com/search/?wd=DescribeCmqTopics&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetTopicResult> Invoke(GetTopicInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetTopicResult>("tencentcloud:Tcmq/getTopic:getTopic", args ?? new GetTopicInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcmq
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeCmqTopics](https://www.tencentcloud.com/search/?wd=DescribeCmqTopics&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetTopicResult> Invoke(GetTopicInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetTopicResult>("tencentcloud:Tcmq/getTopic:getTopic", args ?? new GetTopicInvokeArgs(), options.WithDefaults());

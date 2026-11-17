@@ -36,6 +36,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTimeShiftStreamList](https://www.tencentcloud.com/document/api/267/53719)
         /// </summary>
         public static Task<GetTimeShiftStreamListResult> InvokeAsync(GetTimeShiftStreamListArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetTimeShiftStreamListResult>("tencentcloud:Css/getTimeShiftStreamList:getTimeShiftStreamList", args ?? new GetTimeShiftStreamListArgs(), options.WithDefaults());
@@ -64,6 +70,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTimeShiftStreamList](https://www.tencentcloud.com/document/api/267/53719)
         /// </summary>
         public static Output<GetTimeShiftStreamListResult> Invoke(GetTimeShiftStreamListInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetTimeShiftStreamListResult>("tencentcloud:Css/getTimeShiftStreamList:getTimeShiftStreamList", args ?? new GetTimeShiftStreamListInvokeArgs(), options.WithDefaults());
@@ -92,6 +104,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Css
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTimeShiftStreamList](https://www.tencentcloud.com/document/api/267/53719)
         /// </summary>
         public static Output<GetTimeShiftStreamListResult> Invoke(GetTimeShiftStreamListInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetTimeShiftStreamListResult>("tencentcloud:Css/getTimeShiftStreamList:getTimeShiftStreamList", args ?? new GetTimeShiftStreamListInvokeArgs(), options.WithDefaults());

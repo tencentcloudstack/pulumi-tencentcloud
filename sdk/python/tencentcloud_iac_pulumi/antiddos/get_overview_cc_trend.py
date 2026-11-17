@@ -149,6 +149,12 @@ def get_overview_cc_trend(business: Optional[_builtins.str] = None,
         business="bgpip")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeOverviewCCTrend](https://www.tencentcloud.com/search/?wd=DescribeOverviewCCTrend&type=document&lang=en)
+
 
     :param _builtins.str business: Dayu sub product code (bgpip represents advanced defense IP; net represents professional version of advanced defense IP).
     :param _builtins.str end_time: EndTime.
@@ -202,6 +208,12 @@ def get_overview_cc_trend_output(business: pulumi.Input[Optional[Optional[_built
         metric_name="inqps",
         business="bgpip")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeOverviewCCTrend](https://www.tencentcloud.com/search/?wd=DescribeOverviewCCTrend&type=document&lang=en)
 
 
     :param _builtins.str business: Dayu sub product code (bgpip represents advanced defense IP; net represents professional version of advanced defense IP).

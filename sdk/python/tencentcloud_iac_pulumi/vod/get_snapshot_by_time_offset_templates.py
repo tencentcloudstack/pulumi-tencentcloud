@@ -132,6 +132,12 @@ def get_snapshot_by_time_offset_templates(definition: Optional[_builtins.str] = 
         definition=foo_snapshot_by_time_offset_template.id)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSnapshotByTimeOffsetTemplates](https://www.tencentcloud.com/document/api/266/34145)
+
 
     :param _builtins.str definition: Unique ID filter of snapshot by time offset template.
     :param _builtins.str result_output_file: Used to save results.
@@ -179,6 +185,12 @@ def get_snapshot_by_time_offset_templates_output(definition: pulumi.Input[Option
     foo = tencentcloud.vod.get_snapshot_by_time_offset_templates_output(type="Custom",
         definition=foo_snapshot_by_time_offset_template.id)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSnapshotByTimeOffsetTemplates](https://www.tencentcloud.com/document/api/266/34145)
 
 
     :param _builtins.str definition: Unique ID filter of snapshot by time offset template.

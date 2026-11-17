@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     instanceId: "es-nni6pm4s",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeIndexList](https://www.tencentcloud.com/document/api/845/47607)
  */
 export function getDescribeIndexList(args: GetDescribeIndexListArgs, opts?: pulumi.InvokeOptions): Promise<GetDescribeIndexListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -120,6 +126,12 @@ export interface GetDescribeIndexListResult {
  *     instanceId: "es-nni6pm4s",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeIndexList](https://www.tencentcloud.com/document/api/845/47607)
  */
 export function getDescribeIndexListOutput(args: GetDescribeIndexListOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDescribeIndexListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

@@ -29,6 +29,15 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateClusterDatabase](https://www.tencentcloud.com/document/api/1098/55914)
+ * * Read: [DescribeClusterDetailDatabases](https://www.tencentcloud.com/document/api/1098/55912)
+ * * Update: [ModifyClusterDatabase](https://www.tencentcloud.com/document/api/1098/55911)
+ * * Delete: [DeleteClusterDatabase](https://www.tencentcloud.com/document/api/1098/55913)
+ *
  * ## Import
  *
  * cynosdb clusterDatabases can be imported using the id, e.g.

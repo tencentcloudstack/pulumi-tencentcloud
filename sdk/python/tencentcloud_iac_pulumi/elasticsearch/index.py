@@ -186,6 +186,15 @@ class Index(pulumi.CustomResource):
             index_meta_json="{\\"mappings\\":{},\\"settings\\":{\\"index.number_of_replicas\\":1,\\"index.number_of_shards\\":1,\\"index.refresh_interval\\":\\"30s\\"}}")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateIndex](https://www.tencentcloud.com/document/api/845/47609)
+        * Read: [DescribeIndexMeta](https://www.tencentcloud.com/document/api/845/47606)
+        * Update: [UpdateIndex](https://www.tencentcloud.com/document/api/845/47605)
+        * Delete: [DeleteIndex](https://www.tencentcloud.com/document/api/845/47608)
+
         ## Import
 
         elasticsearch index can be imported using the id, e.g.
@@ -223,6 +232,15 @@ class Index(pulumi.CustomResource):
             index_name="test-es-index",
             index_meta_json="{\\"mappings\\":{},\\"settings\\":{\\"index.number_of_replicas\\":1,\\"index.number_of_shards\\":1,\\"index.refresh_interval\\":\\"30s\\"}}")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateIndex](https://www.tencentcloud.com/document/api/845/47609)
+        * Read: [DescribeIndexMeta](https://www.tencentcloud.com/document/api/845/47606)
+        * Update: [UpdateIndex](https://www.tencentcloud.com/document/api/845/47605)
+        * Delete: [DeleteIndex](https://www.tencentcloud.com/document/api/845/47608)
 
         ## Import
 

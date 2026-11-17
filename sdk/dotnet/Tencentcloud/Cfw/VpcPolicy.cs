@@ -40,6 +40,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cfw
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [AddVpcAcRule](https://www.tencentcloud.com/search/?wd=AddVpcAcRule&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeVpcAcRule](https://www.tencentcloud.com/document/api/1160/68133)
+    /// * Update: [ModifyVpcAcRule](https://www.tencentcloud.com/search/?wd=ModifyVpcAcRule&amp;type=document&amp;lang=en)
+    /// * Delete: [RemoveVpcAcRule](https://www.tencentcloud.com/search/?wd=RemoveVpcAcRule&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// CFW vpc policy can be imported using the id, e.g.

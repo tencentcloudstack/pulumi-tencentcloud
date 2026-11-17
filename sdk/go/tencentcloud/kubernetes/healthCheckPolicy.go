@@ -53,6 +53,15 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateHealthCheckPolicy](https://www.tencentcloud.com/document/api/457/66319)
+// * Read: [DescribeHealthCheckPolicies](https://www.tencentcloud.com/document/api/457/66314)
+// * Update: [ModifyHealthCheckPolicy](https://www.tencentcloud.com/document/api/457/66310)
+// * Delete: [DeleteHealthCheckPolicy](https://www.tencentcloud.com/document/api/457/66317)
+//
 // ## Import
 //
 // TKE kubernetes health check policy can be imported using the clusterId#name, e.g.

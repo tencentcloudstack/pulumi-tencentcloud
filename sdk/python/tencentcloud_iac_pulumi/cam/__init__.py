@@ -5,6 +5,7 @@
 from ._inputs import *
 from .access_key import *
 from .get_account_summary import *
+from .get_accounts import *
 from .get_group_memberships import *
 from .get_group_policy_attachments import *
 from .get_group_user_account import *
@@ -42,6 +43,7 @@ from .saml_provider import *
 from .service_linked_role import *
 from .set_policy_version_config import *
 from .tag_role_attachment import *
+from .update_password_rule_config import *
 from .user import *
 from .user_permission_boundary_attachment import *
 from .user_policy_attachment import *

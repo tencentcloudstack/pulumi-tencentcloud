@@ -127,6 +127,12 @@ def get_proxy_groups(filters: Optional[Sequence[Union['GetProxyGroupsFilterArgs'
         }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeProxyGroupList](https://www.tencentcloud.com/document/api/608/33081)
+
 
     :param Sequence[Union['GetProxyGroupsFilterArgs', 'GetProxyGroupsFilterArgsDict']] filters: Filter conditions,The upper limit of Filter.Values per request is 5.RealServerRegion - String - Required: No - (filtering criteria) Filter by real server region, refer to the RegionId in the returned results of the DescribeDestRegions interface.PackageType - String - Required: No - (Filter condition) proxy group type, where &amp;#39;Thunder&amp;#39; represents the standard proxy group and &amp;#39;Accelerator&amp;#39; represents the silver acceleration proxy group.
     :param _builtins.int project_id: Project ID. Value range:-1, All projects under this user0, default projectOther values, specified items.
@@ -168,6 +174,12 @@ def get_proxy_groups_output(filters: pulumi.Input[Optional[Optional[Sequence[Uni
             "values": ["lg-2foz7wjh"],
         }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeProxyGroupList](https://www.tencentcloud.com/document/api/608/33081)
 
 
     :param Sequence[Union['GetProxyGroupsFilterArgs', 'GetProxyGroupsFilterArgsDict']] filters: Filter conditions,The upper limit of Filter.Values per request is 5.RealServerRegion - String - Required: No - (filtering criteria) Filter by real server region, refer to the RegionId in the returned results of the DescribeDestRegions interface.PackageType - String - Required: No - (Filter condition) proxy group type, where &amp;#39;Thunder&amp;#39; represents the standard proxy group and &amp;#39;Accelerator&amp;#39; represents the silver acceleration proxy group.

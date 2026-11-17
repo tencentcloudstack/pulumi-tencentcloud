@@ -31,6 +31,10 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn.Outputs
         /// </summary>
         public readonly string? InstanceType;
         /// <summary>
+        /// Instance billing method. Valid values: `PayByCcnOwner` (CCN owner pays), `PayByInstanceOwner` (instance owner pays).
+        /// </summary>
+        public readonly string? OrderType;
+        /// <summary>
         /// ID of the routing table associated with the instance. Note: This field may return null, indicating that no valid value can be obtained.
         /// </summary>
         public readonly string? RouteTableId;
@@ -45,12 +49,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Ccn.Outputs
 
             string? instanceType,
 
+            string? orderType,
+
             string? routeTableId)
         {
             Description = description;
             InstanceId = instanceId;
             InstanceRegion = instanceRegion;
             InstanceType = instanceType;
+            OrderType = orderType;
             RouteTableId = routeTableId;
         }
     }

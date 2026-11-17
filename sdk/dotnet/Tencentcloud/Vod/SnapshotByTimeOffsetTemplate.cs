@@ -37,6 +37,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vod
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateSnapshotByTimeOffsetTemplate](https://www.tencentcloud.com/document/api/266/34165)
+    /// * Read: [DescribeSnapshotByTimeOffsetTemplates](https://www.tencentcloud.com/document/api/266/34145)
+    /// * Update: [ModifySnapshotByTimeOffsetTemplate](https://www.tencentcloud.com/document/api/266/34137)
+    /// * Delete: [DeleteSnapshotByTimeOffsetTemplate](https://www.tencentcloud.com/document/api/266/34156)
+    /// 
     /// ## Import
     /// 
     /// VOD snapshot by time offset template can be imported using the id($subAppId#$templateId), e.g.

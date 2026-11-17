@@ -30,6 +30,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CancelDcnJob](https://www.tencentcloud.com/document/api/237/41520)
+    ///   - [DescribeFlow](https://www.tencentcloud.com/document/api/237/16177)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mariadb/cancelDcnJob:CancelDcnJob")]
     public partial class CancelDcnJob : global::Pulumi.CustomResource

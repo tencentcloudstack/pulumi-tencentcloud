@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeTaskStatus](https://www.tencentcloud.com/document/api/597/55881)
 func LookupTaskStatus(ctx *pulumi.Context, args *LookupTaskStatusArgs, opts ...pulumi.InvokeOption) (*LookupTaskStatusResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupTaskStatusResult

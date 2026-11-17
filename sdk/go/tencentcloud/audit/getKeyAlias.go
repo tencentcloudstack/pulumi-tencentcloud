@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [ListKeyAliasByRegion](https://www.tencentcloud.com/search/?wd=ListKeyAliasByRegion&type=document&lang=en)
 func GetKeyAlias(ctx *pulumi.Context, args *GetKeyAliasArgs, opts ...pulumi.InvokeOption) (*GetKeyAliasResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetKeyAliasResult

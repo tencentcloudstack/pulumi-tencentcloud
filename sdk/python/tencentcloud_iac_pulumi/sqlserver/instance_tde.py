@@ -188,6 +188,18 @@ class InstanceTde(pulumi.CustomResource):
             certificate_attribution="self")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+          - [ModifyInstanceEncryptAttributes](https://www.tencentcloud.com/document/api/238/56943)
+        * Read: [DescribeDBInstancesAttribute](https://www.tencentcloud.com/document/api/238/54811)
+        * Update:
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+          - [ModifyInstanceEncryptAttributes](https://www.tencentcloud.com/document/api/238/56943)
+
         ## Import
 
         sqlserver instance_tde can be imported using the id, e.g.
@@ -258,6 +270,18 @@ class InstanceTde(pulumi.CustomResource):
             instance_id=example.id,
             certificate_attribution="self")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+          - [ModifyInstanceEncryptAttributes](https://www.tencentcloud.com/document/api/238/56943)
+        * Read: [DescribeDBInstancesAttribute](https://www.tencentcloud.com/document/api/238/54811)
+        * Update:
+          - [DescribeFlowStatus](https://www.tencentcloud.com/document/api/238/32113)
+          - [ModifyInstanceEncryptAttributes](https://www.tencentcloud.com/document/api/238/56943)
 
         ## Import
 

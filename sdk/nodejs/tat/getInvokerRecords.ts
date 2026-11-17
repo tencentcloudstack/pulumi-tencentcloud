@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     invokerIds: ["ivk-cas4upyf"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeInvokerRecords](https://www.tencentcloud.com/document/api/1147/46694)
  */
 export function getInvokerRecords(args?: GetInvokerRecordsArgs, opts?: pulumi.InvokeOptions): Promise<GetInvokerRecordsResult> {
     args = args || {};
@@ -71,6 +77,12 @@ export interface GetInvokerRecordsResult {
  *     invokerIds: ["ivk-cas4upyf"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeInvokerRecords](https://www.tencentcloud.com/document/api/1147/46694)
  */
 export function getInvokerRecordsOutput(args?: GetInvokerRecordsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetInvokerRecordsResult> {
     args = args || {};

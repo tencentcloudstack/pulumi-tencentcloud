@@ -138,6 +138,12 @@ def get_rule_evaluation_results(compliance_types: Optional[Sequence[_builtins.st
         resource_types=["QCS::CVM::Instance"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListConfigRuleEvaluationResults](https://www.tencentcloud.com/document/api/1164/84965)
+
 
     :param Sequence[_builtins.str] compliance_types: Compliance type list for filtering. Valid values: COMPLIANT, NON_COMPLIANT.
     :param _builtins.str config_rule_id: Config rule ID.
@@ -188,6 +194,12 @@ def get_rule_evaluation_results_output(compliance_types: pulumi.Input[Optional[O
         compliance_types=["NON_COMPLIANT"],
         resource_types=["QCS::CVM::Instance"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListConfigRuleEvaluationResults](https://www.tencentcloud.com/document/api/1164/84965)
 
 
     :param Sequence[_builtins.str] compliance_types: Compliance type list for filtering. Valid values: COMPLIANT, NON_COMPLIANT.

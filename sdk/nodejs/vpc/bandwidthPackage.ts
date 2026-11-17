@@ -59,6 +59,23 @@ import * as utilities from "../utilities";
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateBandwidthPackage](https://www.tencentcloud.com/document/api/215/36922)
+ *   - [DescribeBandwidthPackages](https://www.tencentcloud.com/document/api/215/36919)
+ *   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+ * * Read:
+ *   - [DescribeBandwidthPackages](https://www.tencentcloud.com/document/api/215/36919)
+ *   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+ * * Update:
+ *   - [ModifyBandwidthPackageAttribute](https://www.tencentcloud.com/document/api/215/36918)
+ *   - [ModifyBandwidthPackageBandwidth](https://www.tencentcloud.com/document/api/215/65948)
+ *   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+ * * Delete: [DeleteBandwidthPackage](https://www.tencentcloud.com/document/api/215/36921)
+ *
  * ## Import
  *
  * vpc bandwidthPackage can be imported using the id, e.g.

@@ -41,6 +41,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeReplicationInstanceSyncStatus](https://www.tencentcloud.com/document/api/1051/42671)
 func GetReplicationInstanceSyncStatus(ctx *pulumi.Context, args *GetReplicationInstanceSyncStatusArgs, opts ...pulumi.InvokeOption) (*GetReplicationInstanceSyncStatusResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetReplicationInstanceSyncStatusResult

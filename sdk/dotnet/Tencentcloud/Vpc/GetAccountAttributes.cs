@@ -29,6 +29,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAccountAttributes](https://www.tencentcloud.com/document/api/215/17875)
         /// </summary>
         public static Task<GetAccountAttributesResult> InvokeAsync(GetAccountAttributesArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetAccountAttributesResult>("tencentcloud:Vpc/getAccountAttributes:getAccountAttributes", args ?? new GetAccountAttributesArgs(), options.WithDefaults());
@@ -50,6 +56,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAccountAttributes](https://www.tencentcloud.com/document/api/215/17875)
         /// </summary>
         public static Output<GetAccountAttributesResult> Invoke(GetAccountAttributesInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetAccountAttributesResult>("tencentcloud:Vpc/getAccountAttributes:getAccountAttributes", args ?? new GetAccountAttributesInvokeArgs(), options.WithDefaults());
@@ -71,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Vpc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeAccountAttributes](https://www.tencentcloud.com/document/api/215/17875)
         /// </summary>
         public static Output<GetAccountAttributesResult> Invoke(GetAccountAttributesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetAccountAttributesResult>("tencentcloud:Vpc/getAccountAttributes:getAccountAttributes", args ?? new GetAccountAttributesInvokeArgs(), options.WithDefaults());

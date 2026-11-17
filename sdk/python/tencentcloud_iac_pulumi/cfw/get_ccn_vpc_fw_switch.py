@@ -96,6 +96,12 @@ def get_ccn_vpc_fw_switch(ccn_id: Optional[_builtins.str] = None,
     example = tencentcloud.cfw.get_ccn_vpc_fw_switch(ccn_id="ccn-fkb9bo2v")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCcnVpcFwSwitch](https://www.tencentcloud.com/search/?wd=DescribeCcnVpcFwSwitch&type=document&lang=en)
+
 
     :param _builtins.str ccn_id: CCN ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_ccn_vpc_fw_switch_output(ccn_id: pulumi.Input[Optional[_builtins.str]] =
 
     example = tencentcloud.cfw.get_ccn_vpc_fw_switch(ccn_id="ccn-fkb9bo2v")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeCcnVpcFwSwitch](https://www.tencentcloud.com/search/?wd=DescribeCcnVpcFwSwitch&type=document&lang=en)
 
 
     :param _builtins.str ccn_id: CCN ID.

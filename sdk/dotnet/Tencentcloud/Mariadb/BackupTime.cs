@@ -33,6 +33,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mariadb
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [ModifyBackupTime](https://www.tencentcloud.com/document/api/237/16173)
+    /// * Read: [DescribeBackupTime](https://www.tencentcloud.com/document/api/237/16182)
+    /// * Update: [ModifyBackupTime](https://www.tencentcloud.com/document/api/237/16173)
+    /// 
     /// ## Import
     /// 
     /// mariadb BackupTime can be imported using the id, e.g.

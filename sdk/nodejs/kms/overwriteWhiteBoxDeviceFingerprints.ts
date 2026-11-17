@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const example = new tencentcloud.kms.OverwriteWhiteBoxDeviceFingerprints("example", {keyId: "23e80852-1e38-11e9-b129-5cb9019b4b01"});
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [OverwriteWhiteBoxDeviceFingerprints](https://www.tencentcloud.com/search/?wd=OverwriteWhiteBoxDeviceFingerprints&type=document&lang=en)
  */
 export class OverwriteWhiteBoxDeviceFingerprints extends pulumi.CustomResource {
     /**

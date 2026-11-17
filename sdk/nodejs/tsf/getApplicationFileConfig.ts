@@ -22,6 +22,12 @@ import * as utilities from "../utilities";
  *     configVersion: "1.2",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeFileConfigs](https://www.tencentcloud.com/search/?wd=DescribeFileConfigs&type=document&lang=en)
  */
 export function getApplicationFileConfig(args?: GetApplicationFileConfigArgs, opts?: pulumi.InvokeOptions): Promise<GetApplicationFileConfigResult> {
     args = args || {};
@@ -113,6 +119,12 @@ export interface GetApplicationFileConfigResult {
  *     configVersion: "1.2",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeFileConfigs](https://www.tencentcloud.com/search/?wd=DescribeFileConfigs&type=document&lang=en)
  */
 export function getApplicationFileConfigOutput(args?: GetApplicationFileConfigOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetApplicationFileConfigResult> {
     args = args || {};

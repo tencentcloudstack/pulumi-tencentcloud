@@ -432,6 +432,29 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateClusterNodePool](https://www.tencentcloud.com/document/api/457/38781)
+    /// * Read:
+    ///   - [DescribeClusterNodePoolDetail](https://www.tencentcloud.com/document/api/457/38778)
+    ///   - [DescribeClusters](https://www.tencentcloud.com/document/api/457/32025)
+    /// * Update:
+    ///   - [DeleteMachine](https://www.tencentcloud.com/document/api/296/30907)
+    ///   - [DescribeAutoScalingActivities](https://www.tencentcloud.com/document/api/377/31014)
+    ///   - [DescribeClusterInstances](https://www.tencentcloud.com/document/api/457/66315)
+    ///   - [DescribeClusterNodePoolDetail](https://www.tencentcloud.com/document/api/457/38778)
+    ///   - [DescribeClusters](https://www.tencentcloud.com/document/api/457/32025)
+    ///   - [DescribeInstances](https://www.tencentcloud.com/document/api/213/33258)
+    ///   - [InvokeCommand](https://www.tencentcloud.com/document/api/1147/46690)
+    ///   - [ModifyClusterNodePool](https://www.tencentcloud.com/document/api/457/38776)
+    ///   - [ModifyLaunchConfigurationAttributes](https://www.tencentcloud.com/document/api/377/30998)
+    ///   - [ModifyNodePoolDesiredCapacityAboutAsg](https://www.tencentcloud.com/search/?wd=ModifyNodePoolDesiredCapacityAboutAsg&amp;type=document&amp;lang=en)
+    ///   - [Send](https://www.tencentcloud.com/search/?wd=Send&amp;type=document&amp;lang=en)
+    ///   - [UseAsClient](https://www.tencentcloud.com/search/?wd=UseAsClient&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteClusterNodePool](https://www.tencentcloud.com/document/api/457/38779)
+    /// 
     /// ## Import
     /// 
     /// tke node pool can be imported, e.g.
@@ -543,7 +566,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// Multi-availability zone/subnet policy. Valid values: PRIORITY and EQUALITY. Default value: PRIORITY.
         /// </summary>
         [Output("multiZoneSubnetPolicy")]
-        public Output<string?> MultiZoneSubnetPolicy { get; private set; } = null!;
+        public Output<string> MultiZoneSubnetPolicy { get; private set; } = null!;
 
         /// <summary>
         /// Name of the node pool. The name does not exceed 25 characters, and only supports Chinese, English, numbers, underscores, separators (`-`) and decimal points.
@@ -555,7 +578,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Kubernetes
         /// Node config.
         /// </summary>
         [Output("nodeConfig")]
-        public Output<Outputs.NodePoolNodeConfig?> NodeConfig { get; private set; } = null!;
+        public Output<Outputs.NodePoolNodeConfig> NodeConfig { get; private set; } = null!;
 
         /// <summary>
         /// The total node count.

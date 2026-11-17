@@ -326,6 +326,15 @@ class TopicWithFullId(pulumi.CustomResource):
             remark="remark.")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateTopic](https://www.tencentcloud.com/search/?wd=CreateTopic&type=document&lang=en)
+        * Read: [DescribeTopics](https://www.tencentcloud.com/search/?wd=DescribeTopics&type=document&lang=en)
+        * Update: [ModifyTopic](https://www.tencentcloud.com/search/?wd=ModifyTopic&type=document&lang=en)
+        * Delete: [DeleteTopics](https://www.tencentcloud.com/search/?wd=DeleteTopics&type=document&lang=en)
+
         ## Import
 
         Tdmq Topic can be imported, e.g.
@@ -383,6 +392,15 @@ class TopicWithFullId(pulumi.CustomResource):
             pulsar_topic_type=3,
             remark="remark.")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateTopic](https://www.tencentcloud.com/search/?wd=CreateTopic&type=document&lang=en)
+        * Read: [DescribeTopics](https://www.tencentcloud.com/search/?wd=DescribeTopics&type=document&lang=en)
+        * Update: [ModifyTopic](https://www.tencentcloud.com/search/?wd=ModifyTopic&type=document&lang=en)
+        * Delete: [DeleteTopics](https://www.tencentcloud.com/search/?wd=DeleteTopics&type=document&lang=en)
 
         ## Import
 

@@ -139,6 +139,15 @@ def get_instances(id: Optional[_builtins.str] = None,
         project_id="1235143")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeAccounts](https://www.tencentcloud.com/document/api/409/18109)
+      - [DescribeDBInstances](https://www.tencentcloud.com/document/api/409/16773)
+      - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+
 
     :param _builtins.str id: ID of the postgresql instance to be query.
     :param _builtins.str name: Name of the postgresql instance to be query.
@@ -189,6 +198,15 @@ def get_instances_output(id: pulumi.Input[Optional[Optional[_builtins.str]]] = N
         name="tf-example",
         project_id="1235143")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeAccounts](https://www.tencentcloud.com/document/api/409/18109)
+      - [DescribeDBInstances](https://www.tencentcloud.com/document/api/409/16773)
+      - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
 
 
     :param _builtins.str id: ID of the postgresql instance to be query.

@@ -173,6 +173,14 @@ class MaintenanceWindow(pulumi.CustomResource):
             end_time="19:00")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyMaintenanceWindow](https://www.tencentcloud.com/document/api/239/37832)
+        * Read: [DescribeMaintenanceWindow](https://www.tencentcloud.com/document/api/239/37833)
+        * Update: [ModifyMaintenanceWindow](https://www.tencentcloud.com/document/api/239/37832)
+
         ## Import
 
         redis maintenance window can be imported using the id, e.g.
@@ -229,6 +237,14 @@ class MaintenanceWindow(pulumi.CustomResource):
             start_time="17:00",
             end_time="19:00")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyMaintenanceWindow](https://www.tencentcloud.com/document/api/239/37832)
+        * Read: [DescribeMaintenanceWindow](https://www.tencentcloud.com/document/api/239/37833)
+        * Update: [ModifyMaintenanceWindow](https://www.tencentcloud.com/document/api/239/37832)
 
         ## Import
 

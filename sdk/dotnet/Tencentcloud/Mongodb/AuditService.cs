@@ -76,6 +76,22 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mongodb
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DescribeAuditConfig](https://www.tencentcloud.com/document/api/240/79889)
+    ///   - [DescribeAuditInstanceList](https://www.tencentcloud.com/search/?wd=DescribeAuditInstanceList&amp;type=document&amp;lang=en)
+    ///   - [OpenAuditService](https://www.tencentcloud.com/search/?wd=OpenAuditService&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeAuditConfig](https://www.tencentcloud.com/document/api/240/79889)
+    /// * Update:
+    ///   - [DescribeAuditConfig](https://www.tencentcloud.com/document/api/240/79889)
+    ///   - [ModifyAuditService](https://www.tencentcloud.com/search/?wd=ModifyAuditService&amp;type=document&amp;lang=en)
+    /// * Delete:
+    ///   - [CloseAuditService](https://www.tencentcloud.com/document/api/240/79890)
+    ///   - [DescribeAuditInstanceList](https://www.tencentcloud.com/search/?wd=DescribeAuditInstanceList&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// MongoDB audit service can be imported using the instance id, e.g.

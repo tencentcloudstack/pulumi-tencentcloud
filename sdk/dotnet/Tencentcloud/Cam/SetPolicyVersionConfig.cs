@@ -32,6 +32,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cam
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [SetDefaultPolicyVersion](https://www.tencentcloud.com/document/api/598/36309)
+    /// * Read: [ListPolicyVersions](https://www.tencentcloud.com/document/api/598/36310)
+    /// * Update: [SetDefaultPolicyVersion](https://www.tencentcloud.com/document/api/598/36309)
+    /// 
     /// ## Import
     /// 
     /// CAM set policy version config can be imported using the id, e.g.

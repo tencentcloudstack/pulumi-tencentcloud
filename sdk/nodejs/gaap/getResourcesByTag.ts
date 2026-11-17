@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     tagValue: "tagValue",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeResourcesByTag](https://www.tencentcloud.com/document/api/608/33049)
  */
 export function getResourcesByTag(args: GetResourcesByTagArgs, opts?: pulumi.InvokeOptions): Promise<GetResourcesByTagResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -87,6 +93,12 @@ export interface GetResourcesByTagResult {
  *     tagValue: "tagValue",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeResourcesByTag](https://www.tencentcloud.com/document/api/608/33049)
  */
 export function getResourcesByTagOutput(args: GetResourcesByTagOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetResourcesByTagResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

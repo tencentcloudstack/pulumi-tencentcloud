@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDBCharsets](https://www.tencentcloud.com/document/api/238/39830)
 func GetDbCharsets(ctx *pulumi.Context, args *GetDbCharsetsArgs, opts ...pulumi.InvokeOption) (*GetDbCharsetsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDbCharsetsResult

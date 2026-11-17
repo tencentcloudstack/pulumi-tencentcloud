@@ -36,6 +36,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Teo
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateSecurityAPIService](https://www.tencentcloud.com/document/api/1145/72318)
+    /// * Read: [DescribeSecurityAPIService](https://www.tencentcloud.com/document/api/1145/72314)
+    /// * Update: [ModifySecurityAPIService](https://www.tencentcloud.com/document/api/1145/72312)
+    /// * Delete: [DeleteSecurityAPIService](https://www.tencentcloud.com/document/api/1145/72316)
+    /// 
     /// ## Import
     /// 
     /// TEO security API service can be imported using the zoneId#apiServiceId, e.g.

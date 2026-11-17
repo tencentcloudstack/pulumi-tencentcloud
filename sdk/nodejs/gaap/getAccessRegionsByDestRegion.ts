@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     destRegion: "SouthChina",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAccessRegionsByDestRegion](https://www.tencentcloud.com/document/api/608/33103)
  */
 export function getAccessRegionsByDestRegion(args: GetAccessRegionsByDestRegionArgs, opts?: pulumi.InvokeOptions): Promise<GetAccessRegionsByDestRegionResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -82,6 +88,12 @@ export interface GetAccessRegionsByDestRegionResult {
  *     destRegion: "SouthChina",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeAccessRegionsByDestRegion](https://www.tencentcloud.com/document/api/608/33103)
  */
 export function getAccessRegionsByDestRegionOutput(args: GetAccessRegionsByDestRegionOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAccessRegionsByDestRegionResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

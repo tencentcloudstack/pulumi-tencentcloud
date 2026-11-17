@@ -41,6 +41,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribleL7Rules](https://www.tencentcloud.com/search/?wd=DescribleL7Rules&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetL7RulesResult> InvokeAsync(GetL7RulesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetL7RulesResult>("tencentcloud:Dayu/getL7Rules:getL7Rules", args ?? new GetL7RulesArgs(), options.WithDefaults());
@@ -74,6 +80,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribleL7Rules](https://www.tencentcloud.com/search/?wd=DescribleL7Rules&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetL7RulesResult> Invoke(GetL7RulesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetL7RulesResult>("tencentcloud:Dayu/getL7Rules:getL7Rules", args ?? new GetL7RulesInvokeArgs(), options.WithDefaults());
@@ -107,6 +119,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dayu
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribleL7Rules](https://www.tencentcloud.com/search/?wd=DescribleL7Rules&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetL7RulesResult> Invoke(GetL7RulesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetL7RulesResult>("tencentcloud:Dayu/getL7Rules:getL7Rules", args ?? new GetL7RulesInvokeArgs(), options.WithDefaults());

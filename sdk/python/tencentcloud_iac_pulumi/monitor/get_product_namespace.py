@@ -96,6 +96,12 @@ def get_product_namespace(name: Optional[_builtins.str] = None,
     instances = tencentcloud.monitor.get_product_namespace(name="Redis")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeProductList](https://www.tencentcloud.com/search/?wd=DescribeProductList&type=document&lang=en)
+
 
     :param _builtins.str name: Name for filter, eg:`Load Banlancer`.
     :param _builtins.str result_output_file: Used to store results.
@@ -125,6 +131,12 @@ def get_product_namespace_output(name: pulumi.Input[Optional[Optional[_builtins.
 
     instances = tencentcloud.monitor.get_product_namespace(name="Redis")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeProductList](https://www.tencentcloud.com/search/?wd=DescribeProductList&type=document&lang=en)
 
 
     :param _builtins.str name: Name for filter, eg:`Load Banlancer`.

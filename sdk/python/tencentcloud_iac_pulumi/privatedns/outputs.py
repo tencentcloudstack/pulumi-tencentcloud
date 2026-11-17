@@ -13,6 +13,7 @@ if sys.version_info >= (3, 11):
     pass
 else:
     pass
+from .. import _utilities
 
 __all__ = [
     'ExtendEndPointForwardIp',
@@ -274,17 +275,18 @@ class ZoneAccountVpcSet(dict):
                  region: _builtins.str,
                  uin: _builtins.str,
                  uniq_vpc_id: _builtins.str,
-                 vpc_name: _builtins.str):
+                 vpc_name: Optional[_builtins.str] = None):
         """
         :param _builtins.str region: Region.
         :param _builtins.str uin: UIN of the VPC account.
         :param _builtins.str uniq_vpc_id: VPC ID.
-        :param _builtins.str vpc_name: VPC NAME.
+        :param _builtins.str vpc_name: It has been deprecated from version 1.83.35. Please do not re-enter this field as entering a value will be ignored. VPC NAME.
         """
         pulumi.set(__self__, "region", region)
         pulumi.set(__self__, "uin", uin)
         pulumi.set(__self__, "uniq_vpc_id", uniq_vpc_id)
-        pulumi.set(__self__, "vpc_name", vpc_name)
+        if vpc_name is not None:
+            pulumi.set(__self__, "vpc_name", vpc_name)
 
     @_builtins.property
     @pulumi.getter
@@ -312,9 +314,10 @@ class ZoneAccountVpcSet(dict):
 
     @_builtins.property
     @pulumi.getter(name="vpcName")
-    def vpc_name(self) -> _builtins.str:
+    @_utilities.deprecated("""It has been deprecated from version 1.83.35. Please do not re-enter this field as entering a value will be ignored.""")
+    def vpc_name(self) -> Optional[_builtins.str]:
         """
-        VPC NAME.
+        It has been deprecated from version 1.83.35. Please do not re-enter this field as entering a value will be ignored. VPC NAME.
         """
         return pulumi.get(self, "vpc_name")
 

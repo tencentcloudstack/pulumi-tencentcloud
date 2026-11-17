@@ -33,6 +33,15 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateHpcCluster](https://www.tencentcloud.com/search/?wd=CreateHpcCluster&amp;type=document&amp;lang=en)
+    /// * Read: [DescribeHpcClusters](https://www.tencentcloud.com/search/?wd=DescribeHpcClusters&amp;type=document&amp;lang=en)
+    /// * Update: [ModifyHpcClusterAttribute](https://www.tencentcloud.com/search/?wd=ModifyHpcClusterAttribute&amp;type=document&amp;lang=en)
+    /// * Delete: [DeleteHpcClusters](https://www.tencentcloud.com/search/?wd=DeleteHpcClusters&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// cvm HpcCluster can be imported using the id, e.g.

@@ -134,6 +134,12 @@ def get_webhook_trigger_logs(namespace: Optional[_builtins.str] = None,
         })
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeWebhookTriggerLog](https://www.tencentcloud.com/document/api/1051/50680)
+
 
     :param _builtins.str namespace: namespace.
     :param _builtins.str registry_id: instance Id.
@@ -180,6 +186,12 @@ def get_webhook_trigger_logs_output(namespace: pulumi.Input[Optional[_builtins.s
             "createdBy": "terraform",
         })
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeWebhookTriggerLog](https://www.tencentcloud.com/document/api/1051/50680)
 
 
     :param _builtins.str namespace: namespace.

@@ -18,8 +18,20 @@ import * as utilities from "../utilities";
  *     userType: "COMMON",
  *     userAlias: "terraform-test",
  *     userDescription: "for terraform test",
+ *     accountType: "UserAccount",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create: [CreateUser](https://www.tencentcloud.com/document/api/1155/62675)
+ * * Read: [DescribeUsers](https://www.tencentcloud.com/document/api/1155/62668)
+ * * Update:
+ *   - [ModifyUser](https://www.tencentcloud.com/document/api/1155/62663)
+ *   - [ModifyUserType](https://www.tencentcloud.com/document/api/1155/62662)
+ * * Delete: [DeleteUser](https://www.tencentcloud.com/document/api/1155/62673)
  *
  * ## Import
  *
@@ -58,6 +70,10 @@ export class User extends pulumi.CustomResource {
     }
 
     /**
+     * Account type. Valid values: `UserAccount` (user account), `RoleAccount` (role account). Default is `UserAccount`.
+     */
+    declare public readonly accountType: pulumi.Output<string>;
+    /**
      * User alias, and its characters are less than 50.
      */
     declare public readonly userAlias: pulumi.Output<string | undefined>;
@@ -72,7 +88,7 @@ export class User extends pulumi.CustomResource {
     /**
      * Types of users. ADMIN: administrators; COMMON: general users. When the type of user is administrator, the collections of permissions and bound working groups cannot be set. Administrators own all the permissions by default. If the parameter is not filled in, it will be COMMON by default.
      */
-    declare public readonly userType: pulumi.Output<string | undefined>;
+    declare public readonly userType: pulumi.Output<string>;
     /**
      * Collection of IDs of working groups bound to users.
      */
@@ -91,6 +107,7 @@ export class User extends pulumi.CustomResource {
         opts = opts || {};
         if (opts.id) {
             const state = argsOrState as UserState | undefined;
+            resourceInputs["accountType"] = state?.accountType;
             resourceInputs["userAlias"] = state?.userAlias;
             resourceInputs["userDescription"] = state?.userDescription;
             resourceInputs["userId"] = state?.userId;
@@ -101,6 +118,7 @@ export class User extends pulumi.CustomResource {
             if (args?.userId === undefined && !opts.urn) {
                 throw new Error("Missing required property 'userId'");
             }
+            resourceInputs["accountType"] = args?.accountType;
             resourceInputs["userAlias"] = args?.userAlias;
             resourceInputs["userDescription"] = args?.userDescription;
             resourceInputs["userId"] = args?.userId;
@@ -116,6 +134,10 @@ export class User extends pulumi.CustomResource {
  * Input properties used for looking up and filtering User resources.
  */
 export interface UserState {
+    /**
+     * Account type. Valid values: `UserAccount` (user account), `RoleAccount` (role account). Default is `UserAccount`.
+     */
+    accountType?: pulumi.Input<string | undefined>;
     /**
      * User alias, and its characters are less than 50.
      */
@@ -142,6 +164,10 @@ export interface UserState {
  * The set of arguments for constructing a User resource.
  */
 export interface UserArgs {
+    /**
+     * Account type. Valid values: `UserAccount` (user account), `RoleAccount` (role account). Default is `UserAccount`.
+     */
+    accountType?: pulumi.Input<string | undefined>;
     /**
      * User alias, and its characters are less than 50.
      */

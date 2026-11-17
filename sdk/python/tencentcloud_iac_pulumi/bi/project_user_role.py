@@ -289,6 +289,15 @@ class ProjectUserRole(pulumi.CustomResource):
             user_name="keep-cam-user")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateUserRoleProject](https://www.tencentcloud.com/document/api/1270/72619)
+        * Read: [DescribeUserRoleProjectList](https://www.tencentcloud.com/document/api/1270/72614)
+        * Update: [ModifyUserRoleProject](https://www.tencentcloud.com/document/api/1270/72612)
+        * Delete: [DeleteUserRoleProject](https://www.tencentcloud.com/document/api/1270/72617)
+
         ## Import
 
         bi project_user_role can be imported using the id, e.g.
@@ -334,6 +343,15 @@ class ProjectUserRole(pulumi.CustomResource):
             user_id="100024664626",
             user_name="keep-cam-user")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateUserRoleProject](https://www.tencentcloud.com/document/api/1270/72619)
+        * Read: [DescribeUserRoleProjectList](https://www.tencentcloud.com/document/api/1270/72614)
+        * Update: [ModifyUserRoleProject](https://www.tencentcloud.com/document/api/1270/72612)
+        * Delete: [DeleteUserRoleProject](https://www.tencentcloud.com/document/api/1270/72617)
 
         ## Import
 

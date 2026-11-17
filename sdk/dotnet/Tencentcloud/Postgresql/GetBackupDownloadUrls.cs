@@ -68,6 +68,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBackupDownloadURL](https://www.tencentcloud.com/document/api/409/54346)
         /// </summary>
         public static Task<GetBackupDownloadUrlsResult> InvokeAsync(GetBackupDownloadUrlsArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetBackupDownloadUrlsResult>("tencentcloud:Postgresql/getBackupDownloadUrls:getBackupDownloadUrls", args ?? new GetBackupDownloadUrlsArgs(), options.WithDefaults());
@@ -128,6 +134,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBackupDownloadURL](https://www.tencentcloud.com/document/api/409/54346)
         /// </summary>
         public static Output<GetBackupDownloadUrlsResult> Invoke(GetBackupDownloadUrlsInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetBackupDownloadUrlsResult>("tencentcloud:Postgresql/getBackupDownloadUrls:getBackupDownloadUrls", args ?? new GetBackupDownloadUrlsInvokeArgs(), options.WithDefaults());
@@ -188,6 +200,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Postgresql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeBackupDownloadURL](https://www.tencentcloud.com/document/api/409/54346)
         /// </summary>
         public static Output<GetBackupDownloadUrlsResult> Invoke(GetBackupDownloadUrlsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetBackupDownloadUrlsResult>("tencentcloud:Postgresql/getBackupDownloadUrls:getBackupDownloadUrls", args ?? new GetBackupDownloadUrlsInvokeArgs(), options.WithDefaults());

@@ -20,6 +20,12 @@ import * as utilities from "../utilities";
  *     resourceType: "vod",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeHostVodInstanceList](https://www.tencentcloud.com/search/?wd=DescribeHostVodInstanceList&type=document&lang=en)
  */
 export function getDescribeHostVodInstanceList(args: GetDescribeHostVodInstanceListArgs, opts?: pulumi.InvokeOptions): Promise<GetDescribeHostVodInstanceListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -96,6 +102,12 @@ export interface GetDescribeHostVodInstanceListResult {
  *     resourceType: "vod",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeHostVodInstanceList](https://www.tencentcloud.com/search/?wd=DescribeHostVodInstanceList&type=document&lang=en)
  */
 export function getDescribeHostVodInstanceListOutput(args: GetDescribeHostVodInstanceListOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDescribeHostVodInstanceListResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

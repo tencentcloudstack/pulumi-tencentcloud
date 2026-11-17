@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *     content: "your_content",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ParseLiveStreamProcessNotification](https://www.tencentcloud.com/document/api/1041/33680)
  */
 export function getParseLiveStreamProcessNotification(args: GetParseLiveStreamProcessNotificationArgs, opts?: pulumi.InvokeOptions): Promise<GetParseLiveStreamProcessNotificationResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -64,6 +70,12 @@ export interface GetParseLiveStreamProcessNotificationResult {
  *     content: "your_content",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ParseLiveStreamProcessNotification](https://www.tencentcloud.com/document/api/1041/33680)
  */
 export function getParseLiveStreamProcessNotificationOutput(args: GetParseLiveStreamProcessNotificationOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetParseLiveStreamProcessNotificationResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

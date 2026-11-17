@@ -33,6 +33,12 @@ import * as utilities from "../utilities";
  *     enable: 1,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeNatFwSwitch](https://www.tencentcloud.com/search/?wd=DescribeNatFwSwitch&type=document&lang=en)
  */
 export function getNatFwSwitches(args?: GetNatFwSwitchesArgs, opts?: pulumi.InvokeOptions): Promise<GetNatFwSwitchesResult> {
     args = args || {};
@@ -124,6 +130,12 @@ export interface GetNatFwSwitchesResult {
  *     enable: 1,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeNatFwSwitch](https://www.tencentcloud.com/search/?wd=DescribeNatFwSwitch&type=document&lang=en)
  */
 export function getNatFwSwitchesOutput(args?: GetNatFwSwitchesOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetNatFwSwitchesResult> {
     args = args || {};

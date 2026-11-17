@@ -17,6 +17,12 @@ import * as utilities from "../utilities";
  *
  * const ruleEngineSettings = tencentcloud.teo.getRuleEngineSettings({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRulesSetting](https://www.tencentcloud.com/document/api/1145/50467)
  */
 export function getRuleEngineSettings(args?: GetRuleEngineSettingsArgs, opts?: pulumi.InvokeOptions): Promise<GetRuleEngineSettingsResult> {
     args = args || {};
@@ -61,6 +67,12 @@ export interface GetRuleEngineSettingsResult {
  *
  * const ruleEngineSettings = tencentcloud.teo.getRuleEngineSettings({});
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRulesSetting](https://www.tencentcloud.com/document/api/1145/50467)
  */
 export function getRuleEngineSettingsOutput(args?: GetRuleEngineSettingsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRuleEngineSettingsResult> {
     args = args || {};

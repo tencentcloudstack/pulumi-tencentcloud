@@ -33,6 +33,12 @@ import * as utilities from "../utilities";
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDefaultCertificates](https://www.tencentcloud.com/document/api/1145/50541)
  */
 export function getDefaultCertificate(args?: GetDefaultCertificateArgs, opts?: pulumi.InvokeOptions): Promise<GetDefaultCertificateResult> {
     args = args || {};
@@ -105,6 +111,12 @@ export interface GetDefaultCertificateResult {
  *     }],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDefaultCertificates](https://www.tencentcloud.com/document/api/1145/50541)
  */
 export function getDefaultCertificateOutput(args?: GetDefaultCertificateOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetDefaultCertificateResult> {
     args = args || {};

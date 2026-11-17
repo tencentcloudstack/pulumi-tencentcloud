@@ -34,6 +34,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTagRetentionExecutionTask](https://www.tencentcloud.com/document/api/1051/50687)
         /// </summary>
         public static Task<GetTagRetentionExecutionTasksResult> InvokeAsync(GetTagRetentionExecutionTasksArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetTagRetentionExecutionTasksResult>("tencentcloud:Tcr/getTagRetentionExecutionTasks:getTagRetentionExecutionTasks", args ?? new GetTagRetentionExecutionTasksArgs(), options.WithDefaults());
@@ -60,6 +66,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTagRetentionExecutionTask](https://www.tencentcloud.com/document/api/1051/50687)
         /// </summary>
         public static Output<GetTagRetentionExecutionTasksResult> Invoke(GetTagRetentionExecutionTasksInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetTagRetentionExecutionTasksResult>("tencentcloud:Tcr/getTagRetentionExecutionTasks:getTagRetentionExecutionTasks", args ?? new GetTagRetentionExecutionTasksInvokeArgs(), options.WithDefaults());
@@ -86,6 +98,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTagRetentionExecutionTask](https://www.tencentcloud.com/document/api/1051/50687)
         /// </summary>
         public static Output<GetTagRetentionExecutionTasksResult> Invoke(GetTagRetentionExecutionTasksInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetTagRetentionExecutionTasksResult>("tencentcloud:Tcr/getTagRetentionExecutionTasks:getTagRetentionExecutionTasks", args ?? new GetTagRetentionExecutionTasksInvokeArgs(), options.WithDefaults());

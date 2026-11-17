@@ -155,6 +155,14 @@ class SecurityGroupAttachment(pulumi.CustomResource):
             load_balancer_ids=example_instance.id)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [SetSecurityGroupForLoadbalancers](https://www.tencentcloud.com/document/api/214/33797)
+        * Read: [DescribeLoadBalancers](https://www.tencentcloud.com/document/api/214/33830)
+        * Delete: [SetSecurityGroupForLoadbalancers](https://www.tencentcloud.com/document/api/214/33797)
+
         ## Import
 
         clb security group attachment can be imported using the id, e.g.
@@ -224,6 +232,14 @@ class SecurityGroupAttachment(pulumi.CustomResource):
             security_group=example.id,
             load_balancer_ids=example_instance.id)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [SetSecurityGroupForLoadbalancers](https://www.tencentcloud.com/document/api/214/33797)
+        * Read: [DescribeLoadBalancers](https://www.tencentcloud.com/document/api/214/33830)
+        * Delete: [SetSecurityGroupForLoadbalancers](https://www.tencentcloud.com/document/api/214/33797)
 
         ## Import
 

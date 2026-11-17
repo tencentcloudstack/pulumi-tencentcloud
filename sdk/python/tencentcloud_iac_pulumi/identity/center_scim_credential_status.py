@@ -152,6 +152,14 @@ class CenterScimCredentialStatus(pulumi.CustomResource):
             status="Enabled")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [UpdateSCIMCredentialStatus](https://www.tencentcloud.com/document/api/1031/66419)
+        * Read: [ListSCIMCredentials](https://www.tencentcloud.com/document/api/1031/66420)
+        * Update: [UpdateSCIMCredentialStatus](https://www.tencentcloud.com/document/api/1031/66419)
+
         ## Import
 
         organization identity_center_scim_credential_status can be imported using the id, e.g.
@@ -187,6 +195,14 @@ class CenterScimCredentialStatus(pulumi.CustomResource):
             credential_id="scimcred-xxxxxx",
             status="Enabled")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [UpdateSCIMCredentialStatus](https://www.tencentcloud.com/document/api/1031/66419)
+        * Read: [ListSCIMCredentials](https://www.tencentcloud.com/document/api/1031/66420)
+        * Update: [UpdateSCIMCredentialStatus](https://www.tencentcloud.com/document/api/1031/66419)
 
         ## Import
 

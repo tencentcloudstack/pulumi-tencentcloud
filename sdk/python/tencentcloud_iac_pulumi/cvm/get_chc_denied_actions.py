@@ -96,6 +96,12 @@ def get_chc_denied_actions(chc_ids: Optional[Sequence[_builtins.str]] = None,
     chc_denied_actions = tencentcloud.cvm.get_chc_denied_actions(chc_ids=["chc-xxxxx"])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeChcDeniedActions](https://www.tencentcloud.com/document/api/213/49703)
+
 
     :param Sequence[_builtins.str] chc_ids: CHC host IDs.
     :param _builtins.str result_output_file: Used to save results.
@@ -125,6 +131,12 @@ def get_chc_denied_actions_output(chc_ids: pulumi.Input[Optional[Sequence[_built
 
     chc_denied_actions = tencentcloud.cvm.get_chc_denied_actions(chc_ids=["chc-xxxxx"])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeChcDeniedActions](https://www.tencentcloud.com/document/api/213/49703)
 
 
     :param Sequence[_builtins.str] chc_ids: CHC host IDs.

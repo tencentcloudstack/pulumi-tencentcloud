@@ -125,6 +125,12 @@ def we_data_data_source_list(filters: Optional[Sequence[Union['WeDataDataSourceL
         }])
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDataSourceList](https://www.tencentcloud.com/document/api/1174/61092)
+
 
     :param Sequence[Union['WeDataDataSourceListFilterArgs', 'WeDataDataSourceListFilterArgsDict']] filters: Filters.
     :param Sequence[Union['WeDataDataSourceListOrderFieldArgs', 'WeDataDataSourceListOrderFieldArgsDict']] order_fields: OrderFields.
@@ -176,6 +182,12 @@ def we_data_data_source_list_output(filters: pulumi.Input[Optional[Optional[Sequ
             "values": ["tf_example"],
         }])
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeDataSourceList](https://www.tencentcloud.com/document/api/1174/61092)
 
 
     :param Sequence[Union['WeDataDataSourceListFilterArgs', 'WeDataDataSourceListFilterArgsDict']] filters: Filters.

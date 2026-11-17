@@ -190,6 +190,15 @@ class InstanceEncryptionOperation(pulumi.CustomResource):
             key_region="ap-guangzhou")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeDBInstanceInfo](https://www.tencentcloud.com/document/api/236/36100)
+          - [OpenDBInstanceEncryption](https://www.tencentcloud.com/document/api/236/53776)
+        * Read: [DescribeDBInstanceInfo](https://www.tencentcloud.com/document/api/236/36100)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -253,6 +262,15 @@ class InstanceEncryptionOperation(pulumi.CustomResource):
             key_id="KMS-CDB",
             key_region="ap-guangzhou")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeDBInstanceInfo](https://www.tencentcloud.com/document/api/236/36100)
+          - [OpenDBInstanceEncryption](https://www.tencentcloud.com/document/api/236/53776)
+        * Read: [DescribeDBInstanceInfo](https://www.tencentcloud.com/document/api/236/36100)
 
 
         :param str resource_name: The name of the resource.

@@ -221,6 +221,12 @@ class RenewDataEngineOperation(pulumi.CustomResource):
             renew_flag=1)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [RenewDataEngine](https://www.tencentcloud.com/document/api/1155/62690)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -252,6 +258,12 @@ class RenewDataEngineOperation(pulumi.CustomResource):
             time_unit="m",
             renew_flag=1)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [RenewDataEngine](https://www.tencentcloud.com/document/api/1155/62690)
 
 
         :param str resource_name: The name of the resource.

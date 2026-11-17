@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDBCustomZones](https://www.tencentcloud.com/search/?wd=DescribeDBCustomZones&type=document&lang=en)
 func GetDbCustomZones(ctx *pulumi.Context, args *GetDbCustomZonesArgs, opts ...pulumi.InvokeOption) (*GetDbCustomZonesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetDbCustomZonesResult

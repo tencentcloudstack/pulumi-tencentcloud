@@ -22,6 +22,8 @@ type InstancesAcceptAttachInstance struct {
 	InstanceRegion string `pulumi:"instanceRegion"`
 	// InstanceType: `VPC`, `DIRECTCONNECT`, `BMVPC`, `VPNGW`.
 	InstanceType *string `pulumi:"instanceType"`
+	// Instance billing method. Valid values: `PayByCcnOwner` (CCN owner pays), `PayByInstanceOwner` (instance owner pays).
+	OrderType *string `pulumi:"orderType"`
 	// ID of the routing table associated with the instance. Note: This field may return null, indicating that no valid value can be obtained.
 	RouteTableId *string `pulumi:"routeTableId"`
 }
@@ -46,6 +48,8 @@ type InstancesAcceptAttachInstanceArgs struct {
 	InstanceRegion pulumi.StringInput `pulumi:"instanceRegion"`
 	// InstanceType: `VPC`, `DIRECTCONNECT`, `BMVPC`, `VPNGW`.
 	InstanceType pulumi.StringPtrInput `pulumi:"instanceType"`
+	// Instance billing method. Valid values: `PayByCcnOwner` (CCN owner pays), `PayByInstanceOwner` (instance owner pays).
+	OrderType pulumi.StringPtrInput `pulumi:"orderType"`
 	// ID of the routing table associated with the instance. Note: This field may return null, indicating that no valid value can be obtained.
 	RouteTableId pulumi.StringPtrInput `pulumi:"routeTableId"`
 }
@@ -119,6 +123,11 @@ func (o InstancesAcceptAttachInstanceOutput) InstanceRegion() pulumi.StringOutpu
 // InstanceType: `VPC`, `DIRECTCONNECT`, `BMVPC`, `VPNGW`.
 func (o InstancesAcceptAttachInstanceOutput) InstanceType() pulumi.StringPtrOutput {
 	return o.ApplyT(func(v InstancesAcceptAttachInstance) *string { return v.InstanceType }).(pulumi.StringPtrOutput)
+}
+
+// Instance billing method. Valid values: `PayByCcnOwner` (CCN owner pays), `PayByInstanceOwner` (instance owner pays).
+func (o InstancesAcceptAttachInstanceOutput) OrderType() pulumi.StringPtrOutput {
+	return o.ApplyT(func(v InstancesAcceptAttachInstance) *string { return v.OrderType }).(pulumi.StringPtrOutput)
 }
 
 // ID of the routing table associated with the instance. Note: This field may return null, indicating that no valid value can be obtained.

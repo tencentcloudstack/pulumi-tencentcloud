@@ -378,6 +378,23 @@ class Privilege(pulumi.CustomResource):
             }])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+          - [ModifyAccountPrivileges](https://www.tencentcloud.com/document/api/236/17496)
+        * Read:
+          - [DescribeAccountPrivileges](https://www.tencentcloud.com/document/api/236/17500)
+          - [DescribeAccounts](https://www.tencentcloud.com/document/api/236/17499)
+        * Update:
+          - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+          - [ModifyAccountPrivileges](https://www.tencentcloud.com/document/api/236/17496)
+        * Delete:
+          - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+          - [ModifyAccountPrivileges](https://www.tencentcloud.com/document/api/236/17496)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -500,6 +517,23 @@ class Privilege(pulumi.CustomResource):
                 "column_name": "host",
             }])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+          - [ModifyAccountPrivileges](https://www.tencentcloud.com/document/api/236/17496)
+        * Read:
+          - [DescribeAccountPrivileges](https://www.tencentcloud.com/document/api/236/17500)
+          - [DescribeAccounts](https://www.tencentcloud.com/document/api/236/17499)
+        * Update:
+          - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+          - [ModifyAccountPrivileges](https://www.tencentcloud.com/document/api/236/17496)
+        * Delete:
+          - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+          - [ModifyAccountPrivileges](https://www.tencentcloud.com/document/api/236/17496)
 
 
         :param str resource_name: The name of the resource.

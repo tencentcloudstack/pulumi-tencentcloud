@@ -307,6 +307,15 @@ class OriginGroup(pulumi.CustomResource):
             }])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateOriginGroup](https://www.tencentcloud.com/document/api/1145/50974)
+        * Read: [DescribeOriginGroup](https://www.tencentcloud.com/document/api/1145/50970)
+        * Update: [ModifyOriginGroup](https://www.tencentcloud.com/document/api/1145/50967)
+        * Delete: [DeleteOriginGroup](https://www.tencentcloud.com/document/api/1145/50972)
+
         ## Import
 
         teo origin_group can be imported using the zone_id#originGroup_id, e.g.
@@ -356,6 +365,15 @@ class OriginGroup(pulumi.CustomResource):
                 }],
             }])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateOriginGroup](https://www.tencentcloud.com/document/api/1145/50974)
+        * Read: [DescribeOriginGroup](https://www.tencentcloud.com/document/api/1145/50970)
+        * Update: [ModifyOriginGroup](https://www.tencentcloud.com/document/api/1145/50967)
+        * Delete: [DeleteOriginGroup](https://www.tencentcloud.com/document/api/1145/50972)
 
         ## Import
 

@@ -217,6 +217,19 @@ class EdgeKvNamespace(pulumi.CustomResource):
             remark="This is an example namespace")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateEdgeKVNamespace](https://www.tencentcloud.com/document/api/1145/78830)
+          - [DescribeEdgeKVNamespaces](https://www.tencentcloud.com/document/api/1145/78828)
+        * Read: [DescribeEdgeKVNamespaces](https://www.tencentcloud.com/document/api/1145/78828)
+        * Update:
+          - [DescribeEdgeKVNamespaces](https://www.tencentcloud.com/document/api/1145/78828)
+          - [ModifyEdgeKVNamespace](https://www.tencentcloud.com/document/api/1145/78823)
+        * Delete: [DeleteEdgeKVNamespace](https://www.tencentcloud.com/document/api/1145/78829)
+
         ## Import
 
         TEO Edge KV namespace can be imported using the zone_id#namespace, e.g.
@@ -252,6 +265,19 @@ class EdgeKvNamespace(pulumi.CustomResource):
             namespace="example-namespace",
             remark="This is an example namespace")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateEdgeKVNamespace](https://www.tencentcloud.com/document/api/1145/78830)
+          - [DescribeEdgeKVNamespaces](https://www.tencentcloud.com/document/api/1145/78828)
+        * Read: [DescribeEdgeKVNamespaces](https://www.tencentcloud.com/document/api/1145/78828)
+        * Update:
+          - [DescribeEdgeKVNamespaces](https://www.tencentcloud.com/document/api/1145/78828)
+          - [ModifyEdgeKVNamespace](https://www.tencentcloud.com/document/api/1145/78823)
+        * Delete: [DeleteEdgeKVNamespace](https://www.tencentcloud.com/document/api/1145/78829)
 
         ## Import
 

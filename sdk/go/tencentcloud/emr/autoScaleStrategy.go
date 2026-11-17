@@ -77,6 +77,20 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [AddMetricScaleStrategy](https://www.tencentcloud.com/document/api/1026/73224)
+// * Read: [DescribeAutoScaleStrategies](https://www.tencentcloud.com/document/api/1026/73218)
+// * Update:
+//   - [DescribeAutoScaleStrategies](https://www.tencentcloud.com/document/api/1026/73218)
+//   - [ModifyAutoScaleStrategy](https://www.tencentcloud.com/document/api/1026/73214)
+//
+// * Delete:
+//   - [DeleteAutoScaleStrategy](https://www.tencentcloud.com/document/api/1026/73222)
+//   - [DescribeAutoScaleStrategies](https://www.tencentcloud.com/document/api/1026/73218)
+//
 // ## Import
 //
 // emr emrAutoScaleStrategy can be imported using the id, e.g.

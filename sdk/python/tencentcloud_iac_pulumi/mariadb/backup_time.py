@@ -152,6 +152,14 @@ class BackupTime(pulumi.CustomResource):
             end_backup_time="04:00")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyBackupTime](https://www.tencentcloud.com/document/api/237/16173)
+        * Read: [DescribeBackupTime](https://www.tencentcloud.com/document/api/237/16182)
+        * Update: [ModifyBackupTime](https://www.tencentcloud.com/document/api/237/16173)
+
         ## Import
 
         mariadb backup_time can be imported using the id, e.g.
@@ -187,6 +195,14 @@ class BackupTime(pulumi.CustomResource):
             start_backup_time="01:00",
             end_backup_time="04:00")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [ModifyBackupTime](https://www.tencentcloud.com/document/api/237/16173)
+        * Read: [DescribeBackupTime](https://www.tencentcloud.com/document/api/237/16182)
+        * Update: [ModifyBackupTime](https://www.tencentcloud.com/document/api/237/16173)
 
         ## Import
 

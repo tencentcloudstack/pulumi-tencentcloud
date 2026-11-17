@@ -140,6 +140,14 @@ def get_dbs(instance_id: Optional[_builtins.str] = None,
     example = tencentcloud.sqlserver.get_dbs_output(instance_id=example_db.instance_id)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+      - [DescribeDBs](https://www.tencentcloud.com/document/api/238/32114)
+
 
     :param _builtins.str instance_id: SQL Server instance ID which DB belongs to.
     :param _builtins.str result_output_file: Used to store results.
@@ -210,6 +218,14 @@ def get_dbs_output(instance_id: pulumi.Input[Optional[_builtins.str]] = None,
         remark="test-remark")
     example = tencentcloud.sqlserver.get_dbs_output(instance_id=example_db.instance_id)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read:
+      - [DescribeDBInstances](https://www.tencentcloud.com/document/api/238/32115)
+      - [DescribeDBs](https://www.tencentcloud.com/document/api/238/32114)
 
 
     :param _builtins.str instance_id: SQL Server instance ID which DB belongs to.

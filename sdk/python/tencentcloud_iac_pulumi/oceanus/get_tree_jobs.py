@@ -107,6 +107,12 @@ def get_tree_jobs(filters: Optional[Sequence[Union['GetTreeJobsFilterArgs', 'Get
     example = tencentcloud.oceanus.get_tree_jobs(work_space_id="space-2idq8wbr")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTreeJobs](https://www.tencentcloud.com/search/?wd=DescribeTreeJobs&type=document&lang=en)
+
 
     :param Sequence[Union['GetTreeJobsFilterArgs', 'GetTreeJobsFilterArgsDict']] filters: Filter rules.
     :param _builtins.str result_output_file: Used to save results.
@@ -140,6 +146,12 @@ def get_tree_jobs_output(filters: pulumi.Input[Optional[Optional[Sequence[Union[
 
     example = tencentcloud.oceanus.get_tree_jobs(work_space_id="space-2idq8wbr")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeTreeJobs](https://www.tencentcloud.com/search/?wd=DescribeTreeJobs&type=document&lang=en)
 
 
     :param Sequence[Union['GetTreeJobsFilterArgs', 'GetTreeJobsFilterArgsDict']] filters: Filter rules.

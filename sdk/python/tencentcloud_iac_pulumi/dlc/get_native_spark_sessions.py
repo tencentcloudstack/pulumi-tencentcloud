@@ -107,6 +107,12 @@ def get_native_spark_sessions(data_engine_id: Optional[_builtins.str] = None,
         resource_group_id="rg-j3zolzg77b")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeNativeSparkSessions](https://www.tencentcloud.com/search/?wd=DescribeNativeSparkSessions&type=document&lang=en)
+
 
     :param _builtins.str data_engine_id: Data engine id.
     :param _builtins.str resource_group_id: Resource group id.
@@ -141,6 +147,12 @@ def get_native_spark_sessions_output(data_engine_id: pulumi.Input[Optional[Optio
     example = tencentcloud.dlc.get_native_spark_sessions(data_engine_id="DataEngine-5plqp7q7",
         resource_group_id="rg-j3zolzg77b")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeNativeSparkSessions](https://www.tencentcloud.com/search/?wd=DescribeNativeSparkSessions&type=document&lang=en)
 
 
     :param _builtins.str data_engine_id: Data engine id.

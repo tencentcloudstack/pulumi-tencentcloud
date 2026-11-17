@@ -40,6 +40,21 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tsf
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateGroup](https://www.tencentcloud.com/search/?wd=CreateGroup&amp;type=document&amp;lang=en)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    /// * Read:
+    ///   - [DescribeGroup](https://www.tencentcloud.com/search/?wd=DescribeGroup&amp;type=document&amp;lang=en)
+    ///   - [DescribeResourceTagsByResourceIds](https://www.tencentcloud.com/document/api/651/33022)
+    /// * Update:
+    ///   - [ModifyGroup](https://www.tencentcloud.com/search/?wd=ModifyGroup&amp;type=document&amp;lang=en)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    /// * Delete: [DeleteGroup](https://www.tencentcloud.com/search/?wd=DeleteGroup&amp;type=document&amp;lang=en)
+    /// 
     /// ## Import
     /// 
     /// tsf group can be imported using the id, e.g.

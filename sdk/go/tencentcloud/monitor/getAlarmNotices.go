@@ -44,6 +44,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeAlarmNotices](https://www.tencentcloud.com/document/api/248/39300)
 func GetAlarmNotices(ctx *pulumi.Context, args *GetAlarmNoticesArgs, opts ...pulumi.InvokeOption) (*GetAlarmNoticesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetAlarmNoticesResult

@@ -54,6 +54,77 @@ import (
 //	}
 //
 // ```
+//
+// ### fields can be modified in-place without recreating the bastion host resource
+//
+// ```go
+// package main
+//
+// import (
+//
+//	"github.com/pulumi/pulumi/sdk/v3/go/pulumi"
+//	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/bh"
+//
+// )
+//
+//	func main() {
+//		pulumi.Run(func(ctx *pulumi.Context) error {
+//			_, err := bh.NewResource(ctx, "example", &bh.ResourceArgs{
+//				DeployRegion:    pulumi.String("ap-guangzhou"),
+//				VpcId:           pulumi.String("vpc-q1of50wz"),
+//				SubnetId:        pulumi.String("subnet-7uhvm46o"),
+//				ResourceEdition: pulumi.String("standard"),
+//				ResourceNode:    pulumi.Int(20),
+//				TimeUnit:        pulumi.String("m"),
+//				TimeSpan:        pulumi.Int(1),
+//				PayMode:         pulumi.Int(1),
+//				AutoRenewFlag:   pulumi.Int(1),
+//				DeployZone:      pulumi.String("ap-guangzhou-6"),
+//				CidrBlock:       pulumi.String("192.168.11.0/24"),
+//				VpcCidrBlock:    pulumi.String("192.168.0.0/16"),
+//				IntranetAccess:  pulumi.Int(1),
+//				ExternalAccess:  pulumi.Int(1),
+//				WebAccess:       pulumi.Int(1),
+//				ClientAccess:    pulumi.Int(1),
+//			})
+//			if err != nil {
+//				return err
+//			}
+//			return nil
+//		})
+//	}
+//
+// ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CreateResource](https://www.tencentcloud.com/search/?wd=CreateResource&type=document&lang=en)
+//   - [DeployResource](https://www.tencentcloud.com/search/?wd=DeployResource&type=document&lang=en)
+//   - [DescribeResources](https://www.tencentcloud.com/search/?wd=DescribeResources&type=document&lang=en)
+//
+// * Read: [DescribeResources](https://www.tencentcloud.com/search/?wd=DescribeResources&type=document&lang=en)
+// * Update:
+//   - [DescribeResources](https://www.tencentcloud.com/search/?wd=DescribeResources&type=document&lang=en)
+//   - [DisableClientTcpAccess](https://www.tencentcloud.com/search/?wd=DisableClientTcpAccess&type=document&lang=en)
+//   - [DisableExternalAccess](https://www.tencentcloud.com/search/?wd=DisableExternalAccess&type=document&lang=en)
+//   - [DisableIntranetAccess](https://www.tencentcloud.com/search/?wd=DisableIntranetAccess&type=document&lang=en)
+//   - [DisableWebAccess](https://www.tencentcloud.com/search/?wd=DisableWebAccess&type=document&lang=en)
+//   - [EnableClientTcpAccess](https://www.tencentcloud.com/search/?wd=EnableClientTcpAccess&type=document&lang=en)
+//   - [EnableExternalAccess](https://www.tencentcloud.com/search/?wd=EnableExternalAccess&type=document&lang=en)
+//   - [EnableIntranetAccess](https://www.tencentcloud.com/search/?wd=EnableIntranetAccess&type=document&lang=en)
+//   - [EnableWebAccess](https://www.tencentcloud.com/search/?wd=EnableWebAccess&type=document&lang=en)
+//   - [ModifyResource](https://www.tencentcloud.com/search/?wd=ModifyResource&type=document&lang=en)
+//
+// ## Import
+//
+// BH resource can be imported using the id, e.g.
+//
+// ```sh
+// $ pulumi import tencentcloud:Bh/resource:Resource example bh-saas-sada9k
+// ```
 type Resource struct {
 	pulumi.CustomResourceState
 

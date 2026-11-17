@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataBackupOverview](https://www.tencentcloud.com/document/api/236/35193)
         /// </summary>
         public static Task<GetDataBackupOverviewResult> InvokeAsync(GetDataBackupOverviewArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDataBackupOverviewResult>("tencentcloud:Mysql/getDataBackupOverview:getDataBackupOverview", args ?? new GetDataBackupOverviewArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataBackupOverview](https://www.tencentcloud.com/document/api/236/35193)
         /// </summary>
         public static Output<GetDataBackupOverviewResult> Invoke(GetDataBackupOverviewInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDataBackupOverviewResult>("tencentcloud:Mysql/getDataBackupOverview:getDataBackupOverview", args ?? new GetDataBackupOverviewInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataBackupOverview](https://www.tencentcloud.com/document/api/236/35193)
         /// </summary>
         public static Output<GetDataBackupOverviewResult> Invoke(GetDataBackupOverviewInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDataBackupOverviewResult>("tencentcloud:Mysql/getDataBackupOverview:getDataBackupOverview", args ?? new GetDataBackupOverviewInvokeArgs(), options.WithDefaults());

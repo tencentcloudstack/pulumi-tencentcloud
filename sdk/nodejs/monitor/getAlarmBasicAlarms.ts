@@ -27,6 +27,12 @@ import * as utilities from "../utilities";
  *     metricNames: ["cpu_usage"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeBasicAlarmList](https://www.tencentcloud.com/document/api/248/35981)
  */
 export function getAlarmBasicAlarms(args: GetAlarmBasicAlarmsArgs, opts?: pulumi.InvokeOptions): Promise<GetAlarmBasicAlarmsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -147,6 +153,12 @@ export interface GetAlarmBasicAlarmsResult {
  *     metricNames: ["cpu_usage"],
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeBasicAlarmList](https://www.tencentcloud.com/document/api/248/35981)
  */
 export function getAlarmBasicAlarmsOutput(args: GetAlarmBasicAlarmsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetAlarmBasicAlarmsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

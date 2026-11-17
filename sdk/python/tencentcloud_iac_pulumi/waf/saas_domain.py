@@ -1316,6 +1316,30 @@ class SaasDomain(pulumi.CustomResource):
             api_safe_status=1)
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [AddSpartaProtection](https://www.tencentcloud.com/document/api/627/64571)
+          - [DescribeDomainVerifyResult](https://www.tencentcloud.com/document/api/627/64758)
+          - [DescribeDomains](https://www.tencentcloud.com/document/api/627/64580)
+          - [ModifyApiAnalyzeStatus](https://www.tencentcloud.com/document/api/627/64575)
+          - [ModifyBotStatus](https://www.tencentcloud.com/document/api/627/64540)
+          - [ModifyDomainsCLSStatus](https://www.tencentcloud.com/document/api/627/64539)
+          - [ModifyProtectionStatus](https://www.tencentcloud.com/document/api/627/64508)
+        * Read:
+          - [DescribeDomainDetailsSaas](https://www.tencentcloud.com/document/api/627/64564)
+          - [DescribeDomains](https://www.tencentcloud.com/document/api/627/64580)
+        * Update:
+          - [DescribeDomainDetailsSaas](https://www.tencentcloud.com/document/api/627/64564)
+          - [ModifyApiAnalyzeStatus](https://www.tencentcloud.com/document/api/627/64575)
+          - [ModifyBotStatus](https://www.tencentcloud.com/document/api/627/64540)
+          - [ModifyDomainsCLSStatus](https://www.tencentcloud.com/document/api/627/64539)
+          - [ModifyProtectionStatus](https://www.tencentcloud.com/document/api/627/64508)
+          - [ModifySpartaProtection](https://www.tencentcloud.com/document/api/627/64558)
+        * Delete: [DeleteSpartaProtection](https://www.tencentcloud.com/document/api/627/64568)
+
         ## Import
 
         waf saas_domain can be imported using the id, e.g.
@@ -1536,6 +1560,30 @@ class SaasDomain(pulumi.CustomResource):
             bot_status=1,
             api_safe_status=1)
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [AddSpartaProtection](https://www.tencentcloud.com/document/api/627/64571)
+          - [DescribeDomainVerifyResult](https://www.tencentcloud.com/document/api/627/64758)
+          - [DescribeDomains](https://www.tencentcloud.com/document/api/627/64580)
+          - [ModifyApiAnalyzeStatus](https://www.tencentcloud.com/document/api/627/64575)
+          - [ModifyBotStatus](https://www.tencentcloud.com/document/api/627/64540)
+          - [ModifyDomainsCLSStatus](https://www.tencentcloud.com/document/api/627/64539)
+          - [ModifyProtectionStatus](https://www.tencentcloud.com/document/api/627/64508)
+        * Read:
+          - [DescribeDomainDetailsSaas](https://www.tencentcloud.com/document/api/627/64564)
+          - [DescribeDomains](https://www.tencentcloud.com/document/api/627/64580)
+        * Update:
+          - [DescribeDomainDetailsSaas](https://www.tencentcloud.com/document/api/627/64564)
+          - [ModifyApiAnalyzeStatus](https://www.tencentcloud.com/document/api/627/64575)
+          - [ModifyBotStatus](https://www.tencentcloud.com/document/api/627/64540)
+          - [ModifyDomainsCLSStatus](https://www.tencentcloud.com/document/api/627/64539)
+          - [ModifyProtectionStatus](https://www.tencentcloud.com/document/api/627/64508)
+          - [ModifySpartaProtection](https://www.tencentcloud.com/document/api/627/64558)
+        * Delete: [DeleteSpartaProtection](https://www.tencentcloud.com/document/api/627/64568)
 
         ## Import
 

@@ -19,6 +19,12 @@ import * as utilities from "../utilities";
  *     zoneId: "z-xxxxxx",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListRoleConfigurations](https://www.tencentcloud.com/document/api/1031/63597)
  */
 export function getCenterRoleConfigurations(args: GetCenterRoleConfigurationsArgs, opts?: pulumi.InvokeOptions): Promise<GetCenterRoleConfigurationsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -88,6 +94,12 @@ export interface GetCenterRoleConfigurationsResult {
  *     zoneId: "z-xxxxxx",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [ListRoleConfigurations](https://www.tencentcloud.com/document/api/1031/63597)
  */
 export function getCenterRoleConfigurationsOutput(args: GetCenterRoleConfigurationsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetCenterRoleConfigurationsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

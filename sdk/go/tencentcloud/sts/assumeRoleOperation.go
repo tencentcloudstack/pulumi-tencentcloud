@@ -42,6 +42,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [AssumeRole](https://www.tencentcloud.com/document/api/1150/49456)
 type AssumeRoleOperation struct {
 	pulumi.CustomResourceState
 

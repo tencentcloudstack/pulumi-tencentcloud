@@ -23,6 +23,12 @@ import * as utilities from "../utilities";
  *     slave: 0,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBSlowLogs](https://www.tencentcloud.com/document/api/237/16159)
  */
 export function getSlowLogs(args: GetSlowLogsArgs, opts?: pulumi.InvokeOptions): Promise<GetSlowLogsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -129,6 +135,12 @@ export interface GetSlowLogsResult {
  *     slave: 0,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDBSlowLogs](https://www.tencentcloud.com/document/api/237/16159)
  */
 export function getSlowLogsOutput(args: GetSlowLogsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSlowLogsResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

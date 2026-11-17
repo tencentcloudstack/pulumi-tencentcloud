@@ -96,6 +96,12 @@ def get_usable_unit_namespaces(result_output_file: Optional[_builtins.str] = Non
     usable_unit_namespaces = tencentcloud.tsf.get_usable_unit_namespaces(search_word="")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeUsableUnitNamespaces](https://www.tencentcloud.com/search/?wd=DescribeUsableUnitNamespaces&type=document&lang=en)
+
 
     :param _builtins.str result_output_file: Used to save results.
     :param _builtins.str search_word: search by namespace id or namespace Name.
@@ -125,6 +131,12 @@ def get_usable_unit_namespaces_output(result_output_file: pulumi.Input[Optional[
 
     usable_unit_namespaces = tencentcloud.tsf.get_usable_unit_namespaces(search_word="")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeUsableUnitNamespaces](https://www.tencentcloud.com/search/?wd=DescribeUsableUnitNamespaces&type=document&lang=en)
 
 
     :param _builtins.str result_output_file: Used to save results.

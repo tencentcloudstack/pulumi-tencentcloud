@@ -90,6 +90,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribePorts](https://www.tencentcloud.com/document/api/627/64770)
 func GetPorts(ctx *pulumi.Context, args *GetPortsArgs, opts ...pulumi.InvokeOption) (*GetPortsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetPortsResult

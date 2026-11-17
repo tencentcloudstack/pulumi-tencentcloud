@@ -41,6 +41,14 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreatePackageOrder](https://www.tencentcloud.com/document/api/1157/72479)
+// * Read: [DescribeDomain](https://www.tencentcloud.com/document/api/1157/49038)
+// * Delete: [DeletePackageOrder](https://www.tencentcloud.com/document/api/1157/73506)
+//
 // ## Import
 //
 // DNSPod package order can be imported using the id, e.g.

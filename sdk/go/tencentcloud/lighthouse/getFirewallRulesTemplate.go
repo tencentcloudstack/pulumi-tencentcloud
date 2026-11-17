@@ -36,6 +36,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeFirewallRulesTemplate](https://www.tencentcloud.com/document/api/1103/42510)
 func GetFirewallRulesTemplate(ctx *pulumi.Context, args *GetFirewallRulesTemplateArgs, opts ...pulumi.InvokeOption) (*GetFirewallRulesTemplateResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetFirewallRulesTemplateResult

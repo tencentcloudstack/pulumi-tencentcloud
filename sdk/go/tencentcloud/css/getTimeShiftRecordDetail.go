@@ -44,6 +44,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeTimeShiftRecordDetail](https://www.tencentcloud.com/document/api/267/53720)
 func GetTimeShiftRecordDetail(ctx *pulumi.Context, args *GetTimeShiftRecordDetailArgs, opts ...pulumi.InvokeOption) (*GetTimeShiftRecordDetailResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetTimeShiftRecordDetailResult

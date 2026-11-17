@@ -32,6 +32,18 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tat
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DisableInvoker](https://www.tencentcloud.com/document/api/1147/46692)
+    ///   - [EnableInvoker](https://www.tencentcloud.com/document/api/1147/46691)
+    /// * Read: [DescribeInvokers](https://www.tencentcloud.com/document/api/1147/46693)
+    /// * Update:
+    ///   - [DisableInvoker](https://www.tencentcloud.com/document/api/1147/46692)
+    ///   - [EnableInvoker](https://www.tencentcloud.com/document/api/1147/46691)
+    /// 
     /// ## Import
     /// 
     /// tat InvokerConfig can be imported using the id, e.g.

@@ -99,6 +99,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [ListCompliancePacks](https://www.tencentcloud.com/document/api/1164/85000)
 func GetCompliancePacks(ctx *pulumi.Context, args *GetCompliancePacksArgs, opts ...pulumi.InvokeOption) (*GetCompliancePacksResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetCompliancePacksResult

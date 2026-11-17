@@ -110,6 +110,12 @@ def get_email_identities(result_output_file: Optional[_builtins.str] = None,
     email_identities = tencentcloud.ses.get_email_identities()
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListEmailIdentities](https://www.tencentcloud.com/document/api/1084/39411)
+
 
     :param _builtins.str result_output_file: Used to save results.
     """
@@ -137,6 +143,12 @@ def get_email_identities_output(result_output_file: pulumi.Input[Optional[Option
 
     email_identities = tencentcloud.ses.get_email_identities()
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ListEmailIdentities](https://www.tencentcloud.com/document/api/1084/39411)
 
 
     :param _builtins.str result_output_file: Used to save results.

@@ -18,6 +18,14 @@ import * as utilities from "../utilities";
  *     upgradeProxyAndRedisServer: true,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeTaskInfo](https://www.tencentcloud.com/document/api/239/32064)
+ *   - [UpgradeVersionToMultiAvailabilityZones](https://www.tencentcloud.com/document/api/239/40162)
  */
 export class UpgradeMultiZoneOperation extends pulumi.CustomResource {
     /**

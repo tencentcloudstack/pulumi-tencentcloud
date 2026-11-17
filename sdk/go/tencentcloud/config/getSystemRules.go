@@ -90,6 +90,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [ListSystemRules](https://www.tencentcloud.com/document/api/1164/84962)
 func GetSystemRules(ctx *pulumi.Context, args *GetSystemRulesArgs, opts ...pulumi.InvokeOption) (*GetSystemRulesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSystemRulesResult

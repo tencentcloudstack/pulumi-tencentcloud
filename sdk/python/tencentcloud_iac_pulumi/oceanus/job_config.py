@@ -808,6 +808,14 @@ class JobConfig(pulumi.CustomResource):
             cos_bucket="autotest-gz-bucket-1257058945")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateJobConfig](https://www.tencentcloud.com/search/?wd=CreateJobConfig&type=document&lang=en)
+        * Read: [DescribeJobConfigs](https://www.tencentcloud.com/search/?wd=DescribeJobConfigs&type=document&lang=en)
+        * Delete: [DeleteJobConfigs](https://www.tencentcloud.com/search/?wd=DeleteJobConfigs&type=document&lang=en)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -910,6 +918,14 @@ class JobConfig(pulumi.CustomResource):
             expert_mode_on=False,
             cos_bucket="autotest-gz-bucket-1257058945")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [CreateJobConfig](https://www.tencentcloud.com/search/?wd=CreateJobConfig&type=document&lang=en)
+        * Read: [DescribeJobConfigs](https://www.tencentcloud.com/search/?wd=DescribeJobConfigs&type=document&lang=en)
+        * Delete: [DeleteJobConfigs](https://www.tencentcloud.com/search/?wd=DeleteJobConfigs&type=document&lang=en)
 
 
         :param str resource_name: The name of the resource.

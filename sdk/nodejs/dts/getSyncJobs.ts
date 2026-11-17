@@ -34,6 +34,12 @@ import * as utilities from "../utilities";
  *     jobName: "tf_dts_test",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSyncJobs](https://www.tencentcloud.com/document/api/571/51793)
  */
 export function getSyncJobs(args?: GetSyncJobsArgs, opts?: pulumi.InvokeOptions): Promise<GetSyncJobsResult> {
     args = args || {};
@@ -164,6 +170,12 @@ export interface GetSyncJobsResult {
  *     jobName: "tf_dts_test",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeSyncJobs](https://www.tencentcloud.com/document/api/571/51793)
  */
 export function getSyncJobsOutput(args?: GetSyncJobsOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetSyncJobsResult> {
     args = args || {};

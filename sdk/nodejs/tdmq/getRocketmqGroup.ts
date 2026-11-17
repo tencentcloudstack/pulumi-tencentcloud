@@ -38,6 +38,12 @@ import * as utilities from "../utilities";
  *     filterGroup: exampleRocketmqGroup.groupName,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRocketMQGroups](https://www.tencentcloud.com/search/?wd=DescribeRocketMQGroups&type=document&lang=en)
  */
 export function getRocketmqGroup(args: GetRocketmqGroupArgs, opts?: pulumi.InvokeOptions): Promise<GetRocketmqGroupResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -132,6 +138,12 @@ export interface GetRocketmqGroupResult {
  *     filterGroup: exampleRocketmqGroup.groupName,
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeRocketMQGroups](https://www.tencentcloud.com/search/?wd=DescribeRocketMQGroups&type=document&lang=en)
  */
 export function getRocketmqGroupOutput(args: GetRocketmqGroupOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetRocketmqGroupResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

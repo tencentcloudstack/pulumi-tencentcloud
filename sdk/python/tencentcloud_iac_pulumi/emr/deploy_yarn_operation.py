@@ -85,6 +85,14 @@ class DeployYarnOperation(pulumi.CustomResource):
         emr_yarn = tencentcloud.emr.DeployYarnOperation("emr_yarn", instance_id="emr-xxxxxx")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DeployYarnConf](https://www.tencentcloud.com/document/api/1026/73207)
+          - [DescribeClusterFlowStatusDetail](https://www.tencentcloud.com/document/api/1026/73259)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -107,6 +115,14 @@ class DeployYarnOperation(pulumi.CustomResource):
 
         emr_yarn = tencentcloud.emr.DeployYarnOperation("emr_yarn", instance_id="emr-xxxxxx")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [DeployYarnConf](https://www.tencentcloud.com/document/api/1026/73207)
+          - [DescribeClusterFlowStatusDetail](https://www.tencentcloud.com/document/api/1026/73259)
 
 
         :param str resource_name: The name of the resource.

@@ -36,6 +36,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRollbackTime](https://www.tencentcloud.com/document/api/238/32110)
         /// </summary>
         public static Task<GetRollbackTimeResult> InvokeAsync(GetRollbackTimeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetRollbackTimeResult>("tencentcloud:Sqlserver/getRollbackTime:getRollbackTime", args ?? new GetRollbackTimeArgs(), options.WithDefaults());
@@ -64,6 +70,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRollbackTime](https://www.tencentcloud.com/document/api/238/32110)
         /// </summary>
         public static Output<GetRollbackTimeResult> Invoke(GetRollbackTimeInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetRollbackTimeResult>("tencentcloud:Sqlserver/getRollbackTime:getRollbackTime", args ?? new GetRollbackTimeInvokeArgs(), options.WithDefaults());
@@ -92,6 +104,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Sqlserver
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeRollbackTime](https://www.tencentcloud.com/document/api/238/32110)
         /// </summary>
         public static Output<GetRollbackTimeResult> Invoke(GetRollbackTimeInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetRollbackTimeResult>("tencentcloud:Sqlserver/getRollbackTime:getRollbackTime", args ?? new GetRollbackTimeInvokeArgs(), options.WithDefaults());

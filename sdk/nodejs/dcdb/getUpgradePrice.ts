@@ -48,6 +48,12 @@ import * as utilities from "../utilities";
  *     amountUnit: "pent",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDCDBUpgradePrice](https://www.tencentcloud.com/search/?wd=DescribeDCDBUpgradePrice&type=document&lang=en)
  */
 export function getUpgradePrice(args: GetUpgradePriceArgs, opts?: pulumi.InvokeOptions): Promise<GetUpgradePriceResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -166,6 +172,12 @@ export interface GetUpgradePriceResult {
  *     amountUnit: "pent",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeDCDBUpgradePrice](https://www.tencentcloud.com/search/?wd=DescribeDCDBUpgradePrice&type=document&lang=en)
  */
 export function getUpgradePriceOutput(args: GetUpgradePriceOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetUpgradePriceResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

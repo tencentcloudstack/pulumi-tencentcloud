@@ -101,6 +101,16 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872)
+//   - [SwitchForUpgrade](https://www.tencentcloud.com/document/api/236/15864)
+//
+// * Read: [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872)
 type SwitchForUpgrade struct {
 	pulumi.CustomResourceState
 

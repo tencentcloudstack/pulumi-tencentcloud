@@ -39,6 +39,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read:
+//   - [DescribeInstanceAttributes](https://www.tencentcloud.com/document/api/597/35358)
+//   - [DescribeTopicDetail](https://www.tencentcloud.com/document/api/597/35341)
 func GetTopics(ctx *pulumi.Context, args *GetTopicsArgs, opts ...pulumi.InvokeOption) (*GetTopicsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetTopicsResult

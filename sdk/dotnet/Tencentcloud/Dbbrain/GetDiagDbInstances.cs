@@ -37,6 +37,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDiagDBInstances](https://www.tencentcloud.com/document/api/1035/41195)
         /// </summary>
         public static Task<GetDiagDbInstancesResult> InvokeAsync(GetDiagDbInstancesArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDiagDbInstancesResult>("tencentcloud:Dbbrain/getDiagDbInstances:getDiagDbInstances", args ?? new GetDiagDbInstancesArgs(), options.WithDefaults());
@@ -66,6 +72,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDiagDBInstances](https://www.tencentcloud.com/document/api/1035/41195)
         /// </summary>
         public static Output<GetDiagDbInstancesResult> Invoke(GetDiagDbInstancesInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDiagDbInstancesResult>("tencentcloud:Dbbrain/getDiagDbInstances:getDiagDbInstances", args ?? new GetDiagDbInstancesInvokeArgs(), options.WithDefaults());
@@ -95,6 +107,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dbbrain
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDiagDBInstances](https://www.tencentcloud.com/document/api/1035/41195)
         /// </summary>
         public static Output<GetDiagDbInstancesResult> Invoke(GetDiagDbInstancesInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDiagDbInstancesResult>("tencentcloud:Dbbrain/getDiagDbInstances:getDiagDbInstances", args ?? new GetDiagDbInstancesInvokeArgs(), options.WithDefaults());

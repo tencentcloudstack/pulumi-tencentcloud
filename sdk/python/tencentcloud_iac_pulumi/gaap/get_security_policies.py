@@ -116,6 +116,12 @@ def get_security_policies(id: Optional[_builtins.str] = None,
     foo = tencentcloud.gaap.get_security_policies_output(id=foo_security_policy.id)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSecurityPolicyDetail](https://www.tencentcloud.com/document/api/608/33097)
+
 
     :param _builtins.str id: ID of the security policy to be queried.
     :param _builtins.str result_output_file: Used to save results.
@@ -156,6 +162,12 @@ def get_security_policies_output(id: pulumi.Input[Optional[_builtins.str]] = Non
         action="ACCEPT")
     foo = tencentcloud.gaap.get_security_policies_output(id=foo_security_policy.id)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeSecurityPolicyDetail](https://www.tencentcloud.com/document/api/608/33097)
 
 
     :param _builtins.str id: ID of the security policy to be queried.

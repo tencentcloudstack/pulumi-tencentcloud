@@ -94,6 +94,12 @@ def get_registration_code(instance_id: Optional[_builtins.str] = None,
     example = tencentcloud.mqtt.get_registration_code(instance_id="mqtt-zxjwkr98")
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ApplyRegistrationCode](https://www.tencentcloud.com/search/?wd=ApplyRegistrationCode&type=document&lang=en)
+
 
     :param _builtins.str instance_id: Instance ID.
     :param _builtins.str result_output_file: Used to save results.
@@ -123,6 +129,12 @@ def get_registration_code_output(instance_id: pulumi.Input[Optional[_builtins.st
 
     example = tencentcloud.mqtt.get_registration_code(instance_id="mqtt-zxjwkr98")
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [ApplyRegistrationCode](https://www.tencentcloud.com/search/?wd=ApplyRegistrationCode&type=document&lang=en)
 
 
     :param _builtins.str instance_id: Instance ID.

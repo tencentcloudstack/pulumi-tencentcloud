@@ -30,6 +30,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Emr
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [DeployYarnConf](https://www.tencentcloud.com/document/api/1026/73207)
+    ///   - [DescribeClusterFlowStatusDetail](https://www.tencentcloud.com/document/api/1026/73259)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Emr/deployYarnOperation:DeployYarnOperation")]
     public partial class DeployYarnOperation : global::Pulumi.CustomResource

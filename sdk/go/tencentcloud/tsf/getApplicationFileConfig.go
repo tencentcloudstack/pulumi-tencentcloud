@@ -41,6 +41,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeFileConfigs](https://www.tencentcloud.com/search/?wd=DescribeFileConfigs&type=document&lang=en)
 func LookupApplicationFileConfig(ctx *pulumi.Context, args *LookupApplicationFileConfigArgs, opts ...pulumi.InvokeOption) (*LookupApplicationFileConfigResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv LookupApplicationFileConfigResult

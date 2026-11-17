@@ -32,6 +32,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataEngines](https://www.tencentcloud.com/search/?wd=DescribeDataEngines&amp;type=document&amp;lang=en)
         /// </summary>
         public static Task<GetDescribeDataEngineResult> InvokeAsync(GetDescribeDataEngineArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetDescribeDataEngineResult>("tencentcloud:Dlc/getDescribeDataEngine:getDescribeDataEngine", args ?? new GetDescribeDataEngineArgs(), options.WithDefaults());
@@ -56,6 +62,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataEngines](https://www.tencentcloud.com/search/?wd=DescribeDataEngines&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDescribeDataEngineResult> Invoke(GetDescribeDataEngineInvokeArgs args, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetDescribeDataEngineResult>("tencentcloud:Dlc/getDescribeDataEngine:getDescribeDataEngine", args ?? new GetDescribeDataEngineInvokeArgs(), options.WithDefaults());
@@ -80,6 +92,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Dlc
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeDataEngines](https://www.tencentcloud.com/search/?wd=DescribeDataEngines&amp;type=document&amp;lang=en)
         /// </summary>
         public static Output<GetDescribeDataEngineResult> Invoke(GetDescribeDataEngineInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetDescribeDataEngineResult>("tencentcloud:Dlc/getDescribeDataEngine:getDescribeDataEngine", args ?? new GetDescribeDataEngineInvokeArgs(), options.WithDefaults());

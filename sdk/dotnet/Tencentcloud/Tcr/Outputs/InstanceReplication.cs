@@ -15,7 +15,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Tcr.Outputs
     public sealed class InstanceReplication
     {
         /// <summary>
-        /// ID of the resource.
+        /// Replication registry ID (readonly).
         /// </summary>
         public readonly string? Id;
         /// <summary>

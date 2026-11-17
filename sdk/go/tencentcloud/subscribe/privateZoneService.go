@@ -36,6 +36,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [SubscribePrivateZoneService](https://www.tencentcloud.com/document/api/1097/42109)
 type PrivateZoneService struct {
 	pulumi.CustomResourceState
 

@@ -32,6 +32,10 @@ import (
 //				LogSetId:  pulumi.String("2ed70190-bf06-4777-980d-2d8a327a2554"),
 //				TopicName: pulumi.String("tf-example"),
 //				Status:    pulumi.Bool(true),
+//				Period:    pulumi.Int(30),
+//				Tags: pulumi.StringMap{
+//					"env": pulumi.String("prod"),
+//				},
 //			})
 //			if err != nil {
 //				return err
@@ -41,6 +45,19 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CreateTopic](https://www.tencentcloud.com/document/api/214/37820)
+//   - [DescribeLogsets](https://www.tencentcloud.com/document/api/614/42778)
+//   - [ModifyTopic](https://www.tencentcloud.com/document/api/614/42782)
+//
+// * Read: [DescribeTopics](https://www.tencentcloud.com/document/api/614/42783)
+// * Update: [ModifyTopic](https://www.tencentcloud.com/document/api/614/42782)
+// * Delete: [DeleteTopic](https://www.tencentcloud.com/document/api/614/42784)
 //
 // ## Import
 //
@@ -56,8 +73,12 @@ type LogTopic struct {
 	CreateTime pulumi.StringOutput `pulumi:"createTime"`
 	// Log topic of CLB instance.
 	LogSetId pulumi.StringOutput `pulumi:"logSetId"`
+	// Log storage lifecycle in days. Standard storage supports 1-3600; 3640 means permanent retention. Defaults to 30 when unset.
+	Period pulumi.IntOutput `pulumi:"period"`
 	// The status of log topic. true: enable; false: disable. Default is true.
 	Status pulumi.BoolOutput `pulumi:"status"`
+	// Tags of clb log topic.
+	Tags pulumi.StringMapOutput `pulumi:"tags"`
 	// Log topic of CLB instance.
 	TopicName pulumi.StringOutput `pulumi:"topicName"`
 }
@@ -102,8 +123,12 @@ type logTopicState struct {
 	CreateTime *string `pulumi:"createTime"`
 	// Log topic of CLB instance.
 	LogSetId *string `pulumi:"logSetId"`
+	// Log storage lifecycle in days. Standard storage supports 1-3600; 3640 means permanent retention. Defaults to 30 when unset.
+	Period *int `pulumi:"period"`
 	// The status of log topic. true: enable; false: disable. Default is true.
 	Status *bool `pulumi:"status"`
+	// Tags of clb log topic.
+	Tags map[string]string `pulumi:"tags"`
 	// Log topic of CLB instance.
 	TopicName *string `pulumi:"topicName"`
 }
@@ -113,8 +138,12 @@ type LogTopicState struct {
 	CreateTime pulumi.StringPtrInput
 	// Log topic of CLB instance.
 	LogSetId pulumi.StringPtrInput
+	// Log storage lifecycle in days. Standard storage supports 1-3600; 3640 means permanent retention. Defaults to 30 when unset.
+	Period pulumi.IntPtrInput
 	// The status of log topic. true: enable; false: disable. Default is true.
 	Status pulumi.BoolPtrInput
+	// Tags of clb log topic.
+	Tags pulumi.StringMapInput
 	// Log topic of CLB instance.
 	TopicName pulumi.StringPtrInput
 }
@@ -126,8 +155,12 @@ func (LogTopicState) ElementType() reflect.Type {
 type logTopicArgs struct {
 	// Log topic of CLB instance.
 	LogSetId string `pulumi:"logSetId"`
+	// Log storage lifecycle in days. Standard storage supports 1-3600; 3640 means permanent retention. Defaults to 30 when unset.
+	Period *int `pulumi:"period"`
 	// The status of log topic. true: enable; false: disable. Default is true.
 	Status *bool `pulumi:"status"`
+	// Tags of clb log topic.
+	Tags map[string]string `pulumi:"tags"`
 	// Log topic of CLB instance.
 	TopicName string `pulumi:"topicName"`
 }
@@ -136,8 +169,12 @@ type logTopicArgs struct {
 type LogTopicArgs struct {
 	// Log topic of CLB instance.
 	LogSetId pulumi.StringInput
+	// Log storage lifecycle in days. Standard storage supports 1-3600; 3640 means permanent retention. Defaults to 30 when unset.
+	Period pulumi.IntPtrInput
 	// The status of log topic. true: enable; false: disable. Default is true.
 	Status pulumi.BoolPtrInput
+	// Tags of clb log topic.
+	Tags pulumi.StringMapInput
 	// Log topic of CLB instance.
 	TopicName pulumi.StringInput
 }
@@ -239,9 +276,19 @@ func (o LogTopicOutput) LogSetId() pulumi.StringOutput {
 	return o.ApplyT(func(v *LogTopic) pulumi.StringOutput { return v.LogSetId }).(pulumi.StringOutput)
 }
 
+// Log storage lifecycle in days. Standard storage supports 1-3600; 3640 means permanent retention. Defaults to 30 when unset.
+func (o LogTopicOutput) Period() pulumi.IntOutput {
+	return o.ApplyT(func(v *LogTopic) pulumi.IntOutput { return v.Period }).(pulumi.IntOutput)
+}
+
 // The status of log topic. true: enable; false: disable. Default is true.
 func (o LogTopicOutput) Status() pulumi.BoolOutput {
 	return o.ApplyT(func(v *LogTopic) pulumi.BoolOutput { return v.Status }).(pulumi.BoolOutput)
+}
+
+// Tags of clb log topic.
+func (o LogTopicOutput) Tags() pulumi.StringMapOutput {
+	return o.ApplyT(func(v *LogTopic) pulumi.StringMapOutput { return v.Tags }).(pulumi.StringMapOutput)
 }
 
 // Log topic of CLB instance.

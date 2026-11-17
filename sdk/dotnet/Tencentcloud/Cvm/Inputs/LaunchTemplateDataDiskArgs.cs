@@ -26,7 +26,7 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cvm.Inputs
         public Input<bool>? DeleteWithInstance { get; set; }
 
         /// <summary>
-        /// Data disk ID.
+        /// System disk ID.
         /// </summary>
         [Input("diskId")]
         public Input<string>? DiskId { get; set; }

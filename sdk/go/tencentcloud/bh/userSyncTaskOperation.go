@@ -39,6 +39,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create:
+//   - [CreateSyncUserTask](https://www.tencentcloud.com/search/?wd=CreateSyncUserTask&type=document&lang=en)
+//   - [DescribeUserSyncStatus](https://www.tencentcloud.com/search/?wd=DescribeUserSyncStatus&type=document&lang=en)
 type UserSyncTaskOperation struct {
 	pulumi.CustomResourceState
 

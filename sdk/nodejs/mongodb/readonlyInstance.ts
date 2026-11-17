@@ -5,7 +5,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as utilities from "../utilities";
 
 /**
- * Provide a resource to create a Readonly mongodb instance.
+ * Provide a resource to create a Mongodb readonly instance.
  *
  * ## Example Usage
  *
@@ -15,55 +15,126 @@ import * as utilities from "../utilities";
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const mongodb = new tencentcloud.mongodb.ReadonlyInstance("mongodb", {
- *     instanceName: "tf-mongodb-readonly-test",
+ * const example = new tencentcloud.mongodb.Instance("example", {
+ *     instanceName: "tf-example",
+ *     cpu: 2,
  *     memory: 4,
  *     volume: 100,
- *     engineVersion: "MONGO_44_WT",
- *     machineType: "HIO10G",
- *     availableZone: "ap-guangzhou-3",
+ *     engineVersion: "MONGO_80_WT",
+ *     machineType: "GE.LD.T1",
+ *     availableZone: "ap-guangzhou-6",
+ *     vpcId: "vpc-i5yyodl9",
+ *     subnetId: "subnet-hhi88a58",
  *     projectId: 0,
- *     fatherInstanceId: "cmgo-xxxxxx",
+ *     password: "Password@2026",
+ *     dataEncryption: "TDE",
+ *     encryptionKeySource: "manual",
+ *     keyId: "KMS-MONGODB",
+ *     kmsRegion: "ap-guangzhou",
+ * });
+ * const exampleReadonlyInstance = new tencentcloud.mongodb.ReadonlyInstance("example", {
+ *     instanceName: "tf-mongodb",
+ *     cpu: 2,
+ *     memory: 4,
+ *     volume: 100,
+ *     engineVersion: "MONGO_80_WT",
+ *     machineType: "GE.LD.T1",
+ *     availableZone: "ap-guangzhou-7",
+ *     projectId: 0,
+ *     fatherInstanceId: example.id,
  *     fatherInstanceRegion: "ap-guangzhou",
- *     vpcId: "vpc-xxxxxx",
- *     subnetId: "subnet-xxxxxx",
- *     securityGroups: ["sg-xxxxxx"],
+ *     vpcId: "vpc-i5yyodl9",
+ *     subnetId: "subnet-d4umunpy",
+ *     securityGroups: ["sg-n8zf5ry9"],
  *     clusterType: "REPLSET",
+ *     dataEncryption: "No_Encryption",
  * });
  * ```
  *
- * ### Shard readonly instance
+ * ### Sharding readonly instance
  *
  * ```typescript
  * import * as pulumi from "@pulumi/pulumi";
  * import * as tencentcloud from "@tencentcloud_iac/pulumi";
  *
- * const shardingMongodb = new tencentcloud.mongodb.ReadonlyInstance("sharding_mongodb", {
- *     instanceName: "tf-mongodb-readonly-shard",
+ * const example = new tencentcloud.mongodb.ShardingInstance("example", {
+ *     instanceName: "tf-example",
+ *     shardQuantity: 2,
+ *     nodesPerShard: 3,
+ *     cpu: 2,
  *     memory: 4,
  *     volume: 100,
- *     engineVersion: "MONGO_44_WT",
- *     machineType: "HIO10G",
- *     availableZone: "ap-guangzhou-3",
+ *     engineVersion: "MONGO_80_WT",
+ *     machineType: "GE.LD.T1",
+ *     availableZone: "ap-guangzhou-6",
+ *     vpcId: "vpc-i5yyodl9",
+ *     subnetId: "subnet-hhi88a58",
  *     projectId: 0,
- *     fatherInstanceId: "cmgo-xxxxxx",
+ *     password: "Password@2026",
+ *     mongosCpu: 1,
+ *     mongosMemory: 2,
+ *     mongosNodeNum: 3,
+ *     dataEncryption: "TDE",
+ *     encryptionKeySource: "auto",
+ * });
+ * const exampleReadonlyInstance = new tencentcloud.mongodb.ReadonlyInstance("example", {
+ *     instanceName: "tf-mongodb",
+ *     cpu: 2,
+ *     memory: 4,
+ *     volume: 100,
+ *     engineVersion: "MONGO_80_WT",
+ *     machineType: "GE.LD.T1",
+ *     availableZone: "ap-guangzhou-7",
+ *     projectId: 0,
+ *     fatherInstanceId: example.id,
  *     fatherInstanceRegion: "ap-guangzhou",
- *     vpcId: "vpc-xxxxxx",
- *     subnetId: "subnet-xxxxxx",
- *     securityGroups: ["sg-xxxxxx"],
+ *     vpcId: "vpc-i5yyodl9",
+ *     subnetId: "subnet-d4umunpy",
+ *     securityGroups: ["sg-n8zf5ry9"],
  *     clusterType: "SHARD",
  *     mongosCpu: 1,
  *     mongosMemory: 2,
  *     mongosNodeNum: 3,
+ *     dataEncryption: "TDE",
+ *     encryptionKeySource: "manual",
+ *     keyId: "KMS-MONGODB",
+ *     kmsRegion: "ap-guangzhou",
  * });
  * ```
  *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [CreateDBInstance](https://www.tencentcloud.com/search/?wd=CreateDBInstance&type=document&lang=en)
+ *   - [CreateDBInstanceHour](https://www.tencentcloud.com/document/api/240/34704)
+ *   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/240/34702)
+ *   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+ *   - [RenameInstance](https://www.tencentcloud.com/document/api/240/34697)
+ * * Read:
+ *   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/240/34702)
+ *   - [DescribeSecurityGroup](https://www.tencentcloud.com/document/api/240/40341)
+ *   - [DescribeTransparentDataEncryptionStatus](https://www.tencentcloud.com/search/?wd=DescribeTransparentDataEncryptionStatus&type=document&lang=en)
+ * * Update:
+ *   - [AssignProject](https://www.tencentcloud.com/document/api/240/34705)
+ *   - [DescribeDBInstanceDeal](https://www.tencentcloud.com/document/api/240/37330)
+ *   - [ModifyDBInstanceSecurityGroup](https://www.tencentcloud.com/document/api/240/45894)
+ *   - [ModifyDBInstanceSpec](https://www.tencentcloud.com/document/api/240/34699)
+ *   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+ *   - [RenameInstance](https://www.tencentcloud.com/document/api/240/34697)
+ *   - [RenewDBInstances](https://www.tencentcloud.com/document/api/240/37326)
+ * * Delete:
+ *   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/240/34702)
+ *   - [IsolateDBInstance](https://www.tencentcloud.com/document/api/240/34700)
+ *   - [OfflineIsolatedDBInstance](https://www.tencentcloud.com/document/api/240/34698)
+ *
  * ## Import
  *
- * Mongodb instance can be imported using the id, e.g.
+ * Mongodb readonly instance can be imported using the id, e.g.
  *
  * ```sh
- * $ pulumi import tencentcloud:Mongodb/readonlyInstance:ReadonlyInstance mongodb cmgo-xxxxxx
+ * $ pulumi import tencentcloud:Mongodb/readonlyInstance:ReadonlyInstance mongodb cmgo-7ohkcdu7
  * ```
  */
 export class ReadonlyInstance extends pulumi.CustomResource {
@@ -111,9 +182,21 @@ export class ReadonlyInstance extends pulumi.CustomResource {
      */
     declare public readonly clusterType: pulumi.Output<string>;
     /**
+     * The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.
+     */
+    declare public readonly cpu: pulumi.Output<number>;
+    /**
      * Creation time of the Mongodb instance.
      */
     declare public /*out*/ readonly createTime: pulumi.Output<string>;
+    /**
+     * Database storage encryption setting. `No_Encryption`: Storage encryption is not used. `TDE`: Enables TDE storage encryption. Note: this field does not support update, please recreate the resource if you need to change it.
+     */
+    declare public readonly dataEncryption: pulumi.Output<string>;
+    /**
+     * If TDE storage encryption is selected, the key source must be specified. `auto`: Automatically generate the key. `manual`: Manually specify the key. Note: this field does not support update, please recreate the resource if you need to change it.
+     */
+    declare public readonly encryptionKeySource: pulumi.Output<string | undefined>;
     /**
      * Refers to version information. The DescribeSpecInfo API can be called to obtain detailed information about the supported versions.
      * - MONGO_40_WT: version of the MongoDB 4.0 WiredTiger storage engine.
@@ -144,6 +227,14 @@ export class ReadonlyInstance extends pulumi.CustomResource {
      * Name of the Mongodb instance.
      */
     declare public readonly instanceName: pulumi.Output<string>;
+    /**
+     * Please note that this field is the CMK name, corresponding to the `alias` field in KMS. Key ID. If `manual` is selected as the key resource, you must enter the specified key ID. Note: this field does not support update, please recreate the resource if you need to change it.
+     */
+    declare public readonly keyId: pulumi.Output<string>;
+    /**
+     * Key ID. If `manual` is selected as the key resource, you must enter the specified key region. Note: this field does not support update, please recreate the resource if you need to change it.
+     */
+    declare public readonly kmsRegion: pulumi.Output<string>;
     /**
      * Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
      */
@@ -234,12 +325,17 @@ export class ReadonlyInstance extends pulumi.CustomResource {
             resourceInputs["availableZone"] = state?.availableZone;
             resourceInputs["chargeType"] = state?.chargeType;
             resourceInputs["clusterType"] = state?.clusterType;
+            resourceInputs["cpu"] = state?.cpu;
             resourceInputs["createTime"] = state?.createTime;
+            resourceInputs["dataEncryption"] = state?.dataEncryption;
+            resourceInputs["encryptionKeySource"] = state?.encryptionKeySource;
             resourceInputs["engineVersion"] = state?.engineVersion;
             resourceInputs["fatherInstanceId"] = state?.fatherInstanceId;
             resourceInputs["fatherInstanceRegion"] = state?.fatherInstanceRegion;
             resourceInputs["inMaintenance"] = state?.inMaintenance;
             resourceInputs["instanceName"] = state?.instanceName;
+            resourceInputs["keyId"] = state?.keyId;
+            resourceInputs["kmsRegion"] = state?.kmsRegion;
             resourceInputs["machineType"] = state?.machineType;
             resourceInputs["memory"] = state?.memory;
             resourceInputs["mongosCpu"] = state?.mongosCpu;
@@ -291,11 +387,16 @@ export class ReadonlyInstance extends pulumi.CustomResource {
             resourceInputs["availableZone"] = args?.availableZone;
             resourceInputs["chargeType"] = args?.chargeType;
             resourceInputs["clusterType"] = args?.clusterType;
+            resourceInputs["cpu"] = args?.cpu;
+            resourceInputs["dataEncryption"] = args?.dataEncryption;
+            resourceInputs["encryptionKeySource"] = args?.encryptionKeySource;
             resourceInputs["engineVersion"] = args?.engineVersion;
             resourceInputs["fatherInstanceId"] = args?.fatherInstanceId;
             resourceInputs["fatherInstanceRegion"] = args?.fatherInstanceRegion;
             resourceInputs["inMaintenance"] = args?.inMaintenance;
             resourceInputs["instanceName"] = args?.instanceName;
+            resourceInputs["keyId"] = args?.keyId;
+            resourceInputs["kmsRegion"] = args?.kmsRegion;
             resourceInputs["machineType"] = args?.machineType;
             resourceInputs["memory"] = args?.memory;
             resourceInputs["mongosCpu"] = args?.mongosCpu;
@@ -342,9 +443,21 @@ export interface ReadonlyInstanceState {
      */
     clusterType?: pulumi.Input<string | undefined>;
     /**
+     * The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.
+     */
+    cpu?: pulumi.Input<number | undefined>;
+    /**
      * Creation time of the Mongodb instance.
      */
     createTime?: pulumi.Input<string | undefined>;
+    /**
+     * Database storage encryption setting. `No_Encryption`: Storage encryption is not used. `TDE`: Enables TDE storage encryption. Note: this field does not support update, please recreate the resource if you need to change it.
+     */
+    dataEncryption?: pulumi.Input<string | undefined>;
+    /**
+     * If TDE storage encryption is selected, the key source must be specified. `auto`: Automatically generate the key. `manual`: Manually specify the key. Note: this field does not support update, please recreate the resource if you need to change it.
+     */
+    encryptionKeySource?: pulumi.Input<string | undefined>;
     /**
      * Refers to version information. The DescribeSpecInfo API can be called to obtain detailed information about the supported versions.
      * - MONGO_40_WT: version of the MongoDB 4.0 WiredTiger storage engine.
@@ -375,6 +488,14 @@ export interface ReadonlyInstanceState {
      * Name of the Mongodb instance.
      */
     instanceName?: pulumi.Input<string | undefined>;
+    /**
+     * Please note that this field is the CMK name, corresponding to the `alias` field in KMS. Key ID. If `manual` is selected as the key resource, you must enter the specified key ID. Note: this field does not support update, please recreate the resource if you need to change it.
+     */
+    keyId?: pulumi.Input<string | undefined>;
+    /**
+     * Key ID. If `manual` is selected as the key resource, you must enter the specified key region. Note: this field does not support update, please recreate the resource if you need to change it.
+     */
+    kmsRegion?: pulumi.Input<string | undefined>;
     /**
      * Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
      */
@@ -470,6 +591,18 @@ export interface ReadonlyInstanceArgs {
      */
     clusterType: pulumi.Input<string>;
     /**
+     * The CPU core count of the MongoDB instance after the configuration change. Unit: C. When this parameter is empty, the current CPU size of the instance is used by default. The supported CPU specifications can be obtained through the DescribeSpecInfo API.
+     */
+    cpu?: pulumi.Input<number | undefined>;
+    /**
+     * Database storage encryption setting. `No_Encryption`: Storage encryption is not used. `TDE`: Enables TDE storage encryption. Note: this field does not support update, please recreate the resource if you need to change it.
+     */
+    dataEncryption?: pulumi.Input<string | undefined>;
+    /**
+     * If TDE storage encryption is selected, the key source must be specified. `auto`: Automatically generate the key. `manual`: Manually specify the key. Note: this field does not support update, please recreate the resource if you need to change it.
+     */
+    encryptionKeySource?: pulumi.Input<string | undefined>;
+    /**
      * Refers to version information. The DescribeSpecInfo API can be called to obtain detailed information about the supported versions.
      * - MONGO_40_WT: version of the MongoDB 4.0 WiredTiger storage engine.
      * - MONGO_42_WT: version of the MongoDB 4.2 WiredTiger storage engine.
@@ -499,6 +632,14 @@ export interface ReadonlyInstanceArgs {
      * Name of the Mongodb instance.
      */
     instanceName: pulumi.Input<string>;
+    /**
+     * Please note that this field is the CMK name, corresponding to the `alias` field in KMS. Key ID. If `manual` is selected as the key resource, you must enter the specified key ID. Note: this field does not support update, please recreate the resource if you need to change it.
+     */
+    keyId?: pulumi.Input<string | undefined>;
+    /**
+     * Key ID. If `manual` is selected as the key resource, you must enter the specified key region. Note: this field does not support update, please recreate the resource if you need to change it.
+     */
+    kmsRegion?: pulumi.Input<string | undefined>;
     /**
      * Type of Mongodb instance, and available values include `HIO`(or `GIO` which will be deprecated, represents high IO) and `HIO10G`(or `TGIO` which will be deprecated, represents 10-gigabit high IO).
      */

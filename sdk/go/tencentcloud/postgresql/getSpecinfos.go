@@ -39,6 +39,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeProductConfig](https://www.tencentcloud.com/document/api/409/16776)
 func GetSpecinfos(ctx *pulumi.Context, args *GetSpecinfosArgs, opts ...pulumi.InvokeOption) (*GetSpecinfosResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetSpecinfosResult

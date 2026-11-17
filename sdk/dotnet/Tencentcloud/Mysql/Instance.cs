@@ -196,6 +196,114 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     /// });
     /// ```
     /// 
+    /// ### Create instance with destroy protect enabled
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Mysql.Instance("example", new()
+    ///     {
+    ///         InternetService = 1,
+    ///         EngineVersion = "5.7",
+    ///         ChargeType = "POSTPAID",
+    ///         RootPassword = "PassWord123",
+    ///         SlaveDeployMode = 0,
+    ///         AvailabilityZone = zones.Zones[0].Name,
+    ///         SlaveSyncMode = 1,
+    ///         InstanceName = "tf-example-mysql",
+    ///         MemSize = 4000,
+    ///         VolumeSize = 200,
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         IntranetPort = 3306,
+    ///         SecurityGroups = new[]
+    ///         {
+    ///             securityGroup.Id,
+    ///         },
+    ///         DestroyProtect = "on",
+    ///         Tags = 
+    ///         {
+    ///             { "name", "test" },
+    ///         },
+    ///         Parameters = 
+    ///         {
+    ///             { "character_set_server", "utf8" },
+    ///             { "max_connections", "1000" },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ### Create instance with disk encryption enabled
+    /// 
+    /// ```csharp
+    /// using System.Collections.Generic;
+    /// using System.Linq;
+    /// using Pulumi;
+    /// using Tencentcloud = TencentCloudIAC.PulumiPackage.Tencentcloud;
+    /// 
+    /// return await Deployment.RunAsync(() =&gt; 
+    /// {
+    ///     var example = new Tencentcloud.Mysql.Instance("example", new()
+    ///     {
+    ///         InternetService = 1,
+    ///         EngineVersion = "5.7",
+    ///         ChargeType = "POSTPAID",
+    ///         RootPassword = "PassWord123",
+    ///         SlaveDeployMode = 0,
+    ///         AvailabilityZone = zones.Zones[0].Name,
+    ///         SlaveSyncMode = 1,
+    ///         InstanceName = "tf-example-mysql",
+    ///         MemSize = 4000,
+    ///         VolumeSize = 200,
+    ///         VpcId = vpc.Id,
+    ///         SubnetId = subnet.Id,
+    ///         IntranetPort = 3306,
+    ///         SecurityGroups = new[]
+    ///         {
+    ///             securityGroup.Id,
+    ///         },
+    ///         DiskType = "CLOUD_SSD",
+    ///         DiskEncryption = "on",
+    ///         Tags = 
+    ///         {
+    ///             { "name", "test" },
+    ///         },
+    ///         Parameters = 
+    ///         {
+    ///             { "character_set_server", "utf8" },
+    ///             { "max_connections", "1000" },
+    ///         },
+    ///     });
+    /// 
+    /// });
+    /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create:
+    ///   - [CreateDBInstance](https://www.tencentcloud.com/document/api/236/15871)
+    ///   - [CreateDBInstanceHour](https://www.tencentcloud.com/document/api/236/15865)
+    ///   - [DescribeAsyncRequestInfo](https://www.tencentcloud.com/document/api/236/34462)
+    ///   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872)
+    ///   - [ModifyResourceTags](https://www.tencentcloud.com/document/api/651/33012)
+    ///   - [OpenWanService](https://www.tencentcloud.com/document/api/236/15875)
+    /// * Read:
+    ///   - [DescribeDBInstanceConfig](https://www.tencentcloud.com/document/api/236/17491)
+    ///   - [DescribeInstanceParams](https://www.tencentcloud.com/document/api/236/34467)
+    /// * Delete:
+    ///   - [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872)
+    ///   - [IsolateDBInstance](https://www.tencentcloud.com/document/api/236/15869)
+    ///   - [OfflineIsolatedInstances](https://www.tencentcloud.com/document/api/236/34475)
+    /// 
     /// ## Import
     /// 
     /// MySQL instance can be imported using the id, e.g.
@@ -238,6 +346,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public Output<int> Cpu { get; private set; } = null!;
 
         /// <summary>
+        /// Instance destroy protection status. Valid values: `On` (enable destroy protection), `Off` (disable destroy protection).
+        /// </summary>
+        [Output("destroyProtect")]
+        public Output<string> DestroyProtect { get; private set; } = null!;
+
+        /// <summary>
         /// Specify device type, available values:
         /// - `UNIVERSAL` (default): universal instance,
         /// - `EXCLUSIVE`: exclusive instance,
@@ -248,6 +362,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// </summary>
         [Output("deviceType")]
         public Output<string> DeviceType { get; private set; } = null!;
+
+        /// <summary>
+        /// Whether to enable disk encryption for the CDB instance. Valid value: `On` (enable disk encryption); otherwise disk encryption is not enabled. Only cloud-disk edition instances support this feature. This parameter can only be set at creation time and cannot be modified.
+        /// </summary>
+        [Output("diskEncryption")]
+        public Output<string> DiskEncryption { get; private set; } = null!;
 
         /// <summary>
         /// Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. `CLOUD_SSD` designates an SSD cloud disk; `CLOUD_HSSD` designates an Enhanced SSD cloud disk; and `CLOUD_PREMIUM` designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to `Regions and Availability Zones` for specific support details.
@@ -541,6 +661,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public Input<int>? Cpu { get; set; }
 
         /// <summary>
+        /// Instance destroy protection status. Valid values: `On` (enable destroy protection), `Off` (disable destroy protection).
+        /// </summary>
+        [Input("destroyProtect")]
+        public Input<string>? DestroyProtect { get; set; }
+
+        /// <summary>
         /// Specify device type, available values:
         /// - `UNIVERSAL` (default): universal instance,
         /// - `EXCLUSIVE`: exclusive instance,
@@ -551,6 +677,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// </summary>
         [Input("deviceType")]
         public Input<string>? DeviceType { get; set; }
+
+        /// <summary>
+        /// Whether to enable disk encryption for the CDB instance. Valid value: `On` (enable disk encryption); otherwise disk encryption is not enabled. Only cloud-disk edition instances support this feature. This parameter can only be set at creation time and cannot be modified.
+        /// </summary>
+        [Input("diskEncryption")]
+        public Input<string>? DiskEncryption { get; set; }
 
         /// <summary>
         /// Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. `CLOUD_SSD` designates an SSD cloud disk; `CLOUD_HSSD` designates an Enhanced SSD cloud disk; and `CLOUD_PREMIUM` designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to `Regions and Availability Zones` for specific support details.
@@ -787,6 +919,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         public Input<int>? Cpu { get; set; }
 
         /// <summary>
+        /// Instance destroy protection status. Valid values: `On` (enable destroy protection), `Off` (disable destroy protection).
+        /// </summary>
+        [Input("destroyProtect")]
+        public Input<string>? DestroyProtect { get; set; }
+
+        /// <summary>
         /// Specify device type, available values:
         /// - `UNIVERSAL` (default): universal instance,
         /// - `EXCLUSIVE`: exclusive instance,
@@ -797,6 +935,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
         /// </summary>
         [Input("deviceType")]
         public Input<string>? DeviceType { get; set; }
+
+        /// <summary>
+        /// Whether to enable disk encryption for the CDB instance. Valid value: `On` (enable disk encryption); otherwise disk encryption is not enabled. Only cloud-disk edition instances support this feature. This parameter can only be set at creation time and cannot be modified.
+        /// </summary>
+        [Input("diskEncryption")]
+        public Input<string>? DiskEncryption { get; set; }
 
         /// <summary>
         /// Disk Type: This parameter can be specified for Single-Node (Cloud Disk) or Cloud Disk Edition instances. `CLOUD_SSD` designates an SSD cloud disk; `CLOUD_HSSD` designates an Enhanced SSD cloud disk; and `CLOUD_PREMIUM` designates a High-Performance cloud disk. Note: The regions that support the disk types for Single-Node (Cloud Disk) and Cloud Disk Edition instances vary slightly; please refer to `Regions and Availability Zones` for specific support details.

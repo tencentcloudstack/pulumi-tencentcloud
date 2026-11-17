@@ -119,6 +119,12 @@ class CompareTaskStopOperation(pulumi.CustomResource):
             compare_task_id="dts-8yv4w2i1-cmp-37skmii9")
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [StopCompare](https://www.tencentcloud.com/document/api/571/51800)
+
 
         :param str resource_name: The name of the resource.
         :param pulumi.ResourceOptions opts: Options for the resource.
@@ -144,6 +150,12 @@ class CompareTaskStopOperation(pulumi.CustomResource):
             job_id="dts-8yv4w2i1",
             compare_task_id="dts-8yv4w2i1-cmp-37skmii9")
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create: [StopCompare](https://www.tencentcloud.com/document/api/571/51800)
 
 
         :param str resource_name: The name of the resource.

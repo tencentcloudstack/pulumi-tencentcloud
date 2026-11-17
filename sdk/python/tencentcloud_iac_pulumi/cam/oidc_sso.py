@@ -322,6 +322,19 @@ class OidcSso(pulumi.CustomResource):
             ])
         ```
 
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateUserOIDCConfig](https://www.tencentcloud.com/document/api/598/46303)
+          - [DescribeUserOIDCConfig](https://www.tencentcloud.com/document/api/598/46302)
+        * Read: [DescribeUserOIDCConfig](https://www.tencentcloud.com/document/api/598/46302)
+        * Update:
+          - [DescribeUserOIDCConfig](https://www.tencentcloud.com/document/api/598/46302)
+          - [UpdateUserOIDCConfig](https://www.tencentcloud.com/document/api/598/46300)
+        * Delete: [DisableUserSSO](https://www.tencentcloud.com/document/api/598/46301)
+
         ## Import
 
         CAM-OIDC-SSO can be imported using the client_id or any string which can identifier resource, e.g.
@@ -370,6 +383,19 @@ class OidcSso(pulumi.CustomResource):
                 "email",
             ])
         ```
+
+        ## API Reference
+
+        This resource interacts with the following TencentCloud APIs:
+
+        * Create:
+          - [CreateUserOIDCConfig](https://www.tencentcloud.com/document/api/598/46303)
+          - [DescribeUserOIDCConfig](https://www.tencentcloud.com/document/api/598/46302)
+        * Read: [DescribeUserOIDCConfig](https://www.tencentcloud.com/document/api/598/46302)
+        * Update:
+          - [DescribeUserOIDCConfig](https://www.tencentcloud.com/document/api/598/46302)
+          - [UpdateUserOIDCConfig](https://www.tencentcloud.com/document/api/598/46300)
+        * Delete: [DisableUserSSO](https://www.tencentcloud.com/document/api/598/46301)
 
         ## Import
 

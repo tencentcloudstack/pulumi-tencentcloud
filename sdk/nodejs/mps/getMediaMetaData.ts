@@ -32,6 +32,12 @@ import * as utilities from "../utilities";
  *     },
  * }));
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeMediaMetaData](https://www.tencentcloud.com/document/api/1041/37461)
  */
 export function getMediaMetaData(args: GetMediaMetaDataArgs, opts?: pulumi.InvokeOptions): Promise<GetMediaMetaDataResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});
@@ -96,6 +102,12 @@ export interface GetMediaMetaDataResult {
  *     },
  * }));
  * ```
+ *
+ * ## API Reference
+ *
+ * This data source queries the following TencentCloud APIs:
+ *
+ * * Read: [DescribeMediaMetaData](https://www.tencentcloud.com/document/api/1041/37461)
  */
 export function getMediaMetaDataOutput(args: GetMediaMetaDataOutputArgs, opts?: pulumi.InvokeOutputOptions): pulumi.Output<GetMediaMetaDataResult> {
     opts = pulumi.mergeOptions(utilities.resourceOptsDefaults(), opts || {});

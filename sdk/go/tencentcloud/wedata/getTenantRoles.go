@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [ListTenantRoles](https://www.tencentcloud.com/document/api/1174/77862)
 func GetTenantRoles(ctx *pulumi.Context, args *GetTenantRolesArgs, opts ...pulumi.InvokeOption) (*GetTenantRolesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetTenantRolesResult

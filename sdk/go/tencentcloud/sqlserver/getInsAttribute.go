@@ -38,6 +38,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribeDBInstancesAttribute](https://www.tencentcloud.com/document/api/238/54811)
 func GetInsAttribute(ctx *pulumi.Context, args *GetInsAttributeArgs, opts ...pulumi.InvokeOption) (*GetInsAttributeResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetInsAttributeResult

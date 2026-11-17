@@ -52,6 +52,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [CreateRoInstanceIp](https://www.tencentcloud.com/document/api/236/37830)
+    /// * Read: [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mysql/roInstanceIp:RoInstanceIp")]
     public partial class RoInstanceIp : global::Pulumi.CustomResource

@@ -83,6 +83,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTopics](https://www.tencentcloud.com/document/api/614/42783)
         /// </summary>
         public static Task<GetTopicsResult> InvokeAsync(GetTopicsArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.InvokeAsync<GetTopicsResult>("tencentcloud:Cls/getTopics:getTopics", args ?? new GetTopicsArgs(), options.WithDefaults());
@@ -158,6 +164,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTopics](https://www.tencentcloud.com/document/api/614/42783)
         /// </summary>
         public static Output<GetTopicsResult> Invoke(GetTopicsInvokeArgs? args = null, InvokeOptions? options = null)
             => global::Pulumi.Deployment.Instance.Invoke<GetTopicsResult>("tencentcloud:Cls/getTopics:getTopics", args ?? new GetTopicsInvokeArgs(), options.WithDefaults());
@@ -233,6 +245,12 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Cls
         /// 
         /// });
         /// ```
+        /// 
+        /// ## API Reference
+        /// 
+        /// This data source queries the following TencentCloud APIs:
+        /// 
+        /// * Read: [DescribeTopics](https://www.tencentcloud.com/document/api/614/42783)
         /// </summary>
         public static Output<GetTopicsResult> Invoke(GetTopicsInvokeArgs args, InvokeOutputOptions options)
             => global::Pulumi.Deployment.Instance.Invoke<GetTopicsResult>("tencentcloud:Cls/getTopics:getTopics", args ?? new GetTopicsInvokeArgs(), options.WithDefaults());

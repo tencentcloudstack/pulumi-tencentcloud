@@ -40,6 +40,12 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read: [DescribePrometheusInstances](https://www.tencentcloud.com/document/api/248/48753)
 func GetTmpInstances(ctx *pulumi.Context, args *GetTmpInstancesArgs, opts ...pulumi.InvokeOption) (*GetTmpInstancesResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetTmpInstancesResult

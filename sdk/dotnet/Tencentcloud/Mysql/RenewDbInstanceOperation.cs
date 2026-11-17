@@ -97,6 +97,13 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Mysql
     /// 
     /// });
     /// ```
+    /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [RenewDBInstance](https://www.tencentcloud.com/document/api/236/53308)
+    /// * Read: [DescribeDBInstances](https://www.tencentcloud.com/document/api/236/15872)
     /// </summary>
     [TencentcloudResourceType("tencentcloud:Mysql/renewDbInstanceOperation:RenewDbInstanceOperation")]
     public partial class RenewDbInstanceOperation : global::Pulumi.CustomResource

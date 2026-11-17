@@ -32,6 +32,14 @@ namespace TencentCloudIAC.PulumiPackage.Tencentcloud.Identity
     /// });
     /// ```
     /// 
+    /// ## API Reference
+    /// 
+    /// This resource interacts with the following TencentCloud APIs:
+    /// 
+    /// * Create: [UpdateSCIMSynchronizationStatus](https://www.tencentcloud.com/document/api/1031/66418)
+    /// * Read: [GetSCIMSynchronizationStatus](https://www.tencentcloud.com/document/api/1031/66421)
+    /// * Update: [UpdateSCIMSynchronizationStatus](https://www.tencentcloud.com/document/api/1031/66418)
+    /// 
     /// ## Import
     /// 
     /// organization IdentityCenterScimSynchronizationStatus can be imported using the id, e.g.

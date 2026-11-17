@@ -60,6 +60,15 @@ import * as utilities from "../utilities";
  *     keyRegion: "ap-guangzhou",
  * });
  * ```
+ *
+ * ## API Reference
+ *
+ * This resource interacts with the following TencentCloud APIs:
+ *
+ * * Create:
+ *   - [DescribeDBInstanceInfo](https://www.tencentcloud.com/document/api/236/36100)
+ *   - [OpenDBInstanceEncryption](https://www.tencentcloud.com/document/api/236/53776)
+ * * Read: [DescribeDBInstanceInfo](https://www.tencentcloud.com/document/api/236/36100)
  */
 export class InstanceEncryptionOperation extends pulumi.CustomResource {
     /**

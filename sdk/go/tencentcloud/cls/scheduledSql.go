@@ -12,7 +12,7 @@ import (
 	"github.com/tencentcloudstack/pulumi-tencentcloud/sdk/go/tencentcloud/internal"
 )
 
-// Provides a resource to create a cls scheduledSql
+// Provides a resource to create a CLS scheduled sql
 //
 // ## Example Usage
 //
@@ -28,49 +28,48 @@ import (
 //
 //	func main() {
 //		pulumi.Run(func(ctx *pulumi.Context) error {
-//			logset, err := cls.NewLogset(ctx, "logset", &cls.LogsetArgs{
-//				LogsetName: pulumi.String("tf-example-logset"),
-//				Tags: pulumi.StringMap{
-//					"createdBy": pulumi.String("terraform"),
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			topic, err := cls.NewTopic(ctx, "topic", &cls.TopicArgs{
-//				TopicName:          pulumi.String("tf-example-topic"),
-//				LogsetId:           logset.ID().ToIDOutput().ToStringOutput(),
-//				AutoSplit:          pulumi.Bool(false),
-//				MaxSplitPartitions: pulumi.Int(20),
-//				PartitionCount:     pulumi.Int(1),
-//				Period:             pulumi.Int(10),
-//				StorageType:        pulumi.String("hot"),
-//				Tags: pulumi.StringMap{
-//					"test": pulumi.String("test"),
-//				},
-//			})
-//			if err != nil {
-//				return err
-//			}
-//			_, err = cls.NewScheduledSql(ctx, "scheduled_sql", &cls.ScheduledSqlArgs{
-//				SrcTopicId: topic.ID().ToIDOutput().ToStringOutput(),
-//				Name:       pulumi.String("tf-example-task"),
-//				EnableFlag: pulumi.Int(1),
+//			_, err := cls.NewScheduledSql(ctx, "example", &cls.ScheduledSqlArgs{
+//				SrcTopicId:     pulumi.String("2360e4a2-2b9e-4640-9829-72bc5052c9dd"),
+//				SrcTopicRegion: pulumi.String("ap-guangzhou"),
+//				Name:           pulumi.String("tf-example"),
+//				EnableFlag:     pulumi.Int(1),
 //				DstResource: &cls.ScheduledSqlDstResourceArgs{
-//					TopicId:    topic.ID().ToIDOutput().ToStringOutput(),
-//					Region:     pulumi.String("ap-guangzhou"),
-//					BizType:    pulumi.Int(0),
-//					MetricName: pulumi.String("test"),
+//					TopicId: pulumi.String("3f5cc19d-f601-48b6-9671-9019b7b09bd0"),
+//					Region:  pulumi.String("ap-guangzhou"),
+//					BizType: pulumi.Int(1),
+//					MetricNames: pulumi.StringArray{
+//						pulumi.String("name1"),
+//						pulumi.String("name2"),
+//						pulumi.String("name3"),
+//					},
+//					MetricLabels: pulumi.StringArray{
+//						pulumi.String("lable1"),
+//						pulumi.String("lable2"),
+//						pulumi.String("lable3"),
+//					},
+//					CustomTime: pulumi.String("__WindowStartTime__"),
+//					CustomMetricLabels: cls.ScheduledSqlDstResourceCustomMetricLabelArray{
+//						&cls.ScheduledSqlDstResourceCustomMetricLabelArgs{
+//							Key:   pulumi.String("cmlKey1"),
+//							Value: pulumi.String("cmlValue1"),
+//						},
+//						&cls.ScheduledSqlDstResourceCustomMetricLabelArgs{
+//							Key:   pulumi.String("cmlKey2"),
+//							Value: pulumi.String("cmlValue2"),
+//						},
+//						&cls.ScheduledSqlDstResourceCustomMetricLabelArgs{
+//							Key:   pulumi.String("cmlKey3"),
+//							Value: pulumi.String("cmlValue3"),
+//						},
+//					},
 //				},
-//				ScheduledSqlContent: pulumi.String("xxx"),
-//				ProcessStartTime:    pulumi.Int(1690515360000),
+//				ScheduledSqlContent: pulumi.String("verb:get AND responseStatus.code>=400\n| select stageTimestamp, responseStatus.code, objectRef.resource, objectRef.name, objectRef.namespace, user.username, \"annotations.authorization.k8s.io/decision\" as auth_decision\n  order by stageTimestamp desc\n  limit 50"),
+//				ProcessStartTime:    pulumi.Int(1788417300000),
 //				ProcessType:         pulumi.Int(1),
-//				ProcessPeriod:       pulumi.Int(10),
-//				ProcessTimeWindow:   pulumi.String("@m-15m,@m"),
-//				ProcessDelay:        pulumi.Int(5),
-//				SrcTopicRegion:      pulumi.String("ap-guangzhou"),
-//				ProcessEndTime:      pulumi.Int(1690515360000),
-//				SyntaxRule:          pulumi.Int(0),
+//				ProcessPeriod:       pulumi.Int(1),
+//				ProcessTimeWindow:   pulumi.String("@m-1m,@m"),
+//				ProcessDelay:        pulumi.Int(60),
+//				SyntaxRule:          pulumi.Int(1),
 //			})
 //			if err != nil {
 //				return err
@@ -81,12 +80,21 @@ import (
 //
 // ```
 //
+// ## API Reference
+//
+// This resource interacts with the following TencentCloud APIs:
+//
+// * Create: [CreateScheduledSql](https://www.tencentcloud.com/document/api/614/59901)
+// * Read: [DescribeScheduledSqlInfo](https://www.tencentcloud.com/document/api/614/59899)
+// * Update: [ModifyScheduledSql](https://www.tencentcloud.com/document/api/614/59898)
+// * Delete: [DeleteScheduledSql](https://www.tencentcloud.com/document/api/614/59900)
+//
 // ## Import
 //
-// cls scheduledSql can be imported using the id, e.g.
+// CLS scheduled sql can be imported using the id, e.g.
 //
 // ```sh
-// $ pulumi import tencentcloud:Cls/scheduledSql:ScheduledSql scheduled_sql scheduled_sql_id
+// $ pulumi import tencentcloud:Cls/scheduledSql:ScheduledSql example aebbad1b-4228-4ccc-8d62-0333c9739452
 // ```
 type ScheduledSql struct {
 	pulumi.CustomResourceState
@@ -117,6 +125,8 @@ type ScheduledSql struct {
 	SrcTopicRegion pulumi.StringOutput `pulumi:"srcTopicRegion"`
 	// syntax rule.
 	SyntaxRule pulumi.IntPtrOutput `pulumi:"syntaxRule"`
+	// task id.
+	TaskId pulumi.StringOutput `pulumi:"taskId"`
 }
 
 // NewScheduledSql registers a new resource with the given unique name, arguments, and options.
@@ -205,6 +215,8 @@ type scheduledSqlState struct {
 	SrcTopicRegion *string `pulumi:"srcTopicRegion"`
 	// syntax rule.
 	SyntaxRule *int `pulumi:"syntaxRule"`
+	// task id.
+	TaskId *string `pulumi:"taskId"`
 }
 
 type ScheduledSqlState struct {
@@ -234,6 +246,8 @@ type ScheduledSqlState struct {
 	SrcTopicRegion pulumi.StringPtrInput
 	// syntax rule.
 	SyntaxRule pulumi.IntPtrInput
+	// task id.
+	TaskId pulumi.StringPtrInput
 }
 
 func (ScheduledSqlState) ElementType() reflect.Type {
@@ -449,6 +463,11 @@ func (o ScheduledSqlOutput) SrcTopicRegion() pulumi.StringOutput {
 // syntax rule.
 func (o ScheduledSqlOutput) SyntaxRule() pulumi.IntPtrOutput {
 	return o.ApplyT(func(v *ScheduledSql) pulumi.IntPtrOutput { return v.SyntaxRule }).(pulumi.IntPtrOutput)
+}
+
+// task id.
+func (o ScheduledSqlOutput) TaskId() pulumi.StringOutput {
+	return o.ApplyT(func(v *ScheduledSql) pulumi.StringOutput { return v.TaskId }).(pulumi.StringOutput)
 }
 
 type ScheduledSqlArrayOutput struct{ *pulumi.OutputState }

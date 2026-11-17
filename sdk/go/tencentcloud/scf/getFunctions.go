@@ -46,6 +46,14 @@ import (
 //	}
 //
 // ```
+//
+// ## API Reference
+//
+// This data source queries the following TencentCloud APIs:
+//
+// * Read:
+//   - [GetFunction](https://www.tencentcloud.com/search/?wd=GetFunction&type=document&lang=en)
+//   - [ListFunctions](https://www.tencentcloud.com/document/api/583/18582)
 func GetFunctions(ctx *pulumi.Context, args *GetFunctionsArgs, opts ...pulumi.InvokeOption) (*GetFunctionsResult, error) {
 	opts = internal.PkgInvokeDefaultOpts(opts)
 	var rv GetFunctionsResult

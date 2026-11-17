@@ -132,6 +132,12 @@ def get_scores(end_time: Optional[_builtins.str] = None,
         is_demo=1)
     ```
 
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeScores](https://www.tencentcloud.com/document/api/1131/45304)
+
 
     :param _builtins.str end_time: End time.
     :param _builtins.int is_demo: Get data from demo. This parameter is deprecated.
@@ -176,6 +182,12 @@ def get_scores_output(end_time: pulumi.Input[Optional[_builtins.str]] = None,
         project_id=1,
         is_demo=1)
     ```
+
+    ## API Reference
+
+    This data source queries the following TencentCloud APIs:
+
+    * Read: [DescribeScores](https://www.tencentcloud.com/document/api/1131/45304)
 
 
     :param _builtins.str end_time: End time.
